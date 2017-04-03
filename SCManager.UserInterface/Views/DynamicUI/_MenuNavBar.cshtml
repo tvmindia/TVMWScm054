@@ -1,0 +1,69 @@
+﻿@model SCManager.UserInterface.Models.DynamicUIViewModel
+@{
+    List<SCManager.UserInterface.Models.MenuViewModel> menuList = Model.MenuViewModelList;
+
+}
+
+
+
+    <ul class="nav navbar-nav">
+     @foreach (var mp in menuList.Where(p => p.ParentID == 0))
+     {
+
+        if (menuList.Count(p => p.ParentID == mp.ID) == 0)
+        {
+            if (mp.ID == 1)
+            {
+                @:<li>@Html.ActionLink(mp.MenuText, mp.Action, mp.Controller, null, new { id = @mp.ID, parentid = @mp.ParentID })
+            }
+            else
+            {
+            @:<li>@Html.ActionLink(mp.MenuText, mp.Action, mp.Controller, null, new { id = @mp.ID, parentid = @mp.ParentID })
+            }
+
+        }
+        else
+        {
+
+        @:<li><a href="Url.Action(@mp.Action, @mp.Controller)" class="dropdown-toggle" data-toggle="dropdown">@mp.MenuText<b class="caret"></b></a><ul class="dropdown-menu">
+
+         }
+        @RenderMenuItem(menuList, mp);
+        if (menuList.Count(p => p.ParentID == mp.ID) == 0)
+        {
+        @:</li>
+        }
+        else
+        {
+         @:</ul>
+         }
+    }
+
+    </ul>
+
+        @helper RenderMenuItem(List<SCManager.UserInterface.Models.MenuViewModel> menuList, SCManager.UserInterface.Models.MenuViewModel mi)
+    {
+    foreach (var cp in menuList.Where(p => p.ParentID == mi.ID))
+    {
+
+        if (menuList.Count(p => p.ParentID == cp.ID) == 0)
+        {
+            @:<li>@Html.ActionLink(@cp.MenuText, @cp.Action, @cp.Controller, null, new { id = @cp.ID, parentid = @cp.ParentID })
+        }
+        else
+        {
+            @:<li><a href="Url.Action(@cp.Action, @cp.Controller)" id="@cp.ID" parentid="@cp.ParentID" class="dropdown-toggle" data-toggle="dropdown">@cp.MenuText<b class="caret caret-right"></b></a><ul class="dropdown-menu">
+        }
+
+        @RenderMenuItem(menuList, cp)
+        if (menuList.Count(p => p.ParentID == cp.ID) == 0)
+        {
+        @:</li>
+        }
+
+        else
+        {
+            @:</ul>
+        }
+    }
+}
