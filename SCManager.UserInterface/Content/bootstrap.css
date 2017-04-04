@@ -4099,8 +4099,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
-  color: #fff;
-  background-color: #337ab7;
+  color: darkgray;
+  background-color: rgb(253, 253, 253)!important;
 }
 .nav-stacked > li {
   float: none;
@@ -5467,6 +5467,8 @@ button.list-group-item-danger.active:focus {
   border-bottom: 1px solid transparent;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+  font-size: medium;
+    color: grey;
 }
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;
