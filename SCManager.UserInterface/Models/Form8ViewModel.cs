@@ -17,14 +17,16 @@ namespace SCManager.UserInterface.Models
         public string SaleOrderNo { get; set; }
         public string ChallanNo { get; set; }
 
-        public DateTime ChallanDate { get; set; }
+        public DateTime? ChallanDate { get; set; }
         public string PONo { get; set; }
-        public DateTime PODate { get; set; }
+        public DateTime? PODate { get; set; }
         public string Remarks { get; set; }
 
         public decimal VATAmount { get; set; }
-        public decimal TotalValue { get; set; }
+        public decimal TotalItemsValue { get; set; }
         public decimal Discount { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
+
+        
     }
 }

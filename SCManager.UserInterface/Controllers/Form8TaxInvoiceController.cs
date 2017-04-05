@@ -32,9 +32,9 @@ namespace SCManager.UserInterface.Controllers
         }
 
 
-        #region GetAllEventRequests
+        #region GetAllForm8
         [HttpGet]
-        public string GetAllForm8()
+        public string GetAllForm8(Form8ViewModel dataObj)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace SCManager.UserInterface.Controllers
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
         }
-        #endregion  GetAllEvents
+        #endregion  GetAllForm8
 
 
     }

@@ -20,7 +20,7 @@ namespace SCManager.DataAccessObject.DTO
         public string Remarks { get; set; }
 
         public decimal VATAmount { get; set; }
-        public decimal TotalValue { get; set; }
+        public decimal TotalItemsValue { get; set; }
         public decimal Discount { get; set; }
         public LogDetails logDetails { get; set; }
     }

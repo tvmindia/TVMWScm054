@@ -14,6 +14,8 @@ namespace SCManager.UserInterface.App_Start
                 //ReverseMap() makes it possible to map both ways.
 
                 config.CreateMap<MenuViewModel, Menu>().ReverseMap();
+                config.CreateMap<Form8ViewModel, Form8>().ReverseMap();
+                config.CreateMap<LogDetailsViewModel, LogDetails>().ReverseMap();
             });
         }
     }

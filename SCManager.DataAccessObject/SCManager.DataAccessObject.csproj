@@ -110,7 +110,9 @@
   <ItemGroup>
     <Compile Include="DTO\Common.cs" />
     <Compile Include="DTO\Form8.cs" />
-    <Compile Include="DTO\Menu.cs" />
+    <Compile Include="DTO\Menu.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DTO\UA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
