@@ -23,6 +23,8 @@ namespace SCManager.DataAccessObject.DTO
         public decimal TotalItemsValue { get; set; }
         public decimal Discount { get; set; }
         public LogDetails logDetails { get; set; }
+
+        public decimal Total { get; set; }
     }
 
     public class Form8Details

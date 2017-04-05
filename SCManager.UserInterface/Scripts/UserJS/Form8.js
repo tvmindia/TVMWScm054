@@ -20,7 +20,7 @@ $(document).ready(function () {
                { "data": "TotalItemsValue", "defaultContent": "<i>-</i>" },
                { "data": "VATAmount", "defaultContent": "<i>-</i>" },
                { "data": "Discount", "defaultContent": "<i>-</i>" },
-               { "data": "TotalValue", "defaultContent": "<i>-</i>" },                
+               { "data": "Total", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" onclick="Edit(this)"<i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }

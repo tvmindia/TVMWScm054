@@ -27,6 +27,7 @@ namespace SCManager.UserInterface.Models
         public decimal Discount { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
 
+        public decimal Total { get; set; }
         
     }
 }

@@ -27,3 +27,12 @@
     
    
 }
+
+ .myfooter {
+
+      background-image: url('images/73a6f1c8.png');
+    background-repeat: repeat;
+    width:100%;
+    bottom:0px;
+    position:relative;
+}

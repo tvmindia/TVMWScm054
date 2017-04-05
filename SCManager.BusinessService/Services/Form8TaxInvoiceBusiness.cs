@@ -23,6 +23,12 @@ namespace SCManager.BusinessService.Services
             try
             {
                 Form8list = _form8TaxInvoiceRepository.GetAllForm8(UA);
+                foreach (Form8 F in Form8list  )      
+                {
+                    F.Total = F.TotalItemsValue + F.VATAmount - F.Discount;
+                
+                }
+      
             }
             catch (Exception)
             {
