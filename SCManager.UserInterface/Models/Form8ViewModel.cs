@@ -28,6 +28,11 @@ namespace SCManager.UserInterface.Models
         public LogDetailsViewModel logDetails { get; set; }
 
         public decimal Total { get; set; }
+
+        public String ChallanDateFormatted { get; set; }
+        public String PODateFormatted { get; set; }
+        public String InvoiceDateFormatted { get; set; }
+
         
     }
 }

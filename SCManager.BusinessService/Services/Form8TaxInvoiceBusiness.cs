@@ -22,10 +22,17 @@ namespace SCManager.BusinessService.Services
             List<Form8> Form8list = null;
             try
             {
+                PartyECSettings settings=new PartyECSettings();
                 Form8list = _form8TaxInvoiceRepository.GetAllForm8(UA);
                 foreach (Form8 F in Form8list  )      
                 {
                     F.Total = F.TotalItemsValue + F.VATAmount - F.Discount;
+                    if (F.ChallanDate!=null)
+                        F.ChallanDateFormatted = F.ChallanDate.ToString(settings.dateformat);
+                    if (F.PODate != null)
+                        F.PODateFormatted = F.PODate.ToString(settings.dateformat);
+                    if (F.InvoiceDate != null)
+                        F.InvoiceDateFormatted = F.InvoiceDate.ToString(settings.dateformat);
                 
                 }
       

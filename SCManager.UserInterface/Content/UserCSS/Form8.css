@@ -7,7 +7,7 @@
 }
 
 #exTab3 .nav-pills > li.active > a:focus {
-   color : gray!important;
+   color : black!important;
   background-color: rgb(253, 253, 253)!important;
   
    font-size: medium!important;
@@ -17,13 +17,13 @@
  
 
 #exTab3 .tab-content {
-  color : darkgray;
+  color : black;
   font-size:medium;
   background-color: rgb(253, 253, 253);
   padding : 5px 5px;
    min-height:500px!important;
      margin-bottom:15px;
-    
+    font-size:12px;
      
 }
 

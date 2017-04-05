@@ -11,12 +11,16 @@ namespace SCManager.DataAccessObject.DTO
         public Guid ID { get; set; }
         public string InvoiceNo { get; set; }
         public DateTime InvoiceDate { get; set; }
+ 
         public string SaleOrderNo { get; set; }
         public string ChallanNo { get; set; }
 
         public DateTime ChallanDate { get; set; }
+        
         public string PONo { get; set; }
         public DateTime PODate { get; set; }
+       
+
         public string Remarks { get; set; }
 
         public decimal VATAmount { get; set; }
@@ -25,6 +29,13 @@ namespace SCManager.DataAccessObject.DTO
         public LogDetails logDetails { get; set; }
 
         public decimal Total { get; set; }
+
+
+        public String ChallanDateFormatted { get; set; }
+        public String PODateFormatted { get; set; }
+        public String InvoiceDateFormatted { get; set; }
+
+
     }
 
     public class Form8Details

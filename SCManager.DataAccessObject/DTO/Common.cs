@@ -17,4 +17,9 @@ namespace SCManager.DataAccessObject.DTO
         public DateTime? UpdatedDate { get; set; }
 
     }
+
+    public class PartyECSettings{
+
+    public  string dateformat="dd-MMM-yyyy";
+}
 }

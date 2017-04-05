@@ -15,15 +15,19 @@ $(document).ready(function () {
                { "data": "SCCode" },
                { "data": "ID" },
                { "data": "InvoiceNo" },
-               { "data": "InvoiceDate" },
+               { "data": "InvoiceDateFormatted" },
                { "data": "SaleOrderNo", "defaultContent": "<i>-</i>" },
                { "data": "TotalItemsValue", "defaultContent": "<i>-</i>" },
                { "data": "VATAmount", "defaultContent": "<i>-</i>" },
                { "data": "Discount", "defaultContent": "<i>-</i>" },
                { "data": "Total", "defaultContent": "<i>-</i>" },
+               { "data": "Remarks", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" onclick="Edit(this)"<i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
-             columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }
+             columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false },
+                  { className: "text-right", "targets": [5,6,7,8] },
+             { className: "text-center", "targets": [2,3,4,9,10] }
+       
                  
                 ]
          });
