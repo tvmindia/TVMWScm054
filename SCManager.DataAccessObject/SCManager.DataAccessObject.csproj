@@ -113,6 +113,7 @@
     <Compile Include="DTO\Menu.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DTO\ReorderAlert.cs" />
     <Compile Include="DTO\UA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

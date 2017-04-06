@@ -8,5 +8,6 @@ namespace SCManager.UserInterface.Models
     public class DynamicUIViewModel
     {
         public List<MenuViewModel> MenuViewModelList { get; set; }
+        public List<ReorderAlertViewModel> ReorderAlertViewModelList { get; set; }
     }
 }

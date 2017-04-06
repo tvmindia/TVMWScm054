@@ -10,5 +10,6 @@ namespace SCManager.RepositoryServices.Contracts
     public interface IDynamicUIRepository
     {
         List<Menu> GetAllMenues();
+        List<ReorderAlert> GetReorderAlertITems(UA UA);
     }
 }

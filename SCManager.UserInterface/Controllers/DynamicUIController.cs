@@ -29,6 +29,15 @@ namespace SCManager.UserInterface.Controllers
             return View(dUIObj);
         }
 
+        public ActionResult _ReorderAlertItems()
+        {
+            UA ua = new UA();
+            List<ReorderAlert> ReorderAlertlist = _dynamicUIBusiness.GetReorderAlertITems(ua);
+            DynamicUIViewModel dUIObj = new DynamicUIViewModel();
+            dUIObj.ReorderAlertViewModelList = Mapper.Map<List<ReorderAlert>, List<ReorderAlertViewModel>>(ReorderAlertlist);
+            return View(dUIObj);
+        }
+
         public ActionResult Index()
         {
             return View();

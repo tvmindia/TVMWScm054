@@ -156,6 +156,7 @@
     <Compile Include="Models\DynamicUIViewModel.cs" />
     <Compile Include="Models\Form8ViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
+    <Compile Include="Models\ReorderAlertViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -455,6 +456,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Views\Form8TaxInvoice\Index.cshtml" />
+    <Content Include="Views\DynamicUI\_ReorderAlertItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

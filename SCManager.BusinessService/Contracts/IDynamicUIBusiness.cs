@@ -11,5 +11,8 @@ namespace SCManager.BusinessService.Contracts
     public interface IDynamicUIBusiness
     {
         List<Menu> GetAllMenues();
+        List<ReorderAlert> GetReorderAlertITems(UA UA);
     }
+
+
 }

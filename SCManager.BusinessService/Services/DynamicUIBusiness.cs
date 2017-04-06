@@ -33,5 +33,20 @@ namespace SCManager.BusinessService.Services
 
 
         }
+
+
+        public List<ReorderAlert> GetReorderAlertITems(UA UA)
+        {
+            try
+            {
+                return _dynamicUIRepository.GetReorderAlertITems(UA);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+        }
     }
 }

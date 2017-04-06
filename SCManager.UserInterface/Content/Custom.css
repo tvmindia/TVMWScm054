@@ -10,13 +10,21 @@
 }
 
 .DashboardSummary {
+    
+    background-color:rgba(253, 253, 253, 0.62);
     min-height:250px;
-    background-color:rgb(253, 253, 253);
+   /*max-height:300px;
+   overflow-y:scroll;*/
+}
+
+.DashList {
+     max-height:250px;
+   overflow-y:scroll;
 }
 
 .DashboardTech {
     min-height:545px;
-      background-color:rgb(253, 253, 253);
+      background-color:rgba(253, 253, 253, 0.62);
 }
 
  .SCtabContainer {
@@ -24,7 +32,7 @@
      margin-right: 2px!important; 
      margin-left: 2px!important; 
      width:100%;
-    
+     
    
 }
 
