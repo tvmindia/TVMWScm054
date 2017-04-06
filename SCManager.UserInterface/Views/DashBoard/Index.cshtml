@@ -12,24 +12,32 @@
     <div class="">
         <div class="col-md-4">
             <div class="col-md-12">
-                <div class="panel-heading"><span class="fa fa-bar-chart">&nbsp;&nbsp;</span>Stock Value Summary</div>
+                <div class="panel-heading"><span class="fa fa-pie-chart">&nbsp;&nbsp;</span>Stock Value Summary</div>
                 <div class="panel panel-default panel-success DashboardSummary">
-                   
-                    <div class="panel-body">
-                       
-                    </div>
+                    <div class="col-md-12">&nbsp;</div>
+                    <div class="col-md-12" style="text-align:center;vertical-align:middle">
+                        <canvas id="myChartPie" height="190"></canvas>
 
+                    </div>
+                    <p class="graphledger">Total Stock Value ₹ 180,000</p>
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="panel-heading"><span class="fa fa-pie-chart">&nbsp;&nbsp;</span>Weekly Sales Summary</div>
+                <div class="panel-heading"><span class="fa fa-bar-chart">&nbsp;&nbsp;</span>Weekly Sales Summary</div>
                 <div class="panel panel-default panel-success DashboardSummary">
+                    <div class="col-md-12">&nbsp;</div>
                     
-                    <div class="panel-body">
-                       
-                    </div>
+                    <div class="col-md-12" style="text-align:center;vertical-align:middle">
+                        <canvas id="myChart" class="" height="200"></canvas>
 
-                </div>
+                    </div>
+                     
+                    <p class="graphledger">Weekly Sales in thousands.</p>
+
+
+
+
+                    </div>
             </div>
         </div>
         <div class="col-md-4">
@@ -73,3 +81,7 @@
      
  
 
+@section Scripts {
+    @Scripts.Render("~/bundles/Dashboard")
+    
+    }

@@ -37,3 +37,10 @@
     position:relative;
 }
 
+.graphledger {
+    width:100%;
+    text-align:right;
+    font-size:smaller;
+    color:gray;
+    padding-right:15px;
+}
