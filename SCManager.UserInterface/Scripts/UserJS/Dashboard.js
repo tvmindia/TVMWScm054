@@ -69,4 +69,8 @@
       var myPieChart = new Chart(ctx1).Doughnut(dataDonut, options1);
     
   
+
+      $('.rlist').slideDown();
+      $('.techlist').slideDown('slow');
+
 });
