@@ -18,8 +18,9 @@
 }
 
 .DashList {
-     max-height:250px;
+     max-height:210px;
    overflow-y:scroll;
+   
 }
 
 .DashboardTech {

@@ -43,13 +43,13 @@
         <div class="col-md-4">
             <div class="col-md-12">
                 <div class="panel-heading"><span class="fa fa-bell-o">&nbsp;&nbsp;</span>Re-Order Alert</div>
-                <div class="panel panel-default panel-success DashboardSummary DashList">
+                <div class="panel panel-default panel-success DashboardSummary ">
 
+                     
+                        @Html.Action("_ReorderAlertItems", "DynamicUI")
 
-                    @Html.Action("_ReorderAlertItems", "DynamicUI")
-
-
-                </div>
+                    
+                    </div>
             </div>
             <div class="col-md-12">
                 <div class="panel-heading"><span class="fa fa-bookmark-o">&nbsp;&nbsp;</span>Dummy</div>
@@ -66,9 +66,9 @@
                                   <div class="panel-heading"><span class="fa fa-user-o">&nbsp;&nbsp;</span>Technician Summary</div>
                                   <div class="panel panel-default panel-success DashboardTech">
 
-                                      <div class="panel-body">
-
-                                      </div>
+                                      
+                                          @Html.Action("_TechnicianSummary", "Technician")
+                                       
                                   </div>
    
 

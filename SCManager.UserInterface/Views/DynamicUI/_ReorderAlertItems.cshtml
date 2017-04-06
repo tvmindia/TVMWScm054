@@ -6,27 +6,34 @@
 
 
 <ul class="list-group">
-
+    <li class="list-group-item justify-content-between list-group-item-heading alert-danger">
+        <b>Item Name</b>
+        <span class="badge badge-default alert-danger ">Current Stock</span>
+    </li></ul>
+<ul class="list-group DashList">
     @foreach (var mp in ReorderList)
     {
         if (mp.ApproachPercentage < 100)
         {
-            @:<li class="list-group-item justify-content-between list-group-item-danger">
-            @mp.Item
-            @:<span class="badge badge-default alert-danger ">    
-            @:Stock :  @mp.qty
-            @:</span></li>
+            <li class="list-group-item justify-content-between list-group-item-danger">
+                @mp.Item
+                <span class="badge badge-default alert-danger ">
+                    Stock :  @mp.qty
+                </span>
+            </li>
+
 
         }
         else
         {
-                @:<li class="list-group-item justify-content-between list-group-item-warning">
+            <li class="list-group-item justify-content-between list-group-item-warning">
                 @mp.Item
-                @:<span class="badge badge-default alert-warning ">
-                @:Stock :  @mp.qty
-                @:</span></li>
+                <span class="badge badge-default alert-warning ">
+                    Stock :  @mp.qty
+                </span>
+            </li>
         }
-        
+
 
     }
 </ul>

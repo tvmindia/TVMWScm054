@@ -17,6 +17,7 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<Form8ViewModel, Form8>().ReverseMap();
                 config.CreateMap<LogDetailsViewModel, LogDetails>().ReverseMap();
                 config.CreateMap<ReorderAlertViewModel , ReorderAlert>().ReverseMap();
+                config.CreateMap<TechnicianSummaryViewModel, TechnicianSummary>().ReverseMap();
             });
         }
     }
