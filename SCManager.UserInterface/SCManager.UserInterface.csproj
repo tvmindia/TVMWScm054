@@ -443,6 +443,12 @@
     <Content Include="Scripts\lightbox.min.js" />
     <Content Include="Scripts\UserJS\Dashboard.js" />
     <Content Include="Scripts\UserJS\Form8.js" />
+    <Content Include="Views\Form8TaxInvoice\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\_LayoutPage.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -453,12 +459,10 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Shared\_LayoutPage.cshtml" />
     <Content Include="Views\DashBoard\Index.cshtml" />
     <Content Include="Views\DynamicUI\_MenuNavBar.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
-    <Content Include="Views\Form8TaxInvoice\Index.cshtml" />
     <Content Include="Views\DynamicUI\_ReorderAlertItems.cshtml" />
     <Content Include="Views\Technician\_TechnicianSummary.cshtml" />
   </ItemGroup>

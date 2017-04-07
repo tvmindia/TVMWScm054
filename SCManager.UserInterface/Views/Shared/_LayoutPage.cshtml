@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @RenderSection("styles", required: false)
+     
+ 
+   
+</head>
+<body>
+   
+        <nav class="navbar navbar-default">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img height="30" alt="SCManager" src=@Url.Content("~/Content/images/SCManager.png")></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <br />
+
+                @Html.Action("_MenuNavBar", "DynamicUI")
+
+                <ul class="nav navbar-nav navbar-right">
+                     <li ><a href="#" class="fa fa-user">&nbsp;Suvaneeth</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">User Profile</a></li>
+
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+
+
+
+        </nav>
+
+    
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+     
+        <footer class="info small myfooter"  >
+            <p> &nbsp; &nbsp; &copy;Thrithvam Technologies @DateTime.Now.Year</p>
+        </footer>
+
+   
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrapdatepicker")
+    @Scripts.Render("~/bundles/userpluginjs")
+    
+    @RenderSection("scripts", required: false)
+
+</body>
+ 
+</html>
