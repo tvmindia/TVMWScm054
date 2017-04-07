@@ -5,17 +5,18 @@
 }
 
  
-    <ul class="list-group">
-        <li class="list-group-item justify-content-between list-group-item-heading alert-success">
-            <b>Name</b>
-            <span class="badge badge-default alert-success ">Last Week Calls</span>
-            <span class="badge badge-default alert-success ">Total Stock Value</span>
-        </li></ul>
+    <ul class="list-group TechList">
+    <li class="list-group-item justify-content-between list-group-item-heading alert-success">
+        <b>Name</b>
+        <span class="badge badge-default alert-success ">Last Week Calls</span>
+        <span class="badge badge-default alert-success ">Total Stock Value</span>
+    </li>
+</ul>
         <ul class="list-group">
             @foreach (var mp in List)
             {
 
-                <li class="list-group-item justify-content-between list-group-item-text">
+                <li class="list-group-item justify-content-between list-group-item-text  techitem">
                     @mp.Name
                     <span class="badge badge-default alert-info ">&nbsp;&nbsp; ☎ @mp.Calls &nbsp;&nbsp;</span>
                     <span class="badge badge-default alert-success ">&nbsp;&nbsp; ₹ @mp.StockValue&nbsp;&nbsp;</span>

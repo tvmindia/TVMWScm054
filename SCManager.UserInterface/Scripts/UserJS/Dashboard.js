@@ -70,7 +70,7 @@
     
   
 
-      $('.rlist').slideDown();
-      $('.techlist').slideDown('slow');
+      $('.rlist').fadeIn('slow');
+     // $('.techitem').fadeIn('slow');
 
 });
