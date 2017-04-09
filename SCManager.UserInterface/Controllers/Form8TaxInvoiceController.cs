@@ -50,5 +50,76 @@ namespace SCManager.UserInterface.Controllers
         #endregion  GetAllForm8
 
 
+
+        #region ButtonStyling
+        [HttpGet]
+        public ActionResult ChangeButtonStyle(string ActionType)
+        {
+            ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();
+            switch (ActionType)
+            {
+                case "List":
+                    ToolboxViewModelObj.addbtn.Visible = true;
+                    ToolboxViewModelObj.addbtn.Text = "Add";
+                    ToolboxViewModelObj.addbtn.Title = "Add New";
+                    ToolboxViewModelObj.addbtn.Event = "";
+
+                    
+
+                    break;
+                case "Edit":
+                     ToolboxViewModelObj.savebtn.Visible = true;
+                     ToolboxViewModelObj.savebtn.Text = "Save";
+                     ToolboxViewModelObj.savebtn.Title = "Save Invoice";
+                     ToolboxViewModelObj.savebtn.Event = "";
+
+                     ToolboxViewModelObj.deletebtn.Visible = true;
+                     ToolboxViewModelObj.deletebtn.Text = "Delete";
+                     ToolboxViewModelObj.deletebtn.Title = "Delete Invoice";
+                     ToolboxViewModelObj.deletebtn.Event = "";
+
+                     ToolboxViewModelObj.resetbtn.Visible = true;
+                     ToolboxViewModelObj.resetbtn.Text = "Reset";
+                     ToolboxViewModelObj.resetbtn.Title = "Reset";
+                     ToolboxViewModelObj.resetbtn.Event = "";
+
+                    break;
+                case "Add":
+
+                     ToolboxViewModelObj.savebtn.Visible = true;
+                     ToolboxViewModelObj.savebtn.Text = "Save";
+                     ToolboxViewModelObj.savebtn.Title = "Save Invoice";
+                     ToolboxViewModelObj.savebtn.Event = "";
+
+                     ToolboxViewModelObj.deletebtn.Visible = true;
+                     ToolboxViewModelObj.deletebtn.Disable = true;
+                     ToolboxViewModelObj.deletebtn.Text = "Delete";
+                     ToolboxViewModelObj.deletebtn.Title = "Delete Invoice";
+                     ToolboxViewModelObj.deletebtn.DisableReason = "Not applicable for new item";
+                     ToolboxViewModelObj.deletebtn.Event = "";
+
+                     ToolboxViewModelObj.resetbtn.Visible = true;
+                     ToolboxViewModelObj.resetbtn.Text = "Reset";
+                     ToolboxViewModelObj.resetbtn.Title = "Reset";
+                     ToolboxViewModelObj.resetbtn.Event = "";
+                    
+                    break;
+                case "AddSub":
+                    
+                    break;
+                case "tab1":
+                     
+                    break;
+                case "tab2":
+                     
+                    break;
+                default:
+                    return Content("Nochange");
+            }
+            return PartialView("ToolboxView", ToolboxViewModelObj);
+        }
+
+        #endregion
+
     }
 }

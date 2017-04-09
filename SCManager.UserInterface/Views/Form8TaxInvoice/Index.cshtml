@@ -11,17 +11,36 @@
 
 
 }
+<div class="col-md-12">
+    <div class="SCHeader col-md-6">
+        Form8 - Tax Invoices
 
-<div class="SCHeader">Form8 - Tax Invoices</div>
+    </div>
+    <div  class="col-md-6">
+        <div class="" id="btnPatchAttributeSettab" style="min-height:25px">
+            
+            @{
+                var data = new { ActionType = "List" };
+                @Html.Action("ChangeButtonStyle", "Form8TaxInvoice", data);
+            }
+        </div>
+    </div>
+</div>
+   
+
+
+
  
 
     
     <div id="exTab3" class="container SCtabContainer">
+       
+
         <ul class="nav nav-pills">
-            <li class="active">
+            <li class="active" onclick="ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab','List')">
                   <a href="#1b" data-toggle="tab" > <span class="fa fa-list">&nbsp;&nbsp;</span>Invoices</a>
             </li>
-            <li>
+            <li onclick="ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab','Add')">
                 <a href="#2b" data-toggle="tab" style="width:170px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Invoice Entry</a>
             </li>
              

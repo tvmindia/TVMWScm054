@@ -160,6 +160,7 @@
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\ReorderAlertViewModel.cs" />
     <Compile Include="Models\TechnicianViewModel.cs" />
+    <Compile Include="Models\ToolboxViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -324,6 +325,14 @@
     <Content Include="Content\images\02fe71a7.png" />
     <Content Include="Content\images\41e5c232.png" />
     <Content Include="Content\images\73a6f1c8.png" />
+    <Content Include="Content\images\add.png" />
+    <Content Include="Content\images\back.png" />
+    <Content Include="Content\images\calculate.png" />
+    <Content Include="Content\images\delete.png" />
+    <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\reset.png" />
+    <Content Include="Content\images\return.png" />
+    <Content Include="Content\images\save.png" />
     <Content Include="Content\images\SCManager.png" />
     <Content Include="Content\UserCSS\Form8.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -465,6 +474,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Views\DynamicUI\_ReorderAlertItems.cshtml" />
     <Content Include="Views\Technician\_TechnicianSummary.cshtml" />
+    <Content Include="Views\Shared\ToolboxView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
