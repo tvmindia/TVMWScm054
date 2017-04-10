@@ -262,3 +262,11 @@ background-image: -o-linear-gradient(top, #ffffff, #eeeeee);*/
      
 }
 
+.inputForm.row {
+    margin:1px;
+}
+
+.control-label {
+    font-weight:400!important;
+    font-size:13px;
+}

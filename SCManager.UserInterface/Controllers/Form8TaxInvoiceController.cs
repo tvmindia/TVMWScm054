@@ -49,6 +49,21 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion  GetAllForm8
 
+        [HttpPost]
+        public string InsertUpdateForm8(Form8ViewModel EventObj)
+        {
+            string result = "";
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+            return result;
+        }
 
 
         #region ButtonStyling
@@ -62,7 +77,7 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Text = "Add";
                     ToolboxViewModelObj.addbtn.Title = "Add New";
-                    ToolboxViewModelObj.addbtn.Event = "";
+                    ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
 
                     
 
@@ -85,8 +100,12 @@ namespace SCManager.UserInterface.Controllers
 
                     break;
                 case "Add":
+                    ToolboxViewModelObj.backbtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Text = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back to list";
+                    ToolboxViewModelObj.backbtn.Event = "$('#ListTab').trigger('click');";
 
-                     ToolboxViewModelObj.savebtn.Visible = true;
+                    ToolboxViewModelObj.savebtn.Visible = true;
                      ToolboxViewModelObj.savebtn.Text = "Save";
                      ToolboxViewModelObj.savebtn.Title = "Save Invoice";
                      ToolboxViewModelObj.savebtn.Event = "";

@@ -63,3 +63,22 @@ function GetAllForm8() {
         notyAlert('error', e.message);
     }
 }
+
+
+function List() {
+    try {
+       
+        ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'List');
+
+    } catch (x) {
+        alert(x);
+    }
+  
+}
+
+function Add() {
+   
+   
+    ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Add');
+
+}
