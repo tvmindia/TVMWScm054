@@ -120,7 +120,7 @@ namespace SCManager.UserInterface.Controllers
                      ToolboxViewModelObj.resetbtn.Visible = true;
                      ToolboxViewModelObj.resetbtn.Text = "Reset";
                      ToolboxViewModelObj.resetbtn.Title = "Reset";
-                     ToolboxViewModelObj.resetbtn.Event = "";
+                     ToolboxViewModelObj.resetbtn.Event = "reset();";
                     
                     break;
                 case "AddSub":
