@@ -80,5 +80,76 @@ function Add() {
    
    
     ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Add');
+    GetInvoiceDetailsGrid(0);
 
+}
+
+function GetInvoiceDetailsGrid(id) {
+
+    DataTables.DetailTable = $('#tblInvDetails').DataTable(
+        {
+            dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+            order: [],
+            
+            destroy: true,
+            searching: false,
+            paging: false,
+            data: GetInvoiceDetails(id),
+            columns: [
+              { "data": "SCCode", "defaultContent": "<i></i>" },
+              { "data": "ID", "defaultContent": "<i>0</i>" },
+              { "data": "SlNo", "defaultContent": "<i></i>" },
+              { "data": "Material", "defaultContent": "<i></i>" },
+              { "data": "Quantity", "defaultContent": "<i></i>" },
+              { "data": "UOM", "defaultContent": "<i></i>" },
+              { "data": "Rate", "defaultContent": "<i></i>" },
+              { "data": "BasicAmount", "defaultContent": "<i></i>" },
+              { "data": "TradeDiscount", "defaultContent": "<i></i>" },
+              { "data": "NetAmount", "defaultContent": "<i></i>" }
+            ],
+            columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false },
+                { "targets": [3], "width": "30%" },
+                 { className: "text-right", "targets": [6, 7, 8, 9] },
+            { className: "text-center", "targets": [2, 3, 4, 5] }
+            
+
+            ]
+        });
+
+}
+
+function blankRow(dataObj, slStart,count) {
+
+    for (i = 0; i < count;i++)
+    {
+        
+        var tempObj = new Object();
+        tempObj.SCCode = "";
+        tempObj.ID = "";
+        tempObj.SlNo = slStart + i;
+        tempObj.Material = "";
+        tempObj.Quantity = "";
+        tempObj.UOM = "";
+        tempObj.Rate = "";
+        tempObj.BasicAmount = "";
+        tempObj.TradeDiscount = "";
+        tempObj.NetAmount = "";      
+        dataObj.push(tempObj)
+
+    }
+   
+
+
+}
+
+function GetInvoiceDetails(id) {
+    try {
+       
+        var dataObj = [];
+        blankRow(dataObj, 1, 5);        
+        return dataObj;
+    } catch (e) {
+        alert(e)
+    }
+    
 }

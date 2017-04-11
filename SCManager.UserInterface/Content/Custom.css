@@ -9,6 +9,10 @@
     
 }
 
+.Subhead {
+     font-size: 17px!important;
+}
+
 .DashboardSummary {
     
     background-color:rgba(253, 253, 253, 0.62);
@@ -270,3 +274,14 @@ background-image: -o-linear-gradient(top, #ffffff, #eeeeee);*/
     font-weight:400!important;
     font-size:13px;
 }
+
+
+.mandatory:after {
+content:"★"; 
+color: #e32; 
+ margin-top:5px;
+ margin-left:-45px;
+ 
+}
+
+ 

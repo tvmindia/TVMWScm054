@@ -59,6 +59,14 @@ namespace SCManager.UserInterface.Models
         [Range(0, 9999999999999999.99)]
         public decimal Discount { get; set; }
 
+        [Display(Name = "Sub Total")]
+        [Range(0, 9999999999999999.99)]
+        public decimal Subtotal { get; set; }
+
+        [Display(Name = "Grand Total")]
+        [Range(0, 9999999999999999.99)]
+        public decimal GrandTotal { get; set; }
+
         public LogDetailsViewModel logDetails { get; set; }
 
         public decimal Total { get; set; }
