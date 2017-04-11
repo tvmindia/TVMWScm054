@@ -343,6 +343,7 @@
     <Content Include="Content\images\return.png" />
     <Content Include="Content\images\save.png" />
     <Content Include="Content\images\SCManager.png" />
+    <Content Include="Content\images\wrench.png" />
     <Content Include="Content\UserCSS\Form8.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -484,6 +485,7 @@
     <Content Include="Views\DynamicUI\_ReorderAlertItems.cshtml" />
     <Content Include="Views\Technician\_TechnicianSummary.cshtml" />
     <Content Include="Views\Shared\ToolboxView.cshtml" />
+    <Content Include="Views\DynamicUI\_UnderConstruction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

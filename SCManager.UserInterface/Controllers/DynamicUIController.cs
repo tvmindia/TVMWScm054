@@ -43,6 +43,11 @@ namespace SCManager.UserInterface.Controllers
             return View();
         }
 
+        public ActionResult _UnderConstruction()
+        {            
+            return View();
+        }
+
 
     }
 }

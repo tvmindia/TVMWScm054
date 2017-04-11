@@ -47,7 +47,7 @@ namespace SCManager.UserInterface.Models
         [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }
 
-        [Display(Name = "VAT")]
+        [Display(Name = "VAT %")]
         [Range(0, 9999999999999999.99)]
         public decimal VATAmount { get; set; }
 
