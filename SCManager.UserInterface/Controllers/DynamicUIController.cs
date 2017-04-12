@@ -48,6 +48,10 @@ namespace SCManager.UserInterface.Controllers
             return View();
         }
 
+        public ActionResult demoGrid()
+        {
+            return View();
+        }
 
     }
 }

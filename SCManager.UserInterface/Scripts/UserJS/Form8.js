@@ -26,8 +26,7 @@ $(document).ready(function () {
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false },
                   { className: "text-right", "targets": [5,6,7,8] },
-             { className: "text-center", "targets": [2,3,4,9,10] }
-       
+             { className: "text-center", "targets": [2,3,4,9,10] }     
                  
                 ]
          });
@@ -56,8 +55,6 @@ $(document).ready(function () {
                { "targets": [3], "width": "30%" },
                 { className: "text-right", "targets": [6, 7, 8, 9] },
            { className: "text-center", "targets": [2, 3, 4, 5] }
-
-
            ]
        });
 

@@ -405,6 +405,7 @@
     <Content Include="Scripts\DataTables\dataTables.checkboxes.js" />
     <Content Include="Scripts\DataTables\dataTables.colReorder.js" />
     <Content Include="Scripts\DataTables\dataTables.colReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.editor.min.js" />
     <Content Include="Scripts\DataTables\dataTables.fixedColumns.js" />
     <Content Include="Scripts\DataTables\dataTables.fixedColumns.min.js" />
     <Content Include="Scripts\DataTables\dataTables.fixedHeader.js" />
@@ -461,6 +462,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\lightbox.min.js" />
     <Content Include="Scripts\UserJS\Dashboard.js" />
+    <Content Include="Scripts\UserJS\demoGrid.js" />
     <Content Include="Scripts\UserJS\Form8.js" />
     <Content Include="Views\Form8TaxInvoice\Index.cshtml">
       <SubType>Code</SubType>
@@ -486,6 +488,7 @@
     <Content Include="Views\Technician\_TechnicianSummary.cshtml" />
     <Content Include="Views\Shared\ToolboxView.cshtml" />
     <Content Include="Views\DynamicUI\_UnderConstruction.cshtml" />
+    <Content Include="Views\DynamicUI\demoGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
