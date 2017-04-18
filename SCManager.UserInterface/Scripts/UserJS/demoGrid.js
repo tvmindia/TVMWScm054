@@ -1,6 +1,9 @@
 ﻿var DataTables = {};
 var editor;
 var totalDetailRows = 0;
+var GridData;
+var identityColumn = 'SlNo';
+var GridInputPerRow=7;
 //---------------------------------------Docuement Ready--------------------------------------------------//
 $(document).ready(function () {
     try {
@@ -12,7 +15,7 @@ $(document).ready(function () {
               order: [],
               searching: false,
               paging: false,
-              data: blankRow(20),
+              data: GetGridDate(),
               columns: [
                 { "data": "SCCode", "defaultContent": "<i></i>" },
                 { "data": "ID", "defaultContent": "<i>0</i>" },
@@ -45,34 +48,14 @@ $(document).ready(function () {
           });
 
 
+       
       
-    
     
     }catch(x){}
 
 });
 
-function changeData(value,row,column) {
 
-    $('#last').html('slno : ' + row + ' - ' + column + ' : ' + value);
-   
-}
-
-function createTextBox(data, type, row,columnname) {
-    
-    var a = row[columnname];
-    var b = row.SlNo;
-    var c = "'";
-    debugger;
-    if (data=="" || data == null) {
-       
-        return ('<input type="textbox" class="gridTextbox" value="" onblur="changeData(this.value,' + b + ',' + c + columnname + c + ')" >  </input>');
-    } else {
-        return ('<input type="textbox" class="gridTextbox" value=' + data + ' onblur="changeData(this.value,' + b + ',' + c + columnname + c + ')" >  </input>');
-    }
-   
-
-}
 
 function blankRow(count) {
 
@@ -83,7 +66,7 @@ function blankRow(count) {
         tempObj.SCCode = "";
         tempObj.ID = "";
         tempObj.SlNo = totalDetailRows + i + 1;
-        tempObj.Material = "material" + i;
+        tempObj.Material = "";
         tempObj.Quantity = "";
         tempObj.UOM = "";
         tempObj.Rate = "";
@@ -98,3 +81,40 @@ function blankRow(count) {
     return dataObj;
 
 }
+
+function GetGridDate() {
+
+    GridData = blankRow(20);
+    return GridData;
+}
+
+function changeData(value,row,column) {
+   // debugger;
+  
+    for (i = 0; i < GridData.length; i++)
+    {        
+        if (GridData[i][identityColumn] == row)
+        {
+            GridData[i][column] = value;
+            break;
+        }
+    }
+   
+}
+
+function createTextBox(data, type, row,columnname) {
+    
+    var a = row[columnname];
+    var b = row.SlNo;
+    var c = "'";
+   // debugger;
+    if (data=="" || data == null) {
+       
+        return ('<input type="textbox" class="gridTextbox" value="" onblur="changeData(this.value,' + b + ',' + c + columnname + c + ')" >  </input>');
+    } else {
+        return ('<input type="textbox" class="gridTextbox" value=' + data + ' onblur="changeData(this.value,' + b + ',' + c + columnname + c + ')" >  </input>');
+    }
+   
+
+}
+

@@ -463,6 +463,7 @@
     <Content Include="Scripts\lightbox.min.js" />
     <Content Include="Scripts\UserJS\Dashboard.js" />
     <Content Include="Scripts\UserJS\demoGrid.js" />
+    <Content Include="Scripts\editableGrid.js" />
     <Content Include="Scripts\UserJS\Form8.js" />
     <Content Include="Views\Form8TaxInvoice\Index.cshtml">
       <SubType>Code</SubType>
