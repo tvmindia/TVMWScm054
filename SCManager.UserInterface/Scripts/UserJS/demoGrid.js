@@ -54,12 +54,12 @@ function EG_Columns() {
                 { "data": "SCCode", "defaultContent": "<i></i>" },
                 { "data": "ID", "defaultContent": "<i>0</i>" },
                 { "data": "SlNo", "defaultContent": "<i></i>" },
-                { "data": "Material", render: function (data, type, row) { return (EG_createCombo(data, type, row, 'Material', 'Materials','FillUOM')); } },
-                { "data": "Quantity", render: function (data, type, row) { return (EG_createTextBox(data, type, row, 'Quantity', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
+                { "data": "Material", render: function (data, type, row) { return (EG_createCombo(data, 'S', row, 'Material', 'Materials','FillUOM')); } },
+                { "data": "Quantity", render: function (data, type, row) { return (EG_createTextBox(data, 'N', row, 'Quantity', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "UOM", "defaultContent": "<i></i>" },
-                { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, type, row, 'Rate', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
+                { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'Rate', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "BasicAmount", "defaultContent": "<i></i>" },
-                { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, type, row, 'TradeDiscount', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
+                { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'TradeDiscount', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "NetAmount",  "defaultContent": "<i></i>" }
     ]
 
@@ -148,20 +148,20 @@ function CalculateAmount(row) {
 
     qty = parseFloat(EGqty)||0;
     rate = parseFloat(EGrate)||0;
-    EG_GridData[row - 1]['BasicAmount'] = qty * rate;
+    EG_GridData[row - 1]['BasicAmount'] = roundoff(qty * rate);
 
     dic = parseFloat(EGdic)||0;
-    EG_GridData[row - 1]['NetAmount'] = qty * rate - dic;
+    EG_GridData[row - 1]['NetAmount'] = roundoff(qty * rate - dic);
     EG_Rebind();
-    EG_SetFocus();
+    
 }
 
 function FillUOM(row) {
     var a = _Materials.indexOf(EG_GridData[row - 1]['Material']);
-    if (a > 0) {
+    if (a > -1) {
         EG_GridData[row - 1]['UOM'] = _units[a];
         EG_Rebind();
-        EG_SetFocus();
+       
     }
 
 }

@@ -16,6 +16,51 @@ function datalistValidator(value, source) {
     return false;
 }
 
+
+function ValidateCombo(obj,source) {
+    if (datalistValidator(obj.value, source)) {
+        obj.className = obj.className.replace(' EGDanger', '');
+        return true;
+    }
+    else {
+        obj.value = "";
+        obj.className = obj.className + ' EGDanger'
+        return false;
+    }
+}
+ 
+
+function ValidateText(obj, type) {
+  
+    if (type == 'N') {
+        if (!isNaN(parseInt(obj.value))) {
+            obj.value = parseInt(obj.value);
+            obj.className = obj.className.replace(' EGDanger', '');
+            return true;
+        }
+        else {
+            obj.value = "";
+            obj.className = obj.className + ' EGDanger'
+            return false;
+        }
+
+    }
+    else if (type == 'F') {
+        if (!isNaN(parseFloat(obj.value)))
+        {
+            obj.value = parseFloat(obj.value);
+            obj.className = obj.className.replace(' EGDanger', '');
+            return true;
+        }
+        else {
+            obj.value ="";
+            obj.className = obj.className + ' EGDanger'
+            return false;
+        }
+    }
+    else { }
+}
+
 //-----------------------------------------------------------
 
 
@@ -25,26 +70,37 @@ function datalistValidator(value, source) {
 
 //--2----------data change source-------------------------------
 
-function EG_Validate_changeData_Text(obj, row, column, relatedfn) {
-    if (EG_changeData(obj.value, row, column)) {
-        currBoxIndx = $('.gridTextbox').index(obj);;
-        eval(relatedfn + "(" + row + ")");       
-    }
+function EG_Validate_changeData_Text(obj, type, row, column, relatedfn) {
 
-}
-
-function EG_Validate_changeData_Combo(obj, row, column, source, relatedfn) {
-    if (datalistValidator(obj.value, source)) {
-        obj.className = obj.className.replace(' EGDanger', '');
-    }
-    else {
-        obj.value = "";
-        obj.className = obj.className + ' EGDanger'
-    }
+   var flag= ValidateText(obj, type);
 
     if (EG_changeData(obj.value, row, column)) {
         currBoxIndx = $('.gridTextbox').index(obj);;
         eval(relatedfn + "(" + row + ")");
+        if (flag) {
+            EG_SetFocus_Next();
+        }
+        else {
+            EG_SetFocus();
+        }
+    }
+
+}
+
+function EG_Validate_changeData_Combo(obj,type, row, column, source, relatedfn) {
+     
+    var flag = ValidateCombo(obj, source);
+
+    if (EG_changeData(obj.value, row, column)) {
+        currBoxIndx = $('.gridTextbox').index(obj);
+        
+        eval(relatedfn + "(" + row + ")");
+        if (flag) {
+            EG_SetFocus_Next();
+        }
+        else {
+            EG_SetFocus();
+        }
     }
 }
 
@@ -68,6 +124,10 @@ function EG_changeData(value, row, column) {
 
 //--3-----------combo source binding----------------------------
 function EG_ComboSource(id, values) {
+    if (document.getElementById(id) == null || document.getElementById(id) == 'undefined') {
+        alert("combo source element is not defined in cshtml");
+    }
+
     var options = '';
     for (var i = 0; i < values.length; i++)
         options += '<option value="' + values[i] + '" />';
@@ -87,9 +147,9 @@ function EG_createTextBox(data, type, row, columnname,relatedfn) {
     // debugger;
     if (data == "" || data == null) {
 
-        return ('<input type="textbox" class="gridTextbox" value="" onblur="EG_Validate_changeData_Text(this,' + b + ',' + c + columnname + c + ',' + c + relatedfn + c + ') " >  </input>');
+        return ('<input type="textbox" class="gridTextbox" value="" onblur="EG_Validate_changeData_Text(this,' + c + type + c + ',' + b + ',' + c + columnname + c + ',' + c + relatedfn + c + ') " >  </input>');
     } else {
-        return ('<input type="textbox" class="gridTextbox" value=' + data + ' onblur="EG_Validate_changeData_Text(this,' + b + ',' + c + columnname + c + ',' + c + relatedfn + c + ') " >  </input>');
+        return ('<input type="textbox" class="gridTextbox" value=' + data + ' onblur="EG_Validate_changeData_Text(this,' + c + type + c + ',' + b + ',' + c + columnname + c + ',' + c + relatedfn + c + ') " >  </input>');
     }
 
 
@@ -102,10 +162,10 @@ function EG_createCombo(data, type, row, columnname, Source, relatedfn) {
     var b = row.SlNo;
     var c = "'";
     if (data == "" || data == null) {
-        return ('<input class="gridTextbox" list="' + Source + '" name="' + columnname + '" onblur="EG_Validate_changeData_Combo(this,' + b + ',' + c + columnname + c + ',' + c + Source + c + ',' + c + relatedfn + c + ') " >');
+        return ('<input class="gridTextbox" list="' + Source + '" name="' + columnname + '" onblur="EG_Validate_changeData_Combo(this,'+ c + type + c +',' + b + ',' + c + columnname + c + ',' + c + Source + c + ',' + c + relatedfn + c + ') " >');
     }
     else {
-        return ('<input class="gridTextbox" list="' + Source + '" name="' + columnname + '" value=' + data + ' onblur="EG_Validate_changeData_Combo(this,' + b + ',' + c + columnname + c + ',' + c + Source + c + ',' + c + relatedfn + c + ') " >');
+        return ('<input class="gridTextbox" list="' + Source + '" name="' + columnname + '" value=' + data + ' onblur="EG_Validate_changeData_Combo(this,' + c + type + c + ',' + b + ',' + c + columnname + c + ',' + c + Source + c + ',' + c + relatedfn + c + ') " >');
 
     }
  
@@ -118,11 +178,9 @@ function EG_blankRow(count) {
 
     var dataObj = [];
     for (i = 0; i < count; i++) {
-
         var tempObj = EG_TableDefn()
         tempObj[EG_SlColumn] = EG_totalDetailRows + i + 1;
         dataObj.push(tempObj);
-
     }
 
     EG_totalDetailRows = EG_totalDetailRows + count;
@@ -131,12 +189,21 @@ function EG_blankRow(count) {
 }
 
 
-function EG_SetFocus() {
-    debugger;
+function EG_SetFocus_Next() {
+  
     $('.gridTextbox').eq(currBoxIndx + 1).focus();
     EG_KeyDown();
 }
 
+function EG_SetFocus() {
+
+    $('.gridTextbox').eq(currBoxIndx ).focus();
+    EG_KeyDown();
+}
+
+function roundoff(num) {
+    return Math.round(num * 100) / 100;
+}
 
 function EG_KeyDown() {
 
