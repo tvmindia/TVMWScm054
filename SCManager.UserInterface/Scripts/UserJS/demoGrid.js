@@ -1,30 +1,7 @@
 ﻿var DataTables = {};
-var editor;
-var availableTags = [
-     "ActionScript",
-     "AppleScript",
-     "Asp",
-     "BASIC",
-     "C",
-     "C++",
-     "Clojure",
-     "COBOL",
-     "ColdFusion",
-     "Erlang",
-     "Fortran",
-     "Groovy",
-     "Haskell",
-     "Java",
-     "JavaScript",
-     "Lisp",
-     "Perl",
-     "PHP",
-     "Python",
-     "Ruby",
-     "Scala",
-     "Scheme"
-];
-
+ 
+var _Materials;
+var _units;
 //---------------------------------------Docuement Ready--------------------------------------------------//
 $(document).ready(function () {
     try {
@@ -38,20 +15,12 @@ $(document).ready(function () {
               paging: false,
               data: GetGridData(),
               columns: EG_Columns(),
-              columnDefs: EG_Columns_Settings(),
-              keys: {
-                    columns: ':not(:first-child)',
-                    editor:  editor
-                    },
-              select:{
-                    style:    'os',
-                    selector: 'td:first-child',
-                    blurable: true
-                    }
+              columnDefs: EG_Columns_Settings()
+             
           });
        
-        var a = getMaterials();        
-        EG_ComboSource('Materials',a)
+        getMaterials(_Materials,_units);
+        EG_ComboSource('Materials', _Materials)
     
     }catch(x){}
 
@@ -61,7 +30,7 @@ $(document).ready(function () {
 var EG_totalDetailRows = 0;
 var EG_GridData;
 var EG_SlColumn = 'SlNo';
-var EG_GridInputPerRow = 7;
+var EG_GridInputPerRow = 4;
 
 function EG_TableDefn() {
 
@@ -85,13 +54,13 @@ function EG_Columns() {
                 { "data": "SCCode", "defaultContent": "<i></i>" },
                 { "data": "ID", "defaultContent": "<i>0</i>" },
                 { "data": "SlNo", "defaultContent": "<i></i>" },
-                { "data": "Material", render: function (data, type, row) { return (EG_createCombo(data, type, row, 'Material', 'Materials')); } },
-                { "data": "Quantity", render: function (data, type, row) { return (EG_createTextBox(data, type, row, 'Quantity')); }, "defaultContent": "<i></i>" },
-                { "data": "UOM", render: function (data, type, row) { return (EG_createTextBox(data, type, row, 'UOM')); }, "defaultContent": "<i></i>" },
-                { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, type, row, 'Rate')); }, "defaultContent": "<i></i>" },
-                { "data": "BasicAmount", render: function (data, type, row) { return (EG_createTextBox(data, type, row, 'BasicAmount')); }, "defaultContent": "<i></i>" },
-                { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, type, row, 'TradeDiscount')); }, "defaultContent": "<i></i>" },
-                { "data": "NetAmount", render: function (data, type, row) { return (EG_createTextBox(data, type, row, 'NetAmount')); }, "defaultContent": "<i></i>" }
+                { "data": "Material", render: function (data, type, row) { return (EG_createCombo(data, type, row, 'Material', 'Materials','FillUOM')); } },
+                { "data": "Quantity", render: function (data, type, row) { return (EG_createTextBox(data, type, row, 'Quantity', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
+                { "data": "UOM", "defaultContent": "<i></i>" },
+                { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, type, row, 'Rate', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
+                { "data": "BasicAmount", "defaultContent": "<i></i>" },
+                { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, type, row, 'TradeDiscount', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
+                { "data": "NetAmount",  "defaultContent": "<i></i>" }
     ]
 
     return obj
@@ -138,6 +107,62 @@ function getMaterials() {
     mymats[10] = 'badge';
     mymats[11] = 'plug';
 
-    return mymats;
+    var uoms = new Array();
+    uoms[0] = 'No';
+    uoms[1] = 'No';
+    uoms[2] = 'No';
+    uoms[3] = 'No';
+    uoms[4] = 'Bottle';
+    uoms[5] = 'No';
+    uoms[6] = 'No';
+    uoms[7] = 'No';
+    uoms[8] = 'No';
+    uoms[9] = 'No';
+    uoms[10] = 'No';
+    uoms[11] = 'No';
+
+    _Materials = mymats
+    _units = uoms;
+    
+}
+
+function EG_Rebind() {
+    DataTables.DetailTable.clear().rows.add(EG_GridData).draw(false);
+}
+
+
+function CalculateAmount(row) {
+  
+    //EG_GridData[row-1][Quantity] = value
+    var qty = 0.00;
+    var rate = 0.00;
+    var dic = 0.00;
+
+    var EGqty = '';
+    var EGrate ='';
+    var EGdic = '';
+
+    EGqty = EG_GridData[row - 1]["Quantity"];
+    EGrate = EG_GridData[row - 1]['Rate'];
+    EGdic = EG_GridData[row - 1]['TradeDiscount'];
+
+    qty = parseFloat(EGqty)||0;
+    rate = parseFloat(EGrate)||0;
+    EG_GridData[row - 1]['BasicAmount'] = qty * rate;
+
+    dic = parseFloat(EGdic)||0;
+    EG_GridData[row - 1]['NetAmount'] = qty * rate - dic;
+    EG_Rebind();
+    EG_SetFocus();
+}
+
+function FillUOM(row) {
+    var a = _Materials.indexOf(EG_GridData[row - 1]['Material']);
+    if (a > 0) {
+        EG_GridData[row - 1]['UOM'] = _units[a];
+        EG_Rebind();
+        EG_SetFocus();
+    }
+
 }
 
