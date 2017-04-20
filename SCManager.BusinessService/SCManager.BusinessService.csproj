@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -110,10 +111,12 @@
   <ItemGroup>
     <Compile Include="Contracts\IDynamicUIBusiness.cs" />
     <Compile Include="Contracts\IForm8TaxInvoiceBusiness.cs" />
+    <Compile Include="Contracts\IItemBusiness.cs" />
     <Compile Include="Contracts\ITechnicianBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DynamicUIBusiness.cs" />
     <Compile Include="Services\Form8TaxInvoiceBusiness.cs" />
+    <Compile Include="Services\ItemBusiness.cs" />
     <Compile Include="Services\TechnicianBusiness.cs" />
   </ItemGroup>
   <ItemGroup />

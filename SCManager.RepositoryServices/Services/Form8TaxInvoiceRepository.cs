@@ -69,7 +69,7 @@ namespace SCManager.RepositoryServices.Services
 
                                     Form8list.Add(_Form8Obj);
                                 }
-                            }//if
+                            }
                         }
                     }
                 }

@@ -18,7 +18,7 @@ namespace SCManager.DataAccessObject.DTO
 
     }
 
-    public class PartyECSettings{
+    public class SCManagerSettings{
 
     public  string dateformat="dd-MMM-yyyy";
 }

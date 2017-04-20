@@ -18,6 +18,8 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<LogDetailsViewModel, LogDetails>().ReverseMap();
                 config.CreateMap<ReorderAlertViewModel , ReorderAlert>().ReverseMap();
                 config.CreateMap<TechnicianSummaryViewModel, TechnicianSummary>().ReverseMap();
+                config.CreateMap<ItemViewModel, Item>().ReverseMap();
+                config.CreateMap<ItemDropdownViewModel, Item>().ReverseMap();
             });
         }
     }

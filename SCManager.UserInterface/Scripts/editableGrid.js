@@ -124,14 +124,14 @@ function EG_changeData(value, row, column) {
 
 
 //--3-----------combo source binding----------------------------
-function EG_ComboSource(id, values) {
+function EG_ComboSource(id, values,valueCol,textCol) {
     if (document.getElementById(id) == null || document.getElementById(id) == 'undefined') {
         alert("combo source element is not defined in cshtml");
     }
 
     var options = '';
     for (var i = 0; i < values.length; i++)
-        options += '<option value="' + values[i] + '" />';
+        options += '<option value="' + values[i][valueCol] + '" >' + values[i][textCol] + '</option>';
 
     document.getElementById(id).innerHTML = options;
     //

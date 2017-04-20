@@ -1,7 +1,7 @@
 ﻿var DataTables = {};
  
-var _Materials;
-var _units;
+var _Materials=[];
+ 
 //---------------------------------------Docuement Ready--------------------------------------------------//
 $(document).ready(function () {
     try {
@@ -19,8 +19,8 @@ $(document).ready(function () {
              
           });
        
-        getMaterials(_Materials,_units);
-        EG_ComboSource('Materials', _Materials)
+        getMaterials();
+        EG_ComboSource('Materials', _Materials, 'ItemCode','Description')
         EG_GridDataTable = DataTables.DetailTable;
     
     }catch(x){}
@@ -95,38 +95,35 @@ function GetGridData() {
 
 function getMaterials() {
 
-    var mymats = new Array();
-    mymats[0] = 'bush';
-    mymats[1] = 'door';
-    mymats[2] = 'clamp';
-    mymats[3] = 'clip';
-    mymats[4] = 'additive';
-    mymats[5] = 'liquid';
-    mymats[6] = 'drum';
-    mymats[7] = 'lock';
-    mymats[8] = 'mat';
-    mymats[9] = 'footer';
-    mymats[10] = 'badge';
-    mymats[11] = 'plug';
 
-    var uoms = new Array();
-    uoms[0] = 'No';
-    uoms[1] = 'No';
-    uoms[2] = 'No';
-    uoms[3] = 'No';
-    uoms[4] = 'Bottle';
-    uoms[5] = 'No';
-    uoms[6] = 'No';
-    uoms[7] = 'No';
-    uoms[8] = 'No';
-    uoms[9] = 'No';
-    uoms[10] = 'No';
-    uoms[11] = 'No';
+    try {
 
-    _Materials = mymats
-    _units = uoms;
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("Item/ItemsForDropdown/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+          
+            _Materials = ds.Records;           
+            
+            
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
     
+    
+
 }
+
+
+ 
 
 
 
@@ -158,11 +155,13 @@ function CalculateAmount(row) {
 }
 
 function FillUOM(row) {
-    var a = _Materials.indexOf(EG_GridData[row - 1]['Material']);
-    if (a > -1) {
-        EG_GridData[row - 1]['UOM'] = _units[a];
-        EG_Rebind();
-       
+  
+    for (i = 0; i < _Materials.length; i++) {
+        if (_Materials[i].ItemCode == EG_GridData[row - 1]['Material']) {
+            EG_GridData[row - 1]['UOM'] = _Materials[i].UOM;
+                EG_Rebind();
+                break;            
+        }
     }
 
 }

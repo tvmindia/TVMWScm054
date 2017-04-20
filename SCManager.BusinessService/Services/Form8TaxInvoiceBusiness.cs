@@ -22,7 +22,7 @@ namespace SCManager.BusinessService.Services
             List<Form8> Form8list = null;
             try
             {
-                PartyECSettings settings=new PartyECSettings();
+                SCManagerSettings settings=new SCManagerSettings();
                 Form8list = _form8TaxInvoiceRepository.GetAllForm8(UA);
                 foreach (Form8 F in Form8list  )      
                 {
