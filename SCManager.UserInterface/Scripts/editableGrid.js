@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
 
     EG_KeyDown()
+   
 
 });
 
@@ -144,12 +145,16 @@ function EG_createTextBox(data, type, row, columnname,relatedfn) {
     var a = row[columnname];
     var b = row.SlNo;
     var c = "'";
+    var align = ''
+    if (type == 'N' || type == 'F') {
+        align='style="text-align:right"'
+    }
     // debugger;
     if (data == "" || data == null) {
 
-        return ('<input type="textbox" class="gridTextbox" value="" onblur="EG_Validate_changeData_Text(this,' + c + type + c + ',' + b + ',' + c + columnname + c + ',' + c + relatedfn + c + ') " >  </input>');
+        return ('<input ' + align + ' onfocus="this.select();" type="textbox" class="gridTextbox" value="" onblur="EG_Validate_changeData_Text(this,' + c + type + c + ',' + b + ',' + c + columnname + c + ',' + c + relatedfn + c + ') " >  </input>');
     } else {
-        return ('<input type="textbox" class="gridTextbox" value=' + data + ' onblur="EG_Validate_changeData_Text(this,' + c + type + c + ',' + b + ',' + c + columnname + c + ',' + c + relatedfn + c + ') " >  </input>');
+        return ('<input ' + align + ' onfocus="this.select();" type="textbox" class="gridTextbox" value=' + data + ' onblur="EG_Validate_changeData_Text(this,' + c + type + c + ',' + b + ',' + c + columnname + c + ',' + c + relatedfn + c + ') " >  </input>');
     }
 
 
@@ -173,6 +178,13 @@ function EG_createCombo(data, type, row, columnname, Source, relatedfn) {
 
 //---------------------------------------------------------------------------------
 
+function EG_Rebind() {
+    if (EG_GridDataTable == null) {
+        alert("EG_GridDataTable not defined in document ready");
+        return;
+    }
+    EG_GridDataTable.clear().rows.add(EG_GridData).draw(false);
+}
 
 function EG_blankRow(count) {
 
@@ -188,7 +200,6 @@ function EG_blankRow(count) {
 
 }
 
-
 function EG_SetFocus_Next() {
   
     $('.gridTextbox').eq(currBoxIndx + 1).focus();
@@ -202,7 +213,7 @@ function EG_SetFocus() {
 }
 
 function roundoff(num) {
-    return Math.round(num * 100) / 100;
+    return (Math.round(num * 100) / 100).toFixed(2);
 }
 
 function EG_KeyDown() {
@@ -245,4 +256,5 @@ function EG_KeyDown() {
 
 
     });
+    
 }

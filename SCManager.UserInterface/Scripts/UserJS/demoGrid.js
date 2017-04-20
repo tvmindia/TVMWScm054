@@ -21,6 +21,7 @@ $(document).ready(function () {
        
         getMaterials(_Materials,_units);
         EG_ComboSource('Materials', _Materials)
+        EG_GridDataTable = DataTables.DetailTable;
     
     }catch(x){}
 
@@ -29,6 +30,7 @@ $(document).ready(function () {
 //-----------------------EDIT GRID DEFN-------------------------------------
 var EG_totalDetailRows = 0;
 var EG_GridData;
+var EG_GridDataTable;
 var EG_SlColumn = 'SlNo';
 var EG_GridInputPerRow = 4;
 
@@ -126,9 +128,6 @@ function getMaterials() {
     
 }
 
-function EG_Rebind() {
-    DataTables.DetailTable.clear().rows.add(EG_GridData).draw(false);
-}
 
 
 function CalculateAmount(row) {
@@ -147,10 +146,12 @@ function CalculateAmount(row) {
     EGdic = EG_GridData[row - 1]['TradeDiscount'];
 
     qty = parseFloat(EGqty)||0;
-    rate = parseFloat(EGrate)||0;
-    EG_GridData[row - 1]['BasicAmount'] = roundoff(qty * rate);
+    rate = parseFloat(EGrate) || 0;
+    dic = parseFloat(EGdic) || 0;
 
-    dic = parseFloat(EGdic)||0;
+    EG_GridData[row - 1]['Rate'] = roundoff(rate);
+    EG_GridData[row - 1]['BasicAmount'] = roundoff(qty * rate);   
+    EG_GridData[row - 1]['TradeDiscount'] = roundoff(dic);
     EG_GridData[row - 1]['NetAmount'] = roundoff(qty * rate - dic);
     EG_Rebind();
     
