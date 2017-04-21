@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    EG_KeyDown()
+    EG_KeyDown();
    
 
 });
@@ -24,8 +24,11 @@ function ValidateCombo(obj,source) {
         return true;
     }
     else {
-        obj.value = "";
-        obj.className = obj.className + ' EGDanger'
+        if (obj.value != "") {
+            obj.value = "";
+            obj.className = obj.className + ' EGDanger'
+        }
+       
         return false;
     }
 }
@@ -40,8 +43,10 @@ function ValidateText(obj, type) {
             return true;
         }
         else {
-            obj.value = "";
-            obj.className = obj.className + ' EGDanger'
+            if (obj.value != "") {
+                obj.value = "";
+                obj.className = obj.className + ' EGDanger'
+            }
             return false;
         }
 
@@ -54,8 +59,10 @@ function ValidateText(obj, type) {
             return true;
         }
         else {
-            obj.value ="";
-            obj.className = obj.className + ' EGDanger'
+            if (obj.value != "") {
+                obj.value = "";
+                obj.className = obj.className + ' EGDanger'
+            }
             return false;
         }
     }
@@ -106,13 +113,18 @@ function EG_Validate_changeData_Combo(obj,type, row, column, source, relatedfn) 
 }
 
 function EG_changeData(value, row, column) {
-     
+ 
   //  EG_GridData[row-1][column] = value;
     for (i = 0; i < EG_GridData.length; i++) {
         if (EG_GridData[i][EG_SlColumn] == row) {
             if (EG_GridData[i][column] != value)
             {
                 EG_GridData[i][column] = value;
+
+                if (i == EG_GridData.length-1) {
+                    EG_AddBlankRowsWithoutRebind(1);
+                }
+
                 return true;
             }
             return false;
@@ -134,6 +146,7 @@ function EG_ComboSource(id, values,valueCol,textCol) {
         options += '<option value="' + values[i][valueCol] + '" >' + values[i][textCol] + '</option>';
 
     document.getElementById(id).innerHTML = options;
+   
     //
 }
 //---------------------------------------------------------------
@@ -184,7 +197,43 @@ function EG_Rebind() {
         return;
     }
     EG_GridDataTable.clear().rows.add(EG_GridData).draw(false);
+   
 }
+
+
+function EG_ClearTable() {
+    EG_totalDetailRows = 0;
+    EG_GridDataTable.clear();
+    EG_GridData = [];
+
+}
+
+
+//-------------------------blank rows-----------------------------
+function EG_AddBlankRowsWithoutRebind(count) {
+
+    for (i = 0; i < count; i++) {
+        var tempObj = EG_TableDefn()
+        tempObj[EG_SlColumn] = EG_totalDetailRows + i + 1;
+        EG_GridData.push(tempObj);
+    }
+
+    EG_totalDetailRows = EG_totalDetailRows + count;
+}
+
+
+function EG_AddBlankRows(count) {
+
+    for (i = 0; i < count; i++) {
+        var tempObj = EG_TableDefn()
+        tempObj[EG_SlColumn] = EG_totalDetailRows + i + 1;
+        EG_GridData.push(tempObj);
+    }
+
+    EG_totalDetailRows = EG_totalDetailRows + count;
+    EG_Rebind()
+}
+
 
 function EG_blankRow(count) {
 
@@ -199,6 +248,11 @@ function EG_blankRow(count) {
     return dataObj;
 
 }
+
+//--------------------------blank rows-----------------------------------
+
+
+
 
 function EG_SetFocus_Next() {
   
