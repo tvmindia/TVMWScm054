@@ -13,7 +13,7 @@ $(document).ready(function () {
               order: [],
               searching: false,
               paging: false,
-              data: GetGridData(),
+              data: null,
               columns: EG_Columns(),
               columnDefs: EG_Columns_Settings()
              
@@ -22,6 +22,7 @@ $(document).ready(function () {
         getMaterials();
         EG_ComboSource('Materials', _Materials, 'ItemCode','Description')
         EG_GridDataTable = DataTables.DetailTable;
+        GetGridData();
     
     }catch(x){}
 
@@ -75,8 +76,8 @@ function EG_Columns_Settings() {
         { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false },
         { "targets": [3], "width": "20%" },
         { className: "text-right", "targets": [6, 7, 8, 9] },
-        { className: "text-center", "targets": [2, 3, 4, 5] }
-
+        { className: "text-center", "targets": [2, 3, 4, 5] },
+        { "orderable": false, "targets": [0 ,1,2,3,4,5,6,7,8,9]}
     ]
 
     return obj;
@@ -88,8 +89,8 @@ function EG_Columns_Settings() {
 
 function GetGridData() {
 
-    EG_GridData = EG_blankRow(20);
-    return EG_GridData;
+    EG_ClearTable();
+    EG_AddBlankRows(50)
 }
 
 

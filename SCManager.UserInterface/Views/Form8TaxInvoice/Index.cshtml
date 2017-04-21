@@ -229,7 +229,7 @@
                                             @Html.LabelFor(model => model.Subtotal, htmlAttributes: new { @class = "control-label" })
                                         </div>
                                         <div class="col-md-6">
-                                            @Html.EditorFor(model => model.Subtotal, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.Subtotal, new { htmlAttributes = new { @class = "form-control Amount", @id="subtotal", @readonly = "readonly" } })
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -237,10 +237,10 @@
                                             @Html.LabelFor(model => model.VATAmount, htmlAttributes: new { @class = "control-label" })
                                         </div>
                                         <div class="col-md-2">
-                                            <input type="text" id="vatpercentage" class="form-control" />
+                                            <input type="text" id="vatpercentage" class="form-control" onkeyup="calculateVat()" />
                                         </div>
                                         <div class="col-md-6">
-                                            @Html.EditorFor(model => model.VATAmount, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.VATAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "vatamount" , @onkeyup = "AmountSummary()" ,@onblur= "RoundSummary()" } })
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -248,7 +248,7 @@
                                             @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label" })
                                         </div>
                                         <div class="col-md-6">
-                                            @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control Amount" , @id = "discount", @onkeyup = "AmountSummary()", @onblur = "RoundSummary()" } })
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -256,7 +256,7 @@
                                             @Html.LabelFor(model => model.GrandTotal, htmlAttributes: new { @class = "control-label" })
                                         </div>
                                         <div class="col-md-6">
-                                            @Html.EditorFor(model => model.GrandTotal, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.GrandTotal, new { htmlAttributes = new { @class = "form-control Amount GrandTotal", @readonly = "readonly", @id = "grandtotal" } })
                                         </div>
                                     </div>
 

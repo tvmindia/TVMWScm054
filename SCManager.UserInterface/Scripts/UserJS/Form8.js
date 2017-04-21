@@ -211,6 +211,9 @@ function getMaterials() {
 
 
 function CalculateAmount(row) {
+     
+   
+    
 
     //EG_GridData[row-1][Quantity] = value
     var qty = 0.00;
@@ -235,6 +238,43 @@ function CalculateAmount(row) {
     EG_GridData[row - 1]['NetAmount'] = roundoff(qty * rate - dic);
     EG_Rebind();
 
+    var total = 0.00;
+    for (i = 0; i < EG_GridData.length; i++) {
+        total = total + ( parseFloat(EG_GridData[i]['NetAmount'])||0);
+    }
+
+    $('#subtotal').val(roundoff(total));
+    AmountSummary();
+
+}
+
+function AmountSummary()
+{
+    
+    var subtotal = parseFloat($('#subtotal').val())||0;
+    var vatamount = parseFloat($('#vatamount').val())||0;
+    var discount = parseFloat($('#discount').val()) || 0;
+    var vatp = (parseFloat($('#vatpercentage').val()) || 0);
+    if (vatp > 0) {
+        vatamount = (subtotal * vatp) / 100;
+        $('#vatamount').val(roundoff(vatamount));
+    }
+  
+    $('#grandtotal').val(roundoff(subtotal+vatamount-discount));
+}
+
+function RoundSummary() {
+    var vatamount = parseFloat($('#vatamount').val()) || 0;
+    var discount = parseFloat($('#discount').val()) || 0;
+    $('#vatamount').val(roundoff(vatamount));
+    $('#discount').val(roundoff(discount));
+}
+
+function calculateVat() {
+    var vatp = parseFloat($('#vatpercentage').val()) || 0;
+    var subtotal = parseFloat($('#subtotal').val()) || 0;
+    $('#vatamount').val(roundoff(subtotal * vatp / 100));
+    AmountSummary();
 }
 
 function FillUOM(row) {
