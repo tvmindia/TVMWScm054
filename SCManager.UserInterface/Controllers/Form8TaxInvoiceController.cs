@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using SCManager.UserInterface.Models;
 using SCManager.DataAccessObject.DTO;
 using SCManager.BusinessService.Contracts;
+using System.Web.Script.Serialization;
 
 namespace SCManager.UserInterface.Controllers
 {
@@ -50,11 +51,19 @@ namespace SCManager.UserInterface.Controllers
         #endregion  GetAllForm8
 
         [HttpPost]
-        public string InsertUpdateForm8(Form8ViewModel EventObj)
+        public string InsertUpdateForm8(Form8ViewModel Form8Obj)
         {
             string result = "";
             try
             {
+                if (!ModelState.IsValid) {
+                    UA ua = new UA();
+                    object ResultFromJS = JsonConvert.DeserializeObject(Form8Obj.DetailJSON);
+                    string ReadableFormat = JsonConvert.SerializeObject(ResultFromJS);
+                    Form8Obj.Form8Detail=JsonConvert.DeserializeObject<List<Form8DetailViewModel>>(ReadableFormat);
+                    Form8ViewModel r = Mapper.Map < Form8,  Form8ViewModel > (_form8TaxInvoiceBusiness.InsertUpdate(Mapper.Map<Form8ViewModel, Form8>(Form8Obj), ua));
+                    result = "success";
+                }
 
             }
             catch (Exception ex)
@@ -86,7 +95,7 @@ namespace SCManager.UserInterface.Controllers
                      ToolboxViewModelObj.savebtn.Visible = true;
                      ToolboxViewModelObj.savebtn.Text = "Save";
                      ToolboxViewModelObj.savebtn.Title = "Save Invoice";
-                     ToolboxViewModelObj.savebtn.Event = "";
+                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                      ToolboxViewModelObj.deletebtn.Visible = true;
                      ToolboxViewModelObj.deletebtn.Text = "Delete";
@@ -108,7 +117,7 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.savebtn.Visible = true;
                      ToolboxViewModelObj.savebtn.Text = "Save";
                      ToolboxViewModelObj.savebtn.Title = "Save Invoice";
-                     ToolboxViewModelObj.savebtn.Event = "";
+                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                      ToolboxViewModelObj.deletebtn.Visible = true;
                      ToolboxViewModelObj.deletebtn.Disable = true;

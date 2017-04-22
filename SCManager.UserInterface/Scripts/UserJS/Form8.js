@@ -108,10 +108,27 @@ function Edit(obj){
 
 }
 
+function save() {
+    var validation = validateForm();
+    if (validation == "") {
+        debugger;
+        var result = JSON.stringify(EG_GridData);
+        $("#DetailJSON").val(result);
+        $("#savebutton").trigger('click');
+    }
+    else {
+        notyAlert('error', validation);
+    }
+  
+}
 
 function reset() {
     EG_ClearTable();
     EG_AddBlankRows(5)
+}
+
+function SaveSuccess(data, status, xhr) {
+
 }
 //----------------------------------------------------------------
  
@@ -130,6 +147,7 @@ function EG_TableDefn() {
     var tempObj = new Object();
     tempObj.SCCode = "";
     tempObj.ID = "";
+    tempObj.MaterialID = "";
     tempObj.SlNo = 0;
     tempObj.Material = "";
     tempObj.Quantity = "";
@@ -138,7 +156,7 @@ function EG_TableDefn() {
     tempObj.BasicAmount = "";
     tempObj.TradeDiscount = "";
     tempObj.NetAmount = "";
-
+   
     return tempObj
 }
 
@@ -146,6 +164,7 @@ function EG_Columns() {
     var obj = [
                 { "data": "SCCode", "defaultContent": "<i></i>" },
                 { "data": "ID", "defaultContent": "<i>0</i>" },
+                 { "data": "MaterialID", "defaultContent": "<i></i>" },
                 { "data": "SlNo", "defaultContent": "<i></i>" },
                 { "data": "Material", render: function (data, type, row) { return (EG_createCombo(data, 'S', row, 'Material', 'Materials', 'FillUOM')); } },
                 { "data": "Quantity", render: function (data, type, row) { return (EG_createTextBox(data, 'N', row, 'Quantity', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
@@ -154,6 +173,7 @@ function EG_Columns() {
                 { "data": "BasicAmount", "defaultContent": "<i></i>" },
                 { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'TradeDiscount', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "NetAmount", "defaultContent": "<i></i>" }
+               
     ]
 
     return obj
@@ -163,11 +183,11 @@ function EG_Columns() {
 function EG_Columns_Settings() {
 
     var obj = [
-        { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false },
-        { "targets": [3], "width": "20%" },
-        { className: "text-right", "targets": [6, 7, 8, 9] },
-        { className: "text-center", "targets": [2, 3, 4, 5] },
-        { "orderable": false, "targets": [0 ,1,2,3,4,5,6,7,8,9]}
+        { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
+        { "targets": [4], "width": "20%" },
+        { className: "text-right", "targets": [ 7, 8, 9, 10] },
+        { className: "text-center", "targets": [3, 4, 5, 6] },
+        { "orderable": false, "targets": [0 ,1,2,3,4,5,6,7,8,9,10]}
 
     ]
 
@@ -292,11 +312,23 @@ function FillUOM(row) {
     for (i = 0; i < _Materials.length; i++) {
         if (_Materials[i].ItemCode == EG_GridData[row - 1]['Material']) {
             EG_GridData[row - 1]['UOM'] = _Materials[i].UOM;
+            EG_GridData[row - 1]['MaterialID'] = _Materials[i].ID;
             EG_Rebind();
             break;
         }
     }
 
+}
+
+function validateForm() {
+    
+    for (i = 0; i < EG_GridData.length; i++) {
+        if (EG_GridData[i]['Material'] != "") {
+            return ""
+        }
+    }
+    
+    return "Minimum one detail is required to save";
 }
 
 //-----------------------------------------------------------------------------

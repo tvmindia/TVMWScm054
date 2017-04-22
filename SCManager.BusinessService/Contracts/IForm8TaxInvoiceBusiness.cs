@@ -10,5 +10,6 @@ namespace SCManager.BusinessService.Contracts
     public interface IForm8TaxInvoiceBusiness
     {
         List<Form8> GetAllForm8(UA UA);
+        Form8 InsertUpdate(Form8 frm8, UA UA);
     }
 }

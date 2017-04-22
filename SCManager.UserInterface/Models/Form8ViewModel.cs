@@ -34,6 +34,7 @@ namespace SCManager.UserInterface.Models
 
         [Display(Name = "Challan Date")]
         [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime? ChallanDate { get; set; }
 
         [Display(Name = "PO No")]
@@ -41,6 +42,7 @@ namespace SCManager.UserInterface.Models
         public string PONo { get; set; }
 
         [Display(Name = "PO Date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
         [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
         public DateTime? PODate { get; set; }
 
@@ -49,20 +51,21 @@ namespace SCManager.UserInterface.Models
 
         [Display(Name = "VAT %")]
         [Range(0, 9999999999999999.99)]
-        public decimal VATAmount { get; set; }
+        public decimal? VATAmount { get; set; }
 
         [Display(Name = "Total")]
         [Range(0, 9999999999999999.99)]
-        public decimal TotalItemsValue { get; set; }
+        public decimal? TotalItemsValue { get; set; }
 
         [Display(Name = "Discount")]
         [Range(0, 9999999999999999.99)]
-        public decimal Discount { get; set; }
+        public decimal? Discount { get; set; }
 
         [Display(Name = "Sub Total")]
         [Range(0, 9999999999999999.99)]
-        public decimal Subtotal { get; set; }
+        public decimal? Subtotal { get; set; }
 
+        [Required(ErrorMessage = "Grand total should have value")]
         [Display(Name = "Grand Total")]
         [Range(0, 9999999999999999.99)]
         public decimal GrandTotal { get; set; }
@@ -74,7 +77,24 @@ namespace SCManager.UserInterface.Models
         public String ChallanDateFormatted { get; set; }
         public String PODateFormatted { get; set; }
         public String InvoiceDateFormatted { get; set; }
+        public String DetailJSON { get; set; }
+        public List<Form8DetailViewModel> Form8Detail { get; set; }
 
-        
+    }
+
+    public class Form8DetailViewModel
+    {
+        public string SCCode { get; set; }
+        public Guid? ID { get; set; }
+        public Guid? MaterialID { get; set; }
+        public int? SlNo { get; set; }
+        public string Material { get; set; }
+        public int? Quantity { get; set; }
+        public string UOM { get; set; }
+        public decimal? Rate { get; set; }
+        public decimal? BasicAmount { get; set; }
+        public decimal? TradeDiscount { get; set; }
+        public decimal? NetAmount { get; set; }
+
     }
 }
