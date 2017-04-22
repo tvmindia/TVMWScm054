@@ -270,6 +270,12 @@ function roundoff(num) {
     return (Math.round(num * 100) / 100).toFixed(2);
 }
 
+function RoundTxtBox(obj) {
+    var value = parseFloat(obj.value) || 0;
+    obj.value = roundoff(value);
+
+}
+
 function EG_KeyDown() {
 
     $('.gridTextbox').keydown(function (e) {

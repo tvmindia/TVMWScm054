@@ -315,10 +315,12 @@ color: #e32;
 }
 
 .Amount {
-    text-align:right;
+    text-align:right;  
+    
 }
-.Amount::before {
-    content:"₹"!important;
+.Amount::before(2) {
+    content:"₹"; 
+    
 }
     .Amount.GrandTotal {
         color:green;

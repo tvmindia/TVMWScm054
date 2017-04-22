@@ -263,18 +263,28 @@ function AmountSummary()
     $('#grandtotal').val(roundoff(subtotal+vatamount-discount));
 }
 
-function RoundSummary() {
-    var vatamount = parseFloat($('#vatamount').val()) || 0;
-    var discount = parseFloat($('#discount').val()) || 0;
-    $('#vatamount').val(roundoff(vatamount));
-    $('#discount').val(roundoff(discount));
+var typingFlag = 0;
+function calculateVat() {
+    if (typingFlag == 0) {
+        setTimeout(calculateVatPercentage, 2000);//done to wait till typing over
+        typingFlag = 1;
+    }
 }
 
-function calculateVat() {
+function calculateVatPercentage() {   
     var vatp = parseFloat($('#vatpercentage').val()) || 0;
     var subtotal = parseFloat($('#subtotal').val()) || 0;
+    if (vatp > 100) {
+        vatp = 100;      
+    }
+    if (vatp < 0) {
+        vatp = 0;      
+    }
+
+    $('#vatpercentage').val(vatp);
     $('#vatamount').val(roundoff(subtotal * vatp / 100));
     AmountSummary();
+    typingFlag = 0;
 }
 
 function FillUOM(row) {
