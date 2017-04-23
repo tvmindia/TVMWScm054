@@ -31,9 +31,9 @@ namespace SCManager.BusinessService.Services
                 {
                     F.Total = F.TotalItemsValue + F.VATAmount - F.Discount;
                     if (F.ChallanDate!=null)
-                        F.ChallanDateFormatted = F.ChallanDate.ToString(settings.dateformat);
+                        F.ChallanDateFormatted = F.ChallanDate.GetValueOrDefault().ToString(settings.dateformat);
                     if (F.PODate != null)
-                        F.PODateFormatted = F.PODate.ToString(settings.dateformat);
+                        F.PODateFormatted = F.PODate.GetValueOrDefault().ToString(settings.dateformat);
                     if (F.InvoiceDate != null)
                         F.InvoiceDateFormatted = F.InvoiceDate.ToString(settings.dateformat);
                 
@@ -53,6 +53,13 @@ namespace SCManager.BusinessService.Services
             try
             {
                 frm8.DetailXML= _commonBusiness.GetXMLfromObject(frm8.Form8Detail, "MaterialID",UA);
+                if (frm8.ID == null || frm8.ID == Guid.Empty) {
+                    return _form8TaxInvoiceRepository.InsertForm8(frm8, UA);
+                }
+                else {
+                    _form8TaxInvoiceRepository.UpdateForm8(frm8, UA);
+
+                }
 
             }
             catch (Exception)

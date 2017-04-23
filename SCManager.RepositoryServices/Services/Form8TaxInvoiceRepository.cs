@@ -80,6 +80,87 @@ namespace SCManager.RepositoryServices.Services
             }
             return Form8list;
         }
+
+
+        public Form8 InsertForm8(Form8 frm8, UA UA) {
+            Form8 Result = null;
+            try
+            {
+                SqlParameter outputStatus, outputID = null;
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[InsertForm8]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@InvoiceNo", SqlDbType.NVarChar, 20).Value = frm8.InvoiceNo;
+                        cmd.Parameters.Add("@InvoiceDate", SqlDbType.SmallDateTime).Value = frm8.InvoiceDate;
+                        cmd.Parameters.Add("@SaleOrderNo", SqlDbType.NVarChar, 20).Value = frm8.SaleOrderNo;
+                        cmd.Parameters.Add("@ChallanNo", SqlDbType.NVarChar, 20).Value = frm8.ChallanNo;
+                        cmd.Parameters.Add("@ChallanDate", SqlDbType.SmallDateTime).Value = frm8.ChallanDate;
+                        cmd.Parameters.Add("@PONo", SqlDbType.NVarChar, 20).Value = frm8.PONo;
+                        cmd.Parameters.Add("@PODate", SqlDbType.SmallDateTime).Value = frm8.PODate;
+                        cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar).Value = frm8.Remarks;
+                        cmd.Parameters.Add("@VATAmount", SqlDbType.Decimal).Value = frm8.VATAmount;
+                        cmd.Parameters.Add("@Discount", SqlDbType.Decimal).Value = frm8.Discount;
+                        cmd.Parameters.Add("@DetailXML", SqlDbType.Xml).Value = frm8.DetailXML;
+
+                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = UA.UserName;
+                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = UA.CurrentDatetime();
+
+                        outputStatus = cmd.Parameters.Add("@Status", SqlDbType.SmallInt);
+                        outputStatus.Direction = ParameterDirection.Output;
+                        outputID = cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
+                        outputID.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                        
+
+                        switch (outputStatus.Value.ToString())
+                        {
+                            case "0":
+                               
+                                break;
+                            case "1":
+                                frm8.ID = new Guid(outputID.Value.ToString());
+
+
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return Result;
+        }
+
+        public Form8 UpdateForm8(Form8 frm8, UA UA)
+        {
+            Form8 Result = null;
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return Result;
+        }
+
+
         #endregion Methods
 
     }

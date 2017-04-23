@@ -40,20 +40,21 @@ namespace SCManager.BusinessService.Services
                 {
                     var properties = GetProperties(some_object);
                     var mand = properties[mandIndx].GetValue(some_object, null);
+                 
                     if (mand != null)
                     {
 
-                        result = result + "<item>";
+                        result = result + "<item ";
 
 
                         foreach (var p in properties)
                         {
                             string name = p.Name;
                             var value = p.GetValue(some_object, null);
-                            result = result + "<" + name + ">" + value + "</" + name + ">";
+                            result = result + " " + name + @"=""" + value + @""" " ;
 
                         }
-                        result = result + "</item>";
+                        result = result + "></item>";
                         totalRows = totalRows + 1;
                     }
 

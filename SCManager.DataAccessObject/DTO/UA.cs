@@ -15,7 +15,10 @@ namespace SCManager.DataAccessObject.DTO
 
         public UA(){
             SCCode = "SC001";
-    
+            UserName = "Suvaneeth";
+        }
+        public DateTime CurrentDatetime() {
+            return DateTime.Now;
         }
     }
 }
