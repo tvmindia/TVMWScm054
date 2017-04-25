@@ -25,18 +25,12 @@ namespace SCManager.BusinessService.Services
             List<Form8> Form8list = null;
             try
             {
-                SCManagerSettings settings=new SCManagerSettings();
+               
                 Form8list = _form8TaxInvoiceRepository.GetAllForm8(UA);
                 foreach (Form8 F in Form8list  )      
                 {
-                    F.Total = F.TotalItemsValue + F.VATAmount - F.Discount;
-                    if (F.ChallanDate!=null)
-                        F.ChallanDateFormatted = F.ChallanDate.GetValueOrDefault().ToString(settings.dateformat);
-                    if (F.PODate != null)
-                        F.PODateFormatted = F.PODate.GetValueOrDefault().ToString(settings.dateformat);
-                    if (F.InvoiceDate != null)
-                        F.InvoiceDateFormatted = F.InvoiceDate.ToString(settings.dateformat);
-                
+
+                    Form8BL(F);
                 }
       
             }
@@ -48,17 +42,31 @@ namespace SCManager.BusinessService.Services
             return Form8list;
         }
 
+    
+
         public Form8 InsertUpdate(Form8 frm8, UA UA) {
             Form8 result = null;
             try
             {
                 frm8.DetailXML= _commonBusiness.GetXMLfromObject(frm8.Form8Detail, "MaterialID",UA);
                 if (frm8.ID == null || frm8.ID == Guid.Empty) {
-                    return _form8TaxInvoiceRepository.InsertForm8(frm8, UA);
+                    result= _form8TaxInvoiceRepository.InsertForm8(frm8, UA);
                 }
                 else {
-                    _form8TaxInvoiceRepository.UpdateForm8(frm8, UA);
+                    result=_form8TaxInvoiceRepository.UpdateForm8(frm8, UA);
 
+                }
+
+                //--------BL works ----------------------
+                if (result != null) {
+                    int sl = 1;
+                    foreach (Form8Detail f in result.Form8Detail) {
+                        f.SlNo = sl;
+                        f.BasicAmount = f.Rate * f.Quantity;
+                        f.NetAmount = f.BasicAmount - f.TradeDiscount;
+                        sl = sl + 1;
+                    }
+                    Form8BL(result);
                 }
 
             }
@@ -71,6 +79,16 @@ namespace SCManager.BusinessService.Services
             return result;
         }
 
-      
+        private void Form8BL(Form8 F)
+        {
+            SCManagerSettings settings = new SCManagerSettings();
+            F.Total = F.TotalItemsValue + F.VATAmount - F.Discount;
+            if (F.ChallanDate != null)
+                F.ChallanDateFormatted = F.ChallanDate.GetValueOrDefault().ToString(settings.dateformat);
+            if (F.PODate != null)
+                F.PODateFormatted = F.PODate.GetValueOrDefault().ToString(settings.dateformat);
+            if (F.InvoiceDate != null)
+                F.InvoiceDateFormatted = F.InvoiceDate.ToString(settings.dateformat);
+        }
     }
 }
