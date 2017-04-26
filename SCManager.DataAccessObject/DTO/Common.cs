@@ -34,7 +34,7 @@ namespace SCManager.DataAccessObject.DTO
 
         public string InsertSuccess
         {
-            get { return "Insertion Successfull! "; }
+            get { return "Values Saved Successfully ! "; }
         }
 
         public string UpdateFailure

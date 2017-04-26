@@ -1,5 +1,5 @@
 ﻿var DataTables = {};
- 
+
 var _Materials = [];
 
 //---------------------------------------Docuement Ready--------------------------------------------------//
@@ -27,28 +27,28 @@ $(document).ready(function () {
                { "data": null, "orderable": false, "defaultContent": '<a href="#" onclick="Edit(this)"<i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false },
-                  { className: "text-right", "targets": [5,6,7,8] },
-             { className: "text-center", "targets": [2,3,4,9,10] }     
-                 
-                ]
+                  { className: "text-right", "targets": [5, 6, 7, 8] },
+             { className: "text-center", "targets": [2, 3, 4, 9, 10] }
+
+             ]
          });
-        
+
 
         DataTables.DetailTable = $('#tblInvDetails').DataTable(
        {
            dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
            order: [],
            searching: false,
-           paging: false,          
+           paging: false,
            data: null,
            columns: EG_Columns(),
            columnDefs: EG_Columns_Settings()
        });
 
         getMaterials();
-        EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')       
+        EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.DetailTable;
-         
+
 
     } catch (x) {
 
@@ -59,81 +59,9 @@ $(document).ready(function () {
 });
 
 
-//---------------get grid fill result-------------------
-function GetAllForm8() {
-    try {
-
-        var data = {};
-        var ds = {};
-        ds = GetDataFromServer("Form8TaxInvoice/GetAllForm8/", data);
-        if (ds != '') {
-            ds = JSON.parse(ds);
-        }
-        if (ds.Result == "OK") {
-           // debugger;
-            return ds.Records;
-        }
-        if (ds.Result == "ERROR") {
-            alert(ds.Message);
-        }
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
 
 
-//--------------------button actions ----------------------
-function List() {
-    try {
-       
-        ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'List');
 
-    } catch (x) {
-        alert(x);
-    }
-  
-}
-
-function Add() {
-   
-   
-    ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Add');
-    EG_ClearTable();
-    EG_AddBlankRows(5)
-
-}
-
-function Edit(obj){
-
-}
-
-function save() {
-    var validation = validateForm();
-    if (validation == "") {
-        debugger;
-        var result = JSON.stringify(EG_GridData);
-        $("#DetailJSON").val(result);
-        $("#savebutton").trigger('click');
-    }
-    else {
-        notyAlert('error', validation);
-    }
-  
-}
-
-function reset() {
-    EG_ClearTable();
-    EG_AddBlankRows(5)
-}
-
-function SaveSuccess(data, status, xhr) {
-
-}
-//----------------------------------------------------------------
- 
-
- 
 
 //-----------------------EDIT GRID DEFN-------------------------------------
 var EG_totalDetailRows = 0;
@@ -156,7 +84,7 @@ function EG_TableDefn() {
     tempObj.BasicAmount = "";
     tempObj.TradeDiscount = "";
     tempObj.NetAmount = "";
-   
+
     return tempObj
 }
 
@@ -173,7 +101,7 @@ function EG_Columns() {
                 { "data": "BasicAmount", "defaultContent": "<i></i>" },
                 { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'TradeDiscount', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "NetAmount", "defaultContent": "<i></i>" }
-               
+
     ]
 
     return obj
@@ -185,9 +113,9 @@ function EG_Columns_Settings() {
     var obj = [
         { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
         { "targets": [4], "width": "20%" },
-        { className: "text-right", "targets": [ 7, 8, 9, 10] },
+        { className: "text-right", "targets": [7, 8, 9, 10] },
         { className: "text-center", "targets": [3, 4, 5, 6] },
-        { "orderable": false, "targets": [0 ,1,2,3,4,5,6,7,8,9,10]}
+        { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
 
     ]
 
@@ -198,7 +126,176 @@ function EG_Columns_Settings() {
 //------------------------------------------------------------------
 
 
+//---------------Bind logics-------------------
+function GetAllForm8() {
+    try {
+
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("Form8TaxInvoice/GetAllForm8/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            // debugger;
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+function BindForm8(id) {
+    try {
+        var data = { "ID": id };
+        var ds = {};
+        ds = GetDataFromServer("Form8TaxInvoice/GetForm8/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+
+            BindForm8Fields(ds.Records);
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+            return 0;
+        }
+        return 1;
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+        return 0;
+    }
+
+}
+
+function BindForm8Fields(Records) {
+    debugger;
+    $('#HeaderID').val(Records.ID);
+    $('#InvNo').val(Records.InvoiceNo);
+    $('#InvDate').val(Records.InvoiceDate);
+    $('#Remarks').val(Records.Remarks);
+    $('#CNo').val(Records.ChallanNo);
+    $('#CDate').val(Records.ChallanDateFormatted);
+    $('#PONo').val(Records.PONo);
+    $('#PODate').val(Records.PODateFormatted);
+    $('#SONo').val(Records.SaleOrderNo);
+
+    $('#subtotal').val(Records.TotalItemsValue);
+    $('#vatamount').val(Records.VATAmount);
+    $('#discount').val(Records.Discount);
+    $('#grandtotal').val(Records.Total);
+
+    EG_Rebind_WithData(Records.Form8Detail);
+
+
+
+}
+
+
+
+
+//--------------------button actions ----------------------
+function List() {
+    try {
+
+        ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'List');
+
+    } catch (x) {
+        alert(x);
+    }
+
+}
+
+function Add() {
+
+
+    ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Add');
+    EG_ClearTable();
+    ClearFields();
+    EG_AddBlankRows(5)
+    $('#HeaderID').val('00000000-0000-0000-0000-000000000000');
+
+}
+
+function Edit(currentObj) {
+
+    var rowData = DataTables.eventTable.row($(currentObj).parents('tr')).data();
+    //Event Request Case
+    if ((rowData != null) && (rowData.ID != null)) {
+
+        EG_ClearTable();
+        $('#AddTab').trigger('click');
+        if (BindForm8(rowData.ID)) {
+            ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Edit');
+        }
+        else {
+            $('#ListTab').trigger('click');
+        }
+
+    }
+}
+
+function save() {
+    var validation = validateForm();
+    if (validation == "") {
+        debugger;
+        var result = JSON.stringify(EG_GridData);
+        $("#DetailJSON").val(result);
+        $("#savebutton").trigger('click');
+    }
+    else {
+        notyAlert('error', validation);
+    }
+
+}
+
+function reset() {
+    EG_ClearTable();
+    EG_AddBlankRows(5)
+}
+
+function resetCurrent() {
+    try {
+        debugger;
+        var id = $('#HeaderID').val();
+        BindForm8(id);
+
+
+    } catch (e) {
+
+    }
+}
+
+function SaveSuccess(data, status, xhr) {
+    var i = JSON.parse(data)
+    switch (i.Result) {
+        case "OK":
+            notyAlert('success', i.Message);
+            BindForm8Fields(i.Records)
+           // $('#divOverlayimage').hide();
+            break;
+        case "Error":
+            notyAlert('error', i.Message);
+            break;
+        case "ERROR":
+            notyAlert('error', i.Message);
+            break;
+        default:
+            break;
+    }
+}
+
+
+
 //---------------------page related logics----------------------------------- 
+
+
 
 function getMaterials() {
 
@@ -231,9 +328,9 @@ function getMaterials() {
 
 
 function CalculateAmount(row) {
-     
-   
-    
+
+
+
 
     //EG_GridData[row-1][Quantity] = value
     var qty = 0.00;
@@ -260,7 +357,7 @@ function CalculateAmount(row) {
 
     var total = 0.00;
     for (i = 0; i < EG_GridData.length; i++) {
-        total = total + ( parseFloat(EG_GridData[i]['NetAmount'])||0);
+        total = total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
     }
 
     $('#subtotal').val(roundoff(total));
@@ -268,19 +365,18 @@ function CalculateAmount(row) {
 
 }
 
-function AmountSummary()
-{
-    
-    var subtotal = parseFloat($('#subtotal').val())||0;
-    var vatamount = parseFloat($('#vatamount').val())||0;
+function AmountSummary() {
+
+    var subtotal = parseFloat($('#subtotal').val()) || 0;
+    var vatamount = parseFloat($('#vatamount').val()) || 0;
     var discount = parseFloat($('#discount').val()) || 0;
     var vatp = (parseFloat($('#vatpercentage').val()) || 0);
     if (vatp > 0) {
         vatamount = (subtotal * vatp) / 100;
         $('#vatamount').val(roundoff(vatamount));
     }
-  
-    $('#grandtotal').val(roundoff(subtotal+vatamount-discount));
+
+    $('#grandtotal').val(roundoff(subtotal + vatamount - discount));
 }
 
 var typingFlag = 0;
@@ -291,14 +387,14 @@ function calculateVat() {
     }
 }
 
-function calculateVatPercentage() {   
+function calculateVatPercentage() {
     var vatp = parseFloat($('#vatpercentage').val()) || 0;
     var subtotal = parseFloat($('#subtotal').val()) || 0;
     if (vatp > 100) {
-        vatp = 100;      
+        vatp = 100;
     }
     if (vatp < 0) {
-        vatp = 0;      
+        vatp = 0;
     }
 
     $('#vatpercentage').val(vatp);
@@ -321,13 +417,13 @@ function FillUOM(row) {
 }
 
 function validateForm() {
-    
+
     for (i = 0; i < EG_GridData.length; i++) {
         if (EG_GridData[i]['Material'] != "") {
             return ""
         }
     }
-    
+
     return "Minimum one detail is required to save";
 }
 

@@ -40,9 +40,7 @@ namespace SCManager.BusinessService.Services
                 throw;
             }
             return Form8list;
-        }
-
-    
+        }    
 
         public Form8 InsertUpdate(Form8 frm8, UA UA) {
             Form8 result = null;
@@ -83,6 +81,7 @@ namespace SCManager.BusinessService.Services
         {
             SCManagerSettings settings = new SCManagerSettings();
             F.Total = F.TotalItemsValue + F.VATAmount - F.Discount;
+            
             if (F.ChallanDate != null)
                 F.ChallanDateFormatted = F.ChallanDate.GetValueOrDefault().ToString(settings.dateformat);
             if (F.PODate != null)
@@ -90,5 +89,50 @@ namespace SCManager.BusinessService.Services
             if (F.InvoiceDate != null)
                 F.InvoiceDateFormatted = F.InvoiceDate.ToString(settings.dateformat);
         }
+
+        private void Form8DetailBL(List<Form8Detail> List)
+        {
+            SCManagerSettings settings = new SCManagerSettings();
+            int slno = 1;
+            foreach (Form8Detail F in List) {
+                F.SlNo = slno;
+                F.BasicAmount = F.Quantity * F.Rate ;
+                F.NetAmount = F.BasicAmount - F.TradeDiscount;
+                slno = slno + 1;
+            }
+
+            
+        }
+
+        public bool DeleteForm8Detail(Guid ID, Guid HeaderID, UA UA) {
+            return _form8TaxInvoiceRepository.DeleteForm8Detail(ID, HeaderID, UA);
+        }
+
+        public bool DeleteForm8(Guid ID, UA UA) {
+            return _form8TaxInvoiceRepository.DeleteForm8(ID, UA);
+        }
+
+        public Form8 GetForm8(Guid ID,UA ua) {
+            try
+            {
+                Form8 Result = new Form8();
+                Result = _form8TaxInvoiceRepository.GetForm8Header(ID, ua);
+                Result.Form8Detail = _form8TaxInvoiceRepository.GetForm8Detail(ID, ua);
+                Form8BL(Result);
+                Form8DetailBL(Result.Form8Detail);
+                return Result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+         
+
+        }
+
+
+
+
     }
 }

@@ -200,6 +200,12 @@ function EG_Rebind() {
    
 }
 
+function EG_Rebind_WithData(data) {
+    EG_GridData = data;
+    EG_totalDetailRows = data.length;
+    EG_AddBlankRowsWithoutRebind(1);
+    EG_Rebind();
+}
 
 function EG_ClearTable() {
     EG_totalDetailRows = 0;

@@ -11,7 +11,7 @@ namespace SCManager.UserInterface.Models
     public class Form8ViewModel
     {
         public string SCCode { get; set; }
-        public Guid ID { get; set; }
+        public Guid? ID { get; set; }
 
         [Required(ErrorMessage = "Invoice No is missing")]
         [Display(Name = "Invoice No")]
@@ -86,6 +86,7 @@ namespace SCManager.UserInterface.Models
     {
         public string SCCode { get; set; }
         public Guid? ID { get; set; }
+        public Guid? HeaderID { get; set; }
         public Guid? MaterialID { get; set; }
         public int? SlNo { get; set; }
         public string Material { get; set; }

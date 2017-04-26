@@ -81,7 +81,6 @@ namespace SCManager.RepositoryServices.Services
             return Form8list;
         }
 
-
         public Form8 InsertForm8(Form8 frm8, UA UA) {
             Form8 Result = null;
             try
@@ -144,7 +143,7 @@ namespace SCManager.RepositoryServices.Services
 
                 throw;
             }
-            return Result;
+            return frm8;
         }
 
         public Form8 UpdateForm8(Form8 frm8, UA UA)
@@ -164,7 +163,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Connection = con;
                         cmd.CommandText = "[UpdateForm8]";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add("@SCCode", SqlDbType.UniqueIdentifier, 5).Value = frm8.ID;
+                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = frm8.ID;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
                         cmd.Parameters.Add("@InvoiceNo", SqlDbType.NVarChar, 20).Value = frm8.InvoiceNo;
                         cmd.Parameters.Add("@InvoiceDate", SqlDbType.SmallDateTime).Value = frm8.InvoiceDate;
@@ -209,7 +208,7 @@ namespace SCManager.RepositoryServices.Services
 
                 throw;
             }
-            return Result;
+            return frm8;
         }
 
         public Form8 GetForm8Header(Guid ID, UA UA)
@@ -283,7 +282,8 @@ namespace SCManager.RepositoryServices.Services
                         }
                         cmd.Connection = con;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
-                        cmd.CommandText = "[GetAllForm8]";
+                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = ID;
+                        cmd.CommandText = "[GetForm8DetailByID]";
                         cmd.CommandType = CommandType.StoredProcedure;
                         using (SqlDataReader sdr = cmd.ExecuteReader())
                         {
@@ -297,9 +297,9 @@ namespace SCManager.RepositoryServices.Services
                                         _Form8DetailObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _Form8DetailObj.ID);
                                         _Form8DetailObj.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _Form8DetailObj.SCCode);
                                         _Form8DetailObj.MaterialID = (sdr["ItemID"].ToString() != "" ? Guid.Parse(sdr["ItemID"].ToString()) : _Form8DetailObj.MaterialID);
-                                        _Form8DetailObj.Quantity = (sdr["Qty"].ToString() != "" ? int.Parse(sdr["Qty"].ToString()) : _Form8DetailObj.Quantity);
-                                        _Form8DetailObj.Rate = (sdr["Rate"].ToString() != "" ? decimal.Parse(sdr["Rate"].ToString()) : _Form8DetailObj.Rate);
-                                        _Form8DetailObj.TradeDiscount = (sdr["TradeDiscount"].ToString() != "" ? decimal.Parse(sdr["TradeDiscount"].ToString()) : _Form8DetailObj.TradeDiscount);
+                                        _Form8DetailObj.Quantity = (sdr["Qty"].ToString() != "" ? int.Parse(sdr["Qty"].ToString()) : 0);
+                                        _Form8DetailObj.Rate = (sdr["Rate"].ToString() != "" ? decimal.Parse(sdr["Rate"].ToString()) : 0);
+                                        _Form8DetailObj.TradeDiscount = (sdr["TradeDiscount"].ToString() != "" ? decimal.Parse(sdr["TradeDiscount"].ToString()) :0);
                                         _Form8DetailObj.Material = (sdr["Material"].ToString() != "" ? (sdr["Material"].ToString()) : _Form8DetailObj.Material);
                                         _Form8DetailObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _Form8DetailObj.UOM);
                                     }
@@ -316,6 +316,106 @@ namespace SCManager.RepositoryServices.Services
                 throw ex;
             }
             return Form8DetailList;
+        }
+
+        public bool DeleteForm8(Guid ID, UA UA) {
+            bool result = false;
+            try
+            {
+                SqlParameter outputStatus;
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[DeleteForm8]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value=ID;                       
+                        cmd.Parameters.Add("@DeletedBy", SqlDbType.NVarChar, 250).Value = UA.UserName;                     
+                        outputStatus = cmd.Parameters.Add("@Status", SqlDbType.SmallInt);
+                        outputStatus.Direction = ParameterDirection.Output;
+                   
+                        cmd.ExecuteNonQuery();
+
+
+                    }
+                }
+
+                switch (outputStatus.Value.ToString())
+                {
+                    case "0":
+                        Const Cobj = new Const();
+                        throw new Exception(Cobj.DeleteFailure);
+                    case "1":
+                        return true;
+ 
+                    default:
+                        break;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return result;
+        }
+
+        public bool DeleteForm8Detail(Guid ID,Guid HeaderID, UA UA)
+        {
+            bool result = false;
+            try
+            {
+                SqlParameter outputStatus;
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[DeleteForm8Detail]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = ID;
+                        cmd.Parameters.Add("@HeaderID", SqlDbType.UniqueIdentifier).Value = HeaderID;
+                        cmd.Parameters.Add("@DeletedBy", SqlDbType.NVarChar, 250).Value = UA.UserName;
+                        outputStatus = cmd.Parameters.Add("@Status", SqlDbType.SmallInt);
+                        outputStatus.Direction = ParameterDirection.Output;
+
+                        cmd.ExecuteNonQuery();
+
+
+                    }
+                }
+
+                switch (outputStatus.Value.ToString())
+                {
+                    case "0":
+                        Const Cobj = new Const();
+                        throw new Exception(Cobj.DeleteFailure);
+                    case "1":
+                        return true;
+
+                    default:
+                        break;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return result;
         }
 
         #endregion Methods
