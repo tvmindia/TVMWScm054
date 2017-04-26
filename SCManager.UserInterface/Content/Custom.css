@@ -15,14 +15,14 @@
 
 .DashboardSummary {
     
-    background-color:rgba(253, 253, 253, 0.62);
+    background-color:rgba(253, 253, 253, 0.2);
     min-height:250px;
    /*max-height:300px;
    overflow-y:scroll;*/
 }
 
 .DashList {
-     max-height:210px;
+     max-height:600px;
    overflow-y:scroll;
    
 }
