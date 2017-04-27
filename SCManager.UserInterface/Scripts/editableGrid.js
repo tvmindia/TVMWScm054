@@ -286,9 +286,12 @@ function EG_KeyDown() {
 
     $('.gridTextbox').keydown(function (e) {
         try {
-            if (e.which === 13) {
+             
+            if (e.which === 13  ) {
                 var index = $('.gridTextbox').index(this) + 1;
                 $('.gridTextbox').eq(index).focus();
+                e.preventDefault();
+                return false;
             }
             else {
 

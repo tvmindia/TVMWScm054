@@ -194,7 +194,7 @@ function BindForm8Fields(Records) {
         $('#grandtotal').val(Records.GrandTotal);
 
         EG_Rebind_WithData(Records.Form8Detail);
-
+        $('#InvNo').attr('readonly', 'readonly');
     } catch (e) {
         notyAlert('error', e.message);
     }
@@ -225,11 +225,53 @@ function Add() {
 
     ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Add');
     EG_ClearTable();
-    ClearFields();
+    RestForm8();
     EG_AddBlankRows(5)
-    
+  
 
 }
+
+function Delete() {
+    var id = $('#HeaderID').val();
+    if (id != '' || id != null) {
+
+        if (confirm('Are you sure to delete?')) {
+            try {
+                var data = { "ID": id };
+                var ds = {};
+                ds = GetDataFromServer("Form8TaxInvoice/DeleteForm8/", data);
+                if (ds != '') {
+                    ds = JSON.parse(ds);
+                }
+                if (ds.Result == "OK") {
+                    notyAlert('success', ds.Message);
+                    $('#ListTab').trigger('click');
+                }
+                if (ds.Result == "ERROR") {
+                    notyAlert('error', ds.Message);
+                    return 0;
+                }
+                return 1;
+            }
+            catch (e) {
+                notyAlert('error', e.message);
+                return 0;
+            }
+        }
+       
+    }
+}
+
+function DeleteItem() {
+
+}
+
+function RestForm8() {
+    ClearFields();
+    $('#HeaderID').val('00000000-0000-0000-0000-000000000000');//clear field will make this field model invalid
+    $('#InvNo').removeAttr('readonly')
+}
+
 
 function Edit(currentObj) {
 
@@ -252,10 +294,7 @@ function Edit(currentObj) {
 function save() {
     var validation = validateForm();
     if (validation == "") {
-        debugger;
-        if($('#HeaderID').val()=="0" || $('#HeaderID').val()==null){        
-            $('#HeaderID').val('00000000-0000-0000-0000-000000000000');//clear field will make this field model invalid
-        }
+    
         var result = JSON.stringify(EG_GridData);
         $("#DetailJSON").val(result);
         $("#savebutton").trigger('click');

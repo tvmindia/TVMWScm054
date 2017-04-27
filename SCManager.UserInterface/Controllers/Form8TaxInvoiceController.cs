@@ -82,6 +82,10 @@ namespace SCManager.UserInterface.Controllers
            
             try
             {
+                if (Form8Obj.ID.GetValueOrDefault() == Guid.Empty) {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = c.NoItems });
+                }
+
                 UA ua = new UA();
                 _form8TaxInvoiceBusiness.DeleteForm8(Form8Obj.ID.GetValueOrDefault(), ua);
                 return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess });
@@ -169,7 +173,7 @@ namespace SCManager.UserInterface.Controllers
                      ToolboxViewModelObj.deletebtn.Visible = true;
                      ToolboxViewModelObj.deletebtn.Text = "Delete";
                      ToolboxViewModelObj.deletebtn.Title = "Delete Invoice";
-                     ToolboxViewModelObj.deletebtn.Event = "";
+                     ToolboxViewModelObj.deletebtn.Event = "Delete();";
 
                      ToolboxViewModelObj.resetbtn.Visible = true;
                      ToolboxViewModelObj.resetbtn.Text = "Reset";
