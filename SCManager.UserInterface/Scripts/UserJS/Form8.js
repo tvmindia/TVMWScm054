@@ -12,17 +12,17 @@ $(document).ready(function () {
              order: [],
              searching: true,
              paging: true,
-             data: GetAllForm8(),
+             data: null,
              columns: [
                { "data": "SCCode" },
                { "data": "ID" },
                { "data": "InvoiceNo" },
                { "data": "InvoiceDateFormatted" },
                { "data": "SaleOrderNo", "defaultContent": "<i>-</i>" },
-               { "data": "TotalItemsValue", "defaultContent": "<i>-</i>" },
+               { "data": "Subtotal", "defaultContent": "<i>-</i>" },
                { "data": "VATAmount", "defaultContent": "<i>-</i>" },
                { "data": "Discount", "defaultContent": "<i>-</i>" },
-               { "data": "Total", "defaultContent": "<i>-</i>" },
+               { "data": "GrandTotal", "defaultContent": "<i>-</i>" },
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" onclick="Edit(this)"<i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
@@ -48,7 +48,7 @@ $(document).ready(function () {
         getMaterials();
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.DetailTable;
-
+        List();
 
     } catch (x) {
 
@@ -175,23 +175,30 @@ function BindForm8(id) {
 }
 
 function BindForm8Fields(Records) {
-    debugger;
-    $('#HeaderID').val(Records.ID);
-    $('#InvNo').val(Records.InvoiceNo);
-    $('#InvDate').val(Records.InvoiceDate);
-    $('#Remarks').val(Records.Remarks);
-    $('#CNo').val(Records.ChallanNo);
-    $('#CDate').val(Records.ChallanDateFormatted);
-    $('#PONo').val(Records.PONo);
-    $('#PODate').val(Records.PODateFormatted);
-    $('#SONo').val(Records.SaleOrderNo);
+    try {
 
-    $('#subtotal').val(Records.TotalItemsValue);
-    $('#vatamount').val(Records.VATAmount);
-    $('#discount').val(Records.Discount);
-    $('#grandtotal').val(Records.Total);
+        debugger;
+        $('#HeaderID').val(Records.ID);
+        $('#InvNo').val(Records.InvoiceNo);
+        $('#InvDate').val(Records.InvoiceDate);
+        $('#Remarks').val(Records.Remarks);
+        $('#CNo').val(Records.ChallanNo);
+        $('#CDate').val(Records.ChallanDateFormatted);
+        $('#PONo').val(Records.PONo);
+        $('#PODate').val(Records.PODateFormatted);
+        $('#SONo').val(Records.SaleOrderNo);
 
-    EG_Rebind_WithData(Records.Form8Detail);
+        $('#subtotal').val(Records.Subtotal);
+        $('#vatamount').val(Records.VATAmount);
+        $('#discount').val(Records.Discount);
+        $('#grandtotal').val(Records.GrandTotal);
+
+        EG_Rebind_WithData(Records.Form8Detail);
+
+    } catch (e) {
+        notyAlert('error', e.message);
+    }
+   
 
 
 
@@ -205,9 +212,10 @@ function List() {
     try {
 
         ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'List');
+        DataTables.eventTable.clear().rows.add(GetAllForm8()).draw(false);
 
     } catch (x) {
-        alert(x);
+       // alert(x);
     }
 
 }
@@ -219,7 +227,7 @@ function Add() {
     EG_ClearTable();
     ClearFields();
     EG_AddBlankRows(5)
-    $('#HeaderID').val('00000000-0000-0000-0000-000000000000');
+    
 
 }
 
@@ -245,6 +253,9 @@ function save() {
     var validation = validateForm();
     if (validation == "") {
         debugger;
+        if($('#HeaderID').val()=="0" || $('#HeaderID').val()==null){        
+            $('#HeaderID').val('00000000-0000-0000-0000-000000000000');//clear field will make this field model invalid
+        }
         var result = JSON.stringify(EG_GridData);
         $("#DetailJSON").val(result);
         $("#savebutton").trigger('click');
@@ -278,7 +289,7 @@ function SaveSuccess(data, status, xhr) {
         case "OK":
             notyAlert('success', i.Message);
             BindForm8Fields(i.Records)
-           // $('#divOverlayimage').hide();
+          
             break;
         case "Error":
             notyAlert('error', i.Message);

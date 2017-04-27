@@ -57,15 +57,11 @@ namespace SCManager.BusinessService.Services
 
                 //--------BL works ----------------------
                 if (result != null) {
-                    int sl = 1;
-                    foreach (Form8Detail f in result.Form8Detail) {
-                        f.SlNo = sl;
-                        f.BasicAmount = f.Rate * f.Quantity;
-                        f.NetAmount = f.BasicAmount - f.TradeDiscount;
-                        sl = sl + 1;
-                    }
                     Form8BL(result);
+                    Form8DetailBL(result.Form8Detail);
                 }
+                   
+                
 
             }
             catch (Exception)
@@ -80,7 +76,7 @@ namespace SCManager.BusinessService.Services
         private void Form8BL(Form8 F)
         {
             SCManagerSettings settings = new SCManagerSettings();
-            F.Total = F.TotalItemsValue + F.VATAmount - F.Discount;
+            F.GrandTotal = F.Subtotal + F.VATAmount - F.Discount;
             
             if (F.ChallanDate != null)
                 F.ChallanDateFormatted = F.ChallanDate.GetValueOrDefault().ToString(settings.dateformat);
