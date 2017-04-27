@@ -231,37 +231,40 @@ function Add() {
 
 }
 
-function Delete() {
-    var id = $('#HeaderID').val();
-    if (id != '' || id != null) {
-
-        if (confirm('Are you sure to delete?')) {
-            try {
-                var data = { "ID": id };
-                var ds = {};
-                ds = GetDataFromServer("Form8TaxInvoice/DeleteForm8/", data);
-                if (ds != '') {
-                    ds = JSON.parse(ds);
-                }
-                if (ds.Result == "OK") {
-                    notyAlert('success', ds.Message);
-                    $('#ListTab').trigger('click');
-                }
-                if (ds.Result == "ERROR") {
-                    notyAlert('error', ds.Message);
-                    return 0;
-                }
-                return 1;
-            }
-            catch (e) {
-                notyAlert('error', e.message);
-                return 0;
-            }
-        }
-       
-    }
+function DeleteClick() {
+    
+   notyConfirm('Are you sure to delete?', 'Form8Delete');       
+     
 }
 
+function Form8Delete() {    
+   try {
+        var id = $('#HeaderID').val();
+        if (id != '' || id != null) {
+            var data = { "ID": id };
+            var ds = {};
+            ds = GetDataFromServer("Form8TaxInvoice/DeleteForm8/", data);
+            if (ds != '') {
+                ds = JSON.parse(ds);
+            }
+            if (ds.Result == "OK") {
+                notyAlert('success', ds.Message);
+                $('#ListTab').trigger('click');
+            }
+            if (ds.Result == "ERROR") {
+                notyAlert('error', ds.Message);
+                return 0;
+            }
+            return 1;
+        }
+               
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+        return 0;
+    }
+          
+}
 function DeleteItem() {
 
 }
@@ -328,7 +331,7 @@ function SaveSuccess(data, status, xhr) {
         case "OK":
             notyAlert('success', i.Message);
             BindForm8Fields(i.Records)
-          
+            ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Edit');
             break;
         case "Error":
             notyAlert('error', i.Message);
@@ -478,3 +481,6 @@ function validateForm() {
 }
 
 //-----------------------------------------------------------------------------
+
+
+
