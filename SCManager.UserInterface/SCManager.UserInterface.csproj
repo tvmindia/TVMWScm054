@@ -159,6 +159,7 @@
     <Compile Include="Controllers\DynamicUIController.cs" />
     <Compile Include="Controllers\Form8TaxInvoiceController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TechnicianController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -168,6 +169,7 @@
     <Compile Include="Models\DynamicUIViewModel.cs" />
     <Compile Include="Models\Form8ViewModel.cs" />
     <Compile Include="Models\ItemViewModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\ReorderAlertViewModel.cs" />
     <Compile Include="Models\TechnicianViewModel.cs" />
@@ -345,8 +347,10 @@
     <Content Include="Content\images\return.png" />
     <Content Include="Content\images\save.png" />
     <Content Include="Content\images\SCManager.png" />
+    <Content Include="Content\images\scmanagerback1.JPG" />
     <Content Include="Content\images\wrench.png" />
     <Content Include="Content\UserCSS\Form8.css" />
+    <Content Include="Content\UserCSS\Login.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -467,6 +471,7 @@
     <Content Include="Scripts\UserJS\demoGrid.js" />
     <Content Include="Scripts\editableGrid.js" />
     <Content Include="Scripts\UserJS\Form8.js" />
+    <Content Include="Scripts\UserJS\Login.js" />
     <Content Include="Views\Form8TaxInvoice\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -492,6 +497,7 @@
     <Content Include="Views\Shared\ToolboxView.cshtml" />
     <Content Include="Views\DynamicUI\_UnderConstruction.cshtml" />
     <Content Include="Views\DynamicUI\demoGrid.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -195,6 +195,10 @@ function BindForm8Fields(Records) {
 
         EG_Rebind_WithData(Records.Form8Detail);
         $('#InvNo').attr('readonly', 'readonly');
+        //myDate = new Date();
+        //myDate.setDate(myDate.getDate() - 30);
+        //$('#InvDate').val(myDate);
+
     } catch (e) {
         notyAlert('error', e.message);
     }

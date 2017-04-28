@@ -197,3 +197,8 @@ function notyConfirm(msg, functionIfSuccess) {
     })
 
 }
+
+
+function Logout() {
+    window.location = appAddress;
+}
