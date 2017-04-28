@@ -109,19 +109,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ICategoriesBusiness.cs" />
     <Compile Include="Contracts\ICommonBusiness.cs" />
     <Compile Include="Contracts\IDynamicUIBusiness.cs" />
     <Compile Include="Contracts\IForm8TaxInvoiceBusiness.cs" />
     <Compile Include="Contracts\IItemBusiness.cs" />
+    <Compile Include="Contracts\ISubCategoriesBusiness.cs" />
     <Compile Include="Contracts\ITechnicianBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CategoriesBusiness.cs" />
     <Compile Include="Services\CommonBusiness.cs" />
     <Compile Include="Services\DynamicUIBusiness.cs" />
     <Compile Include="Services\Form8TaxInvoiceBusiness.cs" />
     <Compile Include="Services\ItemBusiness.cs" />
+    <Compile Include="Services\SubCategoriesBusiness.cs" />
     <Compile Include="Services\TechnicianBusiness.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\SCManager.DataAccessObject\SCManager.DataAccessObject.csproj">
       <Project>{6310ba65-874e-408d-b82e-10a36c975073}</Project>

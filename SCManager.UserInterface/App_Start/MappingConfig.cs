@@ -21,6 +21,8 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<TechnicianSummaryViewModel, TechnicianSummary>().ReverseMap();
                 config.CreateMap<ItemViewModel, Item>().ReverseMap();
                 config.CreateMap<ItemDropdownViewModel, Item>().ReverseMap();
+                config.CreateMap<ItemViewModel, Categories>().ReverseMap();
+                config.CreateMap<ItemViewModel, SubCategories>().ReverseMap();
             });
         }
     }

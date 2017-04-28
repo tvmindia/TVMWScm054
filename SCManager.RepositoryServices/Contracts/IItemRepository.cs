@@ -10,5 +10,9 @@ namespace SCManager.RepositoryServices.Contracts
     public interface IItemRepository
     {
         List<Item> GetAllItems(UA UA);
+        List<Item> GetItemByID(UA UA,string ID);
+        object InsertItem(Item itemObj);
+        string UpdateItem(Item itemObj);
+        string DeleteItem(string ID);
     }
 }

@@ -347,6 +347,7 @@
     <Content Include="Content\images\SCManager.png" />
     <Content Include="Content\images\wrench.png" />
     <Content Include="Content\UserCSS\Form8.css" />
+    <Content Include="Content\UserCSS\Item.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -467,6 +468,7 @@
     <Content Include="Scripts\UserJS\demoGrid.js" />
     <Content Include="Scripts\editableGrid.js" />
     <Content Include="Scripts\UserJS\Form8.js" />
+    <Content Include="Scripts\UserJS\Item.js" />
     <Content Include="Views\Form8TaxInvoice\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -492,10 +494,10 @@
     <Content Include="Views\Shared\ToolboxView.cshtml" />
     <Content Include="Views\DynamicUI\_UnderConstruction.cshtml" />
     <Content Include="Views\DynamicUI\demoGrid.cshtml" />
+    <Content Include="Views\Item\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Item\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

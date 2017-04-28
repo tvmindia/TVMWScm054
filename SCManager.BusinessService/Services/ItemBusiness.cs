@@ -24,5 +24,55 @@ namespace SCManager.BusinessService.Services
             return Itemlist;
 
         }
+
+        public List<Item> GetItemByID(UA UA,string ID)
+        {
+            List<Item> Itemlist = null;
+            Itemlist = _itemRepository.GetItemByID(UA,ID);
+            return Itemlist;
+
+        }
+
+        public object InsertItem(Item itemObj)
+        {
+            object result = null;
+            try
+            {
+                result = _itemRepository.InsertItem(itemObj);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        public string UpdateItem(Item itemObj)
+        {
+            string status = null;
+            try
+            {
+                status = _itemRepository.UpdateItem(itemObj);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+
+        public string DeleteItem(string ID)
+        {
+            string status = null;
+            try
+            {
+                status = _itemRepository.DeleteItem(ID);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
     }
 }

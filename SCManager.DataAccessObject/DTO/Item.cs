@@ -18,5 +18,8 @@ namespace SCManager.DataAccessObject.DTO
         public int Stock { get; set; }
         public string UOM { get; set; }
         public int ReorderQty { get; set; }
+        public float ProductCommission { get; set; }
+        public string Remarks { get; set; }
+        public LogDetails logDetails { get; set; }
     }
 }
