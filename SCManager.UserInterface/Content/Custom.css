@@ -351,3 +351,9 @@ color: #e32;
     color:#d7d2d2;
     font-size:13px!important;
 }
+
+.selectItemList {
+
+    max-height:350px;
+    overflow-y:scroll;
+}

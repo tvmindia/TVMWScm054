@@ -471,6 +471,7 @@
     <Content Include="Scripts\UserJS\demoGrid.js" />
     <Content Include="Scripts\editableGrid.js" />
     <Content Include="Scripts\UserJS\Form8.js" />
+    <Content Include="Scripts\UserJS\Item.js" />
     <Content Include="Scripts\UserJS\Login.js" />
     <Content Include="Views\Form8TaxInvoice\Index.cshtml">
       <SubType>Code</SubType>

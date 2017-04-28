@@ -50,6 +50,8 @@ $(document).ready(function () {
         EG_GridDataTable = DataTables.DetailTable;
         List();
 
+        
+
     } catch (x) {
 
         notyAlert('error', e.message);
@@ -98,7 +100,7 @@ function EG_Columns() {
                 { "data": "Quantity", render: function (data, type, row) { return (EG_createTextBox(data, 'N', row, 'Quantity', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "UOM", "defaultContent": "<i></i>" },
                 { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'Rate', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
-                { "data": "BasicAmount", "defaultContent": "<i></i>" },
+                { "data": "BasicAmount", render: function (data, type, row) { return roundoff(data,1); }, "defaultContent": "<i></i>" },
                 { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'TradeDiscount', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "NetAmount", "defaultContent": "<i></i>" }
 
@@ -179,25 +181,36 @@ function BindForm8Fields(Records) {
 
         debugger;
         $('#HeaderID').val(Records.ID);
-        $('#InvNo').val(Records.InvoiceNo);
-        $('#InvDate').val(Records.InvoiceDate);
+        $('#InvNo').val(Records.InvoiceNo);        
         $('#Remarks').val(Records.Remarks);
-        $('#CNo').val(Records.ChallanNo);
-        $('#CDate').val(Records.ChallanDateFormatted);
-        $('#PONo').val(Records.PONo);
-        $('#PODate').val(Records.PODateFormatted);
+        $('#CNo').val(Records.ChallanNo);        
+        $('#PONo').val(Records.PONo);      
         $('#SONo').val(Records.SaleOrderNo);
-
-        $('#subtotal').val(Records.Subtotal);
-        $('#vatamount').val(Records.VATAmount);
-        $('#discount').val(Records.Discount);
-        $('#grandtotal').val(Records.GrandTotal);
-
+        $('#subtotal').val(roundoff(Records.Subtotal));
+        $('#vatamount').val(roundoff(Records.VATAmount));
+        $('#discount').val(roundoff(Records.Discount));
+        $('#grandtotal').val(roundoff(Records.GrandTotal));
         EG_Rebind_WithData(Records.Form8Detail);
         $('#InvNo').attr('readonly', 'readonly');
-        //myDate = new Date();
-        //myDate.setDate(myDate.getDate() - 30);
-        //$('#InvDate').val(myDate);
+
+        var $datepicker = $('#InvDate');
+        $datepicker.datepicker();
+        $datepicker.datepicker('setDate', new Date(Records.InvoiceDateFormatted));
+
+        if (Records.ChallanDateFormatted != null) {
+            var $datepicker = $('#CDate');
+            $datepicker.datepicker();
+            $datepicker.datepicker('setDate', new Date(Records.ChallanDateFormatted));
+        }
+      
+        if (Records.PODateFormatted!=null) {
+            var $datepicker = $('#PODate');
+            $datepicker.datepicker();
+            $datepicker.datepicker('setDate', new Date(Records.PODateFormatted));
+        }
+      
+
+        
 
     } catch (e) {
         notyAlert('error', e.message);
@@ -231,7 +244,7 @@ function Add() {
     EG_ClearTable();
     RestForm8();
     EG_AddBlankRows(5)
-  
+    EG_KeyDown();
 
 }
 
@@ -290,6 +303,7 @@ function Edit(currentObj) {
         $('#AddTab').trigger('click');
         if (BindForm8(rowData.ID)) {
             ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Edit');
+            EG_KeyDown();
         }
         else {
             $('#ListTab').trigger('click');
