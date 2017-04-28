@@ -24,11 +24,11 @@ namespace SCManager.DataAccessObject.DTO
         public string Remarks { get; set; }
 
         public decimal VATAmount { get; set; }
-        public decimal TotalItemsValue { get; set; }
+        public decimal Subtotal { get; set; }
         public decimal Discount { get; set; }
         public LogDetails logDetails { get; set; }
 
-        public decimal Total { get; set; }
+        public decimal GrandTotal { get; set; }
 
 
         public String ChallanDateFormatted { get; set; }

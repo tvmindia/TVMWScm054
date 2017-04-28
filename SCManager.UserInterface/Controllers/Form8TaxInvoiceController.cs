@@ -29,9 +29,11 @@ namespace SCManager.UserInterface.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            Form8ViewModel dummy = new Form8ViewModel();
+            dummy.ID = Guid.Empty;
+            return View(dummy);
         }
-
+        Const c = new Const();
 
         #region GetAllForm8
         [HttpGet]
@@ -54,15 +56,16 @@ namespace SCManager.UserInterface.Controllers
         public string InsertUpdateForm8(Form8ViewModel Form8Obj)
         {
             string result = "";
+           
             try
             {
-                if (!ModelState.IsValid) {
+                if (ModelState.IsValid) {
                     UA ua = new UA();
                     object ResultFromJS = JsonConvert.DeserializeObject(Form8Obj.DetailJSON);
                     string ReadableFormat = JsonConvert.SerializeObject(ResultFromJS);
                     Form8Obj.Form8Detail=JsonConvert.DeserializeObject<List<Form8DetailViewModel>>(ReadableFormat);
                     Form8ViewModel r = Mapper.Map < Form8,  Form8ViewModel > (_form8TaxInvoiceBusiness.InsertUpdate(Mapper.Map<Form8ViewModel, Form8>(Form8Obj), ua));
-                    result = "success";
+                    return JsonConvert.SerializeObject(new { Result = "OK", Message = c.InsertSuccess , Records = r});
                 }
 
             }
@@ -74,6 +77,71 @@ namespace SCManager.UserInterface.Controllers
             return result;
         }
 
+        [HttpGet]
+        public string DeleteForm8(Form8ViewModel Form8Obj) {
+           
+            try
+            {
+                if (Form8Obj.ID.GetValueOrDefault() == Guid.Empty) {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = c.NoItems });
+                }
+
+                UA ua = new UA();
+                _form8TaxInvoiceBusiness.DeleteForm8(Form8Obj.ID.GetValueOrDefault(), ua);
+                return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess });
+
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+
+            
+        }
+
+        [HttpGet]
+        public string DeleteForm8Detail(Form8DetailViewModel Form8Obj)
+        {
+
+            try
+            {
+                UA ua = new UA();
+                Guid ID= Form8Obj.ID.GetValueOrDefault();
+                Guid HeaderID= Form8Obj.HeaderID.GetValueOrDefault();
+                if (ID == null || HeaderID == null)
+                {                
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = c.DeleteFailure });
+                }
+                else
+                {
+                    _form8TaxInvoiceBusiness.DeleteForm8Detail(ID, HeaderID, ua);
+                    return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess });
+                }
+                
+
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+
+
+        }
+
+        [HttpGet]
+        public string GetForm8(Form8ViewModel dataObj)
+        {
+            try
+            {
+                UA ua = new UA();
+                Form8ViewModel Frm8 = Mapper.Map<Form8, Form8ViewModel>(_form8TaxInvoiceBusiness.GetForm8(dataObj.ID.GetValueOrDefault(), ua));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = Frm8 });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
 
         #region ButtonStyling
         [HttpGet]
@@ -92,7 +160,12 @@ namespace SCManager.UserInterface.Controllers
 
                     break;
                 case "Edit":
-                     ToolboxViewModelObj.savebtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Text = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back to list";
+                    ToolboxViewModelObj.backbtn.Event = "$('#ListTab').trigger('click');";
+
+                    ToolboxViewModelObj.savebtn.Visible = true;
                      ToolboxViewModelObj.savebtn.Text = "Save";
                      ToolboxViewModelObj.savebtn.Title = "Save Invoice";
                      ToolboxViewModelObj.savebtn.Event = "save();";
@@ -100,12 +173,12 @@ namespace SCManager.UserInterface.Controllers
                      ToolboxViewModelObj.deletebtn.Visible = true;
                      ToolboxViewModelObj.deletebtn.Text = "Delete";
                      ToolboxViewModelObj.deletebtn.Title = "Delete Invoice";
-                     ToolboxViewModelObj.deletebtn.Event = "";
+                     ToolboxViewModelObj.deletebtn.Event = "DeleteClick();";
 
                      ToolboxViewModelObj.resetbtn.Visible = true;
                      ToolboxViewModelObj.resetbtn.Text = "Reset";
                      ToolboxViewModelObj.resetbtn.Title = "Reset";
-                     ToolboxViewModelObj.resetbtn.Event = "";
+                     ToolboxViewModelObj.resetbtn.Event = "resetCurrent();";
 
                     break;
                 case "Add":

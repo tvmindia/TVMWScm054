@@ -1,0 +1,51 @@
+﻿@model SCManager.UserInterface.Models.LoginViewModel
+
+@{
+    Layout = null;
+}
+@Styles.Render("~/Content/css")
+@Styles.Render("~/Content/UserCSS/Login")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card card-container">
+
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+
+            @using (Ajax.BeginForm("LookupUser", "Login", new AjaxOptions { HttpMethod = "POST", OnSuccess = "LoginSuccess", OnFailure = "LoginFailure", AllowCache = false, LoadingElementId = "" }, new { @class = "form-horizontal form-signin", role = "form", id = "Loginform" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+                <span id="reauth-email" class="reauth-email"></span>
+                @Html.EditorFor(model => model.LoginName, new { htmlAttributes = new { @class = "form-control", placeholder = "Username", autofocus = "autofocus" } })
+                @Html.ValidationMessageFor(model => model.LoginName, "", new { @class = "text-danger" })
+
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
+
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                <button class="btn btn-lg btn-success btn-block btn-signin" type="submit">LOGIN</button>
+
+            }
+
+            <a href="#" class="forgot-password">
+                Forgot the password?
+            </a>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+</body>
+</html>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jqueryunobtrusiveajaxvalidate")
+@Scripts.Render("~/bundles/Login")
+

@@ -200,6 +200,12 @@ function EG_Rebind() {
    
 }
 
+function EG_Rebind_WithData(data) {
+    EG_GridData = data;
+    EG_totalDetailRows = data.length;
+    EG_AddBlankRowsWithoutRebind(1);
+    EG_Rebind();
+}
 
 function EG_ClearTable() {
     EG_totalDetailRows = 0;
@@ -280,9 +286,12 @@ function EG_KeyDown() {
 
     $('.gridTextbox').keydown(function (e) {
         try {
-            if (e.which === 13) {
+             
+            if (e.which === 13  ) {
                 var index = $('.gridTextbox').index(this) + 1;
                 $('.gridTextbox').eq(index).focus();
+                e.preventDefault();
+                return false;
             }
             else {
 

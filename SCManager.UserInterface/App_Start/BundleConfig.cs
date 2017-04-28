@@ -13,6 +13,7 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new StyleBundle("~/Content/DataTables/css/datatableSelect").Include("~/Content/DataTables/css/select.dataTables.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/UserCSS/Form8").Include("~/Content/UserCSS/Form8.css"));
+            bundles.Add(new StyleBundle("~/Content/UserCSS/Login").Include("~/Content/UserCSS/Login.css"));
             bundles.Add(new StyleBundle("~/Content/UserCSS/Item").Include("~/Content/UserCSS/Item.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include("~/Scripts/jquery-3.1.1.min.js")); 
@@ -32,6 +33,8 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/demoGrid").Include("~/Scripts/UserJS/demoGrid.js"));
             bundles.Add(new ScriptBundle("~/bundles/editableGrid").Include("~/Scripts/editableGrid.js"));
             bundles.Add(new ScriptBundle("~/bundles/Item").Include("~/Scripts/UserJS/Item.js"));
+            bundles.Add(new ScriptBundle("~/bundles/Login").Include("~/Scripts/UserJS/Login.js"));
+
         }
     }
 }

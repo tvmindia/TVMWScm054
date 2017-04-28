@@ -169,3 +169,36 @@ function isNumber(e) {
     }
 }
 
+
+function notyConfirm(msg, functionIfSuccess) {
+    var text = '<div class="confirmbox"><span class="confirmboxHead">Delete Alert !</span><br/><br/><span class="confirmboxMsg">' + msg + '</span><br/><br/><span class="confirmboxFooter">You cannot reverse this action</span><div>'
+    var n = noty({
+        text: text,
+        type: 'confirm',
+        dismissQueue: false,
+        layout: 'center',
+        modal: true,
+        theme: 'defaultTheme',
+        buttons: [
+            {
+                addClass: 'btn btn-primary', text: '&nbsp&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp', onClick: function ($noty) {
+                    $noty.close();
+                    eval(functionIfSuccess + '()');
+
+                }
+            },
+        {
+            addClass: 'btn btn-danger', text: 'Cancel', onClick: function ($noty) {
+                $noty.close();
+                return false;
+            }
+        }
+        ]
+    })
+
+}
+
+
+function Logout() {
+    window.location = appAddress;
+}
