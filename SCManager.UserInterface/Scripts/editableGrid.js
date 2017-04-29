@@ -203,11 +203,19 @@ function EG_Rebind() {
     EG_KeyDown();
 }
 
-function EG_Rebind_WithData(data) {
+function EG_Rebind_WithData(data, extra) {
+    var i = 0;
+    if (data != null) {
+        for (i = 0; i < data.length; i++) {
+            data[i][EG_SlColumn] = i + 1;
+        }
+    }
+  
+
     EG_MODE = 'EDIT';
     EG_GridData = data;
     EG_totalDetailRows = data.length;
-    EG_AddBlankRowsWithoutRebind(1);
+    EG_AddBlankRowsWithoutRebind(extra);
     EG_Rebind();
 }
 

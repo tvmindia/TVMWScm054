@@ -361,7 +361,10 @@ color: #e32;
 .actionLink {
     text-decoration:none!important;
 }
-
+.DeleteLink {
+      text-decoration:none!important;
+      color:darkred;
+}
 
 .preloader {
    position:fixed;

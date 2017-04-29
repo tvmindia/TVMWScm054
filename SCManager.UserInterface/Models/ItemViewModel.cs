@@ -37,7 +37,7 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Reorder Qty")]
         public int? ReorderQty { get; set; }
 
-        [Display(Name = "Product Commission")]
+        [Display(Name = "Product Commission (₹)")]
         public float? ProductCommission { get; set; }
 
         [Display(Name = "Remarks")]

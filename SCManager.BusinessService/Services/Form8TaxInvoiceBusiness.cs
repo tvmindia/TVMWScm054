@@ -75,27 +75,35 @@ namespace SCManager.BusinessService.Services
 
         private void Form8BL(Form8 F)
         {
-            SCManagerSettings settings = new SCManagerSettings();
-            F.GrandTotal = F.Subtotal + F.VATAmount - F.Discount;
-            
-            if (F.ChallanDate != null)
-                F.ChallanDateFormatted = F.ChallanDate.GetValueOrDefault().ToString(settings.dateformat);
-            if (F.PODate != null)
-                F.PODateFormatted = F.PODate.GetValueOrDefault().ToString(settings.dateformat);
-            if (F.InvoiceDate != null)
-                F.InvoiceDateFormatted = F.InvoiceDate.ToString(settings.dateformat);
+            if (F != null) {
+                SCManagerSettings settings = new SCManagerSettings();
+                F.GrandTotal = F.Subtotal + F.VATAmount - F.Discount;
+
+                if (F.ChallanDate != null)
+                    F.ChallanDateFormatted = F.ChallanDate.GetValueOrDefault().ToString(settings.dateformat);
+                if (F.PODate != null)
+                    F.PODateFormatted = F.PODate.GetValueOrDefault().ToString(settings.dateformat);
+                if (F.InvoiceDate != null)
+                    F.InvoiceDateFormatted = F.InvoiceDate.ToString(settings.dateformat);
+            }
+         
         }
 
         private void Form8DetailBL(List<Form8Detail> List)
         {
-            SCManagerSettings settings = new SCManagerSettings();
-            int slno = 1;
-            foreach (Form8Detail F in List) {
-                F.SlNo = slno;
-                F.BasicAmount = F.Quantity * F.Rate ;
-                F.NetAmount = F.BasicAmount - F.TradeDiscount;
-                slno = slno + 1;
+            if (List != null)
+            {
+                SCManagerSettings settings = new SCManagerSettings();
+                int slno = 1;
+                foreach (Form8Detail F in List)
+                {
+                    F.SlNo = slno;
+                    F.BasicAmount = F.Quantity * F.Rate;
+                    F.NetAmount = F.BasicAmount - F.TradeDiscount;
+                    slno = slno + 1;
+                }
             }
+           
 
             
         }

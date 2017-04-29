@@ -57,16 +57,16 @@ namespace SCManager.UserInterface.Models
         [Range(0, 9999999999999999.99)]
         public decimal? TotalItemsValue { get; set; }
 
-        [Display(Name = "Discount")]
+        [Display(Name = "Discount (₹)")]
         [Range(0, 9999999999999999.99)]
         public decimal? Discount { get; set; }
 
-        [Display(Name = "Sub Total")]
+        [Display(Name = "Sub Total (₹)")]
         [Range(0, 9999999999999999.99)]
         public decimal? Subtotal { get; set; }
 
         [Required(ErrorMessage = "Grand total should have value")]
-        [Display(Name = "Grand Total")]
+        [Display(Name = "Grand Total (₹)")]
         [Range(0, 9999999999999999.99)]
         public decimal GrandTotal { get; set; }
 
