@@ -64,6 +64,9 @@ function PostDataToServer(page, formData, callback)
         url: appAddress+page,
         async: true,
         data: formData,
+        beforeSend: function () {
+            showLoader();
+        },
         cache: false,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -75,7 +78,7 @@ function PostDataToServer(page, formData, callback)
         },
         complete:function()
         {
-           
+            hideLoader();
         }
 
     });
@@ -89,7 +92,10 @@ function GetDataFromServer(page, formData) {
         
         type: "GET",
         url: appAddress + page,
-        data:formData,
+        data: formData,
+        beforeSend: function () {
+            showLoader();
+        },
         async: false,
         cache: false,
         contentType: "application/json; charset=utf-8",
@@ -100,7 +106,7 @@ function GetDataFromServer(page, formData) {
           notyAlert('error',errorThrown + ',' + textStatus + ',' + jqXHR.statusText);
         },
         complete: function () {
-          
+            hideLoader();
         }
 
     });
@@ -201,4 +207,27 @@ function notyConfirm(msg, functionIfSuccess) {
 
 function Logout() {
     window.location = appAddress;
+}
+
+var loadStatus = 0;
+ 
+function showLoader() {
+    try {
+        $(".preloader").show();
+    } catch (e) {
+
+    }
+   
+   
+}
+
+ 
+function hideLoader() {
+    try {
+        $('.preloader').fadeOut();
+    } catch (e) {
+
+    }
+   
+   
 }

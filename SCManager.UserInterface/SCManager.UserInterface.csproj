@@ -343,6 +343,7 @@
     <Content Include="Content\images\calculate.png" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\reset.png" />
     <Content Include="Content\images\return.png" />
     <Content Include="Content\images\save.png" />

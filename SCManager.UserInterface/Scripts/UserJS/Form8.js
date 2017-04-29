@@ -5,6 +5,7 @@ var _Materials = [];
 //---------------------------------------Docuement Ready--------------------------------------------------//
 $(document).ready(function () {
     try {
+        
         var EventRequestsViewModel = new Object();
         DataTables.eventTable = $('#tblInvoices').DataTable(
          {
@@ -53,7 +54,7 @@ $(document).ready(function () {
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.DetailTable;
         List();
-
+      
         
 
     } catch (x) {
@@ -172,6 +173,7 @@ function BindForm8(id) {
             return 0;
         }
         return 1;
+        
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -228,10 +230,10 @@ function BindForm8Fields(Records) {
 //--------------------button actions ----------------------
 function List() {
     try {
-
+        showLoader();
         ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'List');
         DataTables.eventTable.clear().rows.add(GetAllForm8()).draw(false);
-
+          hideLoader();
     } catch (x) {
        // alert(x);
     }
@@ -240,13 +242,13 @@ function List() {
 
 function Add() {
 
-
+    showLoader();
     ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Add');
     EG_ClearTable();
     RestForm8();
     EG_AddBlankRows(5)
     EG_KeyDown();
-
+    hideLoader();
 }
 
 function DeleteClick() {
@@ -301,7 +303,7 @@ function RestForm8() {
 
 
 function Edit(currentObj) {
-
+    showLoader();
     var rowData = DataTables.eventTable.row($(currentObj).parents('tr')).data();
     //Event Request Case
     if ((rowData != null) && (rowData.ID != null)) {
@@ -317,6 +319,8 @@ function Edit(currentObj) {
         }
 
     }
+    hideLoader();
+   
 }
 
 function save() {
