@@ -9,7 +9,7 @@ namespace SCManager.UserInterface.Models
 {
     public class ItemViewModel
     {
-        [Required(ErrorMessage = "Please enter SCCode")]
+        
         public string SCCode { get; set; }
         public Guid ID { get; set; }
 

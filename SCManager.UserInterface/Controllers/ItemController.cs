@@ -63,7 +63,7 @@ namespace SCManager.UserInterface.Controllers
             }
             return View(itemViewModal);
         }
-
+        Const c = new Const();
         [HttpGet]
         public string ItemsForDropdown(ItemDropdownViewModel obj)
         {
@@ -128,16 +128,17 @@ namespace SCManager.UserInterface.Controllers
                     itemViewmodelObj.logDetails.CreatedDate = ua.CurrentDatetime();
                     itemViewmodelObj.logDetails.UpdatedBy = itemViewmodelObj.logDetails.CreatedBy;
                     itemViewmodelObj.logDetails.UpdatedDate = itemViewmodelObj.logDetails.CreatedDate;
+                    itemViewmodelObj.SCCode = ua.SCCode;
                     if (itemViewmodelObj.ID==Guid.Empty)
                     {
 
                         result = _itemBusiness.InsertItem(Mapper.Map<ItemViewModel, Item>(itemViewmodelObj));
-                        return JsonConvert.SerializeObject(new { Result = "OK", Records = result });
+                        return JsonConvert.SerializeObject(new { Result = "OK", Records = result,Message=c.InsertSuccess });
                     }
                    else
                     {
                         result = _itemBusiness.UpdateItem(Mapper.Map<ItemViewModel, Item>(itemViewmodelObj));
-                        return JsonConvert.SerializeObject(new { Result = "OK", Records = result });
+                        return JsonConvert.SerializeObject(new { Result = "OK", Records = result, Message=c.UpdateSuccess });
                     }
                    
                 }
@@ -169,6 +170,7 @@ namespace SCManager.UserInterface.Controllers
         public string DeleteItem(string ID)
         {
             string status = null;
+            string msg = null;
             if (ModelState.IsValid)
             {
 
@@ -178,8 +180,19 @@ namespace SCManager.UserInterface.Controllers
                     {
                         status = _itemBusiness.DeleteItem(ID);
                     }
-                    
-                    return JsonConvert.SerializeObject(new { Result = "OK", Records = status });
+                    switch(status)
+                    {
+                        case "0":
+                            msg = c.DeleteFailure;
+                            break;
+                        case "1":
+                            msg = c.DeleteSuccess;
+                            break;
+                        case "2":
+                            msg = c.FKviolation;
+                            break;
+                    }
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message= msg });
                 }
                 catch (Exception ex)
                 {
@@ -216,12 +229,12 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save Invoice";
+                    ToolboxViewModelObj.savebtn.Title = "Save Item";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete Invoice";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete Item";
                     ToolboxViewModelObj.deletebtn.Event = "Delete()";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;
@@ -238,13 +251,13 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save Invoice";
+                    ToolboxViewModelObj.savebtn.Title = "Save Item";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Disable = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete Invoice";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete Item";
                     ToolboxViewModelObj.deletebtn.DisableReason = "Not applicable for new item";
                     ToolboxViewModelObj.deletebtn.Event = "Delete();";
 

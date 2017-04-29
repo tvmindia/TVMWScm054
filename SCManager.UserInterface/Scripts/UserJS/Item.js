@@ -96,7 +96,7 @@ function ItemSaveSuccess(data, status) {
                 fillItems($("#ID").val());
             }
             BindAllItems();
-            notyAlert('success', "Saved Successfully!");               
+            notyAlert('success', JsonResult.Message);
             break;
         case "ERROR":
             notyAlert('error', "Error!");
@@ -144,7 +144,6 @@ function fillItems(ID) {
     var thisItem = GetItemDetailsByID(ID); //Binding Data
     //Hidden
     $("#ID").val(thisItem[0].ID);
-    $("#SCCode").val(thisItem[0].SCCode);
     $("#ItemCode").val(thisItem[0].ItemCode);
     $("#Description").val(thisItem[0].Description)
     $("#Stock").val(thisItem[0].Stock)
@@ -165,7 +164,6 @@ function fillItems(ID) {
 //---------------------------------------Clear Fields-----------------------------------------------------//
 function clearfields() {
     $("#ID").val(EmptyGuid);
-    $("#SCCode").val("")
     $("#ItemCode").val("")
     $("#Description").val("")
     $("#Stock").val("")
@@ -205,7 +203,7 @@ function DeleteSuccess(data, status) {
 
         case "OK":
             BindAllItems();
-            notyAlert('success', "Deleted Successfully");
+            notyAlert('success', i.Message);
             clearfields();
             goBack();
             break;
