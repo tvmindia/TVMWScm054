@@ -24,7 +24,7 @@ $(document).ready(function () {
                { "data": "Discount", "defaultContent": "<i>-</i>" },
                { "data": "GrandTotal", "defaultContent": "<i>-</i>" },
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
-               { "data": null, "orderable": false, "defaultContent": '<a href="#" onclick="Edit(this)"<i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
+               { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false },
                   { className: "text-right", "targets": [5, 6, 7, 8] },
@@ -33,6 +33,10 @@ $(document).ready(function () {
              ]
          });
 
+        $('#tblInvoices tbody').on('dblclick', 'td', function () {
+           
+            Edit(this);
+        });
 
         DataTables.DetailTable = $('#tblInvDetails').DataTable(
        {
@@ -193,19 +197,16 @@ function BindForm8Fields(Records) {
         EG_Rebind_WithData(Records.Form8Detail);
         $('#InvNo').attr('readonly', 'readonly');
 
-        var $datepicker = $('#InvDate');
-        $datepicker.datepicker();
+        var $datepicker = $('#InvDate');      
         $datepicker.datepicker('setDate', new Date(Records.InvoiceDateFormatted));
 
         if (Records.ChallanDateFormatted != null) {
-            var $datepicker = $('#CDate');
-            $datepicker.datepicker();
+            var $datepicker = $('#CDate');           
             $datepicker.datepicker('setDate', new Date(Records.ChallanDateFormatted));
         }
       
         if (Records.PODateFormatted!=null) {
-            var $datepicker = $('#PODate');
-            $datepicker.datepicker();
+            var $datepicker = $('#PODate');            
             $datepicker.datepicker('setDate', new Date(Records.PODateFormatted));
         }
       
@@ -290,6 +291,12 @@ function RestForm8() {
     ClearFields();
     $('#HeaderID').val('00000000-0000-0000-0000-000000000000');//clear field will make this field model invalid
     $('#InvNo').removeAttr('readonly')
+    var $datepicker = $('#InvDate');
+    $datepicker.datepicker('setDate', null);
+    var $datepicker = $('#CDate');
+    $datepicker.datepicker('setDate', null);
+    var $datepicker = $('#PODate');
+    $datepicker.datepicker('setDate', null);
 }
 
 

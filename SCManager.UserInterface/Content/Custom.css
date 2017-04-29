@@ -357,3 +357,7 @@ color: #e32;
     max-height:350px;
     overflow-y:scroll;
 }
+
+.actionLink {
+    text-decoration:none!important;
+}
