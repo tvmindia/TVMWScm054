@@ -227,6 +227,11 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.backbtn.Title = "Back to list";
                     ToolboxViewModelObj.backbtn.Event = "goBack();";
 
+                    ToolboxViewModelObj.addbtn.Visible = true;
+                    ToolboxViewModelObj.addbtn.Text = "New";
+                    ToolboxViewModelObj.addbtn.Title = "Add New";
+                    ToolboxViewModelObj.addbtn.Event = "Add();";
+
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
                     ToolboxViewModelObj.savebtn.Title = "Save Item";
@@ -248,6 +253,13 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.backbtn.Text = "Back";
                     ToolboxViewModelObj.backbtn.Title = "Back to list";
                     ToolboxViewModelObj.backbtn.Event = "goBack();";
+
+                    ToolboxViewModelObj.addbtn.Visible = true;
+                    ToolboxViewModelObj.addbtn.Disable = true;
+                    ToolboxViewModelObj.addbtn.DisableReason = "";
+                    ToolboxViewModelObj.addbtn.Text = "New";
+                    ToolboxViewModelObj.addbtn.Title = "";
+                    ToolboxViewModelObj.addbtn.Event = "";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
