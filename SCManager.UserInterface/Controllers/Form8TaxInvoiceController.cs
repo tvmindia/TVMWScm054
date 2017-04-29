@@ -165,6 +165,11 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.backbtn.Title = "Back to list";
                     ToolboxViewModelObj.backbtn.Event = "$('#ListTab').trigger('click');";
 
+                    ToolboxViewModelObj.addbtn.Visible = true;
+                    ToolboxViewModelObj.addbtn.Text = "New";
+                    ToolboxViewModelObj.addbtn.Title = "Add New";
+                    ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
+
                     ToolboxViewModelObj.savebtn.Visible = true;
                      ToolboxViewModelObj.savebtn.Text = "Save";
                      ToolboxViewModelObj.savebtn.Title = "Save Invoice";
@@ -187,6 +192,14 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.backbtn.Title = "Back to list";
                     ToolboxViewModelObj.backbtn.Event = "$('#ListTab').trigger('click');";
 
+
+                    ToolboxViewModelObj.addbtn.Visible = true;
+                    ToolboxViewModelObj.addbtn.Disable = true;
+                    ToolboxViewModelObj.addbtn.DisableReason = "";
+                   ToolboxViewModelObj.addbtn.Text = "New";
+                    ToolboxViewModelObj.addbtn.Title = "";
+                    ToolboxViewModelObj.addbtn.Event = "";
+
                     ToolboxViewModelObj.savebtn.Visible = true;
                      ToolboxViewModelObj.savebtn.Text = "Save";
                      ToolboxViewModelObj.savebtn.Title = "Save Invoice";
@@ -196,7 +209,7 @@ namespace SCManager.UserInterface.Controllers
                      ToolboxViewModelObj.deletebtn.Disable = true;
                      ToolboxViewModelObj.deletebtn.Text = "Delete";
                      ToolboxViewModelObj.deletebtn.Title = "Delete Invoice";
-                     ToolboxViewModelObj.deletebtn.DisableReason = "Not applicable for new item";
+                     ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new item";
                      ToolboxViewModelObj.deletebtn.Event = "";
 
                      ToolboxViewModelObj.resetbtn.Visible = true;
