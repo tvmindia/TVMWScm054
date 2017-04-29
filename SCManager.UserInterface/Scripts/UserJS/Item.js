@@ -23,11 +23,15 @@ $(document).ready(function () {
                { "data": "ReorderQty", "defaultContent": "<i>-</i>" },
                { "data": "ProductCommission", "defaultContent": "<i>-</i>" },
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
-               { "data": null, "orderable": false, "defaultContent": '<a href="#" onclick="Edit(this)"<i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
+               { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false }]
          });
 
+        $('#tblItemList tbody').on('dblclick', 'td', function () {
+
+            Edit(this);
+        });
        
         //EG_GridDataTable = DataTables.DetailTable;
     }
@@ -96,7 +100,7 @@ function ItemSaveSuccess(data, status) {
                 fillItems($("#ID").val());
             }
             BindAllItems();
-            notyAlert('success', "Saved Successfully!");               
+            notyAlert('success', JsonResult.Message);
             break;
         case "ERROR":
             notyAlert('error', "Error!");
@@ -144,7 +148,6 @@ function fillItems(ID) {
     var thisItem = GetItemDetailsByID(ID); //Binding Data
     //Hidden
     $("#ID").val(thisItem[0].ID);
-    $("#SCCode").val(thisItem[0].SCCode);
     $("#ItemCode").val(thisItem[0].ItemCode);
     $("#Description").val(thisItem[0].Description)
     $("#Stock").val(thisItem[0].Stock)
@@ -165,7 +168,6 @@ function fillItems(ID) {
 //---------------------------------------Clear Fields-----------------------------------------------------//
 function clearfields() {
     $("#ID").val(EmptyGuid);
-    $("#SCCode").val("")
     $("#ItemCode").val("")
     $("#Description").val("")
     $("#Stock").val("")
@@ -205,7 +207,7 @@ function DeleteSuccess(data, status) {
 
         case "OK":
             BindAllItems();
-            notyAlert('success', "Deleted Successfully");
+            notyAlert('success', i.Message);
             clearfields();
             goBack();
             break;
