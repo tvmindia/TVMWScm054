@@ -21,9 +21,9 @@ $(document).ready(function () {
                { "data": "InvoiceDateFormatted" },
                { "data": "SaleOrderNo", "defaultContent": "<i>-</i>" },
                { "data": "Subtotal", "defaultContent": "<i>-</i>" },
-               { "data": "VATAmount", "defaultContent": "<i>-</i>" },
-               { "data": "Discount", "defaultContent": "<i>-</i>" },
-               { "data": "GrandTotal", "defaultContent": "<i>-</i>" },
+               { "data": "VATAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "Discount", render: function (data, type, row) {return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
@@ -107,7 +107,7 @@ function EG_Columns() {
                 { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'Rate', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "BasicAmount", render: function (data, type, row) { return roundoff(data,1); }, "defaultContent": "<i></i>" },
                 { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'TradeDiscount', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
-                { "data": "NetAmount", "defaultContent": "<i></i>" }
+                { "data": "NetAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i></i>" }
 
     ]
 
@@ -247,7 +247,7 @@ function Add() {
     EG_ClearTable();
     RestForm8();
     EG_AddBlankRows(5)
-    EG_KeyDown();
+    
     hideLoader();
 }
 
@@ -312,7 +312,7 @@ function Edit(currentObj) {
         $('#AddTab').trigger('click');
         if (BindForm8(rowData.ID)) {
             ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Edit');
-            EG_KeyDown();
+            
         }
         else {
             $('#ListTab').trigger('click');
