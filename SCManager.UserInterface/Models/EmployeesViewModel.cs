@@ -21,8 +21,9 @@ namespace SCManager.UserInterface.Models
         [StringLength(50)]
         public string Type { get; set; }
 
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         [Display(Name = "Mobile No")]
-        [StringLength(50)]
+        [StringLength(50, MinimumLength = 5)]
         public string MobileNo { get; set; }
 
         [Display(Name = "Address")]
