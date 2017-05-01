@@ -376,3 +376,47 @@ function EG_KeyDown() {
     });
     
 }
+
+
+function EG_Validate() {
+    if (EG_MandatoryFields != undefined && EG_MandatoryFields != '') {
+        var fields = EG_MandatoryFields.split(',');
+        var missing = 'A few mandatory fields are missing in row(s)'
+        var errorRows = '';
+        var flg = 0;
+        var validrowExist = 0;
+
+        for (i = 0; i < EG_GridData.length; i++) {
+            for (j = 0; j < fields.length; j++) {
+                if (EG_GridData[i][fields[j]] == "") {
+                    flg = flg + 1;
+                }
+            }
+            if (flg > 0 && flg != fields.length) {
+                errorRows = errorRows + " " + (i + 1);
+            }
+
+            if (flg == 0) {
+                validrowExist = 1;
+            }
+
+            flg = 0;
+        }
+
+      
+
+        if (errorRows != '') {
+            return missing + errorRows;
+        }
+        else if (validrowExist == 0) {
+            return "Minimum one detail is required to save."
+        }
+        else { return "" };
+    }
+    else {
+
+        return "Mandatory fields are not defined"
+    }
+   
+
+}

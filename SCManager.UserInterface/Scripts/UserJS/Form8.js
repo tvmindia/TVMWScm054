@@ -76,6 +76,7 @@ var EG_GridData;//DATA SOURCE OBJ ARRAY
 var EG_GridDataTable;//DATA TABLE ITSELF FOR REBIND PURPOSE
 var EG_SlColumn = 'SlNo';
 var EG_GridInputPerRow = 4;
+var EG_MandatoryFields = 'MaterialID,Quantity,Rate'
 
 function EG_TableDefn() {
 
@@ -372,7 +373,7 @@ function Edit(currentObj) {
 }
 
 function save() {
-    var validation = validateForm();
+    var validation = EG_Validate();
     if (validation == "") {
     
         var result = JSON.stringify(EG_GridData);
@@ -548,18 +549,20 @@ function FillUOM(row) {
 
 }
 
-function validateForm() {
+//function validateForm() {
 
-    for (i = 0; i < EG_GridData.length; i++) {
-        if (EG_GridData[i]['Material'] != "") {
-            return ""
-        }
-    }
+//    for (i = 0; i < EG_GridData.length; i++) {
+//        if (EG_GridData[i]['Material'] != "") {
+//            return ""
+//        }
+//    }
 
-    return "Minimum one detail is required to save";
-}
+//    return "Minimum one detail is required to save";
+//}
 
-//-----------------------------------------------------------------------------
+
+
+//-----------------------------------------------------------------------------EG_MandatoryFields
 
 
 
