@@ -345,12 +345,14 @@
     <Content Include="Content\images\calculate.png" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\reset.png" />
     <Content Include="Content\images\return.png" />
     <Content Include="Content\images\save.png" />
     <Content Include="Content\images\SCManager.png" />
     <Content Include="Content\images\scmanagerback1.JPG" />
     <Content Include="Content\images\wrench.png" />
+    <Content Include="Content\sweetalert.css" />
     <Content Include="Content\UserCSS\Form8.css" />
     <Content Include="Content\UserCSS\Login.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -469,6 +471,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\lightbox.min.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\UserJS\Dashboard.js" />
     <Content Include="Scripts\UserJS\demoGrid.js" />
     <Content Include="Scripts\editableGrid.js" />

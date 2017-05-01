@@ -133,6 +133,7 @@ namespace SCManager.UserInterface.Controllers
         {
             try
             {
+             //   System.Threading.Thread.Sleep(5000);
                 UA ua = new UA();
                 Form8ViewModel Frm8 = Mapper.Map<Form8, Form8ViewModel>(_form8TaxInvoiceBusiness.GetForm8(dataObj.ID.GetValueOrDefault(), ua));
                 return JsonConvert.SerializeObject(new { Result = "OK", Records = Frm8 });
@@ -167,7 +168,7 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Text = "New";
-                    ToolboxViewModelObj.addbtn.Title = "Add New";
+                    ToolboxViewModelObj.addbtn.Title = "Add New Invoice";
                     ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
 
                     ToolboxViewModelObj.savebtn.Visible = true;

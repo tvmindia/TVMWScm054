@@ -1,10 +1,11 @@
 ﻿var DataTables = {};
-
+var emptyGUID = '00000000-0000-0000-0000-000000000000'
 var _Materials = [];
 
 //---------------------------------------Docuement Ready--------------------------------------------------//
 $(document).ready(function () {
     try {
+        
         var EventRequestsViewModel = new Object();
         DataTables.eventTable = $('#tblInvoices').DataTable(
          {
@@ -20,9 +21,9 @@ $(document).ready(function () {
                { "data": "InvoiceDateFormatted" },
                { "data": "SaleOrderNo", "defaultContent": "<i>-</i>" },
                { "data": "Subtotal", "defaultContent": "<i>-</i>" },
-               { "data": "VATAmount", "defaultContent": "<i>-</i>" },
-               { "data": "Discount", "defaultContent": "<i>-</i>" },
-               { "data": "GrandTotal", "defaultContent": "<i>-</i>" },
+               { "data": "VATAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "Discount", render: function (data, type, row) {return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
@@ -53,7 +54,7 @@ $(document).ready(function () {
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.DetailTable;
         List();
-
+      
         
 
     } catch (x) {
@@ -106,7 +107,8 @@ function EG_Columns() {
                 { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'Rate', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "BasicAmount", render: function (data, type, row) { return roundoff(data,1); }, "defaultContent": "<i></i>" },
                 { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'TradeDiscount', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
-                { "data": "NetAmount", "defaultContent": "<i></i>" }
+                { "data": "NetAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i></i>" },
+                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="DeleteLink"  onclick="DeleteItem(this)" ><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>' }
 
     ]
 
@@ -172,6 +174,7 @@ function BindForm8(id) {
             return 0;
         }
         return 1;
+        
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -194,7 +197,7 @@ function BindForm8Fields(Records) {
         $('#vatamount').val(roundoff(Records.VATAmount));
         $('#discount').val(roundoff(Records.Discount));
         $('#grandtotal').val(roundoff(Records.GrandTotal));
-        EG_Rebind_WithData(Records.Form8Detail);
+        EG_Rebind_WithData(Records.Form8Detail,1);
         $('#InvNo').attr('readonly', 'readonly');
 
         var $datepicker = $('#InvDate');      
@@ -228,10 +231,10 @@ function BindForm8Fields(Records) {
 //--------------------button actions ----------------------
 function List() {
     try {
-
+        showLoader();
         ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'List');
         DataTables.eventTable.clear().rows.add(GetAllForm8()).draw(false);
-
+          hideLoader();
     } catch (x) {
        // alert(x);
     }
@@ -240,13 +243,13 @@ function List() {
 
 function Add() {
 
-
+    showLoader();
     ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Add');
     EG_ClearTable();
     RestForm8();
     EG_AddBlankRows(5)
-    EG_KeyDown();
-
+    
+    hideLoader();
 }
 
 function DeleteClick() {
@@ -258,7 +261,7 @@ function DeleteClick() {
 function Form8Delete() {    
    try {
         var id = $('#HeaderID').val();
-        if (id != '' || id != null) {
+        if (id != '' && id != null) {
             var data = { "ID": id };
             var ds = {};
             ds = GetDataFromServer("Form8TaxInvoice/DeleteForm8/", data);
@@ -283,13 +286,60 @@ function Form8Delete() {
     }
           
 }
-function DeleteItem() {
 
+function Form8DetailDelete(id,rw) {
+   try {
+        var Hid = $('#HeaderID').val();
+        if (id != '' && id != null && Hid != '' && Hid != null && Hid != emptyGUID) {
+            var data = { "ID": id, "HeaderID": Hid };
+            var ds = {};
+            ds = GetDataFromServer("Form8TaxInvoice/DeleteForm8Detail/", data);
+            if (ds != '') {
+                ds = JSON.parse(ds);
+            }
+            if (ds.Result == "OK") {
+                notyAlert('success', ds.Message);
+                BindForm8(Hid);
+            }
+            if (ds.Result == "ERROR") {
+                notyAlert('error', ds.Message);
+                return 0;
+            }
+            return 1;
+        }
+        else {
+            debugger;
+            if (EG_GridData.length != 1) {
+                EG_GridData.splice(rw-1,1); 
+                EG_Rebind_WithData(EG_GridData,0);
+            }
+            else {
+                reset();
+                EG_Rebind();
+            }
+
+
+        }
+
+               }
+    catch (e) {
+        notyAlert('error', e.message);
+        return 0;
+}
+
+}
+
+function DeleteItem(currentObj) {
+    var rowData = EG_GridDataTable.row($(currentObj).parents('tr')).data();
+    
+    if ((rowData != null) && (rowData.ID != null)) {
+        notyConfirm('Are you sure to delete?', 'Form8DetailDelete("' + rowData.ID + '",' + rowData[EG_SlColumn] + ')');
+    }
 }
 
 function RestForm8() {
     ClearFields();
-    $('#HeaderID').val('00000000-0000-0000-0000-000000000000');//clear field will make this field model invalid
+    $('#HeaderID').val(emptyGUID);//clear field will make this field model invalid
     $('#InvNo').removeAttr('readonly')
     var $datepicker = $('#InvDate');
     $datepicker.datepicker('setDate', null);
@@ -301,7 +351,7 @@ function RestForm8() {
 
 
 function Edit(currentObj) {
-
+    showLoader();
     var rowData = DataTables.eventTable.row($(currentObj).parents('tr')).data();
     //Event Request Case
     if ((rowData != null) && (rowData.ID != null)) {
@@ -310,13 +360,15 @@ function Edit(currentObj) {
         $('#AddTab').trigger('click');
         if (BindForm8(rowData.ID)) {
             ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Edit');
-            EG_KeyDown();
+            
         }
         else {
             $('#ListTab').trigger('click');
         }
 
     }
+    hideLoader();
+   
 }
 
 function save() {
@@ -354,9 +406,11 @@ function SaveSuccess(data, status, xhr) {
     var i = JSON.parse(data)
     switch (i.Result) {
         case "OK":
-            notyAlert('success', i.Message);
+              notyAlert('success', i.Message);
+           
             BindForm8Fields(i.Records)
             ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Edit');
+           
             break;
         case "Error":
             notyAlert('error', i.Message);

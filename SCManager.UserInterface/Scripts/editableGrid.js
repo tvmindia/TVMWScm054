@@ -92,6 +92,7 @@ function EG_Validate_changeData_Text(obj, type, row, column, relatedfn) {
             EG_SetFocus();
         }
     }
+    
 
 }
 
@@ -110,6 +111,7 @@ function EG_Validate_changeData_Combo(obj,type, row, column, source, relatedfn) 
             EG_SetFocus();
         }
     }
+    
 }
 
 function EG_changeData(value, row, column) {
@@ -198,14 +200,22 @@ function EG_Rebind() {
         return;
     }
     EG_GridDataTable.clear().rows.add(EG_GridData).draw(false);
-   
+    EG_KeyDown();
 }
 
-function EG_Rebind_WithData(data) {
+function EG_Rebind_WithData(data, extra) {
+    var i = 0;
+    if (data != null) {
+        for (i = 0; i < data.length; i++) {
+            data[i][EG_SlColumn] = i + 1;
+        }
+    }
+  
+
     EG_MODE = 'EDIT';
     EG_GridData = data;
     EG_totalDetailRows = data.length;
-    EG_AddBlankRowsWithoutRebind(1);
+    EG_AddBlankRowsWithoutRebind(extra);
     EG_Rebind();
 }
 
@@ -263,15 +273,15 @@ function EG_blankRow(count) {
 
 
 function EG_SetFocus_Next() {
-  
+   
     $('.gridTextbox').eq(currBoxIndx + 1).focus();
-    EG_KeyDown();
+    
 }
 
 function EG_SetFocus() {
 
     $('.gridTextbox').eq(currBoxIndx ).focus();
-    EG_KeyDown();
+    
 }
 
 function roundoff(num) {
@@ -312,7 +322,7 @@ function EG_KeyDown() {
                         $('.gridTextbox').eq(index).focus();
                         break;
 
-                    case 39: // right
+                    case 39||9: // right
                         var index = $('.gridTextbox').index(this) + 1;
                         $('.gridTextbox').eq(index).focus();
                         break;
@@ -323,7 +333,10 @@ function EG_KeyDown() {
                         break;
 
                     default: return; // exit this handler for other keys
+
+
                 }
+                return false;
 
             }
         } catch (x) { }

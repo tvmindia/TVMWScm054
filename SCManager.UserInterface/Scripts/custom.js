@@ -45,16 +45,25 @@ $(document).ready(function () {
    
 });
 
-function notyAlert(type,msgtxt) {
-    var n = noty({
-        text: msgtxt,
-        type: type,//'alert','information','error','warning','notification','success'
-        dismissQueue: true,
-        timeout: 3000,
-        layout: 'top',
-        theme: 'defaultTheme',//closeWith: ['click'],
-        maxVisible: 5
-    });
+function notyAlert(type, msgtxt,title) {
+    var t = '';
+    if (title == undefined) {
+        t = type;
+    }
+    else {
+        t = title;
+    }
+
+    swal({ title: t, text: msgtxt, type: type, timer: 3000 });
+    //var n = noty({
+    //    text: msgtxt,
+    //    type: type,//'alert','information','error','warning','notification','success'
+    //    dismissQueue: true,
+    //    timeout: 3000,
+    //    layout: 'center',
+    //    theme: 'defaultTheme',//closeWith: ['click'],
+    //    maxVisible: 5
+    //});
    
 }
 function PostDataToServer(page, formData, callback)
@@ -64,6 +73,9 @@ function PostDataToServer(page, formData, callback)
         url: appAddress+page,
         async: true,
         data: formData,
+        beforeSend: function () {
+            showLoader();
+        },
         cache: false,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -75,7 +87,7 @@ function PostDataToServer(page, formData, callback)
         },
         complete:function()
         {
-           
+            hideLoader();
         }
 
     });
@@ -89,7 +101,10 @@ function GetDataFromServer(page, formData) {
         
         type: "GET",
         url: appAddress + page,
-        data:formData,
+        data: formData,
+        beforeSend: function () {
+            showLoader();
+        },
         async: false,
         cache: false,
         contentType: "application/json; charset=utf-8",
@@ -100,7 +115,7 @@ function GetDataFromServer(page, formData) {
           notyAlert('error',errorThrown + ',' + textStatus + ',' + jqXHR.statusText);
         },
         complete: function () {
-          
+            hideLoader();
         }
 
     });
@@ -171,34 +186,73 @@ function isNumber(e) {
 
 
 function notyConfirm(msg, functionIfSuccess) {
-    var text = '<div class="confirmbox"><span class="confirmboxHead">Delete Alert !</span><br/><br/><span class="confirmboxMsg">' + msg + '</span><br/><br/><span class="confirmboxFooter">You cannot reverse this action</span><div>'
-    var n = noty({
-        text: text,
-        type: 'confirm',
-        dismissQueue: false,
-        layout: 'center',
-        modal: true,
-        theme: 'defaultTheme',
-        buttons: [
-            {
-                addClass: 'btn btn-primary', text: '&nbsp&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp', onClick: function ($noty) {
-                    $noty.close();
-                    eval(functionIfSuccess + '()');
 
-                }
-            },
-        {
-            addClass: 'btn btn-danger', text: 'Cancel', onClick: function ($noty) {
-                $noty.close();
-                return false;
-            }
-        }
-        ]
-    })
+    swal({
+        title: msg,
+        text: "You will not be able to recover this action!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: true
+    },
+function () {
+    //swal("Deleted!", "Your imaginary file has been deleted.", "success");
+    eval(functionIfSuccess + '()');
+});
+
+
+    //var text = '<div class="confirmbox"><span class="confirmboxHead">Delete Alert !</span><br/><br/><span class="confirmboxMsg">' + msg + '</span><br/><br/><span class="confirmboxFooter">You cannot reverse this action</span><div>'
+    //var n = noty({
+    //    text: text,
+    //    type: 'confirm',
+    //    dismissQueue: false,
+    //    layout: 'center',
+    //    modal: true,
+    //    theme: 'defaultTheme',
+    //    buttons: [
+    //        {
+    //            addClass: 'btn btn-primary', text: '&nbsp&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp', onClick: function ($noty) {
+    //                $noty.close();
+    //                eval(functionIfSuccess + '()');
+
+    //            }
+    //        },
+    //    {
+    //        addClass: 'btn btn-danger', text: 'Cancel', onClick: function ($noty) {
+    //            $noty.close();
+    //            return false;
+    //        }
+    //    }
+    //    ]
+    //})
 
 }
 
 
 function Logout() {
     window.location = appAddress;
+}
+
+var loadStatus = 0;
+ 
+function showLoader() {
+    try {
+        $(".preloader").show();
+    } catch (e) {
+
+    }
+   
+   
+}
+
+ 
+function hideLoader() {
+    try {
+        $('.preloader').fadeOut();
+    } catch (e) {
+
+    }
+   
+   
 }
