@@ -196,8 +196,13 @@ function ResetForm() {
     });
     validator.resetForm();
 }
-//---------------------------------------Delete-------------------------------------------------------//
 function Delete() {
+
+    notyConfirm('Are you sure to delete?', 'DeleteEmployee()');
+
+}
+//---------------------------------------Delete-------------------------------------------------------//
+function DeleteEmployee() {
     debugger;
     var id = $("#ID").val();
     if (id != EmptyGuid) {

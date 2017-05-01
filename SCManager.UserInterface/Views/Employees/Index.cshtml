@@ -146,7 +146,7 @@
         </div>
         </div>
         <div id="EmployeeDelete" hidden="hidden">
-            @using (Ajax.BeginForm("DeleteEmployee", "Employee", new AjaxOptions { HttpMethod = "POST", Confirm = "DeleteConfirm", OnSuccess = "DeleteSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form" }))
+            @using (Ajax.BeginForm("DeleteEmployee", "Employee", new AjaxOptions { HttpMethod = "POST",  OnSuccess = "DeleteSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 <div class="form-actions no-color">

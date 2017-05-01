@@ -188,8 +188,13 @@ function ClearSubCategories()
     $('#Subcategory').append("  <option value='-1'>-- Select SubCategory --</option>");
 }
 
-//---------------------------------------Delete-------------------------------------------------------//
 function Delete() {
+
+    notyConfirm('Are you sure to delete?', 'DeleteItem()');
+
+}
+//---------------------------------------Delete-------------------------------------------------------//
+function DeleteItem() {
     var id = $("#ID").val();
     if (id != EmptyGuid) {
         $("#btnFormDelete").click();
