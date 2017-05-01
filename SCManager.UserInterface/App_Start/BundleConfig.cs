@@ -33,6 +33,7 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/demoGrid").Include("~/Scripts/UserJS/demoGrid.js"));
             bundles.Add(new ScriptBundle("~/bundles/editableGrid").Include("~/Scripts/editableGrid.js"));
             bundles.Add(new ScriptBundle("~/bundles/Item").Include("~/Scripts/UserJS/Item.js"));
+            bundles.Add(new ScriptBundle("~/bundles/Employees").Include("~/Scripts/UserJS/Employees.js"));
             bundles.Add(new ScriptBundle("~/bundles/Login").Include("~/Scripts/UserJS/Login.js"));
 
         }

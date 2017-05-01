@@ -23,6 +23,7 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<ItemDropdownViewModel, Item>().ReverseMap();
                 config.CreateMap<ItemViewModel, Categories>().ReverseMap();
                 config.CreateMap<ItemViewModel, SubCategories>().ReverseMap();
+                config.CreateMap<EmployeesViewModel, Employees>().ReverseMap();
             });
         }
     }

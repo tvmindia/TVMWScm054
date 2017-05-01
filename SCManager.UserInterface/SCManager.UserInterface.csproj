@@ -157,6 +157,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\DynamicUIController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\Form8TaxInvoiceController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -167,6 +168,7 @@
     </Compile>
     <Compile Include="Models\CommonViewModel.cs" />
     <Compile Include="Models\DynamicUIViewModel.cs" />
+    <Compile Include="Models\EmployeesViewModel.cs" />
     <Compile Include="Models\Form8ViewModel.cs" />
     <Compile Include="Models\ItemViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -470,6 +472,7 @@
     <Content Include="Scripts\UserJS\Dashboard.js" />
     <Content Include="Scripts\UserJS\demoGrid.js" />
     <Content Include="Scripts\editableGrid.js" />
+    <Content Include="Scripts\UserJS\Employees.js" />
     <Content Include="Scripts\UserJS\Form8.js" />
     <Content Include="Scripts\UserJS\Item.js" />
     <Content Include="Scripts\UserJS\Login.js" />
@@ -500,6 +503,7 @@
     <Content Include="Views\DynamicUI\demoGrid.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Item\Index.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

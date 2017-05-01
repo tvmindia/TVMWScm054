@@ -222,7 +222,7 @@ function DeleteSuccess(data, status) {
     }
 }
 
-//---------------------------------------Bind All Manufacturers----------------------------------------------//
+//---------------------------------------Bind All Items----------------------------------------------//
 function BindAllItems() {
     try {
         debugger;
@@ -253,7 +253,7 @@ function Add(id) {
     ChangeButtonPatchView('Item', 'btnPatchItemSettab', 'Add');
 }
 
-//---------------------------------------Edit Attributes--------------------------------------------------//
+//---------------------------------------Edit Item--------------------------------------------------//
 function Edit(currentObj) {
     //Tab Change on edit click
     debugger;
