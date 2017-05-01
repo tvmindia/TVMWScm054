@@ -1,4 +1,6 @@
-﻿.SCHeader {
+﻿body    {overflow-y:scroll!important;}
+
+.SCHeader {
    font-size: 20px!important;
     color:  #545454;
     margin-bottom:2%;

@@ -406,9 +406,11 @@ function SaveSuccess(data, status, xhr) {
     var i = JSON.parse(data)
     switch (i.Result) {
         case "OK":
-            notyAlert('success', i.Message);
+              notyAlert('success', i.Message);
+           
             BindForm8Fields(i.Records)
             ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Edit');
+           
             break;
         case "Error":
             notyAlert('error', i.Message);
