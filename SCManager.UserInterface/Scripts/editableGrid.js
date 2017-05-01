@@ -288,7 +288,7 @@ function roundoff(num) {
     return (Math.round(num * 100) / 100).toFixed(2);
 }
 function roundoff(num, opt) {
-    if (num == '') { return '';}
+    if (num == '' && opt != undefined) { return '';}
     return (Math.round(num * 100) / 100).toFixed(2);
 }
 

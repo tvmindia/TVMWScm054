@@ -254,7 +254,7 @@ function Add() {
 
 function DeleteClick() {
     
-   notyConfirm('Are you sure to delete?', 'Form8Delete');       
+   notyConfirm('Are you sure to delete?', 'Form8Delete()');       
      
 }
 
@@ -317,7 +317,7 @@ function Form8DetailDelete(id,rw) {
                 reset();
                 EG_Rebind();
             }
-
+            notyAlert('success', 'Deleted Successfully');
 
         }
 

@@ -138,6 +138,7 @@ function NetworkFailure(data, status, xhr) {
     notyAlert('error', status);
 }
 
+
 //Common function for clearing input fields
 function ClearFields() {
     $(':input').each(function () {
@@ -194,11 +195,11 @@ function notyConfirm(msg, functionIfSuccess) {
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: true
+        closeOnConfirm: false
     },
 function () {
     //swal("Deleted!", "Your imaginary file has been deleted.", "success");
-    eval(functionIfSuccess + '()');
+    eval(functionIfSuccess );
 });
 
 
