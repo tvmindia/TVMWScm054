@@ -27,6 +27,14 @@ namespace SCManager.DataAccessObject.DTO
     {
         #region Messages
 
+        private List<ConstMessage> ConstMessage=new List<ConstMessage>();
+
+       public Const() {
+            ConstMessage.Add(new ConstMessage("Items from this invoice already used,Form8 Cannot be deleted", "DF8D1", "ERROR"));
+            ConstMessage.Add(new ConstMessage("Minimum one item required for invoice", "DF8D2", "ERROR"));
+        }
+
+
         public string InsertFailure
         {
             get { return "Insertion Not Successfull! "; }
@@ -67,6 +75,34 @@ namespace SCManager.DataAccessObject.DTO
         {
             get { return "No items"; }
         }
+
+        public ConstMessage GetMessage(string MsgCode) {
+            ConstMessage result=new ConstMessage(MsgCode,"","ERROR") ;
+          
+            try
+            {
+                foreach (ConstMessage c in ConstMessage)
+                {
+                    if (c.Code == MsgCode) {
+                        result = c;
+                        break;
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                
+            }
+            return result;
+
+
+
+        }
+
+
         #endregion Messages
 
         #region Strings
@@ -75,5 +111,17 @@ namespace SCManager.DataAccessObject.DTO
             get { return "App User"; }
         }
         #endregion
+    }
+
+    public class ConstMessage {
+       public  string Message;
+        public string Code;
+        public string type;
+       public ConstMessage(string msg, string cd, string typ) {
+            Message =   (cd == ""?"": cd + "-") + msg;
+            Code = cd;
+            type = typ;
+
+        }
     }
 }
