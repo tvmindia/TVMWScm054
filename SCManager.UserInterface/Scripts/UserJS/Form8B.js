@@ -158,7 +158,7 @@ function GetAllForm8() {
     }
 }
 
-function BindForm8(id) {
+function BindForm8B(id) {
     try {
         var data = { "ID": id };
         var ds = {};
@@ -168,7 +168,7 @@ function BindForm8(id) {
         }
         if (ds.Result == "OK") {
 
-            BindForm8Fields(ds.Records);
+            BindForm8BFields(ds.Records);
         }
         if (ds.Result == "ERROR") {
             notyAlert('error', ds.Message);
@@ -184,7 +184,7 @@ function BindForm8(id) {
 
 }
 
-function BindForm8Fields(Records) {
+function BindForm8BFields(Records) {
     try {
 
         debugger;
@@ -247,7 +247,7 @@ function Add() {
     showLoader();
     ChangeButtonPatchView('Form8BRetailInvoice', 'btnPatchAttributeSettab', 'Add');
     EG_ClearTable();
-    RestForm8();
+    RestForm8B();
     EG_AddBlankRows(5)
 
     hideLoader();
@@ -300,7 +300,7 @@ function Form8BDetailDelete(id, rw) {
             }
             if (ds.Result == "OK") {
                 notyAlert('success', ds.Message);
-                BindForm8(Hid);
+                BindForm8B(Hid);
             }
             if (ds.Result == "ERROR") {
                 notyAlert('error', ds.Message);
@@ -338,7 +338,7 @@ function DeleteItem(currentObj) {
     }
 }
 
-function RestForm8() {
+function RestForm8B() {
     ClearFields();
     $('#HeaderID').val(emptyGUID);//clear field will make this field model invalid
     $('#InvNo').removeAttr('readonly')
@@ -359,7 +359,7 @@ function Edit(currentObj) {
 
         EG_ClearTable();
         $('#AddTab').trigger('click');
-        if (BindForm8(rowData.ID)) {
+        if (BindForm8B(rowData.ID)) {
             ChangeButtonPatchView('Form8BRetailInvoice', 'btnPatchAttributeSettab', 'Edit');
 
         }

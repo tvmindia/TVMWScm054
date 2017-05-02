@@ -10,10 +10,10 @@ namespace SCManager.BusinessService.Services
 {
     public class Form8BTaxInvoiceBusiness: IForm8BTaxInvoiceBusiness
     {
-        private IForm8BTaxInvoiceRepository _form8BTaxInvoiceRepository;
+        private IForm8BRetailInvoiceRepository _form8BTaxInvoiceRepository;
         private ICommonBusiness _commonBusiness;
 
-        public Form8BTaxInvoiceBusiness(IForm8BTaxInvoiceRepository form8BTaxInvoiceRepository, ICommonBusiness commonBusiness)
+        public Form8BTaxInvoiceBusiness(IForm8BRetailInvoiceRepository form8BTaxInvoiceRepository, ICommonBusiness commonBusiness)
         {
             _form8BTaxInvoiceRepository = form8BTaxInvoiceRepository;
             _commonBusiness = commonBusiness;

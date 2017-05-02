@@ -114,7 +114,7 @@
     <Compile Include="Contracts\IDatabaseFactory.cs" />
     <Compile Include="Contracts\IDynamicUIRepository.cs" />
     <Compile Include="Contracts\IEmployeesRepository.cs" />
-    <Compile Include="Contracts\IForm8BTaxInvoiceRepository.cs" />
+    <Compile Include="Contracts\IForm8BRetailInvoiceRepository.cs" />
     <Compile Include="Contracts\IForm8TaxInvoiceRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -127,7 +127,7 @@
     <Compile Include="Services\DatabaseFactory.cs" />
     <Compile Include="Services\DynamicUIRepository.cs" />
     <Compile Include="Services\EmployeesRepository.cs" />
-    <Compile Include="Services\Form8BTaxInvoiceRepository.cs" />
+    <Compile Include="Services\Form8BRetailInvoiceRepository.cs" />
     <Compile Include="Services\Form8TaxInvoiceRepository.cs" />
     <Compile Include="Services\ItemRepository.cs" />
     <Compile Include="Services\SubCategoryRepository.cs" />
