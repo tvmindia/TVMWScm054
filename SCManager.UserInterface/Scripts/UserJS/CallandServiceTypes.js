@@ -2,7 +2,8 @@
 $(document).ready(function () {
     try
     {
-        FillCallandServiceTypes()
+        FillCallTypes()
+        FillServiceTypes()
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -20,8 +21,6 @@ function CallandServiceTypesSaveSuccess(data, status) {
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
-          
-              //  FillCallandServiceTypes();
 
             notyAlert('success', JsonResult.Records.Message);
             break;
@@ -34,32 +33,57 @@ function CallandServiceTypesSaveSuccess(data, status) {
     }
 }
 //---------------------------------------Fill Employee--------------------------------------------------//
-function FillCallandServiceTypes() {
+function FillCallTypes() {
     debugger;
    
-    var thisType = GetCallandServiceTypes(); //Binding Data
+    var thisType = GetCallTypes(); //Binding Data
     //Hidden
 
-        $("#AMC1Commission").val(thisType[0].AMC1Commission);
-        $("#AMC2Commission").val(thisType[0].AMC2Commission);
         $("#MajorCommission").val(thisType[1].MajorCommission);
-        $("#MinorCommission").val(thisType[1].MinorCommission);
-        $("#MandatoryCommission").val(thisType[1].MandatoryCommission);
-        $("#RepeatCommission").val(thisType[1].RepeatCommission);
-        $("#DemoCommission").val(thisType[1].DemoCommission);
+        $("#MinorCommission").val(thisType[3].MinorCommission);
+        $("#MandatoryCommission").val(thisType[2].MandatoryCommission);
+        $("#RepeatCommission").val(thisType[4].RepeatCommission);
+        $("#DemoCommission").val(thisType[0].DemoCommission);
     
 }
-//---------------------------------------Get Employee Details By ID-------------------------------------//
-function GetCallandServiceTypes() {
+function FillServiceTypes()
+{
+    debugger;
+    var thisType = GetServiceTypes(); //Binding Data
+    $("#AMC1Commission").val(thisType[0].AMC1Commission);
+    $("#AMC2Commission").val(thisType[1].AMC2Commission);
+}
+//---------------------------------------Get Call and service Details-------------------------------------//
+function GetCallTypes() {
     try {
         var data = { };
         var ds = {};
-        ds = GetDataFromServer("CallandServiceTypes/GetCallandServiceTypes/", data);
+        ds = GetDataFromServer("CallandServiceTypes/GetCallTypes/", data);
         if (ds != '') {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            return ds.call,ds.service;
+            return ds.Record;
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+function GetServiceTypes() {
+    try {
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("CallandServiceTypes/GetServiceTypes/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Record;
         }
         if (ds.Result == "ERROR") {
             alert(ds.Message);
