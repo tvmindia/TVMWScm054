@@ -144,7 +144,16 @@ namespace SCManager.UserInterface.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                    if(ex.Message== "Item already exist")
+                    {
+                        ConstMessage cm = c.GetMessage("DIMD2");
+                        return JsonConvert.SerializeObject(new { Result = "ERROR", Message = cm.Message });
+                    }
+                    else
+                    {
+                        return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                    }
+                   
                 }
             }
             else
