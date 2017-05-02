@@ -103,7 +103,7 @@ function ItemSaveSuccess(data, status) {
             notyAlert('success', JsonResult.Message);
             break;
         case "ERROR":
-            notyAlert('error', "Error!");
+            notyAlert('error', JsonResult.Message);
             break;
         default:
             notyAlert('error', JsonResult.Message);
@@ -217,7 +217,7 @@ function DeleteSuccess(data, status) {
             goBack();
             break;
         case "Error":
-            notyAlert('error', "Error");
+            notyAlert('error', i.Message);
             break;
         case "ERROR":
             notyAlert('error', i.Message);

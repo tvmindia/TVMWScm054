@@ -109,6 +109,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ICallandServiceTypesRepository.cs" />
     <Compile Include="Contracts\ICategoryRepository.cs" />
     <Compile Include="Contracts\IDatabaseFactory.cs" />
     <Compile Include="Contracts\IDynamicUIRepository.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Contracts\ISubCategoryRepository.cs" />
     <Compile Include="Contracts\ITechnicianRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CallandServiceTypesRepository.cs" />
     <Compile Include="Services\CategoryRepository.cs" />
     <Compile Include="Services\DatabaseFactory.cs" />
     <Compile Include="Services\DynamicUIRepository.cs" />
