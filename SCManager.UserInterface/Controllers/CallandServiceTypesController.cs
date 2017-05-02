@@ -28,17 +28,26 @@ namespace SCManager.UserInterface.Controllers
         {
             return View();
         }
-        #region GetCallandServiceTypes
+        #region GetCallTypes
         [HttpGet]
-        public string GetCallandServiceTypes()
+        public string GetCallTypes()
         {
             UA ua = new UA();
             List<CallandServiceTypesViewModel> callTypeList = Mapper.Map<List<CallTypes>, List<CallandServiceTypesViewModel>>(_iCallandServiceTypesBusiness.GetCallTypes(ua));
-            List<CallandServiceTypesViewModel> ServiceTypeList = Mapper.Map<List<ServiceTypes>, List<CallandServiceTypesViewModel>>(_iCallandServiceTypesBusiness.GetServiceTypes(ua));
-            return JsonConvert.SerializeObject(new { Result = "OK", call = callTypeList,service=ServiceTypeList });
+            return JsonConvert.SerializeObject(new { Result = "OK", Record = callTypeList });
 
         }
-        #endregion GetCallandServiceTypes
+        #endregion GetCallTypes
+        #region GetServiceTypes
+        [HttpGet]
+        public string GetServiceTypes()
+        {
+            UA ua = new UA();
+            List<CallandServiceTypesViewModel> ServiceTypeList = Mapper.Map<List<ServiceTypes>, List<CallandServiceTypesViewModel>>(_iCallandServiceTypesBusiness.GetServiceTypes(ua));
+            return JsonConvert.SerializeObject(new { Result = "OK", Record =ServiceTypeList });
+
+        }
+        #endregion GetServiceTypes
         #region UpdateCallandServiceTypes
         [HttpPost]
         [ValidateAntiForgeryToken]

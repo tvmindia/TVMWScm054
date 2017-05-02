@@ -54,7 +54,26 @@ namespace SCManager.RepositoryServices.Services
                                     CallTypes _CallTypesObj = new CallTypes();
                                     {
                                         _CallTypesObj.Code = (sdr["Code"].ToString() != "" ? sdr["Code"].ToString() : _CallTypesObj.Code);
-                                        _CallTypesObj.Commission = (sdr["Commission"].ToString() != "" ?float.Parse(sdr["Commission"].ToString()) : _CallTypesObj.Commission);                                       
+                                        if (_CallTypesObj.Code== "Demo")
+                                        {
+                                            _CallTypesObj.DemoCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _CallTypesObj.DemoCommission);
+                                        }
+                                        else if(_CallTypesObj.Code == "Major")
+                                        {
+                                            _CallTypesObj.MajorCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _CallTypesObj.MajorCommission);
+                                        }
+                                        else if (_CallTypesObj.Code == "Mandatory")
+                                        {
+                                            _CallTypesObj.MandatoryCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _CallTypesObj.MandatoryCommission);
+                                        }
+                                        else if (_CallTypesObj.Code == "Minor")
+                                        {
+                                            _CallTypesObj.MinorCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _CallTypesObj.MinorCommission);
+                                        }
+                                        else
+                                        {
+                                            _CallTypesObj.RepeatCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _CallTypesObj.RepeatCommission);
+                                        }
                                     }
 
                                     callTypeslist.Add(_CallTypesObj);
@@ -100,7 +119,15 @@ namespace SCManager.RepositoryServices.Services
                                     ServiceTypes _ServiceTypesObj = new ServiceTypes();
                                     {
                                         _ServiceTypesObj.Code = (sdr["Code"].ToString() != "" ? sdr["Code"].ToString() : _ServiceTypesObj.Code);
-                                        _ServiceTypesObj.Commission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _ServiceTypesObj.Commission);
+                                        if(_ServiceTypesObj.Code== "AMC1")
+                                        {
+                                            _ServiceTypesObj.AMC1Commission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _ServiceTypesObj.AMC1Commission);
+                                        }
+                                        else
+                                        {
+                                            _ServiceTypesObj.AMC2Commission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _ServiceTypesObj.AMC2Commission);
+                                        }
+                                       
                                     }
 
                                     serviceTypeslist.Add(_ServiceTypesObj);

@@ -10,21 +10,21 @@ namespace SCManager.UserInterface.Models
     {
         //calltype
         public string SCCode { get; set; }
-        [Display(Name = "Major")]
+        [Display(Name = "Major (₹)")]
         public float MajorCommission { get; set; }
-        [Display(Name = "Minor")]
+        [Display(Name = "Minor (₹)")]
         public float MinorCommission { get; set; }
-        [Display(Name = "Mandatory")]
+        [Display(Name = "Mandatory (₹)")]
         public float MandatoryCommission { get; set; }
-        [Display(Name = "Repeat")]
+        [Display(Name = "Repeat (₹)")]
         public float RepeatCommission { get; set; }
-        [Display(Name = "Demo")]
+        [Display(Name = "Demo (₹)")]
         public float DemoCommission { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
         //servicetype
-        [Display(Name = "AMC 1 Year")]
+        [Display(Name = "AMC 1 Year (₹)")]
         public float AMC1Commission { get; set; }
-        [Display(Name = "AMC 2 Year")]
+        [Display(Name = "AMC 2 Year (₹)")]
         public float AMC2Commission { get; set; }
     }
 }

@@ -32,6 +32,8 @@ namespace SCManager.DataAccessObject.DTO
        public Const() {
             ConstMessage.Add(new ConstMessage("Items from this invoice already used,Form8 Cannot be deleted", "DF8D1", "ERROR"));
             ConstMessage.Add(new ConstMessage("Minimum one item required for invoice", "DF8D2", "ERROR"));
+            ConstMessage.Add(new ConstMessage("This item already used,cannot be deleted", "DIMD1", "ERROR"));
+            ConstMessage.Add(new ConstMessage("This Items code already Exists,Cannot Save!", "DIMD2", "ERROR"));
         }
 
 
