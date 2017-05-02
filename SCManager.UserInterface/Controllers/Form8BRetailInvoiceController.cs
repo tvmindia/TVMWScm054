@@ -15,12 +15,12 @@ namespace SCManager.UserInterface.Controllers
     {
         #region Constructor_Injection
 
-        IForm8BTaxInvoiceBusiness _form8BTaxInvoiceBusiness;
+        IForm8BRetailInvoiceBusiness _form8BRetailInvoiceBusiness;
         Const c = new Const();
 
-        public Form8BRetailInvoiceController(IForm8BTaxInvoiceBusiness form8BTaxInvoiceBusiness)
+        public Form8BRetailInvoiceController(IForm8BRetailInvoiceBusiness form8BRetailInvoiceBusiness)
         {
-            _form8BTaxInvoiceBusiness = form8BTaxInvoiceBusiness;
+            _form8BRetailInvoiceBusiness = form8BRetailInvoiceBusiness;
 
         }
         #endregion Constructor_Injection
@@ -38,7 +38,7 @@ namespace SCManager.UserInterface.Controllers
             try
             {
                 UA ua = new UA();
-                List<Form8BViewModel> Form8BList = Mapper.Map<List<Form8B>, List<Form8BViewModel>>(_form8BTaxInvoiceBusiness.GetAllForm8B(ua));
+                List<Form8BViewModel> Form8BList = Mapper.Map<List<Form8B>, List<Form8BViewModel>>(_form8BRetailInvoiceBusiness.GetAllForm8B(ua));
                 return JsonConvert.SerializeObject(new { Result = "OK", Records = Form8BList });
             }
             catch (Exception ex)
@@ -48,6 +48,105 @@ namespace SCManager.UserInterface.Controllers
             }
         }
         #endregion  GetAllForm8
+
+
+        [HttpPost]
+        public string InsertUpdateForm8B(Form8BViewModel Form8BObj)
+        {
+            string result = "";
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    UA ua = new UA();
+                    object ResultFromJS = JsonConvert.DeserializeObject(Form8BObj.DetailJSON);
+                    string ReadableFormat = JsonConvert.SerializeObject(ResultFromJS);
+                    Form8BObj.Form8BDetail = JsonConvert.DeserializeObject<List<Form8BDetailViewModel>>(ReadableFormat);
+                    Form8BViewModel r = Mapper.Map<Form8B, Form8BViewModel>(_form8BRetailInvoiceBusiness.InsertUpdate(Mapper.Map<Form8BViewModel, Form8B>(Form8BObj), ua));
+                    return JsonConvert.SerializeObject(new { Result = "OK", Message = c.InsertSuccess, Records = r });
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                ConstMessage cm = c.GetMessage(ex.Message);
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = cm.Message });
+            }
+            return result;
+        }
+
+        [HttpGet]
+        public string DeleteForm8B(Form8ViewModel Form8BObj)
+        {
+
+            try
+            {
+                if (Form8BObj.ID.GetValueOrDefault() == Guid.Empty)
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = c.NoItems });
+                }
+
+                UA ua = new UA();
+                _form8BRetailInvoiceBusiness.DeleteForm8B(Form8BObj.ID.GetValueOrDefault(), ua);
+                return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess });
+
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+
+
+        }
+
+        [HttpGet]
+        public string DeleteForm8BDetail(Form8BDetailViewModel Form8BObj)
+        {
+
+            try
+            {
+                UA ua = new UA();
+                Guid ID = Form8BObj.ID.GetValueOrDefault();
+                Guid HeaderID = Form8BObj.HeaderID.GetValueOrDefault();
+                if (ID == null || HeaderID == null)
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = c.DeleteFailure });
+                }
+                else
+                {
+                    _form8BRetailInvoiceBusiness.DeleteForm8BDetail(ID, HeaderID, ua);
+                    return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess });
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                ConstMessage cm = c.GetMessage(ex.Message);
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = cm.Message });
+            }
+
+
+        }
+
+        [HttpGet]
+        public string GetForm8B(Form8ViewModel dataObj)
+        {
+            try
+            {
+                //   System.Threading.Thread.Sleep(5000);
+                UA ua = new UA();
+                Form8BViewModel Frm8 = Mapper.Map<Form8B, Form8BViewModel>(_form8BRetailInvoiceBusiness.GetForm8B(dataObj.ID.GetValueOrDefault(), ua));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = Frm8 });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+
 
         #region ButtonStyling
         [HttpGet]
