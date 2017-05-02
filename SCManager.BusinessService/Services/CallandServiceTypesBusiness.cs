@@ -34,5 +34,17 @@ namespace SCManager.BusinessService.Services
             }
             return result;
         }
+        public List<CallTypes> GetCallTypes(UA UA)
+        {
+            List<CallTypes> callTypesList = null;
+            callTypesList = _iCallandServiceTypesRepository.GetCallTypes(UA);
+            return callTypesList;
+        }
+        public List<ServiceTypes> GetServiceTypes(UA UA)
+        {
+            List<ServiceTypes> serviceTypesList = null;
+            serviceTypesList = _iCallandServiceTypesRepository.GetServiceTypes(UA);
+            return serviceTypesList;
+        }
     }
 }

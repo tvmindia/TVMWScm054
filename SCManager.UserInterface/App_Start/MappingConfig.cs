@@ -24,6 +24,8 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<ItemViewModel, Categories>().ReverseMap();
                 config.CreateMap<ItemViewModel, SubCategories>().ReverseMap();
                 config.CreateMap<EmployeesViewModel, Employees>().ReverseMap();
+                config.CreateMap<CallandServiceTypesViewModel, CallTypes>().ReverseMap();
+                config.CreateMap<CallandServiceTypesViewModel, ServiceTypes>().ReverseMap();
             });
         }
     }

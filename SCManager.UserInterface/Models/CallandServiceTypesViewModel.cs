@@ -9,6 +9,7 @@ namespace SCManager.UserInterface.Models
     public class CallandServiceTypesViewModel
     {
         //calltype
+        public string SCCode { get; set; }
         [Display(Name = "Major")]
         public float MajorCommission { get; set; }
         [Display(Name = "Minor")]

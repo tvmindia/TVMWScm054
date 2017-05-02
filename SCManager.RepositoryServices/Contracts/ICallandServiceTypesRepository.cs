@@ -11,5 +11,7 @@ namespace SCManager.RepositoryServices.Contracts
     {
         string UpdateServiceType(ServiceTypes serviceTypesObj);
         string UpdateCallType(CallTypes callTypesObj);
+        List<ServiceTypes> GetServiceTypes(UA UA);
+        List<CallTypes> GetCallTypes(UA UA);
     }
 }

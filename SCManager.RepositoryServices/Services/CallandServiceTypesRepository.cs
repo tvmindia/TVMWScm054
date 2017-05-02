@@ -26,6 +26,98 @@ namespace SCManager.RepositoryServices.Services
 
         #region Methods
 
+        #region GetCallTypes
+        public List<CallTypes> GetCallTypes(UA UA)
+        {
+            List<CallTypes> callTypeslist = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.CommandText = "[GetCallTypes]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                callTypeslist = new List<CallTypes>();
+                                while (sdr.Read())
+                                {
+                                    CallTypes _CallTypesObj = new CallTypes();
+                                    {
+                                        _CallTypesObj.Code = (sdr["Code"].ToString() != "" ? sdr["Code"].ToString() : _CallTypesObj.Code);
+                                        _CallTypesObj.Commission = (sdr["Commission"].ToString() != "" ?float.Parse(sdr["Commission"].ToString()) : _CallTypesObj.Commission);                                       
+                                    }
+
+                                    callTypeslist.Add(_CallTypesObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return callTypeslist;
+        }
+        #endregion  GetCallTypes
+
+        #region GetServiceTypes
+        public List<ServiceTypes> GetServiceTypes(UA UA)
+        {
+            List<ServiceTypes> serviceTypeslist = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.CommandText = "[GetServiceTypes]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                serviceTypeslist = new List<ServiceTypes>();
+                                while (sdr.Read())
+                                {
+                                    ServiceTypes _ServiceTypesObj = new ServiceTypes();
+                                    {
+                                        _ServiceTypesObj.Code = (sdr["Code"].ToString() != "" ? sdr["Code"].ToString() : _ServiceTypesObj.Code);
+                                        _ServiceTypesObj.Commission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _ServiceTypesObj.Commission);
+                                    }
+
+                                    serviceTypeslist.Add(_ServiceTypesObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return serviceTypeslist;
+        }
+        #endregion  GetServiceTypes
+
         #region UpdateCallType
         public string UpdateCallType(CallTypes callTypesObj)
         {

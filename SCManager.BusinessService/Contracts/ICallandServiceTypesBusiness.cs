@@ -10,5 +10,7 @@ namespace SCManager.BusinessService.Contracts
    public interface ICallandServiceTypesBusiness
     {
         string UpdateCallandServiceTypes(CallTypes callTypesObj, ServiceTypes serviceTypesObj);
+        List<ServiceTypes> GetServiceTypes(UA UA);
+        List<CallTypes> GetCallTypes(UA UA);
     }
 }
