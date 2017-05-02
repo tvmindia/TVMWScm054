@@ -1,6 +1,7 @@
-﻿@model SCManager.UserInterface.Models.Form8ViewModel
+﻿@model SCManager.UserInterface.Models.Form8BViewModel
+
 @{
-    ViewBag.Title = "Form8 Tax Invoice";
+    ViewBag.Title = "Form8B Retail Invoice";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 @section styles {
@@ -11,9 +12,10 @@
 
 
 }
+
 <div class="col-md-12">
     <div class="SCHeader col-md-6">
-        Form8 - Tax Invoices
+        Form8B - Retail Invoices
 
     </div>
     <div class="col-md-6">
@@ -21,15 +23,11 @@
 
             @{
                 var data = new { ActionType = "List" };
-                @Html.Action("ChangeButtonStyle", "Form8TaxInvoice", data);
+                @Html.Action("ChangeButtonStyle", "Form8BRetailInvoice", data);
             }
         </div>
     </div>
 </div>
-
-
-
-
 
 
 
@@ -64,7 +62,7 @@
                             <th>Total (₹)</th>
                             <th>Remarks</th>
                             <th>...</th>
-                           
+
                         </tr>
                     </thead>
                 </table>
@@ -74,7 +72,7 @@
             <div class="col-md-12">&nbsp;</div>
             <div class="col-md-12">
 
-                @using (Ajax.BeginForm("InsertUpdateForm8", "Form8TaxInvoice", new AjaxOptions { HttpMethod = "POST", Confirm = "", OnSuccess = "SaveSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form",@id="F8" }))
+                @using (Ajax.BeginForm("InsertUpdateForm8B", "Form8BRetailInvoice", new AjaxOptions { HttpMethod = "POST", Confirm = "", OnSuccess = "SaveSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", @id = "F8" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(model => model.ID, htmlAttributes: new { @class = "", Value = "0", @id = "HeaderID", })
@@ -86,12 +84,12 @@
                     <div class="inputForm col-md-5">
                         <div class="form-group">
                             <!---------------- 1 --------------------->
-                             
+
                             <div class="col-md-3 ">
                                 @Html.LabelFor(model => model.InvoiceNo, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6 ">
-                                @Html.EditorFor(model => model.InvoiceNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id= "InvNo" } })
+                                @Html.EditorFor(model => model.InvoiceNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "InvNo" } })
                                 @Html.ValidationMessageFor(model => model.InvoiceNo, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1 mandatory"></div>
@@ -99,12 +97,12 @@
 
                         <div class="form-group">
                             <!---------------- 2 -------------------->
-                             
+
                             <div class="col-md-3 ">
                                 @Html.LabelFor(model => model.InvoiceDate, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6 ">
-                                @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id= "InvDate" } })
+                                @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "InvDate" } })
 
                                 @Html.ValidationMessageFor(model => model.InvoiceDate, "", new { @class = "text-danger" })
                             </div>
@@ -116,12 +114,12 @@
 
                         <div class="form-group">
                             <!----------------7-------------------->
-                            
+
                             <div class="col-md-3">
                                 @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
-                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control HeaderBox", rows =4,@id="Remarks"} })
+                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 4, @id = "Remarks" } })
 
                             </div>
 
@@ -129,110 +127,110 @@
 
 
                     </div>
-                        <div class="inputForm col-md-5">
-                            <div class="form-group">
-                                <!---------------- 3 -------------------->
-                                
-                                <div class="col-md-3">
-                                    @Html.LabelFor(model => model.SaleOrderNo, htmlAttributes: new { @class = "control-label" })
-                                </div>
-                                <div class="col-md-6">
-                                    @Html.EditorFor(model => model.SaleOrderNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "SONo" } })
-                                    @Html.ValidationMessageFor(model => model.SaleOrderNo, "", new { @class = "text-danger" })
-                                </div>
+                    <div class="inputForm col-md-5">
+                        <div class="form-group">
+                            <!---------------- 3 -------------------->
 
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.SaleOrderNo, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.SaleOrderNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "SONo" } })
+                                @Html.ValidationMessageFor(model => model.SaleOrderNo, "", new { @class = "text-danger" })
                             </div>
 
-                            <div class="form-group">
-                                <!---------------- 4 -------------------->
-                                
-                                <div class="col-md-3">
-                                    @Html.LabelFor(model => model.ChallanNo, htmlAttributes: new { @class = "control-label" })
-                                </div>
-                                <div class="col-md-6">
-                                    @Html.EditorFor(model => model.ChallanNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "CNo" } })
-                                    @Html.ValidationMessageFor(model => model.ChallanNo, "", new { @class = "text-danger" })
-                                </div>
-
-                            </div>
-
-                            <div class="form-group">
-                                <!---------------- 5 -------------------->
-                                
-                                <div class="col-md-3">
-                                    @Html.LabelFor(model => model.ChallanDate, htmlAttributes: new { @class = "control-label" })
-                                </div>
-                                <div class="col-md-6">
-                                    @Html.EditorFor(model => model.ChallanDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "CDate" } })
-                                    @Html.ValidationMessageFor(model => model.ChallanDate, "", new { @class = "text-danger" })
-                                </div>
-
-                            </div>
-
-                            <div class="form-group">
-                                <!----------------6-------------------->
-                               
-                                <div class="col-md-3">
-                                    @Html.LabelFor(model => model.PONo, htmlAttributes: new { @class = "control-label" })
-                                </div>
-                                <div class="col-md-6">
-                                    @Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "PONo" } })
-                                    @Html.ValidationMessageFor(model => model.PONo, "", new { @class = "text-danger" })
-                                </div>
-
-                            </div>
-
-                            <div class="form-group">
-                                <!----------------6-------------------->
-                                
-                                <div class="col-md-3">
-                                    @Html.LabelFor(model => model.PODate, htmlAttributes: new { @class = "control-label" })
-                                </div>
-                                <div class="col-md-6">
-                                    @Html.EditorFor(model => model.PODate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "PODate" } })
-                                    @Html.ValidationMessageFor(model => model.PODate, "", new { @class = "text-danger" })
-                                </div>
-
-                            </div>
                         </div>
+
+                        <div class="form-group">
+                            <!---------------- 4 -------------------->
+
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.ChallanNo, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.ChallanNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "CNo" } })
+                                @Html.ValidationMessageFor(model => model.ChallanNo, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <!---------------- 5 -------------------->
+
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.ChallanDate, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.ChallanDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "CDate" } })
+                                @Html.ValidationMessageFor(model => model.ChallanDate, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <!----------------6-------------------->
+
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.PONo, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "PONo" } })
+                                @Html.ValidationMessageFor(model => model.PONo, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <!----------------6-------------------->
+
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.PODate, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.PODate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "PODate" } })
+                                @Html.ValidationMessageFor(model => model.PODate, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                    </div>
                         <div class="inputForm col-md-2">&nbsp;</div>
                         <div class="inputForm col-md-12 Subhead">&nbsp;</div>
                         <div class="inputForm col-md-11 Subhead">Items</div>
                         <div class="col-md-1" style="text-align:right;cursor:pointer;vertical-align:bottom">
-                        @*<span><a onclick="AddMoreRows()">More Rows</a></span>*@
+                            @*<span><a onclick="AddMoreRows()">More Rows</a></span>*@
                         </div>
-                            <div class="inputForm col-md-12">
-                                <table id="tblInvDetails" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr class="text-center">
-                                            <th style="display:none">SCCode</th>
-                                            <th style="display:none">ID</th>
-                                            <th style="display:none">MaterialID</th>
-                                            <th>Sl No</th>
-                                            <th>Material</th>
-                                            <th>Quantity</th>
-                                            <th>UOM</th>
-                                            <th>Rate (₹)</th>
-                                            <th>Basic Amount (₹)</th>
-                                            <th>Trade Discount (₹)</th>
-                                            <th>Net Amount (₹)</th>
-                                            <th>...</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                                
-                            </div>
-                         
-                                <div class="inputForm col-md-8">
+                        <div class="inputForm col-md-12">
+                            <table id="tblInvDetails" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th style="display:none">SCCode</th>
+                                        <th style="display:none">ID</th>
+                                        <th style="display:none">MaterialID</th>
+                                        <th>Sl No</th>
+                                        <th>Material</th>
+                                        <th>Quantity</th>
+                                        <th>UOM</th>
+                                        <th>Rate (₹)</th>
+                                        <th>Basic Amount (₹)</th>
+                                        <th>Trade Discount (₹)</th>
+                                        <th>Net Amount (₹)</th>
+                                        <th>...</th>
+                                    </tr>
+                                </thead>
+                            </table>
 
-                                </div>
+                        </div>
+
+                            <div class="inputForm col-md-8">
+
+                            </div>
                                 <div class="inputForm col-md-4">
                                     <div class="form-group">
                                         <div class="col-md-6">
                                             @Html.LabelFor(model => model.Subtotal, htmlAttributes: new { @class = "control-label" })
                                         </div>
                                         <div class="col-md-6">
-                                            @Html.EditorFor(model => model.Subtotal, new { htmlAttributes = new { @class = "form-control Amount", @id="subtotal", @readonly = "readonly" } })
+                                            @Html.EditorFor(model => model.Subtotal, new { htmlAttributes = new { @class = "form-control Amount", @id = "subtotal", @readonly = "readonly" } })
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -243,15 +241,15 @@
                                             <input type="text" id="vatpercentage" class="form-control" onkeyup="calculateVat()" />
                                         </div>
                                         <div class="col-md-6">
-                                            @Html.EditorFor(model => model.VATAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "vatamount" , @onkeyup = "AmountSummary()" ,@onblur= "RoundTxtBox(this)" } })
+                                            @Html.EditorFor(model => model.VATAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "vatamount", @onkeyup = "AmountSummary()", @onblur = "RoundTxtBox(this)" } })
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-6">
-                                            @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label" })
+                                            @Html.LabelFor(model => model.VATExpense, htmlAttributes: new { @class = "control-label" })
                                         </div>
                                         <div class="col-md-6">
-                                            @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control Amount" , @id = "discount", @onkeyup = "AmountSummary()", @onblur = "RoundTxtBox(this)" } })
+                                            @Html.EditorFor(model => model.VATExpense, new { htmlAttributes = new { @class = "form-control Amount", @id = "discount", @onkeyup = "AmountSummary()", @onblur = "RoundTxtBox(this)" } })
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -274,25 +272,26 @@
                                 </div>
 
 
-                                <input type="submit" id="savebutton" style="display:none"/>
+                                <input type="submit" id="savebutton" style="display:none" />
 
-                                }
+                }
 
-                            </div>
+            </div>
             <div class="inputForm col-md-2">&nbsp;</div>
             <div class="inputForm col-md-2">&nbsp;</div>
         </div>
-     <div class="preloader" id="prelaoder"> 
-         <img src="~/Content/images/loading.gif" class="preloaderImg" /></div>
+        <div class="preloader" id="prelaoder">
+            <img src="~/Content/images/loading.gif" class="preloaderImg" />
+        </div>
     </div>
 </div>
-<datalist id="Materials" onfocus='this.size=10;' onblur='this.size=1;' 
-        onchange='this.size=1; this.blur();'>  </datalist>
+<datalist id="Materials" onfocus='this.size=10;' onblur='this.size=1;'
+          onchange='this.size=1; this.blur();'></datalist>
 @section Scripts {
     @Scripts.Render("~/bundles/datatable")
     @Scripts.Render("~/bundles/jqueryunobtrusiveajaxvalidate")
     @Scripts.Render("~/bundles/bootstrapdatepicker")
-    @Scripts.Render("~/bundles/Form8")
+    @Scripts.Render("~/bundles/Form8B")
     @Scripts.Render("~/bundles/editableGrid")
 
 

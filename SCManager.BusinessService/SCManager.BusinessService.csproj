@@ -114,6 +114,7 @@
     <Compile Include="Contracts\ICommonBusiness.cs" />
     <Compile Include="Contracts\IDynamicUIBusiness.cs" />
     <Compile Include="Contracts\IEmployeesBusiness.cs" />
+    <Compile Include="Contracts\IForm8BTaxInvoiceBusiness.cs" />
     <Compile Include="Contracts\IForm8TaxInvoiceBusiness.cs" />
     <Compile Include="Contracts\IItemBusiness.cs" />
     <Compile Include="Contracts\ISubCategoriesBusiness.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Services\CommonBusiness.cs" />
     <Compile Include="Services\DynamicUIBusiness.cs" />
     <Compile Include="Services\EmployeesBusiness.cs" />
+    <Compile Include="Services\Form8BTaxInvoiceBusiness.cs" />
     <Compile Include="Services\Form8TaxInvoiceBusiness.cs" />
     <Compile Include="Services\ItemBusiness.cs" />
     <Compile Include="Services\SubCategoriesBusiness.cs" />

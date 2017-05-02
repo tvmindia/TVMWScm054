@@ -13,6 +13,7 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new StyleBundle("~/Content/DataTables/css/datatableSelect").Include("~/Content/DataTables/css/select.dataTables.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/UserCSS/Form8").Include("~/Content/UserCSS/Form8.css"));
+            bundles.Add(new StyleBundle("~/Content/UserCSS/Form8B").Include("~/Content/UserCSS/Form8B.css"));
             bundles.Add(new StyleBundle("~/Content/UserCSS/Login").Include("~/Content/UserCSS/Login.css"));
             bundles.Add(new StyleBundle("~/Content/UserCSS/Item").Include("~/Content/UserCSS/Item.css"));
 
@@ -29,6 +30,7 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/userpluginjs").Include("~/Scripts/jquery.noty.packaged.min.js", "~/Scripts/custom.js", "~/Scripts/Chart.js", "~/Scripts/sweetalert.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Form8").Include("~/Scripts/UserJS/Form8.js"));
+            bundles.Add(new ScriptBundle("~/bundles/Form8B").Include("~/Scripts/UserJS/Form8B.js"));
             bundles.Add(new ScriptBundle("~/bundles/Dashboard").Include("~/Scripts/UserJS/Dashboard.js"));
             bundles.Add(new ScriptBundle("~/bundles/demoGrid").Include("~/Scripts/UserJS/demoGrid.js"));
             bundles.Add(new ScriptBundle("~/bundles/editableGrid").Include("~/Scripts/editableGrid.js"));
