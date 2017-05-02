@@ -24,8 +24,9 @@
 }
 
 .DashList {
-     max-height:545px;
+     max-height:535px;
    overflow-y:scroll;
+   margin-bottom:0px;
    
 }
 

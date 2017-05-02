@@ -17,8 +17,18 @@
         if (mp.ApproachPercentage < 100)
         {
             <li class="list-group-item justify-content-between list-group-item-text rlist">
-               <span style="color:red">🡻</span>  @mp.Item
-                <span class="badge badge-default alert-danger ">
+               <span style="color:red">🡻</span> <span title="@mp.Item">
+                @if (@mp.Item.Length > 30)
+                {
+                    @mp.Item.Substring(0, 30) <span>..</span>
+                }
+                else
+                {
+                    @mp.Item;
+                }
+
+                </span> 
+                <span class="badge badge-default alert-danger" title="Reorder Quantity @mp.ReorderQty">
                     Stock :  @mp.qty
                 </span>
             </li>
@@ -28,8 +38,17 @@
         else
         {
             <li class="list-group-item justify-content-between list-group-item-text rlist">
-                <span style="color:orange;">🡻</span> @mp.Item
-                <span class="badge badge-default alert-warning ">
+                <span style="color:orange;">🡻</span><span title="@mp.Item">
+                @if (@mp.Item.Length > 30)
+                {
+                    @mp.Item.Substring(0, 30)                    <span>..</span>
+                }
+                else
+                {
+                    @mp.Item;
+                }
+                </span>
+                <span class="badge badge-default alert-warning" title="Reorder Quantity @mp.ReorderQty">
                     Stock :  @mp.qty
                 </span>
             </li>
