@@ -393,3 +393,7 @@ color: #e32;
 .preloaderImg {
      margin-left: -2em;
 }
+
+.disabled {
+    background-color:rgba(1, 1, 1, 0.02)
+}

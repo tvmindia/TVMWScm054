@@ -97,45 +97,11 @@ namespace SCManager.BusinessService.Services
             try
             {
                 //-------------------------//
-                int mandIndx = 0;
-
-                object tmp = myObj[0];
-                var ppty = GetProperties(tmp);
-                int i;
-                for (i = 0; i < ppty.Length; i++)
-                {
-
-                    if (ppty[i].Name == mandatoryProperties)
-                    {
-                        mandIndx = i;
-                        break;
-                    }
-
-                }
-                //------------------------//
-
+                int mandIndx = getMAndatoryIndex(myObj[0], mandatoryProperties); //int mandIndx = 0;                
 
                 foreach (object some_object in myObj)
                 {
-                    var properties = GetProperties(some_object);
-                    var mand = properties[mandIndx].GetValue(some_object, null);
-                 
-                    if (mand != null)
-                    {
-
-                        result = result + "<item ";
-
-
-                        foreach (var p in properties)
-                        {
-                            string name = p.Name;
-                            var value = p.GetValue(some_object, null);
-                            result = result + " " + name + @"=""" + value + @""" " ;
-
-                        }
-                        result = result + "></item>";
-                        totalRows = totalRows + 1;
-                    }
+                    XML(some_object, mandIndx, ref result, ref totalRows);                    
 
                 }
 

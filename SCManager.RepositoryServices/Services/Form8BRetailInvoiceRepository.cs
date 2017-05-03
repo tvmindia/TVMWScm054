@@ -63,9 +63,9 @@ namespace SCManager.RepositoryServices.Services
                                         _Form8Obj.CustomerDelvAddrs = (sdr["CustomerDelvAddrs"].ToString() != "" ? (sdr["CustomerDelvAddrs"].ToString()) : _Form8Obj.CustomerDelvAddrs);
                                         _Form8Obj.SaleOrderNo = (sdr["SaleOrderNo"].ToString() != "" ? (sdr["SaleOrderNo"].ToString()) : _Form8Obj.SaleOrderNo);
                                         _Form8Obj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _Form8Obj.Remarks);
-                                        _Form8Obj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : _Form8Obj.VATAmount);
-                                        _Form8Obj.Subtotal = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : _Form8Obj.Subtotal);
-                                        _Form8Obj.VATExpense = (sdr["VATExpense"].ToString() != "" ? decimal.Parse(sdr["VATExpense"].ToString()) : _Form8Obj.VATExpense);
+                                        _Form8Obj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) :0);
+                                        _Form8Obj.Subtotal = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : 0);
+                                        _Form8Obj.VATExpense = (sdr["VATExpense"].ToString() != "" ? decimal.Parse(sdr["VATExpense"].ToString()) : 0);
                                     }
 
                                     Form8Blist.Add(_Form8Obj);

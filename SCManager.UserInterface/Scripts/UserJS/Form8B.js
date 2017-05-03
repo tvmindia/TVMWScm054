@@ -20,10 +20,10 @@ $(document).ready(function () {
                { "data": "InvoiceNo" },
                { "data": "InvoiceDateFormatted" },
                { "data": "SaleOrderNo", "defaultContent": "<i>-</i>" },
-               { "data": "Subtotal", "defaultContent": "<i>-</i>" },
-               { "data": "VATAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-               { "data": "VATExpense", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-               { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "Subtotal", render: function (data, type, row) { return roundoff(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "VATAmount", render: function (data, type, row) { return roundoff(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "VATExpense", render: function (data, type, row) { return roundoff(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data); }, "defaultContent": "<i>-</i>" },
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
@@ -122,8 +122,10 @@ function EG_Columns_Settings() {
     var obj = [
         { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
         { "targets": [4], "width": "20%" },
-        { className: "text-right", "targets": [7, 8, 9, 10] },
-        { className: "text-center", "targets": [3, 4, 5, 6] },
+        { className: "text-right", "targets": [7] },
+        { className: "text-center", "targets": [3, 4, 5, 11] },
+          { className: "text-center disabled", "targets": [6] },
+        { className: "text-right disabled", "targets": [8, 9, 10] },
         { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
 
     ]
@@ -136,7 +138,7 @@ function EG_Columns_Settings() {
 
 
 //---------------Bind logics-------------------
-function GetAllForm8() {
+function GetAllForm8B() {
     try {
 
         var data = {};
@@ -196,10 +198,14 @@ function BindForm8BFields(Records) {
         $('#SONo').val(Records.SaleOrderNo);
         $('#subtotal').val(roundoff(Records.Subtotal));
         $('#vatamount').val(roundoff(Records.VATAmount));
-        $('#discount').val(roundoff(Records.Discount));
-        $('#grandtotal').val(roundoff(Records.VATExpense));
-        EG_Rebind_WithData(Records.Form8Detail, 1);
+        $('#discount').val(roundoff(Records.VATExpense));
+        $('#grandtotal').val(roundoff(Records.GrandTotal));
+     
         $('#InvNo').attr('readonly', 'readonly');
+        $('#SPUNo').val(Records.SPUNo);
+        $('#CustDel').val(Records.CustomerDelvAddrs);
+        $('#CustBill').val(Records.CustomerBillAddrs);
+
 
         var $datepicker = $('#InvDate');
         $datepicker.datepicker('setDate', new Date(Records.InvoiceDateFormatted));
@@ -215,7 +221,7 @@ function BindForm8BFields(Records) {
         }
 
 
-
+        EG_Rebind_WithData(Records.Form8BDetail, 1);
 
     } catch (e) {
         notyAlert('error', e.message);
@@ -395,7 +401,7 @@ function resetCurrent() {
     try {
         debugger;
         var id = $('#HeaderID').val();
-        BindForm8(id);
+        BindForm8B(id);
 
 
     } catch (e) {
@@ -409,7 +415,7 @@ function SaveSuccess(data, status, xhr) {
         case "OK":
             notyAlert('success', i.Message);
 
-            BindForm8Fields(i.Records)
+            BindForm8BFields(i.Records)
             ChangeButtonPatchView('Form8BRetailInvoice', 'btnPatchAttributeSettab', 'Edit');
 
             break;
@@ -481,9 +487,7 @@ function CalculateAmount(row) {
     qty = parseFloat(EGqty) || 0;
     rate = parseFloat(EGrate) || 0;   
     dic = parseFloat(EGdic) || 0;
-    if (dic == 0) {
-       dic= qty * rate;
-    }
+    dic = qty * rate; ///form8b is for material return from IFB , so value of doc wil be zero, it is done by giving total amount as trade discount.
 
     EG_GridData[row - 1]['Rate'] = roundoff(rate);
     EG_GridData[row - 1]['BasicAmount'] = roundoff(qty * rate);
