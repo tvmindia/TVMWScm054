@@ -57,10 +57,13 @@ namespace SCManager.BusinessService.Services
             }
         }
 
+        private static PropertyInfo[] GetProperties(object obj)
+        {
+            return obj.GetType().GetProperties();
+        }
 
 
-
-
+        //----------------------need to make below in common -----------------------
         public string GetXMLfromForm8BDetail(List<Form8BDetail> myObj, string mandatoryProperties, UA ua)
         {
             string result = "<Details>";
@@ -88,8 +91,7 @@ namespace SCManager.BusinessService.Services
                 return "";
             }
         }
-
-        //----------------------need to make below in common -----------------------
+     
         public string GetXMLfromObject(List<Form8Detail> myObj, string mandatoryProperties, UA ua)
         {
             string result = "<Details>";
@@ -125,14 +127,41 @@ namespace SCManager.BusinessService.Services
 
         }
 
-       
-
-     
-
-        private static PropertyInfo[] GetProperties(object obj)
+        public string GetXMLfromLocalPurchaseDetail(List<LocalPurchaseDetail> myObj, string mandatoryProperties, UA ua)
         {
-            return obj.GetType().GetProperties();
+            string result = "<Details>";
+            int totalRows = 0;
+            try
+            {
+                //-------------------------//
+                int mandIndx = getMAndatoryIndex(myObj[0], mandatoryProperties); //int mandIndx = 0;                
+
+                foreach (object some_object in myObj)
+                {
+                    XML(some_object, mandIndx, ref result, ref totalRows);
+
+                }
+
+                result = result + "</Details>";
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            if (totalRows > 0)
+            {
+                return result;
+            }
+            else
+            {
+                return "";
+            }
+
         }
+       
         //----------------------------------------------------------------------------
     }
 }

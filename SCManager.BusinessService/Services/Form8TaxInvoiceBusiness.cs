@@ -27,11 +27,15 @@ namespace SCManager.BusinessService.Services
             {
                
                 Form8list = _form8TaxInvoiceRepository.GetAllForm8(UA);
-                foreach (Form8 F in Form8list  )      
+                if(Form8list != null)
                 {
+                    foreach (Form8 F in Form8list)
+                    {
 
-                    Form8BL(F);
+                        Form8BL(F);
+                    }
                 }
+              
       
             }
             catch (Exception)
