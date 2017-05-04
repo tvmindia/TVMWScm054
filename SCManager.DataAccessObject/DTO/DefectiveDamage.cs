@@ -21,5 +21,6 @@ namespace SCManager.DataAccessObject.DTO
         public string ItemCode { get; set; }
         public string Description { get; set; }
         public LogDetails logDetails { get; set; }
+        public String OpenDateFormatted { get; set; }
     }
 }

@@ -13,7 +13,7 @@ $(document).ready(function () {
              columns: [
                     { "data": "ID", "defaultContent": "<i>-</i>" },
                   { "data": "Type", "defaultContent": "<i>-</i>" },
-                  { "data": "OpenDate", "defaultContent": "<i>-</i>" },
+                  { "data": "OpenDateFormatted", "defaultContent": "<i>-</i>" },
                    { "data": "RefNo", "defaultContent": "<i>-</i>" },
                     { "data": "ItemCode", "defaultContent": "<i>-</i>" },        
                       
@@ -85,6 +85,8 @@ function clearfields() {
     $("#Remarks").val("")
     var $datepicker = $('#OpenDate');
     $datepicker.datepicker('setDate', null);
+    $("#EmpID").prop('disabled', false);
+    $("#Type").prop('disabled', false);
     ResetForm();
 }
 //---------------------------------------Fill DefectiveDamaged--------------------------------------------------//
@@ -93,6 +95,8 @@ function fillDefectiveDamaged(ID) {
     ChangeButtonPatchView("DefectiveorDamaged", "btnPatchDefectiveorDamagedSettab", "Edit");
     var thisItem = GetDefectiveDamagedByID(ID); //Binding Data
     //Hidden
+    $("#EmpID").prop('disabled', true);
+    $("#Type").prop('disabled', true);
     $("#ID").val(thisItem[0].ID);
     $("#Type").val(thisItem[0].Type);
     $("#EmpID").val(thisItem[0].EmpID);
@@ -107,7 +111,7 @@ function fillDefectiveDamaged(ID) {
     $("#Remarks").val(thisItem[0].Remarks)
    // $("#deleteId").val(thisItem[0].ID);
 }
-//---------------------------------------Get Employee Details By ID-------------------------------------//
+//---------------------------------------Get DefectiveDamaged Details By ID-------------------------------------//
 function GetDefectiveDamagedByID(id) {
     try {
         var data = { "id": id };
@@ -183,6 +187,24 @@ function ItemCodeOnChange(curObj) {
 
     }
     catch (e) {
+
+    }
+}
+function TypeOnChange(curObj)
+{
+    try
+    {
+        if($("#Type").val()=="Damaged")
+        {
+            $("#EmpID").prop('disabled', true);
+        }
+        else
+        {
+            $("#EmpID").prop('disabled', false);
+        }
+    }
+    catch(e)
+    {
 
     }
 }

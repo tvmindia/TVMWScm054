@@ -20,7 +20,26 @@ namespace SCManager.BusinessService.Services
         {
             List<DefectiveDamage> defectiveDamageList = null;
             defectiveDamageList = _iDefectiveDamageRepository.GetAllDefectiveDamaged(UA);
+            if (defectiveDamageList != null)
+            {
+                foreach (DefectiveDamage dd in defectiveDamageList)
+                {
+
+                    DefectiveDamage_DF(dd);
+                }
+            }
             return defectiveDamageList;
+        }
+        private void DefectiveDamage_DF(DefectiveDamage dd)
+        {
+            if (dd != null)
+            {
+                SCManagerSettings settings = new SCManagerSettings();
+              
+                if (dd.OpenDate != null)
+                    dd.OpenDateFormatted = dd.OpenDate.GetValueOrDefault().ToString(settings.dateformat);                
+            }
+
         }
         public List<DefectiveDamage> GetDefectiveDamagedByID(UA UA,string ID)
         {

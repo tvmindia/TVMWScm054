@@ -33,5 +33,6 @@ namespace SCManager.UserInterface.Models
         public List<SelectListItem> TechniciansList { get; set; }
         public List<SelectListItem> ItemCodeList { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
+        public String OpenDateFormatted { get; set; }
     }
 }
