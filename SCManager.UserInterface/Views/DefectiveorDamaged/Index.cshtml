@@ -82,7 +82,7 @@
                                         listDefectiveDamagedType.Add(new SelectListItem
                                         { Text = "Damaged", Value = "Damaged" });
                                     }
-                                    @Html.DropDownListFor(model => model.Type, listDefectiveDamagedType, "-- Select Type --", new { @class = "form-control", value = -1, style = "padding:4px 12px;" })
+                                    @Html.DropDownListFor(model => model.Type, listDefectiveDamagedType, "-- Select Type --", new { @class = "form-control", value = -1, style = "padding:4px 12px;", @onchange = "TypeOnChange(this)" })
                                     @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -110,15 +110,7 @@
                                 <div class="col-md-1 mandatory"></div>
                                 </div>
 
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    @Html.LabelFor(model => model.RefNo, htmlAttributes: new { @class = "control-label " })
-                                    </div>
-                                    <div class="col-md-5">
-                                        @Html.EditorFor(model => model.RefNo, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.RefNo, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
+                           
 
                             <div class="form-group">
                                 <div class="col-md-3">
@@ -130,6 +122,26 @@
                                     </div>
                                 <div class="col-md-1 mandatory"></div>
                                 </div>
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.Qty, htmlAttributes: new { @class = "control-label " })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-1 mandatory"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.RefNo, htmlAttributes: new { @class = "control-label " })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.RefNo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.RefNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -137,28 +149,18 @@
                                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label " })
                                     </div>
                                     <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" , style = "height:50px;" , @readonly = "readonly" } })
+                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" , style = "height:70px;" , @readonly = "readonly" } })
                                         @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    @Html.LabelFor(model => model.Qty, htmlAttributes: new { @class = "control-label " })
-                                    </div>
-                                    <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
-                                    </div>
-                                <div class="col-md-1 mandatory"></div>
-                                </div>
 
                             <div class="form-group">
                                 <div class="col-md-3">
                                     @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label " })
                                    </div>
                                      <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" , style = "height:50px;" } })
+                                        @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" , style = "height:100px;" } })
                                         @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
