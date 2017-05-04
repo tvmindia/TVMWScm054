@@ -347,7 +347,11 @@ fieldset[disabled] .btn-danger.active {
 }
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .active > a {
-   background-color:wheat;
+    background-image: url('images/73a6f1c8.png');
+    background-repeat: repeat;
+    border-radius: 5px 5px 0 0;
+    color:#545454;
+    
 }
 .navbar-brand,
 .navbar-nav > li > a {
