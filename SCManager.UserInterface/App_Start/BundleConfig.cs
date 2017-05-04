@@ -36,6 +36,7 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/Employees").Include("~/Scripts/UserJS/Employees.js"));
             bundles.Add(new ScriptBundle("~/bundles/Login").Include("~/Scripts/UserJS/Login.js"));
             bundles.Add(new ScriptBundle("~/bundles/CallandServiceTypes").Include("~/Scripts/UserJS/CallandServiceTypes.js"));
+            bundles.Add(new ScriptBundle("~/bundles/DefectDamage").Include("~/Scripts/UserJS/DefectiveDamage.js"));
         }
     }
 }

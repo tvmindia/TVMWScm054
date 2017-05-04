@@ -258,6 +258,54 @@ namespace SCManager.RepositoryServices.Services
         }
         #endregion DeleteEmployee
 
+        #region GetAllTechnicians
+        public List<Employees> GetAllTechnicians(UA UA)
+        {
+            List<Employees> Technicianslist = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.CommandText = "[GetAllTechnician]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                Technicianslist = new List<Employees>();
+                                while (sdr.Read())
+                                {
+                                    Employees employeesObj = new Employees();
+
+                                    {
+                                        employeesObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : employeesObj.ID);
+                                        employeesObj.Name = (sdr["Name"].ToString() != "" ? sdr["Name"].ToString() : employeesObj.Name);
+
+                                    };
+
+                                    Technicianslist.Add(employeesObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Technicianslist;
+        }
+        #endregion GetAllTechnicians
+
         #endregion Methods
     }
 }

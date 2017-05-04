@@ -28,6 +28,12 @@ namespace SCManager.BusinessService.Services
             employeesList = _iEmployeesRepository.GetEmployeeByID(UA,ID);
             return employeesList;
         }
+        public List<Employees> GetAllTechnicians(UA UA)
+        {
+            List<Employees> employeesList = null;
+            employeesList = _iEmployeesRepository.GetAllTechnicians(UA);
+            return employeesList;
+        }
         public object InsertUpdateEmployee(Employees employeesObj)
         {
             object result = null;

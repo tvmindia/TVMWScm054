@@ -13,5 +13,6 @@ namespace SCManager.BusinessService.Contracts
         List<Employees> GetEmployeeByID(UA UA, string ID);
         object InsertUpdateEmployee(Employees employeesObj);
         string DeleteEmployee(string ID, UA ua);
+        List<Employees> GetAllTechnicians(UA UA);
     }
 }

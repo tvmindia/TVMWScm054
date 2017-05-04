@@ -14,5 +14,6 @@ namespace SCManager.RepositoryServices.Contracts
         object InsertEmployee(Employees employeesObj);
         object UpdateEmployee(Employees employeesObj);
         string DeleteEmployee(string ID, UA ua);
+        List<Employees> GetAllTechnicians(UA UA);
     }
 }

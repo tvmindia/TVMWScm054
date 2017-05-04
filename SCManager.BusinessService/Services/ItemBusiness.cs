@@ -24,6 +24,13 @@ namespace SCManager.BusinessService.Services
             return Itemlist;
 
         }
+        public List<Item> GetAllItemCode(UA UA)
+        {
+            List<Item> Itemlist = null;
+            Itemlist = _itemRepository.GetAllItemCode(UA);
+            return Itemlist;
+
+        }
 
         public List<Item> GetItemByID(UA UA,string ID)
         {
@@ -32,7 +39,12 @@ namespace SCManager.BusinessService.Services
             return Itemlist;
 
         }
-
+       public List<Item> GetItemDescriptionByID(UA UA, string ID)
+        {
+            List<Item> Itemlist = null;
+            Itemlist = _itemRepository.GetItemDescriptionByID(UA, ID);
+            return Itemlist;
+        }
         public object InsertItem(Item itemObj)
         {
             object result = null;

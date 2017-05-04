@@ -112,6 +112,7 @@
     <Compile Include="Contracts\ICallandServiceTypesBusiness.cs" />
     <Compile Include="Contracts\ICategoriesBusiness.cs" />
     <Compile Include="Contracts\ICommonBusiness.cs" />
+    <Compile Include="Contracts\IDefectiveDamageBusiness.cs" />
     <Compile Include="Contracts\IDynamicUIBusiness.cs" />
     <Compile Include="Contracts\IEmployeesBusiness.cs" />
     <Compile Include="Contracts\IForm8TaxInvoiceBusiness.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Services\CallandServiceTypesBusiness.cs" />
     <Compile Include="Services\CategoriesBusiness.cs" />
     <Compile Include="Services\CommonBusiness.cs" />
+    <Compile Include="Services\DefectiveDamageBusiness.cs" />
     <Compile Include="Services\DynamicUIBusiness.cs" />
     <Compile Include="Services\EmployeesBusiness.cs" />
     <Compile Include="Services\Form8TaxInvoiceBusiness.cs" />

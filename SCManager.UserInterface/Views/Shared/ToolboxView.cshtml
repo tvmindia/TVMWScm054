@@ -107,6 +107,26 @@
 
         }
         
+        @if (Model.returnBtn.Visible)
+        {
+            if (Model.returnBtn.Disable)
+            {
+
+                <a class="thr_disbtn" title="@Model.returnBtn.Title-@Model.returnBtn.DisableReason">
+                    <img class="btnImg" src="@Url.Content("~/Content/images/return.png")">
+                    <span class="btnText">@Model.returnBtn.Text</span>
+                </a>
+            }
+            else
+            {
+
+                <a title="@Model.returnBtn.Title" class="thr_btn" onclick=@Model.returnBtn.Event>
+                    <img class="btnImg" src="@Url.Content("~/Content/images/return.png")">
+                    <span class="btnText">@Model.returnBtn.Text</span>
+                </a>
+            }
+
+        }
 
     </div>
 

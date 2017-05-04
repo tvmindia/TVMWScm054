@@ -26,6 +26,7 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<EmployeesViewModel, Employees>().ReverseMap();
                 config.CreateMap<CallandServiceTypesViewModel, CallTypes>().ReverseMap();
                 config.CreateMap<CallandServiceTypesViewModel, ServiceTypes>().ReverseMap();
+                config.CreateMap<DefectiveorDamagedViewModel, DefectiveDamage>().ReverseMap();
             });
         }
     }
