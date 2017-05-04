@@ -115,7 +115,9 @@
     <Compile Include="DTO\DefectiveDamage.cs" />
     <Compile Include="DTO\Employees.cs" />
     <Compile Include="DTO\Form8.cs" />
+    <Compile Include="DTO\Form8B.cs" />
     <Compile Include="DTO\Item.cs" />
+    <Compile Include="DTO\LocalPurchase.cs" />
     <Compile Include="DTO\Menu.cs">
       <SubType>Code</SubType>
     </Compile>
