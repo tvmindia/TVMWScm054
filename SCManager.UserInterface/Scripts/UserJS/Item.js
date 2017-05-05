@@ -25,7 +25,10 @@ $(document).ready(function () {
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
-             columnDefs: [{ "targets": [0], "visible": false, "searchable": false }]
+             columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
+                  { className: "text-right", "targets": [5, 7, 8] },
+                    { className: "text-center", "targets": [1,2,3,4,6,9,10] }
+             ]
          });
 
         $('#tblItemList tbody').on('dblclick', 'td', function () {
