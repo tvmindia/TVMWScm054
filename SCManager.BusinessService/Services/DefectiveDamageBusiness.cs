@@ -59,6 +59,8 @@ namespace SCManager.BusinessService.Services
                 }
                 else
                 {
+                    defectiveDamageObj.EmpID = defectiveDamageObj.HiddenEmpID;
+                    defectiveDamageObj.Type = defectiveDamageObj.HiddenType;
                     result = _iDefectiveDamageRepository.UpdateDefectiveDamaged(defectiveDamageObj);
                 }
             }
@@ -67,6 +69,45 @@ namespace SCManager.BusinessService.Services
                 throw ex;
             }
             return result;
+        }
+        public string DeleteDefectiveDamaged(string ID, UA ua)
+        {
+            string status = null;
+            try
+            {
+                status = _iDefectiveDamageRepository.DeleteDefectiveDamaged(ID, ua);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+        public string DefectiveDamagedValidation(string itemID, string empID, UA ua)
+        {
+            string status = null;
+            try
+            {
+                status = _iDefectiveDamageRepository.DefectiveDamagedValidation(itemID, empID, ua);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+        public string ReturnDefectiveDamaged(string ID, UA ua)
+        {
+            string status = null;
+            try
+            {
+                status = _iDefectiveDamageRepository.ReturnDefectiveDamaged(ID, ua);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
         }
     }
 }

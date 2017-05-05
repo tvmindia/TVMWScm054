@@ -19,6 +19,8 @@ namespace SCManager.DataAccessObject.DTO
         public DateTime? ReturnDate { get; set; }
         public Guid EmpID { get; set; }
         public string ItemCode { get; set; }
+        public Guid HiddenEmpID { get; set; }
+        public string HiddenType { get; set; }
         public string Description { get; set; }
         public LogDetails logDetails { get; set; }
         public String OpenDateFormatted { get; set; }

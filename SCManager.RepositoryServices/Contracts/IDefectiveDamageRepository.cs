@@ -13,5 +13,8 @@ namespace SCManager.RepositoryServices.Contracts
         object InsertDefectiveDamaged(DefectiveDamage defectiveDamageObj);
         object UpdateDefectiveDamaged(DefectiveDamage defectiveDamageObj);
         List<DefectiveDamage> GetDefectiveDamagedByID(UA UA, string ID);
+        string DeleteDefectiveDamaged(string ID, UA ua);
+        string ReturnDefectiveDamaged(string ID, UA ua);
+        string DefectiveDamagedValidation(string itemID, string empID, UA ua);
     }
 }

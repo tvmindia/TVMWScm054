@@ -43,6 +43,87 @@ $(document).ready(function () {
     }
    
 });
+
+function Delete() {
+
+    notyConfirm('Are you sure to delete?', 'DeleteDefectiveDamaged()');
+
+}
+//---------------------------------------Delete-------------------------------------------------------//
+function DeleteDefectiveDamaged() {
+    debugger;
+    var id = $("#ID").val();
+    if (id != EmptyGuid) {
+        $("#btnFormDelete").click();
+    }
+    else {
+        notyAlert('error', 'Error');
+    }
+}
+function ReturnToCompany() {
+    debugger;
+    var ReturnID = $("#ID").val();
+    if (ReturnID != EmptyGuid) {
+        $("#btnFormReturn").click();
+    }
+    else {
+        notyAlert('error', 'Error');
+    }
+}
+function ReturnSuccess(data, status) {
+    var i = JSON.parse(data)
+    debugger;
+
+    switch (i.Result) {
+
+        case "OK":
+            BindAllDefectiveDamaged();
+            ReturnedFields();
+            notyAlert('success', i.Message);
+            break;
+        case "Error":
+            notyAlert('error', "Error");
+            break;
+        case "ERROR":
+            notyAlert('error', i.Message);
+            break;
+        default:
+            break;
+    }
+}
+function ReturnedFields()
+{
+    $("#EmpID").prop('disabled', true);
+    $("#Type").prop('disabled', true);
+    $("#RefNo").prop('disabled', true);
+    $("#ItemID").prop('disabled', true);
+    $("#Qty").prop('disabled', true);
+    $("#Remarks").prop('disabled', true);
+    $('#OpenDate').prop('disabled', true);
+    ChangeButtonPatchView("DefectiveorDamaged", "btnPatchDefectiveorDamagedSettab", "Return");
+}
+function DeleteSuccess(data, status) {
+    var i = JSON.parse(data)
+    debugger;
+
+    switch (i.Result) {
+
+        case "OK":
+            BindAllDefectiveDamaged();
+            notyAlert('success', i.Message);
+            clearfields();
+            goBack();
+            break;
+        case "Error":
+            notyAlert('error', "Error");
+            break;
+        case "ERROR":
+            notyAlert('error', i.Message);
+            break;
+        default:
+            break;
+    }
+}
 function DefectiveDamagedSaveSuccess(data, status) {
     debugger;
     var JsonResult = JSON.parse(data)
@@ -76,8 +157,11 @@ function ResetForm() {
 //---------------------------------------Clear Fields-----------------------------------------------------//
 function clearfields() {
     $("#ID").val(EmptyGuid);
+    $("#ReturnID").val(EmptyGuid);
     $("#EmpID").val("")
+    $("#HiddenEmpID").val("");
     $("#Type").val("")
+    $("#HiddenType").val("")
     $("#RefNo").val("")
     $("#ItemID").val("")
     $("#Description").val("");
@@ -85,8 +169,15 @@ function clearfields() {
     $("#Remarks").val("")
     var $datepicker = $('#OpenDate');
     $datepicker.datepicker('setDate', null);
+    $("#deleteId").val("0")
+    $("#returnId").val("0");
     $("#EmpID").prop('disabled', false);
     $("#Type").prop('disabled', false);
+    $("#RefNo").prop('disabled', false);
+    $("#ItemID").prop('disabled', false);
+    $("#Qty").prop('disabled', false);
+    $("#Remarks").prop('disabled', false);
+    $('#OpenDate').prop('disabled', false);
     ResetForm();
 }
 //---------------------------------------Fill DefectiveDamaged--------------------------------------------------//
@@ -95,11 +186,13 @@ function fillDefectiveDamaged(ID) {
     ChangeButtonPatchView("DefectiveorDamaged", "btnPatchDefectiveorDamagedSettab", "Edit");
     var thisItem = GetDefectiveDamagedByID(ID); //Binding Data
     //Hidden
-    $("#EmpID").prop('disabled', true);
-    $("#Type").prop('disabled', true);
+   
     $("#ID").val(thisItem[0].ID);
+    $("#ReturnID").val(thisItem[0].ID);
     $("#Type").val(thisItem[0].Type);
+    $("#HiddenType").val(thisItem[0].Type);
     $("#EmpID").val(thisItem[0].EmpID);
+    $("#HiddenEmpID").val(thisItem[0].EmpID);
     if (thisItem[0].OpenDate != null) {
         var $datepicker = $('#OpenDate');
         $datepicker.datepicker('setDate', new Date(thisItem[0].OpenDate));
@@ -109,7 +202,10 @@ function fillDefectiveDamaged(ID) {
     $("#Description").val(thisItem[0].Description)
     $("#Qty").val(thisItem[0].Qty)
     $("#Remarks").val(thisItem[0].Remarks)
-   // $("#deleteId").val(thisItem[0].ID);
+    $("#deleteId").val(thisItem[0].ID);
+    $("#returnId").val(thisItem[0].ID);
+    $("#EmpID").prop('disabled', true);
+    $("#Type").prop('disabled', true);
 }
 //---------------------------------------Get DefectiveDamaged Details By ID-------------------------------------//
 function GetDefectiveDamagedByID(id) {
@@ -138,10 +234,16 @@ function Edit(currentObj) {
 
     $('#AddTab').trigger('click');
     ChangeButtonPatchView("DefectiveorDamaged", "btnPatchDefectiveorDamagedSettab", "Edit"); //ControllerName,id of the container div,Name of the action
+    debugger;
     var rowData = DataTables.DefectiveDamagedTable.row($(currentObj).parents('tr')).data();
     if ((rowData != null) && (rowData.ID != null)) {
         fillDefectiveDamaged(rowData.ID);
+        if(rowData.ReturnStatusYN==true)
+        {
+            ReturnedFields();
+        }
     }
+   
 }
 //---------------------------------------Bind All DefectiveDamaged----------------------------------------------//
 function BindAllDefectiveDamaged() {
@@ -245,6 +347,39 @@ function GetAllDefectiveDamaged() {
 //------------------------------- Defective/Damaged Save-----------------------------//
 function save() {
     debugger;
+    var qty = DefectiveDamagedValidation();
+    debugger;
+    notySaveConfirm('Total quantities=' + qty + '\nAre you sure to Save?', 'SaveClick()');
+   
+}
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    if (charCode != 46 && charCode > 31
+      && (charCode < 48 || charCode > 57))
+        return false;
 
+    return true;
+}
+
+function SaveClick()
+{
     $("#btnInsertUpdateDefectiveDamaged").trigger('click');
+}
+
+function DefectiveDamagedValidation() {
+    debugger;
+    try {
+        var ItemID = $("#ItemID").val();
+        var EmpID = $("#EmpID").val();
+        var data = { "ItemID": ItemID, "EmpID": EmpID };
+        var ds = {};
+        ds = GetDataFromServer("DefectiveorDamaged/DefectiveDamagedValidation/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        return ds.Message;
+    }
+    catch (e) {
+
+    }
 }

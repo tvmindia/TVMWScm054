@@ -126,6 +126,7 @@ namespace SCManager.UserInterface.Controllers
                     defectiveorDamagedViewModelObj.logDetails.UpdatedBy = defectiveorDamagedViewModelObj.logDetails.CreatedBy;
                     defectiveorDamagedViewModelObj.logDetails.UpdatedDate = defectiveorDamagedViewModelObj.logDetails.CreatedDate;
                     defectiveorDamagedViewModelObj.SCCode = ua.SCCode;
+                    
                     result = _iDefectiveDamageBusiness.InsertUpdateDefectiveDamaged(Mapper.Map<DefectiveorDamagedViewModel, DefectiveDamage>(defectiveorDamagedViewModelObj));
                     return JsonConvert.SerializeObject(new { Result = "OK", Records = result });
                 }
@@ -159,6 +160,123 @@ namespace SCManager.UserInterface.Controllers
 
         }
         #endregion InsertUpdateDefectDamaged
+
+        #region DeleteDefectiveDamaged
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public string DeleteDefectiveDamaged(string ID)
+        {
+            string status = null;
+            string msg = null;
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    UA ua = new UA();
+                    if (!string.IsNullOrEmpty(ID))
+                    {
+                        status = _iDefectiveDamageBusiness.DeleteDefectiveDamaged(ID, ua);
+                    }
+                    switch (status)
+                    {
+                        case "0":
+                            msg = c.DeleteFailure;
+                            break;
+                        case "1":
+                            msg = c.DeleteSuccess;
+                            break;
+                        case "2":
+                            msg = c.FKviolation;
+                            break;
+                    }
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message = msg });
+                }
+                catch (Exception ex)
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                }
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "Please Check the values" });
+            }
+
+        }
+        #endregion DeleteDefectiveDamaged
+
+        #region ReturnDefectiveDamaged
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public string ReturnDefectiveDamaged(DefectiveorDamagedViewModel defectiveorDamagedViewModelObj)
+        {
+            string status = null;
+            string msg = null;
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    UA ua = new UA();
+                    if ((defectiveorDamagedViewModelObj.ID)!=Guid.Empty)
+                    {
+                        status = _iDefectiveDamageBusiness.ReturnDefectiveDamaged(defectiveorDamagedViewModelObj.ID.ToString(), ua);
+                    }
+                    switch (status)
+                    {
+                        case "0":
+                            msg = c.UpdateFailure;
+                            break;
+                        case "1":
+                            msg = c.UpdateSuccess;
+                            break;
+                    }
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message = msg });
+                }
+                catch (Exception ex)
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                }
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "Please Check the values" });
+            }
+
+        }
+        #endregion ReturnDefectiveDamaged
+
+        #region DeleteDefectiveDamaged
+        [HttpGet]
+        public string DefectiveDamagedValidation(string itemID, string empID)
+        {
+            string status = null;
+            string msg = null;
+            
+                try
+                {
+                if (!string.IsNullOrEmpty(itemID) && !string.IsNullOrEmpty(empID))
+                {
+                    UA ua = new UA();
+                    
+                        status = _iDefectiveDamageBusiness.DefectiveDamagedValidation(itemID,empID, ua);
+                  
+                 
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message = status });
+                }
+                else
+                {
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message = c.NoItems });
+                }
+            }
+            catch (Exception ex)
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                }
+           
+
+        }
+        #endregion DeleteDefectiveDamaged
 
         #region ButtonStyling
         [HttpGet]
@@ -194,8 +312,10 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.deletebtn.Event = "Delete();";
 
                     ToolboxViewModelObj.returnBtn.Visible = true;
+                    ToolboxViewModelObj.returnBtn.Disable = true;
                     ToolboxViewModelObj.returnBtn.Text = "Return";
                     ToolboxViewModelObj.returnBtn.Title = "Return To Company";
+                    ToolboxViewModelObj.returnBtn.DisableReason = "Not applicable for new Defective/Damaged";
                     ToolboxViewModelObj.returnBtn.Event = "ReturnToCompany();";
 
                     break;
@@ -225,6 +345,8 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.returnBtn.Title = "Return To Company";
                     ToolboxViewModelObj.returnBtn.Event = "ReturnToCompany();";
 
+                    break;
+                case "Return":
                     break;
                 default:
                     return Content("Nochange");

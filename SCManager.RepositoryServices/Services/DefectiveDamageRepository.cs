@@ -237,6 +237,114 @@ namespace SCManager.RepositoryServices.Services
             };
         }
         #endregion UpdateDefectiveDamaged
+
+        #region DeleteDefectiveDamaged
+        public string DeleteDefectiveDamaged(string ID, UA ua)
+        {
+            SqlParameter outParameter = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[DeleteDefectiveDamaged]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = Guid.Parse(ID);
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = ua.SCCode;
+
+                        outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
+                        outParameter.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return outParameter.Value.ToString();
+        }
+        #endregion DeleteDefectiveDamaged
+
+        #region ReturnDefectiveDamaged
+        public string ReturnDefectiveDamaged(string ID, UA ua)
+        {
+            SqlParameter outParameter = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[ReturnDefectiveDamaged]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = Guid.Parse(ID);
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = ua.SCCode;
+                        cmd.Parameters.Add("@ReturnDate",SqlDbType.DateTime).Value= ua.CurrentDatetime();
+                        cmd.Parameters.Add("@ReturnStatusYN", SqlDbType.Bit).Value = true;
+                        outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
+                        outParameter.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return outParameter.Value.ToString();
+        }
+        #endregion ReturnDefectiveDamaged
+
+        #region DefectiveDamagedValidation
+        public string DefectiveDamagedValidation(string itemID,string empID, UA ua)
+        {
+            
+            int result ;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[GetItemStockByLocation]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@ItemID", SqlDbType.UniqueIdentifier).Value = Guid.Parse(itemID);
+                        cmd.Parameters.Add("@TechID", SqlDbType.UniqueIdentifier).Value = Guid.Parse(empID);
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = ua.SCCode;
+                        cmd.Parameters.Add("@LocType", SqlDbType.NVarChar, 5).Value = "TECH";
+                                              
+                        result=int.Parse( cmd.ExecuteScalar().ToString());
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result.ToString();
+        }
+        #endregion DefectiveDamagedValidation
+
         #endregion Methods
     }
 }

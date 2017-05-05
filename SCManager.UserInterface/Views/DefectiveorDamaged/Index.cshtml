@@ -128,7 +128,7 @@
                                     @Html.LabelFor(model => model.Qty, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumberKey(event)" } })
                                     @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -138,7 +138,7 @@
                                     @Html.LabelFor(model => model.RefNo, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.RefNo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.RefNo, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumberKey(event)" } })
                                     @Html.ValidationMessageFor(model => model.RefNo, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -172,9 +172,31 @@
                         </div>
                     </div>
                     @Html.HiddenFor(model => model.ID, htmlAttributes: new { @class = "control-label col-lg-2", id = "ID", @Value = Guid.Empty })
+                    @Html.HiddenFor(model => model.HiddenEmpID, htmlAttributes: new { @class = "control-label col-lg-2", id = "HiddenEmpID", @Value = Guid.Empty })
+                    @Html.HiddenFor(model => model.HiddenType, htmlAttributes: new { @class = "control-label col-lg-2", id = "HiddenType", @Value = string.Empty })
                                         }
                 </div>
             </div>
+        <div id="DefectiveDamagedDelete" hidden="hidden">
+            @using (Ajax.BeginForm("DeleteDefectiveDamaged", "DefectiveorDamaged", new AjaxOptions { HttpMethod = "POST", OnSuccess = "DeleteSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    @Html.HiddenFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-4", Value = "0", id = "deleteId" })
+                    <input id="btnFormDelete" type="submit" value="Delete" class="btn btn-default" />
+                </div>
+            }
+        </div>
+        <div id="DefectiveDamagedReturn" hidden="hidden">
+            @using (Ajax.BeginForm("ReturnDefectiveDamaged", "DefectiveorDamaged", new AjaxOptions { HttpMethod = "POST", OnSuccess = "ReturnSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal" ,role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    @Html.HiddenFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-4", Value = "0", id = "returnId" })
+                    <input id="btnFormReturn" type="submit" value="Return" class="btn btn-default" />
+                </div>
+            }
+        </div>
         </div>
     </div>
     @section Scripts {
