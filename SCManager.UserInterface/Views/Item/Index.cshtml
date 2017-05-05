@@ -85,6 +85,18 @@
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
                             </div>
+
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = "2" })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-1 mandatory"></div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-4">
                                     @Html.LabelFor(model => model.UOM, htmlAttributes: new { @class = "control-label" })
@@ -153,31 +165,48 @@
                                     @*@Html.ValidationMessageFor(model => model.ProductCommission, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                         
+
+                           
+
+
+
                             <div class="form-group">
-                                <div class="col-md-3">
-                                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = "3" })
-                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                    @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control", @rows = "7" })
+                                    @*@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })*@
                                 </div>
-                                <div class="col-md-1 mandatory"></div>
                             </div>
+                        </div>
 
-                        
+                       
 
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-6 mastersep">
+                            <div class="col-md-12">
+                                <div class="masterinfo">
+                                    <br />
+                                    <br />
+
+                                    <div class="masterinfoImg">
+                                        <img src="~/Content/images/stock.png" />
                                     </div>
-                                    <div class="col-md-5">
-                                        @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control", @rows = "7" })
-                                        @*@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })*@
+                                    <br />
+                                    <div class="masterinfoHead">
+                                        Spare Item Master
+                                    </div>
+                                    <br />
+                                    <div class="masterinfoDet">
+                                        The spare item master  (often referred to simply as the "item master", comprising all the individual spares ,additives and accessories in store) contains descriptions of all items that service center keeps in stock.
+                                        It is the central repository of information on items (such as inventory levels) for the SC.
+                                        The reorder level, selling rate and the specific category od spares are defined here.
+                                        Descriptions of the individual items used in SC are stored in item master .
                                     </div>
                                 </div>
+                            </div>
+                       
+                           
                         </div>
                         <div class="form-group" hidden="hidden">
                             <div class="col-md-offset-2 col-md-10">

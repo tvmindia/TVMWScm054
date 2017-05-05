@@ -352,6 +352,7 @@
     <Content Include="Content\images\back.png" />
     <Content Include="Content\images\calculate.png" />
     <Content Include="Content\images\delete.png" />
+    <Content Include="Content\images\employees.png" />
     <Content Include="Content\images\favicon.ico" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\reset.png" />
@@ -359,6 +360,7 @@
     <Content Include="Content\images\save.png" />
     <Content Include="Content\images\SCManager.png" />
     <Content Include="Content\images\scmanagerback1.JPG" />
+    <Content Include="Content\images\stock.png" />
     <Content Include="Content\images\wrench.png" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="Content\UserCSS\Form8.css" />
