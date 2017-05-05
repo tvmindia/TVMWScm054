@@ -1,5 +1,6 @@
 ﻿var DataTables = {};
 var EmptyGuid = "00000000-0000-0000-0000-000000000000";
+var _Materials = [];
 //---------------------------------------Docuement Ready--------------------------------------------------//
 $(document).ready(function () {
     try {
@@ -24,6 +25,8 @@ $(document).ready(function () {
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
+                 { className: "text-right", "targets": [6] },
+                 { className: "text-center", "targets": [1,2,3,4,5,7,8] },
                     {
                         "render": function (data, type, row) {
                             return (data == true ? "Returned" + '<i class="fa fa-check" style="color:green;" aria-hidden="true"></i>' : "Not Returned");
@@ -37,13 +40,47 @@ $(document).ready(function () {
 
             Edit(this);
         });
+
+        GetAllItemCode();
+        EG_ComboSource('Materials', _Materials, 'ItemCode', 'ID', 'Description')
     }
     catch (e) {
         notyAlert('error', e.message);
     }
    
 });
+//--3-----------combo source binding----------------------------
+function EG_ComboSource(id, values, valueCol, textCol,textDesc) {
+    debugger;
+    if (document.getElementById(id) == null || document.getElementById(id) == 'undefined') {
+        alert("combo source element is not defined in cshtml");
+    }
 
+    var options = '';
+    for (var i = 0; i < values.length; i++)
+        options += '<option id="' + values[i][textCol] + '" value="' + values[i][valueCol] + '" >' + values[i][textDesc] + '</option>';
+
+    document.getElementById(id).innerHTML = options;
+
+    //
+}
+function ItemCodeOnChange(i)
+{
+    debugger;
+    var val=$(i).val();
+    var a = $("#Materials").find('option[value="' + val + '"]');
+    var itemID = a.attr('id');
+    $("#ItemID").val(itemID);
+    var desc = a.text();
+    $("#Description").val(desc);
+    
+}
+function ReturnItemCode(itemID)
+{
+    debugger;
+    var a = $("#Materials").find('option[id="' + itemID + '"]');
+    $("#ItemCode").val(a.val());
+}
 function Delete() {
 
     notyConfirm('Are you sure to delete?', 'DeleteDefectiveDamaged()');
@@ -96,7 +133,7 @@ function ReturnedFields()
     $("#EmpID").prop('disabled', true);
     $("#Type").prop('disabled', true);
     $("#RefNo").prop('disabled', true);
-    $("#ItemID").prop('disabled', true);
+    $("#ItemCode").prop('disabled', true);
     $("#Qty").prop('disabled', true);
     $("#Remarks").prop('disabled', true);
     $('#OpenDate').prop('disabled', true);
@@ -163,7 +200,8 @@ function clearfields() {
     $("#Type").val("")
     $("#HiddenType").val("")
     $("#RefNo").val("")
-    $("#ItemID").val("")
+    $("#ItemCode").val("")
+    $("#ItemID").val("");
     $("#Description").val("");
     $("#Qty").val("")
     $("#Remarks").val("")
@@ -174,7 +212,7 @@ function clearfields() {
     $("#EmpID").prop('disabled', false);
     $("#Type").prop('disabled', false);
     $("#RefNo").prop('disabled', false);
-    $("#ItemID").prop('disabled', false);
+    $("#ItemCode").prop('disabled', false);
     $("#Qty").prop('disabled', false);
     $("#Remarks").prop('disabled', false);
     $('#OpenDate').prop('disabled', false);
@@ -198,6 +236,7 @@ function fillDefectiveDamaged(ID) {
         $datepicker.datepicker('setDate', new Date(thisItem[0].OpenDate));
     }
     $("#RefNo").val(thisItem[0].RefNo)
+    //$("#ItemID").val(thisItem[0].ItemID)
     $("#ItemID").val(thisItem[0].ItemID)
     $("#Description").val(thisItem[0].Description)
     $("#Qty").val(thisItem[0].Qty)
@@ -206,6 +245,7 @@ function fillDefectiveDamaged(ID) {
     $("#returnId").val(thisItem[0].ID);
     $("#EmpID").prop('disabled', true);
     $("#Type").prop('disabled', true);
+    ReturnItemCode(thisItem[0].ItemID);
 }
 //---------------------------------------Get DefectiveDamaged Details By ID-------------------------------------//
 function GetDefectiveDamagedByID(id) {
@@ -269,29 +309,6 @@ function goBack() {
     clearfields();
 }
 
-function ItemCodeOnChange(curObj) {
-    debugger;
-    try {
-        var ID = curObj.value;
-        var data = { "ID": ID };
-        var ds = {};
-        ds = GetDataFromServer("DefectiveorDamaged/GetItemDescriptionByID/", data);
-        if (ds != '') {
-            ds = JSON.parse(ds);
-        }
-        if (ds.Result == "OK") {
-            $("#Description").val(ds.Records[0].Description);
-            return ds.Records;
-        }
-        if (ds.Result == "ERROR") {
-            notyAlert('error', ds.Message);
-        }
-
-    }
-    catch (e) {
-
-    }
-}
 function TypeOnChange(curObj)
 {
     try
@@ -382,4 +399,33 @@ function DefectiveDamagedValidation() {
     catch (e) {
 
     }
+}
+
+function GetAllItemCode() {
+
+
+    try {
+
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("DefectiveorDamaged/GetAllItemCode/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+
+            _Materials = ds.Records;
+
+
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+
+
+
 }

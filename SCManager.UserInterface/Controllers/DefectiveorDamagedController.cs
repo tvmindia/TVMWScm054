@@ -50,22 +50,6 @@ namespace SCManager.UserInterface.Controllers
                     });
                 }
                 defectiveorDamagedViewModel.TechniciansList = selectListItem;
-
-                //ItemCode Drop down bind
-                List<ItemViewModel> ItemCodeList = Mapper.Map<List<Item>, List<ItemViewModel>>(_iItemBusiness.GetAllItemCode(ua));
-                selectListItem = null;
-                selectListItem = new List<SelectListItem>();
-                foreach (ItemViewModel avm in ItemCodeList)
-                {
-                    selectListItem.Add(new SelectListItem
-                    {
-                        Text = avm.ItemCode,
-                        Value = avm.ID.ToString(),
-                        Selected = false
-                    });
-                }
-                defectiveorDamagedViewModel.ItemCodeList = selectListItem;
-
             }
             catch (Exception ex)
             {
@@ -85,6 +69,17 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion GetAllDefectiveDamaged
 
+        #region GetAllItemCode    
+        [HttpGet]
+        public string GetAllItemCode(ItemDropdownViewModel obj)
+        {
+            UA ua = new UA();
+            List<ItemViewModel> ItemCodeList = Mapper.Map<List<Item>, List<ItemViewModel>>(_iItemBusiness.GetAllItemCode(ua));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemCodeList });
+
+        }
+        #endregion GetAllDefectiveDamaged
+
         #region GetDefectiveDamagedByID
         [HttpGet]
         public string GetDefectiveDamagedByID(string ID)
@@ -96,16 +91,6 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion GetDefectiveDamagedByID
 
-        #region GetItemDescriptionByID
-        [HttpGet]
-        public string GetItemDescriptionByID(string ID)
-        {
-            UA ua = new UA();
-            List<ItemViewModel> defectiveDamagedList = Mapper.Map<List<Item>, List<ItemViewModel>>(_iItemBusiness.GetItemDescriptionByID(ua,ID));
-            return JsonConvert.SerializeObject(new { Result = "OK", Records = defectiveDamagedList });
-
-        }
-        #endregion GetAllDefectiveDamaged
 
         #region InsertUpdateDefectDamaged
         [HttpPost]

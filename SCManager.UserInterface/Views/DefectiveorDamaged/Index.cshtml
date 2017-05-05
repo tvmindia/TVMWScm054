@@ -117,8 +117,10 @@
                                     @Html.LabelFor(model => model.ItemCode, htmlAttributes: new { @class = "control-label " })
                                    </div>
                                      <div class="col-md-5">
-                                        @Html.DropDownListFor(model => model.ItemID, Model.ItemCodeList, "-- Select ItemCode --"  ,new { @class = "form-control", value = -1, style = "padding:4px 12px;", @onchange = "ItemCodeOnChange(this)" })
-                                        @Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })
+                                         @Html.EditorFor(model => model.ItemCode, new { htmlAttributes = new { @class = "form-control",list= "Materials", @onchange = "ItemCodeOnChange(this)" } })
+                                         <datalist id="Materials" onfocus='this.size=10;' onblur='this.size=1;'
+                                                   onchange='this.size=1; this.blur();'></datalist>
+                                        @Html.ValidationMessageFor(model => model.ItemCode, "", new { @class = "text-danger" })
                                     </div>
                                 <div class="col-md-1 mandatory"></div>
                                 </div>
@@ -173,6 +175,7 @@
                     </div>
                     @Html.HiddenFor(model => model.ID, htmlAttributes: new { @class = "control-label col-lg-2", id = "ID", @Value = Guid.Empty })
                     @Html.HiddenFor(model => model.HiddenEmpID, htmlAttributes: new { @class = "control-label col-lg-2", id = "HiddenEmpID", @Value = Guid.Empty })
+                    @Html.HiddenFor(model => model.ItemID, htmlAttributes: new { @class = "control-label col-lg-2", id = "ItemID", @Value = Guid.Empty })
                     @Html.HiddenFor(model => model.HiddenType, htmlAttributes: new { @class = "control-label col-lg-2", id = "HiddenType", @Value = string.Empty })
                                         }
                 </div>
@@ -199,10 +202,10 @@
         </div>
         </div>
     </div>
+
     @section Scripts {
         @Scripts.Render("~/bundles/datatable")
         @Scripts.Render("~/bundles/jqueryunobtrusiveajaxvalidate")
         @Scripts.Render("~/bundles/bootstrapdatepicker")
         @Scripts.Render("~/bundles/DefectDamage")
-       
     }

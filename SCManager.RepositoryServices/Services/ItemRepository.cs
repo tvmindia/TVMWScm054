@@ -306,6 +306,7 @@ namespace SCManager.RepositoryServices.Services
 
                                     {
                                         itemObj.ItemCode = (sdr["ItemCode"].ToString() != "" ? (sdr["ItemCode"].ToString()) : itemObj.ItemCode);
+                                        itemObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : itemObj.Description);
                                         itemObj.ID = (sdr["ID"].ToString() != "" ?Guid.Parse(sdr["ID"].ToString()) : itemObj.ID);
 
                                     };
@@ -325,53 +326,7 @@ namespace SCManager.RepositoryServices.Services
         }
         #endregion GetAllItemCode
 
-        #region GetItemDescriptionByID
-        public List<Item> GetItemDescriptionByID(UA UA,string ID)
-        {
-            List<Item> ItemCodelist = null;
-            try
-            {
-                using (SqlConnection con = _databaseFactory.GetDBConnection())
-                {
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        if (con.State == ConnectionState.Closed)
-                        {
-                            con.Open();
-                        }
-                        cmd.Connection = con;
-                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
-                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value =Guid.Parse(ID);
-                        cmd.CommandText = "[GetItemDescriptionByID]";
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        using (SqlDataReader sdr = cmd.ExecuteReader())
-                        {
-                            if ((sdr != null) && (sdr.HasRows))
-                            {
-                                ItemCodelist = new List<Item>();
-                                while (sdr.Read())
-                                {
-                                    Item itemObj = new Item();
-
-                                    {
-                                        itemObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : itemObj.Description);                                      
-
-                                    };
-
-                                    ItemCodelist.Add(itemObj);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return ItemCodelist;
-        }
-        #endregion GetItemDescriptionByID
+      
         #endregion Methods
     }
 }

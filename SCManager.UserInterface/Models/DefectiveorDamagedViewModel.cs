@@ -22,7 +22,7 @@ namespace SCManager.UserInterface.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
         [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
         public DateTime? ReturnDate { get; set; }
-        public Guid EmpID { get; set; }
+        public Guid? EmpID { get; set; }
         public Guid? HiddenEmpID { get; set; }
         [Display(Name = "Reference No.")]
         public string RefNo { get; set; }

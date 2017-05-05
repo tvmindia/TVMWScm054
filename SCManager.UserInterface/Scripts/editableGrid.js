@@ -138,7 +138,8 @@ function EG_changeData(value, row, column) {
 
 
 //--3-----------combo source binding----------------------------
-function EG_ComboSource(id, values,valueCol,textCol) {
+function EG_ComboSource(id, values, valueCol, textCol) {
+    debugger;
     if (document.getElementById(id) == null || document.getElementById(id) == 'undefined') {
         alert("combo source element is not defined in cshtml");
     }
