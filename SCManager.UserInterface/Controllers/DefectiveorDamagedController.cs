@@ -317,12 +317,12 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save Employee";
+                    ToolboxViewModelObj.savebtn.Title = "Save Defective/Damaged";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete Employee";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete Defective/Damaged";
                     ToolboxViewModelObj.deletebtn.Event = "Delete()";
 
                     ToolboxViewModelObj.returnBtn.Visible = true;
