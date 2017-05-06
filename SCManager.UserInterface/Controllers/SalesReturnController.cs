@@ -11,63 +11,38 @@ using System.Web.Mvc;
 
 namespace SCManager.UserInterface.Controllers
 {
-    public class DefectiveorDamagedController : Controller
+    public class SalesReturnController : Controller
     {
         Const c = new Const();
         #region Constructor_Injection
 
-        IDefectiveDamageBusiness _iDefectiveDamageBusiness;
-        IEmployeesBusiness _iEmployeesBusiness;
+        ISalesReturnBusiness _iSalesReturnBusiness;
         IItemBusiness _iItemBusiness;
 
-        public DefectiveorDamagedController(IDefectiveDamageBusiness iDefectiveDamageBusiness, IEmployeesBusiness iEmployeesBusiness, IItemBusiness iItemBusiness)
+        public SalesReturnController(ISalesReturnBusiness iSalesReturnBusiness, IItemBusiness iItemBusiness)
         {
-            _iDefectiveDamageBusiness = iDefectiveDamageBusiness;
-            _iEmployeesBusiness = iEmployeesBusiness;
+            _iSalesReturnBusiness = iSalesReturnBusiness;
             _iItemBusiness = iItemBusiness;
 
         }
         #endregion Constructor_Injection
-        // GET: DefectiveorDamaged
+
+        // GET: SalesReturn
         public ActionResult Index()
         {
-            DefectiveorDamagedViewModel defectiveorDamagedViewModel = null;
-            try
-            {               
-                defectiveorDamagedViewModel = new DefectiveorDamagedViewModel();
-                UA ua = new UA();
-                List<SelectListItem> selectListItem = new List<SelectListItem>();
-                //Technician Drop down bind
-                List<EmployeesViewModel> TechniciansList = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_iEmployeesBusiness.GetAllTechnicians(ua));
-                TechniciansList = TechniciansList == null ? null : TechniciansList.OrderBy(attset => attset.Name).ToList();
-                foreach (EmployeesViewModel clvm in TechniciansList)
-                {
-                    selectListItem.Add(new SelectListItem
-                    {
-                        Text = clvm.Name,
-                        Value = clvm.ID.ToString(),
-                        Selected = false
-                    });
-                }
-                defectiveorDamagedViewModel.TechniciansList = selectListItem;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return View(defectiveorDamagedViewModel);
+            return View();
         }
 
-        #region GetAllDefectiveDamaged
+        #region GetAllSalesReturn
         [HttpGet]
-        public string GetAllDefectiveDamaged()
+        public string GetAllSalesReturn()
         {
             UA ua = new UA();
-            List<DefectiveorDamagedViewModel> defectiveDamagedList = Mapper.Map<List<DefectiveDamage>, List<DefectiveorDamagedViewModel>>(_iDefectiveDamageBusiness.GetAllDefectiveDamaged(ua));
-            return JsonConvert.SerializeObject(new { Result = "OK", Records = defectiveDamagedList });
+            List<SalesReturnViewModel> salesReturnList = Mapper.Map<List<SalesReturn>, List<SalesReturnViewModel>>(_iSalesReturnBusiness.GetAllSalesReturn(ua));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = salesReturnList });
 
         }
-        #endregion GetAllDefectiveDamaged
+        #endregion GetAllSalesReturn
 
         #region GetAllItemCode    
         [HttpGet]
@@ -80,22 +55,41 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion GetAllDefectiveDamaged
 
-        #region GetDefectiveDamagedByID
+        #region SalesReturnValidation
         [HttpGet]
-        public string GetDefectiveDamagedByID(string ID)
+        public string SalesReturnValidation(string itemID)
         {
-            UA ua = new UA();
-            List<DefectiveorDamagedViewModel> defectiveDamagedList = Mapper.Map<List<DefectiveDamage>, List<DefectiveorDamagedViewModel>>(_iDefectiveDamageBusiness.GetDefectiveDamagedByID(ua,ID));
-            return JsonConvert.SerializeObject(new { Result = "OK", Records = defectiveDamagedList });
+            string status = null;
+           
+            try
+            {
+                if (!string.IsNullOrEmpty(itemID))
+                {
+                    UA ua = new UA();
+
+                    status = _iSalesReturnBusiness.SalesReturnValidation(itemID,ua);
+
+
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message = status });
+                }
+                else
+                {
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message = c.NoItems });
+                }
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+
 
         }
-        #endregion GetDefectiveDamagedByID
+        #endregion SalesReturnValidation
 
-
-        #region InsertUpdateDefectDamaged
+        #region InsertUpdateSalesReturn
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public string InsertUpdateDefectDamaged(DefectiveorDamagedViewModel defectiveorDamagedViewModelObj)
+        public string InsertUpdateSalesReturn(SalesReturnViewModel salesReturnViewModel)
         {
             object result = null;
             if (ModelState.IsValid)
@@ -104,15 +98,15 @@ namespace SCManager.UserInterface.Controllers
                 try
                 {
                     UA ua = new UA();
-                    defectiveorDamagedViewModelObj.logDetails = new LogDetailsViewModel();
+                    salesReturnViewModel.logDetails = new LogDetailsViewModel();
                     //Getting UA
-                    defectiveorDamagedViewModelObj.logDetails.CreatedBy = ua.UserName;
-                    defectiveorDamagedViewModelObj.logDetails.CreatedDate = ua.CurrentDatetime();
-                    defectiveorDamagedViewModelObj.logDetails.UpdatedBy = defectiveorDamagedViewModelObj.logDetails.CreatedBy;
-                    defectiveorDamagedViewModelObj.logDetails.UpdatedDate = defectiveorDamagedViewModelObj.logDetails.CreatedDate;
-                    defectiveorDamagedViewModelObj.SCCode = ua.SCCode;
-                    
-                    result = _iDefectiveDamageBusiness.InsertUpdateDefectiveDamaged(Mapper.Map<DefectiveorDamagedViewModel, DefectiveDamage>(defectiveorDamagedViewModelObj));
+                    salesReturnViewModel.logDetails.CreatedBy = ua.UserName;
+                    salesReturnViewModel.logDetails.CreatedDate = ua.CurrentDatetime();
+                    salesReturnViewModel.logDetails.UpdatedBy = salesReturnViewModel.logDetails.CreatedBy;
+                    salesReturnViewModel.logDetails.UpdatedDate = salesReturnViewModel.logDetails.CreatedDate;
+                    salesReturnViewModel.SCCode = ua.SCCode;
+
+                    result = _iSalesReturnBusiness.InsertUpdateSalesReturn(Mapper.Map<SalesReturnViewModel, SalesReturn>(salesReturnViewModel));
                     return JsonConvert.SerializeObject(new { Result = "OK", Records = result });
                 }
                 catch (Exception ex)
@@ -144,12 +138,23 @@ namespace SCManager.UserInterface.Controllers
             }
 
         }
-        #endregion InsertUpdateDefectDamaged
+        #endregion InsertUpdateSalesReturn
 
-        #region DeleteDefectiveDamaged
+        #region GetSalesReturnByID
+        [HttpGet]
+        public string GetSalesReturnByID(string ID)
+        {
+            UA ua = new UA();
+            List<SalesReturnViewModel> salesReturnList = Mapper.Map<List<SalesReturn>, List<SalesReturnViewModel>>(_iSalesReturnBusiness.GetSalesReturnByID(ua, ID));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = salesReturnList });
+
+        }
+        #endregion GetSalesReturnByID
+
+        #region DeleteSalesReturn
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public string DeleteDefectiveDamaged(string ID)
+        public string DeleteSalesReturn(string ID)
         {
             string status = null;
             string msg = null;
@@ -161,7 +166,7 @@ namespace SCManager.UserInterface.Controllers
                     UA ua = new UA();
                     if (!string.IsNullOrEmpty(ID))
                     {
-                        status = _iDefectiveDamageBusiness.DeleteDefectiveDamaged(ID, ua);
+                        status = _iSalesReturnBusiness.DeleteSalesReturn(ID, ua);
                     }
                     switch (status)
                     {
@@ -188,12 +193,12 @@ namespace SCManager.UserInterface.Controllers
             }
 
         }
-        #endregion DeleteDefectiveDamaged
+        #endregion DeleteSalesReturn
 
-        #region ReturnDefectiveDamaged
+        #region ReturnSalesToCompany
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public string ReturnDefectiveDamaged(DefectiveorDamagedViewModel defectiveorDamagedViewModelObj)
+        public string ReturnSalesToCompany(SalesReturnViewModel salesReturnViewModelObj)
         {
             string status = null;
             string msg = null;
@@ -203,9 +208,9 @@ namespace SCManager.UserInterface.Controllers
                 try
                 {
                     UA ua = new UA();
-                    if ((defectiveorDamagedViewModelObj.ID)!=Guid.Empty)
+                    if ((salesReturnViewModelObj.ID) != Guid.Empty)
                     {
-                        status = _iDefectiveDamageBusiness.ReturnDefectiveDamaged(defectiveorDamagedViewModelObj.ID.ToString(), ua);
+                        status = _iSalesReturnBusiness.ReturnSalesToCompany(salesReturnViewModelObj.ID.ToString(), ua);
                     }
                     switch (status)
                     {
@@ -229,39 +234,7 @@ namespace SCManager.UserInterface.Controllers
             }
 
         }
-        #endregion ReturnDefectiveDamaged
-
-        #region DefectiveDamagedValidation
-        [HttpGet]
-        public string DefectiveDamagedValidation(string itemID, string empID)
-        {
-            string status = null;
-            string msg = null;
-            
-                try
-                {
-                if (!string.IsNullOrEmpty(itemID) && !string.IsNullOrEmpty(empID))
-                {
-                    UA ua = new UA();
-                    
-                        status = _iDefectiveDamageBusiness.DefectiveDamagedValidation(itemID,empID, ua);
-                  
-                 
-                    return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message = status });
-                }
-                else
-                {
-                    return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message = c.NoItems });
-                }
-            }
-            catch (Exception ex)
-                {
-                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
-                }
-           
-
-        }
-        #endregion DefectiveDamagedValidation
+        #endregion ReturnSalesToCompany
 
         #region ButtonStyling
         [HttpGet]
@@ -277,7 +250,7 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.addbtn.Event = "Add();";
 
                     break;
-               
+
                 case "Add":
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
@@ -292,15 +265,15 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Disable = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete Defective/Damaged";
-                    ToolboxViewModelObj.deletebtn.DisableReason = "Not applicable for new Defective/Damaged";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete Sales Return";
+                    ToolboxViewModelObj.deletebtn.DisableReason = "Not applicable for new Sales Return";
                     ToolboxViewModelObj.deletebtn.Event = "Delete();";
 
                     ToolboxViewModelObj.returnBtn.Visible = true;
                     ToolboxViewModelObj.returnBtn.Disable = true;
                     ToolboxViewModelObj.returnBtn.Text = "Return";
                     ToolboxViewModelObj.returnBtn.Title = "Return To Company";
-                    ToolboxViewModelObj.returnBtn.DisableReason = "Not applicable for new Defective/Damaged";
+                    ToolboxViewModelObj.returnBtn.DisableReason = "Not applicable for new Sales Return";
                     ToolboxViewModelObj.returnBtn.Event = "ReturnToCompany();";
 
                     break;
@@ -317,12 +290,12 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save Employee";
+                    ToolboxViewModelObj.savebtn.Title = "Save Sales Return";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete Employee";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete Sales Return";
                     ToolboxViewModelObj.deletebtn.Event = "Delete()";
 
                     ToolboxViewModelObj.returnBtn.Visible = true;

@@ -32,7 +32,7 @@ namespace SCManager.UserInterface.Models
         public Guid ItemID { get; set; }
         public string Description { get; set; }
         [Display(Name = "Quantity")]
-        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Count must be a number")]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Quantity must be a number")]
         public string Qty { get; set; }
         public string Remarks { get; set; }
         public List<SelectListItem> TechniciansList { get; set; }

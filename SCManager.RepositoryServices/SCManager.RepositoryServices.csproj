@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Contracts\IItemRepository.cs" />
     <Compile Include="Contracts\ILocalPurchaseRepository.cs" />
+    <Compile Include="Contracts\ISalesReturnRepository.cs" />
     <Compile Include="Contracts\ISubCategoryRepository.cs" />
     <Compile Include="Contracts\ITechnicianRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Services\Form8TaxInvoiceRepository.cs" />
     <Compile Include="Services\ItemRepository.cs" />
     <Compile Include="Services\LocalPurchaseRepository.cs" />
+    <Compile Include="Services\SalesReturnRepository.cs" />
     <Compile Include="Services\SubCategoryRepository.cs" />
     <Compile Include="Services\TechnicianRepository.cs" />
   </ItemGroup>

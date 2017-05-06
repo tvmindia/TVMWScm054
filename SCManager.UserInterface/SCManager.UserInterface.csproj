@@ -165,6 +165,7 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\LocalPurchaseController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SalesReturnController.cs" />
     <Compile Include="Controllers\TechnicianController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -182,6 +183,7 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\ReorderAlertViewModel.cs" />
+    <Compile Include="Models\SalesReturnViewModel.cs" />
     <Compile Include="Models\TechnicianViewModel.cs" />
     <Compile Include="Models\ToolboxViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -495,6 +497,7 @@
     <Content Include="Scripts\UserJS\Item.js" />
     <Content Include="Scripts\UserJS\LocalPurchase.js" />
     <Content Include="Scripts\UserJS\Login.js" />
+    <Content Include="Scripts\UserJS\SalesReturn.js" />
     <Content Include="Views\Form8TaxInvoice\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -527,6 +530,7 @@
     <Content Include="Views\Form8BRetailInvoice\Index.cshtml" />
     <Content Include="Views\LocalPurchase\Index.cshtml" />
     <Content Include="Views\DefectiveorDamaged\Index.cshtml" />
+    <Content Include="Views\SalesReturn\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
