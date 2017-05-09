@@ -112,6 +112,7 @@
     <Compile Include="DTO\CallandServiceTypes.cs" />
     <Compile Include="DTO\Categories.cs" />
     <Compile Include="DTO\Common.cs" />
+    <Compile Include="DTO\CreditNotes.cs" />
     <Compile Include="DTO\DefectiveDamage.cs" />
     <Compile Include="DTO\Employees.cs" />
     <Compile Include="DTO\Form8.cs" />

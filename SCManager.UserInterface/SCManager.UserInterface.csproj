@@ -156,6 +156,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\CallandServiceTypesController.cs" />
+    <Compile Include="Controllers\CreditNotesController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\DefectiveorDamagedController.cs" />
     <Compile Include="Controllers\DynamicUIController.cs" />
@@ -173,6 +174,7 @@
     </Compile>
     <Compile Include="Models\CallandServiceTypesViewModel.cs" />
     <Compile Include="Models\CommonViewModel.cs" />
+    <Compile Include="Models\CreditNotesViewModel.cs" />
     <Compile Include="Models\DefectiveorDamagedViewModel.cs" />
     <Compile Include="Models\DynamicUIViewModel.cs" />
     <Compile Include="Models\EmployeesViewModel.cs" />
@@ -487,6 +489,7 @@
     <Content Include="Scripts\lightbox.min.js" />
     <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\UserJS\CallandServiceTypes.js" />
+    <Content Include="Scripts\UserJS\CreditNotes.js" />
     <Content Include="Scripts\UserJS\Dashboard.js" />
     <Content Include="Scripts\UserJS\DefectiveDamage.js" />
     <Content Include="Scripts\UserJS\demoGrid.js" />
@@ -531,6 +534,7 @@
     <Content Include="Views\LocalPurchase\Index.cshtml" />
     <Content Include="Views\DefectiveorDamaged\Index.cshtml" />
     <Content Include="Views\SalesReturn\Index.cshtml" />
+    <Content Include="Views\CreditNotes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -77,6 +77,7 @@
                                 @Html.EditorFor(model => model.OpenDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "OpenDate" } })
                                 @Html.ValidationMessageFor(model => model.OpenDate, "", new { @class = "text-danger" })
                             </div>
+                            <div class="col-md-1 mandatory"></div>
                         </div>
 
                         <div class="form-group">
@@ -99,6 +100,7 @@
                                                onchange='this.size=1; this.blur();'></datalist>
                                     @Html.ValidationMessageFor(model => model.ItemCode, "", new { @class = "text-danger" })
                                 </div>
+                            <div class="col-md-1 mandatory"></div>
                             </div>
 
                         <div class="form-group">
@@ -109,6 +111,7 @@
                                     @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
                                 </div>
+                            <div class="col-md-1 mandatory"></div>
                             </div>
                         </div>
                     <div class="col-md-6">
