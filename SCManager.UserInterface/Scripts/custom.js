@@ -186,11 +186,14 @@ function isNumber(e) {
 }
 
 
-function notyConfirm(msg, functionIfSuccess) {
-
+function notyConfirm(msg, functionIfSuccess,msg2) {
+    var m = 'You will not be able to recover this action!'
+    if (msg2 != undefined) {
+        m = msg2 + '  ' + m;
+    }
     swal({
         title: msg,
-        text: "You will not be able to recover this action!",
+        text: m,
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
