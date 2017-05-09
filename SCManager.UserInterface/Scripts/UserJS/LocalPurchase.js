@@ -20,7 +20,7 @@ $(document).ready(function () {
                { "data": "InvoiceNo" },
                { "data": "InvoiceDateFormatted" },
                { "data": "VendorName", "defaultContent": "<i>-</i>" },
-               { "data": "Subtotal", "defaultContent": "<i>-</i>" },
+               { "data": "Subtotal", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "VATAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },           
                { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
