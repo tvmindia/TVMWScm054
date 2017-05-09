@@ -1,0 +1,229 @@
+﻿@model SCManager.UserInterface.Models.OtherIncomeViewModel
+
+@{
+    ViewBag.Title = "OtherIncome";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+@section styles {
+    @Styles.Render("~/Content/DataTables/css/datatable")
+    @Styles.Render("~/Content/bootstrapdatepicker")
+}
+<div class="col-md-12">
+    <div class="SCHeader col-md-6">
+        Credit Notes
+
+    </div>
+    <div class="col-md-6">
+        <div class="" id="btnPatchOtherIncomeSettab" style="min-height:25px">
+
+            @{
+                var data = new { ActionType = "Add" };
+                @Html.Action("ChangeButtonStyle", "OtherIncome", data);
+            }
+        </div>
+    </div>
+</div>
+
+<div id="exTab3" class="container SCtabContainer">
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a id="AddTab" onclick="Add(1)" href="#OtherIncomeEntry" data-toggle="tab" style="width:235px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>OtherIncome Entry</a>
+        </li>
+        <li>
+            <a id="OtherIncomeTab" onclick="List()" href="#OtherIncomeList" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>OtherIncome List</a>
+        </li>
+
+    </ul>
+    <div class="tab-content clearfix">
+        <div class="tab-pane fade in active" id="OtherIncomeEntry">
+            <div class="col-md-12">&nbsp;</div>
+            <div class="col-md-12">
+                @using (Ajax.BeginForm("InsertUpdateOtherIncome", "OtherIncome", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OtherIncomeSaveSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "formIns_Up" }))
+            {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="inputForm col-md-12">
+                            &nbsp;
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.IncomeTypeCode, htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                    <div class="col-md-5">
+                                        @Html.DropDownListFor(model => model.IncomeTypeCode, Model.IncomeTypeList, "-- Select Income Type --", new { @class = "form-control", value = -1, style = "padding:4px 12px;" })                                       
+                                        @Html.ValidationMessageFor(model => model.IncomeTypeCode, "", new { @class = "text-danger" })
+                                    </div>
+                                <div class="col-md-1 mandatory"></div>
+                                </div>
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.RefNo, htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                    <div class="col-md-5">
+                                        @Html.EditorFor(model => model.RefNo, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.RefNo, "", new { @class = "text-danger" })
+                                    </div>
+                                <div class="col-md-1 mandatory"></div>
+                                </div>
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.RefDate, htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                    <div class="col-md-5">
+                                        @Html.EditorFor(model => model.RefDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "RefDate" } })
+                                        @Html.ValidationMessageFor(model => model.RefDate, "", new { @class = "text-danger" })
+                                    </div>
+                                <div class="col-md-1 mandatory"></div>
+                                </div>
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label " })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            </div>
+                        <div class="col-md-6">
+                         
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                    <div class="col-md-5">
+                                         @{
+                                             List<SelectListItem> listOtherIncomePaymentMode = new List<SelectListItem>();
+                                             listOtherIncomePaymentMode.Add(new SelectListItem
+                                             { Text = "Cash", Value = "Cash"
+                                             });
+                                             listOtherIncomePaymentMode.Add(new SelectListItem
+                                             { Text = "Cheque", Value = "Cheque"
+                                             });
+                                             listOtherIncomePaymentMode.Add(new SelectListItem
+                                             {
+                                                 Text = "Online", Value = "Online"
+                                             });
+                                        }
+                                        @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control", value = -1, style = "padding:4px 12px;" })
+                                      
+                                        @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                                    </div>
+                                    <div class="col-md-5">
+                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", style = "height:100px;" } })
+                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" hidden="hidden">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input id="btnInsertUpdateOtherIncome" type="submit" value="Create" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                }
+                </div>
+            </div>
+        <div class="tab-pane fade " id="OtherIncomeList">
+            <div class="col-md-12">&nbsp;</div>
+            <div class="col-md-12">
+
+
+                <div class="col-lg-1">
+
+
+                    @Html.CheckBoxFor(model => model.showAllYN, new { @class = "css-checkbox", @id = "showAllYNCheckbox", @onclick = "showAllYNCheckedOrNot(this)" })
+                    @Html.ValidationMessageFor(model => model.showAllYN, "", new { @class = "text-danger" })
+
+
+
+
+                </div>
+                @Html.LabelFor(model => model.showAllYN, htmlAttributes: new { @class = "control-label" })
+
+            </div>
+            <div class="col-md-12">&nbsp;</div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <!----------------6-------------------->
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.fromDate, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.fromDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "fromDate" } })
+                            @Html.ValidationMessageFor(model => model.fromDate, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <!----------------6-------------------->
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.toDate, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.toDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "toDate" } })
+                            @Html.ValidationMessageFor(model => model.toDate, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-12">&nbsp;</div>
+            <div class="col-md-12">
+                <table id="tblOtherIncomeList" class="table table-striped table-bordered table-hover" cellspacing="0" width="1245">
+                    <thead>
+                        <tr class="text-center">
+                            <th style="display:none;">ID</th>
+                            <th>Income Type</th>
+                            <th>Date</th>
+                            <th>Reference No.</th>
+                            <th>Amount</th>
+                            <th>Description</th>
+                            <th>...</th>
+
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div id="OtherIncomeDelete" hidden="hidden">
+            @using (Ajax.BeginForm("DeleteOtherIncome", "OtherIncome", new AjaxOptions { HttpMethod = "POST", OnSuccess = "DeleteSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    @Html.HiddenFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-4", Value = "0", id = "deleteId" })
+                    <input id="btnFormDelete" type="submit" value="Delete" class="btn btn-default" />
+                </div>
+            }
+        </div>
+        </div>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/datatable")
+        @Scripts.Render("~/bundles/jqueryunobtrusiveajaxvalidate")
+        @Scripts.Render("~/bundles/bootstrapdatepicker")
+        @Scripts.Render("~/bundles/OtherIncome")
+    }

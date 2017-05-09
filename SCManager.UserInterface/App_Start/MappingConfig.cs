@@ -33,6 +33,7 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<DefectiveorDamagedViewModel, DefectiveDamage>().ReverseMap();
                 config.CreateMap<SalesReturnViewModel, SalesReturn>().ReverseMap();
                 config.CreateMap<CreditNotesViewModel, CreditNotes>().ReverseMap();
+                config.CreateMap<OtherIncomeViewModel, OtherIncome>().ReverseMap();
             });
         }
     }

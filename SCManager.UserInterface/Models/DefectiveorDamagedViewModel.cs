@@ -9,13 +9,13 @@ namespace SCManager.UserInterface.Models
 {
     public class DefectiveorDamagedViewModel
     {
-        public Guid ID { get; set; }
-        public Guid ReturnID { get; set; }
+        public Guid? ID { get; set; }
+        public Guid? ReturnID { get; set; }
         public string SCCode { get; set; }
-        [Required(ErrorMessage = "Please select type")]
+        //[Required(ErrorMessage = "Please select type")]
         public string Type { get; set; }
         public string HiddenType { get; set; }
-        [Required(ErrorMessage = "Please select technician")]
+      
         public string Technician { get; set; }
         [Required(ErrorMessage = "Please select open date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
@@ -29,11 +29,11 @@ namespace SCManager.UserInterface.Models
         public Guid? HiddenEmpID { get; set; }
         [Display(Name = "Reference No.")]
         public string RefNo { get; set; }
-        public bool ReturnStatusYN { get; set; }
+        public bool? ReturnStatusYN { get; set; }
         [Required(ErrorMessage = "Please select item code")]
         [Display(Name = "Item Code")]
         public string ItemCode { get; set; }
-        public Guid ItemID { get; set; }
+        public Guid? ItemID { get; set; }
         public string Description { get; set; }
         [Required(ErrorMessage = "Please select quantity")]
         [Display(Name = "Quantity")]

@@ -364,9 +364,38 @@ function GetAllDefectiveDamaged() {
 //------------------------------- Defective/Damaged Save-----------------------------//
 function save() {
     debugger;
-    var qty = DefectiveDamagedValidation();
-    debugger;
-    notySaveConfirm('Total quantities=' + qty + '\nAre you sure to Save?', 'SaveClick()');
+    if (($("#EmpID").val() != "") && ($("#Type").val() != "") && ($("#ItemID").val() != "") && ($("#Qty").val() != "") && ($("#OpenDate").val() != ""))
+    {
+        var qty = DefectiveDamagedValidation();
+        var enteredQty = $("#Qty").val();
+        debugger;
+        if (qty == "0")
+        {
+            notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
+        
+        }
+        else
+        {
+            enteredQty = parseInt(enteredQty);
+            qty = parseInt(qty);
+            if (qty > enteredQty)
+            {
+                var remainingQty = qty - enteredQty;
+
+                notySaveConfirm("The technician's stock for selected item will reduce to "+remainingQty+" .\n Do you want to continue ? ", 'SaveClick()');
+            }
+            else
+            {
+                notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
+            }
+            
+        }
+        
+    }
+    else
+    {
+        $("#btnInsertUpdateDefectiveDamaged").trigger('click');
+    }
    
 }
 function isNumberKey(evt) {
@@ -384,7 +413,6 @@ function SaveClick()
 }
 
 function DefectiveDamagedValidation() {
-    debugger;
     try {
         var ItemID = $("#ItemID").val();
         var EmpID = $("#EmpID").val();

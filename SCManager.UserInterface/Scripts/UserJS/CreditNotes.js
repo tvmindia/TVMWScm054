@@ -53,7 +53,7 @@ function List() {
         DateClear();
 
     } catch (x) {
-        //alert(x);
+        alert(x);
     }
 
 }
