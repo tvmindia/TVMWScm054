@@ -391,7 +391,7 @@ function save() {
             }
             else
             {
-                notyAlert('error', "Selected item does not have enough stock. Damage entry cannot be done!");
+                notyAlert('error', "Office is not having enough stock of the selected item. Damage entry cannot be done!");
             }
                 
             
@@ -408,8 +408,15 @@ function save() {
                 if (hdfQty != enteredQty)
                 {
                     var totalQty = qty + hdfQty - enteredQty;
-
-                    notySaveConfirm("Do you want to continue ?", 'SaveClick()', "The technician's stock for selected item will reduce to " + totalQty + ".");
+                    if (type == "Defective")
+                    {
+                        notySaveConfirm("Do you want to continue ?", 'SaveClick()', "The technician's stock for selected item will reduce to " + totalQty + ".");
+                    }
+                    else
+                    {
+                        notySaveConfirm("Do you want to continue ?", 'SaveClick()', "The Office's stock for selected item will reduce to " + totalQty + ".");
+                    }
+                    
                 }
                 else
                 {
@@ -427,7 +434,7 @@ function save() {
                     notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
                 }
                 else {
-                    notyAlert('error', "Selected item does not have enough stock. Damage entry cannot be done!");
+                    notyAlert('error', "Office is not having enough stock of the selected item. Damage entry cannot be done!");
                 }
                               
             }

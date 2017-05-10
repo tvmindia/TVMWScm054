@@ -328,7 +328,10 @@ namespace SCManager.RepositoryServices.Services
                         cmd.CommandText = "[GetItemStockByLocation]";
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@ItemID", SqlDbType.UniqueIdentifier).Value = Guid.Parse(itemID);
-                        cmd.Parameters.Add("@TechID", SqlDbType.UniqueIdentifier).Value = Guid.Parse(empID);
+                        if(!string.IsNullOrEmpty(empID))
+                        {
+                            cmd.Parameters.Add("@TechID", SqlDbType.UniqueIdentifier).Value = Guid.Parse(empID);
+                        }                       
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = ua.SCCode;
                         if(type== "Defective")
                         {

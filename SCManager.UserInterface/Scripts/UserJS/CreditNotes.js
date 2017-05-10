@@ -34,6 +34,8 @@ $(document).ready(function () {
             Edit(this);
         });
 
+        FillDates();
+
         $('#fromDate').change(function () {
             FromDateOnChange();
         });
@@ -45,6 +47,27 @@ $(document).ready(function () {
         notyAlert('error', e.message);
     }
 });
+
+function FillDates()
+{
+    debugger;
+    var m_names = new Array("Jan", "Feb", "Mar",
+ "Apr", "May", "Jun", "Jul", "Aug", "Sep",
+ "Oct", "Nov", "Dec");
+
+    var d = new Date();
+    var curr_date = d.getDate();
+    var curr_month = d.getMonth();
+    var curr_year = d.getFullYear();
+    var toDate = curr_date + "-" + m_names[curr_month]
+    + "-" + curr_year;
+    var $datepicker = $('#toDate');
+    $datepicker.datepicker('setDate', new Date(toDate));
+    var today = new Date()
+    var priorDate = new Date();
+    priorDate.setDate(priorDate.getDate() - 5);
+    priorDate=d.toLocaleString()
+}
 
 //--------------------button actions ----------------------
 function List() {

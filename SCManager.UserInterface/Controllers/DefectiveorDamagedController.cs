@@ -244,7 +244,7 @@ namespace SCManager.UserInterface.Controllers
             
                 try
                 {
-                if (!string.IsNullOrEmpty(itemID) && !string.IsNullOrEmpty(empID))
+                if (!string.IsNullOrEmpty(itemID) )
                 {
                     UA ua = new UA();
                     
