@@ -373,8 +373,8 @@ function GetAllDefectiveDamaged() {
 function save() {
     debugger;
     var type = $("#Type").val();
-    
-    if (($("#EmpID").val() != "") && ($("#Type").val() != "") && ($("#ItemID").val() != "") && ($("#Qty").val() != "") && ($("#OpenDate").val() != ""))
+   
+    if ( ($("#Type").val() != "") && ($("#ItemID").val() != "") && ($("#Qty").val() != "") && ($("#OpenDate").val() != ""))
     {
         var qty = DefectiveDamagedValidation();
         var enteredQty = $("#Qty").val();
@@ -383,15 +383,19 @@ function save() {
             hdfQty = "0";
         }
         debugger;
-        if (qty == "0")
+        if (qty == "0" ||qty=="No items")
         {           
-            if (type == "Defective") {
+            if (type == "Defective")
+            {
                 notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
             }
-            else {
-
+            else
+            {
+                notyAlert('error', "Selected item does not have enough stock. Damage entry cannot be done!");
             }
-        
+                
+            
+            
         }
         else
         {
@@ -399,7 +403,7 @@ function save() {
             qty = parseInt(qty);
             hdfQty = parseInt(hdfQty);
            
-            if (qty > enteredQty && type == "Defective")
+            if (qty > enteredQty)
             {
                 if (hdfQty != enteredQty)
                 {
@@ -418,14 +422,14 @@ function save() {
             }
             else
             {
+               
                 if (type == "Defective") {
                     notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
                 }
-                else
-                {
-                    SaveClick();
+                else {
+                    notyAlert('error', "Selected item does not have enough stock. Damage entry cannot be done!");
                 }
-              
+                              
             }
             
         }
