@@ -77,6 +77,7 @@ function FillDates()
     + "-" + p_year;
     var $datepicker = $('#fromDate');
     $datepicker.datepicker('setDate', new Date(fromDate));
+    FromDateOnChange();
 }
 
 //--------------------button actions ----------------------
@@ -85,6 +86,8 @@ function List() {
 
         ChangeButtonPatchView('CreditNotes', 'btnPatchCreditNotesSettab', 'List');
         DateClear();
+        FillDates()
+        BindAllCreditNotes()
 
     } catch (x) {
         alert(x);
@@ -322,6 +325,7 @@ function BindAllCreditNotes() {
     try {
         debugger;
         DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(false)).draw(false);
+       
     }
     catch (e) {
         notyAlert('error', e.message);
