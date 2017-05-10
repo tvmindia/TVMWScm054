@@ -204,6 +204,7 @@ function clearfields() {
     $("#ItemID").val("");
     $("#Description").val("");
     $("#Qty").val("")
+    $("#HiddenQty").val("");
     $("#Remarks").val("")
     var $datepicker = $('#OpenDate');
     $datepicker.datepicker('setDate', null);
@@ -240,6 +241,7 @@ function fillDefectiveDamaged(ID) {
     $("#ItemID").val(thisItem[0].ItemID)
     $("#Description").val(thisItem[0].Description)
     $("#Qty").val(thisItem[0].Qty)
+    $("#HiddenQty").val(thisItem[0].Qty)
     $("#Remarks").val(thisItem[0].Remarks)
     $("#deleteId").val(thisItem[0].ID);
     $("#returnId").val(thisItem[0].ID);
@@ -368,6 +370,10 @@ function save() {
     {
         var qty = DefectiveDamagedValidation();
         var enteredQty = $("#Qty").val();
+        var hdfQty = $("#HiddenQty").val();
+        if (hdfQty == "") {
+            hdfQty = "0";
+        }
         debugger;
         if (qty == "0")
         {
@@ -378,11 +384,23 @@ function save() {
         {
             enteredQty = parseInt(enteredQty);
             qty = parseInt(qty);
+            hdfQty = parseInt(hdfQty);
+           
             if (qty > enteredQty)
             {
-                var remainingQty = qty - enteredQty;
+                if (hdfQty != enteredQty)
+                {
+                    var totalQty = qty + hdfQty - enteredQty;
+                    notySaveConfirm("The technician's stock for selected item will reduce to " + totalQty + "", 'SaveClick()', "Do you want to continue ?");
+                }
+                else
+                {
+                    SaveClick();
+                    //var remainingQty = qty - enteredQty;
 
-                notySaveConfirm("The technician's stock for selected item will reduce to "+remainingQty+" .\n Do you want to continue ? ", 'SaveClick()');
+                    //notySaveConfirm("The technician's stock for selected item will reduce to " + remainingQty + " .\n Do you want to continue ? ", 'SaveClick()');
+                }
+               
             }
             else
             {
@@ -414,9 +432,11 @@ function SaveClick()
 
 function DefectiveDamagedValidation() {
     try {
+        debugger;
         var ItemID = $("#ItemID").val();
         var EmpID = $("#EmpID").val();
-        var data = { "ItemID": ItemID, "EmpID": EmpID };
+        var type = $("#Type").val();
+        var data = { "ItemID": ItemID, "EmpID": EmpID,"type":type };
         var ds = {};
         ds = GetDataFromServer("DefectiveorDamaged/DefectiveDamagedValidation/", data);
         if (ds != '') {

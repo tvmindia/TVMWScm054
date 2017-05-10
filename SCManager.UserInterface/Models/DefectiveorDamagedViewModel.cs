@@ -39,6 +39,7 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Quantity")]
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Quantity must be a number")]
         public string Qty { get; set; }
+        public string HiddenQty { get; set; }
         public string Remarks { get; set; }
         public List<SelectListItem> TechniciansList { get; set; }
         public List<SelectListItem> ItemCodeList { get; set; }

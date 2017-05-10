@@ -310,7 +310,7 @@ namespace SCManager.RepositoryServices.Services
         #endregion ReturnDefectiveDamaged
 
         #region DefectiveDamagedValidation
-        public string DefectiveDamagedValidation(string itemID,string empID, UA ua)
+        public string DefectiveDamagedValidation(string itemID,string empID, string type, UA ua)
         {
             
             int result ;
@@ -330,7 +330,14 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@ItemID", SqlDbType.UniqueIdentifier).Value = Guid.Parse(itemID);
                         cmd.Parameters.Add("@TechID", SqlDbType.UniqueIdentifier).Value = Guid.Parse(empID);
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = ua.SCCode;
-                        cmd.Parameters.Add("@LocType", SqlDbType.NVarChar, 5).Value = "TECH";
+                        if(type== "Defective")
+                        {
+                            cmd.Parameters.Add("@LocType", SqlDbType.NVarChar, 5).Value = "TECH";
+                        }
+                        else
+                        {
+                            cmd.Parameters.Add("@LocType", SqlDbType.NVarChar, 5).Value = "OFFC";
+                        }
                                               
                         result=int.Parse( cmd.ExecuteScalar().ToString());
                     }

@@ -140,7 +140,7 @@
                                     @Html.LabelFor(model => model.RefNo, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.RefNo, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumberKey(event)" } })
+                                    @Html.EditorFor(model => model.RefNo, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.RefNo, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label " })
                                     </div>
                                     <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" , style = "height:70px;" , @readonly = "readonly" } })
+                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 3, @readonly = "readonly" } })
                                         @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -162,7 +162,7 @@
                                     @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label " })
                                    </div>
                                      <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" , style = "height:100px;" } })
+                                        @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 3 } })
                                         @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -177,6 +177,7 @@
                     @Html.HiddenFor(model => model.HiddenEmpID, htmlAttributes: new { @class = "control-label col-lg-2", id = "HiddenEmpID", @Value = Guid.Empty })
                     @Html.HiddenFor(model => model.ItemID, htmlAttributes: new { @class = "control-label col-lg-2", id = "ItemID", @Value = Guid.Empty })
                     @Html.HiddenFor(model => model.HiddenType, htmlAttributes: new { @class = "control-label col-lg-2", id = "HiddenType", @Value = string.Empty })
+                    @Html.HiddenFor(model => model.HiddenQty, htmlAttributes: new { @class = "control-label col-lg-2", id = "HiddenQty", @Value = string.Empty })
                                         }
                 </div>
             </div>
@@ -201,6 +202,7 @@
             }
         </div>
         </div>
+  
     </div>
 
     @section Scripts {

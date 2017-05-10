@@ -83,12 +83,12 @@ namespace SCManager.BusinessService.Services
             }
             return status;
         }
-        public string DefectiveDamagedValidation(string itemID, string empID, UA ua)
+        public string DefectiveDamagedValidation(string itemID, string empID, string type, UA ua)
         {
             string status = null;
             try
             {
-                status = _iDefectiveDamageRepository.DefectiveDamagedValidation(itemID, empID, ua);
+                status = _iDefectiveDamageRepository.DefectiveDamagedValidation(itemID, empID,type, ua);
             }
             catch (Exception ex)
             {

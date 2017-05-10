@@ -197,8 +197,7 @@ namespace SCManager.UserInterface.Controllers
         {
             string status = null;
             string msg = null;
-            if (ModelState.IsValid)
-            {
+            
 
                 try
                 {
@@ -222,18 +221,14 @@ namespace SCManager.UserInterface.Controllers
                 {
                     return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
                 }
-            }
-            else
-            {
-                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "Please Check the values" });
-            }
+           
 
         }
         #endregion ReturnDefectiveDamaged
 
         #region DefectiveDamagedValidation
         [HttpGet]
-        public string DefectiveDamagedValidation(string itemID, string empID)
+        public string DefectiveDamagedValidation(string itemID, string empID,string type)
         {
             string status = null;
             string msg = null;
@@ -244,7 +239,7 @@ namespace SCManager.UserInterface.Controllers
                 {
                     UA ua = new UA();
                     
-                        status = _iDefectiveDamageBusiness.DefectiveDamagedValidation(itemID,empID, ua);
+                        status = _iDefectiveDamageBusiness.DefectiveDamagedValidation(itemID,empID,type, ua);
                   
                  
                     return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message = status });

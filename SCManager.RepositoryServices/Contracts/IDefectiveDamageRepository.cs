@@ -15,6 +15,6 @@ namespace SCManager.RepositoryServices.Contracts
         List<DefectiveDamage> GetDefectiveDamagedByID(UA UA, string ID);
         string DeleteDefectiveDamaged(string ID, UA ua);
         string ReturnDefectiveDamaged(string ID, UA ua);
-        string DefectiveDamagedValidation(string itemID, string empID, UA ua);
+        string DefectiveDamagedValidation(string itemID, string empID, string type, UA ua);
     }
 }

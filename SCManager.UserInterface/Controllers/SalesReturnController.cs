@@ -202,8 +202,7 @@ namespace SCManager.UserInterface.Controllers
         {
             string status = null;
             string msg = null;
-            if (ModelState.IsValid)
-            {
+            
 
                 try
                 {
@@ -227,11 +226,7 @@ namespace SCManager.UserInterface.Controllers
                 {
                     return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
                 }
-            }
-            else
-            {
-                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "Please Check the values" });
-            }
+            
 
         }
         #endregion ReturnSalesToCompany
