@@ -337,6 +337,7 @@ function CreditNotesSaveSuccess(data, status) {
             else {
                 fillCreditNotes($("#ID").val());
             }
+            FillDates();
             BindAllCreditNotes();
             notyAlert('success', JsonResult.Records.Message);
             break;
