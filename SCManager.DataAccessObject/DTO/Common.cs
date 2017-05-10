@@ -39,6 +39,7 @@ namespace SCManager.DataAccessObject.DTO
             ConstMessage.Add(new ConstMessage("Invoice No already exist!", "IF8B1", "ERROR"));
             ConstMessage.Add(new ConstMessage("Invoice No already exist!", "IF81", "ERROR"));
             ConstMessage.Add(new ConstMessage("Items from this invoice already used,Form8 Cannot be deleted!", "DF8B1", "ERROR"));
+            ConstMessage.Add(new ConstMessage("Transfer item stock from Technician before deleting!", "DE1", "ERROR"));
             //
         }
 
