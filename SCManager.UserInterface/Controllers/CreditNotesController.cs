@@ -195,8 +195,10 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.deletebtn.Event = "Delete();";
 
                     ToolboxViewModelObj.addbtn.Visible = true;
+                    ToolboxViewModelObj.addbtn.Disable = true;
                     ToolboxViewModelObj.addbtn.Text = "New";
                     ToolboxViewModelObj.addbtn.Title = "Add New";
+                    ToolboxViewModelObj.addbtn.DisableReason = "Not applicable for new CreditNotes";
                     ToolboxViewModelObj.addbtn.Event = "Add();";
 
                     ToolboxViewModelObj.backbtn.Visible = true;
