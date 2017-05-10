@@ -48,5 +48,10 @@ namespace SCManager.BusinessService.Services
 
 
         }
+
+        public List<StockValueSummary> GetStockValueSummary(UA UA) {
+
+            return _dynamicUIRepository.GetStockValueSummary(UA);
+        }
     }
 }

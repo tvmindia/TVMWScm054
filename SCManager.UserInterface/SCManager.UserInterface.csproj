@@ -188,6 +188,7 @@
     <Compile Include="Models\OtherIncomeViewModel.cs" />
     <Compile Include="Models\ReorderAlertViewModel.cs" />
     <Compile Include="Models\SalesReturnViewModel.cs" />
+    <Compile Include="Models\StockValueSummaryViewModel.cs" />
     <Compile Include="Models\TechnicianViewModel.cs" />
     <Compile Include="Models\ToolboxViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

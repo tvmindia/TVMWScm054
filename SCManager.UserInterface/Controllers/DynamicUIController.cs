@@ -53,5 +53,24 @@ namespace SCManager.UserInterface.Controllers
             return View();
         }
 
+
+
+
+        [HttpGet]
+        public string GetStockValueSummary(StockValueSummary obj)
+        {
+            try
+            {
+                //   System.Threading.Thread.Sleep(5000);
+                UA ua = new UA();
+                List<StockValueSummary> Result = _dynamicUIBusiness.GetStockValueSummary(ua);                
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = Result });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+
     }
 }
