@@ -52,6 +52,8 @@ $(document).ready(function () {
     }
 });
 
+
+
 //---------------------------------------Edit DefectiveDamaged--------------------------------------------------//
 function Edit(currentObj) {
     //Tab Change on edit click
