@@ -42,13 +42,13 @@
                         <tr class="text-center">
                             <th style="display:none;">ID</th>
                             <th>Type</th>
-                            <th>Date</th>
+                            <th style="width:70px !important;">Date</th>
                             <th>Reference No.</th>
                             <th>Code</th>
-                            <th>Description</th>
-                            <th>Quantity</th>
-                            <th>Returned To Company</th>
-                            <th>Remark</th>
+                            <th style="width:300px !important;">Description</th>
+                            <th style="width:20px !important;">Quantity</th>
+                            <th style="width:40px !important;">Returned To Company</th>
+                            <th style="width:300px !important;">Remark</th>
                             <th>...</th>
 
                         </tr>
@@ -161,9 +161,10 @@
                                 <div class="col-md-3">
                                     @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label " })
                                    </div>
+
                                      <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 3 } })
-                                        @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 4, @id = "Remarks" } })
+                                        @*@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })*@
                                     </div>
                                 </div>
                         </div>

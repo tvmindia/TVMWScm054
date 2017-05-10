@@ -106,9 +106,46 @@ function EG_ComboSource(id, values, valueCol, textCol, textDesc) {
 //------------------------------- SalesReturn Save-----------------------------//
 function save() {
     debugger;
-    var qty = SalesReturnValidation();
-    debugger;
-    notySaveConfirm('Total quantities=' + qty + '\nAre you sure to Save?', 'SaveClick()');
+    if (($('#OpenDate').val() != "") && ($("#ItemID").val() != "") && ($("#Qty").val() != ""))
+    {
+        var qty = SalesReturnValidation();
+        debugger;
+        var enteredQty = $("#Qty").val();
+        var hdfQty = $("#HiddenQty").val();
+        if (hdfQty == "") {
+            hdfQty = "0";
+        }
+        if (qty == "0") {
+            notyAlert('error', "Selected Item does not have enough stock. This entry cannot be done!");
+
+        }
+        else
+        {
+            enteredQty = parseInt(enteredQty);
+            qty = parseInt(qty);
+            hdfQty = parseInt(hdfQty);
+            if (qty > enteredQty) {
+                if (hdfQty != enteredQty) {
+                    var totalQty = qty + hdfQty - enteredQty;
+                    notySaveConfirm("Do you want to continue ?", 'SaveClick()', "The stock for selected item will reduce to " + totalQty + ".");
+                }
+                else {
+                    SaveClick();
+                    
+                }
+
+            }
+            else {
+                notyAlert('error', "Selected Item does not have enough stock. Entry cannot be done!");
+            }
+        }
+       
+    }
+    else
+    {
+        $("#btnInsertUpdateSalesReturn").trigger('click');
+    }
+   
 
 }
 
@@ -203,6 +240,7 @@ function fillSalesReturn(ID) {
     $("#ItemID").val(thisItem[0].ItemID)
     $("#Description").val(thisItem[0].Description)
     $("#Qty").val(thisItem[0].Qty)
+    $("#HiddenQty").val(thisItem[0].Qty)
     $("#Remarks").val(thisItem[0].Remarks)
     $("#deleteId").val(thisItem[0].ID);
     $("#returnId").val(thisItem[0].ID);
@@ -271,6 +309,7 @@ function clearfields() {
     $("#Remarks").val("")
     $("#deleteId").val("0")
     $("#returnId").val("0");
+    $("#HiddenQty").val("");
     var $datepicker = $('#OpenDate');
     $datepicker.datepicker('setDate', null);
     $("#RefNo").prop('disabled', false);

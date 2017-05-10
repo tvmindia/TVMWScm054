@@ -22,13 +22,16 @@ namespace SCManager.UserInterface.Models
         [Required(ErrorMessage = "Please enter Quantity")]
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Quantity must be a number")]
         public int? Qty { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }
         public string ReturnStatusYN { get; set; }
         public DateTime? ReturnDate { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Required(ErrorMessage = "Please Select Item Code")]
         [Display(Name = "Item Code")]
         public string ItemCode { get; set; }
+        public string HiddenQty { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
         public String OpenDateFormatted { get; set; }
     }

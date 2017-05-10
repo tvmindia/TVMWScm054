@@ -366,6 +366,8 @@ function GetAllDefectiveDamaged() {
 //------------------------------- Defective/Damaged Save-----------------------------//
 function save() {
     debugger;
+    var type = $("#Type").val();
+    
     if (($("#EmpID").val() != "") && ($("#Type").val() != "") && ($("#ItemID").val() != "") && ($("#Qty").val() != "") && ($("#OpenDate").val() != ""))
     {
         var qty = DefectiveDamagedValidation();
@@ -376,8 +378,13 @@ function save() {
         }
         debugger;
         if (qty == "0")
-        {
-            notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
+        {           
+            if (type == "Defective") {
+                notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
+            }
+            else {
+
+            }
         
         }
         else
@@ -386,11 +393,12 @@ function save() {
             qty = parseInt(qty);
             hdfQty = parseInt(hdfQty);
            
-            if (qty > enteredQty)
+            if (qty > enteredQty && type == "Defective")
             {
                 if (hdfQty != enteredQty)
                 {
                     var totalQty = qty + hdfQty - enteredQty;
+
                     notySaveConfirm("Do you want to continue ?", 'SaveClick()', "The technician's stock for selected item will reduce to " + totalQty + ".");
                 }
                 else
@@ -404,7 +412,14 @@ function save() {
             }
             else
             {
-                notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
+                if (type == "Defective") {
+                    notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
+                }
+                else
+                {
+                    SaveClick();
+                }
+              
             }
             
         }

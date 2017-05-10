@@ -23,6 +23,7 @@ namespace SCManager.UserInterface.Models
         public float Amount { get; set; }
         [Display(Name = "Mode Of Payment")]
         public string PaymentMode { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Display(Name = "From Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]

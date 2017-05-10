@@ -19,6 +19,7 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Date")]
         public DateTime? Date { get; set; }
         public float Amount { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Display(Name = "From Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]

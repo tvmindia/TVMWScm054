@@ -98,6 +98,15 @@ namespace SCManager.UserInterface.Controllers
         public string InsertUpdateDefectDamaged(DefectiveorDamagedViewModel defectiveorDamagedViewModelObj)
         {
             object result = null;
+            if(defectiveorDamagedViewModelObj.ID!=Guid.Empty)
+            {
+                ModelState.Remove("Type");
+                ModelState.Remove("EmpID");
+            }
+            if(defectiveorDamagedViewModelObj.Type== "Damaged")
+            {
+                ModelState.Remove("EmpID");
+            }
             if (ModelState.IsValid)
             {
 
