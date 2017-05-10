@@ -477,7 +477,7 @@ function DefectiveDamagedValidation() {
         return ds.Message;
     }
     catch (e) {
-
+   
     }
 }
 
