@@ -391,7 +391,7 @@ function save() {
                 if (hdfQty != enteredQty)
                 {
                     var totalQty = qty + hdfQty - enteredQty;
-                    notySaveConfirm("The technician's stock for selected item will reduce to " + totalQty + "", 'SaveClick()', "Do you want to continue ?");
+                    notySaveConfirm("Do you want to continue ?", 'SaveClick()', "The technician's stock for selected item will reduce to " + totalQty + ".");
                 }
                 else
                 {
