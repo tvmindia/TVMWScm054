@@ -254,6 +254,27 @@ function () {
 
 }
 
+function notyReturnConfirm(msg, functionIfSuccess, msg2) {
+    var m = 'You will not be able to recover this action!'
+    if (msg2 != undefined) {
+        m = msg2 + '  ' + m;
+    }
+    swal({
+        title: msg,
+        text: m,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, Return it!",
+        closeOnConfirm: false
+    },
+function () {
+    //swal("Deleted!", "Your imaginary file has been deleted.", "success");
+    eval(functionIfSuccess);
+});
+
+}
+
 function Logout() {
     window.location = appAddress;
 }

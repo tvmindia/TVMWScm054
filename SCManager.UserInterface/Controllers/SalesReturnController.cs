@@ -300,6 +300,10 @@ namespace SCManager.UserInterface.Controllers
 
                     break;
                 case "Return":
+                    ToolboxViewModelObj.backbtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Text = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back to list";
+                    ToolboxViewModelObj.backbtn.Event = "goBack();";
                     break;
                 default:
                     return Content("Nochange");

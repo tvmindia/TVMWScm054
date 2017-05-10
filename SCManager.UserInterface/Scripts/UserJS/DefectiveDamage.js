@@ -102,11 +102,16 @@ function ReturnToCompany() {
     debugger;
     var ReturnID = $("#ID").val();
     if (ReturnID != EmptyGuid) {
-        $("#btnFormReturn").click();
+        notyReturnConfirm('Are you sure to Return?', 'ReturnDefectiveDamaged()');
+       
     }
     else {
         notyAlert('error', 'Error');
     }
+}
+function ReturnDefectiveDamaged()
+{
+    $("#btnFormReturn").click();
 }
 function ReturnSuccess(data, status) {
     var i = JSON.parse(data)
