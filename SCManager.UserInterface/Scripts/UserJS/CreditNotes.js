@@ -66,17 +66,17 @@ function FillDates()
     var $datepicker = $('#toDate');
     $datepicker.datepicker('setDate', new Date(toDate));
     var today = new Date()
-    //var pd = new Date();
-    //var priorDate=priorDate.setDate(pd.getDate() - 30);
-    //priorDate = priorDate.toLocaleString()
-    //priorDate = priorDate.split(' ')[0];
-    //var p_month = priorDate.split('/')[0];
-    //var p_date = priorDate.split('/')[1];
-    //var p_year = priorDate.split('/')[2];
-    //var fromDate = p_date + "-" + m_names[p_month]
-    //+ "-" + p_year;
-    //var $datepicker = $('#fromDate');
-    //$datepicker.datepicker('setDate', new Date(fromDate));
+    var pd = new Date();
+   pd.setDate(pd.getDate() - 30);
+   var  priorDate = pd.toLocaleString()
+    priorDate = priorDate.split(' ')[0];
+    var p_month = parseInt(priorDate.split('/')[0]) - 1;
+    var p_date = priorDate.split('/')[1];
+    var p_year = priorDate.split('/')[2];
+    var fromDate = p_date + "-" + m_names[p_month]
+    + "-" + p_year;
+    var $datepicker = $('#fromDate');
+    $datepicker.datepicker('setDate', new Date(fromDate));
 }
 
 //--------------------button actions ----------------------

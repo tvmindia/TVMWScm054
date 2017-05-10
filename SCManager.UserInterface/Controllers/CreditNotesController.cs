@@ -194,7 +194,12 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.deletebtn.DisableReason = "Not applicable for new CreditNotes";
                     ToolboxViewModelObj.deletebtn.Event = "Delete();";
 
-                   
+                    ToolboxViewModelObj.backbtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Text = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back to list";
+                    ToolboxViewModelObj.backbtn.Event = "goBack();";
+
+
                     break;
                 case "Edit":
                     ToolboxViewModelObj.backbtn.Visible = true;
