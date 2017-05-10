@@ -28,7 +28,8 @@ $(document).ready(function () {
             columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
               
                 { className: "text-right", "targets": [5] },
-                { className: "text-center", "targets": [1, 2, 3, 4,6, 7, 8] },
+                { className: "text-center", "targets": [1, 2, 3, 6, 8] },
+                 { className: "text-left", "targets": [4,7] },
                   {
                       "render": function (data, type, row) {
                           return (data == "True" ? "Returned" + '<i class="fa fa-check" style="color:green;" aria-hidden="true"></i>' : "Not Returned");

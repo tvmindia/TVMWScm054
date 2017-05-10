@@ -28,15 +28,16 @@
 <div id="exTab3" class="container SCtabContainer">
     <ul class="nav nav-pills">
         <li class="active">
+            <a id="CreditNotesTab" onclick="List()" href="#CreditNotesList" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>CreditNotes List</a>
+        </li> 
+        <li >
             <a id="AddTab" onclick="Add(1)" href="#CreditNotesEntry" data-toggle="tab" style="width:235px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>CreditNotes Entry</a>
         </li>
-        <li>
-            <a id="CreditNotesTab" onclick="List()" href="#CreditNotesList" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>CreditNotes List</a>
-        </li>     
+            
 
     </ul>
     <div class="tab-content clearfix">
-        <div class="tab-pane fade in active" id="CreditNotesEntry">
+        <div class="tab-pane fade" id="CreditNotesEntry">
             <div class="col-md-12">&nbsp;</div>
             <div class="col-md-12">
                 @using (Ajax.BeginForm("InsertUpdateCreditNotes", "CreditNotes", new AjaxOptions { HttpMethod = "POST", OnSuccess = "CreditNotesSaveSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "formIns_Up" }))
@@ -78,7 +79,7 @@
                                     @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label" })
                                    </div>
                                      <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumberKey(event)" } })
                                         @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -110,7 +111,7 @@
     <div>
         </div>
         </div>
-        <div class="tab-pane fade " id="CreditNotesList">
+        <div class="tab-pane fade in active " id="CreditNotesList">
             <div class="col-md-12">&nbsp;</div>
             <div class="col-md-12">
               
@@ -130,7 +131,7 @@
             </div>
             <div class="col-md-12">&nbsp;</div>
             <div class="col-md-12">
-                <div class="col-md-6">
+                <div class="col-md-5">
                 
                     <div class="form-group">
                         <!----------------6-------------------->
@@ -145,7 +146,7 @@
 
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
 
                     <div class="form-group">
                         <!----------------6-------------------->
@@ -160,6 +161,7 @@
 
                     </div>
                 </div>
+                <div class="col-md-2"></div>
                
             </div>
             <div class="col-md-12">&nbsp;</div>

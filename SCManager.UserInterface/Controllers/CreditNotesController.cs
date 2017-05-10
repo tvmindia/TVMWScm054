@@ -113,6 +113,10 @@ namespace SCManager.UserInterface.Controllers
         public string InsertUpdateCreditNotes(CreditNotesViewModel creditNotesViewModelViewModelObj)
         {
             object result = null;
+            if (creditNotesViewModelViewModelObj.ID != Guid.Empty)
+            {
+                ModelState.Remove("CreditNoteNo");                
+            }
             if (ModelState.IsValid)
             {
 

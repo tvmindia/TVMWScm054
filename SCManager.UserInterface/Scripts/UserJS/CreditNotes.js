@@ -24,7 +24,8 @@ $(document).ready(function () {
            ],
            columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
                { className: "text-right", "targets": [3] },
-               { className: "text-center", "targets": [1, 2,4,5] },
+               { className: "text-center", "targets": [1, 2, 5] },
+               { className: "text-left", "targets": [4] },
                            ]
        });
 
@@ -57,7 +58,14 @@ function List() {
     }
 
 }
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    if (charCode != 46 && charCode > 31
+      && (charCode < 48 || charCode > 57))
+        return false;
 
+    return true;
+}
 function DateClear()
 {
     $('#fromDate').val("");

@@ -10,7 +10,7 @@ namespace SCManager.UserInterface.Models
     {
         public string SCCode { get; set; }
         public Guid? ID { get; set; }
-        //[Required(ErrorMessage = "Please enter CreditNote No.")]
+        [Required(ErrorMessage = "Please enter CreditNote No.")]
         [Display(Name = "Credit Note No.")]
         public string CreditNoteNo { get; set; }
         [Required(ErrorMessage = "Please Select Date")]
