@@ -86,7 +86,7 @@ function GetStockValueSummary() {
     }
     if (ds.Result == "OK") {
         if (ds.Records != null) {
-            $('#TotalStockValue').html(ds.Records[0].totalValue);
+            $('#TotalStockValue').html(ds.Records[0].totalValueConverted);
         }
         return ds.Records;
     }

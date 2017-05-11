@@ -11,5 +11,6 @@ namespace SCManager.DataAccessObject.DTO
         public string color;
         public string label;
         public int totalValue;
+        public string totalValueConverted;
     }
 }

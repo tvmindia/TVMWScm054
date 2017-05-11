@@ -11,13 +11,15 @@ namespace SCManager.BusinessService.Services
     public class DynamicUIBusiness: IDynamicUIBusiness
     {
         private IDynamicUIRepository _dynamicUIRepository;
+        private ICommonBusiness _commonBusiness;
         /// <summary>
         /// Constructor Injection:-Getting IDynamicUIBusiness implementing object
         /// </summary>
         /// <param name="dynamicUIBusiness"></param>
-        public DynamicUIBusiness(IDynamicUIRepository dynamicUIRespository)
+        public DynamicUIBusiness(IDynamicUIRepository dynamicUIRespository, ICommonBusiness commonBusiness)
         {
             _dynamicUIRepository = dynamicUIRespository;
+            _commonBusiness = commonBusiness;
         }
 
         public List<Menu> GetAllMenues()
@@ -73,6 +75,9 @@ namespace SCManager.BusinessService.Services
                     if (r > 250) {
                         r = 0;
                     }
+
+
+                    s.totalValueConverted = _commonBusiness.ConvertCurrency(s.totalValue);
                 }
 
             }

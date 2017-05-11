@@ -5,6 +5,7 @@ using System.Web;
 using SCManager.BusinessService.Contracts;
 using SCManager.DataAccessObject.DTO;
 using System.Reflection;
+using System.Globalization;
 
 namespace SCManager.BusinessService.Services
 {
@@ -161,7 +162,21 @@ namespace SCManager.BusinessService.Services
             }
 
         }
-       
+
         //----------------------------------------------------------------------------
+
+        public string ConvertCurrency(decimal value) {
+            string result = value.ToString();
+
+            string fare = result;
+            decimal parsed = decimal.Parse(fare, CultureInfo.InvariantCulture);
+            CultureInfo hindi = new CultureInfo("hi-IN");
+            result = string.Format(hindi, "{0:C0}", parsed);
+
+
+
+            return result;  
+
+        }
     }
 }
