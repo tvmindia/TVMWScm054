@@ -442,5 +442,7 @@ color: #e32;
 }
 .chart-legend ul{
     list-style: none;
-
+    font-size:10px;
+    margin-left:20px;
+    margin-right:-20px;
 }
