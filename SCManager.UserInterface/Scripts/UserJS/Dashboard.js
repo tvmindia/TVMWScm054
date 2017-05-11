@@ -28,30 +28,30 @@
 
 
 //---------------------------------doughnut  stock value summary ------------------------
-    var dataDonut = [
-{
-    value: 38,
-    color: "rgba(151,250,205,0.6)",
-    label: "TL Spares"
-},
-{
-    value: 27,
-    color: "rgba(151,220,205,0.6)",
-    label: "FL Spares"
-},
-{
-    value: 10,
-    color: "rgba(151,180,205,0.6)",
-    label: "Additives"
-},
-{
-    value:25,
-    color: "rgba(151,160,205,0.6)",
-    label: "Accessories"
-},
+//    var dataDonut = [
+//{
+//    value: 38,
+//    color: "rgba(151,250,205,0.6)",
+//    label: "TL Spares"
+//},
+//{
+//    value: 27,
+//    color: "rgba(151,220,205,0.6)",
+//    label: "FL Spares"
+//},
+//{
+//    value: 10,
+//    color: "rgba(151,180,205,0.6)",
+//    label: "Additives"
+//},
+//{
+//    value:25,
+//    color: "rgba(151,160,205,0.6)",
+//    label: "Accessories"
+//},
   
-      ]
-
+//      ]
+    var dataDonut = GetStockValueSummary();
       var options1 =
       {
           animation: true,
@@ -74,3 +74,25 @@
      // $('.techitem').fadeIn('slow');
 
 });
+
+
+function GetStockValueSummary() {
+    var ds = {};
+    var data = { "value": "" };
+    ds = GetDataFromServer("DynamicUI/GetStockValueSummary/", data);
+   
+    if (ds != '') {
+        ds = JSON.parse(ds);
+    }
+    if (ds.Result == "OK") {
+        if (ds.Records != null) {
+            $('#TotalStockValue').html(ds.Records[0].totalValue);
+        }
+        return ds.Records;
+    }
+    if (ds.Result == "ERROR") {
+        return null;
+    }
+
+
+}

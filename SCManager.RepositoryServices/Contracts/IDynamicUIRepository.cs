@@ -11,5 +11,6 @@ namespace SCManager.RepositoryServices.Contracts
     {
         List<Menu> GetAllMenues();
         List<ReorderAlert> GetReorderAlertITems(UA UA);
+        List<StockValueSummary> GetStockValueSummary(UA UA);
     }
 }

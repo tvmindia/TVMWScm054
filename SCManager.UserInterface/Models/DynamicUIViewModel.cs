@@ -9,5 +9,8 @@ namespace SCManager.UserInterface.Models
     {
         public List<MenuViewModel> MenuViewModelList { get; set; }
         public List<ReorderAlertViewModel> ReorderAlertViewModelList { get; set; }
+        public List<StockValueSummaryViewModel> StockValueSummaryViewModelList { get; set; }
     }
+
+   
 }

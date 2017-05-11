@@ -57,7 +57,7 @@ namespace SCManager.RepositoryServices.Services
                                     }
                                     menuList.Add(menuObj);
                                 }
-                            }//if
+                            } 
                         }
                     }
                 }
@@ -118,6 +118,59 @@ namespace SCManager.RepositoryServices.Services
             }
 
             return ReorderAlertList;
+        }
+
+        public List<StockValueSummary> GetStockValueSummary(UA UA) {
+           List<StockValueSummary> ResultList = null;
+
+            try
+            {
+
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[GetStockValueSummary]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("SCCode", UA.SCCode);
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                ResultList = new List<StockValueSummary>();
+
+
+                                while (sdr.Read())
+                                {
+                                    StockValueSummary Result = new StockValueSummary();
+                                    {
+
+                                        Result.value = int.Parse(sdr["value"].ToString());
+                                        Result.color = sdr["color"].ToString();
+                                        Result.label = sdr["label"].ToString();
+                                        Result.totalValue = int.Parse(sdr["totalValue"].ToString());
+
+                                    }
+                                    ResultList.Add(Result);
+                                }
+                            } 
+                        }
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return ResultList;
         }
 
     }
