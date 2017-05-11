@@ -12,6 +12,7 @@ namespace SCManager.UserInterface.Models
         public string SCCode { get; set; }
         public Guid ID { get; set; }
         public string EntryNo { get; set; }
+        [Required(ErrorMessage = "Please Select Income Type")]
         [Display(Name = "Income Type")]
         public string IncomeTypeCode { get; set; }
         [Display(Name = "Reference No.")]

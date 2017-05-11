@@ -251,12 +251,14 @@ function showAllYNCheckedOrNot(i) {
 
     if (i.checked == true) {
         DataTables.OtherIncomeTable.clear().rows.add(GetAllOtherIncome(true)).draw(false);
+        $('#fromDate').val("");
+        $('#toDate').val("");
     }
     else {
         DataTables.OtherIncomeTable.clear().rows.add(GetAllOtherIncome(false)).draw(false);
+        FillDates();
     }
-    $('#fromDate').val("");
-    $('#toDate').val("");
+    
 }
 //-----------------------------------------Reset Validation Messages--------------------------------------//
 function ResetForm() {
@@ -321,7 +323,7 @@ function List() {
         ChangeButtonPatchView('OtherIncome', 'btnPatchOtherIncomeSettab', 'List');
         DateClear();
         FillDates()
-        BindAllOtherIncome()
+        //BindAllOtherIncome()
     } catch (x) {
         alert(x);
     }
