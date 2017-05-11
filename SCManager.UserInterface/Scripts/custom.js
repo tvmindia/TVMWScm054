@@ -186,7 +186,7 @@ function isNumber(e) {
 }
 
 
-function notyConfirm(msg, functionIfSuccess,msg2) {
+function notyConfirm(msg, functionIfSuccess,msg2,btnText) {
     var m = 'You will not be able to recover this action!'
     if (msg2 != undefined) {
         m = msg2 + '  ' + m;
@@ -197,7 +197,7 @@ function notyConfirm(msg, functionIfSuccess,msg2) {
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: btnText,
         closeOnConfirm: false
     },
 function () {
@@ -233,47 +233,6 @@ function () {
 
 }
 
-function notySaveConfirm(msg, functionIfSuccess, msg2) {
-    var m = 'You will not be able to recover this action!'
-    if (msg2 != undefined) {
-        m = msg2 + '  ' + m;
-    }
-    swal({
-        title: msg,
-        text: m,
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, Save it!",
-        closeOnConfirm: false
-    },
-function () {
-    //swal("Deleted!", "Your imaginary file has been deleted.", "success");
-    eval(functionIfSuccess);
-});
-
-}
-
-function notyReturnConfirm(msg, functionIfSuccess, msg2) {
-    var m = 'You will not be able to recover this action!'
-    if (msg2 != undefined) {
-        m = msg2 + '  ' + m;
-    }
-    swal({
-        title: msg,
-        text: m,
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, Return it!",
-        closeOnConfirm: false
-    },
-function () {
-    //swal("Deleted!", "Your imaginary file has been deleted.", "success");
-    eval(functionIfSuccess);
-});
-
-}
 
 function Logout() {
     window.location = appAddress;

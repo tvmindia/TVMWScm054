@@ -198,7 +198,7 @@ function GetOtherIncomeByID(id) {
 }
 function Delete() {
 
-    notyConfirm('Are you sure to delete?', 'DeleteOtherIncome()');
+    notyConfirm('Are you sure to delete?', 'DeleteOtherIncome()', '', "Yes, delete it!");
 
 }
 //---------------------------------------Delete-------------------------------------------------------//

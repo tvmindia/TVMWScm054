@@ -201,7 +201,7 @@ function ResetForm() {
 }
 function Delete() {
 
-    notyConfirm('Are you sure to delete?', 'DeleteEmployee()');
+    notyConfirm('Are you sure to delete?', 'DeleteEmployee()', '', "Yes, delete it!");
 
 }
 //---------------------------------------Delete-------------------------------------------------------//
@@ -237,12 +237,4 @@ function DeleteSuccess(data, status) {
         default:
             break;
     }
-}
-function isNumberKey(evt) {
-    var charCode = (evt.which) ? evt.which : event.keyCode;
-    if (charCode != 46 && charCode > 31
-      && (charCode < 48 || charCode > 57))
-        return false;
-
-    return true;
 }

@@ -94,14 +94,7 @@ function List() {
     }
 
 }
-function isNumberKey(evt) {
-    var charCode = (evt.which) ? evt.which : event.keyCode;
-    if (charCode != 46 && charCode > 31
-      && (charCode < 48 || charCode > 57))
-        return false;
 
-    return true;
-}
 function DateClear()
 {
     $('#fromDate').val("");
@@ -138,7 +131,7 @@ function Edit(currentObj) {
 }
 function Delete() {
 
-    notyConfirm('Are you sure to delete?', 'DeleteCreditNote()');
+    notyConfirm('Are you sure to delete?', 'DeleteCreditNote()','' ,"Yes, delete it!");
 
 }
 //---------------------------------------Delete-------------------------------------------------------//

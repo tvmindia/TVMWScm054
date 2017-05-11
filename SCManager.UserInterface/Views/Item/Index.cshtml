@@ -47,9 +47,9 @@
                             <th>Description</th>
                             <th>Category</th>
                             <th>Sub Category</th>
-                            <th>Stock Qty (₹)</th>
+                            <th>Stock Qty </th>
                             <th>UOM</th>
-                            <th>Reorder Qty (₹)</th>
+                            <th>Reorder Qty</th>
                             <th>Product Commission (₹)</th>
                             <th>Remarks</th>
                             <th>...</th>
@@ -151,7 +151,7 @@
                                     @Html.LabelFor(model => model.ReorderQty, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.ReorderQty, new { htmlAttributes = new { @class = "form-control" , onkeypress = "return isNumberKey(event)" , style = "text-align:right;" } })
+                                    @Html.EditorFor(model => model.ReorderQty, new { htmlAttributes = new { @class = "form-control" , onkeypress = "return isNumber(event)", style = "text-align:right;" } })
                                     @*@Html.ValidationMessageFor(model => model.ReorderQty, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
@@ -161,7 +161,7 @@
                                     @Html.LabelFor(model => model.ProductCommission, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.ProductCommission, new { htmlAttributes = new { @class = "form-control" , onkeypress = "return isNumberKey(event)", style = "text-align:right;" } })
+                                    @Html.EditorFor(model => model.ProductCommission, new { htmlAttributes = new { @class = "form-control" , onkeypress = "return isNumber(event)", style = "text-align:right;" } })
                                     @*@Html.ValidationMessageFor(model => model.ProductCommission, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                                     @Html.LabelFor(model => model.SellingRate, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.SellingRate, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumberKey(event)", style = "text-align:right;" } })
+                                    @Html.EditorFor(model => model.SellingRate, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)", style = "text-align:right;" } })
                                     @*@Html.ValidationMessageFor(model => model.ReorderQty, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
