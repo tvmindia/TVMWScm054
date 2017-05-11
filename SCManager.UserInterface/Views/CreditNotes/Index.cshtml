@@ -28,10 +28,10 @@
 <div id="exTab3" class="container SCtabContainer">
     <ul class="nav nav-pills">
         <li class="active">
-            <a id="CreditNotesTab" onclick="List()" href="#CreditNotesList" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>CreditNotes List</a>
+            <a id="CreditNotesTab" onclick="List()" href="#CreditNotesList" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>Credit Notes List</a>
         </li> 
         <li >
-            <a id="AddTab" onclick="Add(1)" href="#CreditNotesEntry" data-toggle="tab" style="width:235px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>CreditNotes Entry</a>
+            <a id="AddTab" onclick="Add(1)" href="#CreditNotesEntry" data-toggle="tab" style="width:235px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Credit Notes Entry</a>
         </li>
             
 
@@ -84,18 +84,51 @@
                                     </div>
                                 </div>
 
-                          
-                            </div>
-                        <div class="col-md-6">
                             <div class="form-group">
                                 <div class="col-md-3">
                                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows = 4 } })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                          
+                            </div>
+                        <div class="col-md-6 mastersep">
+                            <div class="col-md-12">
+                                <div class="masterinfo">
+                                    <br />
+                                    <br />
+
+                                    <div class="masterinfoImg">
+                                         
+                                        <img src="~/Content/images/purse-with-bills.png" />
                                     </div>
-                                    <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" , rows = 4 } })
-                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                    <br />
+                                    <div class="masterinfoHead">
+                                        Credit Note
+                                    </div>
+                                    <br />
+                                    <div class="masterinfoDet">
+                                        Credit Note is document sent by a IFB  , stating that a certain amount has been credited to the SC .
+                                        A credit note is issued in various situations like againt a defective retuen or against a sales return or  to correct a mistake, 
+                                        such as when (1) an invoice amount is overstated, 
+                                        (2) correct discount rate is not applied, (3) goods damage within guaranty period, or 
+                                        (4) they do not meet the SC specifications and are returned.
+
+                                       
                                     </div>
                                 </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-6">
+                       
 
                             <div class="form-group" hidden="hidden">
                                 <div class="col-md-offset-2 col-md-10">
