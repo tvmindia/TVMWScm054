@@ -131,7 +131,7 @@ function Edit(currentObj) {
 }
 function Delete() {
 
-    notyConfirm('Are you sure to delete?', 'DeleteCreditNote()');
+    notyConfirm('Are you sure to delete?', 'DeleteCreditNote()','' ,"Yes, delete it!");
 
 }
 //---------------------------------------Delete-------------------------------------------------------//

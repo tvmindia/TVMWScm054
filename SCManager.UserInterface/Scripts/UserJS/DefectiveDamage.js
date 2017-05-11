@@ -84,7 +84,7 @@ function ReturnItemCode(itemID)
 }
 function Delete() {
 
-    notyConfirm('Are you sure to delete?', 'DeleteDefectiveDamaged()');
+    notyConfirm('Are you sure to delete?', 'DeleteDefectiveDamaged()', '', "Yes, delete it!");
 
 }
 //---------------------------------------Delete-------------------------------------------------------//
@@ -102,7 +102,7 @@ function ReturnToCompany() {
     debugger;
     var ReturnID = $("#ID").val();
     if (ReturnID != EmptyGuid) {
-        notyReturnConfirm('Are you sure to Return?', 'ReturnDefectiveDamaged()');
+        notyConfirm('Are you sure to Return?', 'ReturnDefectiveDamaged()', '', "Yes, Return it!");
        
     }
     else {
@@ -410,11 +410,11 @@ function save() {
                     var totalQty = qty + hdfQty - enteredQty;
                     if (type == "Defective")
                     {
-                        notySaveConfirm("Do you want to continue ?", 'SaveClick()', "The technician's stock for selected item will reduce to " + totalQty + ".");
+                        notyConfirm("Do you want to continue ?", 'SaveClick()', "The technician's stock for selected item will reduce to " + totalQty + ".", "Yes, Save it!");
                     }
                     else
                     {
-                        notySaveConfirm("Do you want to continue ?", 'SaveClick()', "The Office's stock for selected item will reduce to " + totalQty + ".");
+                        notyConfirm("Do you want to continue ?", 'SaveClick()', "The Office's stock for selected item will reduce to " + totalQty + ".", "Yes, Save it!");
                     }
                     
                 }

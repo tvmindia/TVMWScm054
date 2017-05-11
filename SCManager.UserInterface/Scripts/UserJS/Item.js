@@ -196,7 +196,7 @@ function ClearSubCategories()
 
 function Delete() {
 
-    notyConfirm('Are you sure to delete?', 'DeleteItem()');
+    notyConfirm('Are you sure to delete?', 'DeleteItem()', '', "Yes, delete it!");
 
 }
 //---------------------------------------Delete-------------------------------------------------------//

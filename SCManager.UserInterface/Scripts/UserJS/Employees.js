@@ -201,7 +201,7 @@ function ResetForm() {
 }
 function Delete() {
 
-    notyConfirm('Are you sure to delete?', 'DeleteEmployee()');
+    notyConfirm('Are you sure to delete?', 'DeleteEmployee()', '', "Yes, delete it!");
 
 }
 //---------------------------------------Delete-------------------------------------------------------//
