@@ -50,8 +50,35 @@ namespace SCManager.BusinessService.Services
         }
 
         public List<StockValueSummary> GetStockValueSummary(UA UA) {
+            List<StockValueSummary> result = new List<StockValueSummary>();
+            result= _dynamicUIRepository.GetStockValueSummary(UA);
+            if (result != null) {
+                int r = 100;
+                int g = 130;
+                int b = 160;
+                string color = "rgba($r$,$g$,$b$,0.6)";
+                foreach (StockValueSummary s in result)
+                {
+                    s.color = color.Replace("$r$", r.ToString()).Replace("$g$", g.ToString()).Replace("$b$", b.ToString());
+                    b = b + 50;
+                    g = g + 30;
+                    r = r + 10;
+                    if (b > 250) {
+                        b = 0;                        
+                    }
+                    if (g > 250) {
+                        g = 0;                      
+                        
+                    }
+                    if (r > 250) {
+                        r = 0;
+                    }
+                }
 
-            return _dynamicUIRepository.GetStockValueSummary(UA);
+            }
+
+
+            return result;
         }
     }
 }
