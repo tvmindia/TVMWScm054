@@ -13,5 +13,8 @@ namespace SCManager.RepositoryServices.Contracts
         object InsertOtherIncome(OtherIncome otherIncomeObj);
         object UpdateOtherIncome(OtherIncome otherIncomeObj);
         List<OtherIncome> GetAllIncomeType();
+        List<OtherIncome> GetOtherIncomeByID(UA UA, string ID);
+        string DeleteOtherIncome(string ID, UA ua);
+        List<OtherIncome> GetOtherIncomeBetweenDates(UA UA, string fromDate, string toDate);
     }
 }

@@ -39,5 +39,6 @@ namespace SCManager.UserInterface.Models
         public List<SelectListItem> IncomeTypeList { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
         public string IncomeTypeDescription { get; set; }
+        public String RefDateFormatted { get; set; }
     }
 }
