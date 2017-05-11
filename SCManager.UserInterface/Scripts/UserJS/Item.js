@@ -18,9 +18,9 @@ $(document).ready(function () {
                { "data": "Description", "defaultContent": "<i>-</i>" },
                { "data": "Category", "defaultContent": "<i>-</i>" },
                { "data": "Subcategory", "defaultContent": "<i>-</i>" },
-               { "data": "Stock", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "Stock","defaultContent": "<i>-</i>" },
                { "data": "UOM", "defaultContent": "<i>-</i>" },
-               { "data": "ReorderQty", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "ReorderQty","defaultContent": "<i>-</i>" },
                { "data": "ProductCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
@@ -162,10 +162,10 @@ function fillItems(ID) {
     $("#ID").val(thisItem[0].ID);
     $("#ItemCode").val(thisItem[0].ItemCode);
     $("#Description").val(thisItem[0].Description)
-    $("#Stock").val(roundoff(thisItem[0].Stock))
+    $("#Stock").val(thisItem[0].Stock)
     $("#UOM").val(thisItem[0].UOM)
     //Dropdown
-    $("#ReorderQty").val(roundoff(thisItem[0].ReorderQty))
+    $("#ReorderQty").val(thisItem[0].ReorderQty)
     $("#ProductCommission").val(roundoff(thisItem[0].ProductCommission))
     $("#SellingRate").val(roundoff(thisItem[0].SellingRate))
     $("#Remarks").val(thisItem[0].Remarks)
