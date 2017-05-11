@@ -54,21 +54,22 @@
     var dataDonut = GetStockValueSummary();
       var options1 =
       {
+          
           animation: true,
           tooltipTemplate: "<%= label%>-<%= value%>%",
           tooltipFillColor: "rgba(0,0,0,0)",
-          tooltipFontColor: "rgba(1,1,1,.7)",
+          tooltipFontColor: "rgba(1,1,1,1)",
           tooltipCaretSize: 0,
-          tooltipFontStyle: "thin",
-
-          tooltipEvents: [],
-          onAnimationComplete: function () { this.showTooltip(this.segments, true); }
+          tooltipFontStyle: "thick",
+         
+         // tooltipEvents: [],
+         // onAnimationComplete: function () { this.showTooltip(this.segments, true); }
       }
 
       var ctx1 = document.getElementById("myChartPie").getContext("2d");
       var myPieChart = new Chart(ctx1).Doughnut(dataDonut, options1);
     
-  
+      $('#Legend1').html('<br/>'+myPieChart.generateLegend());
 
       $('.rlist').fadeIn('slow');
      // $('.techitem').fadeIn('slow');
