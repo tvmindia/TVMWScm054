@@ -58,7 +58,7 @@ namespace SCManager.RepositoryServices.Services
                                         _SalesReturnlistObj.OpenDate = (sdr["OpenDate"].ToString() != "" ? DateTime.Parse(sdr["OpenDate"].ToString()) : _SalesReturnlistObj.OpenDate);
                                         _SalesReturnlistObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : _SalesReturnlistObj.RefNo);
                                         _SalesReturnlistObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _SalesReturnlistObj.Description);
-                                        _SalesReturnlistObj.Qty = (sdr["Qty"].ToString() != "" ? int.Parse(sdr["Qty"].ToString()) : _SalesReturnlistObj.Qty);
+                                        _SalesReturnlistObj.Qty = (sdr["Qty"].ToString() != "" ? (sdr["Qty"].ToString()) : _SalesReturnlistObj.Qty);
                                         _SalesReturnlistObj.ReturnStatusYN = (sdr["ReturnStatusYN"].ToString() != "" ? bool.Parse(sdr["ReturnStatusYN"].ToString()) : _SalesReturnlistObj.ReturnStatusYN);
                                         _SalesReturnlistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _SalesReturnlistObj.Remarks);
                                     }
@@ -249,7 +249,7 @@ namespace SCManager.RepositoryServices.Services
                                         _SalesReturnlistObj.OpenDate = (sdr["OpenDate"].ToString() != "" ? DateTime.Parse(sdr["OpenDate"].ToString()) : _SalesReturnlistObj.OpenDate);
                                         _SalesReturnlistObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : _SalesReturnlistObj.RefNo);
                                         _SalesReturnlistObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _SalesReturnlistObj.Description);
-                                        _SalesReturnlistObj.Qty = (sdr["Qty"].ToString() != "" ? int.Parse(sdr["Qty"].ToString()) : _SalesReturnlistObj.Qty);
+                                        _SalesReturnlistObj.Qty = (sdr["Qty"].ToString() != "" ? (sdr["Qty"].ToString()) : _SalesReturnlistObj.Qty);
                                         _SalesReturnlistObj.ReturnStatusYN = (sdr["ReturnStatusYN"].ToString() != "" ? bool.Parse(sdr["ReturnStatusYN"].ToString()) : _SalesReturnlistObj.ReturnStatusYN);
                                         _SalesReturnlistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _SalesReturnlistObj.Remarks);
                                     }

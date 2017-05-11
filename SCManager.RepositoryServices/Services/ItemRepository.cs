@@ -62,7 +62,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ItemObj.Subcategory = (sdr["Subcategory"].ToString() != "" ? (sdr["Subcategory"].ToString()) : _ItemObj.Subcategory);
                                         _ItemObj.Stock = (sdr["StockQty"].ToString() != "" ? int.Parse(sdr["StockQty"].ToString()) : _ItemObj.Stock);
                                         _ItemObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _ItemObj.UOM);
-                                        _ItemObj.ReorderQty = (sdr["ReorderQty"].ToString() != "" ? int.Parse(sdr["ReorderQty"].ToString()) : _ItemObj.ReorderQty);
+                                        _ItemObj.ReorderQty = (sdr["ReorderQty"].ToString() != "" ? (sdr["ReorderQty"].ToString()) : _ItemObj.ReorderQty);
                                         _ItemObj.ProductCommission = (sdr["ProductCommission"].ToString() != "" ? float.Parse(sdr["ProductCommission"].ToString()) : _ItemObj.ProductCommission);
                                         _ItemObj.Remarks = (sdr["Remarks"].ToString() != "" ?(sdr["Remarks"].ToString()) : _ItemObj.Remarks);
                                     }
@@ -119,7 +119,8 @@ namespace SCManager.RepositoryServices.Services
                                         _ItemObj.Subcategory = (sdr["Subcategory"].ToString() != "" ? (sdr["Subcategory"].ToString()) : _ItemObj.Subcategory);
                                         _ItemObj.Stock = (sdr["StockQty"].ToString() != "" ? int.Parse(sdr["StockQty"].ToString()) : _ItemObj.Stock);
                                         _ItemObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _ItemObj.UOM);
-                                        _ItemObj.ReorderQty = (sdr["ReorderQty"].ToString() != "" ? int.Parse(sdr["ReorderQty"].ToString()) : _ItemObj.ReorderQty);
+                                        _ItemObj.ReorderQty = (sdr["ReorderQty"].ToString() != "" ? (sdr["ReorderQty"].ToString()) : _ItemObj.ReorderQty);
+                                        _ItemObj.SellingRate = (sdr["SellingRate"].ToString() != "" ? float.Parse(sdr["SellingRate"].ToString()) : _ItemObj.SellingRate);
                                         _ItemObj.ProductCommission = (sdr["ProductCommission"].ToString() != "" ? float.Parse(sdr["ProductCommission"].ToString()) : _ItemObj.ProductCommission);
                                         _ItemObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _ItemObj.Remarks);
                                     }
@@ -168,6 +169,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@UOM", SqlDbType.NVarChar, 5).Value = itemObj.UOM;
                         cmd.Parameters.Add("@ReOrderQty", SqlDbType.Int).Value = itemObj.ReorderQty;
                         cmd.Parameters.Add("@ProductCommission", SqlDbType.Decimal).Value = itemObj.ProductCommission;
+                        cmd.Parameters.Add("@SellingRate", SqlDbType.Decimal).Value = itemObj.SellingRate;
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = itemObj.Remarks;
                         cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = itemObj.logDetails.CreatedBy;
                         cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = itemObj.logDetails.CreatedDate;
@@ -224,6 +226,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@UOM", SqlDbType.NVarChar, 5).Value = itemObj.UOM;
                         cmd.Parameters.Add("@ReOrderQty", SqlDbType.Int).Value = itemObj.ReorderQty;
                         cmd.Parameters.Add("@ProductCommission", SqlDbType.Decimal).Value = itemObj.ProductCommission;
+                        cmd.Parameters.Add("@SellingRate", SqlDbType.Decimal).Value = itemObj.SellingRate;
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = itemObj.Remarks;
                         cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = itemObj.logDetails.UpdatedBy;
                         cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = itemObj.logDetails.UpdatedDate;

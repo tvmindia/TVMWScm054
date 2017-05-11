@@ -66,6 +66,28 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion GetAllOtherIncome
 
+        #region GetOtherIncomeBetweenDates
+        [HttpGet]
+        public string GetOtherIncomeBetweenDates(string fromDate, string toDate)
+        {
+            UA ua = new UA();
+            List<OtherIncomeViewModel> OtherIncomeList = Mapper.Map<List<OtherIncome>, List<OtherIncomeViewModel>>(_iOtherIncomeBusiness.GetOtherIncomeBetweenDates(ua, fromDate, toDate));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = OtherIncomeList });
+
+        }
+        #endregion GetOtherIncomeBetweenDates
+
+        #region GetOtherIncomeByID
+        [HttpGet]
+        public string GetOtherIncomeByID(string ID)
+        {
+            UA ua = new UA();
+            List<OtherIncomeViewModel> OtherIncomeList = Mapper.Map<List<OtherIncome>, List<OtherIncomeViewModel>>(_iOtherIncomeBusiness.GetOtherIncomeByID(ua, ID));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = OtherIncomeList });
+
+        }
+        #endregion GetOtherIncomeByID
+
         #region InsertUpdateOtherIncome
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -120,6 +142,50 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion InsertUpdateOtherIncome
 
+        #region DeleteOtherIncome
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public string DeleteOtherIncome(string ID)
+        {
+            string status = null;
+            string msg = null;
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    UA ua = new UA();
+                    if (!string.IsNullOrEmpty(ID))
+                    {
+                        status = _iOtherIncomeBusiness.DeleteOtherIncome(ID, ua);
+                    }
+                    switch (status)
+                    {
+                        case "0":
+                            msg = c.DeleteFailure;
+                            break;
+                        case "1":
+                            msg = c.DeleteSuccess;
+                            break;
+                        case "2":
+                            msg = c.FKviolation;
+                            break;
+                    }
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message = msg });
+                }
+                catch (Exception ex)
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                }
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "Please Check the values" });
+            }
+
+        }
+        #endregion DeleteOtherIncome
+
         #region ButtonStyling
         [HttpGet]
         public ActionResult ChangeButtonStyle(string ActionType)
@@ -148,6 +214,18 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.deletebtn.Title = "Delete OtherIncome";
                     ToolboxViewModelObj.deletebtn.DisableReason = "Not applicable for new OtherIncome";
                     ToolboxViewModelObj.deletebtn.Event = "Delete();";
+
+                    ToolboxViewModelObj.addbtn.Visible = true;
+                    ToolboxViewModelObj.addbtn.Disable = true;
+                    ToolboxViewModelObj.addbtn.Text = "New";
+                    ToolboxViewModelObj.addbtn.Title = "Add New";
+                    ToolboxViewModelObj.addbtn.DisableReason = "Not applicable for new OtherIncome";
+                    ToolboxViewModelObj.addbtn.Event = "Add();";
+
+                    ToolboxViewModelObj.backbtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Text = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back to list";
+                    ToolboxViewModelObj.backbtn.Event = "goBack();";
 
 
                     break;

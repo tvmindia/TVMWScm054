@@ -242,13 +242,15 @@ function showAllYNCheckedOrNot(i)
     if(i.checked==true)
     {
         DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(true)).draw(false);
+        $('#fromDate').val("");
+        $('#toDate').val("");
     }
     else
     {
         DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(false)).draw(false);
+        FillDates();
     }
-    $('#fromDate').val("");
-    $('#toDate').val("");
+    
 }
 
 function FromDateOnChange()

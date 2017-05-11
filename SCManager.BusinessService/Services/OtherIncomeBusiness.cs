@@ -31,6 +31,34 @@ namespace SCManager.BusinessService.Services
             return OtherIncomelist;
 
         }
+        public List<OtherIncome> GetOtherIncomeByID(UA UA, string ID)
+        {
+            List<OtherIncome> OtherIncomelist = null;
+            OtherIncomelist = _iOtherIncomeRepository.GetOtherIncomeByID(UA, ID);
+            if (OtherIncomelist != null)
+            {
+                foreach (OtherIncome cn in OtherIncomelist)
+                {
+
+                    DefectiveDamage_DF(cn);
+                }
+            }
+            return OtherIncomelist;
+
+        }
+        public string DeleteOtherIncome(string ID, UA ua)
+        {
+            string status = null;
+            try
+            {
+                status = _iOtherIncomeRepository.DeleteOtherIncome(ID, ua);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
         private void DefectiveDamage_DF(OtherIncome oi)
         {
             if (oi != null)
@@ -40,6 +68,21 @@ namespace SCManager.BusinessService.Services
                 if (oi.RefDate != null)
                     oi.RefDateFormatted = oi.RefDate.GetValueOrDefault().ToString(settings.dateformat);
             }
+
+        }
+        public List<OtherIncome> GetOtherIncomeBetweenDates(UA UA, string fromDate, string toDate)
+        {
+            List<OtherIncome> OtherIncomelist = null;
+            OtherIncomelist = _iOtherIncomeRepository.GetOtherIncomeBetweenDates(UA, fromDate, toDate);
+            if (OtherIncomelist != null)
+            {
+                foreach (OtherIncome cn in OtherIncomelist)
+                {
+
+                    DefectiveDamage_DF(cn);
+                }
+            }
+            return OtherIncomelist;
 
         }
         public object InsertUpdateOtherIncome(OtherIncome otherIncomeObj)

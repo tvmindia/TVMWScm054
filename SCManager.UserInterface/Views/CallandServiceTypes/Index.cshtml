@@ -50,7 +50,7 @@
                                 @Html.LabelFor(model => model.MajorCommission, htmlAttributes: new { @class = "control-label " })
                             </div>
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.MajorCommission, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.MajorCommission, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)", style = "text-align:right" } })
                                 @Html.ValidationMessageFor(model => model.MajorCommission, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                                 @Html.LabelFor(model => model.MinorCommission, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.MinorCommission, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.MinorCommission, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)", style = "text-align:right" } })
                                 @Html.ValidationMessageFor(model => model.MinorCommission, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                                 @Html.LabelFor(model => model.MandatoryCommission, htmlAttributes: new { @class = "control-label " })
                             </div>
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.MandatoryCommission, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.MandatoryCommission, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)", style = "text-align:right" } })
                                 @Html.ValidationMessageFor(model => model.MandatoryCommission, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                 @Html.LabelFor(model => model.RepeatCommission, htmlAttributes: new { @class = "control-label " })
                             </div>
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.RepeatCommission, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.RepeatCommission, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)", style = "text-align:right" } })
                                 @Html.ValidationMessageFor(model => model.RepeatCommission, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                                 @Html.LabelFor(model => model.DemoCommission, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.DemoCommission, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.DemoCommission, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)", style = "text-align:right" } })
                                 @Html.ValidationMessageFor(model => model.DemoCommission, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                                 @Html.LabelFor(model => model.AMC1Commission, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.AMC1Commission, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.AMC1Commission, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)", style = "text-align:right" } })
                                 @Html.ValidationMessageFor(model => model.AMC1Commission, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                                 @Html.LabelFor(model => model.AMC2Commission, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.AMC2Commission, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.AMC2Commission, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)", style = "text-align:right" } })
                                 @Html.ValidationMessageFor(model => model.AMC2Commission, "", new { @class = "text-danger" })
                             </div>
                         </div>
