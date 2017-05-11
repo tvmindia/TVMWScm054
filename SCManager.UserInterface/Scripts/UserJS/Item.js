@@ -165,6 +165,7 @@ function fillItems(ID) {
     //Dropdown
     $("#ReorderQty").val(thisItem[0].ReorderQty)
     $("#ProductCommission").val(thisItem[0].ProductCommission)
+    $("#SellingRate").val(thisItem[0].SellingRate)
     $("#Remarks").val(thisItem[0].Remarks)
     $("#deleteId").val(thisItem[0].ID);
     $("#CategoryID").val(thisItem[0].CategoryID);
@@ -184,6 +185,7 @@ function clearfields() {
     $("#UOM").val("")
     $("#ReorderQty").val("");
     $("#ProductCommission").val("");
+    $("#SellingRate").val("");
     $("#Remarks").val("");
     $("#deleteId").val("0")
     $("#CategoryID").val("");

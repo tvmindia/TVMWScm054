@@ -35,13 +35,15 @@ namespace SCManager.UserInterface.Models
         public string UOM { get; set; }
 
         [Display(Name = "Reorder Qty")]
-        public int? ReorderQty { get; set; }
+        public string ReorderQty { get; set; }
 
         [Display(Name = "Product Commission (₹)")]
         public float? ProductCommission { get; set; }
 
         [Display(Name = "Remarks")]
         public string Remarks { get; set; }
+        [Display(Name = "Selling Rate (₹)")]
+        public float? SellingRate { get; set; }
         public List<SelectListItem> CategoryList { get; set; }
         public List<SelectListItem> SubCategoryList { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
