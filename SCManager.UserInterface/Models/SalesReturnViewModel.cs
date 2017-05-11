@@ -21,7 +21,7 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Quantity")]
         [Required(ErrorMessage = "Please enter Quantity")]
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Quantity must be a number")]
-        public int? Qty { get; set; }
+        public string Qty { get; set; }
         [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }
         public string ReturnStatusYN { get; set; }
