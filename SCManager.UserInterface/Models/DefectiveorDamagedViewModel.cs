@@ -40,7 +40,7 @@ namespace SCManager.UserInterface.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Required(ErrorMessage = "Please select quantity")]
-        [Display(Name = "Quantity (₹)")]
+        [Display(Name = "Quantity")]
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Quantity must be a number")]
         public string Qty { get; set; }
         public string HiddenQty { get; set; }

@@ -19,7 +19,7 @@ $(document).ready(function () {
                     { "data": "ItemCode", "defaultContent": "<i>-</i>" },        
                       
                { "data": "Description", "defaultContent": "<i>-</i>" },
-                 { "data": "Qty", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+                 { "data": "Qty", "defaultContent": "<i>-</i>" },
                  { "data": "ReturnStatusYN", "defaultContent": "<i>-</i>" },
                  { "data": "Remarks", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
@@ -246,7 +246,7 @@ function fillDefectiveDamaged(ID) {
     //$("#ItemID").val(thisItem[0].ItemID)
     $("#ItemID").val(thisItem[0].ItemID)
     $("#Description").val(thisItem[0].Description)
-    $("#Qty").val(roundoff(thisItem[0].Qty))
+    $("#Qty").val(thisItem[0].Qty)
     $("#HiddenQty").val(thisItem[0].Qty)
     $("#Remarks").val(thisItem[0].Remarks)
     $("#deleteId").val(thisItem[0].ID);
