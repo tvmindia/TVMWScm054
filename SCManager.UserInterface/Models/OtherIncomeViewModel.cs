@@ -21,6 +21,7 @@ namespace SCManager.UserInterface.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
         [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
         public DateTime RefDate { get; set; }
+        [Display(Name = "Amount (₹)")]
         public float Amount { get; set; }
         [Display(Name = "Mode Of Payment")]
         public string PaymentMode { get; set; }

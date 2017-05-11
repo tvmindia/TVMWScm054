@@ -18,6 +18,7 @@ namespace SCManager.UserInterface.Models
         [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
         [Display(Name = "Date")]
         public DateTime? Date { get; set; }
+        [Display(Name = "Amount (₹)")]
         public float Amount { get; set; }
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }

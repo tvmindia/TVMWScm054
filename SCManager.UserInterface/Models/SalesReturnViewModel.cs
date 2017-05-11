@@ -18,7 +18,7 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Reference No.")]
         public string RefNo { get; set; }
         public Guid? ItemID { get; set; }
-        [Display(Name = "Quantity")]
+        [Display(Name = "Quantity (₹)")]
         [Required(ErrorMessage = "Please enter Quantity")]
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Quantity must be a number")]
         public string Qty { get; set; }

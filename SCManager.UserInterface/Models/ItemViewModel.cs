@@ -26,15 +26,15 @@ namespace SCManager.UserInterface.Models
         public string Category { get; set; }
         public Guid SubcategoryID { get; set; }
         public string Subcategory { get; set; }
-        [Display(Name = "Stock Qty")]
-        public int? Stock { get; set; }
+        [Display(Name = "Stock Qty (₹)")]
+        public string Stock { get; set; }
 
         [Required(ErrorMessage = "Please enter UOM")]
         [Display(Name = "UOM")]
         [StringLength(5)]
         public string UOM { get; set; }
 
-        [Display(Name = "Reorder Qty")]
+        [Display(Name = "Reorder Qty (₹)")]
         public string ReorderQty { get; set; }
 
         [Display(Name = "Product Commission (₹)")]

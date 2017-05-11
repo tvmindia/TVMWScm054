@@ -39,19 +39,19 @@ function FillCallTypes() {
     var thisType = GetCallTypes(); //Binding Data
     //Hidden
 
-        $("#MajorCommission").val(thisType[1].MajorCommission);
-        $("#MinorCommission").val(thisType[3].MinorCommission);
-        $("#MandatoryCommission").val(thisType[2].MandatoryCommission);
-        $("#RepeatCommission").val(thisType[4].RepeatCommission);
-        $("#DemoCommission").val(thisType[0].DemoCommission);
+    $("#MajorCommission").val(roundoff(thisType[1].MajorCommission));
+    $("#MinorCommission").val(roundoff(thisType[3].MinorCommission));
+    $("#MandatoryCommission").val(roundoff(thisType[2].MandatoryCommission));
+    $("#RepeatCommission").val(roundoff(thisType[4].RepeatCommission));
+    $("#DemoCommission").val(roundoff(thisType[0].DemoCommission));
     
 }
 function FillServiceTypes()
 {
     debugger;
     var thisType = GetServiceTypes(); //Binding Data
-    $("#AMC1Commission").val(thisType[0].AMC1Commission);
-    $("#AMC2Commission").val(thisType[1].AMC2Commission);
+    $("#AMC1Commission").val(roundoff(thisType[0].AMC1Commission));
+    $("#AMC2Commission").val(roundoff(thisType[1].AMC2Commission));
 }
 //---------------------------------------Get Call and service Details-------------------------------------//
 function GetCallTypes() {

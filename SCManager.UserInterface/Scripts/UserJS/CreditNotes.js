@@ -17,7 +17,7 @@ $(document).ready(function () {
                   { "data": "ID", "defaultContent": "<i>-</i>" },
                 { "data": "CreditNoteNo", "defaultContent": "<i>-</i>" },
                  { "data": "DateFormatted", "defaultContent": "<i>-</i>" },
-                { "data": "Amount", "defaultContent": "<i>-</i>" },
+                { "data": "Amount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                  { "data": "Description", "defaultContent": "<i>-</i>" },
                  
              { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
@@ -208,7 +208,7 @@ function fillCreditNotes(ID) {
     $("#ID").val(thisItem[0].ID);
     $("#HiddenCreditNoteNo").val(thisItem[0].CreditNoteNo);
     $("#CreditNoteNo").val(thisItem[0].CreditNoteNo);
-    $("#Amount").val(thisItem[0].Amount);
+    $("#Amount").val(roundoff(thisItem[0].Amount));
     $("#Description").val(thisItem[0].Description);
     $("#CreditNoteNo").prop('disabled', true);
     if (thisItem[0].Date != null) {

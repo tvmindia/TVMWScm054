@@ -18,7 +18,7 @@ $(document).ready(function () {
               { "data": "IncomeTypeCode", "defaultContent": "<i>-</i>" },
                { "data": "RefDateFormatted", "defaultContent": "<i>-</i>" },
                 { "data": "RefNo", "defaultContent": "<i>-</i>" },
-              { "data": "Amount", "defaultContent": "<i>-</i>" },
+              { "data": "Amount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "Description", "defaultContent": "<i>-</i>" },
 
            { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
@@ -167,7 +167,7 @@ function fillOtherIncome(ID) {
     $("#IncomeTypeCode").val(thisItem[0].IncomeTypeCode);
     $("#RefNo").val(thisItem[0].RefNo);
     $("#HiddenRefNo").val(thisItem[0].RefNo);
-    $("#Amount").val(thisItem[0].Amount);
+    $("#Amount").val(roundoff(thisItem[0].Amount));
     $("#Description").val(thisItem[0].Description);
     $("#PaymentMode").val(thisItem[0].PaymentMode);
     $("#RefNo").prop('disabled', true);
