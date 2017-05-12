@@ -35,6 +35,8 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<CreditNotesViewModel, CreditNotes>().ReverseMap();
                 config.CreateMap<OtherIncomeViewModel, OtherIncome>().ReverseMap();
                 config.CreateMap<StockValueSummaryViewModel, StockValueSummary>().ReverseMap();
+                config.CreateMap<OpeningDetailViewModel, OpeningDetail>().ReverseMap();
+                config.CreateMap<OpeningSettingViewModel, OpeningSetting>().ReverseMap();
             });
         }
     }
