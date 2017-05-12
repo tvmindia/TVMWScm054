@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using SCManager.BusinessService.Contracts;
 using SCManager.DataAccessObject.DTO;
+using SCManager.UserInterface.CustomAttributes;
 using SCManager.UserInterface.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class OtherIncomeController : Controller
     {
         Const c = new Const();
@@ -26,6 +28,7 @@ namespace SCManager.UserInterface.Controllers
         #endregion Constructor_Injection
 
         // GET: OtherIncome
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
             OtherIncomeViewModel otherIncomeViewModel = null;
@@ -57,6 +60,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllOtherIncome
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllOtherIncome(string showAllYN)
         {
             UA ua = new UA();
@@ -68,6 +72,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetOtherIncomeBetweenDates
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetOtherIncomeBetweenDates(string fromDate, string toDate)
         {
             UA ua = new UA();
@@ -79,6 +84,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetOtherIncomeByID
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetOtherIncomeByID(string ID)
         {
             UA ua = new UA();
@@ -91,6 +97,7 @@ namespace SCManager.UserInterface.Controllers
         #region InsertUpdateOtherIncome
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string InsertUpdateOtherIncome(OtherIncomeViewModel otherIncomeViewModelObj)
         {
             object result = null;
@@ -145,6 +152,7 @@ namespace SCManager.UserInterface.Controllers
         #region DeleteOtherIncome
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DeleteOtherIncome(string ID)
         {
             string status = null;
@@ -188,6 +196,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();

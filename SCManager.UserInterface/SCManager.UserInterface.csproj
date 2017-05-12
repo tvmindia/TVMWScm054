@@ -155,6 +155,7 @@
     <Compile Include="App_Start\MappingConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CallandServiceTypesController.cs" />
     <Compile Include="Controllers\CreditNotesController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
@@ -165,10 +166,10 @@
     <Compile Include="Controllers\Form8TaxInvoiceController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\LocalPurchaseController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OtherIncomeController.cs" />
     <Compile Include="Controllers\SalesReturnController.cs" />
     <Compile Include="Controllers\TechnicianController.cs" />
+    <Compile Include="CustomAttributes\CustomAuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
       <SubType>Code</SubType>
@@ -187,10 +188,13 @@
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\OtherIncomeViewModel.cs" />
     <Compile Include="Models\ReorderAlertViewModel.cs" />
+    <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SalesReturnViewModel.cs" />
+    <Compile Include="Models\ServiceCenterViewModel.cs" />
     <Compile Include="Models\StockValueSummaryViewModel.cs" />
     <Compile Include="Models\TechnicianViewModel.cs" />
     <Compile Include="Models\ToolboxViewModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -532,7 +536,6 @@
     <Content Include="Views\Shared\ToolboxView.cshtml" />
     <Content Include="Views\DynamicUI\_UnderConstruction.cshtml" />
     <Content Include="Views\DynamicUI\demoGrid.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Item\Index.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\CallandServiceTypes\Index.cshtml" />
@@ -542,6 +545,8 @@
     <Content Include="Views\SalesReturn\Index.cshtml" />
     <Content Include="Views\CreditNotes\Index.cshtml" />
     <Content Include="Views\OtherIncome\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\NotAuthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

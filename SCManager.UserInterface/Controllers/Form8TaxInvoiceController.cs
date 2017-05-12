@@ -9,9 +9,11 @@ using SCManager.UserInterface.Models;
 using SCManager.DataAccessObject.DTO;
 using SCManager.BusinessService.Contracts;
 using System.Web.Script.Serialization;
+using SCManager.UserInterface.CustomAttributes;
 
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class Form8TaxInvoiceController : Controller
     {
         //
@@ -26,7 +28,7 @@ namespace SCManager.UserInterface.Controllers
             
         }
         #endregion Constructor_Injection
-
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole,RoleContants.ManagerRole)]
         public ActionResult Index()
         {
             Form8ViewModel dummy = new Form8ViewModel();
@@ -37,6 +39,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllForm8
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllForm8(Form8ViewModel dataObj)
         {
             try
@@ -53,6 +56,7 @@ namespace SCManager.UserInterface.Controllers
         #endregion  GetAllForm8
 
         [HttpPost]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string InsertUpdateForm8(Form8ViewModel Form8Obj)
         {
             string result = "";
@@ -78,6 +82,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DeleteForm8(Form8ViewModel Form8Obj) {
            
             try
@@ -100,6 +105,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DeleteForm8Detail(Form8DetailViewModel Form8Obj)
         {
 
@@ -130,6 +136,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetForm8(Form8ViewModel dataObj)
         {
             try
@@ -147,6 +154,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();

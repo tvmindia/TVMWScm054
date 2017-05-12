@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using SCManager.BusinessService.Contracts;
 using SCManager.DataAccessObject.DTO;
+using SCManager.UserInterface.CustomAttributes;
 using SCManager.UserInterface.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class SalesReturnController : Controller
     {
         Const c = new Const();
@@ -28,6 +30,7 @@ namespace SCManager.UserInterface.Controllers
         #endregion Constructor_Injection
 
         // GET: SalesReturn
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
             return View();
@@ -35,6 +38,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllSalesReturn
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllSalesReturn()
         {
             UA ua = new UA();
@@ -46,6 +50,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllItemCode    
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllItemCode(ItemDropdownViewModel obj)
         {
             UA ua = new UA();
@@ -57,6 +62,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region SalesReturnValidation
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string SalesReturnValidation(string itemID)
         {
             string status = null;
@@ -89,6 +95,7 @@ namespace SCManager.UserInterface.Controllers
         #region InsertUpdateSalesReturn
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string InsertUpdateSalesReturn(SalesReturnViewModel salesReturnViewModel)
         {
             object result = null;
@@ -142,6 +149,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetSalesReturnByID
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetSalesReturnByID(string ID)
         {
             UA ua = new UA();
@@ -154,6 +162,7 @@ namespace SCManager.UserInterface.Controllers
         #region DeleteSalesReturn
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DeleteSalesReturn(string ID)
         {
             string status = null;
@@ -198,6 +207,7 @@ namespace SCManager.UserInterface.Controllers
         #region ReturnSalesToCompany
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string ReturnSalesToCompany(SalesReturnViewModel salesReturnViewModelObj)
         {
             string status = null;
@@ -233,6 +243,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();

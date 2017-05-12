@@ -125,10 +125,12 @@
     <Compile Include="DTO\OtherIncome.cs" />
     <Compile Include="DTO\ReorderAlert.cs" />
     <Compile Include="DTO\SalesReturn.cs" />
+    <Compile Include="DTO\ServiceCenter.cs" />
     <Compile Include="DTO\StockValueSummary.cs" />
     <Compile Include="DTO\SubCategories.cs" />
     <Compile Include="DTO\Technician.cs" />
     <Compile Include="DTO\UA.cs" />
+    <Compile Include="DTO\UserAndRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

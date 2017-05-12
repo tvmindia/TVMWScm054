@@ -8,9 +8,11 @@ using SCManager.UserInterface.Models;
 using SCManager.BusinessService.Contracts;
 using AutoMapper;
 using Newtonsoft.Json;
+using SCManager.UserInterface.CustomAttributes;
 
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class ItemController : Controller
     {
 
@@ -32,6 +34,7 @@ namespace SCManager.UserInterface.Controllers
 
 
         // GET: Item  UA ua = new UA();
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public ActionResult Index()
         {
             ItemViewModel itemViewModal = null;
@@ -65,6 +68,7 @@ namespace SCManager.UserInterface.Controllers
         }
         Const c = new Const();
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string ItemsForDropdown(ItemDropdownViewModel obj)
         {
             UA ua = new UA();
@@ -73,6 +77,7 @@ namespace SCManager.UserInterface.Controllers
 
         }
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetAllItems()
         {
             UA ua = new UA();
@@ -81,6 +86,7 @@ namespace SCManager.UserInterface.Controllers
 
         }
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetItemByID(string ID)
         {
             UA ua = new UA();
@@ -90,6 +96,7 @@ namespace SCManager.UserInterface.Controllers
         }
         #region GetAllSubCategories
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetAllSubCategories(string CategoryID)
         {
            try
@@ -113,6 +120,7 @@ namespace SCManager.UserInterface.Controllers
         #region InsertItem
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string InsertUpdateItem(ItemViewModel itemViewmodelObj)
         {
             object result = null;
@@ -176,6 +184,7 @@ namespace SCManager.UserInterface.Controllers
         #region DeleteItem
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string DeleteItem(string ID)
         {
             string status = null;
@@ -216,6 +225,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();
