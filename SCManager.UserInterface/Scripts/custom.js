@@ -191,6 +191,10 @@ function notyConfirm(msg, functionIfSuccess,msg2,btnText) {
     if (msg2 != undefined) {
         m = msg2 + '  ' + m;
     }
+    if (btnText == undefined)
+    {
+        btnText = "Yes, delete it!";
+    }
     swal({
         title: msg,
         text: m,
