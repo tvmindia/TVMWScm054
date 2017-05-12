@@ -27,10 +27,10 @@
 <div id="exTab3" class="container SCtabContainer">
     <ul class="nav nav-pills">
         <li class="active">
-            <a id="OtherIncomeTab" onclick="List()" href="#OtherIncomeList" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>OtherIncome List</a>
+            <a id="OtherIncomeTab" onclick="List()" href="#OtherIncomeList" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>Other Income List</a>
         </li>
         <li>
-            <a id="AddTab" onclick="Add(1)" href="#OtherIncomeEntry" data-toggle="tab" style="width:235px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>OtherIncome Entry</a>
+            <a id="AddTab" onclick="Add(1)" href="#OtherIncomeEntry" data-toggle="tab" style="width:235px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Other Income Entry</a>
         </li>
        
 
@@ -93,43 +93,73 @@
                                     @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            </div>
-                        <div class="col-md-6">
-                         
+
                             <div class="form-group">
                                 <div class="col-md-3">
                                     @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label" })
-                                    </div>
-                                    <div class="col-md-5">
-                                         @{
-                                             List<SelectListItem> listOtherIncomePaymentMode = new List<SelectListItem>();
-                                             listOtherIncomePaymentMode.Add(new SelectListItem
-                                             { Text = "Cash", Value = "Cash"
-                                             });
-                                             listOtherIncomePaymentMode.Add(new SelectListItem
-                                             { Text = "Cheque", Value = "Cheque"
-                                             });
-                                             listOtherIncomePaymentMode.Add(new SelectListItem
-                                             {
-                                                 Text = "Online", Value = "Online"
-                                             });
-                                        }
-                                        @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control", value = -1, style = "padding:4px 12px;" })
-                                      
-                                        @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
-                                    </div>
                                 </div>
+                                <div class="col-md-5">
+                                    @{
+                                        List<SelectListItem> listOtherIncomePaymentMode = new List<SelectListItem>();
+                                        listOtherIncomePaymentMode.Add(new SelectListItem
+                                        {
+                                            Text = "Cash",
+                                            Value = "Cash"
+                                        });
+                                        listOtherIncomePaymentMode.Add(new SelectListItem
+                                        {
+                                            Text = "Cheque",
+                                            Value = "Cheque"
+                                        });
+                                        listOtherIncomePaymentMode.Add(new SelectListItem
+                                        {
+                                            Text = "Online",
+                                            Value = "Online"
+                                        });
+                                    }
+                                    @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control", value = -1, style = "padding:4px 12px;" })
+
+                                    @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <div class="col-md-3">
                                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows = 4 } })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            </div>
+                        <div class="col-md-6 mastersep">
+                            <div class="col-md-12">
+                                <div class="masterinfo">
+                                    <br />
+                                    <br />
+
+                                    <div class="masterinfoImg">
+                                        <img src="~/Content/images/indian-rupee.png" />
+                                       
                                     </div>
-                                    <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows = 4 } })
-                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                    <br />
+                                    <div class="masterinfoHead">
+                                       Other Income
+                                    </div>
+                                    <br />
+                                    <div class="masterinfoDet">
+                                      Other Income for SC comes mainly in two ways. One is as ICR payments from IFB. That is IFB pays SC based on the ICR Bills they collected and the 
+                                        no of call SC attended etc. Another income source will be from other Service Centers . That is by transfering Items on request basis to other SCs.
+
+
                                     </div>
                                 </div>
                             </div>
+
+
+                        </div>
 
                             <div class="form-group" hidden="hidden">
                                 <div class="col-md-offset-2 col-md-10">

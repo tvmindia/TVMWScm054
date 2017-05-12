@@ -14,5 +14,6 @@ namespace SCManager.DataAccessObject.DTO
         public string Name { get; set; }
         public int Calls { get; set; }
         public decimal StockValue { get; set; }
+        public string StockValueFormatted { get; set; }
     }
 }

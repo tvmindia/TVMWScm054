@@ -13,13 +13,15 @@ namespace SCManager.BusinessService.Services
     {
 
         private ITechnicianRepository _technicianRepository;
+        private ICommonBusiness _commonBusiness;
         /// <summary>
         /// Constructor Injection:-Getting IDynamicUIBusiness implementing object
         /// </summary>
         /// <param name="dynamicUIBusiness"></param>
-        public TechnicianBusiness(ITechnicianRepository technicianRepository)
+        public TechnicianBusiness(ITechnicianRepository technicianRepository, ICommonBusiness commonBusiness)
         {
             _technicianRepository = technicianRepository;
+            _commonBusiness = commonBusiness;
         }
 
 
@@ -27,7 +29,15 @@ namespace SCManager.BusinessService.Services
         {
             try
             {
-                return _technicianRepository.GetTechnicianSummary(ua);
+                List<TechnicianSummary> Result = new List<TechnicianSummary>();
+                Result= _technicianRepository.GetTechnicianSummary(ua);
+                if (Result != null) {
+                    foreach (TechnicianSummary T in Result)
+                    {
+                        T.StockValueFormatted = _commonBusiness.ConvertCurrency(T.StockValue);
+                    }
+                }
+                return Result;
             }
             catch (Exception)
             {
