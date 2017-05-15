@@ -96,7 +96,7 @@ function notyAlert(type, msgtxt,title) {
         t = title;
     }
 
-    swal({ title: t, text: msgtxt, type: type, timer: 3000 });
+    swal({ title: t, text: msgtxt, type: type, timer: 6000 });
     //var n = noty({
     //    text: msgtxt,
     //    type: type,//'alert','information','error','warning','notification','success'

@@ -56,7 +56,14 @@ namespace SCManager.BusinessService.Services
 
         private void OpeningSettingBL(OpeningSetting F)
         {
-            
+            SCManagerSettings settings = new SCManagerSettings();
+           
+            if (F.WithEffectDate != null)
+                F.WithEffectDateFormatted = F.WithEffectDate.ToString(settings.dateformat);
+            F.CashFormatted = _commonBusiness.ConvertCurrency(F.Cash);
+            F.BankFormatted = _commonBusiness.ConvertCurrency(F.Bank);
+
+
         }
 
         private void OpeningSettingDetailBL(List<OpeningDetail> List)
@@ -87,9 +94,13 @@ namespace SCManager.BusinessService.Services
             {
                 OpeningSetting Result = new OpeningSetting();
                 Result = _OpeningSettingRepository.GetOpeningSettingHeader(ua);
-                Result.OpeningDetails = _OpeningSettingRepository.GetOpeningSettingDetail(  ua);
-                OpeningSettingBL(Result);
-                OpeningSettingDetailBL(Result.OpeningDetails);
+
+                if (Result != null) {
+                    Result.OpeningDetails = _OpeningSettingRepository.GetOpeningSettingDetail(ua);
+                    OpeningSettingBL(Result);
+                    OpeningSettingDetailBL(Result.OpeningDetails);
+                }
+                
                 return Result;
             }
             catch (Exception)

@@ -8,9 +8,11 @@ using Newtonsoft.Json;
 using SCManager.UserInterface.Models;
 using SCManager.DataAccessObject.DTO;
 using SCManager.BusinessService.Contracts;
+using SCManager.UserInterface.CustomAttributes;
 
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class OpeningSettingController : Controller
     {
         #region Constructor_Injection
@@ -25,6 +27,7 @@ namespace SCManager.UserInterface.Controllers
         #endregion Constructor_Injection
 
         // GET: OpeningSetting
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public ActionResult Index()
         {
             OpeningSettingViewModel o = new OpeningSettingViewModel();
@@ -36,6 +39,7 @@ namespace SCManager.UserInterface.Controllers
 
         Const c = new Const();
 
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string InsertUpdateOpeningSetting(OpeningSettingViewModel OpeningSettingObj)
         {
             string result = "";
@@ -62,6 +66,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string DeleteOpeningDetail(OpeningDetailViewModel ODobj)
         {
 
@@ -91,14 +96,15 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
-        public string GetForm8(Form8ViewModel dataObj)
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        public string GetOpenings(OpeningSetting dataObj)
         {
             try
             {
                 //   System.Threading.Thread.Sleep(5000);
                 UA ua = new UA();
-                OpeningSettingViewModel Frm8 = Mapper.Map<OpeningSetting, OpeningSettingViewModel>(_openingSettingBusiness.GetOpeningSetting(ua));
-                return JsonConvert.SerializeObject(new { Result = "OK", Records = Frm8 });
+                OpeningSettingViewModel opening = Mapper.Map<OpeningSetting, OpeningSettingViewModel>(_openingSettingBusiness.GetOpeningSetting(ua));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = opening });
             }
             catch (Exception ex)
             {
@@ -108,6 +114,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();
@@ -139,7 +146,7 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.resetbtn.Visible = true;
                     ToolboxViewModelObj.resetbtn.Text = "Reset";
                     ToolboxViewModelObj.resetbtn.Title = "Reset";
-                    ToolboxViewModelObj.resetbtn.Event = "resetCurrent();";
+                    ToolboxViewModelObj.resetbtn.Event = "BindOpening();";
 
                      
                 

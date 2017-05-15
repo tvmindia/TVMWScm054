@@ -12,12 +12,12 @@ namespace SCManager.UserInterface.Models
         public Guid ID { get; set; }
 
         [Required(ErrorMessage = "Opening Cash Balance is missing")]
-        [Display(Name = "Cash Balance (₹)")]
+        [Display(Name = "Cash Balance ")]
         [Range(0, 9999999999999999.99)]
         public decimal Cash { get; set; }
 
         [Required(ErrorMessage = "Opening Bank Balance  missing")]
-        [Display(Name = "Bank Balance (₹)")]
+        [Display(Name = "Bank Balance  ")]
         [Range(0, 9999999999999999.99)]
         public decimal Bank { get; set; }
 
@@ -30,6 +30,10 @@ namespace SCManager.UserInterface.Models
 
         public List<OpeningDetailViewModel> OpeningDetails { get; set; }
         public String DetailJSON { get; set; }
+
+        public string WithEffectDateFormatted { get; set; }
+        public string CashFormatted { get; set; }
+        public string BankFormatted { get; set; }
 
     }
 
