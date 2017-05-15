@@ -548,6 +548,9 @@
     <Content Include="Views\SalesReturn\Index.cshtml" />
     <Content Include="Views\CreditNotes\Index.cshtml" />
     <Content Include="Views\OtherIncome\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\NotAuthorized.cshtml" />
+    <Content Include="Views\OpeningSetting\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
