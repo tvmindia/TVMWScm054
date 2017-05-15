@@ -226,6 +226,7 @@ namespace SCManager.RepositoryServices.Services
                                         _OpeningSettingDetailObj.MaterialID = (sdr["ItemID"].ToString() != "" ? Guid.Parse(sdr["ItemID"].ToString()) : _OpeningSettingDetailObj.MaterialID);
                                         _OpeningSettingDetailObj.Quantity = (sdr["Qty"].ToString() != "" ? int.Parse(sdr["Qty"].ToString()) : 0);                                       
                                         _OpeningSettingDetailObj.Material = (sdr["Material"].ToString() != "" ? (sdr["Material"].ToString()) : _OpeningSettingDetailObj.Material);
+                                        _OpeningSettingDetailObj.MaterialDescription = (sdr["MaterialDescription"].ToString() != "" ? (sdr["MaterialDescription"].ToString()) : _OpeningSettingDetailObj.MaterialDescription);
                                         _OpeningSettingDetailObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _OpeningSettingDetailObj.UOM);
                                     }
 

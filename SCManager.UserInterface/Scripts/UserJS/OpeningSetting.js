@@ -19,11 +19,13 @@ $(document).ready(function () {
              columns: [
                { "data": "SlNo" },
                { "data": "Material" },
+                { "data": "MaterialDescription" },
                { "data": "Quantity" },
                { "data": "UOM" }           
              ],
              columnDefs: [                    
-             { className: "text-center disabled", "targets": [0, 1, 2, 3] }
+             { className: "text-center disabled", "targets": [0, 1, 3, 4] },
+             { className: "disabled", "targets": [2] }
              ]
          });
 
@@ -72,6 +74,7 @@ function EG_TableDefn() {
     tempObj.MaterialID = "";
     tempObj.SlNo = 0;
     tempObj.Material = "";
+    tempObj.MaterialDescription = "";
     tempObj.Quantity = "";
     tempObj.UOM = "";   
 
@@ -85,6 +88,7 @@ function EG_Columns() {
                 { "data": "MaterialID", "defaultContent": "<i></i>" },
                 { "data": "SlNo", "defaultContent": "<i></i>" },
                 { "data": "Material", render: function (data, type, row) { return (EG_createCombo(data, 'S', row, 'Material', 'Materials', 'FillUOM')); } },
+                { "data": "MaterialDescription", "defaultContent": "<i></i>" },
                 { "data": "Quantity", render: function (data, type, row) { return (EG_createTextBox(data, 'N', row, 'Quantity', '')); }, "defaultContent": "<i></i>" },
                 { "data": "UOM", "defaultContent": "<i></i>" },             
                 { "data": null, "orderable": false, "defaultContent": '<a href="#" class="DeleteLink"  onclick="DeleteItem(this)" ><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>' }
@@ -100,9 +104,10 @@ function EG_Columns_Settings() {
     var obj = [
         { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
         { "targets": [4], "width": "20%" },      
-        { className: "text-center", "targets": [3, 4, 5,7] },      
-        { className: "text-center disabled", "targets": [6] },
-        { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7] }
+        { className: "text-center", "targets": [3, 4,6,8] },      
+        { className: "text-center disabled", "targets": [7] },
+        { className: "disabled", "targets": [5] },
+        { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7,8] }
 
     ]
 
@@ -341,6 +346,7 @@ function FillUOM(row) {
         if (_Materials[i].ItemCode == EG_GridData[row - 1]['Material']) {
             EG_GridData[row - 1]['UOM'] = _Materials[i].UOM;
             EG_GridData[row - 1]['MaterialID'] = _Materials[i].ID;
+            EG_GridData[row - 1]['MaterialDescription'] = _Materials[i].Description;
             EG_Rebind();
             break;
         }

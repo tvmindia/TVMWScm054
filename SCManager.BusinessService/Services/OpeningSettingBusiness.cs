@@ -60,8 +60,8 @@ namespace SCManager.BusinessService.Services
            
             if (F.WithEffectDate != null)
                 F.WithEffectDateFormatted = F.WithEffectDate.ToString(settings.dateformat);
-            F.CashFormatted = _commonBusiness.ConvertCurrency(F.Cash);
-            F.BankFormatted = _commonBusiness.ConvertCurrency(F.Bank);
+            F.CashFormatted = _commonBusiness.ConvertCurrency(F.Cash,2);
+            F.BankFormatted = _commonBusiness.ConvertCurrency(F.Bank,2);
 
 
         }

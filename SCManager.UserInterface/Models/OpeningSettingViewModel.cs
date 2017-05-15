@@ -44,6 +44,7 @@ namespace SCManager.UserInterface.Models
         public Guid? MaterialID { get; set; }
         public int? SlNo { get; set; }
         public string Material { get; set; }
+        public string MaterialDescription { get; set; }
         public int? Quantity { get; set; }
         public string UOM { get; set; }
 

@@ -32,7 +32,9 @@ namespace SCManager.UserInterface.Controllers
         {
             OpeningSettingViewModel o = new OpeningSettingViewModel();
             o.ID = Guid.Empty;
-            o.WithEffectDate = DateTime.Now.Date;
+            o.BankFormatted = "0.00";
+            o.CashFormatted = "0.00";
+            o.WithEffectDateFormatted = "NIL";
 
             return View(o);
         }

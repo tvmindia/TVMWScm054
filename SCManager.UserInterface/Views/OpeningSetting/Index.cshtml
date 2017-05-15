@@ -6,7 +6,7 @@
 }
 @section styles {
     @Styles.Render("~/Content/DataTables/css/datatable")
-    @Styles.Render("~/Content/bootstrapdatepicker")
+    @*@Styles.Render("~/Content/bootstrapdatepicker")*@
     
 }
  
@@ -109,6 +109,7 @@
                                 
                                 <th>Sl No</th>
                                 <th>Material</th>
+                                <th>Material Description</th>
                                 <th>Quantity</th>
                                 <th>UOM</th>
                             </tr>
@@ -201,6 +202,7 @@
                                         <th style="display:none">MaterialID</th>
                                         <th>Sl No</th>
                                         <th>Material</th>
+                                        <th>Material Description</th>
                                         <th>Quantity</th>
                                         <th>UOM</th>
                                         <th>...</th>
@@ -232,7 +234,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/datatable")
     @Scripts.Render("~/bundles/jqueryunobtrusiveajaxvalidate")
-    @Scripts.Render("~/bundles/bootstrapdatepicker")
+    @*@Scripts.Render("~/bundles/bootstrapdatepicker")*@
     @Scripts.Render("~/bundles/OpeningSetting")
     @Scripts.Render("~/bundles/editableGrid")
 
