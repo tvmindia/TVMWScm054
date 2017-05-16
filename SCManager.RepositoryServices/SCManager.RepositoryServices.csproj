@@ -125,6 +125,7 @@
     <Compile Include="Contracts\ILocalPurchaseRepository.cs" />
     <Compile Include="Contracts\IOpeningSettingRepository.cs" />
     <Compile Include="Contracts\IOtherIncomeRepository.cs" />
+    <Compile Include="Contracts\IReportRepository.cs" />
     <Compile Include="Contracts\ISalesReturnRepository.cs" />
     <Compile Include="Contracts\ISubCategoryRepository.cs" />
     <Compile Include="Contracts\ITechnicianRepository.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Services\LocalPurchaseRepository.cs" />
     <Compile Include="Services\OpeningSettingRepository.cs" />
     <Compile Include="Services\OtherIncomeRepository.cs" />
+    <Compile Include="Services\ReportRepository.cs" />
     <Compile Include="Services\SalesReturnRepository.cs" />
     <Compile Include="Services\SubCategoryRepository.cs" />
     <Compile Include="Services\TechnicianRepository.cs" />

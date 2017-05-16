@@ -166,6 +166,7 @@
     <Compile Include="Controllers\Form8TaxInvoiceController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\LocalPurchaseController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\OpeningSettingController.cs" />
     <Compile Include="Controllers\OtherIncomeController.cs" />
     <Compile Include="Controllers\SalesReturnController.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Models\OpeningSettingViewModel.cs" />
     <Compile Include="Models\OtherIncomeViewModel.cs" />
     <Compile Include="Models\ReorderAlertViewModel.cs" />
+    <Compile Include="Models\ReportViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SalesReturnViewModel.cs" />
     <Compile Include="Models\ServiceCenterViewModel.cs" />
@@ -513,6 +515,7 @@
     <Content Include="Scripts\UserJS\Login.js" />
     <Content Include="Scripts\UserJS\OpeningSetting.js" />
     <Content Include="Scripts\UserJS\OtherIncome.js" />
+    <Content Include="Scripts\UserJS\Report.js" />
     <Content Include="Scripts\UserJS\SalesReturn.js" />
     <Content Include="Views\Form8TaxInvoice\Index.cshtml">
       <SubType>Code</SubType>
@@ -551,10 +554,12 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\NotAuthorized.cshtml" />
     <Content Include="Views\OpeningSetting\Index.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Start\App_Data\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Views\OfficeStockReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -43,6 +43,7 @@ namespace SCManager.UserInterface.App_Start
 
                 config.CreateMap<OpeningDetailViewModel, OpeningDetail>().ReverseMap();
                 config.CreateMap<OpeningSettingViewModel, OpeningSetting>().ReverseMap();
+                config.CreateMap<StockSummaryViewModel, Item>().ReverseMap();
             });
         }
     }

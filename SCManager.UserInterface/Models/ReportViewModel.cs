@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SCManager.DataAccessObject.DTO
+namespace SCManager.UserInterface.Models
 {
-    public class Item
+    public class StockSummaryViewModel
     {
         public string SCCode { get; set; }
         public Guid ID { get; set; }
@@ -22,6 +22,6 @@ namespace SCManager.DataAccessObject.DTO
         public string Remarks { get; set; }
         public float SellingRate { get; set; }
         public float Value { get; set; }
-        public LogDetails logDetails { get; set; }
+        public LogDetailsViewModel logDetails { get; set; }
     }
 }
