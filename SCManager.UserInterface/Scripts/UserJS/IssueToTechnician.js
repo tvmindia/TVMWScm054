@@ -139,10 +139,6 @@ function EG_Columns_Settings() {
 
 //---------------------page related logics----------------------------------- 
 
-function FillIssuedItemsList()
-{
-
-}
 
 function fillTechnicians()
 {
@@ -151,6 +147,8 @@ function fillTechnicians()
     var option = document.createElement('option');
     option.text ="All Technicians", option.value = "All";
     ddlSelect.appendChild(option);
+    $("#ddlIssueListTech").val("All");
+    BindAllIssuedList()
 }
 
 function getMaterials() {

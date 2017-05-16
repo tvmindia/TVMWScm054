@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using SCManager.BusinessService.Contracts;
 using SCManager.DataAccessObject.DTO;
+using SCManager.UserInterface.CustomAttributes;
 using SCManager.UserInterface.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class IssueToTechnicianController : Controller
     {
         Const c = new Const();
@@ -26,6 +28,7 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion Constructor_Injection
         // GET: IssueToTechnician
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole,RoleContants.ManagerRole)]
         public ActionResult Index()
         {
             IssueToTechnicianViewModel issueToTechnicianViewModel = null;
@@ -59,6 +62,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetIssueSheets
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetIssueSheets(string empID, string transferDate)
         {
             UA ua = new UA();
@@ -70,6 +74,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllIssueToTechnician
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetAllIssueToTechnician(string empID,string fromDate, string toDate)
         {
             UA ua = new UA();
@@ -81,6 +86,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region InsertUpdateIssuedSheets
         [HttpPost]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string InsertUpdateIssuedSheets(IssueToTechnicianViewModel IssueToTechnicianViewModelObj)
         {
            // string result = "";
@@ -130,6 +136,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region DeleteIssueToTechnician
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string DeleteIssueToTechnician(string ID)
         {
             string status = null;
@@ -185,6 +192,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();
