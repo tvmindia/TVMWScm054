@@ -8,9 +8,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SCManager.UserInterface.CustomAttributes;
 
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class ReportController : Controller
     {
         IReportBusiness _reportBusiness;
@@ -25,6 +27,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetItemsSummary(string fromdate=null,string todate=null)
         {
             UA ua = new UA();
@@ -34,16 +37,17 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();
             switch (ActionType)
             {
                 case "List":
-                    ToolboxViewModelObj.savebtn.Visible = true;
-                    ToolboxViewModelObj.savebtn.Text = "Print";
-                    ToolboxViewModelObj.savebtn.Title = "Print";
-                    ToolboxViewModelObj.savebtn.Event = "UnderConstruction();";
+                    ToolboxViewModelObj.PrintBtn.Visible = true;
+                    ToolboxViewModelObj.PrintBtn.Text = "Print";
+                    ToolboxViewModelObj.PrintBtn.Title = "Print";
+                    ToolboxViewModelObj.PrintBtn.Event = "UnderConstruction();";
 
                     break;
                

@@ -15,6 +15,18 @@
      font-size: 17px!important;
 }
 
+.filterHead {
+     font-size: 13px!important;
+     color:grey;
+}
+
+.ReportHead {
+    font-size: 19px!important;
+    text-align:center;
+    border-bottom:solid;
+    border-width:medium;
+    border-bottom-color:lightblue;
+}
 .DashboardSummary {
     
     background-color:rgba(253, 253, 253, 0.2);

@@ -6,7 +6,7 @@ $(document).ready(function () {
          {
              dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
              order: [],
-             searching: true,
+             searching: false,
              paging: true,
              data: GetItemsSummary(),
              columns: [
@@ -24,8 +24,8 @@ $(document).ready(function () {
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
                   { className: "text-right", "targets": [] },
-                    { className: "text-center", "targets": [ 3,4,5,6,7,8] },
-                    { className: "text-left", "targets": [2] },
+                    { className: "text-center", "targets": [ 5,6,7,8] },
+                    { className: "text-left", "targets": [2,3,4] },
 
              ]
          });
