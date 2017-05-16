@@ -118,6 +118,7 @@
     <Compile Include="Contracts\IEmployeesBusiness.cs" />
     <Compile Include="Contracts\IForm8BRetailInvoiceBusiness.cs" />
     <Compile Include="Contracts\IForm8TaxInvoiceBusiness.cs" />
+    <Compile Include="Contracts\IIssueToTechnicianBusiness.cs" />
     <Compile Include="Contracts\IItemBusiness.cs" />
     <Compile Include="Contracts\ILocalPurchaseBusiness.cs" />
     <Compile Include="Contracts\IOtherIncomeBusiness.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Services\EmployeesBusiness.cs" />
     <Compile Include="Services\Form8BRetailInvoiceBusiness.cs" />
     <Compile Include="Services\Form8TaxInvoiceBusiness.cs" />
+    <Compile Include="Services\IssueToTechnicianBusiness.cs" />
     <Compile Include="Services\ItemBusiness.cs" />
     <Compile Include="Services\LocalPurchaseBusiness.cs" />
     <Compile Include="Services\OtherIncomeBusiness.cs" />
