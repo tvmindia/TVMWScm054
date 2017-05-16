@@ -26,6 +26,9 @@
     border-bottom:solid;
     border-width:medium;
     border-bottom-color:lightblue;
+    font-family:'Segoe UI';
+    padding-bottom:5px;
+
 }
 .DashboardSummary {
     
@@ -465,3 +468,5 @@ color: #e32;
     border-width:thin;
     border-color:lightgray;
 }
+
+
