@@ -21,5 +21,6 @@ namespace SCManager.UserInterface.Models
         ////[Required(ErrorMessage = "Confirmation Password is required.")]
         //[System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
         //public string ConfirmPassword { get; set; }
+        public bool IsFailure { get; set; }
     }
 }

@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc; 
+using System.Web.Mvc;
 using AutoMapper;
 using Newtonsoft.Json;
 using SCManager.UserInterface.Models;
 using SCManager.DataAccessObject.DTO;
 using SCManager.BusinessService.Contracts;
+using SCManager.UserInterface.CustomAttributes;
 
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class Form8BRetailInvoiceController : Controller
     {
         #region Constructor_Injection
@@ -26,6 +28,7 @@ namespace SCManager.UserInterface.Controllers
         #endregion Constructor_Injection
 
         // GET: Form8BRetailInvoice
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
             return View();
@@ -33,6 +36,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllForm8
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllForm8B(Form8BViewModel dataObj)
         {
             try
@@ -51,6 +55,7 @@ namespace SCManager.UserInterface.Controllers
 
 
         [HttpPost]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string InsertUpdateForm8B(Form8BViewModel Form8BObj)
         {
             string result = "";
@@ -78,6 +83,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DeleteForm8B(Form8ViewModel Form8BObj)
         {
 
@@ -102,6 +108,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DeleteForm8BDetail(Form8BDetailViewModel Form8BObj)
         {
 
@@ -132,6 +139,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetForm8B(Form8ViewModel dataObj)
         {
             try
@@ -150,6 +158,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();

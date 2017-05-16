@@ -109,6 +109,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IAuthenticationRepository.cs" />
     <Compile Include="Contracts\ICallandServiceTypesRepository.cs" />
     <Compile Include="Contracts\ICategoryRepository.cs" />
     <Compile Include="Contracts\ICreditNotesRepository.cs" />
@@ -123,11 +124,13 @@
     <Compile Include="Contracts\IIssueToTechnicianRepository.cs" />
     <Compile Include="Contracts\IItemRepository.cs" />
     <Compile Include="Contracts\ILocalPurchaseRepository.cs" />
+    <Compile Include="Contracts\IOpeningSettingRepository.cs" />
     <Compile Include="Contracts\IOtherIncomeRepository.cs" />
     <Compile Include="Contracts\ISalesReturnRepository.cs" />
     <Compile Include="Contracts\ISubCategoryRepository.cs" />
     <Compile Include="Contracts\ITechnicianRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AuthenticationRepository.cs" />
     <Compile Include="Services\CallandServiceTypesRepository.cs" />
     <Compile Include="Services\CategoryRepository.cs" />
     <Compile Include="Services\CreditNotesRepository.cs" />
@@ -140,6 +143,7 @@
     <Compile Include="Services\IssueToTechnicianRepository.cs" />
     <Compile Include="Services\ItemRepository.cs" />
     <Compile Include="Services\LocalPurchaseRepository.cs" />
+    <Compile Include="Services\OpeningSettingRepository.cs" />
     <Compile Include="Services\OtherIncomeRepository.cs" />
     <Compile Include="Services\SalesReturnRepository.cs" />
     <Compile Include="Services\SubCategoryRepository.cs" />

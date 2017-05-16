@@ -6,10 +6,11 @@
 @Styles.Render("~/Content/css")
 @Styles.Render("~/Content/UserCSS/Login")
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
+    <title>Index</title>
 </head>
 <body>
     <div class="container">
@@ -18,12 +19,10 @@
             <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
             <p id="profile-name" class="profile-name-card"></p>
 
-            @using (Ajax.BeginForm("LookupUser", "Login", new AjaxOptions { HttpMethod = "POST", OnSuccess = "LoginSuccess", OnFailure = "LoginFailure", AllowCache = false, LoadingElementId = "" }, new { @class = "form-horizontal form-signin", role = "form", id = "Loginform" }))
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal form-signin", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
 
                 <span id="reauth-email" class="reauth-email"></span>
                 @Html.EditorFor(model => model.LoginName, new { htmlAttributes = new { @class = "form-control", placeholder = "Username", autofocus = "autofocus" } })
@@ -40,12 +39,21 @@
             <a href="#" class="forgot-password">
                 Forgot the password?
             </a>
+           @{
+               if (Model != null)
+               {
+                   if (Model.IsFailure)
+                   {
+                    <span class="text-danger logfailed">Login Failed</span>
+                   }
+               }
+           }
         </div><!-- /card-container -->
     </div><!-- /container -->
 </body>
 </html>
+
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 @Scripts.Render("~/bundles/jqueryunobtrusiveajaxvalidate")
 @Scripts.Render("~/bundles/Login")
-

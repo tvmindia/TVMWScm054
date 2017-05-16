@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using SCManager.BusinessService.Contracts;
 using SCManager.DataAccessObject.DTO;
+using SCManager.UserInterface.CustomAttributes;
 using SCManager.UserInterface.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class CreditNotesController : Controller
     {
         Const c = new Const();
@@ -26,6 +28,7 @@ namespace SCManager.UserInterface.Controllers
         #endregion Constructor_Injection
 
         // GET: CreditNotes
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
             return View();
@@ -33,6 +36,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllCreditNotes
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllCreditNotes(string showAllYN)
         {
             UA ua = new UA();
@@ -43,6 +47,7 @@ namespace SCManager.UserInterface.Controllers
         #endregion GetAllCreditNotes
         #region GetCreditNotesBetweenDates
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetCreditNotesBetweenDates(string fromDate, string toDate)
         {
             UA ua = new UA();
@@ -54,6 +59,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetCreditNotesByID
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetCreditNotesByID(string ID)
         {
             UA ua = new UA();
@@ -66,6 +72,7 @@ namespace SCManager.UserInterface.Controllers
         #region DeleteCreditNote
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DeleteCreditNote(string ID)
         {
             string status = null;
@@ -110,6 +117,7 @@ namespace SCManager.UserInterface.Controllers
         #region InsertUpdateCreditNotes
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string InsertUpdateCreditNotes(CreditNotesViewModel creditNotesViewModelViewModelObj)
         {
             object result = null;
@@ -167,6 +175,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();

@@ -8,9 +8,11 @@ using Newtonsoft.Json;
 using SCManager.UserInterface.Models;
 using SCManager.DataAccessObject.DTO;
 using SCManager.BusinessService.Contracts;
+using SCManager.UserInterface.CustomAttributes;
 
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class LocalPurchaseController : Controller
     {
         // GET: LocalPurchase
@@ -25,7 +27,7 @@ namespace SCManager.UserInterface.Controllers
 
         }
         #endregion Constructor_Injection
-
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
             return View();
@@ -33,6 +35,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllLocalPurchase
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllLocalPurchase(LocalPurchaseViewModel dataObj)
         {
             try
@@ -49,6 +52,7 @@ namespace SCManager.UserInterface.Controllers
         #endregion  GetAllLocalPurchase
 
         [HttpPost]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string InsertUpdateLocalPurchase(LocalPurchaseViewModel LocalPurchaseObj)
         {
             string result = "";
@@ -75,6 +79,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DeleteLocalPurchase(LocalPurchaseViewModel LocalPurchaseObj)
         {
 
@@ -99,6 +104,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DeleteLocalPurchaseDetail(LocalPurchaseDetailViewModel LocalPurchaseObj)
         {
 
@@ -129,6 +135,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetLocalPurchase(LocalPurchaseViewModel dataObj)
         {
             try
@@ -147,6 +154,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();

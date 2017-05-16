@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using SCManager.BusinessService.Contracts;
 using SCManager.DataAccessObject.DTO;
+using SCManager.UserInterface.CustomAttributes;
 using SCManager.UserInterface.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class DefectiveorDamagedController : Controller
     {
         Const c = new Const();
@@ -29,6 +31,7 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion Constructor_Injection
         // GET: DefectiveorDamaged
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
             DefectiveorDamagedViewModel defectiveorDamagedViewModel = null;
@@ -60,6 +63,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllDefectiveDamaged
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllDefectiveDamaged()
         {
             UA ua = new UA();
@@ -71,6 +75,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllItemCode    
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllItemCode(ItemDropdownViewModel obj)
         {
             UA ua = new UA();
@@ -82,6 +87,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetDefectiveDamagedByID
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetDefectiveDamagedByID(string ID)
         {
             UA ua = new UA();
@@ -95,6 +101,7 @@ namespace SCManager.UserInterface.Controllers
         #region InsertUpdateDefectDamaged
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string InsertUpdateDefectDamaged(DefectiveorDamagedViewModel defectiveorDamagedViewModelObj)
         {
             object result = null;
@@ -158,6 +165,7 @@ namespace SCManager.UserInterface.Controllers
         #region DeleteDefectiveDamaged
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DeleteDefectiveDamaged(string ID)
         {
             string status = null;
@@ -202,6 +210,7 @@ namespace SCManager.UserInterface.Controllers
         #region ReturnDefectiveDamaged
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string ReturnDefectiveDamaged(DefectiveorDamagedViewModel defectiveorDamagedViewModelObj)
         {
             string status = null;
@@ -237,6 +246,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region DefectiveDamagedValidation
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DefectiveDamagedValidation(string itemID, string empID,string type)
         {
             string status = null;
@@ -269,6 +279,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();

@@ -446,3 +446,10 @@ color: #e32;
     margin-left:20px;
     margin-right:-20px;
 }
+
+
+.ULthin {
+    border-bottom:solid;
+    border-width:thin;
+    border-color:lightgray;
+}

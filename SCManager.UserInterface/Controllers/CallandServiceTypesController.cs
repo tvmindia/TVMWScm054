@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using SCManager.BusinessService.Contracts;
 using SCManager.DataAccessObject.DTO;
+using SCManager.UserInterface.CustomAttributes;
 using SCManager.UserInterface.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class CallandServiceTypesController : Controller
     {
         #region Constructor_Injection
@@ -24,12 +26,14 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion Constructor_Injection
         // GET: CallandServiceTypes
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public ActionResult Index()
         {
             return View();
         }
         #region GetCallTypes
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetCallTypes()
         {
             UA ua = new UA();
@@ -40,6 +44,7 @@ namespace SCManager.UserInterface.Controllers
         #endregion GetCallTypes
         #region GetServiceTypes
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetServiceTypes()
         {
             UA ua = new UA();
@@ -51,6 +56,7 @@ namespace SCManager.UserInterface.Controllers
         #region UpdateCallandServiceTypes
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string UpdateCallandServiceTypes(CallandServiceTypesViewModel callandServiceTypesViewModel)
         {
             object result = null;
@@ -98,6 +104,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();

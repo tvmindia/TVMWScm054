@@ -28,7 +28,8 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/userpluginjs").Include("~/Scripts/jquery.noty.packaged.min.js", "~/Scripts/custom.js", "~/Scripts/Chart.js", "~/Scripts/sweetalert.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrapdatepicker").Include("~/Scripts/bootstrap-datepicker.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/userpluginjs").Include("~/Scripts/jquery.noty.packaged.min.js", "~/Scripts/custom.js", "~/Scripts/Chart.js", "~/Scripts/sweetalert.min.js"));
-
+           
+            bundles.Add(new ScriptBundle("~/bundles/OpeningSetting").Include("~/Scripts/UserJS/OpeningSetting.js"));
             bundles.Add(new ScriptBundle("~/bundles/Form8").Include("~/Scripts/UserJS/Form8.js"));
             bundles.Add(new ScriptBundle("~/bundles/Form8B").Include("~/Scripts/UserJS/Form8B.js"));
             bundles.Add(new ScriptBundle("~/bundles/LocalPurchase").Include("~/Scripts/UserJS/LocalPurchase.js"));

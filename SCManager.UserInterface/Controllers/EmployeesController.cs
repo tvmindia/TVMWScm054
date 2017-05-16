@@ -8,9 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using SCManager.UserInterface.CustomAttributes;
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class EmployeesController : Controller
     {
         Const c = new Const();
@@ -26,6 +27,7 @@ namespace SCManager.UserInterface.Controllers
         #endregion Constructor_Injection
 
         // GET: Employees
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public ActionResult Index()
         {
             return View();
@@ -33,6 +35,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllEmployees
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetAllEmployees()
         {
             UA ua = new UA();
@@ -43,7 +46,9 @@ namespace SCManager.UserInterface.Controllers
         #endregion GetAllEmployees
 
         #region GetEmployeeByID
+
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetEmployeeByID(string ID)
         {
             UA ua = new UA();
@@ -56,6 +61,7 @@ namespace SCManager.UserInterface.Controllers
         #region InsertUpdateEmployee
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string InsertUpdateEmployee(EmployeesViewModel employeesViewModel)
         {
             object result = null;
@@ -104,6 +110,7 @@ namespace SCManager.UserInterface.Controllers
         #region DeleteEmployee
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string DeleteEmployee(string ID)
         {
             string status = null;
@@ -149,6 +156,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();

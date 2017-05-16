@@ -12,6 +12,7 @@ namespace SCManager.BusinessService.Contracts
         string GetXMLfromObject(List<Form8Detail> myObj, string mandatoryProperties, UA ua);
         string GetXMLfromForm8BDetail(List<Form8BDetail> myObj, string mandatoryProperties, UA ua);
         string GetXMLfromLocalPurchaseDetail(List<LocalPurchaseDetail> myObj, string mandatoryProperties, UA ua);
-        string ConvertCurrency(decimal value);
+        string GetXMLfromOpenDetail(List<OpeningDetail> myObj, string mandatoryProperties, UA ua);
+        string ConvertCurrency(decimal value, int DecimalPoints = 0);
     }
 }
