@@ -43,7 +43,8 @@
                       
             <div class="col-md-12">
                 <div class="col-md-5">
-                    <hr />
+                 <br />
+                    <br />
                     <div class="form-group">
                         <div class="col-md-3">
                             @Html.LabelFor(model => model.EmpID, htmlAttributes: new { @class = "control-label" })
@@ -131,7 +132,8 @@
 
                 <div class="form-horizontal">
 
-                    <hr />
+                    <br />
+                    <br />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="col-md-12">
                         <div class="col-md-6">
@@ -194,6 +196,9 @@
     </div>
 <datalist id="Materials" onfocus='this.size=10;' onblur='this.size=1;'
           onchange='this.size=1; this.blur();'></datalist>
+<div class="preloader" id="prelaoder">
+    <img src="~/Content/images/loading.gif" class="preloaderImg" />
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/datatable")
     @Scripts.Render("~/bundles/jqueryunobtrusiveajaxvalidate")

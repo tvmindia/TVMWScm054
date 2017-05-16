@@ -107,6 +107,7 @@ function DeleteSuccess(data, status) {
 function GetOtherIncomeBetweenDates() {
     try {
         debugger;
+        $("#showAllYNCheckbox").prop('checked', false);
         var fromDate = $("#fromDate").val();
         var toDate = $("#toDate").val();
         if (toDate == "" && fromDate == "") {
