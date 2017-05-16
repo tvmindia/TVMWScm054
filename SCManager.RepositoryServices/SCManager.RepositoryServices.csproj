@@ -121,6 +121,7 @@
     <Compile Include="Contracts\IForm8TaxInvoiceRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Contracts\IIssueToTechnicianRepository.cs" />
     <Compile Include="Contracts\IItemRepository.cs" />
     <Compile Include="Contracts\ILocalPurchaseRepository.cs" />
     <Compile Include="Contracts\IOpeningSettingRepository.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Services\EmployeesRepository.cs" />
     <Compile Include="Services\Form8BRetailInvoiceRepository.cs" />
     <Compile Include="Services\Form8TaxInvoiceRepository.cs" />
+    <Compile Include="Services\IssueToTechnicianRepository.cs" />
     <Compile Include="Services\ItemRepository.cs" />
     <Compile Include="Services\LocalPurchaseRepository.cs" />
     <Compile Include="Services\OpeningSettingRepository.cs" />
