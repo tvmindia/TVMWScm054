@@ -409,7 +409,7 @@ function save() {
                 {
                     var totalQty = qty + hdfQty - enteredQty;
                     if (type == "Defective")
-                    {
+                    { 
                         notyConfirm("Do you want to continue ?", 'SaveClick()', "The technician's stock for selected item will reduce to " + totalQty + ".", "Yes, Save it!");
                     }
                     else
