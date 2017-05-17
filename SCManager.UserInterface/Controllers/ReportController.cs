@@ -59,7 +59,7 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
-                    ToolboxViewModelObj.backbtn.Title = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back to reports";
                     ToolboxViewModelObj.backbtn.Event = "goBack();";
                     break;
              

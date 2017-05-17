@@ -484,6 +484,13 @@ function CalculateAmount(row) {
     rate = parseFloat(EGrate) || 0;
     dic = parseFloat(EGdic) || 0;
 
+    if (dic > (qty * rate)) {
+        dic = (qty * rate);
+    }
+    else if (dic < 0) {
+        dic = 0
+    }
+
     EG_GridData[row - 1]['Rate'] = roundoff(rate);
     EG_GridData[row - 1]['BasicAmount'] = roundoff(qty * rate);
     EG_GridData[row - 1]['TradeDiscount'] = roundoff(dic);
