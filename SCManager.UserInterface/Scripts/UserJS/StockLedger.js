@@ -7,7 +7,7 @@ $(document).ready(function () {
          {
              dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
              order: [],
-             searching: false,
+             searching: true,
              paging: true,
              data: GetAllStockLedger(),
              columns: [
@@ -23,7 +23,7 @@ $(document).ready(function () {
                { "data": "logDetails", render: function (data, type, row) { return ConvertJsonToDate(data.CreatedDate) }, "defaultContent": "<i>-</i>" }
 
              ],
-             columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
+             columnDefs: [{ "targets": [0,1,2,3], "visible": false, "searchable": false },
                   { className: "text-right", "targets": [] },
                     { className: "text-center", "targets": [5, 6, 7, 8] },
                     { className: "text-left", "targets": [2, 3, 4] },
@@ -37,7 +37,7 @@ $(document).ready(function () {
                  api.column(0, { page: 'current' }).data().each(function (group, i) {
                      if (last !== group) {
                          $(rows).eq(i).before(
-                             '<tr class="group"><td colspan="5">' +'<b>Item</b> : '+ group + '</td></tr>'
+                             '<tr class="group "><td colspan="5" class="rptGrp">' + '<b>Item</b> : ' + group + '</td></tr>'
                          );
 
                          last = group;
