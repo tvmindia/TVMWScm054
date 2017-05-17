@@ -10,5 +10,6 @@ namespace SCManager.RepositoryServices.Contracts
     public interface IReportRepository
     {
        List<Item> GetItemsSummary(UA UA, string fromdate = null, string todate = null);
+       List<SystemReport> GetAllSysReports(UA ua);
     }
 }

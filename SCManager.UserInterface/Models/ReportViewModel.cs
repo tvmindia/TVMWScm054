@@ -5,6 +5,18 @@ using System.Web;
 
 namespace SCManager.UserInterface.Models
 {
+    public class SystemReportViewModel
+    {
+        public string SCCode { get; set; }
+        public Guid ID { get; set; }
+        public string ReportName { get; set; }
+        public string ReportDescription { get; set; }
+        public string Controller { get; set; }
+        public string Action { get; set; }
+        public string SPName { get; set; }
+        public string SQL { get; set; }
+    }
+
     public class StockSummaryViewModel
     {
         public string SCCode { get; set; }
@@ -24,4 +36,5 @@ namespace SCManager.UserInterface.Models
         public float Value { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
     }
+
 }

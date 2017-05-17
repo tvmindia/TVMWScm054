@@ -1,4 +1,5 @@
 ﻿var DataTables = {};
+var appAddress = window.location.protocol + "//" + window.location.host + "/";   //Retrieving browser Url 
 $(document).ready(function () {
     try {
 
@@ -115,5 +116,10 @@ function RefreshItemSummaryTable()
 function UnderConstruction()
 {
     notyAlert('error', 'Under Construction');
+}
+
+function goBack()
+{
+    window.location = appAddress + "Report/Index/";
 }
 
