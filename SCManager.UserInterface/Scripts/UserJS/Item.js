@@ -50,7 +50,7 @@ $(document).ready(function () {
 //---------------get grid fill result-------------------
 function GetAllItems() {
     try {
-
+        debugger;
         var data = {};
         var ds = {};
         ds = GetDataFromServer("Item/GetAllItems/", data);

@@ -56,8 +56,23 @@ namespace SCManager.UserInterface.Controllers
                     });
                 }
                 itemViewModal.CategoryList = selectListItem;
-               
-        
+
+                //------------------ UOM Dropdown Bind--------------------//
+                selectListItem = new List<SelectListItem>();
+                //Categories Drop down bind
+                List<ItemViewModel> UOMList = Mapper.Map<List<Item>, List<ItemViewModel>>(_itemBusiness.GetAllUOMs());
+                UOMList = UOMList == null ? null : UOMList.OrderBy(attset => attset.Description).ToList();
+                foreach (ItemViewModel clvm in UOMList)
+                {
+                    selectListItem.Add(new SelectListItem
+                    {
+                        Text = clvm.UOMDesc,
+                        Value = clvm.UOM,
+                        Selected = false
+                    });
+                }
+                itemViewModal.UOMList = selectListItem;
+
 
             }
             catch(Exception ex)

@@ -331,7 +331,54 @@ namespace SCManager.RepositoryServices.Services
         }
         #endregion GetAllItemCode
 
-      
+        #region GetAllUOMs
+        public List<Item> GetAllUOMs()
+        {
+            List<Item> Itemlist = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                    
+                        cmd.CommandText = "[GetAllUOMs]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                Itemlist = new List<Item>();
+                                while (sdr.Read())
+                                {
+                                    Item itemObj = new Item();
+
+                                    {
+                                        itemObj.UOM = (sdr["Code"].ToString() != "" ? (sdr["Code"].ToString()) : itemObj.UOM);
+                                        itemObj.UOMDesc = (sdr["Description"].ToString() != "" ? sdr["Description"].ToString() : itemObj.UOMDesc);
+
+                                    };
+
+                                    Itemlist.Add(itemObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Itemlist;
+        }
+        #endregion GetAllUOMs
+
         #endregion Methods
     }
 }

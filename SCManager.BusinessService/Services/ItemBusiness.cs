@@ -31,7 +31,12 @@ namespace SCManager.BusinessService.Services
             return Itemlist;
 
         }
-
+        public List<Item> GetAllUOMs()
+        {
+            List<Item> Itemlist = null;
+            Itemlist = _itemRepository.GetAllUOMs();
+            return Itemlist;
+        }
         public List<Item> GetItemByID(UA UA,string ID)
         {
             List<Item> Itemlist = null;

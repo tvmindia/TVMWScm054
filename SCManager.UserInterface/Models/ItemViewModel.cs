@@ -45,7 +45,9 @@ namespace SCManager.UserInterface.Models
         public string Remarks { get; set; }
         [Display(Name = "Selling Rate (₹)")]
         public float? SellingRate { get; set; }
+        public string UOMDesc { get; set; }
         public List<SelectListItem> CategoryList { get; set; }
+        public List<SelectListItem> UOMList { get; set; }
         public List<SelectListItem> SubCategoryList { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
     }
