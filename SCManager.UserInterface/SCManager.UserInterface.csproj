@@ -387,6 +387,7 @@
     <Content Include="Content\UserCSS\Form8B.css" />
     <Content Include="Content\UserCSS\Item.css" />
     <Content Include="Content\UserCSS\Login.css" />
+    <Content Include="Content\UserCSS\Report.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -559,6 +560,7 @@
     <Content Include="Views\Account\NotAuthorized.cshtml" />
     <Content Include="Views\OpeningSetting\Index.cshtml" />
     <Content Include="Views\IssueToTechnician\Index.cshtml" />
+    <Content Include="Views\Report\StockSummary.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

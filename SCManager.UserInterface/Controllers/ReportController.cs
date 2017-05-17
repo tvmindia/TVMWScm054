@@ -23,6 +23,12 @@ namespace SCManager.UserInterface.Controllers
         // GET: OfficeStockReport
         public ActionResult Index()
         {
+            UA ua = new UA();
+            List<SystemReportViewModel> SysReportVM = Mapper.Map<List<SystemReport>,List<SystemReportViewModel>>(_reportBusiness.GetAllSysReports(ua));
+            return View(SysReportVM);
+        }
+        public ActionResult StockSummary()
+        {
             return View();
         }
 
@@ -49,7 +55,14 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.PrintBtn.Title = "Print";
                     ToolboxViewModelObj.PrintBtn.Event = "UnderConstruction();";
 
+                    ToolboxViewModelObj.backbtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Text = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back";
+                    ToolboxViewModelObj.backbtn.Event = "goBack();";
                     break;
+             
+
+                 
                
                 default:
                     return Content("Nochange");

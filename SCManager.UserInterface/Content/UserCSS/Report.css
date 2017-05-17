@@ -1,0 +1,11 @@
+﻿.container{
+    min-height:650px;
+}
+
+.list-group-item {
+    /*! height:auto; */
+    min-height:65px;
+}
+list-group-item.active small {
+    color:#fff;
+}

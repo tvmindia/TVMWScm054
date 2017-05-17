@@ -31,5 +31,19 @@ namespace SCManager.BusinessService.Services
             }
             return ItemList;
         }
+
+        public List<SystemReport> GetAllSysReports(UA ua)
+        {
+            List<SystemReport> ReportList = null;
+            try
+            {
+                ReportList = _reportRepository.GetAllSysReports(ua);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ReportList;
+        }
     }
 }
