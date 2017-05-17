@@ -47,6 +47,7 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/OtherIncome").Include("~/Scripts/UserJS/OtherIncome.js"));
             bundles.Add(new ScriptBundle("~/bundles/Report").Include("~/Scripts/UserJS/Report.js"));
             bundles.Add(new ScriptBundle("~/bundles/IssueToTechnician").Include("~/Scripts/UserJS/IssueToTechnician.js"));
+            bundles.Add(new ScriptBundle("~/bundles/ReceiveFromTechnician").Include("~/Scripts/UserJS/ReceiveFromTechnician.js"));
         }
     }
 }
