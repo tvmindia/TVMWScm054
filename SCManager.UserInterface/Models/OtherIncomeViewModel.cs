@@ -24,6 +24,7 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Amount (₹)")]
         public float Amount { get; set; }
         [Display(Name = "Mode Of Payment")]
+        [Required(ErrorMessage = "Please Select Mode Of Payment")]
         public string PaymentMode { get; set; }
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
