@@ -61,6 +61,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ItemObj.SubcategoryID = (sdr["SubcategoryID"].ToString() != "" ? Guid.Parse(sdr["SubcategoryID"].ToString()) : _ItemObj.SubcategoryID);
                                         _ItemObj.Subcategory = (sdr["Subcategory"].ToString() != "" ? (sdr["Subcategory"].ToString()) : _ItemObj.Subcategory);
                                         _ItemObj.Stock = (sdr["StockQty"].ToString() != "" ? (sdr["StockQty"].ToString()) : _ItemObj.Stock);
+                                        _ItemObj.DefDamgStockQty = (sdr["DefDamgQty"].ToString() != "" ? (sdr["DefDamgQty"].ToString()) : _ItemObj.DefDamgStockQty);
                                         _ItemObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _ItemObj.UOM);
                                         _ItemObj.ReorderQty = (sdr["ReorderQty"].ToString() != "" ? (sdr["ReorderQty"].ToString()) : _ItemObj.ReorderQty);
                                         _ItemObj.ProductCommission = (sdr["ProductCommission"].ToString() != "" ? float.Parse(sdr["ProductCommission"].ToString()) : _ItemObj.ProductCommission);
@@ -118,6 +119,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ItemObj.SubcategoryID = (sdr["SubcategoryID"].ToString() != "" ? Guid.Parse(sdr["SubcategoryID"].ToString()) : _ItemObj.SubcategoryID);
                                         _ItemObj.Subcategory = (sdr["Subcategory"].ToString() != "" ? (sdr["Subcategory"].ToString()) : _ItemObj.Subcategory);
                                         _ItemObj.Stock = (sdr["StockQty"].ToString() != "" ? (sdr["StockQty"].ToString()) : _ItemObj.Stock);
+                                        _ItemObj.DefDamgStockQty = (sdr["DefDamgQty"].ToString() != "" ? (sdr["DefDamgQty"].ToString()) : _ItemObj.DefDamgStockQty);
                                         _ItemObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _ItemObj.UOM);
                                         _ItemObj.ReorderQty = (sdr["ReorderQty"].ToString() != "" ? (sdr["ReorderQty"].ToString()) : _ItemObj.ReorderQty);
                                         _ItemObj.SellingRate = (sdr["SellingRate"].ToString() != "" ? float.Parse(sdr["SellingRate"].ToString()) : _ItemObj.SellingRate);

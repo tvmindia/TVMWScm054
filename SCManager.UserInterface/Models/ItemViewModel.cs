@@ -39,7 +39,8 @@ namespace SCManager.UserInterface.Models
 
         [Display(Name = "Product Commission (₹)")]
         public float? ProductCommission { get; set; }
-
+        [Display(Name = "Def/Damg Qty")]
+        public string DefDamgStockQty { get; set; }
         [Display(Name = "Remarks")]
         public string Remarks { get; set; }
         [Display(Name = "Selling Rate (₹)")]

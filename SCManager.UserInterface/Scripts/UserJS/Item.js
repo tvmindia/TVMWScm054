@@ -18,7 +18,8 @@ $(document).ready(function () {
                { "data": "Description", "defaultContent": "<i>-</i>" },
                { "data": "Category", "defaultContent": "<i>-</i>" },
                { "data": "Subcategory", "defaultContent": "<i>-</i>" },
-               { "data": "Stock","defaultContent": "<i>-</i>" },
+               { "data": "Stock", "defaultContent": "<i>-</i>" },
+               { "data": "DefDamgStockQty", "defaultContent": "<i>-</i>" },
                { "data": "UOM", "defaultContent": "<i>-</i>" },
                { "data": "ReorderQty","defaultContent": "<i>-</i>" },
                { "data": "ProductCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
@@ -26,8 +27,8 @@ $(document).ready(function () {
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
-                  { className: "text-right", "targets": [5, 7, 8] },
-                    { className: "text-center", "targets": [1,3, 4, 6, 10] },
+                  { className: "text-right", "targets": [5, 6, 8,9] },
+                    { className: "text-center", "targets": [1,3, 4,7, 10] },
                     { className: "text-left", "targets": [2,9] },
 
              ]
@@ -155,6 +156,7 @@ function fillItems(ID) {
     $("#ItemCode").val(thisItem[0].ItemCode);
     $("#Description").val(thisItem[0].Description)
     $("#Stock").val(thisItem[0].Stock)
+    $("#DefDamgStockQty").val(thisItem[0].DefDamgStockQty);
     $("#UOM").val(thisItem[0].UOM)
     //Dropdown
     $("#ReorderQty").val(thisItem[0].ReorderQty)
@@ -176,6 +178,7 @@ function clearfields() {
     $("#ItemCode").val("")
     $("#Description").val("")
     $("#Stock").val("")
+    $("#DefDamgStockQty").val("")
     $("#UOM").val("")
     $("#ReorderQty").val("");
     $("#ProductCommission").val("");

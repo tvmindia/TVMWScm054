@@ -48,9 +48,10 @@
                             <th>Category</th>
                             <th>Sub Category</th>
                             <th>Stock Qty </th>
+                            <th>Def/Damg Qty</th>
                             <th>UOM</th>
                             <th>Reorder Qty</th>
-                            <th>Product Commission (₹)</th>
+                            <th style="width:95px !important;">Product Commission (₹)</th>
                             <th style="width:200px !important;">Remarks</th>
                             <th>...</th>
 
@@ -143,6 +144,15 @@
                                 </div>
                                 <div class="col-md-5">
                                     @Html.EditorFor(model => model.Stock, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", style = "text-align:right;" } })
+                                    @*@Html.ValidationMessageFor(model => model.Stock, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.DefDamgStockQty, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.DefDamgStockQty, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", style = "text-align:right;" } })
                                     @*@Html.ValidationMessageFor(model => model.Stock, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
