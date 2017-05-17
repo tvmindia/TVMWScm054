@@ -21,6 +21,7 @@ namespace SCManager.UserInterface.Controllers
             _reportBusiness = reportBusiness;
         }
         // GET: OfficeStockReport
+        [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
@@ -28,11 +29,13 @@ namespace SCManager.UserInterface.Controllers
             List<SystemReportViewModel> SysReportVM = Mapper.Map<List<SystemReport>,List<SystemReportViewModel>>(_reportBusiness.GetAllSysReports(ua));
             return View(SysReportVM);
         }
+        [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult StockSummary()
         {
             return View();
         }
+        [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult StockLedger()
         {
@@ -46,6 +49,7 @@ namespace SCManager.UserInterface.Controllers
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllStockLedger(string fromdate = null, string todate = null)
         {
+
             UA ua = new UA();
             List<StockLedgerViewModel> stockList = Mapper.Map<List<StockLedger>, List<StockLedgerViewModel>>(_reportBusiness.GetStockLedger(ua, fromdate, todate));
             return JsonConvert.SerializeObject(new { Result = "OK", Records = stockList });
