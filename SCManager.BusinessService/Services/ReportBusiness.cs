@@ -38,6 +38,7 @@ namespace SCManager.BusinessService.Services
             try
             {
                 ReportList = _reportRepository.GetAllSysReports(ua);
+                ReportList = ReportList == null ? null : ReportList.OrderBy(rep => rep.Order).ToList();
             }
             catch (Exception ex)
             {

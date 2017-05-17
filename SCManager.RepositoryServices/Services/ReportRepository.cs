@@ -113,6 +113,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ReportObj.Action = (sdr["Action"].ToString() != "" ? sdr["Action"].ToString() : _ReportObj.Action);
                                         _ReportObj.SPName = (sdr["SPName"].ToString() != "" ? sdr["SPName"].ToString() : _ReportObj.SPName);
                                         _ReportObj.SQL = (sdr["SQL"].ToString() != "" ? sdr["SQL"].ToString() : _ReportObj.SQL);
+                                        _ReportObj.Order= (sdr["Order"].ToString() != "" ? int.Parse(sdr["Order"].ToString()) : _ReportObj.Order);
                                     }
                                     Reportlist.Add(_ReportObj);
                                 }

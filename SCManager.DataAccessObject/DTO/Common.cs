@@ -145,5 +145,6 @@ namespace SCManager.DataAccessObject.DTO
         public string Action { get; set; }
         public string SPName { get; set; }
         public string SQL { get; set; }
+        public int Order { get; set; }
     }
 }
