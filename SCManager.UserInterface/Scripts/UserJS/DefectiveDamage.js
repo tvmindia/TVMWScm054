@@ -403,7 +403,7 @@ function save() {
             qty = parseInt(qty);
             hdfQty = parseInt(hdfQty);
            
-            if (qty >= enteredQty)
+            if (qty + hdfQty >= enteredQty)
             {
                 if (hdfQty != enteredQty)
                 {

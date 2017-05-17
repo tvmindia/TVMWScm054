@@ -126,7 +126,7 @@ function EG_Columns_Settings() {
         { className: "text-right", "targets": [6] },
         { className: "text-center disabled", "targets": [ 7] },
         { className: "text-left disabled", "targets": [5] },
-        { className: "text-center", "targets": [3,4] },
+        { className: "text-center", "targets": [3,4,8] },
         { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7] }
 
     ]
@@ -337,8 +337,12 @@ function GetIssueSheetsByTechnician() {
         var empID = $("#ddlIssueListTech").val();
         var transferDate = $("#IssueDate").val();
        
-        if (transferDate == "" && empID == "") {
+        if (transferDate == "" &&  empID=="") {
             //DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(false)).draw(false);
+        }
+        else if( transferDate !="" && empID=="All")
+        {
+
         }
         else {
             var data = { "transferDate": transferDate, "empID": empID };
@@ -353,7 +357,7 @@ function GetIssueSheetsByTechnician() {
                 }
                 else
                 {
-                    reset();
+                    //reset();
                 }
                
             }
