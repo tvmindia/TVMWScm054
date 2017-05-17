@@ -240,7 +240,7 @@
                                             @Html.LabelFor(model => model.VATAmount, htmlAttributes: new { @class = "control-label" })
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="text" id="vatpercentage" class="form-control" onkeyup="calculateVat()" />
+                                            <input type="text" id="vatpercentage" class="form-control vattxt" onkeyup="calculateVat()" />
                                         </div>
                                         <div class="col-md-6">
                                             @Html.EditorFor(model => model.VATAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "vatamount" , @onkeyup = "AmountSummary()" ,@onblur= "RoundTxtBox(this)" } })
