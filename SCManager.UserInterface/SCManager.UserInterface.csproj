@@ -520,7 +520,8 @@
     <Content Include="Scripts\UserJS\Login.js" />
     <Content Include="Scripts\UserJS\OpeningSetting.js" />
     <Content Include="Scripts\UserJS\OtherIncome.js" />
-    <Content Include="Scripts\UserJS\Report.js" />
+    <Content Include="Scripts\UserJS\StockLedger.js" />
+    <Content Include="Scripts\UserJS\StockSummary.js" />
     <Content Include="Scripts\UserJS\SalesReturn.js" />
     <Content Include="Views\Form8TaxInvoice\Index.cshtml">
       <SubType>Code</SubType>
@@ -562,6 +563,7 @@
     <Content Include="Views\IssueToTechnician\Index.cshtml" />
     <Content Include="Views\Report\StockSummary.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Report\StockLedger.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

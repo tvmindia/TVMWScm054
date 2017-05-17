@@ -46,5 +46,19 @@ namespace SCManager.BusinessService.Services
             }
             return ReportList;
         }
+
+        public List<StockLedger> GetStockLedger(UA UA, string fromdate = null, string todate = null)
+        {
+            List<StockLedger> StockLedgerList = null;
+            try
+            {
+               StockLedgerList = _reportRepository.GetStockLedger(UA, fromdate, todate);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return StockLedgerList;
+        }
     }
 }

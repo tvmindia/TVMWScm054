@@ -135,16 +135,5 @@ namespace SCManager.DataAccessObject.DTO
         }
     }
 
-    public class SystemReport
-    {
-        public string SCCode { get; set; }
-        public Guid ID { get; set; }
-        public string ReportName { get; set; }
-        public string ReportDescription { get; set; }
-        public string Controller { get; set; }
-        public string Action { get; set; }
-        public string SPName { get; set; }
-        public string SQL { get; set; }
-        public int Order { get; set; }
-    }
+    
 }

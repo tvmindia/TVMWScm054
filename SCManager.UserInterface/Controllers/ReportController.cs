@@ -33,7 +33,23 @@ namespace SCManager.UserInterface.Controllers
         {
             return View();
         }
-
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public ActionResult StockLedger()
+        {
+            UA ua = new UA();
+            DateTime dt = ua.CurrentDatetime();
+            ViewBag.fromdate = dt.AddDays(-30).ToString("yyyy-MM-dd");
+            ViewBag.todate = dt.ToString("yyyy-MM-dd");
+            return View();
+        }
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetAllStockLedger(string fromdate = null, string todate = null)
+        {
+            UA ua = new UA();
+            List<StockLedgerViewModel> stockList = Mapper.Map<List<StockLedger>, List<StockLedgerViewModel>>(_reportBusiness.GetStockLedger(ua, fromdate, todate));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = stockList });
+        }
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetItemsSummary(string fromdate=null,string todate=null)

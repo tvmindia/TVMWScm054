@@ -38,4 +38,16 @@ namespace SCManager.UserInterface.Models
         public LogDetailsViewModel logDetails { get; set; }
     }
 
+    public class StockLedgerViewModel
+    {
+        public int Order { get; set; }
+        public string SCCode { get; set; }
+        public string ItemCode { get; set; }
+        public string Description { get; set; }
+        public string Type { get; set; }
+        public string RefNo { get; set; }
+        public decimal Qty { get; set; }
+        public string Location { get; set; }
+        public LogDetailsViewModel logDetails { get; set; }
+    }
 }

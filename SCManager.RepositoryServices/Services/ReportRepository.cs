@@ -17,8 +17,6 @@ namespace SCManager.RepositoryServices.Services
         {
             _databaseFactory = databaseFactory;
         }
-
-
         #region GetAllItems
         public List<Item> GetItemsSummary(UA UA, string fromdate = null, string todate = null)
         {
@@ -78,7 +76,58 @@ namespace SCManager.RepositoryServices.Services
             return Itemlist;
         }
         #endregion  GetAllItems
-
+        public List<StockLedger> GetStockLedger(UA UA, string fromdate = null, string todate = null)
+        {
+            List<StockLedger> stockLedgerList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@startDate", SqlDbType.DateTime).Value = fromdate;
+                        cmd.Parameters.Add("@endDate", SqlDbType.DateTime).Value = todate;
+                        cmd.CommandText = "[RPT_StockLedger]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                stockLedgerList = new List<StockLedger>();
+                                while (sdr.Read())
+                                {
+                                    StockLedger _stockLedgerObj = new StockLedger();
+                                    {
+                                        _stockLedgerObj.Order = (sdr["ORD"].ToString() != "" ? int.Parse(sdr["ORD"].ToString()) : _stockLedgerObj.Order);
+                                        _stockLedgerObj.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _stockLedgerObj.SCCode);
+                                        _stockLedgerObj.ItemCode = (sdr["ItemCode"].ToString() != "" ? (sdr["ItemCode"].ToString()) : _stockLedgerObj.ItemCode);
+                                        _stockLedgerObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _stockLedgerObj.Description);
+                                        _stockLedgerObj.Type = (sdr["Type"].ToString() != "" ? sdr["Type"].ToString() : _stockLedgerObj.Type);
+                                        _stockLedgerObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : _stockLedgerObj.RefNo);
+                                        _stockLedgerObj.Qty = (sdr["qty"].ToString() != "" ? decimal.Parse(sdr["qty"].ToString()) : _stockLedgerObj.Qty);
+                                        _stockLedgerObj.Location = (sdr["Location"].ToString() != "" ? (sdr["Location"].ToString()) : _stockLedgerObj.Location);
+                                        _stockLedgerObj.logDetails = new LogDetails();
+                                        _stockLedgerObj.logDetails.CreatedDate = (sdr["CreatedDate"].ToString() != "" ? (DateTime.Parse(sdr["CreatedDate"].ToString())) : _stockLedgerObj.logDetails.CreatedDate);
+                                    }
+                                    stockLedgerList.Add(_stockLedgerObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return stockLedgerList;
+        }
         public List<SystemReport> GetAllSysReports(UA ua)
         {
             List<SystemReport> Reportlist = null;

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "StockSummary";
+    ViewBag.Title = "StockLedger";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
@@ -30,10 +30,9 @@
                 <div class="col-md-12 ">
                     <div id="external_filter" class="form-inline">
                         <label><b>From Date</b></label>
-                        <input class="form-control datepicker" onchange="RefreshItemSummaryTable()" style="width:190px" name="fromdate" id="fromdate" type="Date">
+                        <input class="form-control datepicker" style="width:190px" name="fromdate" onchange="RefreshLedgerTable()" id="fromdate" value=@ViewBag.fromdate type="Date">
                         <label><b>To Date</b> </label>
-                        <input class="form-control datepicker" onchange="RefreshItemSummaryTable()" style="width:190px" name="todate" id="todate" type="Date">
-
+                        <input class="form-control datepicker" style="width:190px" name="todate" onchange="RefreshLedgerTable()" id="todate" value=@ViewBag.todate type="Date">
                     </div>
                 </div>
             </div>
@@ -50,22 +49,22 @@
             <div class="col-md-12">&nbsp;</div>
 
             <div class="col-md-12">
-                <div class="col-md-12 ReportHead">Stock Summary Report</div>
+                <div class="col-md-12 ReportHead">Stock Ledger</div>
                 <div class="container-fluid">
                     <div class="row">
 
-                        <table id="tblItemList" class="table compact" cellspacing="0" width="100%">
+                        <table id="tblLedger" class="table compact" cellspacing="0" width="100%">
                             <thead>
                                 <tr class="text-center">
-                                    <th style="display:none;">ID</th>
                                     <th>Sl No</th>
+                                    <th>SC Code</th>
                                     <th>Item Code</th>
                                     <th>Description</th>
-                                    <th>Category</th>
-                                    <th>Stock Qty </th>
-                                    <th>UOM</th>
-                                    <th>Rate</th>
-                                    <th>Value</th>
+                                    <th>Type</th>
+                                    <th>Refl No</th>
+                                    <th>Quantity</th>
+                                    <th>Location</th>
+                                    <th>Date</th>
                                 </tr>
                             </thead>
                         </table>
@@ -84,7 +83,6 @@
 @section Scripts {
     @Scripts.Render("~/bundles/datatable")
     @Scripts.Render("~/bundles/bootstrapdatepicker")
-    @Scripts.Render("~/bundles/StockSummary")
+    @Scripts.Render("~/bundles/StockLedger")
 }
-
 
