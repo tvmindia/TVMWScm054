@@ -23,7 +23,8 @@ $(document).ready(function () {
                { "data": "logDetails", render: function (data, type, row) { return ConvertJsonToDate(data.CreatedDate) }, "defaultContent": "<i>-</i>" }
 
              ],
-             columnDefs: [{ "targets": [0,1,2,3], "visible": false, "searchable": false },
+             columnDefs: [{ "targets": [0, 1], "visible": false, "searchable": false },
+                 { "targets": [2,3], "visible": false, "searchable": true },
                   { className: "text-right", "targets": [] },
                     { className: "text-center", "targets": [5, 6, 7, 8] },
                     { className: "text-left", "targets": [2, 3, 4] },
