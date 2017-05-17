@@ -12,7 +12,7 @@ $(document).ready(function () {
              data: GetAllStockLedger(),
              columns: [
 
-               { "data": null, "defaultContent": "<i>-</i>" },
+               { "data": "GroupCode", "defaultContent": "<i>-</i>" },
                { "data": "SCCode", "defaultContent": "<i>-</i>" },
                { "data": "ItemCode", "defaultContent": "<i>-</i>" },
                { "data": "Description", "defaultContent": "<i>-</i>" },
@@ -23,12 +23,27 @@ $(document).ready(function () {
                { "data": "logDetails", render: function (data, type, row) { return ConvertJsonToDate(data.CreatedDate) }, "defaultContent": "<i>-</i>" }
 
              ],
-             columnDefs: [{ "targets": [0], "visible": true, "searchable": false },
+             columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
                   { className: "text-right", "targets": [] },
                     { className: "text-center", "targets": [5, 6, 7, 8] },
                     { className: "text-left", "targets": [2, 3, 4] },
 
-             ]
+             ],
+             drawCallback: function (settings) {
+                 var api = this.api();
+                 var rows = api.rows({ page: 'current' }).nodes();
+                 var last = null;
+
+                 api.column(0, { page: 'current' }).data().each(function (group, i) {
+                     if (last !== group) {
+                         $(rows).eq(i).before(
+                             '<tr class="group"><td colspan="5">' +'<b>Item</b> : '+ group + '</td></tr>'
+                         );
+
+                         last = group;
+                     }
+                 });
+             }
          });
 
         DataTables.LedgerTable.on('order.dt search.dt', function () {
