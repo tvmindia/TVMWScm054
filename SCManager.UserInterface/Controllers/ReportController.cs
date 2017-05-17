@@ -21,12 +21,14 @@ namespace SCManager.UserInterface.Controllers
             _reportBusiness = reportBusiness;
         }
         // GET: OfficeStockReport
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
             UA ua = new UA();
             List<SystemReportViewModel> SysReportVM = Mapper.Map<List<SystemReport>,List<SystemReportViewModel>>(_reportBusiness.GetAllSysReports(ua));
             return View(SysReportVM);
         }
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult StockSummary()
         {
             return View();

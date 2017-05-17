@@ -9,3 +9,9 @@
 list-group-item.active small {
     color:#fff;
 }
+
+.list-group-item-heading
+{
+    margin-top: 5px;
+}
+

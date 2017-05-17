@@ -15,6 +15,7 @@ namespace SCManager.UserInterface.Models
         public string Action { get; set; }
         public string SPName { get; set; }
         public string SQL { get; set; }
+        public int Order { get; set; }
     }
 
     public class StockSummaryViewModel
