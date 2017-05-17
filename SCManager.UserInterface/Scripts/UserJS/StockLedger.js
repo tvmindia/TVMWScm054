@@ -5,10 +5,16 @@ $(document).ready(function () {
 
         DataTables.LedgerTable = $('#tblLedger').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"f>rt<"bottom"ip><"clear">',
              order: [],
              searching: true,
              paging: true,
+             pageLength: 50,
+             language: {
+                 search: "_INPUT_",
+                 searchPlaceholder: "Search Items..."
+             },
+             //dom: '<lf<t>ip>',
              data: GetAllStockLedger(),
              columns: [
 
@@ -26,8 +32,9 @@ $(document).ready(function () {
              columnDefs: [{ "targets": [0, 1], "visible": false, "searchable": false },
                  { "targets": [2,3], "visible": false, "searchable": true },
                   { className: "text-right", "targets": [] },
-                    { className: "text-center", "targets": [5, 6, 7, 8] },
-                    { className: "text-left", "targets": [2, 3, 4] },
+                    { className: "text-center", "targets": [6, 8] },
+                    { className: "text-left", "targets": [2, 3, 4,5,7] },
+                     { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8] }
 
              ],
              drawCallback: function (settings) {
@@ -106,3 +113,6 @@ function RefreshLedgerTable()
         notyAlert('error', e.message);
     }
 }
+
+
+ 
