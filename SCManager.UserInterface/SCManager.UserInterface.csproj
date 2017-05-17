@@ -167,6 +167,7 @@
     <Compile Include="Controllers\IssueToTechnicianController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\LocalPurchaseController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\OpeningSettingController.cs" />
     <Compile Include="Controllers\OtherIncomeController.cs" />
     <Compile Include="Controllers\SalesReturnController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Models\OpeningSettingViewModel.cs" />
     <Compile Include="Models\OtherIncomeViewModel.cs" />
     <Compile Include="Models\ReorderAlertViewModel.cs" />
+    <Compile Include="Models\ReportViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SalesReturnViewModel.cs" />
     <Compile Include="Models\ServiceCenterViewModel.cs" />
@@ -371,6 +373,7 @@
     <Content Include="Content\images\favicon.ico" />
     <Content Include="Content\images\indian-rupee.png" />
     <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\printer.png" />
     <Content Include="Content\images\purse-with-bills.png" />
     <Content Include="Content\images\reset.png" />
     <Content Include="Content\images\return.png" />
@@ -516,6 +519,7 @@
     <Content Include="Scripts\UserJS\Login.js" />
     <Content Include="Scripts\UserJS\OpeningSetting.js" />
     <Content Include="Scripts\UserJS\OtherIncome.js" />
+    <Content Include="Scripts\UserJS\Report.js" />
     <Content Include="Scripts\UserJS\SalesReturn.js" />
     <Content Include="Views\Form8TaxInvoice\Index.cshtml">
       <SubType>Code</SubType>
@@ -555,10 +559,12 @@
     <Content Include="Views\Account\NotAuthorized.cshtml" />
     <Content Include="Views\OpeningSetting\Index.cshtml" />
     <Content Include="Views\IssueToTechnician\Index.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Start\App_Data\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Views\OfficeStockReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
