@@ -167,6 +167,7 @@
     <Compile Include="Controllers\IssueToTechnicianController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\LocalPurchaseController.cs" />
+    <Compile Include="Controllers\ReceiveFromTechnicianController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\OpeningSettingController.cs" />
     <Compile Include="Controllers\OtherIncomeController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\OpeningSettingViewModel.cs" />
     <Compile Include="Models\OtherIncomeViewModel.cs" />
+    <Compile Include="Models\ReceiveFromTechnicianViewModel.cs" />
     <Compile Include="Models\ReorderAlertViewModel.cs" />
     <Compile Include="Models\ReportViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
@@ -563,7 +565,6 @@
     <Content Include="Views\IssueToTechnician\Index.cshtml" />
     <Content Include="Views\Report\StockSummary.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
-    <Content Include="Views\Report\StockLedger.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

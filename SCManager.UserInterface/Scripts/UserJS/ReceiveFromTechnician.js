@@ -8,7 +8,7 @@ $(document).ready(function () {
     try {
 
 
-        DataTables.IssuedItems = $('#tblIssuedItemsList').DataTable(
+        DataTables.ReceiveItems = $('#tblReceiptItemsList').DataTable(
        {
            dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
            order: [],
@@ -24,7 +24,7 @@ $(document).ready(function () {
              { "data": "Material", "defaultContent": "<i></i>" },
              { "data": "Description", "defaultContent": "<i></i>" },
              { "data": "Qty", "defaultContent": "<i></i>" },
-             { "data": "UOM", "defaultContent": "<i></i>" }            
+             { "data": "UOM", "defaultContent": "<i></i>" }
            ],
            columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false },
                { "targets": [2], "visible": false, "searchable": false },
@@ -35,13 +35,13 @@ $(document).ready(function () {
            ]
        });
 
-        $('#tblIssuedItemsList tbody').on('dblclick', 'td', function () {
+        $('#tblReceiptItemsList tbody').on('dblclick', 'td', function () {
 
             Edit(this);
         });
 
 
-        DataTables.IssueSheetTable = $('#tblIssueSheet').DataTable(
+        DataTables.ReceiptSheetTable = $('#tblReceiptSheet').DataTable(
       {
           dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
           order: [],
@@ -53,20 +53,20 @@ $(document).ready(function () {
       });
         getMaterials();
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
-        EG_GridDataTable = DataTables.IssueSheetTable;
+        EG_GridDataTable = DataTables.ReceiptSheetTable;
         Add();
-        var $datepicker = $('#IssueDate');
+        var $datepicker = $('#ReceiveDate');
         $datepicker.datepicker('setDate', null);
         // List();
 
         $('#fromDate').change(function () {
-            BindAllIssuedList();
+            BindAllReceiveList();
         });
         $('#toDate').change(function () {
-            BindAllIssuedList();
+            BindAllReceiveList();
         });
-        $('#IssueDate').change(function () {
-            GetIssueSheetsByTechnician();
+        $('#ReceiveDate').change(function () {
+            GetReceiveSheetsByTechnician();
         });
         fillTechnicians();
     } catch (x) {
@@ -125,9 +125,9 @@ function EG_Columns_Settings() {
         { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
         { "targets": [4], "width": "20%" },
         { className: "text-right", "targets": [6] },
-        { className: "text-center disabled", "targets": [ 7] },
+        { className: "text-center disabled", "targets": [7] },
         { className: "text-left disabled", "targets": [5] },
-        { className: "text-center", "targets": [3,4,8] },
+        { className: "text-center", "targets": [3, 4, 8] },
         { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7] }
 
     ]
@@ -141,15 +141,14 @@ function EG_Columns_Settings() {
 //---------------------page related logics----------------------------------- 
 
 
-function fillTechnicians()
-{
+function fillTechnicians() {
     debugger;
-    var ddlSelect = document.getElementById("ddlIssueListTech");
+    var ddlSelect = document.getElementById("ddlReceiveListTech");
     var option = document.createElement('option');
-    option.text ="All Technicians", option.value = "All";
+    option.text = "All Technicians", option.value = "All";
     ddlSelect.appendChild(option);
-    $("#ddlIssueListTech").val("All");
-    BindAllIssuedList()
+    $("#ddlReceiveListTech").val("All");
+    BindAllReceiveList()
 }
 
 function getMaterials() {
@@ -195,39 +194,36 @@ function FillUOM(row) {
     }
 
 } function save() {
-  
+
     var EmpID = $("#HiddenEmpID").val();
-    var IssueDate = $("#IssueDate").val();
-    if (EmpID != "" && IssueDate != "")
-    {
+    var ReceiveDate = $("#ReceiveDate").val();
+    if (EmpID != "" && ReceiveDate != "") {
         debugger;
         var validation = EG_Validate();
         if (validation == "") {
-         
+
             var result = JSON.stringify(EG_GridData);
             $("#DetailJSON").val(result);
-            $("#btnInsertUpdateIssuedSheets").trigger('click');
+            $("#btnInsertUpdateReceiveSheets").trigger('click');
         }
         else {
             notyAlert('error', validation);
         }
     }
-    else
-    {
-        $("#btnInsertUpdateIssuedSheets").trigger('click');
-    }   
+    else {
+        $("#btnInsertUpdateReceiveSheets").trigger('click');
+    }
 }
 
-function IssuedSheetsSaveSuccess(data, status)
-{
+function ReceiptSheetsSaveSuccess(data, status) {
     debugger;
     var i = JSON.parse(data)
     switch (i.Result) {
         case "OK":
             notyAlert('success', i.Message);
             debugger;
-            BindIssueSheetFields(i.Records)
-            ChangeButtonPatchView('IssueToTechnician', 'btnPatchIssueToTechnicianSettab', 'Edit');
+            BindReceiveSheetFields(i.Records)
+            ChangeButtonPatchView('ReceiveFromTechnician', 'btnPatchReceiveFromTechnicianSettab', 'Edit');
 
             break;
         case "Error":
@@ -240,23 +236,22 @@ function IssuedSheetsSaveSuccess(data, status)
             break;
     }
 }
-function BindAllIssuedList()
-{
-    DataTables.IssuedItems.clear().rows.add(GetIssuedList()).draw(false);
+function BindAllReceiveList() {
+    DataTables.ReceiveItems.clear().rows.add(GetReceiveList()).draw(false);
 }
-function GetIssuedList() {
+function GetReceiveList() {
     try {
         debugger;
-        var empID = $("#ddlIssueListTech").val();
+        var empID = $("#ddlReceiveListTech").val();
         var fromDate = $("#fromDate").val();
         var toDate = $("#toDate").val();
-        if (toDate == "" && fromDate == "" && empID=="") {
+        if (toDate == "" && fromDate == "" && empID == "") {
             //DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(false)).draw(false);
         }
         else {
-            var data = { "fromDate": fromDate, "toDate": toDate ,"empID":empID};
+            var data = { "fromDate": fromDate, "toDate": toDate, "empID": empID };
             var ds = {};
-            ds = GetDataFromServer("IssueToTechnician/GetAllIssueToTechnician/", data);
+            ds = GetDataFromServer("ReceiveFromTechnician/GetAllReceiptsFromTechnician/", data);
             debugger;
             if (ds != '') {
                 ds = JSON.parse(ds);
@@ -275,42 +270,38 @@ function GetIssuedList() {
         notyAlert('error', e.message);
     }
 }
-function BindIssueSheetFields(Records)
-{
+function BindReceiveSheetFields(Records) {
     debugger;
-   
-        EG_Rebind_WithData(Records,1)   
-   
-}
-function TechnicianChange(curObj)
-{
-    debugger;
-    $("#ddlIssueListTech").val(curObj.value);
-    GetIssueSheetsByTechnician();
-}
-function Delete(currentObj) {
-    var rowData = DataTables.IssueSheetTable.row($(currentObj).parents('tr')).data();
-    if ((rowData != null) && (rowData.ID != null)) {
-        notyConfirm('Are you sure to delete?', 'DeleteIssueToTech("' + rowData.ID + '","' + rowData[EG_SlColumn] + '")', '', "Yes, delete it!");
-    }
-   
+
+    EG_Rebind_WithData(Records, 1)
 
 }
-function DeleteIssueToTech(id,rw)
-{
+function TechnicianChange(curObj) {
     debugger;
-    var data = { "ID":id };
+    $("#ddlReceiveListTech").val(curObj.value);
+    GetReceiveSheetsByTechnician();
+}
+function Delete(currentObj) {
+    var rowData = DataTables.ReceiptSheetTable.row($(currentObj).parents('tr')).data();
+    if ((rowData != null) && (rowData.ID != null)) {
+        notyConfirm('Are you sure to delete?', 'DeleteReceiveFromTech("' + rowData.ID + '","' + rowData[EG_SlColumn] + '")', '', "Yes, delete it!");
+    }
+
+
+}
+function DeleteReceiveFromTech(id, rw) {
+    debugger;
+    var data = { "ID": id };
     var ds = {};
-    if (id != '' && id != null)
-    {
-        ds = GetDataFromServer("IssueToTechnician/DeleteIssueToTechnician/", data);
+    if (id != '' && id != null) {
+        ds = GetDataFromServer("ReceiveFromTechnician/DeleteReceiveFromTechnician/", data);
         debugger;
         if (ds != '') {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
             notyAlert('success', i.Message);
-            GetIssueSheetsByTechnician();
+            GetReceiveSheetsByTechnician();
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -318,8 +309,7 @@ function DeleteIssueToTech(id,rw)
             return 0;
         }
     }
-    else
-    {
+    else {
         debugger;
         if (EG_GridData.length != 1) {
             EG_GridData.splice(rw - 1, 1);
@@ -331,41 +321,38 @@ function DeleteIssueToTech(id,rw)
         }
         notyAlert('success', 'Deleted Successfully');
     }
-   
+
 }
-function GetIssueSheetsByTechnician() {
+function GetReceiveSheetsByTechnician() {
     try {
         debugger;
-        var empID = $("#ddlIssueListTech").val();
-        var transferDate = $("#IssueDate").val();
-       
-        if (transferDate == "" &&  empID=="") {
+        var empID = $("#ddlReceiveListTech").val();
+        var transferDate = $("#ReceiveDate").val();
+
+        if (transferDate == "" && empID == "") {
             //DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(false)).draw(false);
         }
-        else if( transferDate !="" && empID=="All")
-        {
+        else if (transferDate != "" && empID == "All") {
 
         }
         else {
             var data = { "transferDate": transferDate, "empID": empID };
             var ds = {};
-            ds = GetDataFromServer("IssueToTechnician/GetIssueSheets/", data);
+            ds = GetDataFromServer("ReceiveFromTechnician/GetReceiptsSheet/", data);
             debugger;
             if (ds != '') {
                 ds = JSON.parse(ds);
-                if (ds.Records != undefined && ds.Records != "" && ds.Records != null)
-                {
-                    BindIssueSheetFields(ds.Records);
+                if (ds.Records != undefined && ds.Records != "" && ds.Records != null) {
+                    BindReceiveSheetFields(ds.Records);
                 }
-                else
-                {
+                else {
                     if (typingStarted == 0)
                     {
                         reset();
                     }
                     
                 }
-               
+
             }
             if (ds.Result == "OK") {
                 // debugger;
@@ -384,23 +371,21 @@ function GetIssueSheetsByTechnician() {
 //--------------------button actions ----------------------
 function List() {
     try {
-        ChangeButtonPatchView('IssueToTechnician', 'btnPatchIssueToTechnicianSettab', 'List');
-        var empID = $("#ddlIssueListTech").val();
+        ChangeButtonPatchView('ReceiveFromTechnician', 'btnPatchReceiveFromTechnicianSettab', 'List');
+        var empID = $("#ddlReceiveListTech").val();
         var fromDate = $("#fromDate").val();
         var toDate = $("#toDate").val();
         if (empID != "") {
-            if (toDate != "" || fromDate != "")
-            {
-                BindAllIssuedList();
+            if (toDate != "" || fromDate != "") {
+                BindAllReceiveList();
             }
-            else
-            {
+            else {
                 FillDates();
             }
-            
+
         }
-       
-       // DataTables.eventTable.clear().rows.add(GetAllForm8()).draw(false);
+
+        // DataTables.eventTable.clear().rows.add(GetAllForm8()).draw(false);
     } catch (x) {
         // alert(x);
     }
@@ -408,26 +393,24 @@ function List() {
 }
 
 function reset() {
-    typingStarted = 0;
     EG_ClearTable();
     EG_AddBlankRows(5)
-   // ResetForm();
+    typingStarted = 0;
+    // ResetForm();
 }
 
 function Add() {
-       
-    ChangeButtonPatchView('IssueToTechnician', 'btnPatchIssueToTechnicianSettab', 'Add');
-    var empID = $("#ddlIssueListTech").val();
-    var transferDate = $("#IssueDate").val();
-    if (empID != "" && transferDate != "")
-    {
-        GetIssueSheetsByTechnician();
+
+    ChangeButtonPatchView('ReceiveFromTechnician', 'btnPatchReceiveFromTechnicianSettab', 'Add');
+    var empID = $("#ddlReceiveListTech").val();
+    var transferDate = $("#ReceiveDate").val();
+    if (empID != "" && transferDate != "") {
+        GetReceiveSheetsByTechnician();
     }
-    else
-    {
+    else {
         EG_ClearTable();
         EG_AddBlankRows(5)
-    } 
+    }
 }
 
 function FillDates() {
@@ -456,5 +439,5 @@ function FillDates() {
     + "-" + p_year;
     var $datepicker = $('#fromDate');
     $datepicker.datepicker('setDate', new Date(fromDate));
-    BindAllIssuedList();
+    BindAllReceiveList();
 }

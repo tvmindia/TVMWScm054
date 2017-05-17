@@ -125,6 +125,7 @@
     </Compile>
     <Compile Include="DTO\OpeningSetting.cs" />
     <Compile Include="DTO\OtherIncome.cs" />
+    <Compile Include="DTO\ReceiveFromTechnician.cs" />
     <Compile Include="DTO\ReorderAlert.cs" />
     <Compile Include="DTO\Reports.cs" />
     <Compile Include="DTO\SalesReturn.cs" />

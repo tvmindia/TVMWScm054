@@ -354,6 +354,19 @@ function EG_KeyDown() {
       
     });
 
+    $('.vattxt').keydown(function (e) {
+
+        try {
+            if (e.which === 13) {                
+                e.preventDefault();
+                return false;
+            }
+        } catch (e) {
+
+        }
+
+    });
+
     $('.HeaderBox').keydown(function (e) {
 
         try {
