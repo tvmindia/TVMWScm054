@@ -5,14 +5,20 @@ $(document).ready(function () {
 
         DataTables.LedgerTable = $('#tblLedger').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"f>rt<"bottom"ip><"clear">',
              order: [],
-             searching: false,
+             searching: true,
              paging: true,
+             pageLength: 50,
+             language: {
+                 search: "_INPUT_",
+                 searchPlaceholder: "Search Items..."
+             },
+             //dom: '<lf<t>ip>',
              data: GetAllStockLedger(),
              columns: [
 
-               { "data": null, "defaultContent": "<i>-</i>" },
+               { "data": "GroupCode", "defaultContent": "<i>-</i>" },
                { "data": "SCCode", "defaultContent": "<i>-</i>" },
                { "data": "ItemCode", "defaultContent": "<i>-</i>" },
                { "data": "Description", "defaultContent": "<i>-</i>" },
@@ -23,12 +29,29 @@ $(document).ready(function () {
                { "data": "logDetails", render: function (data, type, row) { return ConvertJsonToDate(data.CreatedDate) }, "defaultContent": "<i>-</i>" }
 
              ],
-             columnDefs: [{ "targets": [0], "visible": true, "searchable": false },
+             columnDefs: [{ "targets": [0, 1], "visible": false, "searchable": false },
+                 { "targets": [2,3], "visible": false, "searchable": true },
                   { className: "text-right", "targets": [] },
-                    { className: "text-center", "targets": [5, 6, 7, 8] },
-                    { className: "text-left", "targets": [2, 3, 4] },
+                    { className: "text-center", "targets": [6, 8] },
+                    { className: "text-left", "targets": [2, 3, 4,5,7] },
+                     { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8] }
 
-             ]
+             ],
+             drawCallback: function (settings) {
+                 var api = this.api();
+                 var rows = api.rows({ page: 'current' }).nodes();
+                 var last = null;
+
+                 api.column(0, { page: 'current' }).data().each(function (group, i) {
+                     if (last !== group) {
+                         $(rows).eq(i).before(
+                             '<tr class="group "><td colspan="5" class="rptGrp">' + '<b>Item</b> : ' + group + '</td></tr>'
+                         );
+
+                         last = group;
+                     }
+                 });
+             }
          });
 
         DataTables.LedgerTable.on('order.dt search.dt', function () {
@@ -90,3 +113,6 @@ function RefreshLedgerTable()
         notyAlert('error', e.message);
     }
 }
+
+
+ 

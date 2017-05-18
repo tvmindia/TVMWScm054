@@ -48,6 +48,7 @@ namespace SCManager.UserInterface.Models
         public string RefNo { get; set; }
         public decimal Qty { get; set; }
         public string Location { get; set; }
+        public string GroupCode { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
     }
 }

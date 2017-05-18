@@ -112,6 +112,7 @@ namespace SCManager.RepositoryServices.Services
                                         _stockLedgerObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : _stockLedgerObj.RefNo);
                                         _stockLedgerObj.Qty = (sdr["qty"].ToString() != "" ? decimal.Parse(sdr["qty"].ToString()) : _stockLedgerObj.Qty);
                                         _stockLedgerObj.Location = (sdr["Location"].ToString() != "" ? (sdr["Location"].ToString()) : _stockLedgerObj.Location);
+                                        _stockLedgerObj.GroupCode= (sdr["GroupCode"].ToString() != "" ? (sdr["GroupCode"].ToString()) : _stockLedgerObj.GroupCode);
                                         _stockLedgerObj.logDetails = new LogDetails();
                                         _stockLedgerObj.logDetails.CreatedDate = (sdr["CreatedDate"].ToString() != "" ? (DateTime.Parse(sdr["CreatedDate"].ToString())) : _stockLedgerObj.logDetails.CreatedDate);
                                     }

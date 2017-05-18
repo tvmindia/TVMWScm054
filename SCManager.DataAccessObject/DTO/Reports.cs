@@ -27,6 +27,8 @@ namespace SCManager.DataAccessObject.DTO
         public string RefNo { get; set; }
         public decimal Qty { get; set; }
         public string Location { get; set; }
+        public string GroupCode { get; set; }
+        
         public LogDetails logDetails { get; set; }
     }
 

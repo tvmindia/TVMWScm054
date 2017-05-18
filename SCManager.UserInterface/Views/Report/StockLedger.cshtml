@@ -35,6 +35,7 @@
                         <input class="form-control datepicker" style="width:190px" name="todate" onchange="RefreshLedgerTable()" id="todate" value=@ViewBag.todate type="Date">
                     </div>
                 </div>
+               
             </div>
 
             <div class="col-md-4 ">
@@ -52,21 +53,24 @@
                 <div class="col-md-12 ReportHead">Stock Ledger</div>
                 <div class="container-fluid">
                     <div class="row">
-
+                     
                         <table id="tblLedger" class="table compact" cellspacing="0" width="100%">
                             <thead>
+                                
                                 <tr class="text-center">
-                                    <th>Sl No</th>
+                                    <th>GroupCode</th>
                                     <th>SC Code</th>
                                     <th>Item Code</th>
                                     <th>Description</th>
                                     <th>Type</th>
-                                    <th>Refl No</th>
+                                    <th>Reference No</th>
                                     <th>Quantity</th>
                                     <th>Location</th>
                                     <th>Date</th>
                                 </tr>
+
                             </thead>
+                          
                         </table>
                     </div>
                 </div>

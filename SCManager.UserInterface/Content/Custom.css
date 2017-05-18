@@ -11,6 +11,10 @@
     
 }
 
+.ReportTitle {
+     color:  #545454;
+}
+
 .Subhead {
      font-size: 17px!important;
 }
@@ -28,8 +32,18 @@
     border-bottom-color:lightblue;
     font-family:'Segoe UI';
     padding-bottom:5px;
+    margin-bottom:5px;
 
 }
+
+.rptGrp {
+   font-size: 13px!important;
+    text-align:left;
+    background-color:#f6f6f6;
+    padding-left:5px;
+    
+}
+
 .DashboardSummary {
     
     background-color:rgba(253, 253, 253, 0.2);
