@@ -45,11 +45,10 @@ namespace SCManager.UserInterface.Controllers
             ViewBag.todate = dt.ToString("yyyy-MM-dd");
             return View();
         }
-
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult TechnicianStock()
         {
-
-            //_reportBusiness.GetTechniciansStockSummary();
             return View();
         }
         [HttpGet]
