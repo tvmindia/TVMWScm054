@@ -15,7 +15,7 @@ $(document).ready(function () {
 
               
            
-               { "data": "Name", "defaultContent": "<i>-</i>" },
+               { "data": "Name",visible:false, "defaultContent": "<i>-</i>" },
                { "data": "ItemCode", "defaultContent": "<i>-</i>" },
                { "data": "Description", "defaultContent": "<i>-</i>" },
                { "data": "Stock", "defaultContent": "<i>-</i>" },
