@@ -11,7 +11,7 @@ namespace SCManager.UserInterface.Models
     {
         public string SCCode { get; set; }
         public Guid? ID { get; set; }
-       
+        [Display(Name = "Technician")]
         public Guid? EmpID { get; set; }
         [Display(Name = "Technician")]
         [Required(ErrorMessage = "Please select Technician")]

@@ -569,6 +569,7 @@
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Report\StockLedger.cshtml" />
     <Content Include="Views\Report\TechnicianStock.cshtml" />
+    <Content Include="Views\ReceiveFromTechnician\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />
