@@ -286,8 +286,7 @@ function Delete(currentObj) {
     if ((rowData != null) && (rowData.ID != null)) {
         notyConfirm('Are you sure to delete?', 'DeleteReceiveFromTech("' + rowData.ID + '","' + rowData[EG_SlColumn] + '")', '', "Yes, delete it!");
     }
-
-
+    
 }
 function DeleteReceiveFromTech(id, rw) {
     debugger;
