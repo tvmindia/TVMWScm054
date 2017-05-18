@@ -9,6 +9,7 @@ $(document).ready(function () {
              order: [],
              searching: false,
              paging: true,
+             pageLength: 50,
              data: GetItemsSummary(),
              columns: [
               
@@ -19,8 +20,8 @@ $(document).ready(function () {
                { "data": "Category", "defaultContent": "<i>-</i>" },
                { "data": "Stock", "defaultContent": "<i>-</i>" },
                { "data": "UOM", "defaultContent": "<i>-</i>" },
-               { "data": "SellingRate","defaultContent": "<i>-</i>" },
-               { "data": "Value","defaultContent": "<i>-</i>" }
+               { "data": "SellingRate",render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" },
+               { "data": "Value",render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" }
              
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },

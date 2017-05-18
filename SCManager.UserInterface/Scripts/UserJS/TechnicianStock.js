@@ -9,23 +9,24 @@ $(document).ready(function () {
              order: [],
              searching: false,
              paging: true,
+             pageLength: 50,
              data: GetAllTechnicianStock(),
              columns: [
 
               
-               { "data": null, "defaultContent": "<i>-</i>" },
+           
                { "data": "Name", "defaultContent": "<i>-</i>" },
                { "data": "ItemCode", "defaultContent": "<i>-</i>" },
                { "data": "Description", "defaultContent": "<i>-</i>" },
                { "data": "Stock", "defaultContent": "<i>-</i>" },
-               { "data": "Rate", "defaultContent": "<i>-</i>" },
-               { "data": "Value", "defaultContent": "<i>-</i>" }
+               { "data": "Rate", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "Value", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" }
 
              ],
              columnDefs: [
-                  { className: "text-right", "targets": [] },
-                    { className: "text-center", "targets": [1,2,3,4,5,6] },
-                    { className: "text-left", "targets": [0] },
+                  { className: "text-right",orderable:false, "targets": [4,5] },
+                    { className: "text-center", orderable: false, "targets": [0, 3] },
+                    { className: "text-left", orderable: false, "targets": [ 1, 2] },
 
              ],
              drawCallback: function (settings) {
@@ -33,10 +34,10 @@ $(document).ready(function () {
                  var rows = api.rows({ page: 'current' }).nodes();
                  var last = null;
 
-                 api.column(1, { page: 'current' }).data().each(function (group, i) {
+                 api.column(0, { page: 'current' }).data().each(function (group, i) {
                      if (last !== group) {
                          $(rows).eq(i).before(
-                             '<tr class="group "><td colspan="10" class="rptGrp">' + '<b>Technician Name</b> : ' + group + '</td></tr>'
+                             '<tr class="group "><td colspan="10" class="rptGrp">' + '<b>Name</b> : ' + group + '</td></tr>'
                          );
 
                          last = group;
@@ -45,11 +46,7 @@ $(document).ready(function () {
              }
          });
 
-        DataTables.TechnicianStockTable.on('order.dt search.dt', function () {
-            DataTables.TechnicianStockTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-                cell.innerHTML = i + 1;
-            });
-        }).draw();
+        
 
     }
     catch (e) {

@@ -32,9 +32,9 @@ $(document).ready(function () {
              columnDefs: [{ "targets": [0, 1], "visible": false, "searchable": false },
                  { "targets": [2,3], "visible": false, "searchable": true },
                   { className: "text-right", "targets": [] },
-                    { className: "text-center", "targets": [6, 8] },
-                    { className: "text-left", "targets": [2, 3, 4,5,7] },
-                     { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8] }
+                    {orderable:false, className: "text-center", "targets": [6, 8] },
+                    {orderable:false, className: "text-left", "targets": [2, 3, 4,5,7] },
+                     //{ orderable: false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8] }
 
              ],
              drawCallback: function (settings) {

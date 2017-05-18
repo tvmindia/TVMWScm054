@@ -30,7 +30,6 @@ $(document).ready(function () {
                   { className: "text-right", "targets": [5, 6, 8,9] },
                     { className: "text-center", "targets": [1,3, 4,7, 10] },
                     { className: "text-left", "targets": [2,9] },
-
              ]
          });
 
