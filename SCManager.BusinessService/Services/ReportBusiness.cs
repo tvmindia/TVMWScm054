@@ -60,5 +60,19 @@ namespace SCManager.BusinessService.Services
             }
             return StockLedgerList;
         }
+
+       public List<TechnicianStock> GetTechniciansStockSummary(UA UA, string fromdate = null, string todate = null)
+        {
+            List<TechnicianStock> TechnicianList = null;
+            try
+            {
+                TechnicianList = _reportRepository.GetTechniciansStockSummary(UA, fromdate, todate);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return TechnicianList;
+        }
     }
 }

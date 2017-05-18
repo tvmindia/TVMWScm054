@@ -31,5 +31,14 @@ namespace SCManager.DataAccessObject.DTO
         
         public LogDetails logDetails { get; set; }
     }
+    public class TechnicianStock
+    {
+        public string Name { get; set; }
+        public string ItemCode { get; set; }
+        public string Description { get; set; }
+        public decimal Stock { get; set; }
+        public decimal Rate { get; set; }
+        public decimal Value { get; set; }
+    }
 
 }

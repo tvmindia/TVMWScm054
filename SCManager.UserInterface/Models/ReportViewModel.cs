@@ -51,4 +51,13 @@ namespace SCManager.UserInterface.Models
         public string GroupCode { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
     }
+    public class TechnicianStockViewModel
+    {
+        public string Name { get; set; }
+        public string ItemCode { get; set; }
+        public string Description { get; set; }
+        public decimal Stock { get; set; }
+        public decimal Rate { get; set; }
+        public decimal Value { get; set; }
+    }
 }

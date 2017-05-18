@@ -45,6 +45,24 @@ namespace SCManager.UserInterface.Controllers
             ViewBag.todate = dt.ToString("yyyy-MM-dd");
             return View();
         }
+
+        public ActionResult TechnicianStock()
+        {
+
+            //_reportBusiness.GetTechniciansStockSummary();
+            return View();
+        }
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetAllTechnicianStock(string fromdate = null, string todate = null)
+        {
+            UA ua = new UA();
+            List<TechnicianStockViewModel> techinicianList = Mapper.Map<List<TechnicianStock>, List<TechnicianStockViewModel>>(_reportBusiness.GetTechniciansStockSummary(ua, fromdate, todate));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = techinicianList });
+        }
+
+
+
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllStockLedger(string fromdate = null, string todate = null)

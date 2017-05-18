@@ -129,6 +129,55 @@ namespace SCManager.RepositoryServices.Services
             }
             return stockLedgerList;
         }
+
+        public List<TechnicianStock> GetTechniciansStockSummary(UA UA, string fromdate = null, string todate = null)
+        {
+            List<TechnicianStock> TechncianList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@Fromdate", SqlDbType.DateTime).Value = fromdate;
+                        cmd.Parameters.Add("@Todate", SqlDbType.DateTime).Value = todate;
+                        cmd.CommandText = "[RPT_TechSummary]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                TechncianList = new List<TechnicianStock>();
+                                while (sdr.Read())
+                                {
+                                    TechnicianStock _technicianStockObj = new TechnicianStock();
+                                    {
+                                        _technicianStockObj.Name = (sdr["name"].ToString() != "" ? sdr["name"].ToString() : _technicianStockObj.Name);
+                                        _technicianStockObj.ItemCode = (sdr["ItemCode"].ToString() != "" ? (sdr["ItemCode"].ToString()) : _technicianStockObj.ItemCode);
+                                        _technicianStockObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _technicianStockObj.Description);
+                                        _technicianStockObj.Stock = (sdr["StockQty"].ToString() != "" ? (decimal.Parse(sdr["StockQty"].ToString())) : _technicianStockObj.Stock);
+                                        _technicianStockObj.Rate = (sdr["Rate"].ToString() != "" ? (decimal.Parse(sdr["Rate"].ToString())) : _technicianStockObj.Rate);
+                                        _technicianStockObj.Value = (sdr["Value"].ToString() != "" ? (decimal.Parse(sdr["Value"].ToString())) : _technicianStockObj.Value);
+                                    }
+                                    TechncianList.Add(_technicianStockObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return TechncianList;
+        }
         public List<SystemReport> GetAllSysReports(UA ua)
         {
             List<SystemReport> Reportlist = null;

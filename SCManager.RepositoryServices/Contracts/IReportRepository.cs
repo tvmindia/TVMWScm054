@@ -12,6 +12,7 @@ namespace SCManager.RepositoryServices.Contracts
         List<SystemReport> GetAllSysReports(UA ua);
         List<Item> GetItemsSummary(UA UA, string fromdate = null, string todate = null);
         List<StockLedger> GetStockLedger(UA UA, string fromdate = null, string todate = null);
+        List<TechnicianStock> GetTechniciansStockSummary(UA UA, string fromdate = null, string todate = null);
 
     }
 }
