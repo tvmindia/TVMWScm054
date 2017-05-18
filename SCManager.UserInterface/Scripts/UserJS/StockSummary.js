@@ -5,7 +5,8 @@ $(document).ready(function () {
 
         DataTables.itemTable = $('#tblItemList').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+             buttons: ['excel', 'print'],
              order: [],
              searching: false,
              paging: true,
@@ -38,6 +39,8 @@ $(document).ready(function () {
             });
         }).draw();
 
+        $(".buttons-print").hide();
+        $(".buttons-excel").hide();
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -122,5 +125,14 @@ function UnderConstruction()
 function goBack()
 {
     window.location = appAddress + "Report/Index/";
+}
+function PrintTableToDoc() {
+    try {
+
+        $(".buttons-print").trigger('click');
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
 }
 

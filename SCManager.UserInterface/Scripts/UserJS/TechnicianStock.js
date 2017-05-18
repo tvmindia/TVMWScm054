@@ -5,7 +5,8 @@ $(document).ready(function () {
 
         DataTables.TechnicianStockTable = $('#tblTechnicianList').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+             buttons: ['excel', 'print'],
              order: [],
              searching: false,
              paging: true,
@@ -45,8 +46,9 @@ $(document).ready(function () {
                  });
              }
          });
-
-        
+        //hide button of jquery datatable
+        $(".buttons-print").hide();
+        $(".buttons-excel").hide();
 
     }
     catch (e) {
@@ -100,6 +102,19 @@ function RefreshTechnicianStockTable() {
         }
     }
     catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+function PrintTableToDoc()
+{
+    try
+    {
+       
+        $(".buttons-print").trigger('click');
+    }
+    catch(e)
+    {
         notyAlert('error', e.message);
     }
 }

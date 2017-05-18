@@ -5,7 +5,7 @@
 }
 @section styles {
     @Styles.Render("~/Content/DataTables/css/datatable")
-    @*@Styles.Render("~/Content/DataTables/css/datatableButtons")*@
+    @Styles.Render("~/Content/DataTables/css/datatableButtons")
     @Styles.Render("~/Content/bootstrapdatepicker")
 }
 
@@ -81,6 +81,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/datatable")
+    @Scripts.Render("~/bundles/jsZip")
+    @Scripts.Render("~/bundles/datatableButtons")
     @Scripts.Render("~/bundles/bootstrapdatepicker")
     @Scripts.Render("~/bundles/TechnicianStock")
 }

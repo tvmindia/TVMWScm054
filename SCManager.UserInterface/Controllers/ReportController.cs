@@ -92,7 +92,7 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.PrintBtn.Visible = true;
                     ToolboxViewModelObj.PrintBtn.Text = "Print";
                     ToolboxViewModelObj.PrintBtn.Title = "Print";
-                    ToolboxViewModelObj.PrintBtn.Event = "UnderConstruction();";
+                    ToolboxViewModelObj.PrintBtn.Event = "PrintTableToDoc();";
 
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
