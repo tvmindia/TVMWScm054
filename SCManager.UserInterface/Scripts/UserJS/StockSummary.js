@@ -6,7 +6,13 @@ $(document).ready(function () {
         DataTables.itemTable = $('#tblItemList').DataTable(
          {
              dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
-             buttons: ['excel', 'print'],
+             buttons: [{
+                 extend: 'excel',
+                 exportOptions:
+                              {
+                                  columns: [2, 3, 4, 5,6,7,8]
+                              }
+             }],
              order: [],
              searching: false,
              paging: true,
@@ -129,7 +135,7 @@ function goBack()
 function PrintTableToDoc() {
     try {
 
-        $(".buttons-print").trigger('click');
+        $(".buttons-excel").trigger('click');
     }
     catch (e) {
         notyAlert('error', e.message);

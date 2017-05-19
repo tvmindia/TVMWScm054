@@ -6,7 +6,33 @@ $(document).ready(function () {
         DataTables.TechnicianStockTable = $('#tblTechnicianList').DataTable(
          {
              dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
-             buttons: ['excel', 'print'],
+             buttons: [
+                 //{
+                 //extend: 'print',
+                 //exportOptions:
+                 //             {
+                 //                 columns: [0,1, 2, 3],
+                 //                 page: 'current',
+                 //                 //format: {
+                 //                 //    body: function (data, row, column, node) {
+                 //                 //        debugger;
+                 //                 //        // Strip $ from salary column to make it numeric
+                 //                 //        return column === 0 ?
+                 //                 //            data.Name="787" :
+                 //                 //            data;
+                 //                 //    }
+                 //                 //}
+                 //             }
+                                
+                              
+                 //},
+                 {
+                   extend: 'excel',
+                   exportOptions:
+                                {
+                                    columns: [0,1,2,3,4,5]
+                                }
+                    }],
              order: [],
              searching: false,
              paging: true,
@@ -111,7 +137,7 @@ function PrintTableToDoc()
     try
     {
        
-        $(".buttons-print").trigger('click');
+        $(".buttons-excel").trigger('click');
     }
     catch(e)
     {
