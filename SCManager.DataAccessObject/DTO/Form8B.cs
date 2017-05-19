@@ -20,7 +20,8 @@ namespace SCManager.DataAccessObject.DTO
         public string PONo { get; set; }
         public DateTime? PODate { get; set; }
         public string SPUNo { get; set; }
-        
+        public string TicketNo { get; set; }
+
         public string CustomerDelvAddrs { get; set; }
         public string CustomerBillAddrs { get; set; }
 

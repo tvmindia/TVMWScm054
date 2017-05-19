@@ -55,6 +55,8 @@
                             <th>ID</th>
                             <th>Invoice No</th>
                             <th>Invoice Date</th>
+                            <th>SPU No</th>
+                            <th>Ticket No</th>
                             <th>Sale Order No</th>
                             <th>Items Total (₹)</th>
                             <th>VAT Amount (₹)</th>
@@ -110,18 +112,37 @@
 
                         </div>
 
+
                         <div class="form-group">
-                            <!---------------- 3 -------------------->
+                            <!----------------6-------------------->
 
                             <div class="col-md-3">
-                                @Html.LabelFor(model => model.SaleOrderNo, htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.SPUNo, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
-                                @Html.EditorFor(model => model.SaleOrderNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "SONo" } })
-                                @Html.ValidationMessageFor(model => model.SaleOrderNo, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.SPUNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "SPUNo" } })
+                                @Html.ValidationMessageFor(model => model.SPUNo, "", new { @class = "text-danger" })
                             </div>
+                            <div class="col-md-1 mandatory"></div>
 
                         </div>
+
+                        <div class="form-group">
+                            <!----------------6-------------------->
+
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.TicketNo, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.TicketNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "TicketNo" } })
+                                @Html.ValidationMessageFor(model => model.TicketNo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1 mandatory"></div>
+                        </div>
+
+
+
+                        
 
                         <div class="form-group">
                             <!---------------- 4 -------------------->
@@ -182,25 +203,27 @@
                     <div class="inputForm col-md-5">
 
                         <div class="form-group">
-                            <!----------------6-------------------->
+                            <!---------------- 3 -------------------->
 
                             <div class="col-md-4">
-                                @Html.LabelFor(model => model.SPUNo, htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.SaleOrderNo, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
-                                @Html.EditorFor(model => model.SPUNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "SPUNo" } })
-                                @Html.ValidationMessageFor(model => model.SPUNo, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.SaleOrderNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "SONo" } })
+                                @Html.ValidationMessageFor(model => model.SaleOrderNo, "", new { @class = "text-danger" })
                             </div>
 
                         </div>
+
                         <div class="form-group">
+
                             <!----------------7-------------------->
 
                             <div class="col-md-4">
                                 @Html.LabelFor(model => model.CustomerDelvAddrs, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
-                                @Html.EditorFor(model => model.CustomerDelvAddrs, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 2, @id = "CustDel" } })
+                                @Html.EditorFor(model => model.CustomerDelvAddrs, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 3, @id = "CustDel" } })
 
                             </div>
 
@@ -212,7 +235,7 @@
                                 @Html.LabelFor(model => model.CustomerBillAddrs, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
-                                @Html.EditorFor(model => model.CustomerBillAddrs, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 2, @id = "CustBill" } })
+                                @Html.EditorFor(model => model.CustomerBillAddrs, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 3, @id = "CustBill" } })
 
                             </div>
 

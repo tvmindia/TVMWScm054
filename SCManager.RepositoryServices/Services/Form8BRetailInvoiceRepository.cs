@@ -59,6 +59,7 @@ namespace SCManager.RepositoryServices.Services
                                         _Form8Obj.PODate = (sdr["PODate"].ToString() != "" ? DateTime.Parse(sdr["PODate"].ToString()).Date : _Form8Obj.PODate);
                                         _Form8Obj.PONo = (sdr["PONo"].ToString() != "" ? (sdr["PONo"].ToString()) : _Form8Obj.PONo);
                                         _Form8Obj.SPUNo = (sdr["SPUNo"].ToString() != "" ? (sdr["SPUNo"].ToString()) : _Form8Obj.SPUNo);
+                                        _Form8Obj.TicketNo = (sdr["TicketNo"].ToString() != "" ? (sdr["TicketNo"].ToString()) : _Form8Obj.TicketNo);
                                         _Form8Obj.CustomerBillAddrs = (sdr["CustomerBillAddrs"].ToString() != "" ? (sdr["CustomerBillAddrs"].ToString()) : _Form8Obj.CustomerBillAddrs);
                                         _Form8Obj.CustomerDelvAddrs = (sdr["CustomerDelvAddrs"].ToString() != "" ? (sdr["CustomerDelvAddrs"].ToString()) : _Form8Obj.CustomerDelvAddrs);
                                         _Form8Obj.SaleOrderNo = (sdr["SaleOrderNo"].ToString() != "" ? (sdr["SaleOrderNo"].ToString()) : _Form8Obj.SaleOrderNo);
@@ -108,6 +109,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@PONo", SqlDbType.NVarChar, 20).Value = frm8B.PONo;
                         cmd.Parameters.Add("@PODate", SqlDbType.SmallDateTime).Value = frm8B.PODate;
                         cmd.Parameters.Add("@SPUNo", SqlDbType.NVarChar).Value = frm8B.SPUNo;
+                        cmd.Parameters.Add("@TicketNo", SqlDbType.NVarChar).Value = frm8B.TicketNo;
                         cmd.Parameters.Add("@CustomerBillAddrs", SqlDbType.NVarChar).Value = frm8B.CustomerBillAddrs;
                         cmd.Parameters.Add("@CustomerDelvAddrs", SqlDbType.NVarChar).Value = frm8B.CustomerDelvAddrs;
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar).Value = frm8B.Remarks;
@@ -178,6 +180,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@PONo", SqlDbType.NVarChar, 20).Value = frm8B.PONo;
                         cmd.Parameters.Add("@PODate", SqlDbType.SmallDateTime).Value = frm8B.PODate;
                         cmd.Parameters.Add("@SPUNo", SqlDbType.NVarChar).Value = frm8B.SPUNo;
+                        cmd.Parameters.Add("@TicketNo", SqlDbType.NVarChar).Value = frm8B.TicketNo;
                         cmd.Parameters.Add("@CustomerBillAddrs", SqlDbType.NVarChar).Value = frm8B.CustomerBillAddrs;
                         cmd.Parameters.Add("@CustomerDelvAddrs", SqlDbType.NVarChar).Value = frm8B.CustomerDelvAddrs;
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar).Value = frm8B.Remarks;
@@ -255,6 +258,7 @@ namespace SCManager.RepositoryServices.Services
                                         _Form8Obj.PODate = (sdr["PODate"].ToString() != "" ? DateTime.Parse(sdr["PODate"].ToString()).Date : _Form8Obj.PODate);
                                         _Form8Obj.PONo = (sdr["PONo"].ToString() != "" ? (sdr["PONo"].ToString()) : _Form8Obj.PONo);
                                         _Form8Obj.SPUNo = (sdr["SPUNo"].ToString() != "" ? (sdr["SPUNo"].ToString()) : _Form8Obj.SPUNo);
+                                        _Form8Obj.TicketNo = (sdr["TicketNo"].ToString() != "" ? (sdr["TicketNo"].ToString()) : _Form8Obj.TicketNo);
                                         _Form8Obj.CustomerBillAddrs = (sdr["CustomerBillAddrs"].ToString() != "" ? (sdr["CustomerBillAddrs"].ToString()) : _Form8Obj.CustomerBillAddrs);
                                         _Form8Obj.CustomerDelvAddrs = (sdr["CustomerDelvAddrs"].ToString() != "" ? (sdr["CustomerDelvAddrs"].ToString()) : _Form8Obj.CustomerDelvAddrs);
                                         _Form8Obj.SaleOrderNo = (sdr["SaleOrderNo"].ToString() != "" ? (sdr["SaleOrderNo"].ToString()) : _Form8Obj.SaleOrderNo);

@@ -19,6 +19,8 @@ $(document).ready(function () {
                { "data": "ID" },
                { "data": "InvoiceNo" },
                { "data": "InvoiceDateFormatted" },
+               { "data": "SPUNo" },
+               { "data": "TicketNo" },
                { "data": "SaleOrderNo", "defaultContent": "<i>-</i>" },
                { "data": "Subtotal", render: function (data, type, row) { return roundoff(data); }, "defaultContent": "<i>-</i>" },
                { "data": "VATAmount", render: function (data, type, row) { return roundoff(data); }, "defaultContent": "<i>-</i>" },
@@ -28,8 +30,8 @@ $(document).ready(function () {
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false },
-                  { className: "text-right", "targets": [5, 6, 7, 8] },
-             { className: "text-center", "targets": [2, 3, 4, 9, 10] }
+                  { className: "text-right", "targets": [ 7, 8,9,10] },
+             { className: "text-center", "targets": [2, 3, 4, 5,6,11,12] }
 
              ]
          });
@@ -203,6 +205,7 @@ function BindForm8BFields(Records) {
      
         $('#InvNo').attr('readonly', 'readonly');
         $('#SPUNo').val(Records.SPUNo);
+        $('#TicketNo').val(Records.TicketNo);
         $('#CustDel').val(Records.CustomerDelvAddrs);
         $('#CustBill').val(Records.CustomerBillAddrs);
 
