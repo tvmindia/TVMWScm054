@@ -158,6 +158,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CallandServiceTypesController.cs" />
     <Compile Include="Controllers\CreditNotesController.cs" />
+    <Compile Include="Controllers\DailyServiceReportController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\DefectiveorDamagedController.cs" />
     <Compile Include="Controllers\DynamicUIController.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Models\CallandServiceTypesViewModel.cs" />
     <Compile Include="Models\CommonViewModel.cs" />
     <Compile Include="Models\CreditNotesViewModel.cs" />
+    <Compile Include="Models\DailyServiceReportViewModel.cs" />
     <Compile Include="Models\DefectiveorDamagedViewModel.cs" />
     <Compile Include="Models\DynamicUIViewModel.cs" />
     <Compile Include="Models\EmployeesViewModel.cs" />
@@ -510,6 +512,7 @@
     <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\UserJS\CallandServiceTypes.js" />
     <Content Include="Scripts\UserJS\CreditNotes.js" />
+    <Content Include="Scripts\UserJS\DailyServiceReport.js" />
     <Content Include="Scripts\UserJS\Dashboard.js" />
     <Content Include="Scripts\UserJS\DefectiveDamage.js" />
     <Content Include="Scripts\UserJS\demoGrid.js" />
@@ -571,6 +574,7 @@
     <Content Include="Views\Report\StockLedger.cshtml" />
     <Content Include="Views\Report\TechnicianStock.cshtml" />
     <Content Include="Views\ReceiveFromTechnician\Index.cshtml" />
+    <Content Include="Views\DailyServiceReport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />
