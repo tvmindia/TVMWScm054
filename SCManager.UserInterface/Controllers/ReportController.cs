@@ -45,11 +45,10 @@ namespace SCManager.UserInterface.Controllers
             ViewBag.todate = dt.ToString("yyyy-MM-dd");
             return View();
         }
-
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult TechnicianStock()
         {
-
-            //_reportBusiness.GetTechniciansStockSummary();
             return View();
         }
         [HttpGet]
@@ -93,7 +92,7 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.PrintBtn.Visible = true;
                     ToolboxViewModelObj.PrintBtn.Text = "Print";
                     ToolboxViewModelObj.PrintBtn.Title = "Print";
-                    ToolboxViewModelObj.PrintBtn.Event = "UnderConstruction();";
+                    ToolboxViewModelObj.PrintBtn.Event = "PrintTableToDoc();";
 
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";

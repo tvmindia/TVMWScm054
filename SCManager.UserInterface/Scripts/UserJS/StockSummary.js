@@ -5,10 +5,18 @@ $(document).ready(function () {
 
         DataTables.itemTable = $('#tblItemList').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+             buttons: [{
+                 extend: 'excel',
+                 exportOptions:
+                              {
+                                  columns: [2, 3, 4, 5,6,7,8]
+                              }
+             }],
              order: [],
              searching: false,
              paging: true,
+             pageLength: 50,
              data: GetItemsSummary(),
              columns: [
               
@@ -19,8 +27,8 @@ $(document).ready(function () {
                { "data": "Category", "defaultContent": "<i>-</i>" },
                { "data": "Stock", "defaultContent": "<i>-</i>" },
                { "data": "UOM", "defaultContent": "<i>-</i>" },
-               { "data": "SellingRate","defaultContent": "<i>-</i>" },
-               { "data": "Value","defaultContent": "<i>-</i>" }
+               { "data": "SellingRate",render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" },
+               { "data": "Value",render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" }
              
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
@@ -37,6 +45,8 @@ $(document).ready(function () {
             });
         }).draw();
 
+        $(".buttons-print").hide();
+        $(".buttons-excel").hide();
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -121,5 +131,14 @@ function UnderConstruction()
 function goBack()
 {
     window.location = appAddress + "Report/Index/";
+}
+function PrintTableToDoc() {
+    try {
+
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
 }
 

@@ -5,27 +5,55 @@ $(document).ready(function () {
 
         DataTables.TechnicianStockTable = $('#tblTechnicianList').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+             buttons: [
+                 //{
+                 //extend: 'print',
+                 //exportOptions:
+                 //             {
+                 //                 columns: [0,1, 2, 3],
+                 //                 page: 'current',
+                 //                 //format: {
+                 //                 //    body: function (data, row, column, node) {
+                 //                 //        debugger;
+                 //                 //        // Strip $ from salary column to make it numeric
+                 //                 //        return column === 0 ?
+                 //                 //            data.Name="787" :
+                 //                 //            data;
+                 //                 //    }
+                 //                 //}
+                 //             }
+                                
+                              
+                 //},
+                 {
+                   extend: 'excel',
+                   exportOptions:
+                                {
+                                    columns: [0,1,2,3,4,5]
+                                }
+                    }],
              order: [],
              searching: false,
              paging: true,
+             pageLength: 50,
              data: GetAllTechnicianStock(),
              columns: [
 
               
-               { "data": null, "defaultContent": "<i>-</i>" },
-               { "data": "Name", "defaultContent": "<i>-</i>" },
+           
+               { "data": "Name",visible:false, "defaultContent": "<i>-</i>" },
                { "data": "ItemCode", "defaultContent": "<i>-</i>" },
                { "data": "Description", "defaultContent": "<i>-</i>" },
                { "data": "Stock", "defaultContent": "<i>-</i>" },
-               { "data": "Rate", "defaultContent": "<i>-</i>" },
-               { "data": "Value", "defaultContent": "<i>-</i>" }
+               { "data": "Rate", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "Value", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" }
 
              ],
              columnDefs: [
-                  { className: "text-right", "targets": [] },
-                    { className: "text-center", "targets": [1,2,3,4,5,6] },
-                    { className: "text-left", "targets": [0] },
+                  { className: "text-right",orderable:false, "targets": [4,5] },
+                    { className: "text-center", orderable: false, "targets": [0, 3] },
+                    { className: "text-left", orderable: false, "targets": [ 1, 2] },
 
              ],
              drawCallback: function (settings) {
@@ -33,10 +61,10 @@ $(document).ready(function () {
                  var rows = api.rows({ page: 'current' }).nodes();
                  var last = null;
 
-                 api.column(1, { page: 'current' }).data().each(function (group, i) {
+                 api.column(0, { page: 'current' }).data().each(function (group, i) {
                      if (last !== group) {
                          $(rows).eq(i).before(
-                             '<tr class="group "><td colspan="10" class="rptGrp">' + '<b>Technician Name</b> : ' + group + '</td></tr>'
+                             '<tr class="group "><td colspan="10" class="rptGrp">' + '<b>Name</b> : ' + group + '</td></tr>'
                          );
 
                          last = group;
@@ -44,12 +72,9 @@ $(document).ready(function () {
                  });
              }
          });
-
-        DataTables.TechnicianStockTable.on('order.dt search.dt', function () {
-            DataTables.TechnicianStockTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-                cell.innerHTML = i + 1;
-            });
-        }).draw();
+        //hide button of jquery datatable
+        $(".buttons-print").hide();
+        $(".buttons-excel").hide();
 
     }
     catch (e) {
@@ -103,6 +128,19 @@ function RefreshTechnicianStockTable() {
         }
     }
     catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+function PrintTableToDoc()
+{
+    try
+    {
+       
+        $(".buttons-excel").trigger('click');
+    }
+    catch(e)
+    {
         notyAlert('error', e.message);
     }
 }

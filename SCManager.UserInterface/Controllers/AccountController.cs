@@ -64,6 +64,10 @@ namespace SCManager.UserInterface.Controllers
         {
          return RedirectToAction("Index", "DashBoard");
         }
+        private ActionResult RedirectToLogin()
+        {
+            return RedirectToAction("Index", "Account");
+        }
 
         #region Logout
         [HttpGet]
@@ -81,7 +85,8 @@ namespace SCManager.UserInterface.Controllers
             {
 
             }
-            return View("Index");
+            //return View("Index");
+            return RedirectToLogin();
         }
 
         #endregion Logout
