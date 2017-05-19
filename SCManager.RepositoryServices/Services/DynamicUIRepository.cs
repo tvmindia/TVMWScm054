@@ -151,6 +151,7 @@ namespace SCManager.RepositoryServices.Services
                                     {
 
                                         Result.value = int.Parse(sdr["value"].ToString());
+                                        Result.Amount = decimal.Parse(sdr["Amount"].ToString());
                                         Result.color = sdr["color"].ToString();
                                         Result.label = sdr["label"].ToString();
                                         Result.totalValue = int.Parse(sdr["totalValue"].ToString());
