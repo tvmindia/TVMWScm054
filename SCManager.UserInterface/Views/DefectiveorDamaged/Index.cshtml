@@ -82,7 +82,7 @@
                                         listDefectiveDamagedType.Add(new SelectListItem
                                         { Text = "Damaged", Value = "Damaged" });
                                     }
-                                    @Html.DropDownListFor(model => model.Type, listDefectiveDamagedType, "-- Select Type --", new { @class = "form-control", value = -1, style = "padding:4px 12px;", @onchange = "TypeOnChange(this)" })
+                                    @Html.DropDownListFor(model => model.Type, listDefectiveDamagedType, "-- Select Type --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;", @onchange = "TypeOnChange(this)" })
                                     @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -93,7 +93,7 @@
                                     @Html.LabelFor(model => model.Technician, htmlAttributes: new { @class = "control-label " })
                                    </div>
                                      <div class="col-md-5">
-                                        @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --" , new { @class = "form-control", value = -1, style = "padding:4px 12px;" })
+                                        @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --" , new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
                                         @Html.ValidationMessageFor(model => model.EmpID, "", new { @class = "text-danger" })
                                     </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -104,7 +104,7 @@
                                     @Html.LabelFor(model => model.OpenDate, htmlAttributes: new { @class = "control-label " })
                                    </div>
                                      <div class="col-md-5">
-                                        @Html.EditorFor(model => model.OpenDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "OpenDate" } })
+                                        @Html.EditorFor(model => model.OpenDate, new { htmlAttributes = new { @class = "form-control HeaderBox BlockEnter", @id = "OpenDate" } })
                                         @Html.ValidationMessageFor(model => model.OpenDate, "", new { @class = "text-danger" })
                                     </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -117,7 +117,7 @@
                                     @Html.LabelFor(model => model.ItemCode, htmlAttributes: new { @class = "control-label " })
                                    </div>
                                      <div class="col-md-5">
-                                         @Html.EditorFor(model => model.ItemCode, new { htmlAttributes = new { @class = "form-control",list= "Materials", @onchange = "ItemCodeOnChange(this)" } })
+                                         @Html.EditorFor(model => model.ItemCode, new { htmlAttributes = new { @class = "form-control BlockEnter", list= "Materials", @onchange = "ItemCodeOnChange(this)" } })
                                          <datalist id="Materials" onfocus='this.size=10;' onblur='this.size=1;'
                                                    onchange='this.size=1; this.blur();'></datalist>
                                         @Html.ValidationMessageFor(model => model.ItemCode, "", new { @class = "text-danger" })
@@ -130,18 +130,28 @@
                                     @Html.LabelFor(model => model.Qty, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)", style = "text-align:right" } })
+                                    @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control BlockEnter", onkeypress = "return isNumber(event)", style = "text-align:right" } })
                                     @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-3">
-                                    @Html.LabelFor(model => model.RefNo, htmlAttributes: new { @class = "control-label " })
+                                    @Html.LabelFor(model => model.RefNo, htmlAttributes: new { @class = "control-label " ,@id="lblRefNo" })
+                                    @Html.LabelFor(model => model.SPUNo, htmlAttributes: new { @class = "control-label ",@id="lblSPUNo" ,style="display:none;"})
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.RefNo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.RefNo, new { htmlAttributes = new { @class = "form-control BlockEnter", @onclick = "RemoveRefCSS();" } })
                                     @Html.ValidationMessageFor(model => model.RefNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.TicketNo, htmlAttributes: new { @class = "control-label " })                                 
+                                </div>
+                                <div class="col-md-5" id="TicketNoDiv">
+                                    @Html.EditorFor(model => model.TicketNo, new { htmlAttributes = new { @class = "form-control BlockEnter",@onclick="RemoveCss();" } })
+                                    @Html.ValidationMessageFor(model => model.TicketNo, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
@@ -151,7 +161,7 @@
                                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label " })
                                     </div>
                                     <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 3, @readonly = "readonly" } })
+                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control HeaderBox BlockEnter", rows = 3, @readonly = "readonly" } })
                                         @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -163,7 +173,7 @@
                                    </div>
 
                                      <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 4, @id = "Remarks" } })
+                                        @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control HeaderBox BlockEnter", rows = 4, @id = "Remarks" } })
                                         @*@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })*@
                                     </div>
                                 </div>

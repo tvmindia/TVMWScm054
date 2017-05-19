@@ -198,7 +198,7 @@ function FillUOM(row) {
     var EmpID = $("#HiddenEmpID").val();
     var ReceiveDate = $("#ReceiveDate").val();
     if (EmpID != "" && ReceiveDate != "") {
-        debugger;
+       
         var validation = EG_Validate();
         if (validation == "") {
 
@@ -218,7 +218,9 @@ function FillUOM(row) {
 function ReceiptSheetsSaveSuccess(data, status) {
     debugger;
     var i = JSON.parse(data)
+    debugger;
     switch (i.Result) {
+     
         case "OK":
             notyAlert('success', i.Message);
             debugger;
@@ -231,6 +233,7 @@ function ReceiptSheetsSaveSuccess(data, status) {
             break;
         case "ERROR":
             notyAlert('error', i.Message);
+            GetReceiveSheetsByTechnician();
             break;
         default:
             break;
@@ -300,6 +303,7 @@ function DeleteReceiveFromTech(id, rw) {
         }
         if (ds.Result == "OK") {
             notyAlert('success', i.Message);
+            typingStarted = 0;
             GetReceiveSheetsByTechnician();
             return ds.Records;
         }
@@ -315,7 +319,8 @@ function DeleteReceiveFromTech(id, rw) {
             EG_Rebind_WithData(EG_GridData, 0);
         }
         else {
-            reset();
+            //reset();
+            RebindGrid();
             EG_Rebind();
         }
         notyAlert('success', 'Deleted Successfully');
@@ -347,9 +352,10 @@ function GetReceiveSheetsByTechnician() {
                 else {
                     if (typingStarted == 0)
                     {
-                        reset();
+                       // reset();
+                        RebindGrid();
                     }
-                    
+                                       
                 }
 
             }
@@ -391,13 +397,26 @@ function List() {
 
 }
 
-function reset() {
+function RebindGrid() {
     EG_ClearTable();
     EG_AddBlankRows(5)
-    typingStarted = 0;
-    // ResetForm();
 }
 
+function reset() {
+    ClearControls();
+    RebindGrid();
+    typingStarted = 0;
+}
+function ClearControls() {
+    debugger;
+  
+        $("#HiddenEmpID").val("");
+        var $datepicker = $('#ReceiveDate');
+        $datepicker.datepicker('setDate', null);
+        $("#ddlReceiveListTech").val("All");
+    
+  
+}
 function Add() {
 
     ChangeButtonPatchView('ReceiveFromTechnician', 'btnPatchReceiveFromTechnicianSettab', 'Add');

@@ -21,7 +21,11 @@ namespace SCManager.BusinessService.Services
         public List<IssueToTechnician> GetIssueSheets(string ID, string transferDate, UA UA)
         {
             List<IssueToTechnician> IssueToTechnicianlist = null;
-            IssueToTechnicianlist = _iIssueToTechnicianRepository.GetIssueSheets(ID, transferDate, UA);          
+            if(ID!="All")
+            {
+                IssueToTechnicianlist = _iIssueToTechnicianRepository.GetIssueSheets(ID, transferDate, UA);
+            }
+                 
             return IssueToTechnicianlist;
 
         }

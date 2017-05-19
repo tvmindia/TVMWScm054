@@ -41,6 +41,10 @@ namespace SCManager.UserInterface.Models
         public float? ProductCommission { get; set; }
         [Display(Name = "Def/Damg Qty")]
         public string DefDamgStockQty { get; set; }
+        [Display(Name = "SC Qty")]
+        public string SCQty { get; set; }
+        [Display(Name = "Technician Qty")]
+        public string TechnicianQty { get; set; }
         [Display(Name = "Remarks")]
         public string Remarks { get; set; }
         [Display(Name = "Selling Rate (₹)")]

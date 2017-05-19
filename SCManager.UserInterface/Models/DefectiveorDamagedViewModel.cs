@@ -32,6 +32,10 @@ namespace SCManager.UserInterface.Models
         public Guid? HiddenEmpID { get; set; }
         [Display(Name = "Reference No.")]
         public string RefNo { get; set; }
+        [Display(Name = "SPU No.")]
+        public string SPUNo { get; set; }
+        [Display(Name = "Ticket No.")]
+        public string TicketNo { get; set; }
         public bool? ReturnStatusYN { get; set; }
         [Required(ErrorMessage = "Please select item code")]
         [Display(Name = "Item Code")]

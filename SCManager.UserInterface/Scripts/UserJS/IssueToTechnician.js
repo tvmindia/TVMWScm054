@@ -235,6 +235,7 @@ function IssuedSheetsSaveSuccess(data, status)
             break;
         case "ERROR":
             notyAlert('error', i.Message);
+            GetIssueSheetsByTechnician();
             break;
         default:
             break;
@@ -310,6 +311,7 @@ function DeleteIssueToTech(id,rw)
         }
         if (ds.Result == "OK") {
             notyAlert('success', i.Message);
+            typingStarted = 0;
             GetIssueSheetsByTechnician();
             return ds.Records;
         }
@@ -326,7 +328,8 @@ function DeleteIssueToTech(id,rw)
             EG_Rebind_WithData(EG_GridData, 0);
         }
         else {
-            reset();
+            //reset();
+            RebindGrid();
             EG_Rebind();
         }
         notyAlert('success', 'Deleted Successfully');
@@ -335,7 +338,6 @@ function DeleteIssueToTech(id,rw)
 }
 function GetIssueSheetsByTechnician() {
     try {
-        debugger;
         var empID = $("#ddlIssueListTech").val();
         var transferDate = $("#IssueDate").val();
        
@@ -361,7 +363,8 @@ function GetIssueSheetsByTechnician() {
                 {
                     if (typingStarted == 0)
                     {
-                        reset();
+                        // reset();
+                        RebindGrid();
                     }
                     
                 }
@@ -407,11 +410,23 @@ function List() {
 
 }
 
-function reset() {
-    typingStarted = 0;
+function RebindGrid()
+{
     EG_ClearTable();
     EG_AddBlankRows(5)
-   // ResetForm();
+}
+
+function reset() {
+        ClearControls();
+        RebindGrid();
+    typingStarted = 0;
+}
+function ClearControls()
+{
+    $("#HiddenEmpID").val("");
+    var $datepicker = $('#IssueDate');
+    $datepicker.datepicker('setDate', null);
+    $("#ddlIssueListTech").val("All");
 }
 
 function Add() {

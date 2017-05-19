@@ -84,6 +84,22 @@ $(document).ready(function () {
     //        inputs.eq(inputs.index(this) + 1).focus();
     //    }
     //});
+
+    $('.BlockEnter').keydown(function (e) {
+        debugger;
+        try {
+            if (e.which === 13) {
+                var index = $('.BlockEnter').index(this) + 1;
+                $('.BlockEnter').eq(index).focus();
+                e.preventDefault();
+                
+                return false;
+            }
+        } catch (e) {
+
+        }
+
+    });
    
 });
 
@@ -243,10 +259,14 @@ function isNumber(e) {
 }
 
 
-function notyConfirm(msg, functionIfSuccess,msg2,btnText) {
+function notyConfirm(msg, functionIfSuccess,msg2,btnText,value) {
     var m = 'You will not be able to recover this action!'
     if (msg2 != undefined) {
         m = msg2 + '  ' + m;
+    }
+    if (value == 1)
+    {
+        m = '';
     }
     if (btnText == undefined)
     {
