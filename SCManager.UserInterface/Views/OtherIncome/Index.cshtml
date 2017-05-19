@@ -56,7 +56,7 @@
                                     @Html.LabelFor(model => model.IncomeTypeCode, htmlAttributes: new { @class = "control-label" })
                                     </div>
                                     <div class="col-md-5">
-                                        @Html.DropDownListFor(model => model.IncomeTypeCode, Model.IncomeTypeList, "-- Select Income Type --", new { @class = "form-control", value = -1, style = "padding:4px 12px;" })                                       
+                                        @Html.DropDownListFor(model => model.IncomeTypeCode, Model.IncomeTypeList, "-- Select Income Type --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })                                       
                                         @Html.ValidationMessageFor(model => model.IncomeTypeCode, "", new { @class = "text-danger" })
                                     </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -67,7 +67,7 @@
                                     @Html.LabelFor(model => model.RefNo, htmlAttributes: new { @class = "control-label" })
                                     </div>
                                     <div class="col-md-5">
-                                        @Html.EditorFor(model => model.RefNo, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.RefNo, new { htmlAttributes = new { @class = "form-control BlockEnter" } })
                                         @Html.ValidationMessageFor(model => model.RefNo, "", new { @class = "text-danger" })
                                     </div>
                               
@@ -78,7 +78,7 @@
                                     @Html.LabelFor(model => model.RefDate, htmlAttributes: new { @class = "control-label" })
                                     </div>
                                     <div class="col-md-5">
-                                        @Html.EditorFor(model => model.RefDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "RefDate" } })
+                                        @Html.EditorFor(model => model.RefDate, new { htmlAttributes = new { @class = "form-control HeaderBox BlockEnter", @id = "RefDate" } })
                                         @Html.ValidationMessageFor(model => model.RefDate, "", new { @class = "text-danger" })
                                     </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -89,7 +89,7 @@
                                     @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)", style="text-align:right" } })
+                                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control BlockEnter", onkeypress = "return isNumber(event)", style="text-align:right" } })
                                     @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -118,7 +118,7 @@
                                             Value = "Online"
                                         });
                                     }
-                                    @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control", value = -1, style = "padding:4px 12px;" })
+                                    @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
 
                                     @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
                                 </div>
@@ -130,7 +130,7 @@
                                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows = 4 } })
+                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control BlockEnter", rows = 4 } })
                                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                 </div>
                             </div>

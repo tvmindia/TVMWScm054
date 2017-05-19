@@ -12,6 +12,7 @@ namespace SCManager.DataAccessObject.DTO
         public string Type { get; set; }
         public DateTime? OpenDate { get; set; }
         public string RefNo { get; set; }
+        public string TicketNo { get; set; }
         public Guid ItemID { get; set; }
         public int Qty { get; set; }
         public string Remarks { get; set; }

@@ -113,6 +113,7 @@ namespace SCManager.RepositoryServices.Services
                                         _DefectiveDamagelistObj.Type = (sdr["Type"].ToString() != "" ? (sdr["Type"].ToString()) : _DefectiveDamagelistObj.Type);
                                         _DefectiveDamagelistObj.OpenDate = (sdr["OpenDate"].ToString() != "" ? DateTime.Parse(sdr["OpenDate"].ToString()) : _DefectiveDamagelistObj.OpenDate);
                                         _DefectiveDamagelistObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : _DefectiveDamagelistObj.RefNo);
+                                        _DefectiveDamagelistObj.TicketNo = (sdr["TicketNo"].ToString() != "" ? (sdr["TicketNo"].ToString()) : _DefectiveDamagelistObj.TicketNo);
                                         _DefectiveDamagelistObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _DefectiveDamagelistObj.Description);
                                         _DefectiveDamagelistObj.Qty = (sdr["Qty"].ToString() != "" ? int.Parse(sdr["Qty"].ToString()) : _DefectiveDamagelistObj.Qty);
                                         _DefectiveDamagelistObj.ReturnStatusYN = (sdr["ReturnStatusYN"].ToString() != "" ? bool.Parse(sdr["ReturnStatusYN"].ToString()) : _DefectiveDamagelistObj.ReturnStatusYN);
@@ -156,6 +157,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@Type", SqlDbType.NVarChar,15).Value = defectiveDamageObj.Type;
                         cmd.Parameters.Add("@OpenDate", SqlDbType.DateTime).Value =defectiveDamageObj.OpenDate;
                         cmd.Parameters.Add("@RefNo", SqlDbType.NVarChar, 50).Value = defectiveDamageObj.RefNo;
+                        cmd.Parameters.Add("@TicketNo", SqlDbType.NVarChar, 50).Value = defectiveDamageObj.TicketNo;
                         cmd.Parameters.Add("@ItemID", SqlDbType.UniqueIdentifier).Value = defectiveDamageObj.ItemID;
                         cmd.Parameters.Add("@Qty", SqlDbType.Int).Value = defectiveDamageObj.Qty;
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar,-1).Value = defectiveDamageObj.Remarks;
@@ -210,6 +212,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@Type", SqlDbType.NVarChar, 15).Value = defectiveDamageObj.Type;
                         cmd.Parameters.Add("@OpenDate", SqlDbType.DateTime).Value = defectiveDamageObj.OpenDate;
                         cmd.Parameters.Add("@RefNo", SqlDbType.NVarChar, 50).Value = defectiveDamageObj.RefNo;
+                        cmd.Parameters.Add("@TicketNo", SqlDbType.NVarChar, 50).Value = defectiveDamageObj.TicketNo;
                         cmd.Parameters.Add("@ItemID", SqlDbType.UniqueIdentifier).Value = defectiveDamageObj.ItemID;
                         cmd.Parameters.Add("@Qty", SqlDbType.Int).Value = defectiveDamageObj.Qty;
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = defectiveDamageObj.Remarks;

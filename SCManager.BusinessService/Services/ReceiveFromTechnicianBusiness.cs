@@ -21,7 +21,11 @@ namespace SCManager.BusinessService.Services
         public List<ReceiveFromTechnician> GetReceiptsSheet(string ID, string transferDate, UA UA)
         {
             List<ReceiveFromTechnician> ReceiveFromTechnicianlist = null;
-            ReceiveFromTechnicianlist = _iReceiveFromTechnicianRepository.GetReceiptsSheet(ID, transferDate, UA);
+            if(ID!="All")
+            {
+                ReceiveFromTechnicianlist = _iReceiveFromTechnicianRepository.GetReceiptsSheet(ID, transferDate, UA);
+            }
+           
             return ReceiveFromTechnicianlist;
 
         }

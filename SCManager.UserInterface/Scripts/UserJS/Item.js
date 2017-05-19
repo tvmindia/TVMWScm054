@@ -157,6 +157,8 @@ function fillItems(ID) {
     $("#Description").val(thisItem[0].Description)
     $("#Stock").val(thisItem[0].Stock)
     $("#DefDamgStockQty").val(thisItem[0].DefDamgStockQty);
+    $("#SCQty").val(thisItem[0].SCQty);
+    $("#TechnicianQty").val(thisItem[0].TechnicianQty);
     $("#UOM").val(thisItem[0].UOM)
     //Dropdown
     $("#ReorderQty").val(thisItem[0].ReorderQty)
@@ -179,6 +181,8 @@ function clearfields() {
     $("#Description").val("")
     $("#Stock").val("")
     $("#DefDamgStockQty").val("")
+    $("#SCQty").val("")
+    $("#TechnicianQty").val("")
     $("#UOM").val("")
     $("#ReorderQty").val("");
     $("#ProductCommission").val("");

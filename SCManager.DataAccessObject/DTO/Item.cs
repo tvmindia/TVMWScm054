@@ -25,5 +25,7 @@ namespace SCManager.DataAccessObject.DTO
         public float Value { get; set; }
         public LogDetails logDetails { get; set; }
         public string DefDamgStockQty { get; set; }
+        public string SCQty { get; set; }
+        public string TechnicianQty { get; set; }
     }
 }

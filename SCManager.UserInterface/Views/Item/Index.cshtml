@@ -81,7 +81,7 @@
                                     @Html.LabelFor(model => model.ItemCode, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.ItemCode, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.ItemCode, new { htmlAttributes = new { @class = "form-control BlockEnter" } })
                                     @Html.ValidationMessageFor(model => model.ItemCode, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -92,7 +92,7 @@
                                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = "2" })
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control BlockEnter", @rows = "2" })
                                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="col-md-5">
                                   @*  @Html.EditorFor(model => model.UOM, new { htmlAttributes = new { @class = "form-control" } })*@
-                                    @Html.DropDownListFor(model => model.UOM, Model.UOMList, "-- Select UOM --", new { @class = "form-control", value = -1, style = "padding:4px 12px;" })
+                                    @Html.DropDownListFor(model => model.UOM, Model.UOMList, "-- Select UOM --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
                                     @Html.ValidationMessageFor(model => model.UOM, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -118,7 +118,7 @@
                                     @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.DropDownListFor(model => model.CategoryID, Model.CategoryList, "-- Select Category --", new { @class = "form-control", @onchange = "CategoryOnChange(this)", value = -1, style = "padding:4px 12px;" })
+                                    @Html.DropDownListFor(model => model.CategoryID, Model.CategoryList, "-- Select Category --", new { @class = "form-control BlockEnter", @onchange = "CategoryOnChange(this)", value = -1, style = "padding:4px 12px;" })
 
                                     @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
                                 </div>
@@ -141,10 +141,28 @@
                                 </div>
                             <div class="form-group">
                                 <div class="col-md-4">
+                                    @Html.LabelFor(model => model.SCQty, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.SCQty, new { htmlAttributes = new { @class = "form-control BlockEnter", @readonly = "readonly", style = "text-align:right;" } })
+                                    @*@Html.ValidationMessageFor(model => model.Stock, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.TechnicianQty, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.TechnicianQty, new { htmlAttributes = new { @class = "form-control BlockEnter", @readonly = "readonly", style = "text-align:right;" } })
+                                    @*@Html.ValidationMessageFor(model => model.Stock, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
                                     @Html.LabelFor(model => model.Stock, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.Stock, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", style = "text-align:right;" } })
+                                    @Html.EditorFor(model => model.Stock, new { htmlAttributes = new { @class = "form-control BlockEnter", @readonly = "readonly", style = "text-align:right;" } })
                                     @*@Html.ValidationMessageFor(model => model.Stock, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
@@ -153,7 +171,7 @@
                                     @Html.LabelFor(model => model.DefDamgStockQty, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.DefDamgStockQty, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", style = "text-align:right;" } })
+                                    @Html.EditorFor(model => model.DefDamgStockQty, new { htmlAttributes = new { @class = "form-control BlockEnter", @readonly = "readonly", style = "text-align:right;" } })
                                     @*@Html.ValidationMessageFor(model => model.Stock, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
@@ -162,7 +180,7 @@
                                     @Html.LabelFor(model => model.ReorderQty, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.ReorderQty, new { htmlAttributes = new { @class = "form-control" , onkeypress = "return isNumber(event)", style = "text-align:right;" } })
+                                    @Html.EditorFor(model => model.ReorderQty, new { htmlAttributes = new { @class = "form-control BlockEnter", onkeypress = "return isNumber(event)", style = "text-align:right;" } })
                                     @*@Html.ValidationMessageFor(model => model.ReorderQty, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
@@ -172,7 +190,7 @@
                                     @Html.LabelFor(model => model.ProductCommission, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.ProductCommission, new { htmlAttributes = new { @class = "form-control" , onkeypress = "return isNumber(event)", style = "text-align:right;" } })
+                                    @Html.EditorFor(model => model.ProductCommission, new { htmlAttributes = new { @class = "form-control BlockEnter", onkeypress = "return isNumber(event)", style = "text-align:right;" } })
                                     @*@Html.ValidationMessageFor(model => model.ProductCommission, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
@@ -183,7 +201,7 @@
                                     @Html.LabelFor(model => model.SellingRate, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.SellingRate, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)", style = "text-align:right;" } })
+                                    @Html.EditorFor(model => model.SellingRate, new { htmlAttributes = new { @class = "form-control BlockEnter", onkeypress = "return isNumber(event)", style = "text-align:right;" } })
                                     @*@Html.ValidationMessageFor(model => model.ReorderQty, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
@@ -195,7 +213,7 @@
                                     @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control", @rows = "7" })
+                                    @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control BlockEnter", @rows = "7" })
                                     @*@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>

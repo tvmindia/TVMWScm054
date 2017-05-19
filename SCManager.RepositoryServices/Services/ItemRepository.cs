@@ -120,6 +120,8 @@ namespace SCManager.RepositoryServices.Services
                                         _ItemObj.Subcategory = (sdr["Subcategory"].ToString() != "" ? (sdr["Subcategory"].ToString()) : _ItemObj.Subcategory);
                                         _ItemObj.Stock = (sdr["StockQty"].ToString() != "" ? (sdr["StockQty"].ToString()) : _ItemObj.Stock);
                                         _ItemObj.DefDamgStockQty = (sdr["DefDamgQty"].ToString() != "" ? (sdr["DefDamgQty"].ToString()) : _ItemObj.DefDamgStockQty);
+                                        _ItemObj.SCQty = (sdr["SCQty"].ToString() != "" ? (sdr["SCQty"].ToString()) : _ItemObj.SCQty);
+                                        _ItemObj.TechnicianQty = (sdr["TechnicianQty"].ToString() != "" ? (sdr["TechnicianQty"].ToString()) : _ItemObj.TechnicianQty);
                                         _ItemObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _ItemObj.UOM);
                                         _ItemObj.ReorderQty = (sdr["ReorderQty"].ToString() != "" ? (sdr["ReorderQty"].ToString()) : _ItemObj.ReorderQty);
                                         _ItemObj.SellingRate = (sdr["SellingRate"].ToString() != "" ? float.Parse(sdr["SellingRate"].ToString()) : _ItemObj.SellingRate);

@@ -76,7 +76,7 @@
                                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control BlockEnter" } })
                                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1 mandatory"></div>
@@ -94,7 +94,7 @@
                                     listEmployeeType.Add(new SelectListItem
                                     { Text = "Other Staff", Value = "Other Staff" });                                   
                                 }
-                                @Html.DropDownListFor(model => model.Type, listEmployeeType, "-- Select Employee Type --",  new { @class = "form-control", value = -1, style = "padding:4px 12px;" } )
+                                @Html.DropDownListFor(model => model.Type, listEmployeeType, "-- Select Employee Type --",  new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" } )
                                 @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1 mandatory"></div>
@@ -105,7 +105,7 @@
                                 @Html.LabelFor(model => model.MobileNo, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)" } })
+                                @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control BlockEnter", onkeypress = "return isNumber(event)" } })
                                 @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                                 @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", style = "height:50px;" } })
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control BlockEnter", @rows = "3" } })
                                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                                 @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control", style = "height:50px;" } })
+                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control BlockEnter", @rows = "3" } })
                                 @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
                             </div>
                         </div>

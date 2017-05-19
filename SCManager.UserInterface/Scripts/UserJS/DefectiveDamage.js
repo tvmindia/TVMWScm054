@@ -100,14 +100,60 @@ function DeleteDefectiveDamaged() {
 }
 function ReturnToCompany() {
     debugger;
+    var type = $("#Type").val();
     var ReturnID = $("#ID").val();
-    if (ReturnID != EmptyGuid) {
-        notyConfirm('Are you sure to Return?', 'ReturnDefectiveDamaged()', '', "Yes, Return it!");
-       
+    var ticketNo = $("#TicketNo").val();
+    var spuNo = $("#RefNo").val();
+    if ((type == "Defective" && ticketNo == "") || (type == "Defective" && spuNo == "")) {
+        
+        if (ticketNo == "" && spuNo!="") {
+            $("#TicketNo").css('border-color', 'red');
+            notyAlert('error', 'Please fill Ticket No to continue');
+        }
+       else if (spuNo == "" && ticketNo!="") {
+           $("#RefNo").css('border-color', 'red');
+           notyAlert('error', 'Please fill SPU No to continue');
+       }
+       else
+       {
+           notyAlert('error', 'Please fill SPU No and Tocken No to continue');
+       }
+
     }
-    else {
-        notyAlert('error', 'Error');
+    else
+    {
+        if (ReturnID != EmptyGuid) {
+            var qty = DefectiveDamagedValidation();
+            var enteredQty = $("#Qty").val();
+            var hdfQty = $("#HiddenQty").val();
+            if (hdfQty == "") {
+                hdfQty = "0";
+            }
+            enteredQty = parseInt(enteredQty);
+            qty = parseInt(qty);
+            hdfQty = parseInt(hdfQty);
+
+            if (qty + hdfQty >= enteredQty) {
+
+                var totalQty = qty + hdfQty - enteredQty;
+                if (type == "Defective") {
+                    notyConfirm("Are you sure to Return?", 'ReturnDefectiveDamaged()', "The technician's stock for selected item will reduce to " + totalQty + ".", "Yes, Return it!");
+                }
+                else {
+                    notyConfirm("Are you sure to Return?", 'ReturnDefectiveDamaged()', "The Office's stock for selected item will reduce to " + totalQty + ".", "Yes, Return it!");
+                }
+
+
+
+            }
+            //notyConfirm('Are you sure to Return?', 'ReturnDefectiveDamaged()', '', "Yes, Return it!");
+
+        }
+        else {
+            notyAlert('error', 'Error');
+        }
     }
+  
 }
 function ReturnDefectiveDamaged()
 {
@@ -139,6 +185,7 @@ function ReturnedFields()
     $("#EmpID").prop('disabled', true);
     $("#Type").prop('disabled', true);
     $("#RefNo").prop('disabled', true);
+    $("#TicketNo").prop('disabled',true);
     $("#ItemCode").prop('disabled', true);
     $("#Qty").prop('disabled', true);
     $("#Remarks").prop('disabled', true);
@@ -197,6 +244,15 @@ function ResetForm() {
     });
     validator.resetForm();
 }
+
+function RemoveCss()
+{
+    $("#TicketNo").css('border-color', '');
+}
+function RemoveRefCSS()
+{
+    $("#RefNo").css('border-color', '');
+}
 //---------------------------------------Clear Fields-----------------------------------------------------//
 function clearfields() {
     $("#ID").val(EmptyGuid);
@@ -206,12 +262,14 @@ function clearfields() {
     $("#Type").val("")
     $("#HiddenType").val("")
     $("#RefNo").val("")
+    $("#TicketNo").val("")
     $("#ItemCode").val("")
     $("#ItemID").val("");
     $("#Description").val("");
     $("#Qty").val("")
     $("#HiddenQty").val("");
     $("#Remarks").val("")
+    $("#TicketNo").css('border-color', '');
     var $datepicker = $('#OpenDate');
     $datepicker.datepicker('setDate', null);
     $("#deleteId").val("0")
@@ -219,6 +277,7 @@ function clearfields() {
     $("#EmpID").prop('disabled', false);
     $("#Type").prop('disabled', false);
     $("#RefNo").prop('disabled', false);
+    $("#TicketNo").prop('disabled',false)
     $("#ItemCode").prop('disabled', false);
     $("#Qty").prop('disabled', false);
     $("#Remarks").prop('disabled', false);
@@ -231,7 +290,16 @@ function fillDefectiveDamaged(ID) {
     ChangeButtonPatchView("DefectiveorDamaged", "btnPatchDefectiveorDamagedSettab", "Edit");
     var thisItem = GetDefectiveDamagedByID(ID); //Binding Data
     //Hidden
-   
+    if (thisItem[0].Type == "Damaged")
+    {
+        $("#lblRefNo").show();
+        $("#lblSPUNo").hide();
+    }
+    else
+    {
+        $("#lblRefNo").hide();
+        $("#lblSPUNo").show();
+    }
     $("#ID").val(thisItem[0].ID);
     $("#ReturnID").val(thisItem[0].ID);
     $("#Type").val(thisItem[0].Type);
@@ -243,6 +311,7 @@ function fillDefectiveDamaged(ID) {
         $datepicker.datepicker('setDate', new Date(thisItem[0].OpenDate));
     }
     $("#RefNo").val(thisItem[0].RefNo)
+    $("#TicketNo").val(thisItem[0].TicketNo)
     //$("#ItemID").val(thisItem[0].ItemID)
     $("#ItemID").val(thisItem[0].ItemID)
     $("#Description").val(thisItem[0].Description)
@@ -324,10 +393,14 @@ function TypeOnChange(curObj)
         if($("#Type").val()=="Damaged")
         {
             $("#EmpID").prop('disabled', true);
+            $("#lblRefNo").show();
+            $("#lblSPUNo").hide();
         }
         else
         {
             $("#EmpID").prop('disabled', false);
+            $("#lblRefNo").hide();
+            $("#lblSPUNo").show();
         }
     }
     catch(e)
@@ -373,79 +446,69 @@ function GetAllDefectiveDamaged() {
 function save() {
     debugger;
     var type = $("#Type").val();
-   
-    if ( ($("#Type").val() != "") && ($("#ItemID").val() != "") && ($("#Qty").val() != "") && ($("#OpenDate").val() != ""))
-    {
-        var qty = DefectiveDamagedValidation();
-        var enteredQty = $("#Qty").val();
-        var hdfQty = $("#HiddenQty").val();
-        if (hdfQty == "") {
-            hdfQty = "0";
-        }
-        debugger;
-        if (qty == "0" ||qty=="No items")
-        {           
-            if (type == "Defective")
-            {
-                notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
+    
+        if (($("#Type").val() != "") && ($("#ItemID").val() != "") && ($("#Qty").val() != "") && ($("#OpenDate").val() != "")) {
+            var qty = DefectiveDamagedValidation();
+            var enteredQty = $("#Qty").val();
+            var hdfQty = $("#HiddenQty").val();
+            if (hdfQty == "") {
+                hdfQty = "0";
             }
-            else
-            {
-                notyAlert('error', "Office is not having enough stock of the selected item. Damage entry cannot be done!");
-            }
-                
-            
-            
-        }
-        else
-        {
-            enteredQty = parseInt(enteredQty);
-            qty = parseInt(qty);
-            hdfQty = parseInt(hdfQty);
-           
-            if (qty + hdfQty >= enteredQty)
-            {
-                if (hdfQty != enteredQty)
-                {
-                    var totalQty = qty + hdfQty - enteredQty;
-                    if (type == "Defective")
-                    { 
-                        notyConfirm("Do you want to continue ?", 'SaveClick()', "The technician's stock for selected item will reduce to " + totalQty + ".", "Yes, Save it!");
-                    }
-                    else
-                    {
-                        notyConfirm("Do you want to continue ?", 'SaveClick()', "The Office's stock for selected item will reduce to " + totalQty + ".", "Yes, Save it!");
-                    }
-                    
-                }
-                else
-                {
-                    SaveClick();
-                    //var remainingQty = qty - enteredQty;
-
-                    //notySaveConfirm("The technician's stock for selected item will reduce to " + remainingQty + " .\n Do you want to continue ? ", 'SaveClick()');
-                }
-               
-            }
-            else
-            {
-               
+            debugger;
+            if (qty == "0" || qty == "No items") {
                 if (type == "Defective") {
                     notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
                 }
                 else {
                     notyAlert('error', "Office is not having enough stock of the selected item. Damage entry cannot be done!");
                 }
-                              
+
+
+
             }
-            
+            else {
+                enteredQty = parseInt(enteredQty);
+                qty = parseInt(qty);
+                hdfQty = parseInt(hdfQty);
+
+                if (qty + hdfQty >= enteredQty) {
+                    if (hdfQty != enteredQty) {
+                        var totalQty = qty + hdfQty - enteredQty;
+                        if (type == "Defective") {
+                            notyConfirm("Do you want to continue ?", 'SaveClick()', "", "Yes, Save it!",1);
+                        }
+                        else {
+                            notyConfirm("Do you want to continue ?", 'SaveClick()', "", "Yes, Save it!",1);
+                        }
+
+                    }
+                    else {
+                        SaveClick();
+                        //var remainingQty = qty - enteredQty;
+
+                        //notySaveConfirm("The technician's stock for selected item will reduce to " + remainingQty + " .\n Do you want to continue ? ", 'SaveClick()');
+                    }
+
+                }
+                else {
+
+                    if (type == "Defective") {
+                        notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
+                    }
+                    else {
+                        notyAlert('error', "Office is not having enough stock of the selected item. Damage entry cannot be done!");
+                    }
+
+                }
+
+            }
+
         }
-        
-    }
-    else
-    {
-        $("#btnInsertUpdateDefectiveDamaged").trigger('click');
-    }
+        else {
+            $("#btnInsertUpdateDefectiveDamaged").trigger('click');
+        }
+    
+  
    
 }
 
