@@ -113,6 +113,7 @@
     <Compile Include="Contracts\ICallandServiceTypesRepository.cs" />
     <Compile Include="Contracts\ICategoryRepository.cs" />
     <Compile Include="Contracts\ICreditNotesRepository.cs" />
+    <Compile Include="Contracts\IDailyServiceRepository.cs" />
     <Compile Include="Contracts\IDatabaseFactory.cs" />
     <Compile Include="Contracts\IDefectiveDamageRepository.cs" />
     <Compile Include="Contracts\IDynamicUIRepository.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Services\CallandServiceTypesRepository.cs" />
     <Compile Include="Services\CategoryRepository.cs" />
     <Compile Include="Services\CreditNotesRepository.cs" />
+    <Compile Include="Services\DailyServiceRepository.cs" />
     <Compile Include="Services\DatabaseFactory.cs" />
     <Compile Include="Services\DefectiveDamageRepository.cs" />
     <Compile Include="Services\DynamicUIRepository.cs" />

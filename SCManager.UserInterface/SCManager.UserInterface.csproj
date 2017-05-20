@@ -190,6 +190,7 @@
     <Compile Include="Models\Form8ViewModel.cs" />
     <Compile Include="Models\IssueToTechnicianViewModel.cs" />
     <Compile Include="Models\ItemViewModel.cs" />
+    <Compile Include="Models\JobViewModel.cs" />
     <Compile Include="Models\LocalPurchaseViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
@@ -387,6 +388,7 @@
     <Content Include="Content\images\stock.png" />
     <Content Include="Content\images\wrench.png" />
     <Content Include="Content\sweetalert.css" />
+    <Content Include="Content\UserCSS\DailyServiceReport.css" />
     <Content Include="Content\UserCSS\Form8.css" />
     <Content Include="Content\UserCSS\Form8B.css" />
     <Content Include="Content\UserCSS\Item.css" />
@@ -575,6 +577,7 @@
     <Content Include="Views\Report\TechnicianStock.cshtml" />
     <Content Include="Views\ReceiveFromTechnician\Index.cshtml" />
     <Content Include="Views\DailyServiceReport\Index.cshtml" />
+    <Content Include="Views\DailyServiceReport\TechnicianJobForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

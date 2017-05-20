@@ -1,4 +1,4 @@
-﻿
+﻿@model SCManager.UserInterface.Models.JobViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
@@ -6,6 +6,7 @@
 @section styles {
     @Styles.Render("~/Content/DataTables/css/datatable")
     @Styles.Render("~/Content/bootstrapdatepicker")
+    @Styles.Render("~/Content/UserCSS/DailyServiceReport")
 }
 
 <div class="col-md-12">
@@ -143,28 +144,10 @@
 </div>
 
 
- <!-- Modal -->
-<div class="modal fade" id="AddJobModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">%%%%%%</h4>
-            </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                   
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                @*<button onclick="RedirectToLogin()" class="btn btn-lg btn-success" type="submit">LOGIN</button>*@
-                @*<a href="/Account/Logout" class="btn btn-primary" value="Login"/>*@
-            </div>
-        </div>
-    </div>
-</div>
-
+ @{
+     var sourcedata = new { source = "TechnicianJob" };
+     @Html.Action("TechnicianJobForm", "DailyServiceReport", sourcedata);
+}
 
 
     @section Scripts {

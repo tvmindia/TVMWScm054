@@ -133,6 +133,7 @@
     <Compile Include="DTO\StockValueSummary.cs" />
     <Compile Include="DTO\SubCategories.cs" />
     <Compile Include="DTO\Technician.cs" />
+    <Compile Include="DTO\TechnicianJob.cs" />
     <Compile Include="DTO\UA.cs" />
     <Compile Include="DTO\UserAndRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
