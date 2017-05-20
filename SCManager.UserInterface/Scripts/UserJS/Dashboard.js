@@ -59,9 +59,10 @@ $(document).ready(function () {
           
           animation: true,
           tooltipTemplate: function (V) { return getDonutAmount(V.label,V.value) },
-          tooltipFillColor: "rgba(0,0,0,0)",
+          tooltipFillColor: "rgba(255,255,255,.89)",
           tooltipFontColor: "rgba(1,1,1,1)",
           tooltipCaretSize: 0,
+          tooltipFontSize: 14,
           tooltipFontStyle: "thick",
          
          // tooltipEvents: [],
