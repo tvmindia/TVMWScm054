@@ -130,6 +130,7 @@
     <Compile Include="DTO\Reports.cs" />
     <Compile Include="DTO\SalesReturn.cs" />
     <Compile Include="DTO\ServiceCenter.cs" />
+    <Compile Include="DTO\ServiceType.cs" />
     <Compile Include="DTO\StockValueSummary.cs" />
     <Compile Include="DTO\SubCategories.cs" />
     <Compile Include="DTO\Technician.cs" />

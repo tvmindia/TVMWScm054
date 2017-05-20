@@ -9,6 +9,7 @@ namespace SCManager.RepositoryServices.Contracts
 {
     public interface IDailyServiceRepository
     {
-       object InsertJob(TechnicianJob technicianJob);
+        object InsertJob(TechnicianJob technicianJob);
+        List<ServiceType> GetAllServiceTypes();
     }
 }

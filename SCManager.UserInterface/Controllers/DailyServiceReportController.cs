@@ -67,6 +67,11 @@ namespace SCManager.UserInterface.Controllers
 
         public ActionResult TechnicianJobForm(string source)
         {
+
+            //Service type drow down bind here
+            UA ua = new UA();
+            _dailyServiceBusiness.GetAllServiceTypes(ua);
+
             JobViewModel jobVM = new JobViewModel();
             jobVM.Source = source;
             return View("TechnicianJobForm", jobVM);

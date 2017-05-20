@@ -10,5 +10,6 @@ namespace SCManager.BusinessService.Contracts
     public interface IDailyServiceBusiness
     {
         object InsertJob(TechnicianJob technicianJob);
+        List<ServiceType> GetAllServiceTypes(UA ua);
     }
 }

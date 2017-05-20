@@ -17,6 +17,53 @@ namespace SCManager.RepositoryServices.Services
         {
             _databaseFactory = databaseFactory;
         }
+        #region GetAllServiceTypes
+        public List<ServiceType> GetAllServiceTypes()
+        {
+            List<ServiceType> serviceTypeList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[GetAllServiceTypes]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                serviceTypeList = new List<ServiceType>();
+                                while (sdr.Read())
+                                {
+                                    ServiceType _serviceType = new ServiceType();
+                                    {
+                                        _serviceType.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _serviceType.SCCode);
+                                        _serviceType.Code = (sdr["Code"].ToString() != "" ? (sdr["Code"].ToString()) : _serviceType.Code);
+                                        _serviceType.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _serviceType.Description);
+                                        _serviceType.Commission = (sdr["Commission"].ToString() != "" ?decimal.Parse(sdr["Commission"].ToString()) : _serviceType.Commission);
+                                        _serviceType.SubType = (sdr["SubType"].ToString() != "" ? (sdr["SubType"].ToString()) : _serviceType.SubType);
+                                    }
+                                    serviceTypeList.Add(_serviceType);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return serviceTypeList;
+        }
+        #endregion GetAllServiceTypes
+
         #region InsertJob
         public object InsertJob(TechnicianJob technicianJob)
         {

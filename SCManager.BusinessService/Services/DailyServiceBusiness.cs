@@ -15,6 +15,22 @@ namespace SCManager.BusinessService.Services
         {
             _dailyServiceRepository = dailyServiceRepository;
         }
+
+        public List<ServiceType> GetAllServiceTypes(UA ua)
+        {
+            List<ServiceType> ServiceTypeList = null;
+           try
+            {
+                ServiceTypeList = _dailyServiceRepository.GetAllServiceTypes();
+                ServiceTypeList = ServiceTypeList == null ? null : ServiceTypeList.Where(stype => stype.SCCode == ua.SCCode).ToList();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return ServiceTypeList;
+        }
+
         public object InsertJob(TechnicianJob technicianJob)
         {
             try
