@@ -11,5 +11,6 @@ namespace SCManager.RepositoryServices.Contracts
     {
         object InsertJob(TechnicianJob technicianJob);
         List<ServiceType> GetAllServiceTypes();
+        List<Job> GetAllDailyJobs(string SCCode);
     }
 }

@@ -69,14 +69,74 @@ namespace SCManager.UserInterface.Controllers
         {
 
             //Service type drow down bind here
-            UA ua = new UA();
-            _dailyServiceBusiness.GetAllServiceTypes(ua);
-
             JobViewModel jobVM = new JobViewModel();
+            List<SelectListItem> selectListItem = new List<SelectListItem>();
+            UA ua = new UA();
+            List<ServiceTypeViewModel> serviceTypeVM = Mapper.Map<List<ServiceType>, List<ServiceTypeViewModel>>(_dailyServiceBusiness.GetAllServiceTypes(ua));
+            if(serviceTypeVM!=null)
+            {
+                foreach (ServiceTypeViewModel serviceTypevm in serviceTypeVM)
+                {
+                    selectListItem.Add(new SelectListItem
+                    {
+                        Text = serviceTypevm.Description,
+                        Value = serviceTypevm.Code,
+                        Selected = false
+                    });
+                }
+            }
+            jobVM.ServiceTypes = selectListItem;
+            selectListItem = null;
+            selectListItem = new List<SelectListItem>();
+            List<CallTypeViewModel> calltypeListVM = Mapper.Map<List<CallTypes>, List<CallTypeViewModel>>(_dailyServiceBusiness.GetCallTypes(ua));
+            if(calltypeListVM!=null)
+            {
+                foreach (CallTypeViewModel callTypevm in calltypeListVM)
+                {
+                    selectListItem.Add(new SelectListItem
+                    {
+                        Text = callTypevm.Code,
+                        Value = callTypevm.Code,
+                        Selected = false
+                    });
+                }
+            }
+           
+            jobVM.CallTypes = selectListItem;
+
             jobVM.Source = source;
             return View("TechnicianJobForm", jobVM);
         }
 
+        [HttpGet]
+        public string GetJobNumbersForDropDown()
+        {
+            try
+            {
+                UA ua = new UA();
+                List<JobViewModel> jobListVM = Mapper.Map<List<Job>, List<JobViewModel>>(_dailyServiceBusiness.GetAllJobNumbers(ua.SCCode));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = jobListVM });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public string GetAllTechnicianForServiceTypeDropDown()
+        {
+            try
+            {
+                UA ua = new UA();
+                List<EmployeesViewModel> EmpListVM = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_dailyServiceBusiness.GetTechniciansForRepeatedJob(ua.SCCode));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = EmpListVM });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
 
         #region ButtonStyling
         [HttpGet]

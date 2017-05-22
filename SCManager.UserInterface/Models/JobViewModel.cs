@@ -9,6 +9,7 @@ namespace SCManager.UserInterface.Models
 {
     public class JobViewModel
     {
+        public Guid ID { get; set; }
         public string Source { get; set; }
 
         [Display(Name = "Service Date")]
@@ -42,17 +43,17 @@ namespace SCManager.UserInterface.Models
         public string CallType { get; set; }
         public List<SelectListItem> CallTypes { get; set; }
 
-        [Required(ErrorMessage = "Please enter model no")]
+      
         [Display(Name = "Model No")]
         [StringLength(50)]
         public string ModelNo { get; set; }
 
-        [Required(ErrorMessage = "Please enter serial no")]
+       
         [Display(Name = "Serial No")]
         [StringLength(50)]
         public string SerialNo { get; set; }
 
-        [Required(ErrorMessage = "Please enter icr no")]
+       
         [Display(Name = "ICR No")]
         [StringLength(50)]
         public string ICRNo { get; set; }

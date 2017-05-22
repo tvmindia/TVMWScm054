@@ -11,5 +11,9 @@ namespace SCManager.BusinessService.Contracts
     {
         object InsertJob(TechnicianJob technicianJob);
         List<ServiceType> GetAllServiceTypes(UA ua);
+        List<Job> GetAllDailyJobs(string SCCode);
+        List<Job> GetAllJobNumbers(string SCCode);
+        List<Employees> GetTechniciansForRepeatedJob(string SCCode);
+        List<CallTypes> GetCallTypes(UA ua);
     }
 }

@@ -81,51 +81,44 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    @{
-                                                        List<SelectListItem> servTypeList = new List<SelectListItem>();
-                                                        servTypeList.Add(new SelectListItem
-                                                        { Text = "urgent", Value = "C" });
-                                                        servTypeList.Add(new SelectListItem
-                                                        { Text = "repeat", Value = "S" });
-                                                    }
-                                                    @Html.DropDownListFor(model => model.ServiceType, servTypeList, "--Select Service Types--", new { @class = "form-control", @onchange = "" })
+                                                   
+                                                    @Html.DropDownListFor(model => model.ServiceType, Model.ServiceTypes, "--Select Service Types--", new { @class = "form-control" })
                                                     @Html.ValidationMessageFor(model => model.ServiceType, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
                                             </div>
+                                          
                                             <div class="form-group">
+                                                <div class="col-md-4">
+                                                    @Html.LabelFor(model => model.CallType)
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @Html.DropDownListFor(model => model.CallType, Model.CallTypes, "--Select Call Types--", new { @class = "form-control", @onchange = "CallTypeOnChange(this)" })
+                                                    @Html.ValidationMessageFor(model => model.CallType, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1 mandatory"></div>
+                                            </div>
+
+                                            <div class="form-group calltypehidden">
                                                 <div class="col-md-4">
                                                     @Html.LabelFor(model => model.RepeatJobNo)
                                                 </div>
 
                                                 <div class="col-md-6">
-
-                                                    @Html.DropDownListFor(model => model.RepeatJobNo, servTypeList, "--Select job --", new { @class = "form-control", @onchange = "" })
-
+                                                    <input type="text" id="RepeatJobNo" name="RepeatJobNo" class="form-control" list="jobnumberList" />
+                                                    <datalist id="jobnumberList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group calltypehidden">
                                                 <div class="col-md-4">
                                                     @Html.LabelFor(model => model.EmpID)
                                                 </div>
 
                                                 <div class="col-md-6">
-
-                                                    @Html.DropDownListFor(model => model.EmpID, servTypeList, "--Select Technician--", new { @class = "form-control", @onchange = "" })
-                                                    @Html.ValidationMessageFor(model => model.EmpID, "", new { @class = "text-danger" })
-                                                </div>
-                                                <div class="col-md-1 mandatory"></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-4">
-                                                    @Html.LabelFor(model => model.CallType)
-                                                </div>
-
-                                                <div class="col-md-6">
-
-                                                    @Html.DropDownListFor(model => model.CallType, servTypeList, "--Select Call Types--", new { @class = "form-control", @onchange = "" })
-                                                    @Html.ValidationMessageFor(model => model.CallType, "", new { @class = "text-danger" })
+                                                    <input type="text" id="EmpID" name="EmpID" class="form-control" list="EmployeeList" onchange = "CallTypeOnChange(this)" />
+                                                     @Html.HiddenFor(model => model.EmpID, htmlAttributes: new { @id = "hdfEmpID", Value = "" })
+                                                    <datalist id="EmployeeList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
                                             </div>
@@ -151,7 +144,6 @@
                                                 </div>
 
                                             </div>
-
                                             <div class="form-group">
                                                 <div class="col-md-4">
                                                     @Html.LabelFor(model => model.ICRNo)
@@ -175,7 +167,6 @@
                                                 </div>
 
                                             </div>
-
                                             <div class="form-group" style="display:none;">
                                                 <div class="col-md-offset-2 col-md-10">
                                                     <input id="btnJobSave" type="submit" value="Create" class="btn btn-default" />
