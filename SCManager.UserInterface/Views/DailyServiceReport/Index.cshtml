@@ -1,0 +1,162 @@
+﻿@model SCManager.UserInterface.Models.JobViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+@section styles {
+    @Styles.Render("~/Content/DataTables/css/datatable")
+    @Styles.Render("~/Content/bootstrapdatepicker")
+    @Styles.Render("~/Content/UserCSS/DailyServiceReport")
+}
+
+<div class="col-md-12">
+    <div class="SCHeader col-md-6">
+        Daily Service Report
+     </div>
+    <div class="col-md-6">
+        <div class="" id="btnPatchDailyServiceReport" style="min-height:25px">
+            @{
+                var data = new { ActionType = "Add" };
+                @Html.Action("ChangeButtonStyle", "DailyServiceReport", data);
+            }
+        </div>
+    </div>
+
+</div>
+
+<div class="container SCtabContainer">
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a id="DailyServiceReportTab" onclick="return true;" href="#DailyServiceReport" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>Daily Service Report</a>
+        </li>
+        <li>
+            <a id="ServiceReportSummaryTab" onclick="return true;" href="#ServiceReportList" data-toggle="tab" style="width:232px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Service Report Summary</a>
+        </li>
+
+    </ul>
+    <div class="tab-content clearfix">
+        <div class="tab-pane fade in active" id="DailyServiceReport">
+            <div class="col-md-12">&nbsp;</div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <label class="control-label">Technician</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <select id="ddltechnicain" class="form-control">
+                                        <option>Choose Technician</option>
+                                        <option>Technician1</option>
+                                        <option>Technician2</option>
+                                        <option>Technician3</option>
+                                        <option>Technician4</option>
+                                        <option>Technician5</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 mandatory"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <label class="control-label">Service Date</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="date" class="form-control" id="txtServiceDate">
+                                </div>
+                                <div class="col-md-1 mandatory"></div>
+                            </div>
+                        </form>
+                    </div>
+                  
+                </div>
+            </div>
+            <div class="col-md-12">&nbsp;</div>
+           
+            <div class="container-fluid">
+                <div class="row">
+                <table id="tblDailyServiceReport" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                    <thead>
+                        <tr class="text-center">
+                           
+                            <th>Job No.</th>
+
+                            <th>Customer Name</th>
+                            <th>Customer Location</th>
+                            <th>Service Type</th>
+                            <th>Call Type</th>
+                            <th>Model</th>
+                            <th>Serial No</th>
+                            <th>Call Status</th>
+                            <th>ICR No</th>
+                            <th>Technician Remark</th>
+                            <th>...</th>
+
+                        </tr>
+                    </thead>
+                </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="ServiceReportList">
+            <div class="col-md-12">&nbsp;</div>
+           <div class="container-fluid">
+               <div class="row">
+                   <div class="col-md-8">
+                       <form class="form-horizontal">
+                           <div class="form-group">
+                               <div class="col-md-2">
+                                   <label class="control-label">Service Date</label>
+                               </div>
+                               <div class="col-md-3">
+                                   <input type="date" class="form-control" id="txtServiceDate2">
+                               </div>
+                               <div class="col-md-1 mandatory"></div>
+                           </div>
+                        </form>
+                       </div>
+                   </div>
+               </div>
+            <div class="col-md-12">&nbsp;</div>
+            <div class="container-fluid">
+                <div class="row">
+                    <table id="tblServiceReportSummary" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="text-center">
+
+                                <th>Date</th>
+                                <th>Technician</th>
+                                <th>Total Calls</th>
+                                <th>Minor Calls</th>
+                                <th>Major Calls</th>
+                                <th>Mandatory Calls</th>
+                                <th>Demo Calls</th>
+                                <th>Repeat Calls</th>
+                               
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+ @{
+     var sourcedata = new { source = "TechnicianJob" };
+     @Html.Action("TechnicianJobForm", "DailyServiceReport", sourcedata);
+}
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/datatable")
+        @Scripts.Render("~/bundles/jqueryunobtrusiveajaxvalidate")
+        @Scripts.Render("~/bundles/bootstrapdatepicker")
+        @Scripts.Render("~/bundles/DailyServiceReport")
+
+    }
+
+
+

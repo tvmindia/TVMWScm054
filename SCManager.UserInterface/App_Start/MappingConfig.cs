@@ -53,6 +53,9 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<TCRBillEntryDetailViewModel, TCRBillEntryDetail>().ReverseMap();
                 config.CreateMap<ICRBillEntryViewModel, ICRBillEntry>().ReverseMap();
                 config.CreateMap<ICRBillEntryDetailViewModel, ICRBillEntryDetail>().ReverseMap();
+                config.CreateMap<ServiceTypeViewModel, ServiceType>().ReverseMap();
+                config.CreateMap<JobViewModel, Job>().ReverseMap();
+                config.CreateMap<CallTypeViewModel, CallTypes>().ReverseMap();
             });
         }
     }

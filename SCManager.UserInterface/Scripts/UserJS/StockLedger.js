@@ -37,7 +37,8 @@ $(document).ready(function () {
 
              ],
              columnDefs: [
-                    { "targets": [0,1,2,3], "visible": false, "searchable": false },
+                    { "targets": [0, 1], "visible": false, "searchable": false },
+                    { "targets": [2, 3], "visible": false, "searchable": true },
                     {orderable:false, className: "text-center", "targets": [6, 8] },
                     {orderable:false, className: "text-left", "targets": [4,5,7] }],
              drawCallback: function (settings) {

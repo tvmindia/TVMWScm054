@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿var dataDonut;
+
+$(document).ready(function () {
     //---------------------------------bar chart weekly summary -------------------------
     var data = {
         labels: ["Feb-W3", "Feb-W4", "Mar-W1", "Mar-W2", "Mar-W3", "Mar-W4", "Apr-W1"],
@@ -51,15 +53,16 @@
 //},
   
 //      ]
-    var dataDonut = GetStockValueSummary();
+     dataDonut = GetStockValueSummary();
       var options1 =
       {
           
           animation: true,
-          tooltipTemplate: "<%= label%>-<%= value%>%",
-          tooltipFillColor: "rgba(0,0,0,0)",
+          tooltipTemplate: function (V) { return getDonutAmount(V.label,V.value) },
+          tooltipFillColor: "rgba(255,255,255,.89)",
           tooltipFontColor: "rgba(1,1,1,1)",
           tooltipCaretSize: 0,
+          tooltipFontSize: 14,
           tooltipFontStyle: "thick",
          
          // tooltipEvents: [],
@@ -95,5 +98,17 @@ function GetStockValueSummary() {
         return null;
     }
 
+
+}
+
+
+
+function getDonutAmount(l, v) {
+    for (i = 0; i < dataDonut.length; i++) {
+        if (dataDonut[i].label == l && dataDonut[i].value == v) {
+            return v + '% ' + l + " :" + dataDonut[i].AmountConverted;
+        }
+    }
+    return l + ' ' + v + '%';
 
 }

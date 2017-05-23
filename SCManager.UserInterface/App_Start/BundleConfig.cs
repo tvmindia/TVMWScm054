@@ -17,7 +17,8 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new StyleBundle("~/Content/UserCSS/Login").Include("~/Content/UserCSS/Login.css"));
             bundles.Add(new StyleBundle("~/Content/UserCSS/Item").Include("~/Content/UserCSS/Item.css"));
             bundles.Add(new StyleBundle("~/Content/UserCSS/Report").Include("~/Content/UserCSS/Report.css"));
-
+            bundles.Add(new StyleBundle("~/Content/UserCSS/DailyServiceReport").Include("~/Content/UserCSS/DailyServiceReport.css"));
+            
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include("~/Scripts/jquery-3.1.1.min.js")); 
           
             bundles.Add(new ScriptBundle("~/bundles/jqueryform").Include("~/Scripts/jquery.form.js"));
@@ -54,6 +55,8 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/TechnicianStock").Include("~/Scripts/UserJS/TechnicianStock.js"));
             bundles.Add(new ScriptBundle("~/bundles/TCRBillEntry").Include("~/Scripts/UserJS/TCRBillEntry.js"));
             bundles.Add(new ScriptBundle("~/bundles/ICRBillEntry").Include("~/Scripts/UserJS/ICRBillEntry.js"));
+            bundles.Add(new ScriptBundle("~/bundles/DailyServiceReport").Include("~/Scripts/UserJS/DailyServiceReport.js"));
+            
         }
     }
 }

@@ -1,0 +1,194 @@
+﻿@model SCManager.UserInterface.Models.JobViewModel
+
+ <!-- Modal -->
+<div class="modal fade" id="AddJobModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="container-fluid">
+                    <div class="col-md-6">
+                        <h4 class="modal-title" id="myModalLabel">Technician Name</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="modal-title" id="myModalLabel">Service Date</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="col-md-10">
+
+
+                        @using (Ajax.BeginForm("InsertUpdateJob", "DailyServiceReport", new AjaxOptions { HttpMethod = "POST", OnSuccess = "JobSaveSuccess", OnFailure = "JobSaveFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "jobform" }))
+
+                        {
+                            @Html.AntiForgeryToken()
+
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            if (Model.Source != "TechnicianJob")
+                            {
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @Html.LabelFor(model => model.ServiceDate)
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.ServiceDate, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ServiceDate, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1 mandatory"></div>
+                                </div>
+                            }
+
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    @Html.LabelFor(model => model.JobNo)
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.JobNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.JobNo, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1 mandatory"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    @Html.LabelFor(model => model.CustomerName)
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1 mandatory"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    @Html.LabelFor(model => model.CustomerLocation)
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.CustomerLocation, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.CustomerLocation, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1 mandatory"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    @Html.LabelFor(model => model.ServiceType)
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                   
+                                                    @Html.DropDownListFor(model => model.ServiceType, Model.ServiceTypes, "--Select Service Types--", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.ServiceType, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1 mandatory"></div>
+                                            </div>
+                                          
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    @Html.LabelFor(model => model.CallType)
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @Html.DropDownListFor(model => model.CallType, Model.CallTypes, "--Select Call Types--", new { @class = "form-control", @onchange = "CallTypeOnChange(this)" })
+                                                    @Html.ValidationMessageFor(model => model.CallType, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1 mandatory"></div>
+                                            </div>
+
+                                            <div class="form-group calltypehidden">
+                                                <div class="col-md-4">
+                                                    @Html.LabelFor(model => model.RepeatJobNo)
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <input type="text" id="RepeatJobNo" name="RepeatJobNo" class="form-control" list="jobnumberList" />
+                                                    <datalist id="jobnumberList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>
+                                                </div>
+                                                <div class="col-md-1 mandatory"></div>
+                                            </div>
+                                            <div class="form-group calltypehidden">
+                                                <div class="col-md-4">
+                                                    @Html.LabelFor(model => model.EmpID)
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <input type="text" id="EmpID" name="EmpID" class="form-control" list="EmployeeList" onchange = "CallTypeOnChange(this)" />
+                                                     @Html.HiddenFor(model => model.EmpID, htmlAttributes: new { @id = "hdfEmpID", Value = "" })
+                                                    <datalist id="EmployeeList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>
+                                                </div>
+                                                <div class="col-md-1 mandatory"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    @Html.LabelFor(model => model.ModelNo)
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.ModelNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.ModelNo, "", new { @class = "text-danger" })
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    @Html.LabelFor(model => model.SerialNo)
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.SerialNo, "", new { @class = "text-danger" })
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    @Html.LabelFor(model => model.ICRNo)
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.ICRNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.ICRNo, "", new { @class = "text-danger" })
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    @Html.LabelFor(model => model.TechnicianRemark)
+                                                </div>
+
+                                                <div class="col-md-6">
+
+                                                    @Html.TextAreaFor(model => model.TechnicianRemark, new { @class = "form-control", @rows = 3 })
+                                                    @Html.ValidationMessageFor(model => model.TechnicianRemark, "", new { @class = "text-danger" })
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group" style="display:none;">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input id="btnJobSave" type="submit" value="Create" class="btn btn-default" />
+                                                </div>
+                                            </div>
+                                           }
+
+
+                    </div>
+                    <div class="col-md-2">
+                        <div class="" id="btnPatchDailyServiceReport" style="min-height:25px">
+                            @{
+                                var data1 = new { ActionType = "Save" };
+                                @Html.Action("ChangeButtonStyle", "DailyServiceReport", data1);
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -78,6 +78,7 @@ namespace SCManager.BusinessService.Services
 
 
                     s.totalValueConverted = _commonBusiness.ConvertCurrency(s.totalValue);
+                    s.AmountConverted = _commonBusiness.ConvertCurrency(s.Amount);
                 }
 
             }

@@ -44,9 +44,15 @@ namespace SCManager.UserInterface.Models
         [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
         public DateTime? PODate { get; set; }
 
+        [Required(ErrorMessage = "SPU No is missing")]
         [Display(Name = "SPU No")]
         [MaxLength(20)]
         public string SPUNo { get; set; }
+
+        [Required(ErrorMessage = "Ticket No is missing")]
+        [Display(Name = "Ticket No")]
+        [MaxLength(50)]
+        public string TicketNo { get; set; }
 
         [Display(Name = "Cust. Delivery Address")]
         [DataType(DataType.MultilineText)]
