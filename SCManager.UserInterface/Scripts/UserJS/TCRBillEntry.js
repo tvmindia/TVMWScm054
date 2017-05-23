@@ -293,6 +293,8 @@ function BindTCRBillEntryFields(Records) {
 
 
 }
+
+
 function FillUOM(row) {
     debugger;
     for (i = 0; i < _Materials.length; i++) {

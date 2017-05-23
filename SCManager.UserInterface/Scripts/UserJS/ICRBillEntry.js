@@ -108,12 +108,12 @@ function EG_Columns_Settings() {
 
     var obj = [
         { "targets": [0], "visible": false, "searchable": false }, 
-        { "targets": [4], "width": "20%" },
-        { className: "text-right", "targets": [7] },
-        { className: "text-center", "targets": [3, 4, 5] },
-        { className: "text-right disabled", "targets": [7] },
-        { className: "text-center disabled", "targets": [5] },
-        { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7] }
+        
+        { className: "text-right", "targets": [5,6] },
+        { className: "text-center", "targets": [1,2,3, 4] },
+        { className: "text-right disabled", "targets": [5,6] },
+        { className: "text-center disabled", "targets": [7] },
+        { "orderable": false, "targets": [0, 1, 2, 3, 4, 7] }
 
     ]
 
@@ -275,6 +275,11 @@ function DeleteItem(currentObj) {
         notyConfirm('Are you sure to delete?', 'ICRBillDetailDelete("' + rowData.ID + '","' + rowData[EG_SlColumn] + '")', '', "Yes, delete it!");
         //  notyConfirm('Are you sure to delete?', 'TCRBillDetailDelete("' + rowData.ID + '",' + rowData[EG_SlColumn] + ')','', "Yes, delete it!");
     }
+}
+
+function AddJobNo()
+{
+
 }
 
 function BindICRBillEntryFields(Records) {
