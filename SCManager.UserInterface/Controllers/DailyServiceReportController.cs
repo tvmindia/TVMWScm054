@@ -16,14 +16,35 @@ namespace SCManager.UserInterface.Controllers
     public class DailyServiceReportController : Controller
     {
         IDailyServiceBusiness _dailyServiceBusiness;
+      
         public DailyServiceReportController(IDailyServiceBusiness dailyServiceBusiness)
         {
             _dailyServiceBusiness = dailyServiceBusiness;
+          
         }
         // GET: DailyServiceReport
         public ActionResult Index()
         {
-            return View();
+            UA ua = new UA();
+            JobViewModel jobVM = new JobViewModel();
+            List<SelectListItem> selectListItem = new List<SelectListItem>();
+            List<EmployeesViewModel> EmpVM = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_dailyServiceBusiness.GetAllTechnicians(ua));
+            if (EmpVM != null)
+            {
+                foreach (EmployeesViewModel emp in EmpVM)
+                {
+                    selectListItem.Add(new SelectListItem
+                    {
+                        Text = emp.Name,
+                        Value = emp.ID.ToString(),
+                        Selected = false
+                    });
+                }
+            }
+            jobVM.Employees = selectListItem;
+            
+
+            return View(jobVM);
         }
         #region InsertUpdateJob
         [HttpPost]
@@ -36,6 +57,7 @@ namespace SCManager.UserInterface.Controllers
                 try
                 {
                     UA ua = new UA();
+                    jobViewModel.SCCode = ua.SCCode;
                     jobViewModel.logDetails = new LogDetailsViewModel();
                     jobViewModel.logDetails.CreatedBy = ua.UserName;
                     jobViewModel.logDetails.CreatedDate = ua.CurrentDatetime();
@@ -64,6 +86,55 @@ namespace SCManager.UserInterface.Controllers
             }
         }
         #endregion InsertUpdateJob
+
+        [HttpPost]
+        public string DeleteTechnicianJob(JobViewModel job)
+        {
+            object result = null;
+            try
+                {
+                    UA ua = new UA();
+                    job.SCCode = ua.SCCode;
+                    result = _dailyServiceBusiness.DeleteJob(Mapper.Map<JobViewModel,Job>(job));
+                    return JsonConvert.SerializeObject(new { Result = "OK", Record = result });
+                }
+                catch (Exception ex)
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                }
+        }
+
+        [HttpGet]
+        public string GetDailyJobByID(string ID)
+        {
+            if (!string.IsNullOrEmpty(ID))
+            {
+                try
+                {
+                    UA ua = new UA();
+                    JobViewModel jobVM = Mapper.Map<Job, JobViewModel>(_dailyServiceBusiness.GetDailyJobByID(ua.SCCode, ID));
+                    return JsonConvert.SerializeObject(new { Result = "OK", Record = jobVM });
+                }
+                catch (Exception ex)
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                }
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "ID is not valid" });
+            }
+        }
+
+
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        public string GetAllServiceReports()
+        {
+            UA ua = new UA();
+            List<JobViewModel> jobList = Mapper.Map<List<Job>, List<JobViewModel>>(_dailyServiceBusiness.GetAllDailyJobs(ua.SCCode));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = jobList });
+        }
 
         public ActionResult TechnicianJobForm(string source)
         {
@@ -148,7 +219,7 @@ namespace SCManager.UserInterface.Controllers
             {
                 case "Add":
                     ToolboxViewModelObj.addbtn.Visible = true;
-                    ToolboxViewModelObj.addbtn.Text = "Add Job";
+                    ToolboxViewModelObj.addbtn.Text = "Add";
                     ToolboxViewModelObj.addbtn.Title = "Add Job";
                     ToolboxViewModelObj.addbtn.Event = "AddTechnicanJob();";
                     break;

@@ -8,10 +8,10 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <div class="container-fluid">
                     <div class="col-md-6">
-                        <h4 class="modal-title" id="myModalLabel">Technician Name</h4>
+                        <h4 class="modal-title" id="TechnicianLabel"></h4>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="modal-title" id="myModalLabel">Service Date</h4>
+                        <h4 class="modal-title" id="ServiceDateLabel"></h4>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                     <div class="col-md-10">
 
 
-                        @using (Ajax.BeginForm("InsertUpdateJob", "DailyServiceReport", new AjaxOptions { HttpMethod = "POST", OnSuccess = "JobSaveSuccess", OnFailure = "JobSaveFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "jobform" }))
+                        @using (Ajax.BeginForm("InsertUpdateJob", "DailyServiceReport", new AjaxOptions { HttpMethod = "POST", OnSuccess = "JobSaveSuccess", OnFailure = "JobSaveFailure", OnBegin = "ValidateJobForm", AllowCache = false, LoadingElementId = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "jobform" }))
 
                         {
                             @Html.AntiForgeryToken()
@@ -50,6 +50,8 @@
                                                 <div class="col-md-6">
                                                     @Html.EditorFor(model => model.JobNo, new { htmlAttributes = new { @class = "form-control" } })
                                                     @Html.ValidationMessageFor(model => model.JobNo, "", new { @class = "text-danger" })
+                                                    @Html.HiddenFor(model => model.EmpID, htmlAttributes: new { Value = "" })
+                                                    @Html.HiddenFor(model=>model.ServiceDate)
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
                                             </div>
@@ -101,11 +103,11 @@
 
                                             <div class="form-group calltypehidden">
                                                 <div class="col-md-4">
-                                                    @Html.LabelFor(model => model.RepeatJobNo)
+                                                    @Html.LabelFor(model => model.Repeat_JobNo)
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <input type="text" id="RepeatJobNo" name="RepeatJobNo" class="form-control" list="jobnumberList" />
+                                                    <input type="text" id="Repeat_JobNo" name="Repeat_JobNo" class="form-control" list="jobnumberList" />
                                                     <datalist id="jobnumberList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
@@ -116,8 +118,8 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <input type="text" id="EmpID" name="EmpID" class="form-control" list="EmployeeList" onchange = "CallTypeOnChange(this)" />
-                                                     @Html.HiddenFor(model => model.EmpID, htmlAttributes: new { @id = "hdfEmpID", Value = "" })
+                                                    <input type="text" id="txtEmployee" name="txtEmployee" class="form-control" list="EmployeeList" onChange="TechnicianOnChange(this)" />
+                                                     @Html.HiddenFor(model => model.Repeat_EmpID, htmlAttributes: new { Value = "" })
                                                     <datalist id="EmployeeList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
@@ -188,6 +190,7 @@
 
                 </div>
             </div>
+            <div class="modal-footer"></div>
 
         </div>
     </div>

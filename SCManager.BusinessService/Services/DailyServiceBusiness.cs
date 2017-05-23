@@ -12,10 +12,12 @@ namespace SCManager.BusinessService.Services
     {
         IDailyServiceRepository _dailyServiceRepository;
         ICallandServiceTypesBusiness _callandServiceTypesBusiness;
-        public DailyServiceBusiness(IDailyServiceRepository dailyServiceRepository, ICallandServiceTypesBusiness callandServiceTypesBusiness)
+        IEmployeesBusiness _employeesBusiness;
+        public DailyServiceBusiness(IDailyServiceRepository dailyServiceRepository, ICallandServiceTypesBusiness callandServiceTypesBusiness, ITechnicianBusiness technicianBusiness, IEmployeesBusiness employeesBusiness)
         {
             _dailyServiceRepository = dailyServiceRepository;
             _callandServiceTypesBusiness = callandServiceTypesBusiness;
+            _employeesBusiness = employeesBusiness;
         }
 
         public List<ServiceType> GetAllServiceTypes(UA ua)
@@ -94,6 +96,34 @@ namespace SCManager.BusinessService.Services
             }
             return CallTypeList;
         }
+
+        public List<Employees> GetAllTechnicians(UA ua)
+        {
+            List<Employees> EmployeeList = null;
+            try
+            {
+
+                EmployeeList = _employeesBusiness.GetAllTechnicians(ua);
+               
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return EmployeeList;
+        }
+
+        public object DeleteJob(Job job)
+        {
+            try
+            {
+                return _dailyServiceRepository.DeleteJob(job);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public object InsertJob(TechnicianJob technicianJob)
         {
             try
@@ -104,6 +134,21 @@ namespace SCManager.BusinessService.Services
             {
                 throw ex;
             }
+        }
+
+        public Job GetDailyJobByID(string SCCode, string JobID)
+        {
+            List<Job> JobList = null;
+            try
+            {
+                JobList = _dailyServiceRepository.GetAllDailyJobs(SCCode);
+                JobList = JobList == null ? null : JobList.Where(j=>j.ID== Guid.Parse(JobID)).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ((JobList!=null)&&(JobList.Count>0))? JobList[0]:null;
         }
     }
 }
