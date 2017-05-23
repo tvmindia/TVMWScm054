@@ -16,5 +16,6 @@ namespace SCManager.BusinessService.Contracts
         string DeleteItem(string ID);
         List<Item> GetAllItemCode(UA UA);
         List<Item> GetAllUOMs();
+        List<Item> GetAllServiceTypeItems(UA UA);
     }
 }
