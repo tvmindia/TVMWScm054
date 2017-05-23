@@ -24,6 +24,13 @@ namespace SCManager.BusinessService.Services
             return Itemlist;
 
         }
+        public List<Item> GetAllServiceTypeItems(UA UA)
+        {
+            List<Item> Itemlist = null;
+            Itemlist = _itemRepository.GetAllServiceTypeItems(UA);
+            return Itemlist;
+
+        }
         public List<Item> GetAllItemCode(UA UA)
         {
             List<Item> Itemlist = null;

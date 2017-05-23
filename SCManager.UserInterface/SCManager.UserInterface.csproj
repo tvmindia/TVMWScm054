@@ -165,6 +165,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\Form8BRetailInvoiceController.cs" />
     <Compile Include="Controllers\Form8TaxInvoiceController.cs" />
+    <Compile Include="Controllers\ICRBillEntryController.cs" />
     <Compile Include="Controllers\IssueToTechnicianController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\LocalPurchaseController.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Controllers\OpeningSettingController.cs" />
     <Compile Include="Controllers\OtherIncomeController.cs" />
     <Compile Include="Controllers\SalesReturnController.cs" />
+    <Compile Include="Controllers\TCRBillEntryController.cs" />
     <Compile Include="Controllers\TechnicianController.cs" />
     <Compile Include="CustomAttributes\CustomAuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -189,6 +191,7 @@
     <Compile Include="Models\EmployeesViewModel.cs" />
     <Compile Include="Models\Form8BViewModel.cs" />
     <Compile Include="Models\Form8ViewModel.cs" />
+    <Compile Include="Models\ICRBillEntryViewModel.cs" />
     <Compile Include="Models\IssueToTechnicianViewModel.cs" />
     <Compile Include="Models\ItemViewModel.cs" />
     <Compile Include="Models\JobViewModel.cs" />
@@ -205,6 +208,7 @@
     <Compile Include="Models\ServiceCenterViewModel.cs" />
     <Compile Include="Models\ServiceTypeViewModel.cs" />
     <Compile Include="Models\StockValueSummaryViewModel.cs" />
+    <Compile Include="Models\TCRBillEntryViewModel.cs" />
     <Compile Include="Models\TechnicianViewModel.cs" />
     <Compile Include="Models\ToolboxViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -524,6 +528,7 @@
     <Content Include="Scripts\UserJS\Employees.js" />
     <Content Include="Scripts\UserJS\Form8.js" />
     <Content Include="Scripts\UserJS\Form8B.js" />
+    <Content Include="Scripts\UserJS\ICRBillEntry.js" />
     <Content Include="Scripts\UserJS\IssueToTechnician.js" />
     <Content Include="Scripts\UserJS\Item.js" />
     <Content Include="Scripts\UserJS\LocalPurchase.js" />
@@ -534,6 +539,7 @@
     <Content Include="Scripts\UserJS\StockLedger.js" />
     <Content Include="Scripts\UserJS\StockSummary.js" />
     <Content Include="Scripts\UserJS\SalesReturn.js" />
+    <Content Include="Scripts\UserJS\TCRBillEntry.js" />
     <Content Include="Scripts\UserJS\TechnicianStock.js" />
     <Content Include="Views\Form8TaxInvoice\Index.cshtml">
       <SubType>Code</SubType>
@@ -578,6 +584,8 @@
     <Content Include="Views\Report\StockLedger.cshtml" />
     <Content Include="Views\Report\TechnicianStock.cshtml" />
     <Content Include="Views\ReceiveFromTechnician\Index.cshtml" />
+    <Content Include="Views\TCRBillEntry\Index.cshtml" />
+    <Content Include="Views\ICRBillEntry\Index.cshtml" />
     <Content Include="Views\DailyServiceReport\Index.cshtml" />
     <Content Include="Views\DailyServiceReport\TechnicianJobForm.cshtml" />
   </ItemGroup>
