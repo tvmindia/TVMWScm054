@@ -49,9 +49,14 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<SystemReportViewModel, SystemReport>().ReverseMap();
                 config.CreateMap<StockLedgerViewModel, StockLedger>().ReverseMap();
                 config.CreateMap<TechnicianStockViewModel, TechnicianStock>().ReverseMap();
+                config.CreateMap<TCRBillEntryViewModel, TCRBillEntry>().ReverseMap();
+                config.CreateMap<TCRBillEntryDetailViewModel, TCRBillEntryDetail>().ReverseMap();
+                config.CreateMap<ICRBillEntryViewModel, ICRBillEntry>().ReverseMap();
+                config.CreateMap<ICRBillEntryDetailViewModel, ICRBillEntryDetail>().ReverseMap();
                 config.CreateMap<ServiceTypeViewModel, ServiceType>().ReverseMap();
                 config.CreateMap<JobViewModel, Job>().ReverseMap();
                 config.CreateMap<CallTypeViewModel, CallTypes>().ReverseMap();
+                config.CreateMap<JobViewModel, TechnicianJob>().ReverseMap();
             });
         }
     }

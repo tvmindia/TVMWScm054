@@ -121,6 +121,7 @@
     <Compile Include="Contracts\IExpensesBusiness.cs" />
     <Compile Include="Contracts\IForm8BRetailInvoiceBusiness.cs" />
     <Compile Include="Contracts\IForm8TaxInvoiceBusiness.cs" />
+    <Compile Include="Contracts\IICRBillEntryBusiness.cs" />
     <Compile Include="Contracts\IIssueToTechnicianBusiness.cs" />
     <Compile Include="Contracts\IItemBusiness.cs" />
     <Compile Include="Contracts\ILocalPurchaseBusiness.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Contracts\IReportBusiness.cs" />
     <Compile Include="Contracts\ISalesReturnBusiness.cs" />
     <Compile Include="Contracts\ISubCategoriesBusiness.cs" />
+    <Compile Include="Contracts\ITCRBillEntryBusiness.cs" />
     <Compile Include="Contracts\ITechnicianBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthenticationBusiness.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Services\ExpensesBusiness.cs" />
     <Compile Include="Services\Form8BRetailInvoiceBusiness.cs" />
     <Compile Include="Services\Form8TaxInvoiceBusiness.cs" />
+    <Compile Include="Services\ICRBillEntryBusiness.cs" />
     <Compile Include="Services\IssueToTechnicianBusiness.cs" />
     <Compile Include="Services\ItemBusiness.cs" />
     <Compile Include="Services\LocalPurchaseBusiness.cs" />
@@ -153,6 +156,7 @@
     <Compile Include="Services\ReportBusiness.cs" />
     <Compile Include="Services\SalesReturnBusiness.cs" />
     <Compile Include="Services\SubCategoriesBusiness.cs" />
+    <Compile Include="Services\TCRBillEntryBusiness.cs" />
     <Compile Include="Services\TechnicianBusiness.cs" />
   </ItemGroup>
   <ItemGroup>

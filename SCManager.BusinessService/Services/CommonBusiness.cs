@@ -40,7 +40,7 @@ namespace SCManager.BusinessService.Services
             var properties = GetProperties(some_object);
             var mand = properties[mandIndx].GetValue(some_object, null);
 
-            if (mand != null)
+            if ((mand != null) && (!string.IsNullOrEmpty(mand.ToString())))
             {
 
                 result = result + "<item ";
@@ -105,6 +105,76 @@ namespace SCManager.BusinessService.Services
                 foreach (object some_object in myObj)
                 {
                     XML(some_object, mandIndx, ref result, ref totalRows);                    
+
+                }
+
+                result = result + "</Details>";
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            if (totalRows > 0)
+            {
+                return result;
+            }
+            else
+            {
+                return "";
+            }
+
+        }
+
+        public string GetXMLfromTCRObject(List<TCRBillEntryDetail> tcrDetailObj, string mandatoryProperties, UA ua)
+        {
+            string result = "<Details>";
+            int totalRows = 0;
+            try
+            {
+                //-------------------------//
+                int mandIndx = getMAndatoryIndex(tcrDetailObj[0], mandatoryProperties); //int mandIndx = 0;                
+
+                foreach (object some_object in tcrDetailObj)
+                {
+                    XML(some_object, mandIndx, ref result, ref totalRows);
+
+                }
+
+                result = result + "</Details>";
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            if (totalRows > 0)
+            {
+                return result;
+            }
+            else
+            {
+                return "";
+            }
+
+        }
+
+        public string GetXMLfromICRObject(List<ICRBillEntryDetail> icrDetailObj, string mandatoryProperties, UA ua)
+        {
+            string result = "<Details>";
+            int totalRows = 0;
+            try
+            {
+                //-------------------------//
+                int mandIndx = getMAndatoryIndex(icrDetailObj[0], mandatoryProperties); //int mandIndx = 0;                
+
+                foreach (object some_object in icrDetailObj)
+                {
+                    XML(some_object, mandIndx, ref result, ref totalRows);
 
                 }
 

@@ -15,5 +15,8 @@ namespace SCManager.BusinessService.Contracts
         List<Job> GetAllJobNumbers(string SCCode);
         List<Employees> GetTechniciansForRepeatedJob(string SCCode);
         List<CallTypes> GetCallTypes(UA ua);
+        List<Employees> GetAllTechnicians(UA ua);
+        object DeleteJob(Job job);
+        Job GetDailyJobByID(string SCCode, string JobID);
     }
 }

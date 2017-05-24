@@ -53,6 +53,8 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/ReceiveFromTechnician").Include("~/Scripts/UserJS/ReceiveFromTechnician.js"));
             bundles.Add(new ScriptBundle("~/bundles/StockLedger").Include("~/Scripts/UserJS/StockLedger.js"));
             bundles.Add(new ScriptBundle("~/bundles/TechnicianStock").Include("~/Scripts/UserJS/TechnicianStock.js"));
+            bundles.Add(new ScriptBundle("~/bundles/TCRBillEntry").Include("~/Scripts/UserJS/TCRBillEntry.js"));
+            bundles.Add(new ScriptBundle("~/bundles/ICRBillEntry").Include("~/Scripts/UserJS/ICRBillEntry.js"));
             bundles.Add(new ScriptBundle("~/bundles/DailyServiceReport").Include("~/Scripts/UserJS/DailyServiceReport.js"));
             
         }
