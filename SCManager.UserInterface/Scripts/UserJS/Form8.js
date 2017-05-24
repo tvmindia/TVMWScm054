@@ -251,7 +251,7 @@ function Add() {
     EG_ClearTable();
     RestForm8();
     EG_AddBlankRows(5)
-    
+    $('#InvNo').focus();
     hideLoader();
 }
 
@@ -417,9 +417,11 @@ function SaveSuccess(data, status, xhr) {
             break;
         case "Error":
             notyAlert('error', i.Message);
+            $('#InvNo').focus();
             break;
         case "ERROR":
             notyAlert('error', i.Message);
+            $('#InvNo').focus();
             break;
         default:
             break;
