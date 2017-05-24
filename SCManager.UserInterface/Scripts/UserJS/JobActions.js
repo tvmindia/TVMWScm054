@@ -4,17 +4,17 @@
         var result = GetServiceReportEntryByID(rowData.ID);
         ClearJobForm();
         if (result) {
-            $("#JobNo").val(result.JobNo);
-            $("#CustomerName").val(result.CustomerName);
-            $("#CustomerLocation").val(result.CustomerLocation);
-            $("#ServiceType").val(result.ServiceType);
-            $("#CallType").val(result.CallType);
-            $("#Repeat_JobNo").val(result.Repeat_JobNo);
-            $("#txtEmployee").val(result.Repeat_EmpID);
-            $("#ModelNo").val(result.ModelNo);
-            $("#SerialNo").val(result.SerialNo);
-            $("#ICRNo").val(result.ICRNo);
-            $("#TechnicianRemark").val(result.TechnicianRemark);
+            $("#ModelJobNo").val(result.JobNo);
+            $("#ModelCustomerName").val(result.CustomerName);
+            $("#ModelCustomerLocation").val(result.CustomerLocation);
+            $("#ModelServiceType").val(result.ServiceType);
+            $("#ModelCallType").val(result.CallType);
+            $("#ModelRepeat_JobNo").val(result.Repeat_JobNo);
+            $("#ModelEmployee").val(result.Repeat_EmpID);
+            $("#ModelModelNo").val(result.ModelNo);
+            $("#ModelSerialNo").val(result.SerialNo);
+            $("#ModelICRNo").val(result.ICRNo);
+            $("#ModelTechnicianRemark").val(result.TechnicianRemark);
 
             // $("#TechnicianLabel").text(result.);
             // $("#ServiceDateLabel").text(serdat);
@@ -59,10 +59,10 @@ function ValidateJobForm() {
 
     try {
         var fl = true;
-        if (($("#JobNo").val()) && ($("#CustomerName").val()) && ($("#CustomerLocation").val()) && ($("#ServiceType").val()) && ($("#CallType").val())) {
+        if (($("#ModelJobNo").val()) && ($("#ModelCustomerName").val()) && ($("#ModelCustomerLocation").val()) && ($("#ModelServiceType").val()) && ($("#ModelCallType").val())) {
             fl = true;
-            if ($("#CallType").val() == "Repeat") {
-                if (($("#Repeat_JobNo").val()) && ($("#txtEmployee").val())) {
+            if ($("#ModelCallType").val() == "Repeat") {
+                if (($("#ModelRepeat_JobNo").val()) && ($("#ModelEmployee").val())) {
                     fl = true;
                 }
                 else {
@@ -194,7 +194,7 @@ function TechnicianOnChange(i) {
         var val = $(i).val();
         var a = $("#EmployeeList").find('option[value="' + val + '"]');
         var itemID = a.attr('id');
-        $("#Repeat_EmpID").val(itemID);
+        $("#ModelRepeat_EmpID").val(itemID);
     }
     catch(e)
     {

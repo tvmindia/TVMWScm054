@@ -44,8 +44,8 @@ namespace SCManager.UserInterface.Controllers
                 }
             }
             jobVM.Employees = selectListItem;
-            
 
+            ViewBag.Servdate = DateTime.Now.ToString("yyyy-MM-dd");
             return View(jobVM);
         }
         #region InsertUpdateJob
@@ -134,11 +134,27 @@ namespace SCManager.UserInterface.Controllers
 
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole,RoleContants.ManagerRole)]
-        public string GetAllServiceReports()
+        public string GetAllServiceReports(string ID,string ServieDate)
         {
-            UA ua = new UA();
-            List<JobViewModel> jobList = Mapper.Map<List<Job>, List<JobViewModel>>(_dailyServiceBusiness.GetAllDailyJobs(ua.SCCode));
-            return JsonConvert.SerializeObject(new { Result = "OK", Records = jobList });
+            try
+            {
+                if (!string.IsNullOrEmpty(ID) && (!string.IsNullOrEmpty(ServieDate)))
+                {
+                    UA ua = new UA();
+                    List<JobViewModel> jobList = Mapper.Map<List<Job>, List<JobViewModel>>(_dailyServiceBusiness.GetJobs(ua.SCCode,Guid.Parse(ID),ServieDate));
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = jobList });
+                }
+                else
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "ID or Date is Empty!" });
+                }
+            }
+            catch(Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+           
+            
         }
 
         [HttpGet]

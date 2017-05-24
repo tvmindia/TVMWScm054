@@ -51,6 +51,21 @@ namespace SCManager.BusinessService.Services
             return JobList;
         }
 
+        public List<Job> GetJobs(string SCCode, Guid id, string servicedate)
+        {
+            List<Job> JobList = null;
+            try
+            {
+                JobList = _dailyServiceRepository.GetAllDailyJobs(SCCode);
+                JobList = JobList == null ? null : JobList.Where(stype => stype.SCCode == SCCode && stype.Employee.ID==id && DateTime.Parse(stype.ServiceDate)== DateTime.Parse(servicedate)).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return JobList;
+        }
+
         public List<Job> GetAllJobNumbers(string SCCode)
         {
             List<Job> JobList = null;
