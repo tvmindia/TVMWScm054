@@ -274,7 +274,7 @@ function BindTCRBillEntryFields(Records) {
         debugger;
         $('#HeaderID').val(Records.ID);
         $("#EmpID").val(Records.EmpID);
-        $("#TechEmpID").val(Records.EmpID);
+        $("#ModelTechEmpID").val(Records.EmpID);
         $("#JobNo").val(Records.JobNo);
         $("#BillNo").val(Records.BillNo);
         $("#CustomerName").val(Records.CustomerName);
@@ -557,7 +557,7 @@ function getMaterials() {
 function reset()
 {
     $("#EmpID").val("");
-    $("#TechEmpID").val("");
+    $("#ModelTechEmpID").val("");
     $("#JobNo").val("");
     $("#BillNo").val("");
     $("#CustomerName").val("");
@@ -591,7 +591,7 @@ function ResetForm() {
 
 
 function AddTechnicanJob() {
-    var techi = $("#TechEmpID").val();
+    var techi = $("#ModelTechEmpID").val();
      
     if ((techi) ) {
         $("#AddJobModel").modal('show');
@@ -608,9 +608,14 @@ function AddTechnicanJob() {
 function TechnicianSelectOnChange(curobj) {
     try {
         var v = $(curobj).val();
-        $("#TechEmpID").val(v);
+        $("#ModelTechEmpID").val(v);
     }
     catch (e) {
         notyAlert('error', e.Message);
     }
+}
+
+
+function RefreshDailyServiceTable() {
+    //need to write code to refresh combo
 }
