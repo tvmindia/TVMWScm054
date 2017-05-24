@@ -22,7 +22,7 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Repeat Job No")]
         public string Repeat_JobNo { get; set; }
         [Display(Name = "Technician Name")]
-        public Guid? EmpID { get; set; }
+        public Guid? TechEmpID { get; set; }
       
         [Display(Name = "Job No")]
       

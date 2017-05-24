@@ -9,7 +9,7 @@ namespace SCManager.DataAccessObject.DTO
     {
         public string SCCode { get; set; }
         public Guid ID { get; set; }
-        public Guid EmpID { get; set; }
+        public Guid TechEmpID { get; set; }
         public string ServiceDate { get; set; }
         public string JobNo { get; set; }
         public string CustomerName { get; set; }
@@ -24,5 +24,9 @@ namespace SCManager.DataAccessObject.DTO
         public Guid Repeat_EmpID { get; set; }
         public string Repeat_JobNo { get; set; }
         public LogDetails logDetails { get; set; }
+
+
+
+
     }
 }

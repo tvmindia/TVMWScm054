@@ -164,7 +164,7 @@ function TechnicianSelectOnChange(curobj)
     try
     {
         var v = $(curobj).val();
-        $("#EmpID").val(v);
+        $("#TechEmpID").val(v);
     }
     catch(e)
     {
