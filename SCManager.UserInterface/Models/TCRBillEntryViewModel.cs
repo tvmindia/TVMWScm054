@@ -62,6 +62,7 @@ namespace SCManager.UserInterface.Models
         public List<SelectListItem> JobNoList { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
         public List<TCRBillEntryDetailViewModel> TCRBillEntryDetail { get; set; }
+        
     }
 
     public class TCRBillEntryDetailViewModel

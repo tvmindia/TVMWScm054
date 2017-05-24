@@ -76,6 +76,7 @@ function EG_TableDefn() {
     tempObj.ID = "";
     tempObj.SlNo = 0;
     tempObj.Material = "";
+    tempObj.MaterialID = "";
     tempObj.Quantity = "";
     tempObj.UOM = "";
     tempObj.Rate = "";
@@ -94,7 +95,6 @@ function EG_Columns() {
                 { "data": "Quantity", render: function (data, type, row) { return (EG_createTextBox(data, 'N', row, 'Quantity', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "UOM", "defaultContent": "<i></i>" },
                 { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'Rate', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
-
                 { "data": "NetAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i></i>" },
                 { "data": null, "orderable": false, "defaultContent": '<a href="#" class="DeleteLink"  onclick="DeleteItem(this)" ><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>' }
 
@@ -109,11 +109,11 @@ function EG_Columns_Settings() {
     var obj = [
         { "targets": [0], "visible": false, "searchable": false }, 
         
-        { className: "text-right", "targets": [5,6] },
-        { className: "text-center", "targets": [1,2,3, 4] },
-        { className: "text-right disabled", "targets": [5,6] },
-        { className: "text-center disabled", "targets": [7] },
-        { "orderable": false, "targets": [0, 1, 2, 3, 4, 7] }
+        { className: "text-right", "targets": [5] },
+        { className: "text-center", "targets": [1,2,3] },
+        { className: "text-right disabled", "targets": [6] },
+        { className: "text-center disabled", "targets": [4,7] },
+        { "orderable": false, "targets": [0, 1, 2, 3, 4,5,6, 7] }
 
     ]
 
@@ -172,7 +172,7 @@ function Add() {
     ChangeButtonPatchView('ICRBillEntry', 'btnPatchICRBillEntrySettab', 'Add');
     EG_ClearTable();
     // RestForm8();
-    EG_AddBlankRows(5)
+    EG_AddBlankRows(2)
     $("#ID").val("");
     reset();
 }
@@ -232,6 +232,7 @@ function reset()
     {
         $('#HeaderID').val("");
         $("#EmpID").val("");
+        $("#TechEmpID").val("");
         $("#JobNo").val("");
         $("#ICRNo").val("");
         $("#CustomerName").val("");
@@ -288,6 +289,7 @@ function BindICRBillEntryFields(Records) {
         debugger;
         $('#HeaderID').val(Records.ID);
         $("#EmpID").val(Records.EmpID);
+        $("#TechEmpID").val(Records.EmpID);
         $("#JobNo").val(Records.JobNo);
         $("#ICRNo").val(Records.ICRNo);
         $("#CustomerName").val(Records.CustomerName);
@@ -328,6 +330,10 @@ function FillUOM(row) {
         if (_Materials[i].ItemCode == EG_GridData[row - 1]['Material']) {
             EG_GridData[row - 1]['UOM'] = _Materials[i].UOM;
             EG_GridData[row - 1]['MaterialID'] = _Materials[i].ID;
+            if (EG_GridData[row - 1]['Quantity'] == '') {
+                EG_GridData[row - 1]['Quantity'] = 1;
+            }
+           
             EG_Rebind();
             break;
         }
@@ -525,4 +531,33 @@ function AmountSummary() {
     var vatamount = parseFloat($('#TotalServiceTaxAmt').val()) || 0;
     var discount = parseFloat($('#Discount').val()) || 0;
     $('#grandtotal').val(roundoff(subtotal + vatamount - discount));
+}
+
+
+
+
+
+function AddTechnicanJob() {
+    var techi = $("#TechEmpID").val();
+
+    if ((techi)) {
+        $("#AddJobModel").modal('show');
+        $("#TechnicianLabel").text($("#EmpID option:selected").text());
+        $("#ServiceDateLabel").text('Date not selected');
+        ClearJobForm();
+        $(".calltypehidden").hide();
+    }
+    else {
+        notyAlert('error', 'Please Choose Technician and Service Date');
+    }
+
+}
+function TechnicianSelectOnChange(curobj) {
+    try {
+        var v = $(curobj).val();
+        $("#TechEmpID").val(v);
+    }
+    catch (e) {
+        notyAlert('error', e.Message);
+    }
 }

@@ -183,11 +183,15 @@ function EG_createCombo(data, type, row, columnname, Source, relatedfn) {
     var a = row[columnname];
     var b = row.SlNo;
     var c = "'";
+    var randomno = "";
+    randomno = String(Math.random());//to avoid browser autofill-make name unique
+    randomno = randomno.replace(".", "");
+
     if (data == "" || data == null) {
-        return ('<input class="gridTextbox" list="' + Source + '" name="' + columnname + '" onblur="EG_Validate_changeData_Combo(this,'+ c + type + c +',' + b + ',' + c + columnname + c + ',' + c + Source + c + ',' + c + relatedfn + c + ') " >');
+        return ('<input class="gridTextbox" list="' + Source + '" name="' + columnname + randomno + '" onblur="EG_Validate_changeData_Combo(this,' + c + type + c + ',' + b + ',' + c + columnname + c + ',' + c + Source + c + ',' + c + relatedfn + c + ') " >');
     }
     else {
-        return ('<input class="gridTextbox" list="' + Source + '" name="' + columnname + '" value=' + data + ' onblur="EG_Validate_changeData_Combo(this,' + c + type + c + ',' + b + ',' + c + columnname + c + ',' + c + Source + c + ',' + c + relatedfn + c + ') " >');
+        return ('<input class="gridTextbox" list="' + Source + '" name="' + columnname + randomno + '" value=' + data + ' onblur="EG_Validate_changeData_Combo(this,' + c + type + c + ',' + b + ',' + c + columnname + c + ',' + c + Source + c + ',' + c + relatedfn + c + ') " >');
 
     }
  
