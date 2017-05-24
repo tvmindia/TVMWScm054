@@ -18,21 +18,25 @@
             //Hiddenfields
             $("#ModelTechEmpID").val(result.Employee.ID);
             $("#ModelJobID").val(result.ID);
+            BindTechnicianDropDown();
+            BindJobNumberDropDown();
             if(result.CallType=="Repeat")
             {
                 $(".calltypehidden").show();
-                $("#ModelRepeat_JobNo").val(result.Repeat_JobNo);
-                $("#ModelEmployee").val(result.Repeat_EmpID);
+                $("#ModelRepeat_JobNo").val(result.RepeatJobNo);
+                $("#ModelEmployee").val(result.RepeatEmpName);
 
             }
             else
             {
                 $(".calltypehidden").hide();
             }
-            $("#TechnicianLabel").text(result.Employee.Name);
+          
             $("#TechnicianLabel").text('Name: ' + result.Employee.Name);
             $("#ServiceDateLabel").text(result.ServiceDate);
         }
+        $("#modelContextLabel").text('Edit Job');
+        
         $("#AddJobModel").modal('show');
 
 
@@ -216,4 +220,10 @@ function TechnicianOnChange(i) {
 
     }
     
+}
+
+function ModelServiceDateOnChange(curobj)
+{
+    var val = $(curobj).val();
+    $("#ServiceDateLabel").text(val);
 }

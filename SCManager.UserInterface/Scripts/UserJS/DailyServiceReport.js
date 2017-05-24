@@ -105,6 +105,7 @@ function AddTechnicanJob()
     if ((techi) && (serdat))
     {
         $("#AddJobModel").modal('show');
+        $("#modelContextLabel").text('Add Job');
         $("#TechnicianLabel").text('Name: '+$("#EmpSelector option:selected").text());
         $("#ServiceDateLabel").text(ConvertJsonToDate(serdat));
         ClearJobForm();

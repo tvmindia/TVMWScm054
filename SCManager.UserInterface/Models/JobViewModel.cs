@@ -13,6 +13,7 @@ namespace SCManager.UserInterface.Models
         public Guid? Repeat_EmpID { get; set; }
         public EmployeesViewModel Employee { get; set; }
         public string RepeatEmpName { get; set; }
+        public string RepeatJobNo { get; set; }
         public string CallStatusDescription { get; set; }
         public string EmpSelector { get; set; }
         public string CallStatusCode { get; set; }

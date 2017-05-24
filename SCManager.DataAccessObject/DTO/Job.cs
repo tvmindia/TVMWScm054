@@ -22,6 +22,7 @@ namespace SCManager.DataAccessObject.DTO
         public string ICRNo { get; set; }
         public string TechnicianRemark { get; set; }
         public string RepeatEmpName { get; set; }
+        public string RepeatJobNo { get; set; }
         public string CallStatusDescription { get; set; }
         
         public LogDetails logDetails { get; set; }
