@@ -23,6 +23,8 @@ namespace SCManager.UserInterface.Controllers
           
         }
         // GET: DailyServiceReport
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
             UA ua = new UA();
@@ -47,6 +49,7 @@ namespace SCManager.UserInterface.Controllers
             return View(jobVM);
         }
         #region InsertUpdateJob
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public string InsertUpdateJob(JobViewModel jobViewModel)
@@ -88,6 +91,7 @@ namespace SCManager.UserInterface.Controllers
         #endregion InsertUpdateJob
 
         [HttpPost]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DeleteTechnicianJob(JobViewModel job)
         {
             object result = null;
@@ -105,6 +109,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetDailyJobByID(string ID)
         {
             if (!string.IsNullOrEmpty(ID))
@@ -128,7 +133,7 @@ namespace SCManager.UserInterface.Controllers
 
 
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole,RoleContants.ManagerRole)]
         public string GetAllServiceReports()
         {
             UA ua = new UA();
@@ -136,6 +141,8 @@ namespace SCManager.UserInterface.Controllers
             return JsonConvert.SerializeObject(new { Result = "OK", Records = jobList });
         }
 
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult TechnicianJobForm(string source)
         {
 
@@ -180,6 +187,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetJobNumbersForDropDown()
         {
             try
@@ -195,6 +203,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllTechnicianForServiceTypeDropDown()
         {
             try

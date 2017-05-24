@@ -51,7 +51,10 @@
                                                     @Html.EditorFor(model => model.JobNo, new { htmlAttributes = new { @class = "form-control" } })
                                                     @Html.ValidationMessageFor(model => model.JobNo, "", new { @class = "text-danger" })
                                                     @Html.HiddenFor(model => model.EmpID, htmlAttributes: new { Value = "" })
+                                                    @if (Model.Source == "TechnicianJob")
+                                                    {
                                                     @Html.HiddenFor(model=>model.ServiceDate)
+                                                    }
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
                                             </div>
@@ -84,7 +87,7 @@
 
                                                 <div class="col-md-6">
                                                    
-                                                    @Html.DropDownListFor(model => model.ServiceType, Model.ServiceTypes, "--Select Service Types--", new { @class = "form-control" })
+                                                    @Html.DropDownListFor(model => model.ServiceType, Model.ServiceTypes, "--Select Service Types--", new { @class = "form-control", @style = "padding:4px 12px;" })
                                                     @Html.ValidationMessageFor(model => model.ServiceType, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
@@ -95,7 +98,7 @@
                                                     @Html.LabelFor(model => model.CallType)
                                                 </div>
                                                 <div class="col-md-6">
-                                                    @Html.DropDownListFor(model => model.CallType, Model.CallTypes, "--Select Call Types--", new { @class = "form-control", @onchange = "CallTypeOnChange(this)" })
+                                                    @Html.DropDownListFor(model => model.CallType, Model.CallTypes, "--Select Call Types--", new { @class = "form-control", @onchange = "CallTypeOnChange(this)", @style = "padding:4px 12px;" })
                                                     @Html.ValidationMessageFor(model => model.CallType, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>

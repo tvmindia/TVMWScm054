@@ -21,11 +21,12 @@ $(document).ready(function () {
                { "data": "CallStatusCode", "defaultContent": "<i>-</i>" },
                { "data": "ICRNo","defaultContent": "<i>-</i>" },
                { "data": "TechnicianRemark", "defaultContent": "<i>-</i>" },
-               { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="JobEdit(this)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a><span> | </span><a href="#" class="actionLink" onclick="JobDelete(this)"><i class="fa fa-trash-o" aria-hidden="true"></i>Remove</a>' }
+               { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="JobEdit(this)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>' },
+               { "data": null, "orderable": false, "defaultContent": '<a href="#" class="DeleteLink" onclick="JobDelete(this)"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
                   { className: "text-left", "targets": [1,2,3,4,5,6,7,8,9,10] },
-                  { className: "text-center", "targets": [] },
+                  { className: "text-center", "targets": [11,12] },
                   { className: "text-right", "targets": [] }
                     
                    
