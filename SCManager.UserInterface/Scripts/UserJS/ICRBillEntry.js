@@ -232,7 +232,7 @@ function reset()
     {
         $('#HeaderID').val("");
         $("#EmpID").val("");
-        $("#TechEmpID").val("");
+        $("#ModelTechEmpID").val("");
         $("#JobNo").val("");
         $("#ICRNo").val("");
         $("#CustomerName").val("");
@@ -289,7 +289,7 @@ function BindICRBillEntryFields(Records) {
         debugger;
         $('#HeaderID').val(Records.ID);
         $("#EmpID").val(Records.EmpID);
-        $("#TechEmpID").val(Records.EmpID);
+        $("#ModelTechEmpID").val(Records.EmpID);
         $("#JobNo").val(Records.JobNo);
         $("#ICRNo").val(Records.ICRNo);
         $("#CustomerName").val(Records.CustomerName);
@@ -538,7 +538,7 @@ function AmountSummary() {
 
 
 function AddTechnicanJob() {
-    var techi = $("#TechEmpID").val();
+    var techi = $("#ModelTechEmpID").val();
 
     if ((techi)) {
         $("#AddJobModel").modal('show');
@@ -555,9 +555,12 @@ function AddTechnicanJob() {
 function TechnicianSelectOnChange(curobj) {
     try {
         var v = $(curobj).val();
-        $("#TechEmpID").val(v);
+        $("#ModelTechEmpID").val(v);
     }
     catch (e) {
         notyAlert('error', e.Message);
     }
+}
+function RefreshDailyServiceTable() {
+    //need to write code to refresh combo
 }

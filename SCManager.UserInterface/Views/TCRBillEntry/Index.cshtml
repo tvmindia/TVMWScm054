@@ -52,8 +52,9 @@
                             <th>Job No</th>
                             <th>Date</th>
                             <th>Bill No</th>
-                            <th>Customer Name</th>
-                            <th>Customer Contact No</th>
+                            <th>Bill Amount (₹)</th>
+                            <th>Cust. Name</th>
+                            <th>Cust. Contact</th>
                             <th>Location</th>
                             <th>Remarks</th>
                             <th>...</th>
@@ -187,13 +188,14 @@
                                     @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
                                     @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
                                 </div>
+                            <div class="col-md-1 mandatory"></div>  
                             </div>
                         <div class="form-group">
                             <div class="col-md-4 ">
                                 @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control", rows = 4, @id = "Remarks" } })
+                                    @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control", rows = 2, @id = "Remarks" } })
                                     @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -243,7 +245,7 @@
                                 @Html.LabelFor(model => model.ServiceCharge, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.ServiceCharge, new { htmlAttributes = new { @class = "form-control" , style = "text-align:right", @onkeyup = "CalculateSCCommissionAmt(); " } })
+                                    @Html.EditorFor(model => model.ServiceCharge, new { htmlAttributes = new { @class = "form-control" , @id = "SCAmount", style = "text-align:right", @onblur = "CalculateSCCommissionAmt(); " } })
                                     @Html.ValidationMessageFor(model => model.ServiceCharge, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -255,7 +257,7 @@
                                 <input type="text" id="vatpercentage" class="form-control vattxt" onkeyup="CalculateVAT()" />
                             </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.VATAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "VATAmount",  @onkeyup = "AmountSummary(this)", style = "text-align:right" } })
+                                    @Html.EditorFor(model => model.VATAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "VATAmount", @onblur = "AmountSummary()", style = "text-align:right" } })
                                 </div>
                             </div>
                         <div class="form-group">
@@ -263,7 +265,7 @@
                                 @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control", style = "text-align:right",@id= "discount", @onkeyup = "AmountSummary();" } })
+                                    @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control", style = "text-align:right",@id= "discount", @onblur = "AmountSummary();" } })
                                     @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -290,7 +292,7 @@
                                     @Html.LabelFor(model => model.ServiceChargeComm, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-3">
-                                    @Html.EditorFor(model => model.ServiceChargeComm, new { htmlAttributes = new { @class = "form-control", style = "text-align:right", @onkeyup = "CalculateSCCommissionAmt(); " } })
+                                    @Html.EditorFor(model => model.ServiceChargeComm, new { htmlAttributes = new { @class = "form-control", style = "text-align:right", @onblur = "CalculateSCCommissionAmt(); ", @id = "ServiceChargeComm" } })
                                     @Html.ValidationMessageFor(model => model.ServiceChargeComm, "", new { @class = "text-danger" })
                                 </div>
                             </div>

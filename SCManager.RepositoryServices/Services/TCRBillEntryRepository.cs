@@ -59,6 +59,10 @@ namespace SCManager.RepositoryServices.Services
                                         _TCRBillEntrylistObj.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : _TCRBillEntrylistObj.CustomerLocation);
                                         _TCRBillEntrylistObj.Technician = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : _TCRBillEntrylistObj.Technician);
                                         _TCRBillEntrylistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _TCRBillEntrylistObj.Remarks);
+                                        _TCRBillEntrylistObj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : _TCRBillEntrylistObj.VATAmount);
+                                        _TCRBillEntrylistObj.ServiceCharge = (sdr["ServiceCharge"].ToString() != "" ? decimal.Parse(sdr["ServiceCharge"].ToString()) : _TCRBillEntrylistObj.ServiceCharge);
+                                        _TCRBillEntrylistObj.Subtotal = (sdr["SubTotal"].ToString() != "" ? decimal.Parse(sdr["SubTotal"].ToString()) : _TCRBillEntrylistObj.Subtotal);
+                                        _TCRBillEntrylistObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : _TCRBillEntrylistObj.Discount);
                                     }
 
                                     TCRBillEntrylist.Add(_TCRBillEntrylistObj);
