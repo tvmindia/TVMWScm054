@@ -118,6 +118,7 @@
     <Compile Include="Contracts\IDefectiveDamageBusiness.cs" />
     <Compile Include="Contracts\IDynamicUIBusiness.cs" />
     <Compile Include="Contracts\IEmployeesBusiness.cs" />
+    <Compile Include="Contracts\IExpensesBusiness.cs" />
     <Compile Include="Contracts\IForm8BRetailInvoiceBusiness.cs" />
     <Compile Include="Contracts\IForm8TaxInvoiceBusiness.cs" />
     <Compile Include="Contracts\IICRBillEntryBusiness.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Services\DefectiveDamageBusiness.cs" />
     <Compile Include="Services\DynamicUIBusiness.cs" />
     <Compile Include="Services\EmployeesBusiness.cs" />
+    <Compile Include="Services\ExpensesBusiness.cs" />
     <Compile Include="Services\Form8BRetailInvoiceBusiness.cs" />
     <Compile Include="Services\Form8TaxInvoiceBusiness.cs" />
     <Compile Include="Services\ICRBillEntryBusiness.cs" />
