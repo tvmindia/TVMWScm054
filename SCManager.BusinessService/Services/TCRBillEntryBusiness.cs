@@ -93,7 +93,7 @@ namespace SCManager.BusinessService.Services
             {
                 foreach (TCRBillEntry dd in TCRBillEntryList)
                 {
-
+                    dd.TCRBillEntryDetail = null;
                     TCRBillEntryBusinessL(dd);
                     TCRBillBL(dd.TCRBillEntryDetail);
                 }
@@ -137,11 +137,12 @@ namespace SCManager.BusinessService.Services
         {
             if (T != null)
             {
-                T.Subtotal = 0;
+              
                 SCManagerSettings settings = new SCManagerSettings();
 
                 if(T.TCRBillEntryDetail!=null)
                 {
+                    T.Subtotal = 0;
                     foreach (TCRBillEntryDetail F in T.TCRBillEntryDetail)
                     {
 
@@ -152,7 +153,7 @@ namespace SCManager.BusinessService.Services
                     }
                 }
                 
-                T.GrandTotal = T.Subtotal + T.VATAmount - T.Discount;
+                T.GrandTotal = T.Subtotal + T.VATAmount - T.Discount+T.ServiceCharge;
 
                 if (T.BillDate != null)
                     T.BillDateFormatted = T.BillDate.GetValueOrDefault().ToString(settings.dateformat);                

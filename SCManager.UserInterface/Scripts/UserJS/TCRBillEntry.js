@@ -19,6 +19,7 @@ $(document).ready(function () {
               { "data": "JobNo", "defaultContent": "<i>-</i>" },
               { "data": "BillDateFormatted", "defaultContent": "<i>-</i>" },
               { "data": "BillNo", "defaultContent": "<i>-</i>" },
+                { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
               { "data": "CustomerName", "defaultContent": "<i>-</i>" },
               { "data": "CustomerContactNo", "defaultContent": "<i>-</i>" },
                { "data": "CustomerLocation", "defaultContent": "<i>-</i>" },
@@ -26,8 +27,8 @@ $(document).ready(function () {
               { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
             ],
             columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
-                 { className: "text-right", "targets": [] },
-            { className: "text-center", "targets": [1,2, 3, 4, 9, 5, 6, 7, 8] }
+                 { className: "text-right", "targets": [5] },
+            { className: "text-center", "targets": [1,2, 3, 4, 9, 5, 6, 7, 8,9,10] }
 
             ]
         });
@@ -145,14 +146,24 @@ function goBack() {
 function CalculateSCCommissionAmt()
 {
     debugger;
-    var serviceCharge = $("#ServiceCharge").val();
+    var serviceCharge = $("#SCAmount").val();
     var SCcmmsn = $("#ServiceChargeComm").val();
     serviceCharge = parseInt(serviceCharge);
     SCcmmsn = parseInt(SCcmmsn);
+    if (SCcmmsn < 0) {
+        SCcmmsn = 0;
+        $("#ServiceChargeComm").val(0.00)
+    }
+
     if (SCcmmsn != undefined && !isNaN(SCcmmsn))
     {
-        $("#SCCommAmount").val(serviceCharge / SCcmmsn);
+        var a = serviceCharge * SCcmmsn / 100;
+        if (isNaN(a)) {
+            a = 0;
+        }
+        $("#SCCommAmount").val(roundoff(a));
     }
+    AmountSummary();
    
 }
 
@@ -272,7 +283,7 @@ function BindTCRBillEntryFields(Records) {
         $("#PaymentMode").val(Records.PaymentMode);
         $("#Remarks").val(Records.Remarks);
         $("#subtotal").val(roundoff(Records.Subtotal));
-        $("#ServiceCharge").val(roundoff(Records.ServiceCharge));
+        $("#SCAmount").val(roundoff(Records.ServiceCharge));
         $("#VATAmount").val(roundoff(Records.VATAmount));
         //$("#vatpercentage").val(Records.EmpID);
         $("#discount").val(roundoff(Records.Discount));
@@ -431,11 +442,24 @@ function Add() {
 function CalculateVAT()
 {
     debugger;
-    var vatpercent=$("#vatpercentage").val();
+    var vatpercent = $("#vatpercentage").val(); 
+
     var subTotal = $("#subtotal").val();
     vatpercent = parseInt(vatpercent);
+    if (vatpercent > 100) {
+        vatpercent = 100
+        $("#vatpercentage").val(vatpercent);
+    }
+    if (vatpercent < 0) {
+        vatpercent = 0
+        $("#vatpercentage").val(vatpercent);
+    }
     subTotal = parseInt(subTotal);
-    $("#VATAmount").val(subTotal/vatpercent);
+    var vatamt = (subTotal * vatpercent / 100)
+    if (isNaN(vatamt)) { vatamt=0.00}
+    $("#VATAmount").val(roundoff(vatamt));
+
+    AmountSummary();
 }
 
 function CalculateAmount(row) {
@@ -486,14 +510,18 @@ function AmountSummary() {
     debugger;
     var subtotal = parseFloat($('#subtotal').val()) || 0;
     var vatamount = parseFloat($('#VATAmount').val()) || 0;
+    var SCAmount = parseFloat($('#SCAmount').val()) || 0;
     var discount = parseFloat($('#discount').val()) || 0;
     var vatp = (parseFloat($('#vatpercentage').val()) || 0);
     if (vatp > 0) {
         vatamount = (subtotal * vatp) / 100;
         $('#VATAmount').val(roundoff(vatamount));
     }
-
-    $('#grandtotal').val(roundoff(subtotal + vatamount - discount));
+    $('#subtotal').val(roundoff(subtotal));
+    $('#VATAmount').val(roundoff(vatamount));
+    $('#SCAmount').val(roundoff(SCAmount));
+    $('#discount').val(roundoff(discount))
+    $('#grandtotal').val(roundoff(subtotal + vatamount + SCAmount - discount));
 }
 
 

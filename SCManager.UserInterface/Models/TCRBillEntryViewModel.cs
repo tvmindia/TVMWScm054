@@ -33,6 +33,8 @@ namespace SCManager.UserInterface.Models
         public string CustomerContactNo { get; set; }
         [Display(Name = "Customer Location")]
         public string CustomerLocation { get; set; }
+
+        [Required(ErrorMessage = "Please select mode of payment")]
         [Display(Name = "Mode Of Payment")]
         public string PaymentMode { get; set; }
         [DataType(DataType.MultilineText)]
