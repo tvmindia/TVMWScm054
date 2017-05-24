@@ -121,7 +121,8 @@ function ServiceDateOnChange(curobj)
 {
     try
     {
-        $("#ServiceDate").val($(curobj).val())
+      
+        $("#ModelServiceDate").val($(curobj).val())
         RefreshDailyServiceTable();
     }
     catch(e)
@@ -135,8 +136,9 @@ function TechnicianSelectOnChange(curobj)
     try
     {
         var v = $(curobj).val();
-        $("#TechEmpID").val(v);
+        $("#ModelTechEmpID").val(v);
         $("#txtServiceDate").val($("#hdfcurrentdate").val());
+        $("#ModelServiceDate").val($("#hdfcurrentdate").val())
         RefreshDailyServiceTable();
     }
     catch(e)

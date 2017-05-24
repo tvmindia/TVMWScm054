@@ -35,8 +35,8 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        @Html.EditorFor(model => model.ServiceDate, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.ServiceDate, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.ServiceDate, new { htmlAttributes = new { @class = "form-control",@id="ModelServiceDate" } })
+                                       
                                     </div>
                                     <div class="col-md-1 mandatory"></div>
                                 </div>
@@ -48,12 +48,11 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.JobNo, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.JobNo, "", new { @class = "text-danger" })
-                                                    @Html.HiddenFor(model => model.TechEmpID, htmlAttributes: new { Value = "" })
+                                                    @Html.EditorFor(model => model.JobNo, new { htmlAttributes = new { @class = "form-control",@id="ModelJobNo" } })
+                                                    @Html.HiddenFor(model => model.TechEmpID, htmlAttributes: new { Value = "",@id= "ModelTechEmpID" })
                                                     @if (Model.Source == "TechnicianJob")
                                                     {
-                                                    @Html.HiddenFor(model=>model.ServiceDate)
+                                                    @Html.HiddenFor(model=>model.ServiceDate, htmlAttributes: new { Value = "",@id= "ModelServiceDate" })
                                                     }
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
@@ -64,7 +63,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control",@id="ModelCustomerName" } })
                                                     @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
@@ -75,7 +74,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.CustomerLocation, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.EditorFor(model => model.CustomerLocation, new { htmlAttributes = new { @class = "form-control", @id= "ModelCustomerLocation" } })
                                                     @Html.ValidationMessageFor(model => model.CustomerLocation, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
@@ -87,7 +86,7 @@
 
                                                 <div class="col-md-6">
                                                    
-                                                    @Html.DropDownListFor(model => model.ServiceType, Model.ServiceTypes, "--Select Service Types--", new { @class = "form-control", @style = "padding:4px 12px;" })
+                                                    @Html.DropDownListFor(model => model.ServiceType, Model.ServiceTypes, "--Select Service Types--", new { @class = "form-control", @style = "padding:4px 12px;",@id="ModelServiceType" })
                                                     @Html.ValidationMessageFor(model => model.ServiceType, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
@@ -98,7 +97,7 @@
                                                     @Html.LabelFor(model => model.CallType)
                                                 </div>
                                                 <div class="col-md-6">
-                                                    @Html.DropDownListFor(model => model.CallType, Model.CallTypes, "--Select Call Types--", new { @class = "form-control", @onchange = "CallTypeOnChange(this)", @style = "padding:4px 12px;" })
+                                                    @Html.DropDownListFor(model => model.CallType, Model.CallTypes, "--Select Call Types--", new { @class = "form-control", @onchange = "CallTypeOnChange(this)", @style = "padding:4px 12px;",@id= "ModelCallType" })
                                                     @Html.ValidationMessageFor(model => model.CallType, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
@@ -110,7 +109,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <input type="text" id="Repeat_JobNo" name="Repeat_JobNo" class="form-control" list="jobnumberList" />
+                                                    <input type="text" id="ModelRepeat_JobNo" name="Repeat_JobNo" class="form-control" list="jobnumberList" />
                                                     <datalist id="jobnumberList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
@@ -121,8 +120,8 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <input type="text" id="txtEmployee" name="txtEmployee" class="form-control" list="EmployeeList" onChange="TechnicianOnChange(this)" />
-                                                     @Html.HiddenFor(model => model.Repeat_EmpID, htmlAttributes: new { Value = "" })
+                                                    <input type="text" id="ModelEmployee" name="txtEmployee" class="form-control" list="EmployeeList" onChange="TechnicianOnChange(this)" />
+                                                     @Html.HiddenFor(model => model.Repeat_EmpID, htmlAttributes: new { Value = "",@id= "ModelRepeat_EmpID" })
                                                     <datalist id="EmployeeList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
@@ -133,8 +132,8 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.ModelNo, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.ModelNo, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.ModelNo, new { htmlAttributes = new { @class = "form-control",@id= "ModelModelNo" } })
+                                                   
                                                 </div>
 
                                             </div>
@@ -144,8 +143,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.SerialNo, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control",@id= "ModelSerialNo" } })
                                                 </div>
 
                                             </div>
@@ -155,8 +153,8 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.ICRNo, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.ICRNo, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.ICRNo, new { htmlAttributes = new { @class = "form-control",@id="ModelICRNo" } })
+                                                  
                                                 </div>
 
                                             </div>
@@ -167,8 +165,8 @@
 
                                                 <div class="col-md-6">
 
-                                                    @Html.TextAreaFor(model => model.TechnicianRemark, new { @class = "form-control", @rows = 3 })
-                                                    @Html.ValidationMessageFor(model => model.TechnicianRemark, "", new { @class = "text-danger" })
+                                                    @Html.TextAreaFor(model => model.TechnicianRemark, new { @class = "form-control", @rows = 3,@id= "ModelTechnicianRemark" })
+                                                   
                                                 </div>
 
                                             </div>
