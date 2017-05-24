@@ -11,10 +11,14 @@ namespace SCManager.UserInterface.Models
     {
         public string SCCode { get; set; }
         public Guid? Repeat_EmpID { get; set; }
+        public EmployeesViewModel Employee { get; set; }
+        public string RepeatEmpName { get; set; }
+        public string RepeatJobNo { get; set; }
+        public string CallStatusDescription { get; set; }
         public string EmpSelector { get; set; }
         public string CallStatusCode { get; set; }
         public List<SelectListItem> Employees { get; set; }
-        public Guid ID { get; set; }
+        public Guid? ID { get; set; }
         public string Source { get; set; }
 
         [Display(Name = "Service Date")]

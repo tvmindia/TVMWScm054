@@ -106,9 +106,13 @@ namespace SCManager.RepositoryServices.Services
                                         _job.CallType = (sdr["CallTypeCode"].ToString() != "" ? (sdr["CallTypeCode"].ToString()) : _job.CallType);
                                         _job.ModelNo = (sdr["ModelNo"].ToString() != "" ? (sdr["ModelNo"].ToString()) : _job.ModelNo);
                                         _job.SerialNo = (sdr["SerialNo"].ToString() != "" ? (sdr["SerialNo"].ToString()) : _job.SerialNo);
-                                        _job.CallStatusCode = (sdr["CallStatusCode"].ToString() != "" ? (sdr["CallStatusCode]"].ToString()) : _job.CallStatusCode);
+                                     
+                                        _job.CallStatusCode = (sdr["CallStatusCode"].ToString() != "" ? (sdr["CallStatusCode"].ToString()) : _job.CallStatusCode);
                                         _job.ICRNo= (sdr["ICRNo"].ToString() != "" ? (sdr["ICRNo"].ToString()) : _job.ICRNo);
                                         _job.TechnicianRemark = (sdr["TechnicianRemarks"].ToString() != "" ? (sdr["TechnicianRemarks"].ToString()) : _job.TechnicianRemark);
+                                        _job.RepeatEmpName= (sdr["Repeat_EmpName"].ToString() != "" ? (sdr["Repeat_EmpName"].ToString()) : _job.TechnicianRemark);
+                                        _job.RepeatJobNo = (sdr["Repeat_JobNo"].ToString() != "" ? (sdr["Repeat_JobNo"].ToString()) : _job.RepeatJobNo);
+                                        _job.CallStatusDescription = (sdr["CallStatusDescription"].ToString() != "" ? (sdr["CallStatusDescription"].ToString()) : _job.CallStatusDescription);
                                     }
                                     jobList.Add(_job);
                                 }
@@ -199,6 +203,79 @@ namespace SCManager.RepositoryServices.Services
             
         }
         #endregion InsertJob
+
+        #region UpdateJob
+        public object UpdateJob(TechnicianJob technicianJob)
+        {
+            SqlParameter outParameter=null;
+            try
+            {
+
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[UpdateTechnicianJob]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = technicianJob.SCCode;
+                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = technicianJob.ID;
+                        cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = technicianJob.TechEmpID;
+                        cmd.Parameters.Add("@ServiceDate", SqlDbType.DateTime).Value = DateTime.Parse(technicianJob.ServiceDate);
+                        cmd.Parameters.Add("@JobNo", SqlDbType.NVarChar, 50).Value = technicianJob.JobNo;
+                        cmd.Parameters.Add("@CustomerName", SqlDbType.NVarChar, 250).Value = technicianJob.CustomerName;
+                        cmd.Parameters.Add("@CustomerLocation", SqlDbType.NVarChar, 250).Value = technicianJob.CustomerLocation;
+                        cmd.Parameters.Add("@ServiceTypeCode", SqlDbType.NVarChar, 5).Value = technicianJob.ServiceType;
+                        cmd.Parameters.Add("@CallTypeCode", SqlDbType.NVarChar, 20).Value = technicianJob.CallType;
+                        cmd.Parameters.Add("@ModelNo", SqlDbType.NVarChar, 50).Value = technicianJob.ModelNo;
+                        cmd.Parameters.Add("@SerialNo", SqlDbType.NVarChar, 50).Value = technicianJob.SerialNo;
+                        cmd.Parameters.Add("@CallStatusCode", SqlDbType.NVarChar, 5).Value = technicianJob.CallStatusCode;
+                        cmd.Parameters.Add("@ICRNo", SqlDbType.NVarChar, 50).Value = technicianJob.ICRNo;
+                        cmd.Parameters.Add("@TechnicianRemarks", SqlDbType.NVarChar, -1).Value = technicianJob.TechnicianRemark;
+                        if (technicianJob.Repeat_EmpID != Guid.Empty)
+                        {
+                            cmd.Parameters.Add("@Repeat_EmpID", SqlDbType.UniqueIdentifier).Value = technicianJob.Repeat_EmpID;
+                        }
+                        if (!string.IsNullOrEmpty(technicianJob.Repeat_JobNo))
+                        {
+                            cmd.Parameters.Add("@Repeat_JobNo", SqlDbType.NVarChar, 50).Value = technicianJob.Repeat_JobNo;
+                        }
+
+                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = technicianJob.logDetails.UpdatedBy;
+                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.SmallDateTime).Value = technicianJob.logDetails.UpdatedDate;
+                        outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
+                        outParameter.Direction = ParameterDirection.Output;
+                     
+                        cmd.ExecuteNonQuery();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            if (outParameter.Value.ToString() == "1")
+            {
+                return new
+                {
+                 Message = constObj.UpdateSuccess
+                };
+            }
+            else
+            {
+                return new
+                {
+                    Message = constObj.UpdateFailure
+                };
+            }
+
+        }
+        #endregion UpdateJob
 
 
         #region DeleteJob

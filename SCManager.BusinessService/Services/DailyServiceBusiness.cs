@@ -150,6 +150,18 @@ namespace SCManager.BusinessService.Services
                 throw ex;
             }
         }
+        public object UpdateJob(TechnicianJob technicianJob)
+        {
+            try
+            {
+                return _dailyServiceRepository.UpdateJob(technicianJob);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         public Job GetDailyJobByID(string SCCode, string JobID)
         {
@@ -157,7 +169,7 @@ namespace SCManager.BusinessService.Services
             try
             {
                 JobList = _dailyServiceRepository.GetAllDailyJobs(SCCode);
-                JobList = JobList == null ? null : JobList.Where(j=>j.ID== Guid.Parse(JobID)).ToList();
+                JobList = JobList == null ? null : JobList.Where(j=>j.ID== Guid.Parse(JobID)).Select(c=> { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("dd-MM-yyyy");return c; }).ToList();
             }
             catch (Exception ex)
             {

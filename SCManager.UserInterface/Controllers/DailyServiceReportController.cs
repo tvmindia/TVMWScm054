@@ -66,7 +66,17 @@ namespace SCManager.UserInterface.Controllers
                     jobViewModel.logDetails.CreatedDate = ua.CurrentDatetime();
                     jobViewModel.logDetails.UpdatedBy= ua.UserName;
                     jobViewModel.logDetails.UpdatedDate= ua.CurrentDatetime();
-                    result = _dailyServiceBusiness.InsertJob(Mapper.Map<JobViewModel, TechnicianJob>(jobViewModel));
+                    jobViewModel.CallStatusCode = "CLSD";
+                    switch(jobViewModel.ID!=null)
+                    {
+                        case true:
+                            result = _dailyServiceBusiness.UpdateJob(Mapper.Map<JobViewModel, TechnicianJob>(jobViewModel));
+                            break;
+                        default:
+                            result = _dailyServiceBusiness.InsertJob(Mapper.Map<JobViewModel, TechnicianJob>(jobViewModel));
+                            break;
+                    }
+                   
                     return JsonConvert.SerializeObject(new { Result = "OK", Record = result });
                 }
                 catch (Exception ex)
