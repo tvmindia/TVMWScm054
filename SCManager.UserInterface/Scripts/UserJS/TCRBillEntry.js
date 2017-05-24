@@ -5,7 +5,7 @@ var _Materials = [];
 
 $(document).ready(function () {
     try {
-        debugger;
+         
         DataTables.customerBillsTable = $('#tblCustomerBills').DataTable(
         {
             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
@@ -32,7 +32,7 @@ $(document).ready(function () {
 
             ]
         });
-        debugger;
+         
         DataTables.TCRBillDetail = $('#tblTCRBillDetails').DataTable(
        {
           
@@ -85,7 +85,7 @@ function EG_TableDefn() {
 }
 
 function EG_Columns() {
-    debugger;
+     
     var obj = [
             
                 { "data": "ID", "defaultContent": "<i>0</i>" },
@@ -145,7 +145,7 @@ function goBack() {
 
 function CalculateSCCommissionAmt()
 {
-    debugger;
+     
     var serviceCharge = $("#SCAmount").val();
     var SCcmmsn = $("#ServiceChargeComm").val();
     serviceCharge = parseInt(serviceCharge);
@@ -171,7 +171,7 @@ function CalculateSCCommissionAmt()
 
 //---------------------------------------Edit Item--------------------------------------------------//
 function Edit(currentObj) {
-    debugger;
+     
     var rowData = DataTables.customerBillsTable.row($(currentObj).parents('tr')).data();
     //Event Request Case
     if ((rowData != null) && (rowData.ID != null)) {
@@ -217,7 +217,7 @@ function BindTCRBillEntry(id) {
 
 }
 function DeleteItem(currentObj) {
-    debugger;
+     
     var rowData = EG_GridDataTable.row($(currentObj).parents('tr')).data();
 
     if ((rowData != null) && (rowData.ID != null)) {
@@ -227,7 +227,7 @@ function DeleteItem(currentObj) {
 }
 function TCRBillDetailDelete(id, rw) {
     try {
-        debugger;
+         
         var Hid = $('#HeaderID').val();
         if (id != '' && id != null && Hid != '' && Hid != null && Hid != emptyGUID) {
             var data = { "ID": id, "HeaderID": Hid };
@@ -247,7 +247,7 @@ function TCRBillDetailDelete(id, rw) {
             return 1;
         }
         else {
-            debugger;
+             
             if (EG_GridData.length != 1) {
                 EG_GridData.splice(rw - 1, 1);
                 EG_Rebind_WithData(EG_GridData, 0);
@@ -271,7 +271,7 @@ function TCRBillDetailDelete(id, rw) {
 function BindTCRBillEntryFields(Records) {
     try {
 
-        debugger;
+         
         $('#HeaderID').val(Records.ID);
         $("#EmpID").val(Records.EmpID);
         $("#ModelTechEmpID").val(Records.EmpID);
@@ -293,6 +293,8 @@ function BindTCRBillEntryFields(Records) {
         $("#SpecialComm").val(roundoff(Records.SpecialComm));
         EG_Rebind_WithData(Records.TCRBillEntryDetail, 1);
         $('#BillNo').attr('readonly', 'readonly');
+        $('#EmpID').attr('readonly', 'readonly');
+     
 
         var $datepicker = $('#BillDate');
         $datepicker.datepicker('setDate', new Date(Records.BillDate));
@@ -308,7 +310,7 @@ function BindTCRBillEntryFields(Records) {
 
 
 function FillUOM(row) {
-    debugger;
+     
     for (i = 0; i < _Materials.length; i++) {
         if (_Materials[i].ItemCode == EG_GridData[row - 1]['Material']) {
             EG_GridData[row - 1]['UOM'] = _Materials[i].UOM;
@@ -353,16 +355,11 @@ function TCRBillDelete() {
 
 }
 function SaveSuccess(data, status) {
-    debugger;
+     
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
-            if ($("#ID").val() == emptyGUID) {
-                BindTCRBillEntryFields(JsonResult.Records.itemID);
-            }
-            else {
-                BindTCRBillEntryFields($("#ID").val());
-            }
+            BindTCRBillEntry(JsonResult.Records.ID);
             BindAllCustomerBill();
             notyAlert('success', JsonResult.Message);
             break;
@@ -378,7 +375,7 @@ function SaveSuccess(data, status) {
 function BindAllCustomerBill()
 {
     try {
-        debugger;
+         
         DataTables.customerBillsTable.clear().rows.add(GetAllTCRBill()).draw(false);
     }
     catch (e) {
@@ -389,17 +386,17 @@ function BindAllCustomerBill()
 //---------------get grid fill result-------------------
 function GetAllTCRBill() {
     try {
-        debugger;
+         
         var data = {};
         var ds = {};
         ds = GetDataFromServer("TCRBillEntry/GetAllTCRBillEntry/", data);
-        debugger;
+         
         if (ds != '') {
-            debugger;
+             
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            // debugger;
+            //  
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -430,7 +427,7 @@ function save()
 }
 
 function Add() {
-    debugger;
+     
    
     ChangeButtonPatchView('TCRBillEntry', 'btnPatchTCRBillEntrySettab', 'Add');
     EG_ClearTable();
@@ -441,7 +438,7 @@ function Add() {
 
 function CalculateVAT()
 {
-    debugger;
+     
     var vatpercent = $("#vatpercentage").val(); 
 
     var subTotal = $("#subtotal").val();
@@ -507,7 +504,7 @@ function CalculateAmount(row) {
 }
 
 function AmountSummary() {
-    debugger;
+     
     var subtotal = parseFloat($('#subtotal').val()) || 0;
     var vatamount = parseFloat($('#VATAmount').val()) || 0;
     var SCAmount = parseFloat($('#SCAmount').val()) || 0;
@@ -556,6 +553,7 @@ function getMaterials() {
 
 function reset()
 {
+    $("#HeaderID").val(emptyGUID);
     $("#EmpID").val("");
     $("#ModelTechEmpID").val("");
     $("#JobNo").val("");
@@ -566,15 +564,17 @@ function reset()
     $("#PaymentMode").val("");
     $("#Remarks").val("");
     $("#subtotal").val("");
+    $("#SCAmount").val("");
     $("#ServiceChargeComm").val("");
     $("#VATAmount").val("");
     $("#vatpercentage").val("");
     $("#discount").val("");
     $("#grandtotal").val("");
-    $("#ServiceCharge").val("");
+    //$("#ServiceCharge").val("");
     $("#SCCommAmount").val("");
     $("#SpecialComm").val("");
     $('#BillNo').attr('readonly', false);
+    $('#EmpID').attr('readonly', false);
     var $datepicker = $('#BillDate');
     $datepicker.datepicker('setDate', null);
     ResetForm();
@@ -597,6 +597,7 @@ function AddTechnicanJob() {
         $("#AddJobModel").modal('show');
         $("#TechnicianLabel").text($("#EmpID option:selected").text());
         $("#ServiceDateLabel").text('Date not selected');
+        $("#modelContextLabel").text('Add Job');
         ClearJobForm();
         $(".calltypehidden").hide();
     }
