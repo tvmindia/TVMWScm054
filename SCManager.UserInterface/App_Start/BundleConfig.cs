@@ -56,7 +56,8 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/TCRBillEntry").Include("~/Scripts/UserJS/TCRBillEntry.js"));
             bundles.Add(new ScriptBundle("~/bundles/ICRBillEntry").Include("~/Scripts/UserJS/ICRBillEntry.js"));
             bundles.Add(new ScriptBundle("~/bundles/DailyServiceReport").Include("~/Scripts/UserJS/DailyServiceReport.js"));
-            
+            bundles.Add(new ScriptBundle("~/bundles/JobAction").Include("~/Scripts/UserJS/JobActions.js"));
+
         }
     }
 }

@@ -115,6 +115,7 @@
     <Compile Include="DTO\CreditNotes.cs" />
     <Compile Include="DTO\DefectiveDamage.cs" />
     <Compile Include="DTO\Employees.cs" />
+    <Compile Include="DTO\Expenses.cs" />
     <Compile Include="DTO\Form8.cs" />
     <Compile Include="DTO\Form8B.cs" />
     <Compile Include="DTO\ICRBillEntry.cs" />
