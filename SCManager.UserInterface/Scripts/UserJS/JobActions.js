@@ -56,6 +56,7 @@ function ClearJobForm() {
 }
 
 function ValidateJobForm() {
+
     try {
         var fl = true;
         if (($("#JobNo").val()) && ($("#CustomerName").val()) && ($("#CustomerLocation").val()) && ($("#ServiceType").val()) && ($("#CallType").val())) {
