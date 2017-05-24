@@ -531,6 +531,7 @@
     <Content Include="Scripts\UserJS\ICRBillEntry.js" />
     <Content Include="Scripts\UserJS\IssueToTechnician.js" />
     <Content Include="Scripts\UserJS\Item.js" />
+    <Content Include="Scripts\UserJS\JobActions.js" />
     <Content Include="Scripts\UserJS\LocalPurchase.js" />
     <Content Include="Scripts\UserJS\Login.js" />
     <Content Include="Scripts\UserJS\OpeningSetting.js" />
