@@ -20,7 +20,7 @@
                     <div class="col-md-10">
 
 
-                        @using (Ajax.BeginForm("InsertUpdateJob", "DailyServiceReport", new AjaxOptions { HttpMethod = "POST", OnSuccess = "JobSaveSuccess", OnFailure = "JobSaveFailure", OnBegin = "ValidateJobForm", AllowCache = false, LoadingElementId = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "jobform" }))
+                        @using (Ajax.BeginForm("InsertUpdateJob", "DailyServiceReport", new AjaxOptions { HttpMethod = "POST", OnSuccess = "JobSaveSuccess", OnFailure = "JobSaveFailure", OnBegin = "ValidateJobForm", AllowCache = false, LoadingElementId = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "jobform", autocomplete= "off" }))
 
                         {
                             @Html.AntiForgeryToken()
@@ -49,6 +49,7 @@
 
                                                 <div class="col-md-6">
                                                     @Html.EditorFor(model => model.JobNo, new { htmlAttributes = new { @class = "form-control",@id="ModelJobNo" } })
+                                                    @Html.HiddenFor(model => model.ID, htmlAttributes: new { Value = "", @id = "ModelJobID" })
                                                     @Html.HiddenFor(model => model.TechEmpID, htmlAttributes: new { Value = "",@id= "ModelTechEmpID" })
                                                     @if (Model.Source == "TechnicianJob")
                                                     {

@@ -150,6 +150,18 @@ namespace SCManager.BusinessService.Services
                 throw ex;
             }
         }
+        public object UpdateJob(TechnicianJob technicianJob)
+        {
+            try
+            {
+                return _dailyServiceRepository.UpdateJob(technicianJob);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         public Job GetDailyJobByID(string SCCode, string JobID)
         {

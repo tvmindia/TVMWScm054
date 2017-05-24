@@ -9,20 +9,34 @@
             $("#ModelCustomerLocation").val(result.CustomerLocation);
             $("#ModelServiceType").val(result.ServiceType);
             $("#ModelCallType").val(result.CallType);
-            $("#ModelRepeat_JobNo").val(result.Repeat_JobNo);
-            $("#ModelEmployee").val(result.Repeat_EmpID);
+           
+         
             $("#ModelModelNo").val(result.ModelNo);
             $("#ModelSerialNo").val(result.SerialNo);
             $("#ModelICRNo").val(result.ICRNo);
             $("#ModelTechnicianRemark").val(result.TechnicianRemark);
+            //Hiddenfields
+            $("#ModelTechEmpID").val(result.Employee.ID);
+            $("#ModelJobID").val(result.ID);
+            if(result.CallType=="Repeat")
+            {
+                $(".calltypehidden").show();
+                $("#ModelRepeat_JobNo").val(result.Repeat_JobNo);
+                $("#ModelEmployee").val(result.Repeat_EmpID);
 
-            // $("#TechnicianLabel").text(result.);
-            // $("#ServiceDateLabel").text(serdat);
+            }
+            else
+            {
+                $(".calltypehidden").hide();
+            }
+            $("#TechnicianLabel").text(result.Employee.Name);
+            $("#TechnicianLabel").text('Name: ' + result.Employee.Name);
+            $("#ServiceDateLabel").text(result.ServiceDate);
         }
         $("#AddJobModel").modal('show');
 
 
-        // $(".calltypehidden").hide();
+        
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -53,6 +67,7 @@ function GetServiceReportEntryByID(ID) {
 
 function ClearJobForm() {
     $('#jobform')[0].reset();
+
 }
 
 function ValidateJobForm() {

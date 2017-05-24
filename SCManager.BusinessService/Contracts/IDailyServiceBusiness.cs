@@ -19,5 +19,6 @@ namespace SCManager.BusinessService.Contracts
         object DeleteJob(Job job);
         Job GetDailyJobByID(string SCCode, string JobID);
         List<Job> GetJobs(string SCCode,Guid id,string servicedate);
+        object UpdateJob(TechnicianJob technicianJob);
     }
 }
