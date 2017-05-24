@@ -602,7 +602,7 @@ function AddTechnicanJob() {
         $(".calltypehidden").hide();
     }
     else {
-        notyAlert('error', 'Please Choose Technician and Service Date');
+        notyAlert('error', 'Please Choose Technician');
     }
 
 }

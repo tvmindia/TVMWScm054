@@ -544,11 +544,12 @@ function AddTechnicanJob() {
         $("#AddJobModel").modal('show');
         $("#TechnicianLabel").text($("#EmpID option:selected").text());
         $("#ServiceDateLabel").text('Date not selected');
+        $("#modelContextLabel").text('Add Job');
         ClearJobForm();
         $(".calltypehidden").hide();
     }
     else {
-        notyAlert('error', 'Please Choose Technician and Service Date');
+        notyAlert('error', 'Please Choose Technician');
     }
 
 }
