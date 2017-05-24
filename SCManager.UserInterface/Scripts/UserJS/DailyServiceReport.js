@@ -8,7 +8,7 @@ $(document).ready(function () {
              order: [],
              searching: true,
              paging: true,
-             data: GetAllServiceReportEntries(),
+             data: null,
              columns: [
                { "data": "ID", "defaultContent": "<i>-</i>" },
                { "data": "JobNo", "defaultContent": "<i>-</i>" },
@@ -21,17 +21,16 @@ $(document).ready(function () {
                { "data": "CallStatusCode", "defaultContent": "<i>-</i>" },
                { "data": "ICRNo","defaultContent": "<i>-</i>" },
                { "data": "TechnicianRemark", "defaultContent": "<i>-</i>" },
-               { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="JobEdit(this)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>' },
-               { "data": null, "orderable": false, "defaultContent": '<a href="#" class="DeleteLink" onclick="JobDelete(this)"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>' }
+               { "data": null, "orderable": false, "defaultContent": '<a data-toggle="tp" data-placement="top" data-delay={"show":2000, "hide":3000} title="Edit Job" href="#" class="actionLink" onclick="JobEdit(this)"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a>' },
+               { "data": null, "orderable": false, "defaultContent": '<a data-toggle="tp" data-placement="top" data-delay={"show":2000, "hide":3000} title="Delete Job" href="#" class="DeleteLink" onclick="JobDelete(this)"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
                   { className: "text-left", "targets": [1,2,3,4,5,6,7,8,9,10] },
                   { className: "text-center", "targets": [11,12] },
                   { className: "text-right", "targets": [] }
-                    
-                   
-             ]
+           ]
          });
+      
     }
     catch(e)
     {
@@ -85,40 +84,19 @@ function Delete(ID)
 
 function RefreshDailyServiceTable() {
     try {
-     DataTables.DailyService.clear().rows.add(GetAllServiceReportEntries()).draw(false);
+        var empid = $("#EmpSelector").val();
+        var serdate = $("#txtServiceDate").val();
+        if ((empid) && (serdate))
+        {
+            DataTables.DailyService.clear().rows.add(GetAllServiceReportEntries(empid, serdate)).draw(false);
+            $('[data-toggle="tp"]').tooltip({ container: 'body' });
+        }
+      
     }
     catch (e) {
         notyAlert('error', e.message);
     }
 }
-
-function GetAllServiceReportEntries() {
-    try {
-       
-        var data = {};
-        var ds = {};
-        ds = GetDataFromServer("DailyServiceReport/GetAllServiceReports/", data);
-        if (ds != '') {
-            ds = JSON.parse(ds);
-        }
-        if (ds.Result == "OK") {
-           return ds.Records;
-        }
-        if (ds.Result == "ERROR") {
-            alert(ds.Message);
-        }
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
-
-
-
-
-
-
-
 
 function AddTechnicanJob()
 {
@@ -127,8 +105,8 @@ function AddTechnicanJob()
     if ((techi) && (serdat))
     {
         $("#AddJobModel").modal('show');
-        $("#TechnicianLabel").text($("#EmpSelector option:selected").text());
-        $("#ServiceDateLabel").text(serdat);
+        $("#TechnicianLabel").text('Name: '+$("#EmpSelector option:selected").text());
+        $("#ServiceDateLabel").text(ConvertJsonToDate(serdat));
         ClearJobForm();
         $(".calltypehidden").hide();
     }
@@ -139,15 +117,12 @@ function AddTechnicanJob()
    
 }
 
-
-
-
-
 function ServiceDateOnChange(curobj)
 {
     try
     {
-     $("#ServiceDate").val($(curobj).val())
+        $("#ServiceDate").val($(curobj).val())
+        RefreshDailyServiceTable();
     }
     catch(e)
     {
@@ -155,20 +130,40 @@ function ServiceDateOnChange(curobj)
     }
 }
 
-
-
-
-
 function TechnicianSelectOnChange(curobj)
 {
     try
     {
         var v = $(curobj).val();
         $("#TechEmpID").val(v);
+        $("#txtServiceDate").val($("#hdfcurrentdate").val());
+        RefreshDailyServiceTable();
     }
     catch(e)
     {
         notyAlert('error', e.Message);
+    }
+}
+
+
+function GetAllServiceReportEntries(id,date) {
+    try {
+
+        var data = {"ID":id,"ServieDate":date};
+        var ds = {};
+        ds = GetDataFromServer("DailyServiceReport/GetAllServiceReports/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
     }
 }
 

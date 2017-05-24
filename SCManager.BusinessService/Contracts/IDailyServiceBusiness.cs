@@ -18,5 +18,6 @@ namespace SCManager.BusinessService.Contracts
         List<Employees> GetAllTechnicians(UA ua);
         object DeleteJob(Job job);
         Job GetDailyJobByID(string SCCode, string JobID);
+        List<Job> GetJobs(string SCCode,Guid id,string servicedate);
     }
 }

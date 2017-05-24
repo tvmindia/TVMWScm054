@@ -53,6 +53,7 @@ $(document).ready(function () {
         todayHighlight: true
     });
     
+   
     //menu submenu popup on click 3rd level menus
     $('.navbar a.dropdown-toggle').on('click', function (e) {
         var $el = $(this);
@@ -232,7 +233,7 @@ function ClearFields() {
 //------Date Formating :Return Result Eg: 01-Jan-2017--------------------//
 //Passing value
 //Argument Eg:"2017-03-30T00:00:00"
-//Returns 30-03-2017
+//Returns 30-Mar-2017
 function ConvertJsonToDate(jsonDate) {
     try
     {
