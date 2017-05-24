@@ -97,9 +97,18 @@
                                     @Html.DropDownListFor(model => model.JobNo, Model.JobNoList, "-- Select Job No --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
                                     @Html.ValidationMessageFor(model => model.JobNo, "", new { @class = "text-danger" })
                                 </div>
-                            <div class="col-md-1 mandatory"></div>  
-                           <div class="col-md-1"><a href="#" onclick="AddTechnicanJob()" style="margin-left:-55px;"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></div>
-                            </div>
+                            <div class="col-md-1 ">
+                                <span class="mandatory"></span>
+                                <span class="">&nbsp;</span>
+                                <span style="top:5px;">
+                                    <a href="#" onclick="AddTechnicanJob()" title="Add Job">
+                                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                                    </a>
+                                </span>
+                                
+                            </div>  
+                           
+                         </div>
                         <div class="form-group">
                             <div class="col-md-3 ">
                                 @Html.LabelFor(model => model.BillNo, htmlAttributes: new { @class = "control-label" })

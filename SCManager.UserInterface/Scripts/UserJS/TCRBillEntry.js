@@ -109,10 +109,10 @@ function EG_Columns_Settings() {
     var obj = [
         { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }, 
         { "targets": [4], "width": "20%" },
-        { className: "text-right", "targets": [7] },
-        { className: "text-center", "targets": [3, 4, 5] },
-        { className: "text-right disabled", "targets": [7,8] },
-        { className: "text-center disabled", "targets": [5] },
+        { className: "text-right", "targets": [6] },
+        { className: "text-center", "targets": [2,3, 4] },
+        { className: "text-right disabled", "targets": [7] },
+        { className: "text-center disabled", "targets": [5, 8] },
         { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8] }
 
     ]
