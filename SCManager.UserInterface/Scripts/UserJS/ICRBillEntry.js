@@ -232,6 +232,7 @@ function reset()
     {
         $('#HeaderID').val("");
         $("#EmpID").val("");
+        $("#TechEmpID").val("");
         $("#JobNo").val("");
         $("#ICRNo").val("");
         $("#CustomerName").val("");
@@ -288,6 +289,7 @@ function BindICRBillEntryFields(Records) {
         debugger;
         $('#HeaderID').val(Records.ID);
         $("#EmpID").val(Records.EmpID);
+        $("#TechEmpID").val(Records.EmpID);
         $("#JobNo").val(Records.JobNo);
         $("#ICRNo").val(Records.ICRNo);
         $("#CustomerName").val(Records.CustomerName);
@@ -525,4 +527,33 @@ function AmountSummary() {
     var vatamount = parseFloat($('#TotalServiceTaxAmt').val()) || 0;
     var discount = parseFloat($('#Discount').val()) || 0;
     $('#grandtotal').val(roundoff(subtotal + vatamount - discount));
+}
+
+
+
+
+
+function AddTechnicanJob() {
+    var techi = $("#TechEmpID").val();
+
+    if ((techi)) {
+        $("#AddJobModel").modal('show');
+        $("#TechnicianLabel").text($("#EmpID option:selected").text());
+        $("#ServiceDateLabel").text('Date not selected');
+        ClearJobForm();
+        $(".calltypehidden").hide();
+    }
+    else {
+        notyAlert('error', 'Please Choose Technician and Service Date');
+    }
+
+}
+function TechnicianSelectOnChange(curobj) {
+    try {
+        var v = $(curobj).val();
+        $("#TechEmpID").val(v);
+    }
+    catch (e) {
+        notyAlert('error', e.Message);
+    }
 }

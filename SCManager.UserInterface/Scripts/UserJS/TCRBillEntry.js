@@ -263,6 +263,7 @@ function BindTCRBillEntryFields(Records) {
         debugger;
         $('#HeaderID').val(Records.ID);
         $("#EmpID").val(Records.EmpID);
+        $("#TechEmpID").val(Records.EmpID);
         $("#JobNo").val(Records.JobNo);
         $("#BillNo").val(Records.BillNo);
         $("#CustomerName").val(Records.CustomerName);
@@ -528,6 +529,7 @@ function getMaterials() {
 function reset()
 {
     $("#EmpID").val("");
+    $("#TechEmpID").val("");
     $("#JobNo").val("");
     $("#BillNo").val("");
     $("#CustomerName").val("");
@@ -556,4 +558,31 @@ function ResetForm() {
         validator.settings.success($(this));
     });
     validator.resetForm();
+}
+
+
+
+function AddTechnicanJob() {
+    var techi = $("#TechEmpID").val();
+     
+    if ((techi) ) {
+        $("#AddJobModel").modal('show');
+        $("#TechnicianLabel").text($("#EmpID option:selected").text());
+        $("#ServiceDateLabel").text('Date not selected');
+        ClearJobForm();
+        $(".calltypehidden").hide();
+    }
+    else {
+        notyAlert('error', 'Please Choose Technician and Service Date');
+    }
+
+}
+function TechnicianSelectOnChange(curobj) {
+    try {
+        var v = $(curobj).val();
+        $("#TechEmpID").val(v);
+    }
+    catch (e) {
+        notyAlert('error', e.Message);
+    }
 }

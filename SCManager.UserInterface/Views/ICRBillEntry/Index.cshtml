@@ -84,7 +84,7 @@
                                 @Html.LabelFor(model => model.EmpID, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
-                                @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
+                                @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;", @onchange = "TechnicianSelectOnChange(this)" })
 
                                 @Html.ValidationMessageFor(model => model.EmpID, "", new { @class = "text-danger" })
                             </div>
@@ -352,6 +352,6 @@
     @Scripts.Render("~/bundles/bootstrapdatepicker")
     @Scripts.Render("~/bundles/ICRBillEntry")
     @Scripts.Render("~/bundles/editableGrid")
-@Scripts.Render("~/bundles/DailyServiceReport")
+@Scripts.Render("~/bundles/JobAction")
 
 }

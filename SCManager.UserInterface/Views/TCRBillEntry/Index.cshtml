@@ -83,7 +83,7 @@
                                 @Html.LabelFor(model => model.EmpID, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
+                                    @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;",@onchange = "TechnicianSelectOnChange(this)" })
                                    
                                     @Html.ValidationMessageFor(model => model.EmpID, "", new { @class = "text-danger" })
                                 </div>
@@ -270,9 +270,9 @@
                     </div>
                     <div class="inputForm col-md-5">
                      
-                        <div style="border:1px solid burlywood;border-radius:10px;">
+                        <div style="border:1px solid #c1c1c0;border-radius:10px;">
                             
-                            <div class="col-md-12" style="text-align:center;background-color:rgba(240, 173, 78, 0.24);"><label class="control-label">Technician Commissions for Direct Calls</label></div>
+                            <div class="col-md-12" style="text-align:center;background-color:rgba(210, 210, 210, 0.24);"><label class="control-label">Technician Commissions for Direct Calls</label></div>
                           <br />
                             <div class="form-group">
                                
@@ -344,6 +344,6 @@
     @Scripts.Render("~/bundles/bootstrapdatepicker")
     @Scripts.Render("~/bundles/TCRBillEntry")
     @Scripts.Render("~/bundles/editableGrid")
-@Scripts.Render("~/bundles/DailyServiceReport")
+@Scripts.Render("~/bundles/JobAction")
 
 }
