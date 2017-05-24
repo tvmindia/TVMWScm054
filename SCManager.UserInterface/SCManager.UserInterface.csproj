@@ -163,6 +163,7 @@
     <Compile Include="Controllers\DefectiveorDamagedController.cs" />
     <Compile Include="Controllers\DynamicUIController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\Form8BRetailInvoiceController.cs" />
     <Compile Include="Controllers\Form8TaxInvoiceController.cs" />
     <Compile Include="Controllers\IssueToTechnicianController.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="Models\DefectiveorDamagedViewModel.cs" />
     <Compile Include="Models\DynamicUIViewModel.cs" />
     <Compile Include="Models\EmployeesViewModel.cs" />
+    <Compile Include="Models\ExpensesViewModel.cs" />
     <Compile Include="Models\Form8BViewModel.cs" />
     <Compile Include="Models\Form8ViewModel.cs" />
     <Compile Include="Models\IssueToTechnicianViewModel.cs" />
@@ -522,6 +524,7 @@
     <Content Include="Scripts\UserJS\demoGrid.js" />
     <Content Include="Scripts\editableGrid.js" />
     <Content Include="Scripts\UserJS\Employees.js" />
+    <Content Include="Scripts\UserJS\Expenses.js" />
     <Content Include="Scripts\UserJS\Form8.js" />
     <Content Include="Scripts\UserJS\Form8B.js" />
     <Content Include="Scripts\UserJS\IssueToTechnician.js" />
@@ -580,6 +583,7 @@
     <Content Include="Views\ReceiveFromTechnician\Index.cshtml" />
     <Content Include="Views\DailyServiceReport\Index.cshtml" />
     <Content Include="Views\DailyServiceReport\TechnicianJobForm.cshtml" />
+    <Content Include="Views\Expenses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />
