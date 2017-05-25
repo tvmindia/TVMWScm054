@@ -82,7 +82,7 @@ function Delete(ID)
 }
 
 
-function RefreshDailyServiceTable() {
+function RefreshDailyServiceTable(jobno) {
     try {
         var empid = $("#EmpSelector").val();
         var serdate = $("#txtServiceDate").val();

@@ -115,7 +115,7 @@ function JobSaveSuccess(data, status, xhr) {
             case "OK":
                 notyAlert('success', JsonResult.Record.Message);
                 $("#AddJobModel").modal('hide');
-                RefreshDailyServiceTable();
+                RefreshDailyServiceTable($("#ModelJobNo").val());
                 break;
             case "VALIDATION":
                 notyAlert('error', JsonResult.Message);

@@ -70,7 +70,7 @@ $(document).ready(function () {
     });
    
     $(".dropdown, .btn-group").hover(function () {
-        debugger;
+       
         var dropdownMenu = $(this).children(".dropdown-menu");
         if (dropdownMenu.is(":visible")) {
             dropdownMenu.parent().toggleClass("open");
@@ -87,7 +87,7 @@ $(document).ready(function () {
     //});
 
     $('.BlockEnter').keydown(function (e) {
-        debugger;
+    
         try {
             if (e.which === 13) {
                 var index = $('.BlockEnter').index(this) + 1;
