@@ -185,7 +185,7 @@ namespace SCManager.BusinessService.Services
             try
             {
                 JobList = _dailyServiceRepository.GetAllDailyJobs(SCCode);
-                JobList = JobList == null ? null : JobList.Where(j => j.JobNo == JobNo).Select(c => { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("dd-MM-yyyy"); return c; }).ToList();
+                JobList = JobList == null ? null : JobList.Where(j => j.JobNo == JobNo).Select(c => { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("dd-MMM-yyyy"); return c; }).ToList();
             }
             catch (Exception ex)
             {

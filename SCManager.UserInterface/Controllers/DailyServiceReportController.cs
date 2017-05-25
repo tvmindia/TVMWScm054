@@ -152,6 +152,7 @@ namespace SCManager.UserInterface.Controllers
                 try
                 {
                     UA ua = new UA();
+                    
                     JobViewModel jobVM = Mapper.Map<Job, JobViewModel>(_dailyServiceBusiness.GetDailyJobByJobNo(ua.SCCode, JobNo));
                     return JsonConvert.SerializeObject(new { Result = "OK", Record = jobVM });
                 }
