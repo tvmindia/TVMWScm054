@@ -302,6 +302,7 @@ namespace SCManager.RepositoryServices.Services
                                         _Form8DetailObj.TradeDiscount = (sdr["TradeDiscount"].ToString() != "" ? decimal.Parse(sdr["TradeDiscount"].ToString()) :0);
                                         _Form8DetailObj.Material = (sdr["Material"].ToString() != "" ? (sdr["Material"].ToString()) : _Form8DetailObj.Material);
                                         _Form8DetailObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _Form8DetailObj.UOM);
+                                        _Form8DetailObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _Form8DetailObj.Description);
                                     }
 
                                     Form8DetailList.Add(_Form8DetailObj);
