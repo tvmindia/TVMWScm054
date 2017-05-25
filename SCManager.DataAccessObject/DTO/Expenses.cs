@@ -23,4 +23,10 @@ namespace SCManager.DataAccessObject.DTO
 
 
     }
+    public class ExpenseType
+    {
+        public string Code { get; set; }
+        public string Description { get; set; }
+
+    }
 }
