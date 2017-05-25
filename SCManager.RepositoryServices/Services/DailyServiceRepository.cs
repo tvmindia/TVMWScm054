@@ -184,22 +184,33 @@ namespace SCManager.RepositoryServices.Services
             {
                 throw ex;
             }
-            if (outParameter.Value.ToString() == "1")
+            switch(outParameter.Value.ToString())
             {
-                return new
-                {
-                    jobID = Guid.Parse(outParameter1.Value.ToString()),
-                    Status = outParameter.Value.ToString(),
-                    Message = constObj.InsertSuccess
-                };
+               
+                case "1":
+                    return new
+                    {
+                        jobID = Guid.Parse(outParameter1.Value.ToString()),
+                        Status = outParameter.Value.ToString(),
+                        Message = constObj.InsertSuccess
+                    };
+               
+                case "2":
+                    return new
+                    {
+                        Status = outParameter.Value.ToString(),
+                        Message = constObj.JobDuplicate
+                    };
+                   
+                default:
+                    return new
+                    {
+                        Status = outParameter.Value.ToString(),
+                        Message = constObj.InsertFailure
+                    };
+                   
             }
-            else
-            {
-                return new
-                {
-                  Message = constObj.InsertFailure
-                };
-            }
+          
             
         }
         #endregion InsertJob

@@ -81,6 +81,10 @@ namespace SCManager.DataAccessObject.DTO
         {
             get { return "Allready Exist.."; }
         }
+        public string JobDuplicate
+        {
+            get { return "Job Allready Exist.."; }
+        }
         public string NoItems
         {
             get { return "No items"; }

@@ -56,7 +56,7 @@ namespace SCManager.UserInterface.Controllers
         [ValidateAntiForgeryToken]
         public string InsertUpdateJob(JobViewModel jobViewModel)
         {
-            object result = null;
+            dynamic result = null;
             if (ModelState.IsValid)
             {
                 try
@@ -78,7 +78,8 @@ namespace SCManager.UserInterface.Controllers
                             result = _dailyServiceBusiness.InsertJob(Mapper.Map<JobViewModel, TechnicianJob>(jobViewModel));
                             break;
                     }
-                   
+
+                  
                     return JsonConvert.SerializeObject(new { Result = "OK", Record = result });
                 }
                 catch (Exception ex)

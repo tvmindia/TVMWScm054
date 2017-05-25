@@ -11,8 +11,10 @@
                         <h3 class="modal-title SCHeader" id="modelContextLabel"></h3>
                     </div>
                     <div class="col-md-4">
+                        <span>Name: </span>
                         <span class="modal-title" id="TechnicianLabel" style="font-weight: 600;"></span>
                         <br/>
+                        <span>Date: </span>
                         <span class="modal-title" id="ServiceDateLabel" style="font-weight: 600;"></span>
                     </div>
                    
@@ -51,7 +53,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.JobNo, new { htmlAttributes = new { @class = "form-control",@id="ModelJobNo" } })
+                                                    @Html.EditorFor(model => model.JobNo, new { htmlAttributes = new { @class = "form-control", @id="ModelJobNo", autofocus = "autofocus" } })
                                                     @Html.HiddenFor(model => model.ID, htmlAttributes: new { Value = "", @id = "ModelJobID" })
                                                     @Html.HiddenFor(model => model.TechEmpID, htmlAttributes: new { Value = "",@id= "ModelTechEmpID" })
                                                     @if (Model.Source == "TechnicianJob")

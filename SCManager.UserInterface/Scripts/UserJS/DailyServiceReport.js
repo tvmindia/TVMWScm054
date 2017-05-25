@@ -2,6 +2,7 @@
 $(document).ready(function () {
     try
     {
+      
         DataTables.DailyService = $('#tblDailyServiceReport').DataTable(
          {
              dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
@@ -106,8 +107,11 @@ function AddTechnicanJob()
     {
         $("#AddJobModel").modal('show');
         $("#modelContextLabel").text('Add Job');
-        $("#TechnicianLabel").text('Name: '+$("#EmpSelector option:selected").text());
-        $("#ServiceDateLabel").text('Date: '+ConvertJsonToDate(serdat));
+        $("#ModelJobNo").removeAttr('disabled');
+     
+
+        $("#TechnicianLabel").text($("#EmpSelector option:selected").text());
+        $("#ServiceDateLabel").text(ConvertJsonToDate(serdat));
         ClearJobForm();
         $(".calltypehidden").hide();
     }

@@ -5,6 +5,7 @@
         ClearJobForm();
         if (result) {
             $("#ModelJobNo").val(result.JobNo);
+            $("#ModelJobNo").attr({ 'disabled': 'disabled' });
             $("#ModelCustomerName").val(result.CustomerName);
             $("#ModelCustomerLocation").val(result.CustomerLocation);
             $("#ModelServiceType").val(result.ServiceType);
@@ -32,8 +33,8 @@
                 $(".calltypehidden").hide();
             }
           
-            $("#TechnicianLabel").text('Name: ' + result.Employee.Name);
-            $("#ServiceDateLabel").text('Date: ' + ConvertJsonToDate(result.ServiceDate));
+            $("#TechnicianLabel").text(result.Employee.Name);
+            $("#ServiceDateLabel").text(ConvertJsonToDate(result.ServiceDate));
          
         }
         $("#modelContextLabel").text('Edit Job');
@@ -72,7 +73,7 @@ function GetServiceReportEntryByID(ID) {
 
 function ClearJobForm() {
     $('#jobform')[0].reset();
-
+    $("#ModelJobID").val('');
 }
 
 function ValidateJobForm() {
@@ -114,9 +115,18 @@ function JobSaveSuccess(data, status, xhr) {
         var JsonResult = JSON.parse(data)
         switch (JsonResult.Result) {
             case "OK":
-                notyAlert('success', JsonResult.Record.Message);
-                $("#AddJobModel").modal('hide');
-                RefreshDailyServiceTable($("#ModelJobNo").val());
+                //Duplicate job
+                if (JsonResult.Record.Status == "2")
+                {
+                    notyAlert('error', JsonResult.Record.Message);
+                }
+                else
+                {
+                    notyAlert('success', JsonResult.Record.Message);
+                    $("#AddJobModel").modal('hide');
+                    RefreshDailyServiceTable($("#ModelJobNo").val());
+                }
+               
                 break;
             case "VALIDATION":
                 notyAlert('error', JsonResult.Message);
@@ -226,5 +236,7 @@ function TechnicianOnChange(i) {
 function ModelServiceDateOnChange(curobj)
 {
     var val = $(curobj).val();
-    $("#ServiceDateLabel").text('Date: '+ConvertJsonToDate(val));
+    $("#ServiceDateLabel").text(ConvertJsonToDate(val));
 }
+
+
