@@ -290,11 +290,12 @@ function SaveSuccess(data, status) {
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
-            if ($("#ID").val() == EmptyGuid) {
+            if ($("#UpdateID").val() == EmptyGuid) {
+                $("#UpdateID").val(JsonResult.Records.ID);
                 fillExpenses(JsonResult.Records.ID);
             }
             else {
-                fillExpenses($("#ID").val());
+                fillExpenses($("#UpdateID").val());
             }
             FillDates();
             BindAllExpenses();

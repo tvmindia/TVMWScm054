@@ -68,6 +68,7 @@ namespace SCManager.RepositoryServices.Services
         public object InsertExpenses(Expenses ExpensesObj)
         {
             SqlParameter outParameter = null;
+            SqlParameter outParameter2 = null;
             try
             {
 
@@ -95,10 +96,13 @@ namespace SCManager.RepositoryServices.Services
 
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
-                        outParameter = cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
-                        outParameter.Direction = ParameterDirection.Output;
+                        outParameter2 = cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
+                        outParameter2.Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
 
+                        ExpensesObj.ID = new Guid(outParameter2.Value.ToString());
+
+                        return ExpensesObj;
                     }
                 }
             }
