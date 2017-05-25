@@ -312,7 +312,6 @@ namespace SCManager.RepositoryServices.Services
                         outParameter.Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
                     }
-
                 }
             }
             catch (Exception ex)

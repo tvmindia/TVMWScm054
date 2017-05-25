@@ -56,7 +56,7 @@ namespace SCManager.UserInterface.Controllers
         [ValidateAntiForgeryToken]
         public string InsertUpdateJob(JobViewModel jobViewModel)
         {
-            dynamic result = null;
+            object result = null;
             if (ModelState.IsValid)
             {
                 try

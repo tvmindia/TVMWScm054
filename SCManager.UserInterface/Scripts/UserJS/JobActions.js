@@ -149,6 +149,8 @@ function CallTypeOnChange(curobj) {
     try {
         if (curobj.value != "Repeat") {
             $(".calltypehidden").hide();
+            $("#ModelRepeat_EmpID").val('');
+            $("#ModelRepeat_JobNo").val('');
         }
         else {
             $(".calltypehidden").show();
