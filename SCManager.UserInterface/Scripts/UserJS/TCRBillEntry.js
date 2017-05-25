@@ -293,8 +293,8 @@ function BindTCRBillEntryFields(Records) {
         $("#SpecialComm").val(roundoff(Records.SpecialComm));
         EG_Rebind_WithData(Records.TCRBillEntryDetail, 1);
         $('#BillNo').attr('readonly', 'readonly');
-        $('#EmpID').attr('disabled', 'true');
-     
+       // $('#EmpID').attr('disabled', 'true');
+       // $("#EmpID").val(Records.EmpID);
 
         var $datepicker = $('#BillDate');
         $datepicker.datepicker('setDate', new Date(Records.BillDate));
