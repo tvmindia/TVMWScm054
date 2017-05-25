@@ -532,6 +532,7 @@
     <Content Include="Scripts\UserJS\Form8.js" />
     <Content Include="Scripts\UserJS\Form8B.js" />
     <Content Include="Scripts\UserJS\ICRBillEntry.js" />
+    <Content Include="Scripts\UserJS\IncomeExpenseReport.js" />
     <Content Include="Scripts\UserJS\IssueToTechnician.js" />
     <Content Include="Scripts\UserJS\Item.js" />
     <Content Include="Scripts\UserJS\JobActions.js" />
@@ -593,6 +594,7 @@
     <Content Include="Views\DailyServiceReport\Index.cshtml" />
     <Content Include="Views\DailyServiceReport\TechnicianJobForm.cshtml" />
     <Content Include="Views\Expenses\Index.cshtml" />
+    <Content Include="Views\Report\MonthlyIncomeAndExpenditure.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

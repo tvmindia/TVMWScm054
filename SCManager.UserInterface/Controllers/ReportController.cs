@@ -51,6 +51,27 @@ namespace SCManager.UserInterface.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public ActionResult MonthlyIncomeAndExpenditure()
+        {
+            UA ua = new UA();
+            DateTime dt = ua.CurrentDatetime();
+            ViewBag.fromdate = dt.AddDays(-30).ToString("yyyy-MM-dd");
+            ViewBag.todate = dt.ToString("yyyy-MM-dd");
+            return View();
+        }
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetMonthlyIncomeExpenseSummary(string fromdate = null, string todate = null)
+        {
+            UA ua = new UA();
+            List<IncomeExpenseViewModel> incomeexpenseList = Mapper.Map<List<IncomeExpense>, List<IncomeExpenseViewModel>>(_reportBusiness.GetMonthlyIncomeAndExpenditure(ua, fromdate, todate));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = incomeexpenseList });
+        }
+
+
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllTechnicianStock(string fromdate = null, string todate = null)

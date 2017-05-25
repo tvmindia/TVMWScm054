@@ -13,6 +13,6 @@ namespace SCManager.RepositoryServices.Contracts
         List<Item> GetItemsSummary(UA UA, string fromdate = null, string todate = null);
         List<StockLedger> GetStockLedger(UA UA, string fromdate = null, string todate = null);
         List<TechnicianStock> GetTechniciansStockSummary(UA UA, string fromdate = null, string todate = null);
-
+        List<IncomeExpense> GetMonthlyIncomeAndExpenditure(UA UA, string fromdate = null, string todate = null);
     }
 }
