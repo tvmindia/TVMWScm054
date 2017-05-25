@@ -143,6 +143,29 @@ namespace SCManager.UserInterface.Controllers
             }
         }
 
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetDailyJobByJobNo(string JobNo)
+        {
+            if (!string.IsNullOrEmpty(JobNo))
+            {
+                try
+                {
+                    UA ua = new UA();
+                    JobViewModel jobVM = Mapper.Map<Job, JobViewModel>(_dailyServiceBusiness.GetDailyJobByJobNo(ua.SCCode, JobNo));
+                    return JsonConvert.SerializeObject(new { Result = "OK", Record = jobVM });
+                }
+                catch (Exception ex)
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                }
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "JobNo is not valid" });
+            }
+        }
+
 
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole,RoleContants.ManagerRole)]
