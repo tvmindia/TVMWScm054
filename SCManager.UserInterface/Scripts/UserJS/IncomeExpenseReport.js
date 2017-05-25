@@ -3,47 +3,41 @@ var appAddress = window.location.protocol + "//" + window.location.host + "/";  
 $(document).ready(function () {
     try {
 
-        DataTables.itemTable = $('#tblItemList').DataTable(
+        DataTables.IncomeExpenseTable = $('#tblIncomeExpense').DataTable(
          {
              dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
              buttons: [{
                  extend: 'excel',
                  exportOptions:
                               {
-                                  columns: [2, 3, 4, 5,6,7,8]
+                                  columns: [0,1, 2, 3, 4, 5, 6]
                               }
              }],
              order: [],
              searching: false,
              paging: true,
              pageLength: 50,
-             data: GetItemsSummary(),
+             data: GetIncomeExpenseSummary(),
              columns: [
-              
-               { "data": "ID", "defaultContent": "<i>-</i>" },
-               { "data": null, "defaultContent": "<i>-</i>" },
-               { "data": "ItemCode", "defaultContent": "<i>-</i>" },
+
+               { "data": "ReferenceNo", "defaultContent": "<i>-</i>" },
                { "data": "Description", "defaultContent": "<i>-</i>" },
-               { "data": "Category", "defaultContent": "<i>-</i>" },
-               { "data": "Stock", "defaultContent": "<i>-</i>" },
-               { "data": "UOM", "defaultContent": "<i>-</i>" },
-               { "data": "SellingRate",render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" },
-               { "data": "Value",render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" }
-             
+               { "data": "AccountHead", "defaultContent": "<i>-</i>" },
+               { "data": "Income",render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "Expense", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "Balance",render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "logDetails", render: function (data, type, row) { return ConvertJsonToDate(data.CreatedDate) }, "defaultContent": "<i>-</i>" }
+
              ],
-             columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
+             columnDefs: [
                   { className: "text-right", "targets": [] },
-                    { className: "text-center", "targets": [ 5,6,7,8] },
-                    { className: "text-left", "targets": [2,3,4] },
+                    { className: "text-center", "targets": [3,4,5,6] },
+                    { className: "text-left", "targets": [0, 1,2] },
 
              ]
          });
 
-        DataTables.itemTable.on('order.dt search.dt', function () {
-            DataTables.itemTable.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-                cell.innerHTML = i + 1;
-            });
-        }).draw();
+       
 
         $(".buttons-print").hide();
         $(".buttons-excel").hide();
@@ -51,21 +45,22 @@ $(document).ready(function () {
     catch (e) {
         notyAlert('error', e.message);
     }
+
 });
 
 
-function GetItemsSummary() {
+
+function GetIncomeExpenseSummary() {
     try {
         var frdate = $("#fromdate").val();
         var todate = $("#todate").val();
         var data = {};
-        if ((frdate) && (todate))
-        {
+        if ((frdate) && (todate)) {
             data = { "fromdate": frdate, "todate": todate };
         }
-        
+
         var ds = {};
-        ds = GetDataFromServer("Report/GetItemsSummary/", data);
+        ds = GetDataFromServer("Report/GetMonthlyIncomeExpenseSummary/", data);
         if (ds != '') {
             ds = JSON.parse(ds);
         }
@@ -74,7 +69,7 @@ function GetItemsSummary() {
         }
         if (ds.Result == "ERROR") {
             notyAlert('error', ds.Message);
-          }
+        }
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -82,19 +77,16 @@ function GetItemsSummary() {
 }
 
 
-
-function RefreshItemSummaryTable()
+function RefreshIncomeExpenseSummaryTable()
 {
-    try
-    {
+    try {
         var fromdate = $("#fromdate").val();
         var todate = $("#todate").val();
-        if (fromdate != "" && todate != "") {
-            DataTables.itemTable.clear().rows.add(GetItemsSummary()).draw(false);
+        if (DataTables.IncomeExpenseTable != undefined && fromdate != "" && todate != "") {
+            DataTables.IncomeExpenseTable.clear().rows.add(GetIncomeExpenseSummary()).draw(false);
         }
     }
-    catch(e)
-    {
+    catch (e) {
         notyAlert('error', e.message);
     }
 }
@@ -108,7 +100,8 @@ function goBack()
 {
     window.location = appAddress + "Report/Index/";
 }
-function PrintTableToDoc() {
+function PrintTableToDoc()
+{
     try {
 
         $(".buttons-excel").trigger('click');
@@ -117,4 +110,3 @@ function PrintTableToDoc() {
         notyAlert('error', e.message);
     }
 }
-

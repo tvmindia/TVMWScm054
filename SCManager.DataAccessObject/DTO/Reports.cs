@@ -40,5 +40,15 @@ namespace SCManager.DataAccessObject.DTO
         public decimal Rate { get; set; }
         public decimal Value { get; set; }
     }
+    public class IncomeExpense
+    {
+        public string ReferenceNo { get; set; }
+        public string Description { get; set; }
+        public string AccountHead { get; set; }
+        public decimal Income { get; set; }
+        public decimal Expense { get; set; }
+        public decimal Balance { get; set; }
+        public LogDetails logDetails { get; set; }
+    }
 
 }

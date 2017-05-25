@@ -130,6 +130,59 @@ namespace SCManager.RepositoryServices.Services
             return stockLedgerList;
         }
 
+        public List<IncomeExpense> GetMonthlyIncomeAndExpenditure(UA UA, string fromdate = null, string todate = null)
+        {
+            List<IncomeExpense> incomeexpenseList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@startDate", SqlDbType.DateTime).Value = fromdate;
+                        cmd.Parameters.Add("@endDate", SqlDbType.DateTime).Value = todate;
+                        cmd.CommandText = "[RPT_MonthlyIncomeExpense]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                incomeexpenseList = new List<IncomeExpense>();
+                                while (sdr.Read())
+                                {
+                                    IncomeExpense _incomeExpense = new IncomeExpense();
+                                    {
+                                        _incomeExpense.ReferenceNo = (sdr["Ref"].ToString() != "" ? sdr["Ref"].ToString() : _incomeExpense.ReferenceNo);
+                                        _incomeExpense.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _incomeExpense.Description);
+                                        _incomeExpense.AccountHead = (sdr["AcHead"].ToString() != "" ? (sdr["AcHead"].ToString()) : _incomeExpense.AccountHead);
+
+                                        _incomeExpense.Income = (sdr["Income"].ToString() != "" ? decimal.Parse(sdr["Income"].ToString()) : _incomeExpense.Income);
+                                        _incomeExpense.Expense = (sdr["Expense"].ToString() != "" ? decimal.Parse(sdr["Expense"].ToString()) : _incomeExpense.Expense);
+                                        _incomeExpense.Balance = (sdr["Balance"].ToString() != "" ? decimal.Parse(sdr["Balance"].ToString()) : _incomeExpense.Balance);
+                                        _incomeExpense.logDetails = new LogDetails();
+                                        _incomeExpense.logDetails.CreatedDate = (sdr["CreatedDate"].ToString() != "" ? (DateTime.Parse(sdr["CreatedDate"].ToString())) : _incomeExpense.logDetails.CreatedDate);
+                                    }
+                                    incomeexpenseList.Add(_incomeExpense);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return incomeexpenseList;
+        }
+
+
         public List<TechnicianStock> GetTechniciansStockSummary(UA UA, string fromdate = null, string todate = null)
         {
             List<TechnicianStock> TechncianList = null;

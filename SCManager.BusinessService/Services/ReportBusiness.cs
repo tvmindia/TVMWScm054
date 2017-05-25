@@ -61,7 +61,20 @@ namespace SCManager.BusinessService.Services
             return StockLedgerList;
         }
 
-       public List<TechnicianStock> GetTechniciansStockSummary(UA UA, string fromdate = null, string todate = null)
+       public List<IncomeExpense> GetMonthlyIncomeAndExpenditure(UA UA, string fromdate = null, string todate = null)
+        {
+            List<IncomeExpense> IncomeexpenseList = null;
+            try
+            {
+                IncomeexpenseList = _reportRepository.GetMonthlyIncomeAndExpenditure(UA, fromdate, todate);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return IncomeexpenseList;
+        }
+        public List<TechnicianStock> GetTechniciansStockSummary(UA UA, string fromdate = null, string todate = null)
         {
             List<TechnicianStock> TechnicianList = null;
             try
