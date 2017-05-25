@@ -293,7 +293,7 @@ function BindTCRBillEntryFields(Records) {
         $("#SpecialComm").val(roundoff(Records.SpecialComm));
         EG_Rebind_WithData(Records.TCRBillEntryDetail, 1);
         $('#BillNo').attr('readonly', 'readonly');
-        $('#EmpID').attr('readonly', 'readonly');
+        $('#EmpID').attr('disabled', 'true');
      
 
         var $datepicker = $('#BillDate');
@@ -574,11 +574,49 @@ function reset()
     $("#SCCommAmount").val("");
     $("#SpecialComm").val("");
     $('#BillNo').attr('readonly', false);
-    $('#EmpID').attr('readonly', false);
+    $('#EmpID').attr('disabled', false);
     var $datepicker = $('#BillDate');
     $datepicker.datepicker('setDate', null);
     ResetForm();
 }
+
+function FillJobRelatedFields() {
+    var job = $("#JobNo").val();
+    try {
+
+        var data = {"JobNo":job};
+        ds = GetDataFromServer("DailyServiceReport/GetDailyJobByJobNo/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            try {
+               
+                $("#CustomerName").val(ds.Record.CustomerName);
+                $("#CustomerLocation").val(ds.Record.CustomerLocation);
+                var $datepicker = $('#BillDate');
+                $datepicker.datepicker('setDate', new Date(ds.Record.ServiceDate));
+
+            } catch (x) {
+
+            }
+            
+
+
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+
+
+}
+
+
+
 //-----------------------------------------Reset Validation Messages--------------------------------------//
 function ResetForm() {
     var validator = $("#F8").validate();
@@ -617,6 +655,17 @@ function TechnicianSelectOnChange(curobj) {
 }
 
 
-function RefreshDailyServiceTable() {
+function RefreshDailyServiceTable(jobNo) {
     //need to write code to refresh combo
+   
+    $("#JobNo").html($("#JobNo").html() + '<option value="' + jobNo + '">' + jobNo + '</option>')
+    $("#JobNo").val(jobNo);
+    FillJobRelatedFields();
+}
+
+
+function JobSelect(obj) {
+    FillJobRelatedFields();
+    //var v = $(obj).val();
+    //RefreshDailyServiceTable(v);
 }

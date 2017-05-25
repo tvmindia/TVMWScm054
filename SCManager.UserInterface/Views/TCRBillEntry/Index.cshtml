@@ -80,7 +80,7 @@
                     </div>
                     <div class="inputForm col-md-5">
                         <div class="form-group">
-                            <div class="col-md-3 ">
+                            <div class="col-md-4 ">
                                 @Html.LabelFor(model => model.EmpID, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
@@ -91,11 +91,11 @@
                             <div class="col-md-1 mandatory"></div>  
                             </div>
                         <div class="form-group">
-                            <div class="col-md-3 ">
+                            <div class="col-md-4 ">
                                 @Html.LabelFor(model => model.JobNo, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.DropDownListFor(model => model.JobNo, Model.JobNoList, "-- Select Job No --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
+                                    @Html.DropDownListFor(model => model.JobNo, Model.JobNoList, "-- Select Job No --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;", @onchange = "JobSelect(this)" })
                                     @Html.ValidationMessageFor(model => model.JobNo, "", new { @class = "text-danger" })
                                 </div>
                             <div class="col-md-1 ">
@@ -111,7 +111,7 @@
                            
                          </div>
                         <div class="form-group">
-                            <div class="col-md-3 ">
+                            <div class="col-md-4 ">
                                 @Html.LabelFor(model => model.BillNo, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
@@ -121,7 +121,7 @@
                             <div class="col-md-1 mandatory"></div>  
                             </div>
                         <div class="form-group">
-                            <div class="col-md-3 ">
+                            <div class="col-md-4 ">
                                 @Html.LabelFor(model => model.BillDate, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
@@ -130,9 +130,41 @@
                                 </div>
                             <div class="col-md-1 mandatory"></div>  
                             </div>
-
                         <div class="form-group">
-                            <div class="col-md-3 ">
+                            <div class="col-md-4 ">
+                                @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @{
+                                    List<SelectListItem> listOtherIncomePaymentMode = new List<SelectListItem>();
+                                    listOtherIncomePaymentMode.Add(new SelectListItem
+                                    {
+                                        Text = "Cash",
+                                        Value = "Cash"
+                                    });
+                                    listOtherIncomePaymentMode.Add(new SelectListItem
+                                    {
+                                        Text = "Cheque",
+                                        Value = "Cheque"
+                                    });
+                                    listOtherIncomePaymentMode.Add(new SelectListItem
+                                    {
+                                        Text = "Online",
+                                        Value = "Online"
+                                    });
+                                }
+                                @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
+                                @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1 mandatory"></div>
+                        </div>
+
+
+                        
+                    </div>
+                    <div class="inputForm col-md-5">
+                        <div class="form-group">
+                            <div class="col-md-4 ">
                                 @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
@@ -141,9 +173,6 @@
                             </div>
                             <div class="col-md-1 mandatory"></div>
                         </div>
-                    </div>
-                    <div class="inputForm col-md-5">
-                      
                         <div class="form-group">
                             <div class="col-md-4 ">
                                 @Html.LabelFor(model => model.CustomerContactNo, htmlAttributes: new { @class = "control-label" })
@@ -162,34 +191,7 @@
                                     @Html.ValidationMessageFor(model => model.CustomerLocation, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                        <div class="form-group">
-                            <div class="col-md-4 ">
-                                @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label" })
-                                </div>
-                                <div class="col-md-6">
-                                    @{
-                                        List<SelectListItem> listOtherIncomePaymentMode = new List<SelectListItem>();
-                                        listOtherIncomePaymentMode.Add(new SelectListItem
-                                        {
-                                            Text = "Cash",
-                                            Value = "Cash"
-                                        });
-                                        listOtherIncomePaymentMode.Add(new SelectListItem
-                                        {
-                                            Text = "Cheque",
-                                            Value = "Cheque"
-                                        });
-                                        listOtherIncomePaymentMode.Add(new SelectListItem
-                                        {
-                                            Text = "Online",
-                                            Value = "Online"
-                                        });
-                                    }                                 
-                                    @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
-                                    @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
-                                </div>
-                            <div class="col-md-1 mandatory"></div>  
-                            </div>
+                   
                         <div class="form-group">
                             <div class="col-md-4 ">
                                 @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
