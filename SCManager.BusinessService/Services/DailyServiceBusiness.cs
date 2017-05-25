@@ -177,5 +177,21 @@ namespace SCManager.BusinessService.Services
             }
             return ((JobList!=null)&&(JobList.Count>0))? JobList[0]:null;
         }
+
+        public Job GetDailyJobByJobNo(string SCCode, string JobNo)
+        {
+            List<Job> JobList = null;
+           
+            try
+            {
+                JobList = _dailyServiceRepository.GetAllDailyJobs(SCCode);
+                JobList = JobList == null ? null : JobList.Where(j => j.JobNo == JobNo).Select(c => { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("dd-MM-yyyy"); return c; }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ((JobList != null) && (JobList.Count > 0)) ? JobList[0] : null;
+        }
     }
 }

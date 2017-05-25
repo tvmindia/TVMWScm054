@@ -27,6 +27,7 @@ namespace SCManager.UserInterface.Controllers
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
+
             UA ua = new UA();
             JobViewModel jobVM = new JobViewModel();
             List<SelectListItem> selectListItem = new List<SelectListItem>();
@@ -46,6 +47,7 @@ namespace SCManager.UserInterface.Controllers
             jobVM.Employees = selectListItem;
 
             ViewBag.Servdate = DateTime.Now.ToString("yyyy-MM-dd");
+         
             return View(jobVM);
         }
         #region InsertUpdateJob
