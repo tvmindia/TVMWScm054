@@ -23,12 +23,13 @@ $(document).ready(function () {
                { "data": "UOM", "defaultContent": "<i>-</i>" },
                { "data": "ReorderQty","defaultContent": "<i>-</i>" },
                { "data": "ProductCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "SellingRate", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
-                  { className: "text-right", "targets": [5, 6, 8,9] },
-                    { className: "text-center", "targets": [1,3, 4,7, 10] },
+                  { className: "text-right", "targets": [5, 6, 8,9,10] },
+                    { className: "text-center", "targets": [1,3, 4,7, 11] },
                     { className: "text-left", "targets": [2,9] },
              ]
          });
