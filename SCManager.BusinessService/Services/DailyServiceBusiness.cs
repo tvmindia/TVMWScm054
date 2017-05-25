@@ -169,7 +169,7 @@ namespace SCManager.BusinessService.Services
             try
             {
                 JobList = _dailyServiceRepository.GetAllDailyJobs(SCCode);
-                JobList = JobList == null ? null : JobList.Where(j=>j.ID== Guid.Parse(JobID)).Select(c=> { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("dd-MM-yyyy");return c; }).ToList();
+                JobList = JobList == null ? null : JobList.Where(j=>j.ID== Guid.Parse(JobID)).Select(c=> { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("yyyy-MM-dd");return c; }).ToList();
             }
             catch (Exception ex)
             {

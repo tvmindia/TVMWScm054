@@ -86,7 +86,7 @@ function RefreshDailyServiceTable(jobno) {
     try {
         var empid = $("#EmpSelector").val();
         var serdate = $("#txtServiceDate").val();
-        if ((empid) && (serdate))
+        if ((empid) && (serdate) && (DataTables.DailyService!=undefined))
         {
             DataTables.DailyService.clear().rows.add(GetAllServiceReportEntries(empid, serdate)).draw(false);
             $('[data-toggle="tp"]').tooltip({ container: 'body' });
@@ -107,7 +107,7 @@ function AddTechnicanJob()
         $("#AddJobModel").modal('show');
         $("#modelContextLabel").text('Add Job');
         $("#TechnicianLabel").text('Name: '+$("#EmpSelector option:selected").text());
-        $("#ServiceDateLabel").text(ConvertJsonToDate(serdat));
+        $("#ServiceDateLabel").text('Date: '+ConvertJsonToDate(serdat));
         ClearJobForm();
         $(".calltypehidden").hide();
     }

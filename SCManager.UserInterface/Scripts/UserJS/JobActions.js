@@ -33,7 +33,8 @@
             }
           
             $("#TechnicianLabel").text('Name: ' + result.Employee.Name);
-            $("#ServiceDateLabel").text(result.ServiceDate);
+            $("#ServiceDateLabel").text('Date: ' + ConvertJsonToDate(result.ServiceDate));
+         
         }
         $("#modelContextLabel").text('Edit Job');
         
@@ -225,5 +226,5 @@ function TechnicianOnChange(i) {
 function ModelServiceDateOnChange(curobj)
 {
     var val = $(curobj).val();
-    $("#ServiceDateLabel").text(val);
+    $("#ServiceDateLabel").text('Date: '+ConvertJsonToDate(val));
 }
