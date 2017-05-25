@@ -98,6 +98,7 @@ function DateClear() {
 }
 
 function clearfields() {
+    $("#UpdateID").val(EmptyGuid);
     $("#ID").val(EmptyGuid);
     $("#ID").prop('disabled', true); 
     $("#PaymentMode").val("")
@@ -132,7 +133,7 @@ function Delete() {
 //---------------------------------------Delete-------------------------------------------------------//
 function DeleteExpenses() {
     debugger;
-    var id = $("#ID").val();
+    var id = $("#UpdateID").val();
     if (id != EmptyGuid) {
         $("#btnFormDelete").click();
     }
