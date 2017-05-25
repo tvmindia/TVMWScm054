@@ -57,6 +57,8 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<JobViewModel, Job>().ReverseMap();
                 config.CreateMap<CallTypeViewModel, CallTypes>().ReverseMap();
                 config.CreateMap<JobViewModel, TechnicianJob>().ReverseMap();
+                config.CreateMap<ExpensesViewModel, Expenses>().ReverseMap();
+                config.CreateMap<ExpenseTypeViewModel, ExpenseType>().ReverseMap();
                 config.CreateMap<IncomeExpenseViewModel, IncomeExpense>().ReverseMap();
             });
         }
