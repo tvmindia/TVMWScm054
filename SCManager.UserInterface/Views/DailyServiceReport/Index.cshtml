@@ -30,7 +30,7 @@
             <a id="DailyServiceReportTab" onclick="return true;" href="#DailyServiceReport" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>Daily Service Report</a>
         </li>
         <li>
-            <a id="ServiceReportSummaryTab" onclick="return true;" href="#ServiceReportList" data-toggle="tab" style="width:232px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Service Report Summary</a>
+            <a id="ServiceReportSummaryTab" onclick="RefreshServiceReportSummaryTable();" href="#ServiceReportList" data-toggle="tab" style="width:232px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Service Report Summary</a>
         </li>
 
     </ul>
@@ -103,7 +103,7 @@
                                    <label class="control-label">Service Date</label>
                                </div>
                                <div class="col-md-3">
-                                   <input type="date" class="form-control" id="txtServiceDate2">
+                                   <input type="date" class="form-control" id="txtServiceDate2" value=@ViewBag.Servdate onChange="RefreshServiceReportSummaryTable()">
                                </div>
                                <div class="col-md-1 mandatory"></div>
                            </div>
@@ -112,8 +112,8 @@
                    </div>
                </div>
             <div class="col-md-12">&nbsp;</div>
-            <div class="container-fluid">
-                <div class="row">
+          
+                <div class="col-md-12">
                     <table id="tblServiceReportSummary" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                         <thead>
                             <tr class="text-center">
@@ -132,7 +132,7 @@
                         </thead>
                     </table>
                 </div>
-            </div>
+         
         </div>
     </div>
 </div>

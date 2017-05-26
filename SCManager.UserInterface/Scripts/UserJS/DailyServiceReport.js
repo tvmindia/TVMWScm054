@@ -37,6 +37,38 @@ $(document).ready(function () {
     {
      
     }
+
+    try {
+
+        DataTables.DailyServiceReportSummary = $('#tblServiceReportSummary').DataTable(
+         {
+             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             order: [],
+             searching: true,
+             paging: true,
+             data: null,
+             columns: [
+               { "data": "ServiceDate",render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "Technician", "defaultContent": "<i>-</i>" },
+               { "data": "TotalCalls", "defaultContent": "<i>-</i>" },
+               { "data": "MinorCalls", "defaultContent": "<i>-</i>" },
+               { "data": "MajorCalls", "defaultContent": "<i>-</i>" },
+               { "data": "MandatoryCalls", "defaultContent": "<i>-</i>" },
+               { "data": "DemoCalls", "defaultContent": "<i>-</i>" },
+               { "data": "RepeatCalls", "defaultContent": "<i>-</i>" }
+              
+             ],
+             columnDefs: [
+                  { className: "text-left", "targets": [1] },
+                  { className: "text-center", "targets": [0,2,3,4,5,6,7] }
+                 
+             ]
+         });
+
+    }
+    catch (e) {
+
+    }
 });
 
 
@@ -159,6 +191,38 @@ function GetAllServiceReportEntries(id,date) {
         var data = {"ID":id,"ServieDate":date};
         var ds = {};
         ds = GetDataFromServer("DailyServiceReport/GetAllServiceReports/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+function RefreshServiceReportSummaryTable() {
+    try {
+        var serdate = $("#txtServiceDate2").val();
+        if ((serdate) && (DataTables.DailyServiceReportSummary != undefined)) {
+            DataTables.DailyServiceReportSummary.clear().rows.add(GetServiceRegisterSummary(serdate)).draw(false);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+function GetServiceRegisterSummary(date) {
+    try
+    {
+        var data = { "ServiceDate": date };
+        var ds = {};
+        ds = GetDataFromServer("DailyServiceReport/GetServiceRegistrySummary/", data);
         if (ds != '') {
             ds = JSON.parse(ds);
         }
