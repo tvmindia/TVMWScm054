@@ -28,7 +28,7 @@ $(document).ready(function () {
                 ],
            columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
                { className: "text-right", "targets": [8] },
-               { className: "text-center", "targets": [1,2,3,5,6] },
+               { className: "text-center", "targets": [1,2,3,5,6,9] },
                { className: "text-left", "targets": [7] },
            ]
        });
@@ -138,16 +138,14 @@ function Edit(currentObj) {
     var rowData = DataTables.ExpensesTable.row($(currentObj).parents('tr')).data();
     if ((rowData != null) && (rowData.ID != null)) {
         fillExpenses(rowData.ID);
-
     }
 
 }
-function Delete() {
-
-    notyConfirm('Are you sure to delete?', 'DeleteExpenses()', '', "Yes, delete it!");
-
-}
 //---------------------------------------Delete-------------------------------------------------------//
+function Delete() {
+    notyConfirm('Are you sure to delete?', 'DeleteExpenses()', '', "Yes, delete it!");
+}
+
 function DeleteExpenses() {
     debugger;
     var id = $("#UpdateID").val();
@@ -178,7 +176,6 @@ function GetExpensesByID(id) {
         notyAlert('error', e.message);
     }
 }
- 
 
 //---------------------------------------Fill Expenses--------------------------------------------------//
 function fillExpenses(ID) {
@@ -186,7 +183,6 @@ function fillExpenses(ID) {
     ChangeButtonPatchView("Expenses", "btnPatchExpensesSettab", "Edit");
     var thisItem = GetExpensesByID(ID); //Binding Data
     //Hidden
-    
     $("#UpdateID").val(thisItem.ID);
     $("#deleteId").val(thisItem.ID);
     $("#ID").val(thisItem.ID);
