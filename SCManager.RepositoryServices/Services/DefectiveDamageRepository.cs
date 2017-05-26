@@ -61,6 +61,7 @@ namespace SCManager.RepositoryServices.Services
                                         _DefectiveDamagelistObj.Qty = (sdr["Qty"].ToString() != "" ? int.Parse(sdr["Qty"].ToString()) : _DefectiveDamagelistObj.Qty);
                                         _DefectiveDamagelistObj.ReturnStatusYN = (sdr["ReturnStatusYN"].ToString() != "" ?bool.Parse (sdr["ReturnStatusYN"].ToString()) : _DefectiveDamagelistObj.ReturnStatusYN);
                                         _DefectiveDamagelistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _DefectiveDamagelistObj.Remarks);
+                                        _DefectiveDamagelistObj.ReceiveStatus = (sdr["ReceiveStatus"].ToString() != "" ? (sdr["ReceiveStatus"].ToString()) : _DefectiveDamagelistObj.ReceiveStatus);
                                     }
 
                                     DefectiveDamagelist.Add(_DefectiveDamagelistObj);

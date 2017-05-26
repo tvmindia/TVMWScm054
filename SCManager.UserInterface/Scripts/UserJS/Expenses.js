@@ -17,18 +17,18 @@ $(document).ready(function () {
            columns: [
                 { "data": "ID", "defaultContent": "<i>-</i>" },
                 { "data": "EntryNo", "defaultContent": "<i>-</i>" },
-                { "data": "RefDate", "defaultContent": "<i>-</i>" },
+                { "data": "DateFormatted", "defaultContent": "<i>-</i>" },
                 { "data": "RefNo", "defaultContent": "<i>-</i>" },
-                { "data": "ExpenseTypeCode", "defaultContent": "<i>-</i>" },
+                { "data": "ExpenseType", "defaultContent": "<i>-</i>" },
                 { "data": "PaymentMode", "defaultContent": "<i>-</i>" },
-                { "data": "EmpID", "defaultContent": "<i>-</i>" },
+                { "data": "EmpName", "defaultContent": "<i>-</i>" },
                 { "data": "Description", "defaultContent": "<i>-</i>" },
                 { "data": "Amount", render: function (data, type, row) {  return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                 { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
                 ],
            columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
                { className: "text-right", "targets": [8] },
-               { className: "text-center", "targets": [1,2,3,5,6] },
+               { className: "text-center", "targets": [1,2,3,5,6,9] },
                { className: "text-left", "targets": [7] },
            ]
        });
@@ -36,13 +36,14 @@ $(document).ready(function () {
         $('#tblExpensesList tbody').on('dblclick', 'td', function () {
             Edit(this);
         }); 
-        //$('#fromDate').change(function () {
-        //    FromDateOnChange();
-        //});
-        //$('#toDate').change(function () {
-        //    FromDateOnChange();
-        //});
+        $('#fromDate').change(function () {
+            BindAllExpenses();
+        });
+        $('#toDate').change(function () {
+            BindAllExpenses();
+        });
 
+       
         clearfields();
     }
     catch (e) {
@@ -91,24 +92,40 @@ function List() {
     }
 
 }
+function ExpenseTypeChange() {
+    debugger;
+    if ($("#ExpenseTypeCode").val() == "SADV" || $("#ExpenseTypeCode").val() == "SAL")
+    {  
+        $("#EmpID").prop('disabled', false);
+       
+    }
+    else{
+        $("#EmpID").prop('disabled', true);
+        $("#EmpID").val("");
+    }
+}
 
 function DateClear() {
     $('#fromDate').val("");
     $('#toDate').val("");
+    $("#showAllYNCheckbox").prop('checked', false);
 }
 
 function clearfields() {
     $("#UpdateID").val(EmptyGuid);
     $("#ID").val(EmptyGuid);
-    $("#ID").prop('disabled', true); 
-    $("#PaymentMode").val("")
-    $("#ExpenseTypeCode").val("")
-    $("#Amount").val("");
-    $("#Description").val("")
+    $("#EntryNo").prop('disabled', true);
     $("#EmpID").val("");
+    $("#EmpID").prop('disabled', true);
+    $("#EntryNo").val("<<Auto Generated>>");
+    $("#PaymentMode").val("");
+    $("#ExpenseTypeCode").val("");
+    $("#Amount").val("");
+    $("#Description").val("");
+    $("#RefNo").val("");
     var $datepicker = $('#Date');
     $datepicker.datepicker('setDate', null); 
-    $("#deleteId").val("0")
+    $("#deleteId").val("0");
     ResetForm();
 }
 //---------------------------------------Edit Expenses--------------------------------------------------//
@@ -121,16 +138,14 @@ function Edit(currentObj) {
     var rowData = DataTables.ExpensesTable.row($(currentObj).parents('tr')).data();
     if ((rowData != null) && (rowData.ID != null)) {
         fillExpenses(rowData.ID);
-
     }
 
 }
-function Delete() {
-
-    notyConfirm('Are you sure to delete?', 'DeleteExpenses()', '', "Yes, delete it!");
-
-}
 //---------------------------------------Delete-------------------------------------------------------//
+function Delete() {
+    notyConfirm('Are you sure to delete?', 'DeleteExpenses()', '', "Yes, delete it!");
+}
+
 function DeleteExpenses() {
     debugger;
     var id = $("#UpdateID").val();
@@ -161,37 +176,17 @@ function GetExpensesByID(id) {
         notyAlert('error', e.message);
     }
 }
- 
-function DeleteSuccess(data, status) {
-    var i = JSON.parse(data)
-    debugger;
-    switch (i.Result) {
-        case "OK":
-            BindAllExpenses();
-            notyAlert('success', i.Message);
-            clearfields();
-            goBack();
-            break;
-        case "Error":
-            notyAlert('error', "Error");
-            break;
-        case "ERROR":
-            notyAlert('error', i.Message);
-            break;
-        default:
-            break;
-    }
-}
+
 //---------------------------------------Fill Expenses--------------------------------------------------//
 function fillExpenses(ID) {
     debugger;
     ChangeButtonPatchView("Expenses", "btnPatchExpensesSettab", "Edit");
     var thisItem = GetExpensesByID(ID); //Binding Data
     //Hidden
-    
     $("#UpdateID").val(thisItem.ID);
     $("#deleteId").val(thisItem.ID);
     $("#ID").val(thisItem.ID);
+    $("#EntryNo").val(thisItem.EntryNo);
     $("#RefNo").val(thisItem.RefNo);
     $("#ExpenseTypeCode").val(thisItem.ExpenseTypeCode);
     $("#EmpID").val(thisItem.EmpID);
@@ -203,6 +198,7 @@ function fillExpenses(ID) {
         var $datepicker = $('#Date');
         $datepicker.datepicker('setDate', new Date(thisItem.RefDate));
     }
+    ExpenseTypeChange();
 }
 
 //-----------------------------------------Reset Validation Messages--------------------------------------//
@@ -255,7 +251,6 @@ function GetAllExpenses(showAllYN) {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            // debugger;
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -269,9 +264,7 @@ function GetAllExpenses(showAllYN) {
 
 //------------------------------- Expenses Save-----------------------------//
 function save() {
-    debugger;
     $("#btnInsertUpdateExpenses").trigger('click');
-
 }
 
 //---------------------------------------Bind All Expenses----------------------------------------------//
@@ -307,6 +300,28 @@ function SaveSuccess(data, status) {
             break;
         default:
             notyAlert('error', JsonResult.Message);
+            break;
+    }
+}
+
+function DeleteSuccess(data, status) {
+    var i = JSON.parse(data)
+    debugger;
+    switch (i.Result) {
+        case "OK":
+            BindAllExpenses();
+            $('#ListTab').trigger('click');
+            notyAlert('success', i.Message);
+            clearfields();
+            goBack();
+            break;
+        case "Error":
+            notyAlert('error', "Error");
+            break;
+        case "ERROR":
+            notyAlert('error', i.Message);
+            break;
+        default:
             break;
     }
 }

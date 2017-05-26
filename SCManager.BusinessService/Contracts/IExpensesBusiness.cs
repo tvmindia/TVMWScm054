@@ -14,5 +14,6 @@ namespace SCManager.BusinessService.Contracts
         object InsertUpdateExpenses(Expenses ExpensesObj);
         List<Expenses> GetAllExpenses(UA UA,string FromDate, string ToDate, bool showAllYN);
         Expenses GetExpensesByID(UA UA,string ID);
+        string DeleteExpenses(string ID, UA ua);
     }
 }

@@ -16,10 +16,23 @@ namespace SCManager.BusinessService.Services
             _expensesRepository = expensesRepository;
         }
 
+      
+
         public List<Expenses> GetAllExpenses(UA UA, string FromDate, string ToDate, bool showAllYN)
         {
             List<Expenses> expenseList = null;
             expenseList = _expensesRepository.GetAllExpenses(UA,FromDate,ToDate,showAllYN);
+            if (expenseList != null)
+            {
+                foreach (Expenses EX in expenseList)
+                {
+                    SCManagerSettings settings = new SCManagerSettings();
+
+                    if (EX.RefDate != null)
+                        EX.DateFormatted = EX.RefDate.ToString(settings.dateformat);
+                }
+
+            }
             return expenseList;
         }
 
@@ -58,7 +71,19 @@ namespace SCManager.BusinessService.Services
             }
             return result;
         }
-
+        public string DeleteExpenses(string ID, UA ua)
+        {
+            string status = null;
+            try
+            {
+                status = _expensesRepository.DeleteExpenses(ID, ua);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
 
     }
 }
