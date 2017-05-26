@@ -25,5 +25,6 @@ namespace SCManager.DataAccessObject.DTO
         public string Description { get; set; }
         public LogDetails logDetails { get; set; }
         public String OpenDateFormatted { get; set; }
+        public String ReceiveStatus { get; set; }
     }
 }
