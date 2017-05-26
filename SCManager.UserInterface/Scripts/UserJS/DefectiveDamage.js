@@ -12,28 +12,37 @@ $(document).ready(function () {
              paging: true,
              data: GetAllDefectiveDamaged(),
              columns: [
-                    { "data": "ID", "defaultContent": "<i>-</i>" },
-                  { "data": "Type", "defaultContent": "<i>-</i>" },
-                  { "data": "OpenDateFormatted", "defaultContent": "<i>-</i>" },
-                   { "data": "RefNo", "defaultContent": "<i>-</i>" },
-                    { "data": "ItemCode", "defaultContent": "<i>-</i>" },        
+                { "data": "ID", "defaultContent": "<i>-</i>" },
+                { "data": "Type", "defaultContent": "<i>-</i>" },
+                { "data": "OpenDateFormatted", "defaultContent": "<i>-</i>" },
+                { "data": "RefNo", "defaultContent": "<i>-</i>" },
+                { "data": "ItemCode", "defaultContent": "<i>-</i>" },        
                       
-               { "data": "Description", "defaultContent": "<i>-</i>" },
-                 { "data": "Qty", "defaultContent": "<i>-</i>" },
-                 { "data": "ReturnStatusYN", "defaultContent": "<i>-</i>" },
-                 { "data": "Remarks", "defaultContent": "<i>-</i>" },
+                { "data": "Description", "defaultContent": "<i>-</i>" },
+                { "data": "Qty", "defaultContent": "<i>-</i>" },
+                { "data": "ReturnStatusYN", "defaultContent": "<i>-</i>" },
+                { "data": "ReceiveStatus", "defaultContent": "<i>-</i>" },
+                { "data": "Remarks", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
                  { className: "text-right", "targets": [6] },
-                 { className: "text-center", "targets": [1, 2, 3, 4, 7] },
-                 { className: "text-left", "targets": [5,8] },
+                 { className: "text-center", "targets": [1, 2, 3, 4, 7,8] },
+                 { className: "text-left", "targets": [5,9] },
                     {
                         "render": function (data, type, row) {
-                            return (data == true ? "Returned" + '<i class="fa fa-check" style="color:green;" aria-hidden="true"></i>' : "Not Returned");
+                            return (data == true ? "Returned " + '<i class="fa fa-check-circle" style="color:green;" aria-hidden="true"></i>' : "Not Returned");
                         },
                         "targets": 7
-                    }
+
+                    },
+                     {
+                         "render": function (data, type, row) {
+                             return (data == 'Received' ? "Received " + '<i class="fa fa-check-circle" style="color:green;" aria-hidden="true"></i>' : data);
+                         },
+                         "targets": 8
+
+                     }
              ]
          });
 
