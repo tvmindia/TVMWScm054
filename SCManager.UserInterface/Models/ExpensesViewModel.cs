@@ -13,9 +13,11 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Expense ID")]
         public Guid ID { get; set; }
 
+        [Display(Name = "Entry No.")]
         public string EntryNo { get; set; }
 
         [Display(Name = "Expense Type")]
+        [Required(ErrorMessage = "Please Select Expense Type")]
         public string ExpenseTypeCode { get; set; }
 
         [Display(Name = "Reference No.")]
@@ -47,6 +49,10 @@ namespace SCManager.UserInterface.Models
         public DateTime? toDate { get; set; }
         [Display(Name = "Show All Expenses")]
         public bool showAllYN { get; set; }
+
+        public string EmpName { get; set; }
+        public string DateFormatted { get; set; }
+        public string ExpenseType { get; set; }
 
         public LogDetailsViewModel logDetails { get; set; }
         public List<SelectListItem> TechniciansList { get; set; }

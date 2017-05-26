@@ -84,6 +84,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.CommandText = "[InsertExpenses]";
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = ExpensesObj.SCCode;
+                        if(ExpensesObj.EmpID != Guid.Empty)
                         cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = ExpensesObj.EmpID;
                         cmd.Parameters.Add("@RefNo", SqlDbType.NVarChar, 20).Value = ExpensesObj.RefNo;
                         cmd.Parameters.Add("@RefDate", SqlDbType.SmallDateTime).Value = ExpensesObj.RefDate;
@@ -135,7 +136,8 @@ namespace SCManager.RepositoryServices.Services
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = ExpensesObj.ID;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = ExpensesObj.SCCode;
-                        cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = ExpensesObj.EmpID;
+                        if (ExpensesObj.EmpID != Guid.Empty)
+                            cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = ExpensesObj.EmpID;
                         cmd.Parameters.Add("@RefDate", SqlDbType.DateTime).Value = ExpensesObj.RefDate;
                         cmd.Parameters.Add("@RefNo", SqlDbType.NVarChar, 20).Value = ExpensesObj.RefNo;
                         cmd.Parameters.Add("@ExpenseTypeCode", SqlDbType.NVarChar, 5).Value = ExpensesObj.ExpenseTypeCode;
@@ -201,6 +203,8 @@ namespace SCManager.RepositoryServices.Services
                                         expensesObj.Amount = (sdr["Amount"].ToString() != "" ? decimal.Parse(sdr["Amount"].ToString()) : expensesObj.Amount);
                                         expensesObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : expensesObj.ID);
                                         expensesObj.EmpID = (sdr["EmpID"].ToString() != "" ? Guid.Parse(sdr["EmpID"].ToString()) : expensesObj.EmpID);
+                                        expensesObj.EmpName = (sdr["EmpName"].ToString() != "" ? (sdr["EmpName"].ToString()) : expensesObj.EmpName);
+                                        expensesObj.ExpenseType = (sdr["ExpenseType"].ToString() != "" ? (sdr["ExpenseType"].ToString()) : expensesObj.ExpenseType);
                                     };
                                     Expenseslist.Add(expensesObj);
                                 }
@@ -263,6 +267,39 @@ namespace SCManager.RepositoryServices.Services
                 throw ex;
             }
             return expensesObj;
+        }
+
+        public string DeleteExpenses(string ID, UA ua)
+        {
+            SqlParameter outParameter = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[DeleteExpenses]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = Guid.Parse(ID);
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = ua.SCCode;
+
+                        outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
+                        outParameter.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return outParameter.Value.ToString();
         }
     }
 }

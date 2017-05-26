@@ -15,6 +15,7 @@ namespace SCManager.UserInterface.Controllers
     [CustomAuthenticationFilter]
     public class ExpensesController : Controller
     {
+        Const constObj = new Const();
         private IExpensesBusiness _expensesBusiness;
         IEmployeesBusiness _iEmployeesBusiness;
 
@@ -152,7 +153,53 @@ namespace SCManager.UserInterface.Controllers
             return JsonConvert.SerializeObject(new { Result = "OK", Records = CreditNotesList });
 
         }
-#endregion GetAllExpenses
+        #endregion GetAllExpenses
+
+        //DeleteExpenses
+        #region DeleteExpenses
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string DeleteExpenses(string ID)
+        {
+            string status = null;
+            string msg = null;
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    UA ua = new UA();
+                    if (!string.IsNullOrEmpty(ID))
+                    {
+                        status = _expensesBusiness.DeleteExpenses(ID, ua);
+                    }
+                    switch (status)
+                    {
+                        case "0":
+                            msg = constObj.DeleteFailure;
+                            break;
+                        case "1":
+                            msg = constObj.DeleteSuccess;
+                            break;
+                        case "2":
+                            msg = constObj.FKviolation;
+                            break;
+                    }
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message = msg });
+                }
+                catch (Exception ex)
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                }
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "Please Check the values" });
+            }
+
+        }
+        #endregion DeleteExpenses
 
         #region ButtonStyling
         [HttpGet]

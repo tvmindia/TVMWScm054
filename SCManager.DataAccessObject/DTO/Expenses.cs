@@ -18,6 +18,9 @@ namespace SCManager.DataAccessObject.DTO
         public string PaymentMode { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
+        public string EmpName { get; set; }
+        public string DateFormatted { get; set; }
+        public string ExpenseType { get; set; }
 
         public LogDetails logDetails { get; set; }
 
