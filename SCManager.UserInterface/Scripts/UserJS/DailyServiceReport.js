@@ -138,6 +138,9 @@ function AddTechnicanJob()
     if ((techi) && (serdat))
     {
         $("#AddJobModel").modal('show');
+        $('#AddJobModel').on('shown.bs.modal', function () {
+            $('#ModelJobNo').focus()
+        })
         $("#modelContextLabel").text('Add Job');
         $("#ModelJobNo").removeAttr('disabled');
      
