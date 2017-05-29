@@ -70,4 +70,17 @@ namespace SCManager.UserInterface.Models
         public decimal Balance { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
     }
+
+    public class ServiceRegistrySummaryViewModel
+    {
+        public string ServiceDate { get; set; }
+        public string Technician { get; set; }
+        public int TotalCalls { get; set; }
+        public int MinorCalls { get; set; }
+        public int MajorCalls { get; set; }
+        public int MandatoryCalls { get; set; }
+        public int DemoCalls { get; set; }
+        public int RepeatCalls { get; set; }
+
+    }
 }

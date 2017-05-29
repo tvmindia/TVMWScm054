@@ -193,5 +193,20 @@ namespace SCManager.BusinessService.Services
             }
             return ((JobList != null) && (JobList.Count > 0)) ? JobList[0] : null;
         }
+
+        public List<ServiceRegistrySummary> GetServiceRegistrySummary(string SCCode, string serviceDate)
+        {
+            List<ServiceRegistrySummary> ServiceRegistrySummaryList = null;
+            try
+            {
+                ServiceRegistrySummaryList = _dailyServiceRepository.GetServiceRegistrySummary(SCCode, serviceDate);
+                ServiceRegistrySummaryList = ServiceRegistrySummaryList == null ? null : ServiceRegistrySummaryList.Select(c => { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("yyyy-MM-dd"); return c; }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ServiceRegistrySummaryList;
+        }
     }
 }

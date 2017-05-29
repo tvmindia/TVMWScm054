@@ -271,6 +271,32 @@ namespace SCManager.UserInterface.Controllers
             }
         }
 
+
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetServiceRegistrySummary(string ServiceDate)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(ServiceDate))
+                {
+                    UA ua = new UA();
+                    List<ServiceRegistrySummaryViewModel> serviceList = Mapper.Map<List<ServiceRegistrySummary>, List<ServiceRegistrySummaryViewModel>>(_dailyServiceBusiness.GetServiceRegistrySummary(ua.SCCode, ServiceDate));
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = serviceList });
+                }
+                else
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "ServieDate is Empty!" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+
+
+        }
+
         #region ButtonStyling
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]

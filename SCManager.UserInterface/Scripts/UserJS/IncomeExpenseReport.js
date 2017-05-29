@@ -5,7 +5,8 @@ $(document).ready(function () {
 
         DataTables.IncomeExpenseTable = $('#tblIncomeExpense').DataTable(
          {
-             dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+           
+             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
              buttons: [{
                  extend: 'excel',
                  exportOptions:
@@ -14,7 +15,7 @@ $(document).ready(function () {
                               }
              }],
              order: [],
-             searching: false,
+             searching: true,
              paging: true,
              pageLength: 50,
              data: GetIncomeExpenseSummary(),

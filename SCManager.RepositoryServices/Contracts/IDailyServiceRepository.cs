@@ -15,5 +15,6 @@ namespace SCManager.RepositoryServices.Contracts
 
         object DeleteJob(Job job);
         object UpdateJob(TechnicianJob technicianJob);
+        List<ServiceRegistrySummary> GetServiceRegistrySummary(string SCCode,string serviceDate);
     }
 }

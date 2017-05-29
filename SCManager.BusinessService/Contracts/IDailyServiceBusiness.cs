@@ -21,5 +21,6 @@ namespace SCManager.BusinessService.Contracts
         Job GetDailyJobByJobNo(string SCCode, string JobNo);
         List<Job> GetJobs(string SCCode,Guid id,string servicedate);
         object UpdateJob(TechnicianJob technicianJob);
+        List<ServiceRegistrySummary> GetServiceRegistrySummary(string SCCode, string serviceDate);
     }
 }
