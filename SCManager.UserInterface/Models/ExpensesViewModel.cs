@@ -33,7 +33,11 @@ namespace SCManager.UserInterface.Models
         public string PaymentMode { get; set; }
 
         [Display(Name = "Amount (₹)")]
-        public decimal Amount { get; set; }
+        public decimal Amount { get; set; } 
+    
+        public decimal OutStandingPayment { get; set; }
+
+        
 
         [Display(Name = "Note")]
         [DataType(DataType.MultilineText)]

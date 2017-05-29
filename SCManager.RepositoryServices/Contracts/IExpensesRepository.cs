@@ -15,6 +15,7 @@ namespace SCManager.RepositoryServices.Contracts
         List<Expenses> GetAllExpenses(UA UA, string FromDate, string ToDate, bool showAllYN);
         Expenses GetExpensesByID(UA UA, string ID);
         string DeleteExpenses(string ID, UA ua);
+        Expenses GetOutStandingPayment(UA UA);
 
     }
 }

@@ -85,5 +85,11 @@ namespace SCManager.BusinessService.Services
             return status;
         }
 
+        public Expenses GetOutStandingPayment(UA UA)
+        {
+            Expenses expenseObj = null;
+            expenseObj = _expensesRepository.GetOutStandingPayment(UA);
+            return expenseObj;
+        }
     }
 }

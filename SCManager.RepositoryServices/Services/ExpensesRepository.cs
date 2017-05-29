@@ -244,7 +244,6 @@ namespace SCManager.RepositoryServices.Services
                             {
                                 while (sdr.Read())
                                 {
-                                    {
                                         expensesObj.ExpenseTypeCode = (sdr["ExpenseTypeCode"].ToString() != "" ? (sdr["ExpenseTypeCode"].ToString()) : expensesObj.ExpenseTypeCode);
                                         expensesObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()) : expensesObj.RefDate);
                                         expensesObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : expensesObj.RefNo);
@@ -254,8 +253,6 @@ namespace SCManager.RepositoryServices.Services
                                         expensesObj.Amount = (sdr["Amount"].ToString() != "" ? decimal.Parse(sdr["Amount"].ToString()) : expensesObj.Amount);
                                         expensesObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : expensesObj.ID);
                                         expensesObj.EmpID = (sdr["EmpID"].ToString() != "" ? Guid.Parse(sdr["EmpID"].ToString()) : expensesObj.EmpID);
-
-                                    };
                                 }
                             }
                         }
@@ -300,6 +297,45 @@ namespace SCManager.RepositoryServices.Services
                 throw ex;
             }
             return outParameter.Value.ToString();
+        }
+
+        public Expenses GetOutStandingPayment(UA UA)
+        {
+            Expenses expensesObj = new Expenses();
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                      
+                        cmd.CommandText = "[GetOutstandingPayment]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                while (sdr.Read())
+                                {
+                                        expensesObj.OutStandingPayment = (sdr["PaymentAmount"].ToString() != "" ? Decimal.Parse(sdr["PaymentAmount"].ToString()) : expensesObj.OutStandingPayment);
+                                      
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return expensesObj;
         }
     }
 }

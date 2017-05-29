@@ -133,9 +133,21 @@
                                                         
                         </div>
                         <div class="col-md-6 mastersep">
-                            <div class="col-md-12">
-                                <div class="masterinfo">
-                                    @*<h1>salary calculation area</h1>*@
+                            <div class="col-md-12"  id="OutStandingPaymentArea"  hidden="hidden">
+                                <div class="masterinfo"> 
+                                    <br />
+                                    <br />  
+                                    <br />
+                                    <div class="masterinfoHead">
+                                        Out Standing Payment<b> ₹ </b>
+                                        <span> <b> @Html.LabelFor(model => model.OutStandingPayment, htmlAttributes: new { id= "OutStandingPayment" })</b> </span>
+
+                                    </div>
+                                    <br />
+                                    <div class="masterinfoDet">
+                                        Notes 
+                                    </div>
+                                         
                                 </div>
                             </div>
                         </div>

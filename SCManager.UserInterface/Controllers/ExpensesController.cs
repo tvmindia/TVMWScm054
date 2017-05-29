@@ -155,7 +155,18 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion GetAllExpenses
 
-        //DeleteExpenses
+        #region GetOutStandingPayment
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetOutStandingPayment()
+        {
+            UA ua = new UA();
+            ExpensesViewModel CreditNotesList = Mapper.Map<Expenses, ExpensesViewModel>(_expensesBusiness.GetOutStandingPayment(ua));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = CreditNotesList });
+
+        }
+        #endregion GetOutStandingPayment
+
         #region DeleteExpenses
         [HttpPost]
         [ValidateAntiForgeryToken]
