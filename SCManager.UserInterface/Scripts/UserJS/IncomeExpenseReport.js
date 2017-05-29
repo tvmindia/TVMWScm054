@@ -31,9 +31,10 @@ $(document).ready(function () {
 
              ],
              columnDefs: [
-                  { className: "text-right", "targets": [] },
-                    { className: "text-center", "targets": [3,4,5,6] },
-                    { className: "text-left", "targets": [0, 1,2] },
+                      {'searchable': false,'targets': [3, 4, 5, 6]},
+                      { className: "text-right", "targets": [] },
+                      { className: "text-center", "targets": [3,4,5,6] },
+                      { className: "text-left", "targets": [0, 1,2] },
 
              ]
          });

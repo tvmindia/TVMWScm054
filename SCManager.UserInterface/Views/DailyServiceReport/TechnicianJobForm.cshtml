@@ -1,86 +1,99 @@
 ﻿@model SCManager.UserInterface.Models.JobViewModel
 
- <!-- Modal -->
-<div class="modal fade" id="AddJobModel" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel">
+<!-- Modal -->
+<div class="modal fade" id="AddJobModel" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <div class="container-fluid">
+            <div class="modal-header" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;height: 36px;padding: 3px;">
+            <div class="container-fluid" style="padding-right: 0px;">
                     <div class="col-md-8">
                         <h3 class="modal-title SCHeader" id="modelContextLabel"></h3>
                     </div>
-                    <div class="col-md-4">
-                        <span>Name: </span>
-                        <span class="modal-title" id="TechnicianLabel" style="font-weight: 600;"></span>
-                        <br/>
-                        <span>Date: </span>
-                        <span class="modal-title" id="ServiceDateLabel" style="font-weight: 600;"></span>
-                    </div>
-                   
+                   <div class="col-md-4" style="padding-right: 4px;">
+                       <a class="close" data-dismiss="modal" aria-label="Close"><i style="font-size: 33px;" class="fa fa-times-circle" aria-hidden="true"></i></a>
+                   </div>
+
                 </div>
             </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="col-md-10">
+           
+            <div class="col-md-12">
+             <div class="col-md-4">
+                    <span><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <span class="modal-title" id="TechnicianLabel" style="font-weight: 600;font-size: 14px;"></span>
+                   
+                    <span><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                    <span class="modal-title" id="ServiceDateLabel" style="font-weight: 600;font-size: 14px;"></span>
+                </div>
+                <div class="col-md-8">
+
+                </div>
+             </div>
+            <div class="container-fluid">
+                <br/>
+                <br />
+                <br />
+            </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="col-md-10">
 
 
-                        @using (Ajax.BeginForm("InsertUpdateJob", "DailyServiceReport", new AjaxOptions { HttpMethod = "POST", OnSuccess = "JobSaveSuccess", OnFailure = "JobSaveFailure", OnBegin = "ValidateJobForm", AllowCache = false, LoadingElementId = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "jobform", autocomplete= "off" }))
+                            @using (Ajax.BeginForm("InsertUpdateJob", "DailyServiceReport", new AjaxOptions { HttpMethod = "POST", OnSuccess = "JobSaveSuccess", OnFailure = "JobSaveFailure", OnBegin = "ValidateJobForm", AllowCache = false, LoadingElementId = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "jobform", autocomplete = "off" }))
 
-                        {
-                            @Html.AntiForgeryToken()
-
-
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            if (Model.Source != "TechnicianJob")
                             {
+                                @Html.AntiForgeryToken()
+
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                if (Model.Source != "TechnicianJob")
+                                {
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.ServiceDate)
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            @Html.EditorFor(model => model.ServiceDate, new { htmlAttributes = new { @class = "form-control", @id = "ModelServiceDate", @onchange = "ModelServiceDateOnChange(this)" } })
+
+                                        </div>
+                                        <div class="col-md-1 mandatory"></div>
+                                    </div>
+                                }
+
                                 <div class="form-group">
                                     <div class="col-md-4">
-                                        @Html.LabelFor(model => model.ServiceDate)
+                                        @Html.LabelFor(model => model.JobNo)
                                     </div>
 
                                     <div class="col-md-6">
-                                        @Html.EditorFor(model => model.ServiceDate, new { htmlAttributes = new { @class = "form-control",@id="ModelServiceDate", @onchange = "ModelServiceDateOnChange(this)" } })
-                                       
+                                        @Html.EditorFor(model => model.JobNo, new { htmlAttributes = new { @class = "form-control", @id = "ModelJobNo", autofocus = "autofocus" } })
+                                        @Html.HiddenFor(model => model.ID, htmlAttributes: new { Value = "", @id = "ModelJobID" })
+                                        @Html.HiddenFor(model => model.TechEmpID, htmlAttributes: new { Value = "", @id = "ModelTechEmpID" })
+                                        @if (Model.Source == "TechnicianJob")
+                                        {
+                                            @Html.HiddenFor(model => model.ServiceDate, htmlAttributes: new { Value = "", @id = "ModelServiceDate" })
+                                        }
                                     </div>
                                     <div class="col-md-1 mandatory"></div>
                                 </div>
-                            }
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @Html.LabelFor(model => model.CustomerName)
+                                    </div>
 
-                                            <div class="form-group">
-                                                <div class="col-md-4">
-                                                    @Html.LabelFor(model => model.JobNo)
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.JobNo, new { htmlAttributes = new { @class = "form-control", @id="ModelJobNo", autofocus = "autofocus" } })
-                                                    @Html.HiddenFor(model => model.ID, htmlAttributes: new { Value = "", @id = "ModelJobID" })
-                                                    @Html.HiddenFor(model => model.TechEmpID, htmlAttributes: new { Value = "",@id= "ModelTechEmpID" })
-                                                    @if (Model.Source == "TechnicianJob")
-                                                    {
-                                                    @Html.HiddenFor(model=>model.ServiceDate, htmlAttributes: new { Value = "",@id= "ModelServiceDate" })
-                                                    }
-                                                </div>
-                                                <div class="col-md-1 mandatory"></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-4">
-                                                    @Html.LabelFor(model => model.CustomerName)
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control",@id="ModelCustomerName" } })
-                                                    @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
-                                                </div>
-                                                <div class="col-md-1 mandatory"></div>
-                                            </div>
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", @id = "ModelCustomerName" } })
+                                        @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-1 mandatory"></div>
+                                </div>
                                             <div class="form-group">
                                                 <div class="col-md-4">
                                                     @Html.LabelFor(model => model.CustomerLocation)
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.CustomerLocation, new { htmlAttributes = new { @class = "form-control", @id= "ModelCustomerLocation" } })
+                                                    @Html.EditorFor(model => model.CustomerLocation, new { htmlAttributes = new { @class = "form-control", @id = "ModelCustomerLocation" } })
                                                     @Html.ValidationMessageFor(model => model.CustomerLocation, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
@@ -91,19 +104,19 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                   
-                                                    @Html.DropDownListFor(model => model.ServiceType, Model.ServiceTypes, "--Select Service Types--", new { @class = "form-control", @style = "padding:4px 12px;",@id="ModelServiceType" })
+
+                                                    @Html.DropDownListFor(model => model.ServiceType, Model.ServiceTypes, "--Select Service Types--", new { @class = "form-control", @style = "padding:4px 12px;", @id = "ModelServiceType" })
                                                     @Html.ValidationMessageFor(model => model.ServiceType, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
                                             </div>
-                                          
+
                                             <div class="form-group">
                                                 <div class="col-md-4">
                                                     @Html.LabelFor(model => model.CallType)
                                                 </div>
                                                 <div class="col-md-6">
-                                                    @Html.DropDownListFor(model => model.CallType, Model.CallTypes, "--Select Call Types--", new { @class = "form-control", @onchange = "CallTypeOnChange(this)", @style = "padding:4px 12px;",@id= "ModelCallType" })
+                                                    @Html.DropDownListFor(model => model.CallType, Model.CallTypes, "--Select Call Types--", new { @class = "form-control", @onchange = "CallTypeOnChange(this)", @style = "padding:4px 12px;", @id = "ModelCallType" })
                                                     @Html.ValidationMessageFor(model => model.CallType, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
@@ -127,7 +140,7 @@
 
                                                 <div class="col-md-6">
                                                     <input type="text" id="ModelEmployee" name="txtEmployee" class="form-control" list="EmployeeList" onChange="TechnicianOnChange(this)" />
-                                                     @Html.HiddenFor(model => model.Repeat_EmpID, htmlAttributes: new { Value = "",@id= "ModelRepeat_EmpID" })
+                                                    @Html.HiddenFor(model => model.Repeat_EmpID, htmlAttributes: new { Value = "", @id = "ModelRepeat_EmpID" })
                                                     <datalist id="EmployeeList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
@@ -138,8 +151,8 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.ModelNo, new { htmlAttributes = new { @class = "form-control",@id= "ModelModelNo" } })
-                                                   
+                                                    @Html.EditorFor(model => model.ModelNo, new { htmlAttributes = new { @class = "form-control", @id = "ModelModelNo" } })
+
                                                 </div>
 
                                             </div>
@@ -149,7 +162,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control",@id= "ModelSerialNo" } })
+                                                    @Html.EditorFor(model => model.SerialNo, new { htmlAttributes = new { @class = "form-control", @id = "ModelSerialNo" } })
                                                 </div>
 
                                             </div>
@@ -159,8 +172,8 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    @Html.EditorFor(model => model.ICRNo, new { htmlAttributes = new { @class = "form-control",@id="ModelICRNo" } })
-                                                  
+                                                    @Html.EditorFor(model => model.ICRNo, new { htmlAttributes = new { @class = "form-control", @id = "ModelICRNo" } })
+
                                                 </div>
 
                                             </div>
@@ -171,8 +184,8 @@
 
                                                 <div class="col-md-6">
 
-                                                    @Html.TextAreaFor(model => model.TechnicianRemark, new { @class = "form-control", @rows = 3,@id= "ModelTechnicianRemark" })
-                                                   
+                                                    @Html.TextAreaFor(model => model.TechnicianRemark, new { @class = "form-control", @rows = 3, @id = "ModelTechnicianRemark" })
+
                                                 </div>
 
                                             </div>
@@ -181,24 +194,23 @@
                                                     <input id="btnJobSave" type="submit" value="Create" class="btn btn-default" />
                                                 </div>
                                             </div>
-                                           }
-
-
-                    </div>
-                    <div class="col-md-2">
-                        <div class="" id="btnPatchDailyServiceReport" style="min-height:25px">
-                            @{
-                                var data1 = new { ActionType = "Save" };
-                                @Html.Action("ChangeButtonStyle", "DailyServiceReport", data1);
                             }
+
+
+                        </div>
+                        <div class="col-md-2">
+                          
+
                         </div>
 
                     </div>
-
                 </div>
-            </div>
-            <div class="modal-footer" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;"></div>
+                <div class="modal-footer" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;height: 50px;padding: 7px;">
+                    <a class="btn btn-primary" onclick="SaveTechnicanJob()"><i class="glyphicon glyphicon-floppy-disk"></i> Save</a>
+                    <a class="btn btn-default" onclick="ResetForm()"><i class="glyphicon glyphicon-refresh"></i> Reset</a>
+                   
+                </div>
 
-        </div>
+            </div>
     </div>
 </div>
