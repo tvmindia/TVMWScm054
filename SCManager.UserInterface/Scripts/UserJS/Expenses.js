@@ -160,6 +160,7 @@ function clearfields() {
     var $datepicker = $('#Date');
     $datepicker.datepicker('setDate', null); 
     $("#deleteId").val("0");
+    $("#OutStandingPaymentArea").hide();
     ResetForm();
 }
 //---------------------------------------Edit Expenses--------------------------------------------------//

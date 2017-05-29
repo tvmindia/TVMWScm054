@@ -323,7 +323,7 @@ namespace SCManager.RepositoryServices.Services
                             {
                                 while (sdr.Read())
                                 {
-                                        expensesObj.OutStandingPayment = (sdr["PaymentAmount"].ToString() != "" ? Decimal.Parse(sdr["PaymentAmount"].ToString()) : expensesObj.OutStandingPayment);
+                                        expensesObj.OutStandingPayment = (sdr["OutStandingPayments"].ToString() != "" ? Decimal.Parse(sdr["OutStandingPayments"].ToString()) : expensesObj.OutStandingPayment);
                                       
                                 }
                             }

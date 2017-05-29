@@ -30,6 +30,7 @@ namespace SCManager.UserInterface.Models
         public Guid EmpID { get; set; }
 
         [Display(Name = "Mode of Payment")]
+        [Required(ErrorMessage = "Please Select Mode of Payment")]
         public string PaymentMode { get; set; }
 
         [Display(Name = "Amount (₹)")]
