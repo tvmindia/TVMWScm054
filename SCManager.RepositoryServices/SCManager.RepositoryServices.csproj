@@ -125,6 +125,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Contracts\IICRBillEntryRepository.cs" />
+    <Compile Include="Contracts\IICRExpensesRepository.cs" />
     <Compile Include="Contracts\IIssueToTechnicianRepository.cs" />
     <Compile Include="Contracts\IItemRepository.cs" />
     <Compile Include="Contracts\ILocalPurchaseRepository.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Services\Form8BRetailInvoiceRepository.cs" />
     <Compile Include="Services\Form8TaxInvoiceRepository.cs" />
     <Compile Include="Services\ICRBillEntryRepository.cs" />
+    <Compile Include="Services\ICRExpensesRepository.cs" />
     <Compile Include="Services\IssueToTechnicianRepository.cs" />
     <Compile Include="Services\ItemRepository.cs" />
     <Compile Include="Services\LocalPurchaseRepository.cs" />

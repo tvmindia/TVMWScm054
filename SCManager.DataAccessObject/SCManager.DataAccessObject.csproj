@@ -120,6 +120,7 @@
     <Compile Include="DTO\Form8.cs" />
     <Compile Include="DTO\Form8B.cs" />
     <Compile Include="DTO\ICRBillEntry.cs" />
+    <Compile Include="DTO\ICRExpenses.cs" />
     <Compile Include="DTO\IssueToTechnician.cs" />
     <Compile Include="DTO\Item.cs" />
     <Compile Include="DTO\LocalPurchase.cs" />

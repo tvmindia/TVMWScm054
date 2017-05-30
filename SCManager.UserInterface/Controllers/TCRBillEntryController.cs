@@ -261,9 +261,9 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Disable = true;
-                    ToolboxViewModelObj.addbtn.DisableReason = "";
+                    ToolboxViewModelObj.addbtn.DisableReason = "N/A for new TCR Entry";
                     ToolboxViewModelObj.addbtn.Text = "New";
-                    ToolboxViewModelObj.addbtn.Title = "";
+                    ToolboxViewModelObj.addbtn.Title = "Add New";
                     ToolboxViewModelObj.addbtn.Event = "";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
@@ -274,8 +274,8 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Disable = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete Invoice";
-                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new item";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete TCR";
+                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new TCR Entry";
                     ToolboxViewModelObj.deletebtn.Event = "";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;

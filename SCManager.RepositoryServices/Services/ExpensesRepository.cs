@@ -12,6 +12,7 @@ namespace SCManager.RepositoryServices.Services
     public class ExpensesRepository: IExpensesRepository
     {
         Const constobj = new Const();
+
         private IDatabaseFactory _databaseFactory;
         private Const constObj = new Const();
         public ExpensesRepository(IDatabaseFactory databaseFactory)
@@ -64,7 +65,6 @@ namespace SCManager.RepositoryServices.Services
             }
             return ExpenseTypelist;
         }
-
         public object InsertExpenses(Expenses ExpensesObj)
         {
             SqlParameter outParameter = null;
@@ -164,7 +164,6 @@ namespace SCManager.RepositoryServices.Services
                 Message = constobj.UpdateSuccess
             };
         }
-
         public List<Expenses> GetAllExpenses(UA UA, string FromDate, string ToDate, bool showAllYN)
         {
             List<Expenses> Expenseslist = null;
@@ -219,7 +218,6 @@ namespace SCManager.RepositoryServices.Services
             }
             return Expenseslist;
         }
-
         public Expenses GetExpensesByID(UA UA, string ID)
         {
             Expenses expensesObj = new Expenses();
@@ -265,7 +263,6 @@ namespace SCManager.RepositoryServices.Services
             }
             return expensesObj;
         }
-
         public string DeleteExpenses(string ID, UA ua)
         {
             SqlParameter outParameter = null;
@@ -298,7 +295,6 @@ namespace SCManager.RepositoryServices.Services
             }
             return outParameter.Value.ToString();
         }
-
         public Expenses GetOutStandingPayment(UA UA)
         {
             Expenses expensesObj = new Expenses();

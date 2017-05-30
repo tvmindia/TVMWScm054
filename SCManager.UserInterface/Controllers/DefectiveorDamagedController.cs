@@ -183,10 +183,10 @@ namespace SCManager.UserInterface.Controllers
                     switch (status)
                     {
                         case "0":
-                            msg = c.DeleteFailure;
+                            msg = c.DeleteSuccess;                          
                             break;
                         case "1":
-                            msg = c.DeleteSuccess;
+                            msg = c.DeleteFailure;
                             break;
                         case "2":
                             msg = c.FKviolation;

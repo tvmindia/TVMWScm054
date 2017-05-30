@@ -32,7 +32,7 @@ $(document).ready(function () {
 
             ]
         });
-         
+        BindJobNumberDropDown();
         DataTables.TCRBillDetail = $('#tblTCRBillDetails').DataTable(
        {
           
@@ -315,6 +315,7 @@ function FillUOM(row) {
         if (_Materials[i].ItemCode == EG_GridData[row - 1]['Material']) {
             EG_GridData[row - 1]['UOM'] = _Materials[i].UOM;
             EG_GridData[row - 1]['MaterialID'] = _Materials[i].ID;
+            EG_GridData[row - 1]['Rate'] = _Materials[i].SellingRate;
             EG_Rebind();
             break;
         }
@@ -383,6 +384,8 @@ function BindAllCustomerBill()
     }
 }
 
+
+
 //---------------get grid fill result-------------------
 function GetAllTCRBill() {
     try {
@@ -415,7 +418,7 @@ function save()
     $("#ID").val(emptyGUID);
     var validation = EG_Validate();
     if (validation == "") {
-
+        debugger;
         var result = JSON.stringify(EG_GridData);
         $("#DetailJSON").val(result);
         $("#btnSave").trigger('click');
@@ -502,7 +505,34 @@ function CalculateAmount(row) {
     AmountSummary();
 
 }
+function BindJobNumberDropDown() {
 
+    try {
+
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("DailyServiceReport/GetJobNumbersForDropDown/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            var options = '';
+            $.each(ds.Records, function (key, value) {
+                //$("#RepeatJobNo").append($("<option></option>").val(value.ID).html(value.JobNo));
+                options += '<option id="' + value.ID + '" value="' + value.JobNo + '" >' + '</option>';
+            });
+            document.getElementById('jobnumberList').innerHTML = '';
+            document.getElementById('jobnumberList').innerHTML = options;
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+        }
+
+    }
+    catch (e) {
+        notyAlert('error', e.Message);
+    }
+}
 function AmountSummary() {
      
     var subtotal = parseFloat($('#subtotal').val()) || 0;
@@ -557,6 +587,7 @@ function reset()
     $("#EmpID").val("");
     $("#ModelTechEmpID").val("");
     $("#JobNo").val("");
+    $("#jobnumberList").val("");
     $("#BillNo").val("");
     $("#CustomerName").val("");
     $("#CustomerContactNo").val("");
@@ -658,11 +689,42 @@ function TechnicianSelectOnChange(curobj) {
 function RefreshDailyServiceTable(jobNo) {
     //need to write code to refresh combo
    
-    $("#JobNo").html($("#JobNo").html() + '<option value="' + jobNo + '">' + jobNo + '</option>')
-    $("#JobNo").val(jobNo);
+    // $("#JobNo").html($("#JobNo").html() + '<option value="' + jobNo + '">' + jobNo + '</option>')
+    _JobNoValue = jobNo;
+    //  $("#JobNo").val(jobNo);
+    ReBindJobNoDropdown();
     FillJobRelatedFields();
 }
+function ReBindJobNoDropdown() {
+    try {
+        debugger;
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("ICRBillEntry/RebindJobNo/", data);
+        debugger;
+        if (ds != '') {
+            debugger;
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            // debugger;
+            $('#jobnumberList').html('');
+            for (var i = 0; i < ds.Records.length - 1; i++) {
+                var opt = new Option(ds.Records[i].Value, ds.Records[i].Text);
+                $('#jobnumberList').append(opt);
+                $("#JobNo").val(_JobNoValue);
+            }
 
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
 
 function JobSelect(obj) {
     FillJobRelatedFields();
