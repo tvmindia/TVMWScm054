@@ -94,6 +94,19 @@ function List() {
 }
 function ExpenseTypeChange() {
     debugger;
+    if ($("#ExpenseTypeCode").val() == "IFBOT")
+    {
+        debugger;
+        $("#OutStandingPaymentArea").show();
+        var thisItem = GetOutStandingPayment();
+        $("#OutStandingPayment").text(thisItem.OutStandingPayment);
+
+
+    }
+    else {
+        $("#OutStandingPaymentArea").hide();
+}
+
     if ($("#ExpenseTypeCode").val() == "SADV" || $("#ExpenseTypeCode").val() == "SAL")
     {  
         $("#EmpID").prop('disabled', false);
@@ -102,6 +115,27 @@ function ExpenseTypeChange() {
     else{
         $("#EmpID").prop('disabled', true);
         $("#EmpID").val("");
+
+    }
+}
+
+function GetOutStandingPayment() {
+    try {
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("Expenses/GetOutStandingPayment/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
     }
 }
 
@@ -126,6 +160,7 @@ function clearfields() {
     var $datepicker = $('#Date');
     $datepicker.datepicker('setDate', null); 
     $("#deleteId").val("0");
+    $("#OutStandingPaymentArea").hide();
     ResetForm();
 }
 //---------------------------------------Edit Expenses--------------------------------------------------//

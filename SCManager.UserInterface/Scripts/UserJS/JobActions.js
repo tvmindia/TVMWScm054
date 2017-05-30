@@ -75,6 +75,10 @@ function ClearJobForm() {
     $('#jobform')[0].reset();
     $("#ModelJobID").val('');
 }
+function ResetForm() {
+    $('#jobform')[0].reset();
+   
+}
 
 function ValidateJobForm() {
 

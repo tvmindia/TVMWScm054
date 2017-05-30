@@ -312,11 +312,17 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.addbtn.Event = "AddTechnicanJob();";
                     break;
                 case "Save":
-                    ToolboxViewModelObj.savebtn.Visible = true;
-                    ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save";
-                    ToolboxViewModelObj.savebtn.Event = "SaveTechnicanJob();";
+                    //ToolboxViewModelObj.savebtn.Visible = true;
+                    //ToolboxViewModelObj.savebtn.Text = "Save";
+                    //ToolboxViewModelObj.savebtn.Title = "Save";
+                    //ToolboxViewModelObj.savebtn.Event = "SaveTechnicanJob();";
+                    //ToolboxViewModelObj.resetbtn.Visible = true;
+                    //ToolboxViewModelObj.resetbtn.Text = "Reset";
+                    //ToolboxViewModelObj.resetbtn.Title = "Reset";
+                    //ToolboxViewModelObj.resetbtn.Event = "Clear();";
                     break;
+             
+                 
                 default:
                     return Content("Nochange");
             }

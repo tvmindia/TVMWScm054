@@ -5,16 +5,15 @@ using System.Web;
 
 namespace SCManager.DataAccessObject.DTO
 {
-    public class Expenses
+    public class ICRExpenses
     {
-
         public string SCCode { get; set; }
         public Guid ID { get; set; }
         public string EntryNo { get; set; }
         public string ExpenseTypeCode { get; set; }
-        public  string RefNo	{ get; set; }
+        public string RefNo { get; set; }
         public DateTime RefDate { get; set; }
-        public Guid EmpID { get; set; }
+    //    public Guid EmpID { get; set; }
         public string PaymentMode { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
@@ -24,13 +23,5 @@ namespace SCManager.DataAccessObject.DTO
         public decimal OutStandingPayment { get; set; }
 
         public LogDetails logDetails { get; set; }
-
-
-    }
-    public class ExpenseType
-    {
-        public string Code { get; set; }
-        public string Description { get; set; }
-
     }
 }

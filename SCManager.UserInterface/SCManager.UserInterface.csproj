@@ -161,6 +161,7 @@
     <Compile Include="Controllers\DailyServiceReportController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\DefectiveorDamagedController.cs" />
+    <Compile Include="Controllers\DepositAndWithdrawalController.cs" />
     <Compile Include="Controllers\DynamicUIController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
@@ -377,7 +378,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\images\02fe71a7.png" />
     <Content Include="Content\images\41e5c232.png" />
-    <Content Include="Content\images\73a6f1c8.png" />
+    <Content Include="Content\images\73a6f1c8ultracrop.png" />
     <Content Include="Content\images\add.png" />
     <Content Include="Content\images\back.png" />
     <Content Include="Content\images\calculate.png" />
@@ -527,6 +528,7 @@
     <Content Include="Scripts\UserJS\DefectiveDamage.js" />
     <Content Include="Scripts\UserJS\demoGrid.js" />
     <Content Include="Scripts\editableGrid.js" />
+    <Content Include="Scripts\UserJS\DepositAndWithdrawal.js" />
     <Content Include="Scripts\UserJS\Employees.js" />
     <Content Include="Scripts\UserJS\Expenses.js" />
     <Content Include="Scripts\UserJS\Form8.js" />
@@ -599,6 +601,7 @@
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Views\DepositAndWithdrawal\" />
     <Folder Include="Views\OfficeStockReport\" />
   </ItemGroup>
   <ItemGroup>
