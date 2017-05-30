@@ -169,8 +169,10 @@ function Edit(currentObj) {
 }
 
 function JobSelect(obj) {
+    debugger;
+    _JobNoValue = $(obj).val();
     FillJobRelatedFields();
-    //var v = $(obj).val();
+   
     //RefreshDailyServiceTable(v);
 }
 function FillJobRelatedFields() {
