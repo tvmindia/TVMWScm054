@@ -189,6 +189,7 @@
     <Compile Include="Models\CreditNotesViewModel.cs" />
     <Compile Include="Models\DailyServiceReportViewModel.cs" />
     <Compile Include="Models\DefectiveorDamagedViewModel.cs" />
+    <Compile Include="Models\DepositAndWithdrawalViewModel.cs" />
     <Compile Include="Models\DynamicUIViewModel.cs" />
     <Compile Include="Models\EmployeesViewModel.cs" />
     <Compile Include="Models\ExpensesViewModel.cs" />
@@ -597,11 +598,11 @@
     <Content Include="Views\DailyServiceReport\TechnicianJobForm.cshtml" />
     <Content Include="Views\Expenses\Index.cshtml" />
     <Content Include="Views\Report\MonthlyIncomeAndExpenditure.cshtml" />
+    <Content Include="Views\DepositAndWithdrawal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="Views\DepositAndWithdrawal\" />
     <Folder Include="Views\OfficeStockReport\" />
   </ItemGroup>
   <ItemGroup>
