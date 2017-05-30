@@ -33,6 +33,7 @@ $(document).ready(function () {
      ]
  });
         debugger;
+        BindJobNumberDropDown();
         DataTables.ICRBillDetail = $('#tblICRDetails').DataTable(
        {
 
@@ -193,6 +194,11 @@ function FillJobRelatedFields() {
                 $("#CustomerLocation").val(ds.Record.CustomerLocation);
                 var $datepicker = $('#ICRDate');
                 $datepicker.datepicker('setDate', new Date(ds.Record.ServiceDate));
+                
+                    $("#ModelNo").val(ds.Record.ModelNo);
+                    $("#ICRNo").val(ds.Record.ICRNo);
+                    $("#SerialNo").val(ds.Record.SerialNo);
+              
 
             } catch (x) {
 
@@ -242,7 +248,7 @@ function getMaterials() {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-
+            debugger;
             _Materials = ds.Records;
 
 
@@ -280,6 +286,7 @@ function reset()
         $("#EmpID").val("");
         $("#ModelTechEmpID").val("");
         $("#JobNo").val("");
+        $("#jobnumberList").val("");
         $("#ICRNo").val("");
         $("#CustomerName").val("");
         $("#CustomerContactNo").val("");
@@ -377,6 +384,7 @@ function FillUOM(row) {
         if (_Materials[i].ItemCode == EG_GridData[row - 1]['Material']) {
             EG_GridData[row - 1]['UOM'] = _Materials[i].UOM;
             EG_GridData[row - 1]['MaterialID'] = _Materials[i].ID;
+            EG_GridData[row - 1]['Rate'] = _Materials[i].SellingRate;
             if (EG_GridData[row - 1]['Quantity'] == '') {
                 EG_GridData[row - 1]['Quantity'] = 1;
             }
@@ -572,13 +580,44 @@ function CalculateAmount(row) {
     AmountSummary();
 
 }
+function BindJobNumberDropDown() {
 
+    try {
+
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("DailyServiceReport/GetJobNumbersForDropDown/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            var options = '';
+            $.each(ds.Records, function (key, value) {
+                //$("#RepeatJobNo").append($("<option></option>").val(value.ID).html(value.JobNo));
+                options += '<option id="' + value.ID + '" value="' + value.JobNo + '" >' + '</option>';
+            });
+            document.getElementById('jobnumberList').innerHTML = '';
+            document.getElementById('jobnumberList').innerHTML = options;
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+        }
+
+    }
+    catch (e) {
+        notyAlert('error', e.Message);
+    }
+}
 function AmountSummary() {
     debugger;
     var subtotal = parseFloat($('#subtotal').val()) || 0;
-    var vatamount = parseFloat($('#TotalServiceTaxAmt').val()) || 0;
+    var totalServiceTaxAmt = parseFloat($('#TotalServiceTaxAmt').val()) || 0;
     var discount = parseFloat($('#Discount').val()) || 0;
-    $('#grandtotal').val(roundoff(subtotal + vatamount - discount));
+    $('#grandtotal').val(roundoff(subtotal + totalServiceTaxAmt - discount));
+
+    $('#subtotal').val(roundoff(subtotal));
+    $('#TotalServiceTaxAmt').val(roundoff(totalServiceTaxAmt));
+    $('#Discount').val(roundoff(discount))
 }
 
 
@@ -632,11 +671,11 @@ function ReBindJobNoDropdown() {
         }
         if (ds.Result == "OK") {
             // debugger;
-            $('#JobNo').html('');
+            $('#jobnumberList').html('');
             for (var i = 0; i < ds.Records.length-1; i++) {
                 var opt = new Option(ds.Records[i].Value, ds.Records[i].Text);                
-                $('#JobNo').append(opt);
-                $('#JobNo').val(_JobNoValue).attr("selected", "selected");
+                $('#jobnumberList').append(opt);
+                $("#JobNo").val(_JobNoValue);
             }
            
             return ds.Records;

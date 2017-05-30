@@ -63,7 +63,7 @@ namespace SCManager.UserInterface.Models
         public string ItemCode { get; set; }
         public string Description { get; set; }        
         public string UOM { get; set; }
-        
+        public float? SellingRate { get; set; }
 
     }
 }
