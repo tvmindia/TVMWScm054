@@ -415,7 +415,7 @@ function save()
     $("#ID").val(emptyGUID);
     var validation = EG_Validate();
     if (validation == "") {
-
+        debugger;
         var result = JSON.stringify(EG_GridData);
         $("#DetailJSON").val(result);
         $("#btnSave").trigger('click');
@@ -658,11 +658,42 @@ function TechnicianSelectOnChange(curobj) {
 function RefreshDailyServiceTable(jobNo) {
     //need to write code to refresh combo
    
-    $("#JobNo").html($("#JobNo").html() + '<option value="' + jobNo + '">' + jobNo + '</option>')
-    $("#JobNo").val(jobNo);
+    // $("#JobNo").html($("#JobNo").html() + '<option value="' + jobNo + '">' + jobNo + '</option>')
+    _JobNoValue = jobNo;
+    //  $("#JobNo").val(jobNo);
+    ReBindJobNoDropdown();
     FillJobRelatedFields();
 }
+function ReBindJobNoDropdown() {
+    try {
+        debugger;
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("ICRBillEntry/RebindJobNo/", data);
+        debugger;
+        if (ds != '') {
+            debugger;
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            // debugger;
+            $('#JobNo').html('');
+            for (var i = 0; i < ds.Records.length - 1; i++) {
+                var opt = new Option(ds.Records[i].Value, ds.Records[i].Text);
+                $('#JobNo').append(opt);
+                $('#JobNo').val(_JobNoValue).attr("selected", "selected");
+            }
 
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
 
 function JobSelect(obj) {
     FillJobRelatedFields();
