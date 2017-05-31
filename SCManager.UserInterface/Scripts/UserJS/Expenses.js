@@ -103,7 +103,7 @@ function ExpenseTypeChange() {
         debugger;
         $("#OutStandingPaymentArea").show();
         var thisItem = GetOutStandingPayment();
-        $("#OutStandingPayment").text(thisItem.OutStandingPayment);
+        $("#OutStandingPayment").text(thisItem.OutStandingPaymentFormatted);
 
 
     }

@@ -22,7 +22,7 @@ namespace SCManager.DataAccessObject.DTO
         public string DateFormatted { get; set; }
         public string ExpenseType { get; set; }
         public decimal OutStandingPayment { get; set; }
-
+        public string OutStandingPaymentFormatted { get; set; }
         public LogDetails logDetails { get; set; }
 
 

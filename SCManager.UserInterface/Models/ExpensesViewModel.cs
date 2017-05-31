@@ -37,8 +37,8 @@ namespace SCManager.UserInterface.Models
         public decimal Amount { get; set; } 
     
         public decimal OutStandingPayment { get; set; }
+        public string OutStandingPaymentFormatted { get; set; }
 
-        
 
         [Display(Name = "Note")]
         [DataType(DataType.MultilineText)]
