@@ -141,13 +141,15 @@
                                     <br />  
                                     <br />
                                     <div class="masterinfoHead">
-                                        Out Standing Payment<b> ₹ </b>
-                                        <span> <b> @Html.LabelFor(model => model.OutStandingPayment, htmlAttributes: new { id= "OutStandingPayment" })</b> </span>
+                                        Outstanding Payment to IFB <br/><b>  </b>
+                                        <span> <b> @Html.LabelFor(model => model.OutStandingPaymentFormatted, htmlAttributes: new { id= "OutStandingPayment" })</b> </span>
 
                                     </div>
                                     <br />
                                     <div class="masterinfoDet">
-                                        @*Notes*@ 
+                                        Outstanding payment refers to the outstanding unpaid balance to IFB, (the current amount due).
+                                        Calculated as the difference between total Invoice value recived through Form8 Tax invoice from IFB (Payable to IFB) and 
+                                        the total payment made till date to IFB after adjusting the Credit note issued if any.
                                     </div>
                                          
                                 </div>
