@@ -266,11 +266,17 @@ function DeleteSuccess(data, status, xhr)
 function DeleteDepositandwithdrawal()
 {
     try {
-        $("#btnFormDelete").trigger('click');
+        notyConfirm('Are you sure to delete?', 'DeleteDepositandwithdrawalConform()', '', "Yes, delete it!");
+       
     }
     catch (e) {
         notyAlert('error', e.message);
     }
+}
+
+function DeleteDepositandwithdrawalConform()
+{
+    $("#btnFormDelete").trigger('click');
 }
 
 function goBack() {
