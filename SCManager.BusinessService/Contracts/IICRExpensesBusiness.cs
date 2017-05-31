@@ -13,5 +13,6 @@ namespace SCManager.BusinessService.Contracts
         List<ICRExpenses> GetAllICRExpenses(UA UA, string FromDate, string ToDate, bool showAllYN);
         ICRExpenses GetICRExpensesByID(UA UA, string ID);       
         string DeleteICRExpenses(string ID, UA ua);
+        ICRExpenses GetOutStandingICRPayment(UA UA);
     }
 }

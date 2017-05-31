@@ -44,13 +44,39 @@ $(document).ready(function () {
             BindAllICRExpenses();
         });
 
-
+       
+        debugger;
+        var thisItem = GetOutStandingICRPayment();
+        $("#OutStandingICRPayment").text(thisItem.OutStandingPaymentFormatted);
         clearfields();
+
     }
     catch (e) {
         notyAlert('error', e.message);
     }
 });
+
+
+function GetOutStandingICRPayment() {
+    try {
+        debugger;
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("ICRExpenses/GetOutStandingICRPayment/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
 
 function FillDates() {  
     var m_names = new Array("Jan", "Feb", "Mar",
