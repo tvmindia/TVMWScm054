@@ -168,6 +168,7 @@
     <Compile Include="Controllers\Form8BRetailInvoiceController.cs" />
     <Compile Include="Controllers\Form8TaxInvoiceController.cs" />
     <Compile Include="Controllers\ICRBillEntryController.cs" />
+    <Compile Include="Controllers\ICRExpensesController.cs" />
     <Compile Include="Controllers\IssueToTechnicianController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\LocalPurchaseController.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Models\Form8BViewModel.cs" />
     <Compile Include="Models\Form8ViewModel.cs" />
     <Compile Include="Models\ICRBillEntryViewModel.cs" />
+    <Compile Include="Models\ICRExpensesViewModel.cs" />
     <Compile Include="Models\IssueToTechnicianViewModel.cs" />
     <Compile Include="Models\ItemViewModel.cs" />
     <Compile Include="Models\JobViewModel.cs" />
@@ -535,6 +537,7 @@
     <Content Include="Scripts\UserJS\Form8.js" />
     <Content Include="Scripts\UserJS\Form8B.js" />
     <Content Include="Scripts\UserJS\ICRBillEntry.js" />
+    <Content Include="Scripts\UserJS\ICRExpenses.js" />
     <Content Include="Scripts\UserJS\IncomeExpenseReport.js" />
     <Content Include="Scripts\UserJS\IssueToTechnician.js" />
     <Content Include="Scripts\UserJS\Item.js" />
@@ -598,6 +601,7 @@
     <Content Include="Views\DailyServiceReport\TechnicianJobForm.cshtml" />
     <Content Include="Views\Expenses\Index.cshtml" />
     <Content Include="Views\Report\MonthlyIncomeAndExpenditure.cshtml" />
+    <Content Include="Views\ICRExpenses\Index.cshtml" />
     <Content Include="Views\DepositAndWithdrawal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
