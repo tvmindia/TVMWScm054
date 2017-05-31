@@ -35,7 +35,7 @@ namespace SCManager.BusinessService.Services
             try
             {
                 DepositAndWithdrawalList = _depositAndWithdrawalRepository.GetAllDepositAndWithdrawal(SCCode);
-                
+                DepositAndWithdrawalList = DepositAndWithdrawalList == null ? null : DepositAndWithdrawalList.Select(c => { c.RefDate = DateTime.Parse(c.RefDate).Date.ToString("yyyy-MM-dd"); return c; }).ToList();
             }
             catch (Exception ex)
             {

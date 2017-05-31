@@ -14,10 +14,10 @@ $(document).ready(function () {
              columns: [
                { "data": "ID", "defaultContent": "<i>-</i>" },
                 { "data": "TransactionDescription", "defaultContent": "<i>-</i>" },
-               { "data": "RefDate", "defaultContent": "<i>-</i>" },
+               { "data": "RefDate",render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
               
                { "data": "RefNo", "defaultContent": "<i>-</i>" },
-               { "data": "Amount", "defaultContent": "<i>-</i>" },
+               { "data": "Amount",render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "Description", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="EditDepositWithdrawal(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
             ],
@@ -54,7 +54,7 @@ function EditDepositWithdrawal(curObj)
         if (result) {
             $("#TransactionType").val(result.TransactionType);
             $("#RefNo").val(result.RefNo);
-            $("#RefDate").val(result.RefDate);
+            $("#RefDate").val(ConvertJsonToDate(result.RefDate));
             $("#Amount").val(result.Amount);
             $("#Description").val(result.Description);
             $("#DepwithID").val(result.ID);
