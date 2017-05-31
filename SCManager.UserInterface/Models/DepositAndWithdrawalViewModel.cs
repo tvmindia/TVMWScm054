@@ -20,13 +20,15 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Reference No")]
         [StringLength(20)]
         public string RefNo { get; set; }
-        
         [Display(Name = "Reference Date")]
         [Required(ErrorMessage = "Please enter Reference date")]
         [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
+
         public string RefDate { get; set; }
         [Required(ErrorMessage = "Please enter Amount")]
+        [Range(0.00, 1000000000.00, ErrorMessage = "Please enter a numeric")]
         [Display(Name = "Amount")]
+
         public decimal? Amount { get; set; }
         [Display(Name = "Note")]
         public string Description { get; set; }
