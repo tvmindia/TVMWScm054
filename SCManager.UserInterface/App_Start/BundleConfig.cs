@@ -60,6 +60,7 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/Expenses").Include("~/Scripts/UserJS/Expenses.js"));
             bundles.Add(new ScriptBundle("~/bundles/ICRExpenses").Include("~/Scripts/UserJS/ICRExpenses.js"));
             bundles.Add(new ScriptBundle("~/bundles/IncomeExpense").Include("~/Scripts/UserJS/IncomeExpenseReport.js"));
+            bundles.Add(new ScriptBundle("~/bundles/Depositwithdrawal").Include("~/Scripts/UserJS/DepositAndWithdrawal.js"));
 
         }
     }

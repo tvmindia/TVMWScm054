@@ -125,6 +125,14 @@ namespace SCManager.BusinessService.Services
             if (I != null)
             {
                 SCManagerSettings settings = new SCManagerSettings();
+                if(I.TotalServiceTaxAmt==null)
+                {
+                    I.TotalServiceTaxAmt = 0;
+                }
+                if (I.Discount == null)
+                {
+                    I.Discount = 0;
+                }
                 I.GrandTotal = I.STAmount + I.TotalServiceTaxAmt - I.Discount;
 
                 if (I.ICRDate != null)

@@ -148,6 +148,9 @@ function ConvertDateFormats(thisdate) {
         notyAlert('error', e.message);
     }
 }
+function SelectAllValue(e) {
+    $(e).select();
+}
 function PostDataToServer(page, formData, callback)
 {
    $.ajax({

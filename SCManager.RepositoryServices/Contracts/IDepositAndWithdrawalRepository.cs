@@ -11,6 +11,8 @@ namespace SCManager.RepositoryServices.Contracts
     {
         object InsertDepositAndWithdrawal(DepositAndWithdrawal depositAndWithdrawal);
         object UpdateDepositAndWithdrawal(DepositAndWithdrawal depositAndWithdrawal);
+        object DeleteDepositAndWithdrawal(DepositAndWithdrawal depositAndWithdrawal);
+        
         List<DepositAndWithdrawal> GetAllDepositAndWithdrawal(string SCCode);
     }
 }

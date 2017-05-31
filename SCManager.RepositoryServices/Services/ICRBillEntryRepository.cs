@@ -113,9 +113,9 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@STAmount", SqlDbType.Decimal).Value = iCRBillEntry.STAmount;
                         cmd.Parameters.Add("@AMCValidFromDate", SqlDbType.SmallDateTime).Value = iCRBillEntry.AMCValidFromDate;
                         cmd.Parameters.Add("@AMCValidToDate", SqlDbType.SmallDateTime).Value = iCRBillEntry.AMCValidToDate;
-                        cmd.Parameters.Add("@ModelNo", SqlDbType.Decimal).Value = iCRBillEntry.ModelNo;
+                        cmd.Parameters.Add("@ModelNo", SqlDbType.NVarChar,20).Value = iCRBillEntry.ModelNo;
                         cmd.Parameters.Add("@TotalServiceTaxAmount", SqlDbType.Decimal).Value =iCRBillEntry.TotalServiceTaxAmt;
-                        cmd.Parameters.Add("@SerialNo", SqlDbType.Decimal).Value = iCRBillEntry.SerialNo;
+                        cmd.Parameters.Add("@SerialNo", SqlDbType.NVarChar,20).Value = iCRBillEntry.SerialNo;
                         cmd.Parameters.Add("@Discount", SqlDbType.Decimal).Value = iCRBillEntry.Discount;
                         cmd.Parameters.Add("@DetailXML", SqlDbType.Xml).Value = iCRBillEntry.DetailXML;
 
@@ -187,8 +187,8 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@STAmount", SqlDbType.Decimal).Value = iCRBillEntry.STAmount;
                         cmd.Parameters.Add("@AMCValidFromDate", SqlDbType.SmallDateTime).Value = iCRBillEntry.AMCValidFromDate;
                         cmd.Parameters.Add("@AMCValidToDate", SqlDbType.SmallDateTime).Value = iCRBillEntry.AMCValidToDate;
-                        cmd.Parameters.Add("@ModelNo", SqlDbType.Decimal).Value = iCRBillEntry.ModelNo;
-                        cmd.Parameters.Add("@SerialNo", SqlDbType.Decimal).Value = iCRBillEntry.SerialNo;
+                        cmd.Parameters.Add("@ModelNo", SqlDbType.NVarChar,20).Value = iCRBillEntry.ModelNo;
+                        cmd.Parameters.Add("@SerialNo", SqlDbType.NVarChar,20).Value = iCRBillEntry.SerialNo;
                         cmd.Parameters.Add("@Discount", SqlDbType.Decimal).Value = iCRBillEntry.Discount;
                         cmd.Parameters.Add("@TotalServiceTaxAmount", SqlDbType.Decimal).Value = iCRBillEntry.TotalServiceTaxAmt;
                         cmd.Parameters.Add("@DetailXML", SqlDbType.Xml).Value = iCRBillEntry.DetailXML;

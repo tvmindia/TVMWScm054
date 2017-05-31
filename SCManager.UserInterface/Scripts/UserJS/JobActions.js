@@ -1,8 +1,9 @@
-﻿function JobEdit(curobj) {
-    try {
-        var rowData = DataTables.DailyService.row($(curobj).parents('tr')).data();
-        var result = GetServiceReportEntryByID(rowData.ID);
-        ClearJobForm();
+﻿
+function BindForm(ID)
+{
+    try
+    {
+        var result = GetServiceReportEntryByID(ID);
         if (result) {
             $("#ModelJobNo").val(result.JobNo);
             $("#ModelJobNo").attr({ 'disabled': 'disabled' });
@@ -10,8 +11,8 @@
             $("#ModelCustomerLocation").val(result.CustomerLocation);
             $("#ModelServiceType").val(result.ServiceType);
             $("#ModelCallType").val(result.CallType);
-           
-         
+
+
             $("#ModelModelNo").val(result.ModelNo);
             $("#ModelSerialNo").val(result.SerialNo);
             $("#ModelICRNo").val(result.ICRNo);
@@ -21,28 +22,33 @@
             $("#ModelJobID").val(result.ID);
             BindTechnicianDropDown();
             BindJobNumberDropDown();
-            if(result.CallType=="Repeat")
-            {
+            if (result.CallType == "Repeat") {
                 $(".calltypehidden").show();
                 $("#ModelRepeat_JobNo").val(result.RepeatJobNo);
                 $("#ModelEmployee").val(result.RepeatEmpName);
 
             }
-            else
-            {
+            else {
                 $(".calltypehidden").hide();
             }
-          
+
             $("#TechnicianLabel").text(result.Employee.Name);
             $("#ServiceDateLabel").text(ConvertJsonToDate(result.ServiceDate));
-         
+
         }
+    }
+    catch(e)
+    {
+        notyAlert('error', e.message);
+    }
+}
+function JobEdit(curobj) {
+    try {
+        ClearJobForm();
+        var rowData = DataTables.DailyService.row($(curobj).parents('tr')).data();
+        BindForm(rowData.ID);
         $("#modelContextLabel").text('Edit Job');
-        
         $("#AddJobModel").modal('show');
-
-
-        
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -74,9 +80,17 @@ function GetServiceReportEntryByID(ID) {
 function ClearJobForm() {
     $('#jobform')[0].reset();
     $("#ModelJobID").val('');
+    $('#AddJobModel').on('shown.bs.modal', function () {
+        $('#ModelJobNo').focus()
+    })
 }
 function ResetForm() {
-    $('#jobform')[0].reset();
+    var jobid=$("#ModelJobID").val();
+    if (jobid != '')
+    {
+        BindForm(jobid);
+    }
+  
    
 }
 

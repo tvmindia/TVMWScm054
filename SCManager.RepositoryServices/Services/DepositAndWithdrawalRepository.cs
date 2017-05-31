@@ -121,6 +121,7 @@ namespace SCManager.RepositoryServices.Services
             {
                 return new
                 {
+                    ID = depositAndWithdrawal.ID,
                     Message = constObj.UpdateSuccess
                 };
             }
@@ -170,7 +171,9 @@ namespace SCManager.RepositoryServices.Services
                                         _depositAndWithdrawal.RefDate = (sdr["RefDate"].ToString() != "" ? (sdr["RefDate"].ToString()) : _depositAndWithdrawal.RefDate);
                                         _depositAndWithdrawal.Amount = (sdr["Amount"].ToString() != "" ? decimal.Parse(sdr["Amount"].ToString()) : _depositAndWithdrawal.Amount);
                                         _depositAndWithdrawal.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _depositAndWithdrawal.Description);
+                                        _depositAndWithdrawal.TransactionDescription = (sdr["TransactionDescription"].ToString() != "" ? (sdr["TransactionDescription"].ToString()) : _depositAndWithdrawal.TransactionDescription);
                                      }
+                                    
                                     depositAndWithdrawalList.Add(_depositAndWithdrawal);
                                 }
                             }
@@ -185,6 +188,54 @@ namespace SCManager.RepositoryServices.Services
             return depositAndWithdrawalList;
         }
         #endregion GetAllDepositAndWithdrawal
+
+
+        public object DeleteDepositAndWithdrawal(DepositAndWithdrawal depositAndWithdrawal)
+        {
+            SqlParameter outParameter = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[DeleteDepositAndWithdrawalEntry]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = depositAndWithdrawal.ID;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = depositAndWithdrawal.SCCode;
+                   
+                        outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
+                        outParameter.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            if (outParameter.Value.ToString() == "1")
+            {
+                return new
+                {
+                    Message = constObj.DeleteSuccess
+                };
+            }
+            else
+            {
+                return new
+                {
+                    Message = constObj.DeleteFailure
+                };
+            }
+
+        }
+       
 
     }
 }

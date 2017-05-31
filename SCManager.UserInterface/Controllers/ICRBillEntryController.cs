@@ -90,6 +90,32 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion GetAllICRBillEntry
 
+
+        #region RebindJobNo
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        public string RebindJobNo()
+        {
+            UA ua = new UA();
+            List<SelectListItem> selectListItem = new List<SelectListItem>();
+            //Categories Drop down bind
+            List<TCRBillEntryViewModel> jobNoList = Mapper.Map<List<TCRBillEntry>, List<TCRBillEntryViewModel>>(_iTCRBillEntryBusiness.GetAllJobNo(ua));
+            jobNoList = jobNoList == null ? null : jobNoList.OrderBy(attset => attset.JobNo).ToList();
+            foreach (TCRBillEntryViewModel tcrvm in jobNoList)
+            {
+                selectListItem.Add(new SelectListItem
+                {
+                    Text = tcrvm.JobNo,
+                    Value = tcrvm.JobNo,
+                    Selected = false
+                });
+            }
+          //  iCRBillEntryViewModel.JobNoList = selectListItem;
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = selectListItem });
+
+        }
+        #endregion RebindJobNo
+
         #region InsertUpdateICRBillEntry
         [HttpPost]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
@@ -237,17 +263,17 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Text = "New";
-                    ToolboxViewModelObj.addbtn.Title = "Add New TCR Bill";
+                    ToolboxViewModelObj.addbtn.Title = "Add New ICR Bill";
                     ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save TCR Bill";
+                    ToolboxViewModelObj.savebtn.Title = "Save ICR Bill";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete TCR Bill";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete ICR Bill";
                     ToolboxViewModelObj.deletebtn.Event = "DeleteClick();";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;
@@ -265,21 +291,21 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Disable = true;
-                    ToolboxViewModelObj.addbtn.DisableReason = "";
+                    ToolboxViewModelObj.addbtn.DisableReason = "N/A for new ICR Entry";
                     ToolboxViewModelObj.addbtn.Text = "New";
-                    ToolboxViewModelObj.addbtn.Title = "";
+                    ToolboxViewModelObj.addbtn.Title = "Add New";
                     ToolboxViewModelObj.addbtn.Event = "";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save TCR Bill";
+                    ToolboxViewModelObj.savebtn.Title = "Save ICR Bill";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Disable = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete Invoice";
-                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new item";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete ICR";
+                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new ICR Entry";
                     ToolboxViewModelObj.deletebtn.Event = "";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;
