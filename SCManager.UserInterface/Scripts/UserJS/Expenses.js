@@ -1,6 +1,6 @@
 ﻿var DataTables = {};
 var EmptyGuid = "00000000-0000-0000-0000-000000000000";
-
+var Bindflag = false;//for avoiding 3 times binding on pageload. 
 //---------------------------------------Docuement Ready--------------------------------------------------//
 
 $(document).ready(function () {
@@ -37,9 +37,11 @@ $(document).ready(function () {
             Edit(this);
         }); 
         $('#fromDate').change(function () {
+            if (Bindflag)
             BindAllExpenses();
         });
         $('#toDate').change(function () {
+            if (Bindflag)   
             BindAllExpenses();
         });
 
@@ -76,7 +78,8 @@ function FillDates() {
     var fromDate = p_date + "-" + m_names[p_month]
     + "-" + p_year;
     var $datepicker = $('#fromDate');
-    $datepicker.datepicker('setDate', new Date(fromDate)); 
+    $datepicker.datepicker('setDate', new Date(fromDate));
+    Bindflag = true;
 }
 
 //--------------------button actions ----------------------
@@ -84,6 +87,7 @@ function List() {
     try {
         ChangeButtonPatchView('Expenses', 'btnPatchExpensesSettab', 'List');
         DateClear();
+        Bindflag = false;//for avoiding 3 times binding on pageload. 
         FillDates()
         BindAllExpenses()
 
@@ -263,8 +267,10 @@ function showAllYNCheckedOrNot(i) {
         $('#toDate').val("");
     }
     else {
-        DataTables.ExpensesTable.clear().rows.add(GetAllExpenses(false)).draw(false);
+        Bindflag = false;//for avoiding 3 times binding on pageload. 
         FillDates();
+        DataTables.ExpensesTable.clear().rows.add(GetAllExpenses(false)).draw(false);
+      
     }
 
 }
@@ -326,6 +332,7 @@ function SaveSuccess(data, status) {
             else {
                 fillExpenses($("#UpdateID").val());
             }
+            Bindflag = false;//for avoiding 3 times binding on pageload. 
             FillDates();
             BindAllExpenses();
             notyAlert('success', JsonResult.Records.Message);
