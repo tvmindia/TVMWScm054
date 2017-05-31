@@ -60,6 +60,7 @@ function EditDepositWithdrawal(curObj)
             $("#DepwithID").val(result.ID);
             $("#deleteId").val(result.ID);
         }
+
        
       
     }
