@@ -140,6 +140,7 @@ function List() {
 
 function goBack() {
     $('#AddTab').trigger('click');
+    $("#HeaderID").val("");
     reset();
 }
 
@@ -178,6 +179,7 @@ function Edit(currentObj) {
 
         EG_ClearTable();
         $('#AddTab').trigger('click');
+        $("#HeaderID").val(rowData.ID);
         if (BindTCRBillEntry(rowData.ID)) {
             ChangeButtonPatchView('TCRBillEntry', 'btnPatchTCRBillEntrySettab', 'Edit');
 
@@ -583,32 +585,38 @@ function getMaterials() {
 
 function reset()
 {
-    $("#HeaderID").val(emptyGUID);
-    $("#EmpID").val("");
-    $("#ModelTechEmpID").val("");
-    $("#JobNo").val("");
-    $("#jobnumberList").val("");
-    $("#BillNo").val("");
-    $("#CustomerName").val("");
-    $("#CustomerContactNo").val("");
-    $("#CustomerLocation").val("");
-    $("#PaymentMode").val("");
-    $("#Remarks").val("");
-    $("#subtotal").val("");
-    $("#SCAmount").val("");
-    $("#ServiceChargeComm").val("");
-    $("#VATAmount").val("");
-    $("#vatpercentage").val("");
-    $("#discount").val("");
-    $("#grandtotal").val("");
-    //$("#ServiceCharge").val("");
-    $("#SCCommAmount").val("");
-    $("#SpecialComm").val("");
-    $('#BillNo').attr('readonly', false);
-    $('#EmpID').attr('disabled', false);
-    var $datepicker = $('#BillDate');
-    $datepicker.datepicker('setDate', null);
-    ResetForm();
+    if (($("#HeaderID").val() == "") || ($("#HeaderID").val() == 'undefined') || ($("#HeaderID").val() == "0")) {
+        // $("#HeaderID").val(emptyGUID);
+        $("#EmpID").val("");
+        $("#ModelTechEmpID").val("");
+        $("#JobNo").val("");
+        $("#jobnumberList").val("");
+        $("#BillNo").val("");
+        $("#CustomerName").val("");
+        $("#CustomerContactNo").val("");
+        $("#CustomerLocation").val("");
+        $("#PaymentMode").val("");
+        $("#Remarks").val("");
+        $("#subtotal").val("");
+        $("#SCAmount").val("");
+        $("#ServiceChargeComm").val("");
+        $("#VATAmount").val("");
+        $("#vatpercentage").val("");
+        $("#discount").val("");
+        $("#grandtotal").val("");
+        //$("#ServiceCharge").val("");
+        $("#SCCommAmount").val("");
+        $("#SpecialComm").val("");
+        $('#BillNo').attr('readonly', false);
+        $('#EmpID').attr('disabled', false);
+        var $datepicker = $('#BillDate');
+        $datepicker.datepicker('setDate', null);
+        ResetForm();
+    }
+    else
+    {
+        BindTCRBillEntry($("#HeaderID").val());
+    }
 }
 
 function FillJobRelatedFields() {

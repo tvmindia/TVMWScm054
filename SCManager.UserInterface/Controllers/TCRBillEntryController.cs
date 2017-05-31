@@ -246,10 +246,10 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.deletebtn.Title = "Delete TCR Bill";
                     ToolboxViewModelObj.deletebtn.Event = "DeleteClick();";
 
-                    //ToolboxViewModelObj.resetbtn.Visible = true;
-                    //ToolboxViewModelObj.resetbtn.Text = "Reset";
-                    //ToolboxViewModelObj.resetbtn.Title = "Reset";
-                    //ToolboxViewModelObj.resetbtn.Event = "resetCurrent();";
+                    ToolboxViewModelObj.resetbtn.Visible = true;
+                    ToolboxViewModelObj.resetbtn.Text = "Reset";
+                    ToolboxViewModelObj.resetbtn.Title = "Reset";
+                    ToolboxViewModelObj.resetbtn.Event = "reset();";
 
                     break;
                 case "Add":
