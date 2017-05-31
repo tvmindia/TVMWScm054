@@ -24,6 +24,7 @@ namespace SCManager.UserInterface.Models
         public string RefNo { get; set; }
 
         [Display(Name = "Date")]
+        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
         public DateTime RefDate { get; set; }
 
         [Display(Name = "Technician")]
@@ -34,6 +35,7 @@ namespace SCManager.UserInterface.Models
         public string PaymentMode { get; set; }
 
         [Display(Name = "Amount (₹)")]
+        [Range(0.00, 1000000000.00, ErrorMessage = "Please enter a numeric")]
         public decimal Amount { get; set; } 
     
         public decimal OutStandingPayment { get; set; }

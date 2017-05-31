@@ -22,7 +22,7 @@ $(document).ready(function () {
                 { "data": "RefNo", "defaultContent": "<i>-</i>" },
                 { "data": "PaymentMode", "defaultContent": "<i>-</i>" }, 
                 { "data": "Description", "defaultContent": "<i>-</i>" },
-                { "data": "Amount", render: function (data, type, row) {return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+                { "data": "Amount", "defaultContent": "<i>-</i>" },
                 { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
            ],
            columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
@@ -185,7 +185,7 @@ function fillICRExpenses(ID) {
     $("#EntryNo").val(thisItem.EntryNo);
     $("#RefNo").val(thisItem.RefNo); 
     $("#PaymentMode").val(thisItem.PaymentMode);
-    $("#Amount").val(roundoff(thisItem.Amount));
+    $("#Amount").val(thisItem.Amount);
     $("#Description").val(thisItem.Description);
 
     if (thisItem.RefDate != null) {
