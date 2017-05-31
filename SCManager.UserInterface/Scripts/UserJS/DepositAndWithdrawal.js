@@ -24,17 +24,19 @@ $(document).ready(function () {
              columnDefs: [
                    { visible:false, "targets": [0] },
                   { className: "text-left", "targets": [1,3,5] },
-                  { className: "text-center", "targets": [2,4] }
+                  { className: "text-center", "targets": [2,4,6] }
 
              ]
          });
+
+        RefreshDepositsAndWithdrawalsTableBetweenDates();
 
     }
     catch (e) {
 
     }
-    //Default table with last month data
-    RefreshDepositsAndWithdrawalsTableLastMonth();
+   
+  
 });
 
 function Add()
@@ -142,45 +144,14 @@ function GetAllDepositsAndWithdrawalsBetweenDates(fromdate, todate) {
     }
 }
 
-function RefreshDepositsAndWithdrawalsTableLastMonth() {
-    try {
-      
-        if (DataTables.DepositWithdrawalTable != undefined) {
-            DataTables.DepositWithdrawalTable.clear().rows.add(GetAllDepositsAndWithdrawalsLastMonth()).draw(false);
-            $('[data-toggle="tp"]').tooltip({ container: 'body' });
-        }
 
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
 
-function GetAllDepositsAndWithdrawalsLastMonth() {
-    try {
-
-        var data = {};
-        var ds = {};
-        ds = GetDataFromServer("DepositAndWithdrawal/GetAllDepositAndWithdrawalLastMonth/", data);
-        if (ds != '') {
-            ds = JSON.parse(ds);
-        }
-        if (ds.Result == "OK") {
-            return ds.Records;
-        }
-        if (ds.Result == "ERROR") {
-            alert(ds.Message);
-        }
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
 
 function RefreshDepositsAndWithdrawalsTable() {
     try {
 
         if (DataTables.DepositWithdrawalTable != undefined) {
+            $("#chkShowAll").prop('checked', true);
             DataTables.DepositWithdrawalTable.clear().rows.add(GetAllDepositsAndWithdrawals()).draw(false);
             $('[data-toggle="tp"]').tooltip({ container: 'body' });
         }
@@ -244,9 +215,11 @@ function DepositAndWithdrawalSaveSuccess(data, status, xhr)
         switch (JsonResult.Result) {
             case "OK":
                     notyAlert('success', JsonResult.Record.Message);
-              
+                    $("#DepwithID").val(JsonResult.Record.ID);
+                    $("#deleteId").val(JsonResult.Record.ID);
                     RefreshDepositsAndWithdrawalsTable();
-                    goBack();
+                    $("#txtReferenceDateFrom").val('');
+                    $("#txtReferenceDateTo").val('');
                break;
             case "VALIDATION":
                 notyAlert('error', JsonResult.Message);
@@ -272,6 +245,8 @@ function DeleteSuccess(data, status, xhr)
             case "OK":
                 notyAlert('success', JsonResult.Record.Message);
                 RefreshDepositsAndWithdrawalsTable();
+                $("#txtReferenceDateFrom").val('');
+                $("#txtReferenceDateTo").val('');
                 goBack();
                 break;
          
