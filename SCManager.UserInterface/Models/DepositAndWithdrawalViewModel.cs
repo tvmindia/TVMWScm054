@@ -32,7 +32,12 @@ namespace SCManager.UserInterface.Models
         public decimal? Amount { get; set; }
         [Display(Name = "Note")]
         public string Description { get; set; }
-        
+        [Display(Name = "Deposit Mode")]
+        public string DepositMode { get; set; }
+        public List<SelectListItem> DepositModeList { get; set; }
+        [Display(Name = "Cheque Status")]
+        public string ChequeStatus { get; set; }
+        public List<SelectListItem> ChequeStatusList { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
 }
 }
