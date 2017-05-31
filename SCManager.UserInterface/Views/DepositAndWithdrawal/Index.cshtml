@@ -134,12 +134,32 @@
                                     @Html.LabelFor(model => model.TransactionType, htmlAttributes: new { @class = "control-label" })
                                  </div>
                                     <div class="col-md-5">
-                                        @Html.DropDownListFor(model => model.TransactionType, Model.TransactionTypeList, "-- Select Transaction Type --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
+                                        @Html.DropDownListFor(model => model.TransactionType, Model.TransactionTypeList, "-- Select Transaction Type --", new { @class = "form-control BlockEnter", @onchange = "TransactionTypeOnChange(this)", value = -1, style = "padding:4px 12px;" })
                                         @Html.HiddenFor(model => model.ID, htmlAttributes: new { Value = "", @id = "DepwithID" })
                                         @Html.ValidationMessageFor(model => model.TransactionType, "", new { @class = "text-danger" })
                                     </div>
                                 <div class="col-md-1 mandatory"></div>
                                 </div>
+                            <div class="form-group hdDepositMode" style="display:none;">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.DepositMode, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.DropDownListFor(model => model.DepositMode, Model.DepositModeList, "-- Select Deposit Mode --", new { @class = "form-control BlockEnter", @onchange = "DepositModeOnChange(this)", value = -1, style = "padding:4px 12px;" })
+                                    @Html.ValidationMessageFor(model => model.DepositMode, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-1 mandatory"></div>
+                            </div>
+                            <div class="form-group hdChequeStatus" style="display:none;">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.ChequeStatus, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.DropDownListFor(model => model.ChequeStatus, Model.ChequeStatusList, "-- Select Cheque Status --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
+                                    @Html.ValidationMessageFor(model => model.ChequeStatus, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-1 mandatory"></div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-md-3">
                                     @Html.LabelFor(model => model.RefNo, htmlAttributes: new { @class = "control-label" })

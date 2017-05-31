@@ -39,8 +39,39 @@ namespace SCManager.UserInterface.Controllers
                         Selected = false
                     });
             depositAndWithdrawalViewModel.TransactionTypeList = selectListItem;
+            selectListItem = null;
+            selectListItem = new List<SelectListItem>();
+            selectListItem.Add(new SelectListItem
+            {
+                Text = "Cash",
+                Value = "Cash",
+                Selected = false
+            });
+            selectListItem.Add(new SelectListItem
+            {
+                Text = "Cheque",
+                Value = "Cheque",
+                Selected = false
+            });
+            depositAndWithdrawalViewModel.DepositModeList = selectListItem;
 
-           
+            selectListItem = null;
+            selectListItem = new List<SelectListItem>();
+            selectListItem.Add(new SelectListItem
+            {
+                Text = "Cleared",
+                Value = "Cleared",
+                Selected = false
+            });
+            selectListItem.Add(new SelectListItem
+            {
+                Text = "Not Cleared",
+                Value = "NotCleared",
+                Selected = false
+            });
+            depositAndWithdrawalViewModel.ChequeStatusList = selectListItem;
+
+
             DateTime dt = ua.CurrentDatetime();
             ViewBag.fromdate = dt.AddDays(-30).ToString("yyyy-MM-dd");
             ViewBag.todate = dt.ToString("yyyy-MM-dd");

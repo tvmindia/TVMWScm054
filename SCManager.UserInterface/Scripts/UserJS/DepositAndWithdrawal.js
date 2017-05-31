@@ -39,6 +39,42 @@ $(document).ready(function () {
   
 });
 
+function TransactionTypeOnChange(curobj)
+{
+    try {
+        if (curobj.value != "DEPST") {
+            $(".hdDepositMode").hide();
+       
+        }
+        else {
+            $(".hdDepositMode").show();
+           
+        }
+
+    }
+    catch (e) {
+        notyAlert('error', e.Message);
+    }
+}
+
+function DepositModeOnChange(curobj)
+{
+    try {
+        if (curobj.value != "Cheque") {
+            $(".hdChequeStatus").hide();
+
+        }
+        else {
+            $(".hdChequeStatus").show();
+            $("#ChequeStatus").val('NotCleared');
+        }
+
+    }
+    catch (e) {
+        notyAlert('error', e.Message);
+    }
+}
+
 function Add()
 {
     ChangeButtonPatchView('DepositAndWithdrawal', 'btnPatchDepositandwithdrawal', 'Save');
