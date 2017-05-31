@@ -130,7 +130,6 @@ function List() {
     try {
 
         ChangeButtonPatchView('ICRBillEntry', 'btnPatchICRBillEntrySettab', 'List');
-        // DataTables.customerBillsTable.clear().rows.add(GetAllForm8()).draw(false);
         reset();
         BindAllCustomerBill();
     } catch (x) {
@@ -147,40 +146,28 @@ function goBack() {
 
 //---------------------------------------Edit Item--------------------------------------------------//
 function Edit(currentObj) {
-    debugger;
     var rowData = DataTables.customerBillsTable.row($(currentObj).parents('tr')).data();
-    //Event Request Case
     if ((rowData != null) && (rowData.ID != null)) {
-
         EG_ClearTable();
-        $('#AddTab').trigger('click');
-        debugger;
+        $('#AddTab').trigger('click');      
         $("#HeaderID").val(rowData.ID);
         if (BindICRBillEntry(rowData.ID)) {
             ChangeButtonPatchView('ICRBillEntry', 'btnPatchICRBillEntrySettab', 'Edit');
-
         }
         else {
             $('#ListTab').trigger('click');
         }
-
     }
-
-
 }
 
 function JobSelect(obj) {
-    debugger;
     _JobNoValue = $(obj).val();
     FillJobRelatedFields();
-   
-    //RefreshDailyServiceTable(v);
 }
-function FillJobRelatedFields() {
-    debugger;
-    var job = _JobNoValue; //$("#JobNo").val();
-    try {
 
+function FillJobRelatedFields() {
+    var job = _JobNoValue; 
+    try {
         var data = { "JobNo": job };
         ds = GetDataFromServer("DailyServiceReport/GetDailyJobByJobNo/", data);
         debugger;
@@ -189,23 +176,17 @@ function FillJobRelatedFields() {
         }
         if (ds.Result == "OK") {
             try {
-
                 $("#CustomerName").val(ds.Record.CustomerName);
                 $("#CustomerLocation").val(ds.Record.CustomerLocation);
                 var $datepicker = $('#ICRDate');
-                $datepicker.datepicker('setDate', new Date(ds.Record.ServiceDate));
-                
+                $datepicker.datepicker('setDate', new Date(ds.Record.ServiceDate));                
                     $("#ModelNo").val(ds.Record.ModelNo);
                     $("#ICRNo").val(ds.Record.ICRNo);
-                    $("#SerialNo").val(ds.Record.SerialNo);
-              
+                    $("#SerialNo").val(ds.Record.SerialNo);              
 
             } catch (x) {
 
             }
-
-
-
         }
         if (ds.Result == "ERROR") {
             alert(ds.Message);
@@ -214,22 +195,16 @@ function FillJobRelatedFields() {
     catch (e) {
         notyAlert('error', e.message);
     }
-
-
 }
 function Add() {
-    debugger;
-
     ChangeButtonPatchView('ICRBillEntry', 'btnPatchICRBillEntrySettab', 'Add');
     EG_ClearTable();
-    // RestForm8();
     EG_AddBlankRows(2)
     $("#HeaderID").val("");
     reset();
 }
 function BindAllCustomerBill() {
     try {
-        debugger;
         DataTables.customerBillsTable.clear().rows.add(GetAllICRBill()).draw(false);
     }
     catch (e) {
@@ -237,10 +212,7 @@ function BindAllCustomerBill() {
     }
 }
 function getMaterials() {
-
-
     try {
-
         var data = {};
         var ds = {};
         ds = GetDataFromServer("Item/ServiceTypesItemsForDropdown/", data);
@@ -250,8 +222,6 @@ function getMaterials() {
         if (ds.Result == "OK") {
             debugger;
             _Materials = ds.Records;
-
-
         }
         if (ds.Result == "ERROR") {
             alert(ds.Message);
@@ -260,14 +230,11 @@ function getMaterials() {
     catch (e) {
         notyAlert('error', e.message);
     }
-
-
-
 }
+
 function save() {
     var validation = EG_Validate();
     if (validation == "") {
-        debugger;
         var result = JSON.stringify(EG_GridData);
         $("#DetailJSON").val(result);
         $("#btnSave").trigger('click');
@@ -275,14 +242,11 @@ function save() {
     else {
         notyAlert('error', validation);
     }
-
 }
 function reset()
 {
-    debugger;
-    if (($("#HeaderID").val() == "") || ($("#HeaderID").val() == 'undefined'))
+    if (($("#HeaderID").val() == "") || ($("#HeaderID").val() == 'undefined') || ($("#HeaderID").val() == "0"))
     {
-      //  $('#HeaderID').val("");
         $("#EmpID").val("");
         $("#ModelTechEmpID").val("");
         $("#JobNo").val("");
@@ -300,7 +264,7 @@ function reset()
         $("#ModelNo").val("");
         $("#SerialNo").val("");
         $("#grandtotal").val("");
-        $('#ICRNo').attr('readonly', false);
+        //$('#ICRNo').attr('readonly', false);
         var $datepicker = $('#ICRDate');
         $datepicker.datepicker('setDate', null);
         var $datepicker = $('#AMCValidFromDate');
@@ -310,8 +274,11 @@ function reset()
         EG_ClearTable();
         EG_AddBlankRows(5);
         ResetForm();
-    }       
-    
+    }
+    else
+    {
+        BindICRBillEntry($("#HeaderID").val());
+    }  
   
 }
 //-----------------------------------------Reset Validation Messages--------------------------------------//
@@ -327,14 +294,8 @@ function DeleteItem(currentObj) {
     var rowData = EG_GridDataTable.row($(currentObj).parents('tr')).data();
 
     if ((rowData != null) && (rowData.ID != null)) {
-        notyConfirm('Are you sure to delete?', 'ICRBillDetailDelete("' + rowData.ID + '","' + rowData[EG_SlColumn] + '")', '', "Yes, delete it!");
-        //  notyConfirm('Are you sure to delete?', 'TCRBillDetailDelete("' + rowData.ID + '",' + rowData[EG_SlColumn] + ')','', "Yes, delete it!");
+        notyConfirm('Are you sure to delete?', 'ICRBillDetailDelete("' + rowData.ID + '","' + rowData[EG_SlColumn] + '")', '', "Yes, delete it!");       
     }
-}
-
-function AddJobNo()
-{
-
 }
 
 function BindICRBillEntryFields(Records) {
@@ -360,13 +321,17 @@ function BindICRBillEntryFields(Records) {
         $("#subtotal").val(roundoff(Records.STAmount))
         $("#grandtotal").val(roundoff(Records.GrandTotal));
         EG_Rebind_WithData(Records.ICRBillEntryDetail, 1);
-        $('#ICRNo').attr('readonly', 'readonly');
+       // $('#ICRNo').attr('readonly', 'readonly');
 
         var $datepicker = $('#ICRDate');
-        $datepicker.datepicker('setDate', new Date(Records.ICRDate));
-        var $datepicker = $('#AMCValidFromDate');
+        if (Records.ICRDate != null)
+            $datepicker.datepicker('setDate', new Date(Records.ICRDate));
+
+        if (Records.AMCValidFromDate != null)
+        var $datepicker = $('#AMCValidFromDate');      
         $datepicker.datepicker('setDate', new Date(Records.AMCValidFromDate));
         var $datepicker = $('#AMCValidtoDate');
+        if (Records.AMCValidToDate != null)
         $datepicker.datepicker('setDate', new Date(Records.AMCValidToDate));
 
     } catch (e) {
