@@ -30,6 +30,10 @@ $(document).ready(function () {
          });
 
         RefreshDepositsAndWithdrawalsTableBetweenDates();
+        $('#tblDepositwithdrawalList tbody').on('dblclick', 'td', function () {
+
+            EditDepositWithdrawal(this);
+        });
 
     }
     catch (e) {
@@ -81,7 +85,7 @@ function DepositModeOnChange(curobj)
 function Add()
 {
     ChangeButtonPatchView('DepositAndWithdrawal', 'btnPatchDepositandwithdrawal', 'Save');
-   
+    ClearForm();
 
 }
 
@@ -182,6 +186,8 @@ function ClearForm()
     $("#DepwithID").val('');
     $("#deleteId").val('');
     $("#deleteTransactionType").val('');
+    $(".hdDepositMode").hide();
+    $(".hdChequeStatus").hide();
 }
 
 function GetDepositandwithdrawalEntryByID(ID) {
@@ -325,6 +331,7 @@ function DepositAndWithdrawalSaveSuccess(data, status, xhr)
                     RefreshDepositsAndWithdrawalsTable();
                     $("#txtReferenceDateFrom").val('');
                     $("#txtReferenceDateTo").val('');
+                    ChangeButtonPatchView('DepositAndWithdrawal', 'btnPatchDepositandwithdrawal', 'AfterSave');
                break;
             case "VALIDATION":
                 notyAlert('error', JsonResult.Message);

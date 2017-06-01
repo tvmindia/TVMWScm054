@@ -35,10 +35,10 @@ namespace SCManager.BusinessService.Services
 
         }
 
-        public List<ICRExpenses> GetAllICRExpenses(UA UA, string FromDate, string ToDate, bool showAllYN)
+        public List<ICRExpenses> GetAllICRExpenses(UA UA, string FromDate, string ToDate)
         {
             List<ICRExpenses> expenseList = null;
-            expenseList = _iicrexpensesRepository.GetAllICRExpenses(UA, FromDate, ToDate, showAllYN);
+            expenseList = _iicrexpensesRepository.GetAllICRExpenses(UA, FromDate, ToDate);
             if (expenseList != null)
             {
                 foreach (ICRExpenses EX in expenseList)
