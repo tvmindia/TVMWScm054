@@ -135,7 +135,8 @@ function List() {
     try {
 
         ChangeButtonPatchView('ICRBillEntry', 'btnPatchICRBillEntrySettab', 'List');
-        reset();
+        $("#HeaderID").val("");
+         reset();
         BindAllCustomerBill();
     } catch (x) {
         // alert(x);
@@ -248,6 +249,7 @@ function save() {
         notyAlert('error', validation);
     }
 }
+
 function reset()
 {
     if (($("#HeaderID").val() == "") || ($("#HeaderID").val() == 'undefined') || ($("#HeaderID").val() == "0"))
@@ -307,6 +309,7 @@ function BindICRBillEntryFields(Records) {
     try {
 
         debugger;
+        ChangeButtonPatchView('ICRBillEntry', 'btnPatchICRBillEntrySettab', 'Edit');
         $('#HeaderID').val(Records.ID);
         $("#EmpID").val(Records.EmpID);
         $("#ModelTechEmpID").val(Records.EmpID);

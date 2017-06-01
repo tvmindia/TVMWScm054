@@ -14,5 +14,7 @@ namespace SCManager.RepositoryServices.Contracts
         OfficeBillEntry InsertOfficeBillEntry(OfficeBillEntry officeBillEntry, UA UA);
         OfficeBillEntry UpdateOfficeBillEntry(OfficeBillEntry officeBillEntry, UA UA);
         OfficeBillEntry GetOfficeBillHeaderByID(Guid ID, UA ua);
+        bool DeleteOfficeBillEntry(Guid ID, UA UA);
+        bool DeleteOfficeBillDetail(Guid ID, Guid HeaderID, UA UA);
     }
 }

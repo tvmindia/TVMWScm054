@@ -12,5 +12,7 @@ namespace SCManager.BusinessService.Contracts
         List<OfficeBillEntry> GetAllOfficeBillEntry(UA UA);
         OfficeBillEntry InsertUpdate(OfficeBillEntry officeBillEntry, UA UA);
         OfficeBillEntry GetOfficeBillHeaderByID(Guid ID, UA ua);
+        bool DeleteOfficeBillEntry(Guid ID, UA UA);
+        bool DeleteOfficeBillDetail(Guid ID, Guid HeaderID, UA UA);
     }
 }
