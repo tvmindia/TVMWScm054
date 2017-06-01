@@ -127,6 +127,7 @@
     <Compile Include="DTO\Menu.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DTO\OfficeBillEntry.cs" />
     <Compile Include="DTO\OpeningSetting.cs" />
     <Compile Include="DTO\OtherIncome.cs" />
     <Compile Include="DTO\ReceiveFromTechnician.cs" />

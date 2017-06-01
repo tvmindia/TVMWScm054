@@ -45,6 +45,10 @@ $(document).ready(function () {
            columns: EG_Columns(),
            columnDefs: EG_Columns_Settings()
        });
+        $('#tblCustomerBills tbody').on('dblclick', 'td', function () {
+
+            Edit(this);
+        });
         var $datepicker = $('#ICRDate');
         $datepicker.datepicker('setDate', null);
         var $datepicker = $('#AMCValidFromDate');
@@ -62,6 +66,7 @@ $(document).ready(function () {
     }
 
 });
+
 
 //-----------------------EDIT GRID DEFN-------------------------------------
 var EG_totalDetailRows = 0;

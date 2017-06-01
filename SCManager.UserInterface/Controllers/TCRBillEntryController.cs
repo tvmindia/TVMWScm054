@@ -198,8 +198,8 @@ namespace SCManager.UserInterface.Controllers
             {
                 //   System.Threading.Thread.Sleep(5000);
                 UA ua = new UA();
-                TCRBillEntryViewModel Frm8 = Mapper.Map<TCRBillEntry, TCRBillEntryViewModel>(_iTCRBillEntryBusiness.GetTCRBillHeaderByID(dataObj.ID.GetValueOrDefault(), ua));
-                return JsonConvert.SerializeObject(new { Result = "OK", Records = Frm8 });
+                TCRBillEntryViewModel tcr = Mapper.Map<TCRBillEntry, TCRBillEntryViewModel>(_iTCRBillEntryBusiness.GetTCRBillHeaderByID(dataObj.ID.GetValueOrDefault(), ua));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = tcr });
             }
             catch (Exception ex)
             {
