@@ -48,5 +48,6 @@ namespace SCManager.DataAccessObject.DTO
       //  public Guid? MaterialID { get; set; }
         public string Material { get; set; }
         public decimal? NetAmount { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -262,6 +262,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ICRBillEntryDetailObj.ItemNo = (sdr["ItemNo"].ToString() != "" ? int.Parse(sdr["ItemNo"].ToString()) : 0);
                                         _ICRBillEntryDetailObj.Rate = (sdr["Rate"].ToString() != "" ? decimal.Parse(sdr["Rate"].ToString()) : 0);
                                         _ICRBillEntryDetailObj.Material = (sdr["Material"].ToString() != "" ? (sdr["Material"].ToString()) : _ICRBillEntryDetailObj.Material);
+                                        _ICRBillEntryDetailObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _ICRBillEntryDetailObj.Description);
                                         _ICRBillEntryDetailObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _ICRBillEntryDetailObj.UOM);
                                     }
 

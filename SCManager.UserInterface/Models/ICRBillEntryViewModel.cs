@@ -83,5 +83,6 @@ namespace SCManager.UserInterface.Models
         public string UOM { get; set; }
         public string Material { get; set; }
         public decimal? NetAmount { get; set; }
+        public string Description { get; set; }
     }
 }
