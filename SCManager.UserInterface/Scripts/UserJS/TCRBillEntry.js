@@ -126,7 +126,7 @@ function EG_Columns_Settings() {
           { "width": "10%", "targets": 8 },
           { "width": "5%", "targets": 9 },
         { className: "text-right", "targets": [7,5] },
-        { className: "text-center", "targets": [2] },
+        { className: "text-center", "targets": [2,9] },
         { className: "text-right disabled", "targets": [8] },
         { className: "text-center disabled", "targets": [6] },
          { className: "text-left disabled", "targets": [4] },
