@@ -38,6 +38,7 @@ $(document).ready(function () {
            searching: false,
            paging: false,
            data: null,
+           autoWidth: false,
            columns: EG_Columns(),
            columnDefs: EG_Columns_Settings()
        });
@@ -102,8 +103,10 @@ function EG_Columns() {
 function EG_Columns_Settings() {
 
     var obj = [
-        { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
-        { "targets": [4], "width": "20%" },      
+         { "width": "5%", "targets": 3 },
+        { "width": "50%", "targets": 5 },
+         { "width": "10%", "targets": 6 },
+        { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },            
         { className: "text-center", "targets": [3, 4,6,8] },      
         { className: "text-center disabled", "targets": [7] },
         { className: "disabled", "targets": [5] },
