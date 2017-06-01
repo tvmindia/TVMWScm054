@@ -44,13 +44,15 @@ function TransactionTypeOnChange(curobj)
     try {
         if (curobj.value != "DEPST") {
             $(".hdDepositMode").hide();
-       
+            $("#DepositMode").val('');
+            $(".hdChequeStatus").hide();
+            $("#ChequeStatus").val('');
         }
         else {
             $(".hdDepositMode").show();
            
         }
-
+        $("#deleteTransactionType").val(curobj.value);
     }
     catch (e) {
         notyAlert('error', e.Message);
@@ -62,7 +64,7 @@ function DepositModeOnChange(curobj)
     try {
         if (curobj.value != "Cheque") {
             $(".hdChequeStatus").hide();
-
+            $("#ChequeStatus").val('');
         }
         else {
             $(".hdChequeStatus").show();
@@ -79,6 +81,8 @@ function DepositModeOnChange(curobj)
 function Add()
 {
     ChangeButtonPatchView('DepositAndWithdrawal', 'btnPatchDepositandwithdrawal', 'Save');
+   
+
 }
 
 function EditDepositWithdrawal(curObj)
@@ -92,7 +96,29 @@ function EditDepositWithdrawal(curObj)
         ClearForm();
         if (result) {
             $("#TransactionType").val(result.TransactionType);
-            $("#RefNo").val(result.RefNo);
+            $("#deleteTransactionType").val(result.TransactionType);
+            if (result.TransactionType == 'DEPST')
+            {
+                $(".hdDepositMode").show();
+                $("#DepositMode").val(result.DepositMode);
+                if(result.DepositMode=='Cheque')
+                {
+                    $(".hdChequeStatus").show();
+                    $("#ChequeStatus").val(result.ChequeStatus);
+                }
+                else
+                {
+                    $(".hdChequeStatus").hide();
+                    $("#ChequeStatus").val('');
+                }
+            }
+            else
+            {
+                $(".hdDepositMode").hide();
+                $("#DepositMode").val('');
+                $("#ChequeStatus").val('');
+            }
+            $("#RefNo").val(result.RefNo); 
             $("#RefDate").val(ConvertJsonToDate(result.RefDate));
             $("#Amount").val(result.Amount);
             $("#Description").val(result.Description);
@@ -108,12 +134,54 @@ function EditDepositWithdrawal(curObj)
         notyAlert('error', e.message);
     }
 }
+function ValidateForm() {
+
+    try {
+        var fl = true;
+        if ($("#TransactionType").val() == 'DEPST')
+        {
+            fl = true;
+            if ($("#DepositMode").val() != '')
+            {
+                fl = true;
+                if ($("#DepositMode").val() == 'Cheque')
+                {
+                    fl = true;
+                    if ($("#ChequeStatus").val() == '')
+                    {
+                        fl = false;
+                        notyAlert('error', 'Mandatory fields are empty!');
+                    }
+                    
+                }
+                else {
+                    fl = true;
+                
+                }
+            }
+            else
+            {
+                fl = false;
+                notyAlert('error', 'Mandatory fields are empty!');
+            }
+
+        }
+     
+
+        return fl;
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
 
 function ClearForm()
 {
     $('#formdepositwithdrwal')[0].reset();
     $("#DepwithID").val('');
     $("#deleteId").val('');
+    $("#deleteTransactionType").val('');
 }
 
 function GetDepositandwithdrawalEntryByID(ID) {
