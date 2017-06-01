@@ -260,5 +260,45 @@ namespace SCManager.RepositoryServices.Services
             return outParameter.Value.ToString();
 
         }
+
+        public ICRExpenses GetOutStandingICRPayment(UA UA)
+        {
+            ICRExpenses expensesObj = new ICRExpenses();
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+
+                        cmd.CommandText = "[GetOutStandingICRPayment]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                while (sdr.Read())
+                                {
+                                    expensesObj.OutStandingPayment = (sdr["OutStandingPayments"].ToString() != "" ? Decimal.Parse(sdr["OutStandingPayments"].ToString()) : expensesObj.OutStandingPayment);
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return expensesObj;
+        }
     }
+   
 }

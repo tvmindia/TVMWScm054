@@ -12,6 +12,7 @@ namespace SCManager.UserInterface.Models
         public string SCCode { get; set; }
         public Guid? ID { get; set; }
         [Required(ErrorMessage = "Please select ICR No")]
+        [Display(Name = "ICR No")]
         public string ICRNo { get; set; }
         [Required(ErrorMessage = "Please select ICR date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]

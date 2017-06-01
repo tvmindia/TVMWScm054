@@ -45,6 +45,10 @@ $(document).ready(function () {
            columns: EG_Columns(),
            columnDefs: EG_Columns_Settings()
        });
+        $('#tblCustomerBills tbody').on('dblclick', 'td', function () {
+
+            Edit(this);
+        });
         var $datepicker = $('#ICRDate');
         $datepicker.datepicker('setDate', null);
         var $datepicker = $('#AMCValidFromDate');
@@ -62,6 +66,7 @@ $(document).ready(function () {
     }
 
 });
+
 
 //-----------------------EDIT GRID DEFN-------------------------------------
 var EG_totalDetailRows = 0;
@@ -130,7 +135,8 @@ function List() {
     try {
 
         ChangeButtonPatchView('ICRBillEntry', 'btnPatchICRBillEntrySettab', 'List');
-        reset();
+        $("#HeaderID").val("");
+         reset();
         BindAllCustomerBill();
     } catch (x) {
         // alert(x);
@@ -243,6 +249,7 @@ function save() {
         notyAlert('error', validation);
     }
 }
+
 function reset()
 {
     if (($("#HeaderID").val() == "") || ($("#HeaderID").val() == 'undefined') || ($("#HeaderID").val() == "0"))
@@ -302,6 +309,7 @@ function BindICRBillEntryFields(Records) {
     try {
 
         debugger;
+        ChangeButtonPatchView('ICRBillEntry', 'btnPatchICRBillEntrySettab', 'Edit');
         $('#HeaderID').val(Records.ID);
         $("#EmpID").val(Records.EmpID);
         $("#ModelTechEmpID").val(Records.EmpID);

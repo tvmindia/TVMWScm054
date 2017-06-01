@@ -169,6 +169,18 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion DeleteICRExpenses
 
+        #region GetOutStandingICRPayment
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetOutStandingICRPayment()
+        {
+            UA ua = new UA();
+            ICRExpensesViewModel CreditNotesList = Mapper.Map<ICRExpenses, ICRExpensesViewModel>(_ICRexpensesBusiness.GetOutStandingICRPayment(ua));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = CreditNotesList });
+
+        }
+        #endregion GetOutStandingPayment
+
         #region ButtonStyling
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]

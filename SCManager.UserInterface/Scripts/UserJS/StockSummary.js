@@ -32,8 +32,8 @@ $(document).ready(function () {
              
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
-                  { className: "text-right", "targets": [] },
-                    { className: "text-center", "targets": [ 5,6,7,8] },
+                  { className: "text-right", "targets": [7, 8] },
+                    { className: "text-center", "targets": [ 5,6] },
                     { className: "text-left", "targets": [2,3,4] },
 
              ]

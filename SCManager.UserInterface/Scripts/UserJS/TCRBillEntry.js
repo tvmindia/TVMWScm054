@@ -45,6 +45,11 @@ $(document).ready(function () {
            columnDefs: EG_Columns_Settings()
        });
 
+        $('#tblCustomerBills tbody').on('dblclick', 'td', function () {
+
+            Edit(this);
+        });
+
         getMaterials();
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.TCRBillDetail;
@@ -129,8 +134,9 @@ function List() {
     try {
       
         ChangeButtonPatchView('TCRBillEntry', 'btnPatchTCRBillEntrySettab', 'List');
-        // DataTables.customerBillsTable.clear().rows.add(GetAllForm8()).draw(false);
-        reset();
+        $("#HeaderID").val("");
+         reset();
+       
         BindAllCustomerBill();
     } catch (x) {
         // alert(x);
@@ -224,7 +230,7 @@ function DeleteItem(currentObj) {
 
     if ((rowData != null) && (rowData.ID != null)) {
         notyConfirm('Are you sure to delete?', 'TCRBillDetailDelete("' + rowData.ID + '","' + rowData[EG_SlColumn] + '")', '', "Yes, delete it!");
-      //  notyConfirm('Are you sure to delete?', 'TCRBillDetailDelete("' + rowData.ID + '",' + rowData[EG_SlColumn] + ')','', "Yes, delete it!");
+     
     }
 }
 function TCRBillDetailDelete(id, rw) {
@@ -270,10 +276,11 @@ function TCRBillDetailDelete(id, rw) {
 
 }
 
+
 function BindTCRBillEntryFields(Records) {
     try {
 
-         
+        ChangeButtonPatchView('TCRBillEntry', 'btnPatchTCRBillEntrySettab', 'Edit');
         $('#HeaderID').val(Records.ID);
         $("#EmpID").val(Records.EmpID);
         $("#ModelTechEmpID").val(Records.EmpID);
@@ -327,7 +334,7 @@ function FillUOM(row) {
 
 function DeleteClick()
 {
-    notyConfirm('Are you sure to delete?', 'TCRBillDelete()');
+    notyConfirm('Are you sure to delete?', 'TCRBillDelete()', '', "Yes, delete it!");
 }
 function TCRBillDelete() {
     try {
@@ -438,6 +445,7 @@ function Add() {
     EG_ClearTable();
    // RestForm8();
     EG_AddBlankRows(5)
+    $("#HeaderID").val("");
     reset();
 }
 
@@ -583,6 +591,7 @@ function getMaterials() {
 
 }
 
+
 function reset()
 {
     if (($("#HeaderID").val() == "") || ($("#HeaderID").val() == 'undefined') || ($("#HeaderID").val() == "0")) {
@@ -611,6 +620,8 @@ function reset()
         $('#EmpID').attr('disabled', false);
         var $datepicker = $('#BillDate');
         $datepicker.datepicker('setDate', null);
+        EG_ClearTable();
+        EG_AddBlankRows(5);
         ResetForm();
     }
     else

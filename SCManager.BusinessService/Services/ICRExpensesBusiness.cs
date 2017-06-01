@@ -12,9 +12,12 @@ namespace SCManager.BusinessService.Services
     {
 
         private IICRExpensesRepository _iicrexpensesRepository;
-        public ICRExpensesBusiness(IICRExpensesRepository icrexpensesRepository)
+        private ICommonBusiness _commonBusiness;
+
+        public ICRExpensesBusiness(IICRExpensesRepository icrexpensesRepository,ICommonBusiness commonBusiness)
         {
             _iicrexpensesRepository = icrexpensesRepository;
+            _commonBusiness = commonBusiness;
         }
 
         public string DeleteICRExpenses(string ID, UA ua)
@@ -55,6 +58,15 @@ namespace SCManager.BusinessService.Services
             expenseObj = _iicrexpensesRepository.GetICRExpensesByID(UA, ID);
             return expenseObj;
         }
+
+        public ICRExpenses GetOutStandingICRPayment(UA UA)
+        {
+
+            ICRExpenses expenseObj = null;
+            expenseObj = _iicrexpensesRepository.GetOutStandingICRPayment(UA);
+            expenseObj.OutStandingPaymentFormatted = _commonBusiness.ConvertCurrency(expenseObj.OutStandingPayment, 2);
+            return expenseObj;
+        } 
 
         public object InsertUpdateICRExpenses(ICRExpenses ExpensesObj)
         {

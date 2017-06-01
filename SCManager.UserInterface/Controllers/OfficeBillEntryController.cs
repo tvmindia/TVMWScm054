@@ -13,99 +13,45 @@ using System.Web.Mvc;
 namespace SCManager.UserInterface.Controllers
 {
     [CustomAuthenticationFilter]
-    public class TCRBillEntryController : Controller
+    public class OfficeBillEntryController : Controller
     {
         #region Constructor_Injection
 
 
-        ITCRBillEntryBusiness _iTCRBillEntryBusiness;
-        IEmployeesBusiness _iEmployeesBusiness;
-
-        public TCRBillEntryController(ITCRBillEntryBusiness iTCRBillEntryBusiness, IEmployeesBusiness iEmployeesBusiness)
+        IOfficeBillEntryBusiness _iOfficeBillEntryBusiness;       
+      
+        public OfficeBillEntryController(IOfficeBillEntryBusiness iOfficeBillEntryBusiness)
         {
-            _iTCRBillEntryBusiness = iTCRBillEntryBusiness;
-            _iEmployeesBusiness = iEmployeesBusiness;
-
+            _iOfficeBillEntryBusiness = iOfficeBillEntryBusiness;          
+           
         }
         #endregion Constructor_Injection
-        // GET: TCRBillEntry
+
+        // GET: OfficeBillEntry
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
-            TCRBillEntryViewModel tCRBillEntryViewModel = null;
-            try
-            {
-                tCRBillEntryViewModel = new TCRBillEntryViewModel();
-                UA ua = new UA();
-                List<SelectListItem> selectListItem = new List<SelectListItem>();
-                //Technician Drop down bind
-                List<EmployeesViewModel> TechniciansList = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_iEmployeesBusiness.GetAllTechnicians(ua));
-                TechniciansList = TechniciansList == null ? null : TechniciansList.OrderBy(attset => attset.Name).ToList();
-                foreach (EmployeesViewModel clvm in TechniciansList)
-                {
-                    selectListItem.Add(new SelectListItem
-                    {
-                        Text = clvm.Name,
-                        Value = clvm.ID.ToString(),
-                        Selected = false
-                    });
-                }
-                tCRBillEntryViewModel.TechniciansList = selectListItem;
-
-                //------------------ UOM Dropdown Bind--------------------//
-                selectListItem = new List<SelectListItem>();
-                //Categories Drop down bind
-                List<TCRBillEntryViewModel> jobNoList = Mapper.Map<List<TCRBillEntry>, List<TCRBillEntryViewModel>>(_iTCRBillEntryBusiness.GetAllJobNo(ua));
-                jobNoList = jobNoList == null ? null : jobNoList.OrderBy(attset => attset.JobNo).ToList();
-                foreach (TCRBillEntryViewModel tcrvm in jobNoList)
-                {
-                    selectListItem.Add(new SelectListItem
-                    {
-                        Text = tcrvm.JobNo,
-                        Value = tcrvm.JobNo,
-                        Selected = false
-                    });
-                }
-                tCRBillEntryViewModel.JobNoList = selectListItem;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return View(tCRBillEntryViewModel);
+            return View();
         }
+
         Const c = new Const();
-        #region InsertUpdateTCRBillEntry
+        #region InsertUpdateOfficeBillEntry
         [HttpPost]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string InsertUpdateTCRBillEntry(TCRBillEntryViewModel TCRBillEntryViewModelObj)
+        public string InsertUpdateOfficeBillEntry(OfficeBillEntryViewModel OfficeBillEntryViewModelObj)
         {
             string result = "";
 
             try
             {
-                //if (ModelState.IsValid)
-                //{
-                    UA ua = new UA();
-                    object ResultFromJS = JsonConvert.DeserializeObject(TCRBillEntryViewModelObj.DetailJSON);
-                    string ReadableFormat = JsonConvert.SerializeObject(ResultFromJS);
-                    TCRBillEntryViewModelObj.TCRBillEntryDetail = JsonConvert.DeserializeObject<List<TCRBillEntryDetailViewModel>>(ReadableFormat);
-                    TCRBillEntryViewModel r = Mapper.Map<TCRBillEntry, TCRBillEntryViewModel>(_iTCRBillEntryBusiness.InsertUpdate(Mapper.Map<TCRBillEntryViewModel, TCRBillEntry>(TCRBillEntryViewModelObj), ua));
-                    return JsonConvert.SerializeObject(new { Result = "OK", Message = c.InsertSuccess, Records = r });
-                //}
-                //else
-                //{
-                //    List<string> modelErrors = new List<string>();
-                //    foreach (var modelState in ModelState.Values)
-                //    {
-                //        foreach (var modelError in modelState.Errors)
-                //        {
-                //            modelErrors.Add(modelError.ErrorMessage);
-                //        }
-                //    }
-                //    return JsonConvert.SerializeObject(new { Result = "VALIDATION", Message = string.Join(",", modelErrors) });
-                //    //return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "Please Check the values" });
-                //}
+               
+                UA ua = new UA();
+                object ResultFromJS = JsonConvert.DeserializeObject(OfficeBillEntryViewModelObj.DetailJSON);
+                string ReadableFormat = JsonConvert.SerializeObject(ResultFromJS);
+                OfficeBillEntryViewModelObj.OfficeBillEntryDetail = JsonConvert.DeserializeObject<List<OfficeBillEntryDetailViewModel>>(ReadableFormat);
+                OfficeBillEntryViewModel r = Mapper.Map<OfficeBillEntry, OfficeBillEntryViewModel>(_iOfficeBillEntryBusiness.InsertUpdate(Mapper.Map<OfficeBillEntryViewModel, OfficeBillEntry>(OfficeBillEntryViewModelObj), ua));
+                return JsonConvert.SerializeObject(new { Result = "OK", Message = c.InsertSuccess, Records = r });
+               
 
             }
             catch (Exception ex)
@@ -113,37 +59,56 @@ namespace SCManager.UserInterface.Controllers
 
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
-           // return result;
+            // return result;
         }
-        #endregion InsertUpdateTCRBillEntry
+        #endregion InsertUpdateOfficeBillEntry
 
-        #region GetAllTCRBillEntry
+        #region GetOfficeBillHeaderByID
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetOfficeBillHeaderByID(OfficeBillEntryViewModel dataObj)
+        {
+            try
+            {
+                //   System.Threading.Thread.Sleep(5000);
+                UA ua = new UA();
+                OfficeBillEntryViewModel offc = Mapper.Map<OfficeBillEntry, OfficeBillEntryViewModel>(_iOfficeBillEntryBusiness.GetOfficeBillHeaderByID(dataObj.ID.GetValueOrDefault(), ua));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = offc });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        #endregion GetOfficeBillHeaderByID
+
+        #region GetAllOfficeBillEntry
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
-        public string GetAllTCRBillEntry()
+        public string GetAllOfficeBillEntry()
         {
             UA ua = new UA();
-            List<TCRBillEntryViewModel> ItemList = Mapper.Map<List<TCRBillEntry>, List<TCRBillEntryViewModel>>(_iTCRBillEntryBusiness.GetAllTCRBillEntry(ua));
+            List<OfficeBillEntryViewModel> ItemList = Mapper.Map<List<OfficeBillEntry>, List<OfficeBillEntryViewModel>>(_iOfficeBillEntryBusiness.GetAllOfficeBillEntry(ua));
             return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
 
         }
-        #endregion GetAllTCRBillEntry
+        #endregion GetAllOfficeBillEntry
 
-        #region DeleteTCRBillEntry
+        #region DeleteOfficeBillEntry
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string DeleteTCRBillEntry(TCRBillEntryViewModel tcrObj)
+        public string DeleteOfficeBillEntry(OfficeBillEntryViewModel offcObj)
         {
 
             try
             {
-                if (tcrObj.ID.GetValueOrDefault() == Guid.Empty)
+                if (offcObj.ID.GetValueOrDefault() == Guid.Empty)
                 {
                     return JsonConvert.SerializeObject(new { Result = "ERROR", Message = c.NoItems });
                 }
 
                 UA ua = new UA();
-                _iTCRBillEntryBusiness.DeleteTCRBillEntry(tcrObj.ID.GetValueOrDefault(), ua);
+                _iOfficeBillEntryBusiness.DeleteOfficeBillEntry(offcObj.ID.GetValueOrDefault(), ua);
                 return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess });
 
             }
@@ -154,26 +119,26 @@ namespace SCManager.UserInterface.Controllers
 
 
         }
-        #endregion DeleteTCRBillEntry
+        #endregion DeleteOfficeBillEntry
 
-        #region DeleteTCRBillDetail
+        #region DeleteOfficeBillDetail
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string DeleteTCRBillDetail(TCRBillEntryDetailViewModel tcrDObj)
+        public string DeleteOfficeBillDetail(OfficeBillEntryDetailViewModel offcDObj)
         {
 
             try
             {
                 UA ua = new UA();
-                Guid ID = tcrDObj.ID.GetValueOrDefault();
-                Guid HeaderID = tcrDObj.HeaderID.GetValueOrDefault();
+                Guid ID = offcDObj.ID.GetValueOrDefault();
+                Guid HeaderID = offcDObj.HeaderID.GetValueOrDefault();
                 if (ID == null || HeaderID == null)
                 {
                     return JsonConvert.SerializeObject(new { Result = "ERROR", Message = c.DeleteFailure });
                 }
                 else
                 {
-                    _iTCRBillEntryBusiness.DeleteTCRBillDetail(ID, HeaderID, ua);
+                    _iOfficeBillEntryBusiness.DeleteOfficeBillDetail(ID, HeaderID, ua);
                     return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess });
                 }
 
@@ -187,26 +152,7 @@ namespace SCManager.UserInterface.Controllers
 
 
         }
-        #endregion DeleteTCRBillDetail
-
-        #region GetTCRBillHeaderByID
-        [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string GetTCRBillHeaderByID(TCRBillEntryViewModel dataObj)
-        {
-            try
-            {
-                //   System.Threading.Thread.Sleep(5000);
-                UA ua = new UA();
-                TCRBillEntryViewModel tcr = Mapper.Map<TCRBillEntry, TCRBillEntryViewModel>(_iTCRBillEntryBusiness.GetTCRBillHeaderByID(dataObj.ID.GetValueOrDefault(), ua));
-                return JsonConvert.SerializeObject(new { Result = "OK", Records = tcr });
-            }
-            catch (Exception ex)
-            {
-                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
-            }
-        }
-        #endregion GetTCRBillHeaderByID
+        #endregion DeleteOfficeBillDetail
 
         #region ButtonStyling
         [HttpGet]
@@ -233,17 +179,17 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Text = "New";
-                    ToolboxViewModelObj.addbtn.Title = "Add New TCR Bill";
+                    ToolboxViewModelObj.addbtn.Title = "Add New ICR Bill";
                     ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save TCR Bill";
+                    ToolboxViewModelObj.savebtn.Title = "Save ICR Bill";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete TCR Bill";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete ICR Bill";
                     ToolboxViewModelObj.deletebtn.Event = "DeleteClick();";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;
@@ -261,21 +207,21 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Disable = true;
-                    ToolboxViewModelObj.addbtn.DisableReason = "N/A for new TCR Entry";
+                    ToolboxViewModelObj.addbtn.DisableReason = "N/A for new ICR Entry";
                     ToolboxViewModelObj.addbtn.Text = "New";
                     ToolboxViewModelObj.addbtn.Title = "Add New";
                     ToolboxViewModelObj.addbtn.Event = "";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save TCR Bill";
+                    ToolboxViewModelObj.savebtn.Title = "Save ICR Bill";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Disable = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete TCR";
-                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new TCR Entry";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete ICR";
+                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new ICR Entry";
                     ToolboxViewModelObj.deletebtn.Event = "";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;

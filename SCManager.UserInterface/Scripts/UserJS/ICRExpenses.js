@@ -22,7 +22,7 @@ $(document).ready(function () {
                 { "data": "RefNo", "defaultContent": "<i>-</i>" },
                 { "data": "PaymentMode", "defaultContent": "<i>-</i>" }, 
                 { "data": "Description", "defaultContent": "<i>-</i>" },
-                { "data": "Amount", "defaultContent": "<i>-</i>" },
+                { "data": "Amount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                 { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
            ],
            columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
@@ -42,17 +42,48 @@ $(document).ready(function () {
         $('#toDate').change(function () {
             if (Bindflag)
             BindAllICRExpenses();
-        });
-
-
+        }); 
+        BindOutStandingPayment();
         clearfields();
+
     }
     catch (e) {
         notyAlert('error', e.message);
     }
 });
 
-function FillDates() {  
+
+function BindOutStandingPayment()
+{
+    debugger;
+    var thisItem = GetOutStandingICRPayment();
+    $("#OutStandingICRPayment").text(thisItem.OutStandingPaymentFormatted);
+
+}
+
+
+function GetOutStandingICRPayment() {
+    try {
+        debugger;
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("ICRExpenses/GetOutStandingICRPayment/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+function FillDates() {
     var m_names = new Array("Jan", "Feb", "Mar",
  "Apr", "May", "Jun", "Jul", "Aug", "Sep",
  "Oct", "Nov", "Dec");
@@ -185,7 +216,7 @@ function fillICRExpenses(ID) {
     $("#EntryNo").val(thisItem.EntryNo);
     $("#RefNo").val(thisItem.RefNo); 
     $("#PaymentMode").val(thisItem.PaymentMode);
-    $("#Amount").val(thisItem.Amount);
+    $("#Amount").val(roundoff(thisItem.Amount));
     $("#Description").val(thisItem.Description);
 
     if (thisItem.RefDate != null) {
@@ -289,6 +320,7 @@ function SaveSuccess(data, status) {
             Bindflag = false;//for avoiding 3 times binding on pageload. 
             FillDates();
             BindAllICRExpenses();
+            BindOutStandingPayment();
             notyAlert('success', JsonResult.Records.Message);
             break;
         case "ERROR":
@@ -308,6 +340,7 @@ function DeleteSuccess(data, status) {
             BindAllICRExpenses();
             $('#ListTab').trigger('click');
             notyAlert('success', i.Message);
+            BindOutStandingPayment();
             clearfields();
             goBack();
             break;
