@@ -202,6 +202,8 @@ namespace SCManager.UserInterface.Controllers
                 {
                     UA ua = new UA();
                     depositAndWithdrawalViewModel.SCCode = ua.SCCode;
+                depositAndWithdrawalViewModel.logDetails = new LogDetailsViewModel();
+                    depositAndWithdrawalViewModel.logDetails.UpdatedBy = ua.UserName;
                     result = _depositAndWithdrawalBusiness.DeleteDepositAndWithdrawal(Mapper.Map<DepositAndWithdrawalViewModel, DepositAndWithdrawal>(depositAndWithdrawalViewModel));
                     return JsonConvert.SerializeObject(new { Result = "OK", Record = result });
                 }
@@ -227,6 +229,10 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.addbtn.Event = "AddDepositandwithdrawal();";
                     break;
                 case "EditSave":
+                    ToolboxViewModelObj.addbtn.Visible = true;
+                    ToolboxViewModelObj.addbtn.Text = "New";
+                    ToolboxViewModelObj.addbtn.Title = "Add New";
+                    ToolboxViewModelObj.addbtn.Event = "AddDepositandwithdrawal();";
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
                     ToolboxViewModelObj.savebtn.Title = "Save Entry";
@@ -239,8 +245,6 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.backbtn.Text = "Back";
                     ToolboxViewModelObj.backbtn.Title = "Back";
                     ToolboxViewModelObj.backbtn.Event = "goBack();";
-
-
                     break;
                 case "Save":
                     ToolboxViewModelObj.backbtn.Visible = true;
@@ -251,8 +255,39 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.savebtn.Text = "Save";
                     ToolboxViewModelObj.savebtn.Title = "Save Entry";
                     ToolboxViewModelObj.savebtn.Event = "SaveDepositandwithdrawal();";
+                    ToolboxViewModelObj.deletebtn.Visible = true;
+                    ToolboxViewModelObj.deletebtn.Disable = true;
+                    ToolboxViewModelObj.deletebtn.Text = "Delete";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete Entry";
+                    ToolboxViewModelObj.deletebtn.DisableReason = "Not applicable for new Entries";
+                    ToolboxViewModelObj.deletebtn.Event = "DeleteDepositandwithdrawal();";
+                    ToolboxViewModelObj.addbtn.Visible = true;
+                    ToolboxViewModelObj.addbtn.Disable = true;
+                    ToolboxViewModelObj.addbtn.Text = "New";
+                    ToolboxViewModelObj.addbtn.Title = "Add New";
+                    ToolboxViewModelObj.addbtn.DisableReason = "Not applicable for new Entries";
+                    ToolboxViewModelObj.addbtn.Event = "AddDepositandwithdrawal();";
                     break;
 
+                case "AfterSave":
+                    ToolboxViewModelObj.backbtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Text = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back";
+                    ToolboxViewModelObj.backbtn.Event = "goBack();";
+                    ToolboxViewModelObj.savebtn.Visible = true;
+                    ToolboxViewModelObj.savebtn.Text = "Save";
+                    ToolboxViewModelObj.savebtn.Title = "Save Entry";
+                    ToolboxViewModelObj.savebtn.Event = "SaveDepositandwithdrawal();";
+                    ToolboxViewModelObj.deletebtn.Visible = true;
+                    ToolboxViewModelObj.deletebtn.Text = "Delete";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete Entry";
+                    ToolboxViewModelObj.deletebtn.Event = "DeleteDepositandwithdrawal();";
+                    ToolboxViewModelObj.addbtn.Visible = true;
+                    ToolboxViewModelObj.addbtn.Text = "New";
+                    ToolboxViewModelObj.addbtn.Title = "Add New";
+                    ToolboxViewModelObj.addbtn.Event = "AddDepositandwithdrawal();";
+                    break;
+                
 
                 default:
                     return Content("Nochange");

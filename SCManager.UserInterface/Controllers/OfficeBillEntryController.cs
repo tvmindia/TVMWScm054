@@ -94,6 +94,66 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion GetAllOfficeBillEntry
 
+        #region DeleteOfficeBillEntry
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string DeleteOfficeBillEntry(OfficeBillEntryViewModel offcObj)
+        {
+
+            try
+            {
+                if (offcObj.ID.GetValueOrDefault() == Guid.Empty)
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = c.NoItems });
+                }
+
+                UA ua = new UA();
+                _iOfficeBillEntryBusiness.DeleteOfficeBillEntry(offcObj.ID.GetValueOrDefault(), ua);
+                return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess });
+
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+
+
+        }
+        #endregion DeleteOfficeBillEntry
+
+        #region DeleteOfficeBillDetail
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string DeleteOfficeBillDetail(OfficeBillEntryDetailViewModel offcDObj)
+        {
+
+            try
+            {
+                UA ua = new UA();
+                Guid ID = offcDObj.ID.GetValueOrDefault();
+                Guid HeaderID = offcDObj.HeaderID.GetValueOrDefault();
+                if (ID == null || HeaderID == null)
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = c.DeleteFailure });
+                }
+                else
+                {
+                    _iOfficeBillEntryBusiness.DeleteOfficeBillDetail(ID, HeaderID, ua);
+                    return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess });
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                ConstMessage cm = c.GetMessage(ex.Message);
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = cm.Message });
+            }
+
+
+        }
+        #endregion DeleteOfficeBillDetail
+
         #region ButtonStyling
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
@@ -119,17 +179,17 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Text = "New";
-                    ToolboxViewModelObj.addbtn.Title = "Add New ICR Bill";
+                    ToolboxViewModelObj.addbtn.Title = "Add New Office Bill";
                     ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save ICR Bill";
+                    ToolboxViewModelObj.savebtn.Title = "Save Office Bill";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete ICR Bill";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete Office Bill";
                     ToolboxViewModelObj.deletebtn.Event = "DeleteClick();";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;
@@ -147,21 +207,21 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Disable = true;
-                    ToolboxViewModelObj.addbtn.DisableReason = "N/A for new ICR Entry";
+                    ToolboxViewModelObj.addbtn.DisableReason = "N/A for new Office Entry";
                     ToolboxViewModelObj.addbtn.Text = "New";
                     ToolboxViewModelObj.addbtn.Title = "Add New";
                     ToolboxViewModelObj.addbtn.Event = "";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save ICR Bill";
+                    ToolboxViewModelObj.savebtn.Title = "Save Office Bill";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Disable = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete ICR";
-                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new ICR Entry";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete Office Entry";
+                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new Office Entry";
                     ToolboxViewModelObj.deletebtn.Event = "";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;

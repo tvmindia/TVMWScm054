@@ -38,6 +38,8 @@ namespace SCManager.RepositoryServices.Services
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = depositAndWithdrawal.SCCode;
                         cmd.Parameters.Add("@TransactionType", SqlDbType.NVarChar,20).Value = depositAndWithdrawal.TransactionType;
+                        cmd.Parameters.Add("@DepositMode", SqlDbType.NVarChar, 20).Value = depositAndWithdrawal.DepositMode;
+                        cmd.Parameters.Add("@ChequeStatus", SqlDbType.NVarChar, 20).Value = depositAndWithdrawal.ChequeStatus;
                         cmd.Parameters.Add("@RefNo", SqlDbType.NVarChar,20).Value = depositAndWithdrawal.RefNo;
                         cmd.Parameters.Add("@RefDate", SqlDbType.SmallDateTime).Value = depositAndWithdrawal.RefDate;
                         cmd.Parameters.Add("@Amount", SqlDbType.Decimal).Value = depositAndWithdrawal.Amount;
@@ -101,6 +103,8 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = depositAndWithdrawal.ID;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = depositAndWithdrawal.SCCode;
                         cmd.Parameters.Add("@TransactionType", SqlDbType.NVarChar, 20).Value = depositAndWithdrawal.TransactionType;
+                        cmd.Parameters.Add("@DepositMode", SqlDbType.NVarChar, 20).Value = depositAndWithdrawal.DepositMode;
+                        cmd.Parameters.Add("@ChequeStatus", SqlDbType.NVarChar, 20).Value = depositAndWithdrawal.ChequeStatus;
                         cmd.Parameters.Add("@RefNo", SqlDbType.NVarChar, 20).Value = depositAndWithdrawal.RefNo;
                         cmd.Parameters.Add("@RefDate", SqlDbType.SmallDateTime).Value = depositAndWithdrawal.RefDate;
                         cmd.Parameters.Add("@Amount", SqlDbType.Decimal).Value = depositAndWithdrawal.Amount;
@@ -167,6 +171,8 @@ namespace SCManager.RepositoryServices.Services
                                         _depositAndWithdrawal.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _depositAndWithdrawal.SCCode);
                                         _depositAndWithdrawal.ID = (sdr["ID"].ToString() != "" ? (Guid.Parse(sdr["ID"].ToString())) : Guid.Empty);
                                         _depositAndWithdrawal.TransactionType = (sdr["TransactionType"].ToString() != "" ? (sdr["TransactionType"].ToString()) : _depositAndWithdrawal.TransactionType);
+                                        _depositAndWithdrawal.DepositMode = (sdr["DepositMode"].ToString() != "" ? (sdr["DepositMode"].ToString()) : _depositAndWithdrawal.DepositMode);
+                                        _depositAndWithdrawal.ChequeStatus = (sdr["ChequeStatus"].ToString() != "" ? (sdr["ChequeStatus"].ToString()) : _depositAndWithdrawal.ChequeStatus);
                                         _depositAndWithdrawal.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : _depositAndWithdrawal.RefNo);
                                         _depositAndWithdrawal.RefDate = (sdr["RefDate"].ToString() != "" ? (sdr["RefDate"].ToString()) : _depositAndWithdrawal.RefDate);
                                         _depositAndWithdrawal.Amount = (sdr["Amount"].ToString() != "" ? decimal.Parse(sdr["Amount"].ToString()) : _depositAndWithdrawal.Amount);
@@ -208,7 +214,8 @@ namespace SCManager.RepositoryServices.Services
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = depositAndWithdrawal.ID;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = depositAndWithdrawal.SCCode;
-                   
+                        cmd.Parameters.Add("@TransactionType", SqlDbType.NVarChar, 20).Value = depositAndWithdrawal.TransactionType;
+                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = depositAndWithdrawal.logDetails.UpdatedBy;
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();

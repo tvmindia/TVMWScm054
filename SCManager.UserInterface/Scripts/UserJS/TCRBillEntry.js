@@ -134,8 +134,9 @@ function List() {
     try {
       
         ChangeButtonPatchView('TCRBillEntry', 'btnPatchTCRBillEntrySettab', 'List');
-        // DataTables.customerBillsTable.clear().rows.add(GetAllForm8()).draw(false);
-        reset();
+        $("#HeaderID").val("");
+         reset();
+       
         BindAllCustomerBill();
     } catch (x) {
         // alert(x);
@@ -279,7 +280,7 @@ function TCRBillDetailDelete(id, rw) {
 function BindTCRBillEntryFields(Records) {
     try {
 
-         
+        ChangeButtonPatchView('TCRBillEntry', 'btnPatchTCRBillEntrySettab', 'Edit');
         $('#HeaderID').val(Records.ID);
         $("#EmpID").val(Records.EmpID);
         $("#ModelTechEmpID").val(Records.EmpID);
@@ -333,7 +334,7 @@ function FillUOM(row) {
 
 function DeleteClick()
 {
-    notyConfirm('Are you sure to delete?', 'TCRBillDelete()');
+    notyConfirm('Are you sure to delete?', 'TCRBillDelete()', '', "Yes, delete it!");
 }
 function TCRBillDelete() {
     try {
@@ -589,6 +590,7 @@ function getMaterials() {
 
 
 }
+
 
 function reset()
 {

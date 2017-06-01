@@ -117,7 +117,7 @@
         <div class="tab-pane fade " id="DepositwithdrawalEntry">
             <div class="col-md-12">&nbsp;</div>
             <div class="col-md-12">
-                @using (Ajax.BeginForm("InsertUpdateDepositAndWithdrawal", "DepositAndWithdrawal", new AjaxOptions { HttpMethod = "POST", OnSuccess = "DepositAndWithdrawalSaveSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "formdepositwithdrwal" }))
+                @using (Ajax.BeginForm("InsertUpdateDepositAndWithdrawal", "DepositAndWithdrawal", new AjaxOptions { HttpMethod = "POST", OnSuccess = "DepositAndWithdrawalSaveSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "ValidateForm", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "formdepositwithdrwal" }))
                  {
                     @Html.AntiForgeryToken()
 
@@ -185,7 +185,7 @@
                                     @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                     <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", style = "text-align:right" } })
                                         @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
                                     </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -247,6 +247,7 @@
                 @Html.AntiForgeryToken()
                 <div class="form-actions no-color">
                     @Html.HiddenFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-4", id = "deleteId" })
+                    @Html.HiddenFor(model => model.TransactionType, htmlAttributes: new { @class = "control-label col-md-4", id = "deleteTransactionType" })
                     <input id="btnFormDelete" type="submit" value="Delete" class="btn btn-default" />
                 </div>
             }

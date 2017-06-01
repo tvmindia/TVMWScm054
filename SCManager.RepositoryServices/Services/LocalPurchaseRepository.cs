@@ -287,6 +287,8 @@ namespace SCManager.RepositoryServices.Services
                                         _LocalPurchaseDetailObj.TradeDiscount = (sdr["TradeDiscount"].ToString() != "" ? decimal.Parse(sdr["TradeDiscount"].ToString()) : 0);
                                         _LocalPurchaseDetailObj.Material = (sdr["Material"].ToString() != "" ? (sdr["Material"].ToString()) : _LocalPurchaseDetailObj.Material);
                                         _LocalPurchaseDetailObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _LocalPurchaseDetailObj.UOM);
+                                        _LocalPurchaseDetailObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _LocalPurchaseDetailObj.Description);
+
                                     }
 
                                     LocalPurchaseDetailList.Add(_LocalPurchaseDetailObj);

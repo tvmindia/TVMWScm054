@@ -154,7 +154,7 @@ function OfficeBillDetailDelete(id, rw) {
         if (id != '' && id != null && Hid != '' && Hid != null && Hid != emptyGUID) {
             var data = { "ID": id, "HeaderID": Hid };
             var ds = {};
-            ds = GetDataFromServer("OfficeBillEntry/DeleteTCRBillDetail/", data);
+            ds = GetDataFromServer("OfficeBillEntry/DeleteOfficeBillDetail/", data);
             if (ds != '') {
                 ds = JSON.parse(ds);
             }
@@ -218,8 +218,9 @@ function Edit(currentObj) {
 //--------------------button actions ----------------------
 function List() {
     try {
-
-        ChangeButtonPatchView('OfficeBillEntry', 'btnPatchOfficeBillEntrySettab', 'List');
+        debugger;
+        ChangeButtonPatchView('OfficeBillEntry', 'btnPatchOfficeBillEntrySettab', 'List');      
+        $("#HeaderID").val("");
         reset();
         BindAllCustomerBill();
     } catch (x) {
@@ -272,7 +273,7 @@ function BindOfficeBillEntry(id) {
 function BindOfficeBillEntryFields(Records) {
     try {
         debugger;
-
+        ChangeButtonPatchView('OfficeBillEntry', 'btnPatchOfficeBillEntrySettab', 'Edit');
         $('#HeaderID').val(Records.ID);      
       
         $("#BillNo").val(Records.BillNo);
@@ -300,7 +301,7 @@ function BindOfficeBillEntryFields(Records) {
 
 }
 function goBack() {
-    $('#AddTab').trigger('click');
+    $('#ListTab').trigger('click');
     $("#HeaderID").val("");
     reset();
 }
@@ -312,9 +313,39 @@ function Add() {
     reset();
 }
 function DeleteClick() {
-    notyConfirm('Are you sure to delete?', 'OfficeBillDelete()');
+    debugger;
+    notyConfirm('Are you sure to delete?', 'OfficeBillDelete()', '', "Yes, delete it!");
 }
+function OfficeBillDelete() {
+    try {
+        debugger;
+        var id = $('#HeaderID').val();
+        if (id != '' && id != null) {
+            var data = { "ID": id };
+            var ds = {};
+            ds = GetDataFromServer("OfficeBillEntry/DeleteOfficeBillEntry/", data);
+            if (ds != '') {
+                ds = JSON.parse(ds);
+            }
+            if (ds.Result == "OK") {
+                notyAlert('success', ds.Message);
+               // goBack();
+                $('#ListTab').trigger('click');
+            }
+            if (ds.Result == "ERROR") {
+                notyAlert('error', ds.Message);
+                return 0;
+            }
+            return 1;
+        }
 
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+        return 0;
+    }
+
+}
 function GetAllOfficeBill() {
     try {
         debugger;
@@ -437,6 +468,7 @@ function save() {
         notyAlert('error', validation);
     }
 }
+
 function reset()
 {
     if (($("#HeaderID").val() == "") || ($("#HeaderID").val() == 'undefined') || ($("#HeaderID").val() == "0")) {
