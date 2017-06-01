@@ -31,6 +31,7 @@ namespace SCManager.UserInterface.Models
         [Range(0.00, 1000000000.00, ErrorMessage = "Please enter a numeric")]
         public decimal Amount { get; set; }
 
+        [Display(Name = " ")]
         public decimal OutStandingICRPayment { get; set; }
         public string OutStandingPaymentFormatted { get; set; }
 

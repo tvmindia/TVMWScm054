@@ -63,7 +63,8 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<IncomeExpenseViewModel, IncomeExpense>().ReverseMap();
                 config.CreateMap<ServiceRegistrySummaryViewModel, ServiceRegistrySummary>().ReverseMap();
                 config.CreateMap<DepositAndWithdrawalViewModel, DepositAndWithdrawal>().ReverseMap();
-                
+                config.CreateMap<OfficeBillEntryViewModel, OfficeBillEntry>().ReverseMap();
+                config.CreateMap<OfficeBillEntryDetailViewModel, OfficeBillEntryDetail>().ReverseMap();
             });
         }
     }

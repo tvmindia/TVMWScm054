@@ -23,7 +23,7 @@ $(document).ready(function () {
                 { "data": "PaymentMode", "defaultContent": "<i>-</i>" },
                 { "data": "EmpName", "defaultContent": "<i>-</i>" },
                 { "data": "Description", "defaultContent": "<i>-</i>" },
-                { "data": "Amount", "defaultContent": "<i>-</i>" },
+                { "data": "Amount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                 { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
                 ],
            columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
@@ -230,7 +230,7 @@ function fillExpenses(ID) {
     $("#ExpenseTypeCode").val(thisItem.ExpenseTypeCode);
     $("#EmpID").val(thisItem.EmpID);
     $("#PaymentMode").val(thisItem.PaymentMode);
-    $("#Amount").val(thisItem.Amount);
+    $("#Amount").val(roundoff(thisItem.Amount));
     $("#Description").val(thisItem.Description);
   
     if (thisItem.RefDate != null) {

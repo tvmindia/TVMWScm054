@@ -127,6 +127,7 @@
     <Compile Include="Contracts\IIssueToTechnicianBusiness.cs" />
     <Compile Include="Contracts\IItemBusiness.cs" />
     <Compile Include="Contracts\ILocalPurchaseBusiness.cs" />
+    <Compile Include="Contracts\IOfficeBillEntryBusiness.cs" />
     <Compile Include="Contracts\IOpeningSettingBusiness.cs" />
     <Compile Include="Contracts\IOtherIncomeBusiness.cs" />
     <Compile Include="Contracts\IReceiveFromTechnicianBusiness.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Services\IssueToTechnicianBusiness.cs" />
     <Compile Include="Services\ItemBusiness.cs" />
     <Compile Include="Services\LocalPurchaseBusiness.cs" />
+    <Compile Include="Services\OfficeBillEntryBusiness.cs" />
     <Compile Include="Services\OpeningSettingBusiness.cs" />
     <Compile Include="Services\OtherIncomeBusiness.cs" />
     <Compile Include="Services\ReceiveFromTechnicianBusiness.cs" />

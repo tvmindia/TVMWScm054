@@ -197,7 +197,40 @@ namespace SCManager.BusinessService.Services
             }
 
         }
+        public string GetXMLfromOfficeObject(List<OfficeBillEntryDetail> officeDetailObj, string mandatoryProperties, UA ua)
+        {
+            string result = "<Details>";
+            int totalRows = 0;
+            try
+            {
+                //-------------------------//
+                int mandIndx = getMAndatoryIndex(officeDetailObj[0], mandatoryProperties); //int mandIndx = 0;                
 
+                foreach (object some_object in officeDetailObj)
+                {
+                    XML(some_object, mandIndx, ref result, ref totalRows);
+
+                }
+
+                result = result + "</Details>";
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            if (totalRows > 0)
+            {
+                return result;
+            }
+            else
+            {
+                return "";
+            }
+
+        }
         public string GetXMLfromLocalPurchaseDetail(List<LocalPurchaseDetail> myObj, string mandatoryProperties, UA ua)
         {
             string result = "<Details>";

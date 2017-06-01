@@ -45,6 +45,11 @@ $(document).ready(function () {
            columnDefs: EG_Columns_Settings()
        });
 
+        $('#tblCustomerBills tbody').on('dblclick', 'td', function () {
+
+            Edit(this);
+        });
+
         getMaterials();
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.TCRBillDetail;
@@ -224,7 +229,7 @@ function DeleteItem(currentObj) {
 
     if ((rowData != null) && (rowData.ID != null)) {
         notyConfirm('Are you sure to delete?', 'TCRBillDetailDelete("' + rowData.ID + '","' + rowData[EG_SlColumn] + '")', '', "Yes, delete it!");
-      //  notyConfirm('Are you sure to delete?', 'TCRBillDetailDelete("' + rowData.ID + '",' + rowData[EG_SlColumn] + ')','', "Yes, delete it!");
+     
     }
 }
 function TCRBillDetailDelete(id, rw) {
@@ -269,6 +274,7 @@ function TCRBillDetailDelete(id, rw) {
     }
 
 }
+
 
 function BindTCRBillEntryFields(Records) {
     try {
@@ -438,6 +444,7 @@ function Add() {
     EG_ClearTable();
    // RestForm8();
     EG_AddBlankRows(5)
+    $("#HeaderID").val("");
     reset();
 }
 
@@ -611,6 +618,8 @@ function reset()
         $('#EmpID').attr('disabled', false);
         var $datepicker = $('#BillDate');
         $datepicker.datepicker('setDate', null);
+        EG_ClearTable();
+        EG_AddBlankRows(5);
         ResetForm();
     }
     else
