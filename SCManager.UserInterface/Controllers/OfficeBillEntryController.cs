@@ -179,17 +179,17 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Text = "New";
-                    ToolboxViewModelObj.addbtn.Title = "Add New ICR Bill";
+                    ToolboxViewModelObj.addbtn.Title = "Add New Office Bill";
                     ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save ICR Bill";
+                    ToolboxViewModelObj.savebtn.Title = "Save Office Bill";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete ICR Bill";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete Office Bill";
                     ToolboxViewModelObj.deletebtn.Event = "DeleteClick();";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;
@@ -207,21 +207,21 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Disable = true;
-                    ToolboxViewModelObj.addbtn.DisableReason = "N/A for new ICR Entry";
+                    ToolboxViewModelObj.addbtn.DisableReason = "N/A for new Office Entry";
                     ToolboxViewModelObj.addbtn.Text = "New";
                     ToolboxViewModelObj.addbtn.Title = "Add New";
                     ToolboxViewModelObj.addbtn.Event = "";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save ICR Bill";
+                    ToolboxViewModelObj.savebtn.Title = "Save Office Bill";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Disable = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete ICR";
-                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new ICR Entry";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete Office Entry";
+                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new Office Entry";
                     ToolboxViewModelObj.deletebtn.Event = "";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;
