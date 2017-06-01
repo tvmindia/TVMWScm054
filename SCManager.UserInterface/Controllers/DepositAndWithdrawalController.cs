@@ -202,6 +202,8 @@ namespace SCManager.UserInterface.Controllers
                 {
                     UA ua = new UA();
                     depositAndWithdrawalViewModel.SCCode = ua.SCCode;
+                depositAndWithdrawalViewModel.logDetails = new LogDetailsViewModel();
+                    depositAndWithdrawalViewModel.logDetails.UpdatedBy = ua.UserName;
                     result = _depositAndWithdrawalBusiness.DeleteDepositAndWithdrawal(Mapper.Map<DepositAndWithdrawalViewModel, DepositAndWithdrawal>(depositAndWithdrawalViewModel));
                     return JsonConvert.SerializeObject(new { Result = "OK", Record = result });
                 }
