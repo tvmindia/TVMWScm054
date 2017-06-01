@@ -46,6 +46,7 @@ $(document).ready(function () {
            searching: false,
            paging: false,
            data: null,
+           autoWidth: false,
            columns: EG_Columns(),
            columnDefs: EG_Columns_Settings()
        });
@@ -122,12 +123,21 @@ function EG_Columns() {
 function EG_Columns_Settings() {
 
     var obj = [
-        { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false }, { "targets": [5], "visible": false, "searchable": false },
-      
+        { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
+        { "width": "5%", "targets": 3 },
+        { "width": "15%", "targets": 4 },
+         { "width": "20%", "targets": 5 },
+           { "width": "8%", "targets": 6 },
+        { "width": "8%", "targets": 7 },
+         { "width": "8%", "targets": 8 },
+          { "width": "10%", "targets": 9 },
+           { "width": "12%", "targets": 10 },
+            { "width": "10%", "targets": 11 },
         { className: "text-right", "targets": [8, 10] },
         { className: "text-center", "targets": [3, 4,6,  12] },
         { className: "text-right disabled", "targets": [ 9, 11] },
-        { className: "text-center disabled", "targets": [5,7] },
+        { className: "text-center disabled", "targets": [ 7] },
+          { className: "text-left disabled", "targets": [5] },
         { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11] }
 
     ]
