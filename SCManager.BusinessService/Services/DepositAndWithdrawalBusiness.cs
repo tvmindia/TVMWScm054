@@ -51,7 +51,7 @@ namespace SCManager.BusinessService.Services
                 DepositAndWithdrawalList = GetAllDepositAndWithdrawal(SCCode);
                 //Get only last month data
                 DepositAndWithdrawalList = DepositAndWithdrawalList == null ? null : DepositAndWithdrawalList
-                .Where(DW => DateTime.Parse(DW.RefDate) > DateTime.Parse(FromDate) && DateTime.Parse(ToDate) > DateTime.Parse(DW.RefDate)).ToList();
+                .Where(DW => DateTime.Parse(DW.RefDate) >= DateTime.Parse(FromDate) && DateTime.Parse(ToDate) >= DateTime.Parse(DW.RefDate)).ToList();
             }
             catch (Exception ex)
             {
