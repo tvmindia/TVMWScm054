@@ -4,8 +4,6 @@ using SCManager.BusinessService.Contracts;
 using SCManager.DataAccessObject.DTO;
 using SCManager.UserInterface.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -97,21 +95,33 @@ namespace SCManager.UserInterface.Controllers
             return View();
         }
 
-        //[HttpGet]
-        //public string AreyouAlive()
-        //{
-        //    string result = "";
-        //    try
-        //    {
-        //        result = _commonBusiness.GetUA() == null ? "dead" : "alive";
+        [HttpGet]
+        public string AreyouAlive()
+        {
+          
+            string result = "";
+            try
+            {
+              UA uaObj = null;
+              if (System.Web.HttpContext.Current.Session != null)
+              {
+                 if (System.Web.HttpContext.Current.Session["TvmValid"] != null)
+                 {
+                   uaObj = (UA)System.Web.HttpContext.Current.Session["TvmValid"];
+                   result = "alive";
+                 }
+              }
+              else
+              {
+                result = "dead";
+              }
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
-        //    }
-
-        //    return JsonConvert.SerializeObject(new { Result = "OK", Record = result });
-        //}
+            return JsonConvert.SerializeObject(new { Result = "OK", Record = result });
+        }
     }
 }

@@ -63,7 +63,36 @@
         </footer>
 
    
+    <!-- Modal -->
+    <div class="modal fade" id="RedirectToLoginModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Warning</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div id="block_loginredirect">
+                            <div>
+                                <h2>Your session has been expired please login..!</h2>
 
+                                <p>
+                                    If you are the owner of the account and are regularly seeing this error, please read more about it in our <a href="http://www.partyec.com/support/">knowledgebase</a>.
+                                    If you have any questions, please contact our Technical support team.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="RedirectToLogin()" class="btn btn-lg btn-success" type="submit">LOGIN</button>
+                    @*<a href="/Account/Logout" class="btn btn-primary" value="Login"/>*@
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     @Scripts.Render("~/bundles/jquery")
