@@ -72,6 +72,7 @@ function DepositModeOnChange(curobj)
     }
     catch (e) {
         notyAlert('error', e.Message);
+
     }
 }
 
