@@ -20,17 +20,24 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Reference No")]
         [StringLength(20)]
         public string RefNo { get; set; }
-        
         [Display(Name = "Reference Date")]
         [Required(ErrorMessage = "Please enter Reference date")]
         [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
+
         public string RefDate { get; set; }
         [Required(ErrorMessage = "Please enter Amount")]
+        [Range(0.00, 1000000000.00, ErrorMessage = "Please enter a numeric")]
         [Display(Name = "Amount")]
+
         public decimal? Amount { get; set; }
         [Display(Name = "Note")]
         public string Description { get; set; }
-        
+        [Display(Name = "Deposit Mode")]
+        public string DepositMode { get; set; }
+        public List<SelectListItem> DepositModeList { get; set; }
+        [Display(Name = "Cheque Status")]
+        public string ChequeStatus { get; set; }
+        public List<SelectListItem> ChequeStatusList { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
 }
 }

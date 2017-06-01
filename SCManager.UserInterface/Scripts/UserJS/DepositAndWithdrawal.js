@@ -14,28 +14,66 @@ $(document).ready(function () {
              columns: [
                { "data": "ID", "defaultContent": "<i>-</i>" },
                 { "data": "TransactionDescription", "defaultContent": "<i>-</i>" },
-               { "data": "RefDate", "defaultContent": "<i>-</i>" },
+               { "data": "RefDate",render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
               
                { "data": "RefNo", "defaultContent": "<i>-</i>" },
-               { "data": "Amount", "defaultContent": "<i>-</i>" },
+               { "data": "Amount",render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "Description", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="EditDepositWithdrawal(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
             ],
              columnDefs: [
                    { visible:false, "targets": [0] },
                   { className: "text-left", "targets": [1,3,5] },
-                  { className: "text-center", "targets": [2,4] }
+                  { className: "text-center", "targets": [2,4,6] }
 
              ]
          });
+
+        RefreshDepositsAndWithdrawalsTableBetweenDates();
 
     }
     catch (e) {
 
     }
-    //Default table with last month data
-    RefreshDepositsAndWithdrawalsTableLastMonth();
+   
+  
 });
+
+function TransactionTypeOnChange(curobj)
+{
+    try {
+        if (curobj.value != "DEPST") {
+            $(".hdDepositMode").hide();
+       
+        }
+        else {
+            $(".hdDepositMode").show();
+           
+        }
+
+    }
+    catch (e) {
+        notyAlert('error', e.Message);
+    }
+}
+
+function DepositModeOnChange(curobj)
+{
+    try {
+        if (curobj.value != "Cheque") {
+            $(".hdChequeStatus").hide();
+
+        }
+        else {
+            $(".hdChequeStatus").show();
+            $("#ChequeStatus").val('NotCleared');
+        }
+
+    }
+    catch (e) {
+        notyAlert('error', e.Message);
+    }
+}
 
 function Add()
 {
@@ -54,12 +92,13 @@ function EditDepositWithdrawal(curObj)
         if (result) {
             $("#TransactionType").val(result.TransactionType);
             $("#RefNo").val(result.RefNo);
-            $("#RefDate").val(result.RefDate);
+            $("#RefDate").val(ConvertJsonToDate(result.RefDate));
             $("#Amount").val(result.Amount);
             $("#Description").val(result.Description);
             $("#DepwithID").val(result.ID);
             $("#deleteId").val(result.ID);
         }
+
        
       
     }
@@ -141,45 +180,14 @@ function GetAllDepositsAndWithdrawalsBetweenDates(fromdate, todate) {
     }
 }
 
-function RefreshDepositsAndWithdrawalsTableLastMonth() {
-    try {
-      
-        if (DataTables.DepositWithdrawalTable != undefined) {
-            DataTables.DepositWithdrawalTable.clear().rows.add(GetAllDepositsAndWithdrawalsLastMonth()).draw(false);
-            $('[data-toggle="tp"]').tooltip({ container: 'body' });
-        }
 
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
 
-function GetAllDepositsAndWithdrawalsLastMonth() {
-    try {
-
-        var data = {};
-        var ds = {};
-        ds = GetDataFromServer("DepositAndWithdrawal/GetAllDepositAndWithdrawalLastMonth/", data);
-        if (ds != '') {
-            ds = JSON.parse(ds);
-        }
-        if (ds.Result == "OK") {
-            return ds.Records;
-        }
-        if (ds.Result == "ERROR") {
-            alert(ds.Message);
-        }
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
 
 function RefreshDepositsAndWithdrawalsTable() {
     try {
 
         if (DataTables.DepositWithdrawalTable != undefined) {
+            $("#chkShowAll").prop('checked', true);
             DataTables.DepositWithdrawalTable.clear().rows.add(GetAllDepositsAndWithdrawals()).draw(false);
             $('[data-toggle="tp"]').tooltip({ container: 'body' });
         }
@@ -243,9 +251,11 @@ function DepositAndWithdrawalSaveSuccess(data, status, xhr)
         switch (JsonResult.Result) {
             case "OK":
                     notyAlert('success', JsonResult.Record.Message);
-              
+                    $("#DepwithID").val(JsonResult.Record.ID);
+                    $("#deleteId").val(JsonResult.Record.ID);
                     RefreshDepositsAndWithdrawalsTable();
-                    goBack();
+                    $("#txtReferenceDateFrom").val('');
+                    $("#txtReferenceDateTo").val('');
                break;
             case "VALIDATION":
                 notyAlert('error', JsonResult.Message);
@@ -271,6 +281,8 @@ function DeleteSuccess(data, status, xhr)
             case "OK":
                 notyAlert('success', JsonResult.Record.Message);
                 RefreshDepositsAndWithdrawalsTable();
+                $("#txtReferenceDateFrom").val('');
+                $("#txtReferenceDateTo").val('');
                 goBack();
                 break;
          
@@ -290,11 +302,17 @@ function DeleteSuccess(data, status, xhr)
 function DeleteDepositandwithdrawal()
 {
     try {
-        $("#btnFormDelete").trigger('click');
+        notyConfirm('Are you sure to delete?', 'DeleteDepositandwithdrawalConform()', '', "Yes, delete it!");
+       
     }
     catch (e) {
         notyAlert('error', e.message);
     }
+}
+
+function DeleteDepositandwithdrawalConform()
+{
+    $("#btnFormDelete").trigger('click');
 }
 
 function goBack() {

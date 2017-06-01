@@ -7,28 +7,21 @@ using System.Web.Mvc;
 
 namespace SCManager.UserInterface.Models
 {
-    public class ExpensesViewModel
+    public class ICRExpensesViewModel
     {
         public string SCCode { get; set; }
         [Display(Name = "Expense ID")]
         public Guid ID { get; set; }
 
         [Display(Name = "Entry No.")]
-        public string EntryNo { get; set; }
-
-        [Display(Name = "Expense Type")]
-        [Required(ErrorMessage = "Please Select Expense Type")]
-        public string ExpenseTypeCode { get; set; }
+        public string EntryNo { get; set; } 
 
         [Display(Name = "Reference No.")]
         public string RefNo { get; set; }
 
-        [Display(Name = "Date")]
         [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
+        [Display(Name = "Date")]
         public DateTime RefDate { get; set; }
-
-        [Display(Name = "Technician")]
-        public Guid EmpID { get; set; }
 
         [Display(Name = "Mode of Payment")]
         [Required(ErrorMessage = "Please Select Mode of Payment")]
@@ -36,10 +29,11 @@ namespace SCManager.UserInterface.Models
 
         [Display(Name = "Amount (₹)")]
         [Range(0.00, 1000000000.00, ErrorMessage = "Please enter a numeric")]
-        public decimal Amount { get; set; } 
-    
-        public decimal OutStandingPayment { get; set; }
+        public decimal Amount { get; set; }
+
+        public decimal OutStandingICRPayment { get; set; }
         public string OutStandingPaymentFormatted { get; set; }
+
 
 
         [Display(Name = "Note")]
@@ -62,16 +56,10 @@ namespace SCManager.UserInterface.Models
         public string ExpenseType { get; set; }
 
         public LogDetailsViewModel logDetails { get; set; }
-        public List<SelectListItem> TechniciansList { get; set; }
+     //   public List<SelectListItem> TechniciansList { get; set; }
         public List<SelectListItem> PaymentModeList { get; set; }
         public List<SelectListItem> ExpenseTypeList { get; set; }
 
-    }
-    public class ExpenseTypeViewModel
-    {
-        public string Code { get; set; }
-        public string Description { get; set; }
-    }
 
-    
+    }
 }

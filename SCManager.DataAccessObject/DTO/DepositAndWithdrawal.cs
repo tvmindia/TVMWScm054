@@ -15,7 +15,8 @@ namespace SCManager.DataAccessObject.DTO
         public string RefDate { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
-
+        public string DepositMode { get; set; }
+        public string ChequeStatus { get; set; }
         public LogDetails logDetails { get; set; }
     }
  

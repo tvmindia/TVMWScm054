@@ -11,9 +11,11 @@ namespace SCManager.BusinessService.Services
     public class ExpensesBusiness: IExpensesBusiness
     {
         private IExpensesRepository _expensesRepository;
-        public ExpensesBusiness(IExpensesRepository expensesRepository)
+        private ICommonBusiness _commonBusiness;
+        public ExpensesBusiness(IExpensesRepository expensesRepository, ICommonBusiness commonBusiness)
         {
             _expensesRepository = expensesRepository;
+            _commonBusiness = commonBusiness;
         }
 
       
@@ -89,6 +91,7 @@ namespace SCManager.BusinessService.Services
         {
             Expenses expenseObj = null;
             expenseObj = _expensesRepository.GetOutStandingPayment(UA);
+            expenseObj.OutStandingPaymentFormatted = _commonBusiness.ConvertCurrency(expenseObj.OutStandingPayment, 2);
             return expenseObj;
         }
     }

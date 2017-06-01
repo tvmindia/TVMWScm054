@@ -35,7 +35,7 @@ namespace SCManager.BusinessService.Services
             try
             {
                 DepositAndWithdrawalList = _depositAndWithdrawalRepository.GetAllDepositAndWithdrawal(SCCode);
-                
+                DepositAndWithdrawalList = DepositAndWithdrawalList == null ? null : DepositAndWithdrawalList.Select(c => { c.RefDate = DateTime.Parse(c.RefDate).Date.ToString("yyyy-MM-dd"); return c; }).OrderByDescending(D=>D.RefDate).ToList();
             }
             catch (Exception ex)
             {
@@ -60,21 +60,7 @@ namespace SCManager.BusinessService.Services
             return DepositAndWithdrawalList;
         }
 
-        public  List<DepositAndWithdrawal> GetAllDepositAndWithdrawalLastMonth(string SCCode)
-        {
-            List<DepositAndWithdrawal> DepositAndWithdrawalList = null;
-            try
-            {
-                DepositAndWithdrawalList = GetAllDepositAndWithdrawal(SCCode);
-                //Get only last month data
-                DepositAndWithdrawalList = DepositAndWithdrawalList == null ? null : DepositAndWithdrawalList.Where(DW => DateTime.Parse(DW.RefDate) > DateTime.Now.AddMonths(-1)).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return DepositAndWithdrawalList;
-        }
+     
 
         public DepositAndWithdrawal GetDepositAndWithdrawalEntryByID(string SCCode, Guid ID)
         {
