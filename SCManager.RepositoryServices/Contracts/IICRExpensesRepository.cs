@@ -12,7 +12,7 @@ namespace SCManager.RepositoryServices.Contracts
 
         object InsertICRExpenses(ICRExpenses ExpensesObj);
         object UpdateICRExpenses(ICRExpenses ExpensesObj); 
-        List<ICRExpenses> GetAllICRExpenses(UA UA, string FromDate, string ToDate, bool showAllYN);
+        List<ICRExpenses> GetAllICRExpenses(UA UA, string FromDate, string ToDate);
         ICRExpenses GetICRExpensesByID(UA UA, string ID);
         string DeleteICRExpenses(string ID, UA ua);
         ICRExpenses GetOutStandingICRPayment(UA UA);

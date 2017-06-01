@@ -29,12 +29,15 @@ namespace SCManager.UserInterface.Controllers
         // GET: ICRExpenses
         public ActionResult Index()
         {
+            UA ua = new UA();
+            DateTime dt = ua.CurrentDatetime();
+            ViewBag.fromdate = dt.AddDays(-30).ToString("yyyy-MM-dd");
+            ViewBag.todate = dt.ToString("yyyy-MM-dd");
             // return View();ICROT
             ICRExpensesViewModel ICRexpenseViewModel = null;
             try
             {
                 ICRexpenseViewModel = new ICRExpensesViewModel();
-                UA ua = new UA();
                 List<SelectListItem> selectListItem = new List<SelectListItem>();   
                 selectListItem = null; 
                 CommonViewModel CVM = new CommonViewModel();
@@ -103,10 +106,10 @@ namespace SCManager.UserInterface.Controllers
         #region GetAllICRExpenses
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string GetAllICRExpenses(string showAllYN, string FromDate, string ToDate)
+        public string GetAllICRExpenses(string FromDate, string ToDate)
         {
             UA ua = new UA();
-            List<ICRExpensesViewModel> ICRExpensesList = Mapper.Map<List<ICRExpenses>, List<ICRExpensesViewModel>>(_ICRexpensesBusiness.GetAllICRExpenses(ua, FromDate, ToDate, bool.Parse(showAllYN)));
+            List<ICRExpensesViewModel> ICRExpensesList = Mapper.Map<List<ICRExpenses>, List<ICRExpensesViewModel>>(_ICRexpensesBusiness.GetAllICRExpenses(ua, FromDate, ToDate));
             return JsonConvert.SerializeObject(new { Result = "OK", Records = ICRExpensesList });
 
         }

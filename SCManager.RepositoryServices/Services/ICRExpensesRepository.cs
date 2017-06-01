@@ -131,7 +131,7 @@ namespace SCManager.RepositoryServices.Services
             }
         }
 
-        public List<ICRExpenses> GetAllICRExpenses(UA UA, string FromDate, string ToDate, bool showAllYN)
+        public List<ICRExpenses> GetAllICRExpenses(UA UA, string FromDate, string ToDate)
         {
             List<ICRExpenses> Expenseslist = null;
             try
@@ -146,7 +146,6 @@ namespace SCManager.RepositoryServices.Services
                         }
                         cmd.Connection = con;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
-                        cmd.Parameters.Add("@showAllYN", SqlDbType.NVarChar, 5).Value = showAllYN;
                         cmd.Parameters.Add("@FromDate", SqlDbType.DateTime).Value = FromDate == "" ? null : FromDate;
                         cmd.Parameters.Add("@ToDate", SqlDbType.DateTime).Value = ToDate == "" ? null : ToDate;
                         cmd.CommandText = "[GetAllICRExpenses]";

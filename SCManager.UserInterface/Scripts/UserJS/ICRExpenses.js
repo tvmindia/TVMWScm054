@@ -1,6 +1,5 @@
 ﻿var DataTables = {};
 var EmptyGuid = "00000000-0000-0000-0000-000000000000";
-var Bindflag = false;//for avoiding 3 times binding on pageload. 
 
 //---------------------------------------Docuement Ready--------------------------------------------------//
 
@@ -36,11 +35,11 @@ $(document).ready(function () {
             Edit(this);
         });
         $('#fromDate').change(function () {
-            if (Bindflag)
+            $("#showAllYNCheckbox").prop('checked', false);
             BindAllICRExpenses();
         });
         $('#toDate').change(function () {
-            if (Bindflag)
+            $("#showAllYNCheckbox").prop('checked', false);
             BindAllICRExpenses();
         }); 
         BindOutStandingPayment();
@@ -83,57 +82,17 @@ function GetOutStandingICRPayment() {
     }
 }
 
-function FillDates() {
-    var m_names = new Array("Jan", "Feb", "Mar",
- "Apr", "May", "Jun", "Jul", "Aug", "Sep",
- "Oct", "Nov", "Dec");
-
-    var d = new Date();
-    var curr_date = d.getDate();
-    var curr_month = d.getMonth();
-    var curr_year = d.getFullYear();
-    var toDate = curr_date + "-" + m_names[curr_month]
-    + "-" + curr_year;
-    var $datepicker = $('#toDate');
-    $datepicker.datepicker('setDate', new Date(toDate));
-    var today = new Date()
-    var pd = new Date();
-    pd.setDate(pd.getDate() - 30);
-    var priorDate = pd.toLocaleString()
-    priorDate = priorDate.split(' ')[0];
-    var p_month = parseInt(priorDate.split('/')[0]) - 1;
-    var p_date = priorDate.split('/')[1];
-    var p_year = priorDate.split('/')[2];
-    var fromDate = p_date + "-" + m_names[p_month]
-    + "-" + p_year;
-    var $datepicker = $('#fromDate');
-    $datepicker.datepicker('setDate', new Date(fromDate));
-
-    Bindflag = true;
-}
-
 //--------------------button actions ----------------------
 function List() {
     try {
         ChangeButtonPatchView('ICRExpenses', 'btnPatchICRExpensesSettab', 'List');
-        DateClear();
-        Bindflag = false;//for avoiding 3 times binding on pageload. 
-        FillDates()
+        $("#showAllYNCheckbox").prop('checked', false);
         BindAllICRExpenses()
 
     } catch (x) {
         alert(x);
     }
 
-}
- 
-
- 
-
-function DateClear() {
-    $('#fromDate').val("");
-    $('#toDate').val("");
-    $("#showAllYNCheckbox").prop('checked', false);
 }
 
 function clearfields() {
@@ -144,7 +103,6 @@ function clearfields() {
     $("#EmpID").prop('disabled', true);
     $("#EntryNo").val("<<Auto Generated>>");
     $("#PaymentMode").val("");
-   
     $("#Amount").val("");
     $("#Description").val("");
     $("#RefNo").val("");
@@ -245,16 +203,13 @@ function Add(id) {
 }
 
 function showAllYNCheckedOrNot(i) {
-    debugger;
-
+    debugger; 
     if (i.checked == true) {
-        DataTables.ICRExpensesTable.clear().rows.add(GetAllICRExpenses(true)).draw(false);
         $('#fromDate').val("");
         $('#toDate').val("");
+        DataTables.ICRExpensesTable.clear().rows.add(GetAllICRExpenses(true)).draw(false); 
     }
-    else {
-        Bindflag = false;//for avoiding 3 times binding on pageload. 
-        FillDates();
+    else { 
         DataTables.ICRExpensesTable.clear().rows.add(GetAllICRExpenses(false)).draw(false);
     }
 
@@ -269,7 +224,7 @@ function GetAllICRExpenses(showAllYN) {
         var FromDate = $("#fromDate").val();
         var ToDate = $("#toDate").val();
 
-        var data = { "showAllYN": showAllYN, "FromDate": FromDate, "ToDate": ToDate };
+        var data = {"FromDate": FromDate, "ToDate": ToDate };
         var ds = {};
         ds = GetDataFromServer("ICRExpenses/GetAllICRExpenses/", data);
         debugger;
@@ -316,9 +271,7 @@ function SaveSuccess(data, status) {
             }
             else {
                 fillICRExpenses($("#UpdateID").val());
-            }
-            Bindflag = false;//for avoiding 3 times binding on pageload. 
-            FillDates();
+            } 
             BindAllICRExpenses();
             BindOutStandingPayment();
             notyAlert('success', JsonResult.Records.Message);
