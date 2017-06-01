@@ -95,7 +95,14 @@ namespace SCManager.BusinessService.Services
 
 
         }
-
+        public bool DeleteOfficeBillEntry(Guid ID, UA UA)
+        {
+            return _iOfficeBillEntryRepository.DeleteOfficeBillEntry(ID, UA);
+        }
+        public bool DeleteOfficeBillDetail(Guid ID, Guid HeaderID, UA UA)
+        {
+            return _iOfficeBillEntryRepository.DeleteOfficeBillDetail(ID, HeaderID, UA);
+        }
         public OfficeBillEntry InsertUpdate(OfficeBillEntry officeBillEntry, UA UA)
         {
             OfficeBillEntry result = null;
