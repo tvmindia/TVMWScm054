@@ -37,5 +37,6 @@ namespace SCManager.DataAccessObject.DTO
         public decimal? Rate { get; set; }
         public decimal? NetAmount { get; set; }
         public string UOM { get; set; }
+        public string Description { get; set; }
     }
 }

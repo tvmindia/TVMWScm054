@@ -248,6 +248,7 @@ namespace SCManager.RepositoryServices.Services
                                         _OfficeBillEntryDetailObj.Material = (sdr["Material"].ToString() != "" ? (sdr["Material"].ToString()) : _OfficeBillEntryDetailObj.Material);
                                         _OfficeBillEntryDetailObj.MaterialID = (sdr["ItemID"].ToString() != "" ? Guid.Parse(sdr["ItemID"].ToString()) : _OfficeBillEntryDetailObj.MaterialID);
                                         _OfficeBillEntryDetailObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _OfficeBillEntryDetailObj.UOM);
+                                        _OfficeBillEntryDetailObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _OfficeBillEntryDetailObj.Description);
                                     }
 
                                     OfficeBillEntryDetailList.Add(_OfficeBillEntryDetailObj);
