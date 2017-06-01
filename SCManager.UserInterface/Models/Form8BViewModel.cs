@@ -107,6 +107,7 @@ namespace SCManager.UserInterface.Models
         public string Material { get; set; }
         public int? Quantity { get; set; }
         public string UOM { get; set; }
+        public string Description { get; set; }
         public decimal? Rate { get; set; }
         public decimal? BasicAmount { get; set; }
         public decimal? TradeDiscount { get; set; }
