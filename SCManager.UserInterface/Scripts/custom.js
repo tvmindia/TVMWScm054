@@ -362,3 +362,27 @@ function roundoff(num, opt) {
     if (num == '' && opt != undefined) { return ''; }
     return (Math.round(num * 100) / 100).toFixed(2);
 }
+
+
+//function notySessionOut() {
+    
+//    swal({
+//        title: "",
+//        text: "Please sign in again",
+//        imageUrl: "Content/images/Sessionexpired.jpg"
+//      },
+//    //swal({
+//    //    title: msg,
+//    //    text: m,
+//    //    type: "warning",
+//    //    showCancelButton: false,
+//    //    confirmButtonColor: "#DD6B55",
+//    //    confirmButtonText: btnText,
+//    //    closeOnConfirm: false
+//    //},
+//function () {
+//    //swal("Deleted!", "Your imaginary file has been deleted.", "success");
+//    //  eval(functionIfSuccess);
+//    RedirectToLogin();
+//});
+//}

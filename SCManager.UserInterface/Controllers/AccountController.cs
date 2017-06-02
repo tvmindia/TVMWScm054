@@ -103,13 +103,10 @@ namespace SCManager.UserInterface.Controllers
             try
             {
               UA uaObj = null;
-              if (System.Web.HttpContext.Current.Session != null)
+              if ((System.Web.HttpContext.Current.Session != null)&&(System.Web.HttpContext.Current.Session["TvmValid"] != null))
               {
-                 if (System.Web.HttpContext.Current.Session["TvmValid"] != null)
-                 {
                    uaObj = (UA)System.Web.HttpContext.Current.Session["TvmValid"];
                    result = "alive";
-                 }
               }
               else
               {

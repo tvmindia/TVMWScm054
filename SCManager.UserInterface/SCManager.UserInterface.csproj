@@ -399,6 +399,7 @@
     <Content Include="Content\images\save.png" />
     <Content Include="Content\images\SCManager.png" />
     <Content Include="Content\images\scmanagerback1.JPG" />
+    <Content Include="Content\images\Sessionexpired.jpg" />
     <Content Include="Content\images\stock.png" />
     <Content Include="Content\images\wrench.png" />
     <Content Include="Content\sweetalert.css" />
