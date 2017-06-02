@@ -20,7 +20,7 @@ namespace SCManager.UserInterface.Models
         [Required(ErrorMessage = "Please Select Expense Type")]
         public string ExpenseTypeCode { get; set; }
 
-        [Display(Name = "Reference No.")]
+        [Display(Name = "Payment Ref. No.")]
         public string RefNo { get; set; }
 
         [Display(Name = "Date")]
