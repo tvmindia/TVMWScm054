@@ -27,12 +27,15 @@ namespace SCManager.UserInterface.Controllers
         // GET: Expenses
         public ActionResult Index()
         {
+            UA ua = new UA();
+            DateTime dt = ua.CurrentDatetime();
+            ViewBag.fromdate = dt.AddDays(-30).ToString("yyyy-MM-dd");
+            ViewBag.todate = dt.ToString("yyyy-MM-dd");
             // return View();
             ExpensesViewModel expenseViewModel = null;
             try
             {
-                expenseViewModel = new ExpensesViewModel();
-                UA ua = new UA();
+                expenseViewModel = new ExpensesViewModel(); 
                 List<SelectListItem> selectListItem = new List<SelectListItem>();
                 //Technician Drop down bind
                 List<EmployeesViewModel> TechniciansList = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_iEmployeesBusiness.GetAllTechnicians(ua));
@@ -133,10 +136,10 @@ namespace SCManager.UserInterface.Controllers
         #region GetAllExpenses
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string GetAllExpenses(string showAllYN,string FromDate,string ToDate)
+        public string GetAllExpenses(string FromDate,string ToDate)
         {
             UA ua = new UA();
-            List<ExpensesViewModel> CreditNotesList = Mapper.Map<List<Expenses>, List<ExpensesViewModel>>(_expensesBusiness.GetAllExpenses(ua,FromDate,ToDate,bool.Parse(showAllYN)));
+            List<ExpensesViewModel> CreditNotesList = Mapper.Map<List<Expenses>, List<ExpensesViewModel>>(_expensesBusiness.GetAllExpenses(ua,FromDate,ToDate));
             return JsonConvert.SerializeObject(new { Result = "OK", Records = CreditNotesList });
 
         }

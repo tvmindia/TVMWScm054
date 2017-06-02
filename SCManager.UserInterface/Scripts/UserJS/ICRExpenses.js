@@ -203,7 +203,6 @@ function Add(id) {
 }
 
 function showAllYNCheckedOrNot(i) {
-    debugger; 
     if (i.checked == true) {
         $('#fromDate').val("");
         $('#toDate').val("");
@@ -253,7 +252,6 @@ function BindAllICRExpenses() {
     try {
         debugger;
         DataTables.ICRExpensesTable.clear().rows.add(GetAllICRExpenses(false)).draw(false);
-
     }
     catch (e) {
         notyAlert('error', e.message);

@@ -1,6 +1,5 @@
 ﻿var DataTables = {};
-var EmptyGuid = "00000000-0000-0000-0000-000000000000";
-var Bindflag = false;//for avoiding 3 times binding on pageload. 
+var EmptyGuid = "00000000-0000-0000-0000-000000000000"; 
 //---------------------------------------Docuement Ready--------------------------------------------------//
 
 $(document).ready(function () {
@@ -36,16 +35,12 @@ $(document).ready(function () {
         $('#tblExpensesList tbody').on('dblclick', 'td', function () {
             Edit(this);
         }); 
-        $('#fromDate').change(function () {
-            if (Bindflag)
+        $('#fromDate').change(function () { 
             BindAllExpenses();
         });
-        $('#toDate').change(function () {
-            if (Bindflag)   
+        $('#toDate').change(function () { 
             BindAllExpenses();
-        });
-
-       
+        }); 
         clearfields();
     }
     catch (e) {
@@ -53,42 +48,13 @@ $(document).ready(function () {
     }
 });
 
-function FillDates() {
-    debugger;
-    var m_names = new Array("Jan", "Feb", "Mar",
- "Apr", "May", "Jun", "Jul", "Aug", "Sep",
- "Oct", "Nov", "Dec");
-
-    var d = new Date();
-    var curr_date = d.getDate();
-    var curr_month = d.getMonth();
-    var curr_year = d.getFullYear();
-    var toDate = curr_date + "-" + m_names[curr_month]
-    + "-" + curr_year;
-    var $datepicker = $('#toDate');
-    $datepicker.datepicker('setDate', new Date(toDate));
-    var today = new Date()
-    var pd = new Date();
-    pd.setDate(pd.getDate() - 30);
-    var priorDate = pd.toLocaleString()
-    priorDate = priorDate.split(' ')[0];
-    var p_month = parseInt(priorDate.split('/')[0]) - 1;
-    var p_date = priorDate.split('/')[1];
-    var p_year = priorDate.split('/')[2];
-    var fromDate = p_date + "-" + m_names[p_month]
-    + "-" + p_year;
-    var $datepicker = $('#fromDate');
-    $datepicker.datepicker('setDate', new Date(fromDate));
-    Bindflag = true;
-}
+ 
 
 //--------------------button actions ----------------------
 function List() {
     try {
         ChangeButtonPatchView('Expenses', 'btnPatchExpensesSettab', 'List');
-        DateClear();
-        Bindflag = false;//for avoiding 3 times binding on pageload. 
-        FillDates()
+        $("#showAllYNCheckbox").prop('checked', false);
         BindAllExpenses()
 
     } catch (x) {
@@ -103,23 +69,19 @@ function ExpenseTypeChange() {
         debugger;
         $("#OutStandingPaymentArea").show();
         var thisItem = GetOutStandingPayment();
-        $("#OutStandingPayment").text(thisItem.OutStandingPaymentFormatted);
-
-
+        $("#OutStandingPayment").text(thisItem.OutStandingPaymentFormatted); 
     }
     else {
         $("#OutStandingPaymentArea").hide();
-}
+    }
 
     if ($("#ExpenseTypeCode").val() == "SADV" || $("#ExpenseTypeCode").val() == "SAL")
     {  
-        $("#EmpID").prop('disabled', false);
-       
+        $("#EmpID").prop('disabled', false);       
     }
     else{
         $("#EmpID").prop('disabled', true);
         $("#EmpID").val("");
-
     }
 }
 
@@ -141,12 +103,6 @@ function GetOutStandingPayment() {
     catch (e) {
         notyAlert('error', e.message);
     }
-}
-
-function DateClear() {
-    $('#fromDate').val("");
-    $('#toDate').val("");
-    $("#showAllYNCheckbox").prop('checked', false);
 }
 
 function clearfields() {
@@ -173,7 +129,6 @@ function Edit(currentObj) {
     debugger; 
     $('#AddTab').trigger('click');
     ChangeButtonPatchView("CreditNotes", "btnPatchCreditNotesSettab", "Edit"); //ControllerName,id of the container div,Name of the action
-    debugger;
     var rowData = DataTables.ExpensesTable.row($(currentObj).parents('tr')).data();
     if ((rowData != null) && (rowData.ID != null)) {
         fillExpenses(rowData.ID);
@@ -259,18 +214,13 @@ function Add(id) {
 }
 
 function showAllYNCheckedOrNot(i) {
-    debugger;
-
-    if (i.checked == true) {
-        DataTables.ExpensesTable.clear().rows.add(GetAllExpenses(true)).draw(false);
+    if (i.checked == true) { 
         $('#fromDate').val("");
         $('#toDate').val("");
+        DataTables.ExpensesTable.clear().rows.add(GetAllExpenses(true)).draw(false);
     }
     else {
-        Bindflag = false;//for avoiding 3 times binding on pageload. 
-        FillDates();
-        DataTables.ExpensesTable.clear().rows.add(GetAllExpenses(false)).draw(false);
-      
+        DataTables.ExpensesTable.clear().rows.add(GetAllExpenses(false)).draw(false);      
     }
 
 }
@@ -284,7 +234,7 @@ function GetAllExpenses(showAllYN) {
         var FromDate = $("#fromDate").val();
         var ToDate = $("#toDate").val();
 
-        var data = { "showAllYN": showAllYN, "FromDate": FromDate, "ToDate": ToDate};
+        var data = {"FromDate": FromDate, "ToDate": ToDate};
         var ds = {};
         ds = GetDataFromServer("Expenses/GetAllExpenses/", data);
         debugger;
@@ -332,8 +282,6 @@ function SaveSuccess(data, status) {
             else {
                 fillExpenses($("#UpdateID").val());
             }
-            Bindflag = false;//for avoiding 3 times binding on pageload. 
-            FillDates();
             BindAllExpenses();
             notyAlert('success', JsonResult.Records.Message);
             break;

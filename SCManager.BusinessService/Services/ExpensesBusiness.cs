@@ -20,10 +20,10 @@ namespace SCManager.BusinessService.Services
 
       
 
-        public List<Expenses> GetAllExpenses(UA UA, string FromDate, string ToDate, bool showAllYN)
+        public List<Expenses> GetAllExpenses(UA UA, string FromDate, string ToDate)
         {
             List<Expenses> expenseList = null;
-            expenseList = _expensesRepository.GetAllExpenses(UA,FromDate,ToDate,showAllYN);
+            expenseList = _expensesRepository.GetAllExpenses(UA,FromDate,ToDate);
             if (expenseList != null)
             {
                 foreach (Expenses EX in expenseList)
