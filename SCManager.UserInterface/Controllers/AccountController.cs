@@ -98,8 +98,7 @@ namespace SCManager.UserInterface.Controllers
         [HttpGet]
         public string AreyouAlive()
         {
-          
-            string result = "";
+           string result = "";
             try
             {
               UA uaObj = null;
