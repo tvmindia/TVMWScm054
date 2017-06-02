@@ -85,7 +85,8 @@ function ClearJobForm() {
     })
 }
 function ResetForm() {
-    var jobid=$("#ModelJobID").val();
+    var jobid = $("#ModelJobID").val();
+    $('#jobform')[0].reset();
     if (jobid != '')
     {
         BindForm(jobid);
