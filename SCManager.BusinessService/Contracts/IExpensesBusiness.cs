@@ -12,7 +12,7 @@ namespace SCManager.BusinessService.Contracts
 
         List<ExpenseType> GetAllExpenseTypes(UA UA);
         object InsertUpdateExpenses(Expenses ExpensesObj);
-        List<Expenses> GetAllExpenses(UA UA,string FromDate, string ToDate, bool showAllYN);
+        List<Expenses> GetAllExpenses(UA UA,string FromDate, string ToDate);
         Expenses GetExpensesByID(UA UA,string ID);
         Expenses GetOutStandingPayment(UA UA);
         string DeleteExpenses(string ID, UA ua);

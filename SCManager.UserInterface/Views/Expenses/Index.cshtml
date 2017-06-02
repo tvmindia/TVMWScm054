@@ -193,7 +193,7 @@
                             @Html.LabelFor(model => model.fromDate, htmlAttributes: new { @class = "control-label" })
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.fromDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "fromDate" } })
+                            @Html.EditorFor(model => model.fromDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "fromDate" , @Value = ViewBag.fromDate } })
                             @Html.ValidationMessageFor(model => model.fromDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -204,7 +204,7 @@
                             @Html.LabelFor(model => model.toDate, htmlAttributes: new { @class = "control-label" })
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.toDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "toDate" } })
+                            @Html.EditorFor(model => model.toDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "toDate", @Value = ViewBag.toDate } })
                             @Html.ValidationMessageFor(model => model.toDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
