@@ -39,6 +39,7 @@ namespace SCManager.UserInterface.Models
 
         [Display(Name = "PO No")]
         [MaxLength(20)]
+        [Required(ErrorMessage = "Please Enter PO No.")]
         public string PONo { get; set; }
 
         [Display(Name = "PO Date")]
