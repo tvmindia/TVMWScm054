@@ -58,6 +58,7 @@
                             <th>Invoice No</th>
                             <th>Invoice Date</th>
                             <th>Sale Order No</th>
+                            <th>PO No</th>
                             <th>Items Total (₹)</th>
                             <th>VAT Amount (₹)</th>
                             <th>Discount (₹)</th>
@@ -179,6 +180,7 @@
                                     @Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "PONo" } })
                                     @Html.ValidationMessageFor(model => model.PONo, "", new { @class = "text-danger" })
                                 </div>
+                                <div class="col-md-1 mandatory"></div>
 
                             </div>
 

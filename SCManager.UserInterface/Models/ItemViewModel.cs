@@ -47,7 +47,7 @@ namespace SCManager.UserInterface.Models
         public string TechnicianQty { get; set; }
         [Display(Name = "Remarks")]
         public string Remarks { get; set; }
-        [Display(Name = "Selling Rate (₹)")]
+        [Display(Name = "Base Rate (₹)")]
         public float? SellingRate { get; set; }
         public string UOMDesc { get; set; }
         public List<SelectListItem> CategoryList { get; set; }

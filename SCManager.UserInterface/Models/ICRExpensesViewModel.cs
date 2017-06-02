@@ -16,7 +16,7 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Entry No.")]
         public string EntryNo { get; set; } 
 
-        [Display(Name = "Reference No.")]
+        [Display(Name = "Payment Ref. No.")]
         public string RefNo { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "Must be a Date")]

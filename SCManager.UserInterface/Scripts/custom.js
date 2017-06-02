@@ -1,48 +1,48 @@
 var appAddress = window.location.protocol + "//" + window.location.host + "/";   //Retrieving browser Url 
+(function Checker() {
+    var flag = false;
+    $.ajax({
+        url: appAddress + 'Account/AreyouAlive/',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
 
-//(function Checker() {
-//    var flag = false;
-//    $.ajax({
-//        url: appAddress + 'Account/AreyouAlive/',
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
-//        success: function (data) {
-
-//            if (data.Result == "OK") {
-//                switch (data.Record) {
-//                    case "dead":
-//                        $('.modal').modal('hide');
-//                        $("#RedirectToLoginModel").modal('show');
-//                        //notyAlert('success', 'dead df');
-//                        flag = true;
-//                        break;
-//                    case "alive":
-//                        flag = false;
-//                        //notyAlert('success', 'alive df');
-//                        break;
-//                }
+            if (data.Result == "OK") {
+                switch (data.Record) {
+                    case "dead":
+                        $('.modal').modal('hide');
+                        $("#RedirectToLoginModel").modal('show');
+  
+                        flag = true;
+                        break;
+                    case "alive":
+                        flag = false;
+                        break;
+                }
 
 
-//            }
-//            if (data.Result == "ERROR") {
-//                notyAlert('error', data.Message);
-//            }
+            }
+            if (data.Result == "ERROR") {
+                notyAlert('error', data.Message);
+            }
 
-//        },
-//        complete: function () {
-//            // Schedule the next request when the current one's complete
-//            //  setTimeout(Checker, 126000);
-//            if (flag != true) {
-//                //setTimeout(Checker, 3000);
-//                setTimeout(Checker, 126000);
-//            }
+        },
+        complete: function () {
+            // Schedule the next request when the current one's complete
+            //  setTimeout(Checker, 126000);
+            if (flag != true) {
+                //for 15.2 minutes
+                setTimeout(Checker, 912000);
+               // setTimeout(Checker, 126000);
+            }
 
-//        }
-//    });
-//})();
+        }
+    });
+})();
 
 
 $(document).ready(function () {
+  
   
     $('input[type="date"]').datepicker({
         format: "yyyy-mm-dd",//dd-M-yyyy",
@@ -362,3 +362,5 @@ function roundoff(num, opt) {
     if (num == '' && opt != undefined) { return ''; }
     return (Math.round(num * 100) / 100).toFixed(2);
 }
+
+

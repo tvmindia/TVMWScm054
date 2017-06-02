@@ -67,6 +67,7 @@ namespace SCManager.UserInterface.Controllers
             return RedirectToAction("Index", "Account");
         }
 
+
         #region Logout
         [HttpGet]
         [AllowAnonymous]
@@ -98,18 +99,14 @@ namespace SCManager.UserInterface.Controllers
         [HttpGet]
         public string AreyouAlive()
         {
-          
-            string result = "";
+           string result = "";
             try
             {
               UA uaObj = null;
-              if (System.Web.HttpContext.Current.Session != null)
+              if ((System.Web.HttpContext.Current.Session != null)&&(System.Web.HttpContext.Current.Session["TvmValid"] != null))
               {
-                 if (System.Web.HttpContext.Current.Session["TvmValid"] != null)
-                 {
                    uaObj = (UA)System.Web.HttpContext.Current.Session["TvmValid"];
                    result = "alive";
-                 }
               }
               else
               {

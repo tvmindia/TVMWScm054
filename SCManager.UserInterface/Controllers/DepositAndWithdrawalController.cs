@@ -28,13 +28,13 @@ namespace SCManager.UserInterface.Controllers
             List<SelectListItem> selectListItem = new List<SelectListItem>();
             selectListItem.Add(new SelectListItem
             {
-                Text = "Bank Deposit",
+                Text = "Deposit",
                 Value = "DEPST",
                 Selected = false
             });
             selectListItem.Add(new SelectListItem
                     {
-                        Text = "Bank Withdrawal",
+                        Text = "Withdrawal",
                         Value = "WITDR",
                         Selected = false
                     });

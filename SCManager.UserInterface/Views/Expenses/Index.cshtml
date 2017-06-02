@@ -52,7 +52,7 @@
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     @Html.LabelFor(model => model.EntryNo, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     @Html.LabelFor(model => model.RefDate, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
@@ -71,18 +71,10 @@
                                 <div class="col-md-1 mandatory"></div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    @Html.LabelFor(model => model.RefNo, htmlAttributes: new { @class = "control-label " })
-                                </div>
-                                <div class="col-md-5">
-                                    @Html.EditorFor(model => model.RefNo, new { htmlAttributes = new { @class = "form-control HeaderBox BlockEnter"} })
-                                    @Html.ValidationMessageFor(model => model.RefNo, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                         
 
                             <div class="form-group">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     @Html.LabelFor(model => model.ExpenseTypeCode, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
@@ -93,7 +85,7 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     @Html.LabelFor(model => model.EmpID, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
@@ -103,7 +95,7 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
@@ -112,9 +104,18 @@
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.RefNo, htmlAttributes: new { @class = "control-label " })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.RefNo, new { htmlAttributes = new { @class = "form-control HeaderBox BlockEnter" } })
+                                    @Html.ValidationMessageFor(model => model.RefNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
                             <div class="form-group">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
@@ -125,7 +126,7 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">

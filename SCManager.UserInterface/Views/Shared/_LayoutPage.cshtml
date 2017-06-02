@@ -11,7 +11,9 @@
     @Styles.Render("~/Content/css")
     @RenderSection("styles", required: false)
     <link rel="icon" type="image/png" href="~/Content/images/SCManager.png"/>
+     <style>
      
+     </style>
  
    
 </head>
@@ -64,35 +66,32 @@
 
    
     <!-- Modal -->
-    <div class="modal fade" id="RedirectToLoginModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade" id="RedirectToLoginModel" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Warning</h4>
+              
+                <div style="padding-top:15px;">
+                 
+                       @*<div class="sa-icon sa-custom" style="display: block; background-image: url(&quot;Content/images/hourglass.jpg&quot;);width:80px; height:80px"></div>*@
+                       <div class="thumbnail" style="border:none; -webkit-box-shadow:none;box-shadow:none;">
+                          
+                               <img src="Content/images/hourglass.png" alt="...">
+                           
+                          
+                           <div class="caption" style="text-align:center;padding:0px;">
+                               <h1 style="color:red;">Session Expired!</h1>
+                               <p style="font-size:14px;">Please Sign in again</p>
+                           </div>
+                       </div>
+                   
                 </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div id="block_loginredirect">
-                            <div>
-                                <h2>Your session has been expired please login..!</h2>
-
-                                <p>
-                                    If you are the owner of the account and are regularly seeing this error, please read more about it in our <a href="http://www.partyec.com/support/">knowledgebase</a>.
-                                    If you have any questions, please contact our Technical support team.
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
+                <div style="border-top: none;text-align: center;padding-bottom: 15px;">
+                    @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+                    <button type="button" onclick="RedirectToLogin()" class="btn btn-success">Sign In</button>
                 </div>
-                <div class="modal-footer">
-                    <button onclick="RedirectToLogin()" class="btn btn-lg btn-success" type="submit">LOGIN</button>
-                    @*<a href="/Account/Logout" class="btn btn-primary" value="Login"/>*@
-                </div>
-            </div>
-        </div>
-    </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 
     @Scripts.Render("~/bundles/jquery")
@@ -102,11 +101,11 @@
   
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
-        //function RedirectToLogin()
-        //{
-        //    var appAddress = window.location.protocol + "//" + window.location.host + "/";
-        //    window.location = appAddress + "/Account/Logout/";
-        //}
+        function RedirectToLogin()
+        {
+            var appAddress = window.location.protocol + "//" + window.location.host + "/";
+            window.location = appAddress + "/Account/Logout/";
+        }
     </script>
 
 </body>

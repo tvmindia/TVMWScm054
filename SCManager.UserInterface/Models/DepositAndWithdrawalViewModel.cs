@@ -16,7 +16,7 @@ namespace SCManager.UserInterface.Models
         public string TransactionType { get; set; }
         public List<SelectListItem> TransactionTypeList { get; set; }
         public string TransactionDescription { get; set; }
-        [Required(ErrorMessage = "Please enter Reference no")]
+       
         [Display(Name = "Reference No")]
         [StringLength(20)]
         public string RefNo { get; set; }
