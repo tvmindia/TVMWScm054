@@ -1,5 +1,4 @@
 var appAddress = window.location.protocol + "//" + window.location.host + "/";   //Retrieving browser Url 
-
 //(function Checker() {
 //    var flag = false;
 //    $.ajax({
