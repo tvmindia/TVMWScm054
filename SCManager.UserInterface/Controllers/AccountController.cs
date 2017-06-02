@@ -77,17 +77,13 @@ namespace SCManager.UserInterface.Controllers
             {
                 FormsAuthentication.SignOut();
                 Session.Remove("TvmValid");
-
-
             }
             catch (Exception ex)
             {
 
             }
-            //return View("Index");
-            return RedirectToLogin();
+           return RedirectToLogin();
         }
-
         #endregion Logout
 
         [HttpGet]
