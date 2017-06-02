@@ -26,7 +26,7 @@ $(document).ready(function () {
               { "data": "Remarks", "defaultContent": "<i>-</i>" },
               { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
             ],
-            columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
+            columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
                  { className: "text-right", "targets": [5] },
             { className: "text-center", "targets": [1,2, 3, 4, 9, 5, 6, 7, 8,9,10] }
 
@@ -123,7 +123,7 @@ function EG_Columns_Settings() {
          { "width": "8%", "targets": 5 },
         { "width": "8%", "targets": 6 },
          { "width": "8%", "targets": 7 },
-          { "width": "10%", "targets": 8 },
+          { "width": "10%", "targets": 8 },      
           { "width": "5%", "targets": 9 },
         { className: "text-right", "targets": [7,5] },
         { className: "text-center", "targets": [2,9] },
@@ -298,6 +298,7 @@ function BindTCRBillEntryFields(Records) {
         $("#JobNo").val(Records.JobNo);
         $("#BillNo").val(Records.BillNo);
         $("#CustomerName").val(Records.CustomerName);
+        $("#PaymentRefNo").val(Records.PaymentRefNo);
         $("#CustomerContactNo").val(Records.CustomerContactNo);
         $("#CustomerLocation").val(Records.CustomerLocation);
         $("#PaymentMode").val(Records.PaymentMode);
@@ -439,7 +440,7 @@ function save()
     $("#ID").val(emptyGUID);
     var validation = EG_Validate();
     if (validation == "") {
-        debugger;
+      
         var result = JSON.stringify(EG_GridData);
         $("#DetailJSON").val(result);
         $("#btnSave").trigger('click');
@@ -614,6 +615,7 @@ function reset()
         $("#jobnumberList").val("");
         $("#BillNo").val("");
         $("#CustomerName").val("");
+        $("#PaymentRefNo").val("");
         $("#CustomerContactNo").val("");
         $("#CustomerLocation").val("");
         $("#PaymentMode").val("");
@@ -728,17 +730,17 @@ function RefreshDailyServiceTable(jobNo) {
 }
 function ReBindJobNoDropdown() {
     try {
-        debugger;
+       
         var data = {};
         var ds = {};
         ds = GetDataFromServer("ICRBillEntry/RebindJobNo/", data);
-        debugger;
+     
         if (ds != '') {
-            debugger;
+           
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            // debugger;
+           
             $('#jobnumberList').html('');
             for (var i = 0; i < ds.Records.length - 1; i++) {
                 var opt = new Option(ds.Records[i].Value, ds.Records[i].Text);

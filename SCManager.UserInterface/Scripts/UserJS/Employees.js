@@ -38,7 +38,7 @@ $(document).ready(function () {
 //---------------------------------------Edit Employee--------------------------------------------------//
 function Edit(currentObj) {
     //Tab Change on edit click
-    debugger;
+   
 
     $('#AddTab').trigger('click');
     ChangeButtonPatchView("Employees", "btnPatchEmployeesSettab", "Edit"); //ControllerName,id of the container div,Name of the action
@@ -49,7 +49,7 @@ function Edit(currentObj) {
 }
 //------------------------------- Employee Save-----------------------------//
 function save() {
-    debugger;
+   
 
     $("#btnInsertUpdateEmployee").trigger('click');
 }
@@ -60,12 +60,12 @@ function GetAllEmployees() {
         var data = {};
         var ds = {};
         ds = GetDataFromServer("Employees/GetAllEmployees/", data);
-        debugger;
+      
         if (ds != '') {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            // debugger;
+        
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -91,7 +91,7 @@ function List() {
 //---------------------------------------Bind All Employees----------------------------------------------//
 function BindAllEmployees() {
     try {
-        debugger;
+       
         DataTables.employeeTable.clear().rows.add(GetAllEmployees()).draw(false);
     }
     catch (e) {
@@ -100,7 +100,7 @@ function BindAllEmployees() {
 }
 
 function EmployeeSaveSuccess(data, status) {
-    debugger;
+  
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -124,7 +124,7 @@ function EmployeeSaveSuccess(data, status) {
 
 //---------------------------------------Fill Employee--------------------------------------------------//
 function fillEmployee(ID) {
-    debugger;
+  
     ChangeButtonPatchView("Employees", "btnPatchEmployeesSettab", "Edit");
     var thisItem = GetEmployeeDetailsByID(ID); //Binding Data
     //Hidden
@@ -158,7 +158,7 @@ function GetEmployeeDetailsByID(id) {
     }
 }
 function Add(id) {
-    debugger;
+   
     if (id != 1) {
         $('#AddTab').trigger('click');
     }
@@ -206,7 +206,7 @@ function Delete() {
 }
 //---------------------------------------Delete-------------------------------------------------------//
 function DeleteEmployee() {
-    debugger;
+    
     var id = $("#ID").val();
     if (id != EmptyGuid) {
         $("#btnFormDelete").click();
@@ -218,7 +218,7 @@ function DeleteEmployee() {
 
 function DeleteSuccess(data, status) {
     var i = JSON.parse(data)
-    debugger;
+   
 
     switch (i.Result) {
 

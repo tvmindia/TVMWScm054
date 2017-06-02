@@ -33,7 +33,8 @@ namespace SCManager.UserInterface.Models
         public string CustomerContactNo { get; set; }
         [Display(Name = "Customer Location")]
         public string CustomerLocation { get; set; }
-
+        [Display(Name = "Payment Reference No")]
+        public string PaymentRefNo { get; set; }
         [Required(ErrorMessage = "Please select mode of payment")]
         [Display(Name = "Mode Of Payment")]
         public string PaymentMode { get; set; }
@@ -42,6 +43,7 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "VAT %")]
         public decimal? VATAmount { get; set; }
         public decimal? Discount { get; set; }
+        [Display(Name = "Service Charge")]
         public decimal? ServiceCharge { get; set; }
        
         [Display(Name = "Service Charge Commission %")]

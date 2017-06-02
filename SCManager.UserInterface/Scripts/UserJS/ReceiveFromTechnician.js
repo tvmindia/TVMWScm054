@@ -101,7 +101,7 @@ function EG_TableDefn() {
 }
 
 function EG_Columns() {
-    debugger;
+   
     var obj = [
                 { "data": "SCCode", "defaultContent": "<i></i>" },
                 { "data": "ID", "defaultContent": "<i>0</i>" },
@@ -120,7 +120,7 @@ function EG_Columns() {
 }
 
 function EG_Columns_Settings() {
-    debugger;
+  
     var obj = [
         { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
         { "targets": [4], "width": "20%" },
@@ -142,7 +142,7 @@ function EG_Columns_Settings() {
 
 
 function fillTechnicians() {
-    debugger;
+    
     var ddlSelect = document.getElementById("ddlReceiveListTech");
     var option = document.createElement('option');
     option.text = "All Technicians", option.value = "All";
@@ -216,14 +216,14 @@ function FillUOM(row) {
 }
 
 function ReceiptSheetsSaveSuccess(data, status) {
-    debugger;
+   
     var i = JSON.parse(data)
-    debugger;
+   
     switch (i.Result) {
      
         case "OK":
             notyAlert('success', i.Message);
-            debugger;
+           
             BindReceiveSheetFields(i.Records)
             ChangeButtonPatchView('ReceiveFromTechnician', 'btnPatchReceiveFromTechnicianSettab', 'Edit');
 
@@ -244,7 +244,7 @@ function BindAllReceiveList() {
 }
 function GetReceiveList() {
     try {
-        debugger;
+       
         var empID = $("#ddlReceiveListTech").val();
         var fromDate = $("#fromDate").val();
         var toDate = $("#toDate").val();
@@ -255,12 +255,12 @@ function GetReceiveList() {
             var data = { "fromDate": fromDate, "toDate": toDate, "empID": empID };
             var ds = {};
             ds = GetDataFromServer("ReceiveFromTechnician/GetAllReceiptsFromTechnician/", data);
-            debugger;
+           
             if (ds != '') {
                 ds = JSON.parse(ds);
             }
             if (ds.Result == "OK") {
-                // debugger;
+               
                 return ds.Records;
             }
             if (ds.Result == "ERROR") {
@@ -274,13 +274,12 @@ function GetReceiveList() {
     }
 }
 function BindReceiveSheetFields(Records) {
-    debugger;
-
+    
     EG_Rebind_WithData(Records, 1)
 
 }
 function TechnicianChange(curObj) {
-    debugger;
+   
     $("#ddlReceiveListTech").val(curObj.value);
     GetReceiveSheetsByTechnician();
 }
@@ -292,12 +291,12 @@ function Delete(currentObj) {
     
 }
 function DeleteReceiveFromTech(id, rw) {
-    debugger;
+   
     var data = { "ID": id };
     var ds = {};
     if (id != '' && id != null) {
         ds = GetDataFromServer("ReceiveFromTechnician/DeleteReceiveFromTechnician/", data);
-        debugger;
+      
         if (ds != '') {
             ds = JSON.parse(ds);
         }
@@ -313,7 +312,7 @@ function DeleteReceiveFromTech(id, rw) {
         }
     }
     else {
-        debugger;
+       
         if (EG_GridData.length != 1) {
             EG_GridData.splice(rw - 1, 1);
             EG_Rebind_WithData(EG_GridData, 0);
@@ -329,7 +328,7 @@ function DeleteReceiveFromTech(id, rw) {
 }
 function GetReceiveSheetsByTechnician() {
     try {
-        debugger;
+      
         var empID = $("#ddlReceiveListTech").val();
         var transferDate = $("#ReceiveDate").val();
 
@@ -343,7 +342,7 @@ function GetReceiveSheetsByTechnician() {
             var data = { "transferDate": transferDate, "empID": empID };
             var ds = {};
             ds = GetDataFromServer("ReceiveFromTechnician/GetReceiptsSheet/", data);
-            debugger;
+          
             if (ds != '') {
                 ds = JSON.parse(ds);
                 if (ds.Records != undefined && ds.Records != "" && ds.Records != null) {
@@ -360,7 +359,7 @@ function GetReceiveSheetsByTechnician() {
 
             }
             if (ds.Result == "OK") {
-                // debugger;
+                
                 return ds.Records;
             }
             if (ds.Result == "ERROR") {
@@ -408,7 +407,7 @@ function reset() {
     typingStarted = 0;
 }
 function ClearControls() {
-    debugger;
+   
   
         $("#HiddenEmpID").val("");
         var $datepicker = $('#ReceiveDate');
@@ -432,7 +431,7 @@ function Add() {
 }
 
 function FillDates() {
-    debugger;
+   
     var m_names = new Array("Jan", "Feb", "Mar",
  "Apr", "May", "Jun", "Jul", "Aug", "Sep",
  "Oct", "Nov", "Dec");

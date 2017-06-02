@@ -61,7 +61,7 @@ $(document).ready(function () {
 });
 //--3-----------combo source binding----------------------------
 function EG_ComboSource(id, values, valueCol, textCol,textDesc) {
-    debugger;
+   
     if (document.getElementById(id) == null || document.getElementById(id) == 'undefined') {
         alert("combo source element is not defined in cshtml");
     }
@@ -76,7 +76,7 @@ function EG_ComboSource(id, values, valueCol, textCol,textDesc) {
 }
 function ItemCodeOnChange(i)
 {
-    debugger;
+   
     var val=$(i).val();
     var a = $("#Materials").find('option[value="' + val + '"]');
     var itemID = a.attr('id');
@@ -87,7 +87,7 @@ function ItemCodeOnChange(i)
 }
 function ReturnItemCode(itemID)
 {
-    debugger;
+  
     var a = $("#Materials").find('option[id="' + itemID + '"]');
     $("#ItemCode").val(a.val());
 }
@@ -98,7 +98,7 @@ function Delete() {
 }
 //---------------------------------------Delete-------------------------------------------------------//
 function DeleteDefectiveDamaged() {
-    debugger;
+   
     var id = $("#ID").val();
     if (id != EmptyGuid) {
         $("#btnFormDelete").click();
@@ -108,7 +108,7 @@ function DeleteDefectiveDamaged() {
     }
 }
 function ReturnToCompany() {
-    debugger;
+  
     var type = $("#Type").val();
     var ReturnID = $("#ID").val();
     var ticketNo = $("#TicketNo").val();
@@ -170,7 +170,7 @@ function ReturnDefectiveDamaged()
 }
 function ReturnSuccess(data, status) {
     var i = JSON.parse(data)
-    debugger;
+   
 
     switch (i.Result) {
 
@@ -203,7 +203,7 @@ function ReturnedFields()
 }
 function DeleteSuccess(data, status) {
     var i = JSON.parse(data)
-    debugger;
+   
 
     switch (i.Result) {
 
@@ -224,7 +224,7 @@ function DeleteSuccess(data, status) {
     }
 }
 function DefectiveDamagedSaveSuccess(data, status) {
-    debugger;
+ 
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -295,7 +295,7 @@ function clearfields() {
 }
 //---------------------------------------Fill DefectiveDamaged--------------------------------------------------//
 function fillDefectiveDamaged(ID) {
-    debugger;
+    
     ChangeButtonPatchView("DefectiveorDamaged", "btnPatchDefectiveorDamagedSettab", "Edit");
     var thisItem = GetDefectiveDamagedByID(ID); //Binding Data
     //Hidden
@@ -356,11 +356,11 @@ function GetDefectiveDamagedByID(id) {
 //---------------------------------------Edit DefectiveDamaged--------------------------------------------------//
 function Edit(currentObj) {
     //Tab Change on edit click
-    debugger;
+  
 
     $('#AddTab').trigger('click');
     ChangeButtonPatchView("DefectiveorDamaged", "btnPatchDefectiveorDamagedSettab", "Edit"); //ControllerName,id of the container div,Name of the action
-    debugger;
+    
     var rowData = DataTables.DefectiveDamagedTable.row($(currentObj).parents('tr')).data();
     if ((rowData != null) && (rowData.ID != null)) {
         fillDefectiveDamaged(rowData.ID);
@@ -374,7 +374,7 @@ function Edit(currentObj) {
 //---------------------------------------Bind All DefectiveDamaged----------------------------------------------//
 function BindAllDefectiveDamaged() {
     try {
-        debugger;
+      
         DataTables.DefectiveDamagedTable.clear().rows.add(GetAllDefectiveDamaged()).draw(false);
     }
     catch (e) {
@@ -383,7 +383,7 @@ function BindAllDefectiveDamaged() {
 }
 
 function Add(id) {
-    debugger;
+  
     if (id != 1) {
         $('#AddTab').trigger('click');
     }
@@ -431,16 +431,16 @@ function List() {
 //---------------get grid fill result-------------------
 function GetAllDefectiveDamaged() {
     try {
-        debugger;
+      
         var data = {};
         var ds = {};
         ds = GetDataFromServer("DefectiveorDamaged/GetAllDefectiveDamaged/", data);
-        debugger;
+       
         if (ds != '') {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            // debugger;
+           
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -453,7 +453,7 @@ function GetAllDefectiveDamaged() {
 }
 //------------------------------- Defective/Damaged Save-----------------------------//
 function save() {
-    debugger;
+   
     var type = $("#Type").val();
     
         if (($("#Type").val() != "") && ($("#ItemID").val() != "") && ($("#Qty").val() != "") && ($("#OpenDate").val() != "")) {
@@ -463,7 +463,7 @@ function save() {
             if (hdfQty == "") {
                 hdfQty = "0";
             }
-            debugger;
+         
             if (qty == "0" || qty == "No items") {
                 if (type == "Defective") {
                     notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
@@ -528,7 +528,7 @@ function SaveClick()
 
 function DefectiveDamagedValidation() {
     try {
-        debugger;
+     
         var ItemID = $("#ItemID").val();
         var EmpID = $("#EmpID").val();
         var type = $("#Type").val();
