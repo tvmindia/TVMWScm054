@@ -101,7 +101,7 @@ function EG_TableDefn() {
 }
 
 function EG_Columns() {
-    debugger;
+   
     var obj = [
                 { "data": "SCCode", "defaultContent": "<i></i>" },
                 { "data": "ID", "defaultContent": "<i>0</i>" },
@@ -120,7 +120,7 @@ function EG_Columns() {
 }
 
 function EG_Columns_Settings() {
-    debugger;
+    
     var obj = [
         { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
         { "targets": [4], "width": "20%" },
@@ -143,7 +143,7 @@ function EG_Columns_Settings() {
 
 function fillTechnicians()
 {
-    debugger;
+   
     var ddlSelect = document.getElementById("ddlIssueListTech");
     var option = document.createElement('option');
     option.text ="All Technicians", option.value = "All";
@@ -200,7 +200,7 @@ function FillUOM(row) {
     var IssueDate = $("#IssueDate").val();
     if (EmpID != "" && IssueDate != "")
     {
-        debugger;
+       
         var validation = EG_Validate();
         if (validation == "") {
          
@@ -220,12 +220,12 @@ function FillUOM(row) {
 
 function IssuedSheetsSaveSuccess(data, status)
 {
-    debugger;
+   
     var i = JSON.parse(data)
     switch (i.Result) {
         case "OK":
             notyAlert('success', i.Message);
-            debugger;
+            
             BindIssueSheetFields(i.Records)
             ChangeButtonPatchView('IssueToTechnician', 'btnPatchIssueToTechnicianSettab', 'Edit');
 
@@ -247,7 +247,7 @@ function BindAllIssuedList()
 }
 function GetIssuedList() {
     try {
-        debugger;
+       
         var empID = $("#ddlIssueListTech").val();
         var fromDate = $("#fromDate").val();
         var toDate = $("#toDate").val();
@@ -258,12 +258,12 @@ function GetIssuedList() {
             var data = { "fromDate": fromDate, "toDate": toDate ,"empID":empID};
             var ds = {};
             ds = GetDataFromServer("IssueToTechnician/GetAllIssueToTechnician/", data);
-            debugger;
+            
             if (ds != '') {
                 ds = JSON.parse(ds);
             }
             if (ds.Result == "OK") {
-                // debugger;
+               
                 return ds.Records;
             }
             if (ds.Result == "ERROR") {
@@ -278,14 +278,14 @@ function GetIssuedList() {
 }
 function BindIssueSheetFields(Records)
 {
-    debugger;
+   
    
         EG_Rebind_WithData(Records,1)   
    
 }
 function TechnicianChange(curObj)
 {
-    debugger;
+  
     $("#ddlIssueListTech").val(curObj.value);
     GetIssueSheetsByTechnician();
 }
@@ -299,13 +299,12 @@ function Delete(currentObj) {
 }
 function DeleteIssueToTech(id,rw)
 {
-    debugger;
     var data = { "ID":id };
     var ds = {};
     if (id != '' && id != null)
     {
         ds = GetDataFromServer("IssueToTechnician/DeleteIssueToTechnician/", data);
-        debugger;
+       
         if (ds != '') {
             ds = JSON.parse(ds);
         }
@@ -322,7 +321,7 @@ function DeleteIssueToTech(id,rw)
     }
     else
     {
-        debugger;
+       
         if (EG_GridData.length != 1) {
             EG_GridData.splice(rw - 1, 1);
             EG_Rebind_WithData(EG_GridData, 0);
@@ -352,7 +351,7 @@ function GetIssueSheetsByTechnician() {
             var data = { "transferDate": transferDate, "empID": empID };
             var ds = {};
             ds = GetDataFromServer("IssueToTechnician/GetIssueSheets/", data);
-            debugger;
+          
             if (ds != '') {
                 ds = JSON.parse(ds);
                 if (ds.Records != undefined && ds.Records != "" && ds.Records != null)
@@ -371,7 +370,7 @@ function GetIssueSheetsByTechnician() {
                
             }
             if (ds.Result == "OK") {
-                // debugger;
+              
                 return ds.Records;
             }
             if (ds.Result == "ERROR") {
@@ -446,7 +445,7 @@ function Add() {
 }
 
 function FillDates() {
-    debugger;
+   
     var m_names = new Array("Jan", "Feb", "Mar",
  "Apr", "May", "Jun", "Jul", "Aug", "Sep",
  "Oct", "Nov", "Dec");

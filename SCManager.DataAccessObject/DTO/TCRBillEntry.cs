@@ -28,6 +28,7 @@ namespace SCManager.DataAccessObject.DTO
         public decimal? GrandTotal { get; set; }
         public decimal? Subtotal { get; set; }
         public string Technician { get; set; }
+        public string PaymentRefNo { get; set; }
         public Guid? jobNoID { get; set; }
         public LogDetails logDetails { get; set; }
         public string DetailXML { get; set; }

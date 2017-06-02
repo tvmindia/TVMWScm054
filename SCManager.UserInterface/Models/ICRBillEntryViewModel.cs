@@ -59,6 +59,8 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Sub Total (₹)")]
         [Range(0, 9999999999999999.99)]
         public decimal? Subtotal { get; set; }
+        [Display(Name = "Payment Reference No")]
+        public string PaymentRefNo { get; set; }
         [Display(Name = "Total Service Tax Amount (₹)")]
         [Range(0, 9999999999999999.99)]
         public decimal? TotalServiceTaxAmt { get; set; }

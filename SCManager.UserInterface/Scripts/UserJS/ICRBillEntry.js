@@ -26,13 +26,13 @@ $(document).ready(function () {
        { "data": "Remarks", "defaultContent": "<i>-</i>" },
        { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
      ],
-     columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
+     columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
           { className: "text-right", "targets": [9] },
      { className: "text-center", "targets": [1, 2, 3, 4, 9, 5, 6, 7, 8] }
 
      ]
  });
-        debugger;
+     
         BindJobNumberDropDown();
         DataTables.ICRBillDetail = $('#tblICRDetails').DataTable(
        {
@@ -95,7 +95,7 @@ function EG_TableDefn() {
 }
 
 function EG_Columns() {
-    debugger;
+  
     var obj = [
 
                 { "data": "ID", "defaultContent": "<i>0</i>" },               
@@ -135,7 +135,7 @@ function EG_Columns_Settings() {
 
     ]
 
-    return obj;
+    return obj;     
 
 }
 
@@ -187,7 +187,7 @@ function FillJobRelatedFields() {
     try {
         var data = { "JobNo": job };
         ds = GetDataFromServer("DailyServiceReport/GetDailyJobByJobNo/", data);
-        debugger;
+      
         if (ds != '') {
             ds = JSON.parse(ds);
         }
@@ -237,7 +237,7 @@ function getMaterials() {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            debugger;
+          
             _Materials = ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -280,6 +280,7 @@ function reset()
         $("#TotalServiceTaxAmt").val("");
         $("#Discount").val("");
         $("#ModelNo").val("");
+        $("#PaymentRefNo").val("");
         $("#SerialNo").val("");
         $("#grandtotal").val("");
         //$('#ICRNo').attr('readonly', false);
@@ -308,7 +309,7 @@ function ResetForm() {
     validator.resetForm();
 }
 function DeleteItem(currentObj) {
-    debugger;
+   
     var rowData = EG_GridDataTable.row($(currentObj).parents('tr')).data();
 
     if ((rowData != null) && (rowData.ID != null)) {
@@ -319,7 +320,7 @@ function DeleteItem(currentObj) {
 function BindICRBillEntryFields(Records) {
     try {
 
-        debugger;
+      
         ChangeButtonPatchView('ICRBillEntry', 'btnPatchICRBillEntrySettab', 'Edit');
         $('#HeaderID').val(Records.ID);
         $("#EmpID").val(Records.EmpID);
@@ -333,6 +334,7 @@ function BindICRBillEntryFields(Records) {
         $("#Remarks").val(Records.Remarks);       
         $("#Discount").val(roundoff(Records.Discount));
         $("#ModelNo").val(Records.ModelNo);
+        $("#PaymentRefNo").val(Records.PaymentRefNo);
         $("#SerialNo").val(Records.SerialNo);
         $("#AMCValidFromDate").val(Records.AMCValidFromDate);
         $("#AMCValidtoDate").val(Records.AMCValidToDate);
@@ -363,7 +365,7 @@ function DeleteClick() {
     notyConfirm('Are you sure to delete?', 'ICRBillDelete()');
 }
 function FillUOM(row) {
-    debugger;
+   
     for (i = 0; i < _Materials.length; i++) {
         if (_Materials[i].ItemCode == EG_GridData[row - 1]['Material']) {
             EG_GridData[row - 1]['UOM'] = _Materials[i].UOM;
@@ -410,7 +412,7 @@ function ICRBillDelete() {
 }
 function ICRBillDetailDelete(id, rw) {
     try {
-        debugger;
+      
         var Hid = $('#HeaderID').val();
         if (id != '' && id != null && Hid != '' && Hid != null && Hid != emptyGUID) {
             var data = { "ID": id, "HeaderID": Hid };
@@ -430,7 +432,7 @@ function ICRBillDetailDelete(id, rw) {
             return 1;
         }
         else {
-            debugger;
+           
             if (EG_GridData.length != 1) {
                 EG_GridData.splice(rw - 1, 1);
                 EG_Rebind_WithData(EG_GridData, 0);
@@ -478,17 +480,17 @@ function BindICRBillEntry(id) {
 }
 function GetAllICRBill() {
     try {
-        debugger;
+      
         var data = {};
         var ds = {};
         ds = GetDataFromServer("ICRBillEntry/GetAllICRBillEntry/", data);
-        debugger;
+      
         if (ds != '') {
-            debugger;
+         
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            // debugger;
+         
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -500,7 +502,7 @@ function GetAllICRBill() {
     }
 }
 function SaveSuccess(data, status) {
-    debugger;
+   
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -594,7 +596,7 @@ function BindJobNumberDropDown() {
     }
 }
 function AmountSummary() {
-    debugger;
+  
     var subtotal = parseFloat($('#subtotal').val()) || 0;
     var totalServiceTaxAmt = parseFloat($('#TotalServiceTaxAmt').val()) || 0;
     var discount = parseFloat($('#Discount').val()) || 0;
@@ -637,7 +639,7 @@ function TechnicianSelectOnChange(curobj) {
 function RefreshDailyServiceTable(jobNo) {
     //need to write code to refresh combo
     // $("#JobNo").html($("#JobNo").html() + '<option value="' + jobNo + '">' + jobNo + '</option>')
-    debugger;
+   
     //   $("#JobNo").val(jobNo);
     _JobNoValue = jobNo;
     ReBindJobNoDropdown();  
@@ -645,17 +647,17 @@ function RefreshDailyServiceTable(jobNo) {
 }
 function ReBindJobNoDropdown() {
     try {
-        debugger;
+       
         var data = {};
         var ds = {};
         ds = GetDataFromServer("ICRBillEntry/RebindJobNo/", data);
-        debugger;
+       
         if (ds != '') {
-            debugger;
+           
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            // debugger;
+         
             $('#jobnumberList').html('');
             for (var i = 0; i < ds.Records.length-1; i++) {
                 var opt = new Option(ds.Records[i].Value, ds.Records[i].Text);                

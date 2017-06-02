@@ -12,12 +12,12 @@ $(document).ready(function () {
 
 //------------------------------- Employee Save-----------------------------//
 function save() {
-    debugger;
+    
 
     $("#btnUpdateCallandServiceType").trigger('click');
 }
 function CallandServiceTypesSaveSuccess(data, status) {
-    debugger;
+   
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -34,7 +34,7 @@ function CallandServiceTypesSaveSuccess(data, status) {
 }
 //---------------------------------------Fill Employee--------------------------------------------------//
 function FillCallTypes() {
-    debugger;
+  
    
     var thisType = GetCallTypes(); //Binding Data
     //Hidden
@@ -48,7 +48,7 @@ function FillCallTypes() {
 }
 function FillServiceTypes()
 {
-    debugger;
+   
     var thisType = GetServiceTypes(); //Binding Data
     $("#AMC1Commission").val(roundoff(thisType[0].AMC1Commission));
     $("#AMC2Commission").val(roundoff(thisType[1].AMC2Commission));

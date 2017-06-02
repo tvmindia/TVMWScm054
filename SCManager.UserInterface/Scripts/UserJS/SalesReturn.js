@@ -57,11 +57,10 @@ $(document).ready(function () {
 //---------------------------------------Edit DefectiveDamaged--------------------------------------------------//
 function Edit(currentObj) {
     //Tab Change on edit click
-    debugger;
-
+   
     $('#AddTab').trigger('click');
     ChangeButtonPatchView("SalesReturn", "btnPatchSalesReturnSettab", "Edit"); //ControllerName,id of the container div,Name of the action
-    debugger;
+  
     var rowData = DataTables.SalesReturnTable.row($(currentObj).parents('tr')).data();
     if ((rowData != null) && (rowData.ID != null)) {
         fillSalesReturn(rowData.ID);
@@ -92,7 +91,7 @@ function ResetForm() {
 
 //--3-----------combo source binding----------------------------
 function EG_ComboSource(id, values, valueCol, textCol, textDesc) {
-    debugger;
+   
     if (document.getElementById(id) == null || document.getElementById(id) == 'undefined') {
         alert("combo source element is not defined in cshtml");
     }
@@ -108,11 +107,11 @@ function EG_ComboSource(id, values, valueCol, textCol, textDesc) {
 
 //------------------------------- SalesReturn Save-----------------------------//
 function save() {
-    debugger;
+   
     if (($('#OpenDate').val() != "") && ($("#ItemID").val() != "") && ($("#Qty").val() != ""))
     {
         var qty = SalesReturnValidation();
-        debugger;
+     
         var enteredQty = $("#Qty").val();
         var hdfQty = $("#HiddenQty").val();
         if (hdfQty == "") {
@@ -160,7 +159,7 @@ function Delete() {
 
 //---------------------------------------Delete-------------------------------------------------------//
 function DeleteSalesReturn() {
-    debugger;
+  
     var id = $("#ID").val();
     if (id != EmptyGuid) {
         $("#btnFormDelete").click();
@@ -172,8 +171,7 @@ function DeleteSalesReturn() {
 
 function DeleteSuccess(data, status) {
     var i = JSON.parse(data)
-    debugger;
-
+   
     switch (i.Result) {
 
         case "OK":
@@ -194,7 +192,7 @@ function DeleteSuccess(data, status) {
 }
 
 function ReturnToCompany() {
-    debugger;
+   
     var ReturnID = $("#ID").val();
     if (ReturnID != EmptyGuid) {
         notyConfirm('Are you sure to Return?', 'ReturnDefectiveDamaged()', '', "Yes, Return it!");
@@ -209,7 +207,7 @@ function ReturnDefectiveDamaged() {
 }
 function ReturnSuccess(data, status) {
     var i = JSON.parse(data)
-    debugger;
+   
 
     switch (i.Result) {
 
@@ -231,7 +229,7 @@ function ReturnSuccess(data, status) {
 
 //---------------------------------------Fill DefectiveDamaged--------------------------------------------------//
 function fillSalesReturn(ID) {
-    debugger;
+  
     ChangeButtonPatchView("SalesReturn", "btnPatchSalesReturnSettab", "Edit");
     var thisItem = GetSalesReturnByID(ID); //Binding Data
     //Hidden
@@ -256,7 +254,7 @@ function fillSalesReturn(ID) {
 }
 
 function ReturnItemCode(itemID) {
-    debugger;
+    
     var a = $("#Materials").find('option[id="' + itemID + '"]');
     $("#ItemCode").val(a.val());
 }
@@ -282,7 +280,7 @@ function GetSalesReturnByID(id) {
 }
 
 function SalesReturnSaveSuccess(data, status) {
-    debugger;
+  
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -329,7 +327,7 @@ function clearfields() {
 //---------------------------------------Bind All DefectiveDamaged----------------------------------------------//
 function BindAllSalesReturn() {
     try {
-        debugger;
+       
         DataTables.SalesReturnTable.clear().rows.add(GetAllSalesReturn()).draw(false);
     }
     catch (e) {
@@ -343,7 +341,7 @@ function SaveClick() {
 }
 
 function SalesReturnValidation() {
-    debugger;
+   
     try {
         var ItemID = $("#ItemID").val();
         var data = { "ItemID": ItemID };
@@ -360,7 +358,7 @@ function SalesReturnValidation() {
 }
 
 function ItemCodeOnChange(i) {
-    debugger;
+  
     var val = $(i).val();
     var a = $("#Materials").find('option[value="' + val + '"]');
     var itemID = a.attr('id');
@@ -402,16 +400,16 @@ function GetAllItemCode() {
 //---------------get grid fill result-------------------
 function GetAllSalesReturn() {
     try {
-        debugger;
+       
         var data = {};
         var ds = {};
         ds = GetDataFromServer("SalesReturn/GetAllSalesReturn/", data);
-        debugger;
+       
         if (ds != '') {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            // debugger;
+          
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -436,7 +434,7 @@ function List() {
 }
 
 function Add(id) {
-    debugger;
+  
     if (id != 1) {
         $('#AddTab').trigger('click');
     }

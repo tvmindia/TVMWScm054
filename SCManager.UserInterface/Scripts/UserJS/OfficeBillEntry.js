@@ -82,7 +82,7 @@ function EG_TableDefn() {
 }
 
 function EG_Columns() {
-    debugger;
+   
     var obj = [
 
                 { "data": "ID", "defaultContent": "<i>0</i>" },
@@ -132,7 +132,7 @@ function FillUOM(row) {
         if (_Materials[i].ItemCode == EG_GridData[row - 1]['Material']) {
             EG_GridData[row - 1]['UOM'] = _Materials[i].UOM;
             EG_GridData[row - 1]['MaterialID'] = _Materials[i].ID;
-            EG_GridData[row - 1]['Description'] = _Materials[i].Description;
+            EG_GridData[row - 1]['Description'] = _Materials[i].Description;     
             EG_GridData[row - 1]['Rate'] = _Materials[i].SellingRate;
             EG_Rebind();
             break;
@@ -161,7 +161,7 @@ function BindAllCustomerBill() {
 
 function OfficeBillDetailDelete(id, rw) {
     try {
-        debugger;
+        
         var Hid = $('#HeaderID').val();
         if (id != '' && id != null && Hid != '' && Hid != null && Hid != emptyGUID) {
             var data = { "ID": id, "HeaderID": Hid };
@@ -230,7 +230,7 @@ function Edit(currentObj) {
 //--------------------button actions ----------------------
 function List() {
     try {
-        debugger;
+     
         ChangeButtonPatchView('OfficeBillEntry', 'btnPatchOfficeBillEntrySettab', 'List');      
         $("#HeaderID").val("");
         reset();
@@ -284,7 +284,7 @@ function BindOfficeBillEntry(id) {
 }
 function BindOfficeBillEntryFields(Records) {
     try {
-        debugger;
+     
         ChangeButtonPatchView('OfficeBillEntry', 'btnPatchOfficeBillEntrySettab', 'Edit');
         $('#HeaderID').val(Records.ID);      
       
@@ -325,12 +325,12 @@ function Add() {
     reset();
 }
 function DeleteClick() {
-    debugger;
+  
     notyConfirm('Are you sure to delete?', 'OfficeBillDelete()', '', "Yes, delete it!");
 }
 function OfficeBillDelete() {
     try {
-        debugger;
+       
         var id = $('#HeaderID').val();
         if (id != '' && id != null) {
             var data = { "ID": id };
@@ -360,17 +360,17 @@ function OfficeBillDelete() {
 }
 function GetAllOfficeBill() {
     try {
-        debugger;
+       
         var data = {};
         var ds = {};
         ds = GetDataFromServer("OfficeBillEntry/GetAllOfficeBillEntry/", data);
-        debugger;
+      
         if (ds != '') {
-            debugger;
+           
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            // debugger;
+          
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -425,7 +425,7 @@ function CalculateAmount(row) {
 
 }
 function AmountSummary() {
-    debugger;
+  
     var subtotal = parseFloat($('#subtotal').val()) || 0;
     var vatAmount = parseFloat($('#VATAmount').val()) || 0;
     var discount = parseFloat($('#discount').val()) || 0;

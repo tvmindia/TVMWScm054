@@ -27,6 +27,7 @@ namespace SCManager.DataAccessObject.DTO
         public string Technician { get; set; }
         public decimal? STAmount { get; set; }
         public decimal? Discount { get; set; }
+        public string PaymentRefNo { get; set; }
         public decimal? TotalServiceTaxAmt { get; set; }
         public Guid? jobNoID { get; set; }
         public LogDetails logDetails { get; set; }

@@ -34,11 +34,13 @@ $(document).ready(function () {
 
             Edit(this);
         });
-        FillDates();
+      
         $('#fromDate').change(function () {
+          
             FromDateOnChange();
         });
         $('#toDate').change(function () {
+           
             FromDateOnChange();
         });
       
@@ -48,35 +50,6 @@ $(document).ready(function () {
     }
 });
 
-function FillDates() {
-    debugger;
-    var m_names = new Array("Jan", "Feb", "Mar",
- "Apr", "May", "Jun", "Jul", "Aug", "Sep",
- "Oct", "Nov", "Dec");
-
-    var d = new Date();
-    var curr_date = d.getDate();
-    var curr_month = d.getMonth();
-    var curr_year = d.getFullYear();
-    var toDate = curr_date + "-" + m_names[curr_month]
-    + "-" + curr_year;
-    var $datepicker = $('#toDate');
-    $datepicker.datepicker('setDate', new Date(toDate));
-    var today = new Date()
-    var pd = new Date();
-    pd.setDate(pd.getDate() - 30);
-    var priorDate = pd.toLocaleString()
-    priorDate = priorDate.split(' ')[0];
-    var p_month = parseInt(priorDate.split('/')[0]) - 1;
-    var p_date = priorDate.split('/')[1];
-    var p_year = priorDate.split('/')[2];
-    var fromDate = p_date + "-" + m_names[p_month]
-    + "-" + p_year;
-    var $datepicker = $('#fromDate');
-    $datepicker.datepicker('setDate', new Date(fromDate));
-    FromDateOnChange();
-}
-
 function FromDateOnChange() {
 
     DataTables.OtherIncomeTable.clear().rows.add(GetOtherIncomeBetweenDates()).draw(false);
@@ -84,7 +57,7 @@ function FromDateOnChange() {
 
 function DeleteSuccess(data, status) {
     var i = JSON.parse(data)
-    debugger;
+  
 
     switch (i.Result) {
 
@@ -106,29 +79,26 @@ function DeleteSuccess(data, status) {
 }
 function GetOtherIncomeBetweenDates() {
     try {
-        debugger;
+      
         $("#showAllYNCheckbox").prop('checked', false);
         var fromDate = $("#fromDate").val();
         var toDate = $("#toDate").val();
-        if (toDate == "" && fromDate == "") {
-            //DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(false)).draw(false);
-        }
-        else {
+     
             var data = { "fromDate": fromDate, "toDate": toDate };
             var ds = {};
             ds = GetDataFromServer("OtherIncome/GetOtherIncomeBetweenDates/", data);
-            debugger;
+         
             if (ds != '') {
                 ds = JSON.parse(ds);
             }
             if (ds.Result == "OK") {
-                // debugger;
+              
                 return ds.Records;
             }
             if (ds.Result == "ERROR") {
                 alert(ds.Message);
             }
-        }
+       
 
     }
     catch (e) {
@@ -137,7 +107,7 @@ function GetOtherIncomeBetweenDates() {
 }
 //------------------------------- CreditNotes Save-----------------------------//
 function save() {
-    debugger;
+   
     $("#btnInsertUpdateOtherIncome").trigger('click');
 
 }
@@ -145,11 +115,11 @@ function save() {
 //---------------------------------------Edit OtherIncome--------------------------------------------------//
 function Edit(currentObj) {
     //Tab Change on edit click
-    debugger;
+   
 
     $('#AddTab').trigger('click');
     ChangeButtonPatchView("OtherIncome", "btnPatchOtherIncomeSettab", "Edit"); //ControllerName,id of the container div,Name of the action
-    debugger;
+   
     var rowData = DataTables.OtherIncomeTable.row($(currentObj).parents('tr')).data();
     if ((rowData != null) && (rowData.ID != null)) {
         fillOtherIncome(rowData.ID);
@@ -159,7 +129,7 @@ function Edit(currentObj) {
 }
 //---------------------------------------Fill OtherIncome--------------------------------------------------//
 function fillOtherIncome(ID) {
-    debugger;
+   
     ChangeButtonPatchView("OtherIncome", "btnPatchOtherIncomeSettab", "Edit");
     var thisItem = GetOtherIncomeByID(ID); //Binding Data
     //Hidden
@@ -204,7 +174,7 @@ function Delete() {
 }
 //---------------------------------------Delete-------------------------------------------------------//
 function DeleteOtherIncome() {
-    debugger;
+    
     var id = $("#ID").val();
     if (id != EmptyGuid) {
         $("#btnFormDelete").click();
@@ -214,7 +184,7 @@ function DeleteOtherIncome() {
     }
 }
 function OtherIncomeSaveSuccess(data, status) {
-    debugger;
+    
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -224,7 +194,7 @@ function OtherIncomeSaveSuccess(data, status) {
             else {
                 fillOtherIncome($("#ID").val());
             }
-            FillDates();
+           
             FromDateOnChange();
             notyAlert('success', JsonResult.Records.Message);
             break;
@@ -240,7 +210,7 @@ function OtherIncomeSaveSuccess(data, status) {
 //---------------------------------------Bind All OtherIncome----------------------------------------------//
 function BindAllOtherIncome() {
     try {
-        debugger;
+      
         DataTables.OtherIncomeTable.clear().rows.add(GetAllOtherIncome(false)).draw(false);
     }
     catch (e) {
@@ -248,7 +218,7 @@ function BindAllOtherIncome() {
     }
 }
 function showAllYNCheckedOrNot(i) {
-    debugger;
+  
 
     if (i.checked == true) {
         DataTables.OtherIncomeTable.clear().rows.add(GetAllOtherIncome(true)).draw(false);
@@ -257,7 +227,7 @@ function showAllYNCheckedOrNot(i) {
     }
     else {
         DataTables.OtherIncomeTable.clear().rows.add(GetAllOtherIncome(false)).draw(false);
-        FillDates();
+       
     }
     
 }
@@ -291,16 +261,16 @@ function goBack() {
 //---------------get grid fill result-------------------
 function GetAllOtherIncome(showAllYN) {
     try {
-        debugger;
+       
         var data = { "showAllYN": showAllYN };
         var ds = {};
         ds = GetDataFromServer("OtherIncome/GetAllOtherIncome/", data);
-        debugger;
+       
         if (ds != '') {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            // debugger;
+          
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -312,18 +282,13 @@ function GetAllOtherIncome(showAllYN) {
     }
 }
 
-function DateClear() {
-    $('#fromDate').val("");
-    $('#toDate').val("");
-}
-
 //--------------------button actions ----------------------
 function List() {
     try {
 
         ChangeButtonPatchView('OtherIncome', 'btnPatchOtherIncomeSettab', 'List');
-        DateClear();
-        FillDates()
+       
+      
         //BindAllOtherIncome()
     } catch (x) {
         alert(x);
@@ -332,7 +297,7 @@ function List() {
 }
 
 function Add(id) {
-    debugger;
+   
     if (id != 1) {
         $('#AddTab').trigger('click');
     }

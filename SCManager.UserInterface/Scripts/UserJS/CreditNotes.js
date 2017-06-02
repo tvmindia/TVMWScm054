@@ -34,12 +34,14 @@ $(document).ready(function () {
             Edit(this);
         });
 
-        FillDates();
+     
 
         $('#fromDate').change(function () {
+           
             FromDateOnChange();
         });
         $('#toDate').change(function () {
+         
             FromDateOnChange();
         });
     }
@@ -49,56 +51,17 @@ $(document).ready(function () {
 });
 
 
-
-function FillDates()
-{
-    debugger;
-    var m_names = new Array("Jan", "Feb", "Mar",
- "Apr", "May", "Jun", "Jul", "Aug", "Sep",
- "Oct", "Nov", "Dec");
-
-    var d = new Date();
-    var curr_date = d.getDate();
-    var curr_month = d.getMonth();
-    var curr_year = d.getFullYear();
-    var toDate = curr_date + "-" + m_names[curr_month]
-    + "-" + curr_year;
-    var $datepicker = $('#toDate');
-    $datepicker.datepicker('setDate', new Date(toDate));
-    var today = new Date()
-    var pd = new Date();
-   pd.setDate(pd.getDate() - 30);
-   var  priorDate = pd.toLocaleString()
-    priorDate = priorDate.split(' ')[0];
-    var p_month = parseInt(priorDate.split('/')[0]) - 1;
-    var p_date = priorDate.split('/')[1];
-    var p_year = priorDate.split('/')[2];
-    var fromDate = p_date + "-" + m_names[p_month]
-    + "-" + p_year;
-    var $datepicker = $('#fromDate');
-    $datepicker.datepicker('setDate', new Date(fromDate));
-    FromDateOnChange();
-}
-
 //--------------------button actions ----------------------
 function List() {
     try {
 
         ChangeButtonPatchView('CreditNotes', 'btnPatchCreditNotesSettab', 'List');
-        DateClear();
-        FillDates()
         BindAllCreditNotes()
 
     } catch (x) {
         alert(x);
     }
 
-}
-
-function DateClear()
-{
-    $('#fromDate').val("");
-    $('#toDate').val("");
 }
 
 function clearfields()
@@ -117,11 +80,11 @@ function clearfields()
 //---------------------------------------Edit CreditNotes--------------------------------------------------//
 function Edit(currentObj) {
     //Tab Change on edit click
-    debugger;
+  
 
     $('#AddTab').trigger('click');
     ChangeButtonPatchView("CreditNotes", "btnPatchCreditNotesSettab", "Edit"); //ControllerName,id of the container div,Name of the action
-    debugger;
+    
     var rowData = DataTables.CreditNotesTable.row($(currentObj).parents('tr')).data();
     if ((rowData != null) && (rowData.ID != null)) {
         fillCreditNotes(rowData.ID);
@@ -136,7 +99,7 @@ function Delete() {
 }
 //---------------------------------------Delete-------------------------------------------------------//
 function DeleteCreditNote() {
-    debugger;
+   
     var id = $("#ID").val();
     if (id != EmptyGuid) {
         $("#btnFormDelete").click();
@@ -171,7 +134,7 @@ function goBack() {
 }
 function DeleteSuccess(data, status) {
     var i = JSON.parse(data)
-    debugger;
+  
 
     switch (i.Result) {
 
@@ -193,7 +156,7 @@ function DeleteSuccess(data, status) {
 }
 //---------------------------------------Fill CreditNotes--------------------------------------------------//
 function fillCreditNotes(ID) {
-    debugger;
+  
     ChangeButtonPatchView("CreditNotes", "btnPatchCreditNotesSettab", "Edit");
     var thisItem = GetCreditNotesdByID(ID); //Binding Data
     //Hidden
@@ -220,7 +183,7 @@ function ResetForm() {
 }
 
 function Add(id) {
-    debugger;
+ 
     if (id != 1) {
         $('#AddTab').trigger('click');
     }
@@ -230,7 +193,7 @@ function Add(id) {
 
 function showAllYNCheckedOrNot(i)
 {
-    debugger;
+  
     
     if(i.checked==true)
     {
@@ -241,7 +204,7 @@ function showAllYNCheckedOrNot(i)
     else
     {
         DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(false)).draw(false);
-        FillDates();
+     
     }
     
 }
@@ -254,31 +217,26 @@ function FromDateOnChange()
 function GetCreditNotesBetweenDates()
 {
     try {
-        debugger;
+       
         $("#showAllYNCheckbox").prop('checked', false);
         var fromDate = $("#fromDate").val();
         var toDate = $("#toDate").val();
-        if (toDate == "" && fromDate == "")
-        {
-            //DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(false)).draw(false);
-        }
-        else
-        {
+        
             var data = { "fromDate": fromDate, "toDate": toDate };
             var ds = {};
             ds = GetDataFromServer("CreditNotes/GetCreditNotesBetweenDates/", data);
-            debugger;
+           
             if (ds != '') {
                 ds = JSON.parse(ds);
             }
             if (ds.Result == "OK") {
-                // debugger;
+              
                 return ds.Records;
             }
             if (ds.Result == "ERROR") {
                 alert(ds.Message);
             }
-        }
+        
      
     }
     catch (e) {
@@ -288,16 +246,16 @@ function GetCreditNotesBetweenDates()
 //---------------get grid fill result-------------------
 function GetAllCreditNotes(showAllYN) {
     try {
-        debugger;
+      
         var data = { "showAllYN": showAllYN };
         var ds = {};
         ds = GetDataFromServer("CreditNotes/GetAllCreditNotes/", data);
-        debugger;
+       
         if (ds != '') {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            // debugger;
+           
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -311,7 +269,7 @@ function GetAllCreditNotes(showAllYN) {
 
 //------------------------------- CreditNotes Save-----------------------------//
 function save() {
-    debugger;
+ 
     $("#btnInsertUpdateCreditNotes").trigger('click');
 
 }
@@ -319,7 +277,7 @@ function save() {
 //---------------------------------------Bind All CreditNotes----------------------------------------------//
 function BindAllCreditNotes() {
     try {
-        debugger;
+      
         DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(false)).draw(false);
        
     }
@@ -329,7 +287,7 @@ function BindAllCreditNotes() {
 }
 
 function CreditNotesSaveSuccess(data, status) {
-    debugger;
+   
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -339,7 +297,7 @@ function CreditNotesSaveSuccess(data, status) {
             else {
                 fillCreditNotes($("#ID").val());
             }
-            FillDates();
+        
             BindAllCreditNotes();
             notyAlert('success', JsonResult.Records.Message);
             break;

@@ -50,16 +50,16 @@ $(document).ready(function () {
 //---------------get grid fill result-------------------
 function GetAllItems() {
     try {
-        debugger;
+       
         var data = {};
         var ds = {};
         ds = GetDataFromServer("Item/GetAllItems/", data);
-        debugger;
+       
         if (ds != '') {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            // debugger;
+          
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -86,13 +86,13 @@ function List() {
 //------------------------------- Item Save-----------------------------//
 
 function save() {
-    debugger;
+   
       
         $("#btnInsertUpdateItem").trigger('click');
 }
 
 function ItemSaveSuccess(data, status) {
-    debugger;
+  
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -148,7 +148,7 @@ function GetItemDetailsByID(id) {
 
 //---------------------------------------Fill Items--------------------------------------------------//
 function fillItems(ID) {
-    debugger;
+   
     ChangeButtonPatchView("Item", "btnPatchItemSettab", "Edit");
     var thisItem = GetItemDetailsByID(ID); //Binding Data
     //Hidden
@@ -219,7 +219,7 @@ function DeleteItem() {
 
 function DeleteSuccess(data, status) {
     var i = JSON.parse(data)
-    debugger;
+   
 
     switch (i.Result) {
 
@@ -243,7 +243,7 @@ function DeleteSuccess(data, status) {
 //---------------------------------------Bind All Items----------------------------------------------//
 function BindAllItems() {
     try {
-        debugger;
+      
         DataTables.itemTable.clear().rows.add(GetAllItems()).draw(false);
     }
     catch (e) {
@@ -263,7 +263,7 @@ function reset()
 }
 
 function Add(id) {
-    debugger;
+    
     if (id != 1) {
         $('#AddTab').trigger('click');
     }
@@ -274,7 +274,7 @@ function Add(id) {
 //---------------------------------------Edit Item--------------------------------------------------//
 function Edit(currentObj) {
     //Tab Change on edit click
-    debugger;
+   
    
     $('#AddTab').trigger('click');
     ChangeButtonPatchView("Item", "btnPatchItemSettab", "Edit"); //ControllerName,id of the container div,Name of the action
@@ -294,7 +294,7 @@ function goBack()
 
 function CategoryOnChange(curObj)
 {
-    debugger;
+   
     try
     {
         var CategoryID = curObj.value;

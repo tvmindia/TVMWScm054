@@ -109,6 +109,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@CustomerContactNo", SqlDbType.NVarChar, 50).Value = iCRBillEntry.CustomerContactNo;
                         cmd.Parameters.Add("@CustomerLocation", SqlDbType.NVarChar, 50).Value = iCRBillEntry.CustomerLocation;
                         cmd.Parameters.Add("@PaymentMode", SqlDbType.NVarChar, 20).Value = iCRBillEntry.PaymentMode;
+                        cmd.Parameters.Add("@PaymentRefNo", SqlDbType.NVarChar, 50).Value = iCRBillEntry.PaymentRefNo;
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = iCRBillEntry.Remarks;
                         cmd.Parameters.Add("@STAmount", SqlDbType.Decimal).Value = iCRBillEntry.STAmount;
                         cmd.Parameters.Add("@AMCValidFromDate", SqlDbType.SmallDateTime).Value = iCRBillEntry.AMCValidFromDate;
@@ -190,6 +191,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@ModelNo", SqlDbType.NVarChar,20).Value = iCRBillEntry.ModelNo;
                         cmd.Parameters.Add("@SerialNo", SqlDbType.NVarChar,20).Value = iCRBillEntry.SerialNo;
                         cmd.Parameters.Add("@Discount", SqlDbType.Decimal).Value = iCRBillEntry.Discount;
+                        cmd.Parameters.Add("@PaymentRefNo", SqlDbType.NVarChar, 50).Value = iCRBillEntry.PaymentRefNo;
                         cmd.Parameters.Add("@TotalServiceTaxAmount", SqlDbType.Decimal).Value = iCRBillEntry.TotalServiceTaxAmt;
                         cmd.Parameters.Add("@DetailXML", SqlDbType.Xml).Value = iCRBillEntry.DetailXML;
 
@@ -317,6 +319,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ICRBillEntryHeaderObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : _ICRBillEntryHeaderObj.CustomerName);
                                         _ICRBillEntryHeaderObj.CustomerContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : _ICRBillEntryHeaderObj.CustomerContactNo);
                                         _ICRBillEntryHeaderObj.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : _ICRBillEntryHeaderObj.CustomerLocation);
+                                        _ICRBillEntryHeaderObj.PaymentRefNo = (sdr["PaymentRefNo"].ToString() != "" ? (sdr["PaymentRefNo"].ToString()) : _ICRBillEntryHeaderObj.PaymentRefNo);
                                         _ICRBillEntryHeaderObj.PaymentMode = (sdr["PaymentMode"].ToString() != "" ? (sdr["PaymentMode"].ToString()) : _ICRBillEntryHeaderObj.PaymentMode);
                                         _ICRBillEntryHeaderObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _ICRBillEntryHeaderObj.Remarks);
                                         _ICRBillEntryHeaderObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : _ICRBillEntryHeaderObj.Discount);
