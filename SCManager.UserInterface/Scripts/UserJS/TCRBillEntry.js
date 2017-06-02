@@ -41,6 +41,7 @@ $(document).ready(function () {
            searching: false,
            paging: false,
            data: null,
+           autoWidth: false,
            columns: EG_Columns(),
            columnDefs: EG_Columns_Settings()
        });
@@ -81,6 +82,7 @@ function EG_TableDefn() {
     tempObj.MaterialID = "";
     tempObj.SlNo = 0;
     tempObj.Material = "";
+    tempObj.Description = "";
     tempObj.Quantity = "";
     tempObj.UOM = "";
     tempObj.Rate = "";  
@@ -97,6 +99,7 @@ function EG_Columns() {
                  { "data": "MaterialID", "defaultContent": "<i></i>" },
                 { "data": "SlNo", "defaultContent": "<i></i>" },
                 { "data": "Material", render: function (data, type, row) { return (EG_createCombo(data, 'S', row, 'Material', 'Materials', 'FillUOM')); } },
+                 { "data": "Description", "defaultContent": "<i></i>" },
                 { "data": "Quantity", render: function (data, type, row) { return (EG_createTextBox(data, 'N', row, 'Quantity', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "UOM", "defaultContent": "<i></i>" },
                 { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'Rate', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
@@ -114,11 +117,19 @@ function EG_Columns_Settings() {
 
     var obj = [
         { "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false }, 
-        { "targets": [4], "width": "20%" },
-        { className: "text-right", "targets": [6] },
-        { className: "text-center", "targets": [2,3, 4] },
-        { className: "text-right disabled", "targets": [7] },
-        { className: "text-center disabled", "targets": [5, 8] },
+         { "width": "5%", "targets": 2 },
+         { "width": "15%", "targets": 3 },
+        { "width": "20%", "targets": 4 },
+         { "width": "8%", "targets": 5 },
+        { "width": "8%", "targets": 6 },
+         { "width": "8%", "targets": 7 },
+          { "width": "10%", "targets": 8 },
+          { "width": "5%", "targets": 9 },
+        { className: "text-right", "targets": [7,5] },
+        { className: "text-center", "targets": [2,9] },
+        { className: "text-right disabled", "targets": [8] },
+        { className: "text-center disabled", "targets": [6] },
+         { className: "text-left disabled", "targets": [4] },
         { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8] }
 
     ]
@@ -324,6 +335,7 @@ function FillUOM(row) {
         if (_Materials[i].ItemCode == EG_GridData[row - 1]['Material']) {
             EG_GridData[row - 1]['UOM'] = _Materials[i].UOM;
             EG_GridData[row - 1]['MaterialID'] = _Materials[i].ID;
+            EG_GridData[row - 1]['Description'] = _Materials[i].Description;
             EG_GridData[row - 1]['Rate'] = _Materials[i].SellingRate;
             EG_Rebind();
             break;

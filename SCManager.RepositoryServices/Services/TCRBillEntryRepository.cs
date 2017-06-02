@@ -256,6 +256,7 @@ namespace SCManager.RepositoryServices.Services
                                         _TCRBillEntryDetailObj.Quantity = (sdr["Qty"].ToString() != "" ? int.Parse(sdr["Qty"].ToString()) : 0);
                                         _TCRBillEntryDetailObj.Rate = (sdr["Rate"].ToString() != "" ? decimal.Parse(sdr["Rate"].ToString()) : 0);                                        
                                         _TCRBillEntryDetailObj.Material = (sdr["Material"].ToString() != "" ? (sdr["Material"].ToString()) : _TCRBillEntryDetailObj.Material);
+                                        _TCRBillEntryDetailObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _TCRBillEntryDetailObj.Description);
                                         _TCRBillEntryDetailObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _TCRBillEntryDetailObj.UOM);
                                     }
 

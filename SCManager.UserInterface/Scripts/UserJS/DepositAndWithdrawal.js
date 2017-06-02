@@ -188,6 +188,8 @@ function ClearForm()
     $("#deleteTransactionType").val('');
     $(".hdDepositMode").hide();
     $(".hdChequeStatus").hide();
+    $("#DepositMode").val('');
+    $("#ChequeStatus").val('');
 }
 
 function GetDepositandwithdrawalEntryByID(ID) {
