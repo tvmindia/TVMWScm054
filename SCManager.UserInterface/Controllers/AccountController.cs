@@ -67,6 +67,7 @@ namespace SCManager.UserInterface.Controllers
             return RedirectToAction("Index", "Account");
         }
 
+
         #region Logout
         [HttpGet]
         [AllowAnonymous]
