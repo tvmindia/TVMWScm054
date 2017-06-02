@@ -389,6 +389,7 @@
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\employees.png" />
     <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\hourglass.png" />
     <Content Include="Content\images\indian-rupee.png" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\printer.png" />
