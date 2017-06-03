@@ -132,6 +132,7 @@
     <Compile Include="Contracts\IOfficeBillEntryRepository.cs" />
     <Compile Include="Contracts\IOpeningSettingRepository.cs" />
     <Compile Include="Contracts\IOtherIncomeRepository.cs" />
+    <Compile Include="Contracts\IReceiveFromOtherSCRepository.cs" />
     <Compile Include="Contracts\IReceiveFromTechnicianRepository.cs" />
     <Compile Include="Contracts\IReportRepository.cs" />
     <Compile Include="Contracts\ISalesReturnRepository.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Services\OfficeBillEntryRepository.cs" />
     <Compile Include="Services\OpeningSettingRepository.cs" />
     <Compile Include="Services\OtherIncomeRepository.cs" />
+    <Compile Include="Services\ReceiveFromOtherSCRepository.cs" />
     <Compile Include="Services\ReceiveFromTechnicianRepository.cs" />
     <Compile Include="Services\ReportRepository.cs" />
     <Compile Include="Services\SalesReturnRepository.cs" />

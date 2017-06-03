@@ -17,5 +17,6 @@ namespace SCManager.BusinessService.Contracts
         string GetXMLfromTCRObject(List<TCRBillEntryDetail> tcrDetailObj, string mandatoryProperties, UA ua);
         string GetXMLfromICRObject(List<ICRBillEntryDetail> icrDetailObj, string mandatoryProperties, UA ua);
         string GetXMLfromOfficeObject(List<OfficeBillEntryDetail> officeDetailObj, string mandatoryProperties, UA ua);
+        string GetXMLfromOtherSCReceiptObject(List<ReceiveFromOtherScDetail> receiveFromOtherScDetailObj, string mandatoryProperties, UA ua);
     }
 }
