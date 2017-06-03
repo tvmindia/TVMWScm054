@@ -66,6 +66,8 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<OfficeBillEntryViewModel, OfficeBillEntry>().ReverseMap();
                 config.CreateMap<OfficeBillEntryDetailViewModel, OfficeBillEntryDetail>().ReverseMap();
                 config.CreateMap<JobCallTypesViewModel, JobCallTypes>().ReverseMap();
+                config.CreateMap<ReceiveFromOtherSCViewModel, ReceiveFromOtherSC>().ReverseMap();
+                config.CreateMap<ReceiveFromOtherSCDetailViewModel, ReceiveFromOtherScDetail>().ReverseMap();
             });
         }
     }

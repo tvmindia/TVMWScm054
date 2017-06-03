@@ -173,6 +173,7 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\LocalPurchaseController.cs" />
     <Compile Include="Controllers\OfficeBillEntryController.cs" />
+    <Compile Include="Controllers\ReceiveFromOtherSCController.cs" />
     <Compile Include="Controllers\ReceiveFromTechnicianController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\OpeningSettingController.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Models\OfficeBillEntryViewModel.cs" />
     <Compile Include="Models\OpeningSettingViewModel.cs" />
     <Compile Include="Models\OtherIncomeViewModel.cs" />
+    <Compile Include="Models\ReceiveFromOtherSCViewModel.cs" />
     <Compile Include="Models\ReceiveFromTechnicianViewModel.cs" />
     <Compile Include="Models\ReorderAlertViewModel.cs" />
     <Compile Include="Models\ReportViewModel.cs" />
@@ -549,6 +551,7 @@
     <Content Include="Scripts\UserJS\OfficeBillEntry.js" />
     <Content Include="Scripts\UserJS\OpeningSetting.js" />
     <Content Include="Scripts\UserJS\OtherIncome.js" />
+    <Content Include="Scripts\UserJS\ReceiveFromOtherSC.js" />
     <Content Include="Scripts\UserJS\ReceiveFromTechnician.js" />
     <Content Include="Scripts\UserJS\StockLedger.js" />
     <Content Include="Scripts\UserJS\StockSummary.js" />
@@ -607,6 +610,7 @@
     <Content Include="Views\ICRExpenses\Index.cshtml" />
     <Content Include="Views\DepositAndWithdrawal\Index.cshtml" />
     <Content Include="Views\OfficeBillEntry\Index.cshtml" />
+    <Content Include="Views\ReceiveFromOtherSC\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />
