@@ -65,6 +65,7 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<DepositAndWithdrawalViewModel, DepositAndWithdrawal>().ReverseMap();
                 config.CreateMap<OfficeBillEntryViewModel, OfficeBillEntry>().ReverseMap();
                 config.CreateMap<OfficeBillEntryDetailViewModel, OfficeBillEntryDetail>().ReverseMap();
+                config.CreateMap<JobCallTypesViewModel, JobCallTypes>().ReverseMap();
             });
         }
     }

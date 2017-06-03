@@ -11,8 +11,8 @@ function BindForm(ID)
             $("#ModelCustomerLocation").val(result.CustomerLocation);
             $("#ModelServiceType").val(result.ServiceType);
             $("#ModelCallType").val(result.CallType);
-
-
+            $("#SCCommAmount").val(result.SCCommAmount);
+            
             $("#ModelModelNo").val(result.ModelNo);
             $("#ModelSerialNo").val(result.SerialNo);
             $("#ModelICRNo").val(result.ICRNo);
@@ -22,7 +22,7 @@ function BindForm(ID)
             $("#ModelJobID").val(result.ID);
             BindTechnicianDropDown();
             BindJobNumberDropDown();
-            if (result.CallType == "Repeat") {
+            if (result.ServiceType == "RPT") {
                 $(".calltypehidden").show();
                 $("#ModelRepeat_JobNo").val(result.RepeatJobNo);
                 $("#ModelEmployee").val(result.RepeatEmpName);
@@ -101,7 +101,7 @@ function ValidateJobForm() {
         var fl = true;
         if (($("#ModelJobNo").val()) && ($("#ModelCustomerName").val()) && ($("#ModelCustomerLocation").val()) && ($("#ModelServiceType").val()) && ($("#ModelCallType").val())) {
             fl = true;
-            if ($("#ModelCallType").val() == "Repeat") {
+            if ($("#ModelServiceType").val() == "RPT") {
                 if (($("#ModelRepeat_JobNo").val()) && ($("#ModelEmployee").val())) {
                     fl = true;
                 }
@@ -164,9 +164,9 @@ function JobSaveSuccess(data, status, xhr) {
 }
 
 
-function CallTypeOnChange(curobj) {
+function ServiceTypeOnChange(curobj) {
     try {
-        if (curobj.value != "Repeat") {
+        if (curobj.value != "RPT") {
             $(".calltypehidden").hide();
             $("#ModelRepeat_EmpID").val('');
             $("#ModelRepeat_JobNo").val('');

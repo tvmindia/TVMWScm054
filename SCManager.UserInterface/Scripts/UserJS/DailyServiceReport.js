@@ -15,8 +15,8 @@ $(document).ready(function () {
                { "data": "JobNo", "defaultContent": "<i>-</i>" },
                { "data": "CustomerName", "defaultContent": "<i>-</i>" },
                { "data": "CustomerLocation", "defaultContent": "<i>-</i>" },
-               { "data": "ServiceType", "defaultContent": "<i>-</i>" },
-               { "data": "CallType", "defaultContent": "<i>-</i>" },
+               { "data": "ServiceTypeDescription", "defaultContent": "<i>-</i>" },
+               { "data": "JobCallTypeDescription", "defaultContent": "<i>-</i>" },
                { "data": "ModelNo", "defaultContent": "<i>-</i>" },
                { "data": "SerialNo", "defaultContent": "<i>-</i>" },
                { "data": "CallStatusDescription", "defaultContent": "<i>-</i>" },
@@ -25,9 +25,9 @@ $(document).ready(function () {
                { "data": null, "orderable": false, "defaultContent": '<a data-toggle="tp" data-placement="top" data-delay={"show":2000, "hide":3000} title="Edit Job" href="#" class="actionLink" onclick="JobEdit(this)"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a>' },
                { "data": null, "orderable": false, "defaultContent": '<a data-toggle="tp" data-placement="top" data-delay={"show":2000, "hide":3000} title="Delete Job" href="#" class="DeleteLink" onclick="JobDelete(this)"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>' }
              ],
-             columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
+             columnDefs: [{ "targets": [0,8], "visible": false, "searchable": false },
                   { className: "text-left", "targets": [1,2,3,4,5,6,7,9,10] },
-                  { className: "text-center", "targets": [8,11,12] },
+                  { className: "text-center", "targets": [11,12] },
                   { className: "text-right", "targets": [] }
            ]
          });
@@ -201,7 +201,9 @@ function GetAllServiceReportEntries(id,date) {
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
-            alert(ds.Message);
+            notyAlert('error', ds.Message);
+            var emptyarr = [];
+            return emptyarr;
         }
     }
     catch (e) {
@@ -233,7 +235,9 @@ function GetServiceRegisterSummary(date) {
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
-            alert(ds.Message);
+            notyAlert('error', ds.Message);
+            var emptyarr = [];
+            return emptyarr;
         }
     }
     catch (e) {

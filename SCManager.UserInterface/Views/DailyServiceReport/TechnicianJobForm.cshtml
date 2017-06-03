@@ -94,6 +94,17 @@
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
                                             </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    @Html.LabelFor(model => model.CallType)
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @Html.DropDownListFor(model => model.CallType, Model.CallTypes, "--Select Call Types--", new { @class = "form-control", @style = "padding:4px 12px;", @id = "ModelCallType" })
+                                                    @Html.ValidationMessageFor(model => model.CallType, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-md-1 mandatory"></div>
+                                            </div>
                                             <div class="form-group">
                                                 <div class="col-md-4">
                                                     @Html.LabelFor(model => model.ServiceType)
@@ -101,22 +112,12 @@
 
                                                 <div class="col-md-6">
 
-                                                    @Html.DropDownListFor(model => model.ServiceType, Model.ServiceTypes, "--Select Service Types--", new { @class = "form-control", @style = "padding:4px 12px;", @id = "ModelServiceType" })
+                                                    @Html.DropDownListFor(model => model.ServiceType, Model.ServiceTypes, "--Select Service Types--", new { @class = "form-control", @onchange = "ServiceTypeOnChange(this)", @style = "padding:4px 12px;", @id = "ModelServiceType" })
                                                     @Html.ValidationMessageFor(model => model.ServiceType, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <div class="col-md-4">
-                                                    @Html.LabelFor(model => model.CallType)
-                                                </div>
-                                                <div class="col-md-6">
-                                                    @Html.DropDownListFor(model => model.CallType, Model.CallTypes, "--Select Call Types--", new { @class = "form-control", @onchange = "CallTypeOnChange(this)", @style = "padding:4px 12px;", @id = "ModelCallType" })
-                                                    @Html.ValidationMessageFor(model => model.CallType, "", new { @class = "text-danger" })
-                                                </div>
-                                                <div class="col-md-1 mandatory"></div>
-                                            </div>
 
                                             <div class="form-group calltypehidden">
                                                 <div class="col-md-4">
@@ -141,6 +142,10 @@
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
                                             </div>
+
+                                        
+
+
                                             <div class="form-group">
                                                 <div class="col-md-4">
                                                     @Html.LabelFor(model => model.ModelNo)
@@ -172,6 +177,18 @@
 
                                                 </div>
 
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <div class="col-md-4">
+
+                                                    @Html.LabelFor(model => model.SCCommAmount)
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.SCCommAmount, new { htmlAttributes = new { @class = "form-control", style = "text-align:right" } })
+                                                    @Html.ValidationMessageFor(model => model.SCCommAmount, "", new { @class = "text-danger" })
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-md-4">

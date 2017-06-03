@@ -15,6 +15,8 @@ namespace SCManager.UserInterface.Models
         public string RepeatEmpName { get; set; }
         public string RepeatJobNo { get; set; }
         public string CallStatusDescription { get; set; }
+        public string ServiceTypeDescription { get; set; }
+        public string JobCallTypeDescription { get; set; }
         public string EmpSelector { get; set; }
         public string CallStatusCode { get; set; }
         public List<SelectListItem> Employees { get; set; }
@@ -73,6 +75,17 @@ namespace SCManager.UserInterface.Models
     
         public string TechnicianRemark { get; set; }
 
+        [Display(Name = "Special Commission(₹)")]
+        [Range(0.00, 1000000000.00, ErrorMessage = "Please enter a numeric")]
+        public decimal? SCCommAmount { get; set; }
+
         public LogDetailsViewModel logDetails { get; set; }
+    }
+
+    public class JobCallTypesViewModel
+    {
+        public string SCCode { get; set; }
+        public string Code { get; set; }
+        public string Description { get; set; }
     }
 }

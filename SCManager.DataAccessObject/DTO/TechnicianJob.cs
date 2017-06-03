@@ -23,10 +23,7 @@ namespace SCManager.DataAccessObject.DTO
         public string TechnicianRemark { get; set; }
         public Guid Repeat_EmpID { get; set; }
         public string Repeat_JobNo { get; set; }
+        public decimal? SCCommAmount { get; set; }
         public LogDetails logDetails { get; set; }
-
-
-
-
     }
 }

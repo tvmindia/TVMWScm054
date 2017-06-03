@@ -10,11 +10,12 @@ namespace SCManager.RepositoryServices.Contracts
     public interface IDailyServiceRepository
     {
         object InsertJob(TechnicianJob technicianJob);
-        List<ServiceType> GetAllServiceTypes();
+        List<ServiceType> GetAllServiceTypes(string SCCode);
         List<Job> GetAllDailyJobs(string SCCode);
 
         object DeleteJob(Job job);
         object UpdateJob(TechnicianJob technicianJob);
         List<ServiceRegistrySummary> GetServiceRegistrySummary(string SCCode,string serviceDate);
+        List<JobCallTypes> GetAllJobCallTypes(string SCCode);
     }
 }

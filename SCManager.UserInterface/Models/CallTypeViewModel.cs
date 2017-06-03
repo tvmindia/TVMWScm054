@@ -10,4 +10,5 @@ namespace SCManager.UserInterface.Models
       
         public string Code { get; set; }
     }
+
 }

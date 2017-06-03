@@ -25,8 +25,8 @@ namespace SCManager.BusinessService.Services
             List<ServiceType> ServiceTypeList = null;
            try
             {
-                ServiceTypeList = _dailyServiceRepository.GetAllServiceTypes();
-                ServiceTypeList = ServiceTypeList == null ? null : ServiceTypeList.Where(stype => stype.SCCode == ua.SCCode).ToList();
+                ServiceTypeList = _dailyServiceRepository.GetAllServiceTypes(ua.SCCode);
+                ServiceTypeList = ServiceTypeList == null ? null : ServiceTypeList.Where(stype => stype.SCCode == ua.SCCode && stype.SubType== "SERVICE").ToList();
             }
             catch(Exception ex)
             {
@@ -98,18 +98,18 @@ namespace SCManager.BusinessService.Services
             return EmpList;
         }
 
-        public List<CallTypes> GetCallTypes(UA ua)
+        public List<JobCallTypes> GetJobCallTypes(string SCCode)
         {
-            List<CallTypes> CallTypeList = null;
+            List<JobCallTypes> JobCallTypeList = null;
             try
             {
-                CallTypeList = _callandServiceTypesBusiness.GetCallTypes(ua);
+                JobCallTypeList = _dailyServiceRepository.GetAllJobCallTypes(SCCode);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return CallTypeList;
+            return JobCallTypeList;
         }
 
         public List<Employees> GetAllTechnicians(UA ua)
@@ -208,5 +208,7 @@ namespace SCManager.BusinessService.Services
             }
             return ServiceRegistrySummaryList;
         }
+
+       
     }
 }

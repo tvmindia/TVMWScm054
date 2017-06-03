@@ -219,15 +219,15 @@ namespace SCManager.UserInterface.Controllers
             jobVM.ServiceTypes = selectListItem;
             selectListItem = null;
             selectListItem = new List<SelectListItem>();
-            List<CallTypeViewModel> calltypeListVM = Mapper.Map<List<CallTypes>, List<CallTypeViewModel>>(_dailyServiceBusiness.GetCallTypes(ua));
-            if(calltypeListVM!=null)
+            List<JobCallTypesViewModel> jobcalltypeListVM = Mapper.Map<List<JobCallTypes>, List<JobCallTypesViewModel>>(_dailyServiceBusiness.GetJobCallTypes(ua.SCCode));
+            if(jobcalltypeListVM != null)
             {
-                foreach (CallTypeViewModel callTypevm in calltypeListVM)
+                foreach (JobCallTypesViewModel jobcallTypevm in jobcalltypeListVM)
                 {
                     selectListItem.Add(new SelectListItem
                     {
-                        Text = callTypevm.Code,
-                        Value = callTypevm.Code,
+                        Text = jobcallTypevm.Description,
+                        Value = jobcallTypevm.Code,
                         Selected = false
                     });
                 }

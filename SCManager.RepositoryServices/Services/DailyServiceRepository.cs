@@ -18,7 +18,7 @@ namespace SCManager.RepositoryServices.Services
             _databaseFactory = databaseFactory;
         }
         #region GetAllServiceTypes
-        public List<ServiceType> GetAllServiceTypes()
+        public List<ServiceType> GetAllServiceTypes(string SCCode)
         {
             List<ServiceType> serviceTypeList = null;
             try
@@ -34,6 +34,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Connection = con;
                         cmd.CommandText = "[GetAllServiceTypes]";
                         cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = SCCode;
                         using (SqlDataReader sdr = cmd.ExecuteReader())
                         {
                             if ((sdr != null) && (sdr.HasRows))
@@ -63,6 +64,54 @@ namespace SCManager.RepositoryServices.Services
             return serviceTypeList;
         }
         #endregion GetAllServiceTypes
+
+        #region GetAllJobCallTypes
+        public List<JobCallTypes> GetAllJobCallTypes(string SCCode)
+        {
+            List<JobCallTypes> JobCallTypesList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[GetAllJobCallTypes]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = SCCode;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                JobCallTypesList = new List<JobCallTypes>();
+                                while (sdr.Read())
+                                {
+                                    JobCallTypes _jobCallTypes = new JobCallTypes();
+                                    {
+                                        _jobCallTypes.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _jobCallTypes.SCCode);
+                                        _jobCallTypes.Code = (sdr["Code"].ToString() != "" ? (sdr["Code"].ToString()) : _jobCallTypes.Code);
+                                        _jobCallTypes.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _jobCallTypes.Description);
+                                      
+                                    }
+                                    JobCallTypesList.Add(_jobCallTypes);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return JobCallTypesList;
+        }
+        #endregion GetAllJobCallTypes
+
         #region GetAllDailyJobs
         public List<Job> GetAllDailyJobs(string SCCode)
         {
@@ -113,6 +162,9 @@ namespace SCManager.RepositoryServices.Services
                                         _job.RepeatEmpName= (sdr["Repeat_EmpName"].ToString() != "" ? (sdr["Repeat_EmpName"].ToString()) : _job.TechnicianRemark);
                                         _job.RepeatJobNo = (sdr["Repeat_JobNo"].ToString() != "" ? (sdr["Repeat_JobNo"].ToString()) : _job.RepeatJobNo);
                                         _job.CallStatusDescription = (sdr["CallStatusDescription"].ToString() != "" ? (sdr["CallStatusDescription"].ToString()) : _job.CallStatusDescription);
+                                        _job.JobCallTypeDescription= (sdr["JobCallTypeDescription"].ToString() != "" ? (sdr["JobCallTypeDescription"].ToString()) : _job.JobCallTypeDescription);
+                                        _job.ServiceTypeDescription = (sdr["ServiceTypeDescription"].ToString() != "" ? (sdr["ServiceTypeDescription"].ToString()) : _job.ServiceTypeDescription);
+                                        _job.SCCommAmount= (sdr["SpecialCommission"].ToString() != "" ? decimal.Parse(sdr["SpecialCommission"].ToString()) : _job.SCCommAmount);
                                     }
                                     jobList.Add(_job);
                                 }
@@ -168,7 +220,7 @@ namespace SCManager.RepositoryServices.Services
                         {
                             cmd.Parameters.Add("@Repeat_JobNo", SqlDbType.NVarChar, 50).Value = technicianJob.Repeat_JobNo;
                         }
-                       
+                        cmd.Parameters.Add("@SpecialCommission", SqlDbType.Decimal).Value = technicianJob.SCCommAmount;
                         cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = technicianJob.logDetails.CreatedBy;
                         cmd.Parameters.Add("@CreatedDate", SqlDbType.SmallDateTime).Value = technicianJob.logDetails.CreatedDate;
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
@@ -255,7 +307,7 @@ namespace SCManager.RepositoryServices.Services
                         {
                             cmd.Parameters.Add("@Repeat_JobNo", SqlDbType.NVarChar, 50).Value = technicianJob.Repeat_JobNo;
                         }
-
+                        cmd.Parameters.Add("@SpecialCommission", SqlDbType.Decimal).Value = technicianJob.SCCommAmount;
                         cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = technicianJob.logDetails.UpdatedBy;
                         cmd.Parameters.Add("@UpdatedDate", SqlDbType.SmallDateTime).Value = technicianJob.logDetails.UpdatedDate;
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
