@@ -34,7 +34,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         Const c = new Const();
-        #region InsertUpdateTCRBillEntry
+        #region InsertUpdateReceiveFromOtherSC
         [HttpPost]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string InsertUpdateReceiveFromOtherSC(ReceiveFromOtherSCViewModel ReceiveFromOtherSCViewModelObj)
@@ -73,7 +73,7 @@ namespace SCManager.UserInterface.Controllers
             }
             // return result;
         }
-        #endregion InsertUpdateTCRBillEntry
+        #endregion InsertUpdateReceiveFromOtherSC
 
         #region GetAllOtherSCReceipt
         [HttpGet]

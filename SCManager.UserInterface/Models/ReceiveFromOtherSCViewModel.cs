@@ -20,6 +20,7 @@ namespace SCManager.UserInterface.Models
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? InvoiceDate { get; set; }
         public string InvoiceDateFormatted { get; set; }
+        [Required(ErrorMessage = "Service Center is missing")]
         [Display(Name = "From Service Center")]      
         public string FromSCName { get; set; }
         [DataType(DataType.MultilineText)]
