@@ -153,6 +153,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\MappingConfig.cs" />
+    <Compile Include="App_Start\SiteKeys.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -512,6 +513,7 @@
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\semanticui.scss" />
+    <None Include="Properties\PublishProfiles\AlbertSCpublish.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -567,7 +569,9 @@
     <Content Include="Views\Shared\_LayoutPage.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -618,7 +622,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />
-    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\OfficeStockReport\" />
   </ItemGroup>
   <ItemGroup>

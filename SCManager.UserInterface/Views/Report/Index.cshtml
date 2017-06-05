@@ -1,14 +1,14 @@
 ﻿
 @using SCManager.UserInterface.Models;
 @model IEnumerable<SystemReportViewModel>
-
+@using SCManager.UserInterface.App_Start
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 @section styles {
     
-    @Styles.Render("~/Content/UserCSS/Report")
+    @Styles.RenderFormat(SiteKeys.StyleVersion,"~/Content/UserCSS/Report")
 }
 
 <div class="container">

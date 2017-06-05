@@ -1,13 +1,13 @@
 ﻿@model SCManager.UserInterface.Models.LocalPurchaseViewModel
-
+@using SCManager.UserInterface.App_Start
 @{
     ViewBag.Title = "Local Purchase";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
 @section styles {
-    @Styles.Render("~/Content/DataTables/css/datatable")
-    @Styles.Render("~/Content/bootstrapdatepicker")   
+    @Styles.RenderFormat(SiteKeys.StyleVersion,"~/Content/DataTables/css/datatable")
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/bootstrapdatepicker")   
 }
 <div class="col-md-12">
     <div class="SCHeader col-md-6">
@@ -228,12 +228,10 @@
 <datalist id="Materials" onfocus='this.size=10;' onblur='this.size=1;'
           onchange='this.size=1; this.blur();'></datalist>
 @section Scripts {
-    @Scripts.Render("~/bundles/datatable")
-    @Scripts.Render("~/bundles/jqueryunobtrusiveajaxvalidate")
-    @Scripts.Render("~/bundles/bootstrapdatepicker")
-    @Scripts.Render("~/bundles/LocalPurchase")
-    @Scripts.Render("~/bundles/editableGrid")
-
-
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/datatable")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/jqueryunobtrusiveajaxvalidate")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/bootstrapdatepicker")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/LocalPurchase")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/editableGrid")
 }
 

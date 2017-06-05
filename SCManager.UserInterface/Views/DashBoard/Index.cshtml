@@ -1,7 +1,9 @@
-﻿@{
+﻿@using SCManager.UserInterface.App_Start
+@{
     ViewBag.Title = "SC Manager";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
+
 <div class="col-md-12">
     <div class="SCHeader col-md-6">Dashboard</div>
     <div class="container-fluid  col-md-6" ></div>
@@ -91,6 +93,6 @@
 
 
     @section Scripts {
-        @Scripts.Render("~/bundles/Dashboard")
+        @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/Dashboard")
 
     }
