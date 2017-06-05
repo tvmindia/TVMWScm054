@@ -191,7 +191,7 @@ function FillJobRelatedFields() {
         if (ds != '') {
             ds = JSON.parse(ds);
         }
-        if (ds.Result == "OK") {
+        if (ds.Result == "OK") { 
             try {
                 $("#CustomerName").val(ds.Record.CustomerName);
                 $("#CustomerLocation").val(ds.Record.CustomerLocation);
@@ -319,7 +319,6 @@ function DeleteItem(currentObj) {
 
 function BindICRBillEntryFields(Records) {
     try {
-
       
         ChangeButtonPatchView('ICRBillEntry', 'btnPatchICRBillEntrySettab', 'Edit');
         $('#HeaderID').val(Records.ID);
@@ -336,24 +335,34 @@ function BindICRBillEntryFields(Records) {
         $("#ModelNo").val(Records.ModelNo);
         $("#PaymentRefNo").val(Records.PaymentRefNo);
         $("#SerialNo").val(Records.SerialNo);
-        $("#AMCValidFromDate").val(Records.AMCValidFromDate);
-        $("#AMCValidtoDate").val(Records.AMCValidToDate);
+        //$("#AMCValidFromDate").val(Records.AMCValidFromDate);
+        //$("#AMCValidtoDate").val(Records.AMCValidToDate);
         $('#TotalServiceTaxAmt').val(roundoff(Records.TotalServiceTaxAmt));
         $("#subtotal").val(roundoff(Records.STAmount))
         $("#grandtotal").val(roundoff(Records.GrandTotal));
         EG_Rebind_WithData(Records.ICRBillEntryDetail, 1);
        // $('#ICRNo').attr('readonly', 'readonly');
 
-        var $datepicker = $('#ICRDate');
+       
         if (Records.ICRDate != null)
+        {
+            var $datepicker = $('#ICRDate');
             $datepicker.datepicker('setDate', new Date(Records.ICRDate));
+        }            
 
         if (Records.AMCValidFromDate != null)
-        var $datepicker = $('#AMCValidFromDate');      
-        $datepicker.datepicker('setDate', new Date(Records.AMCValidFromDate));
-        var $datepicker = $('#AMCValidtoDate');
+        {
+            var $datepicker = $('#AMCValidFromDate');
+            $datepicker.datepicker('setDate', new Date(Records.AMCValidFromDate));
+        }
+        
+               
         if (Records.AMCValidToDate != null)
-        $datepicker.datepicker('setDate', new Date(Records.AMCValidToDate));
+        {
+            var $datepicker = $('#AMCValidtoDate');
+            $datepicker.datepicker('setDate', new Date(Records.AMCValidToDate));
+        }
+       
 
     } catch (e) {
         notyAlert('error', e.message);
