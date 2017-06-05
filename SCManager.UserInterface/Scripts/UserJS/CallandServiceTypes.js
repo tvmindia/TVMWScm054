@@ -2,7 +2,7 @@
 $(document).ready(function () {
     try
     {
-        FillCallTypes()
+     
         FillServiceTypes()
     }
     catch (e) {
@@ -33,46 +33,25 @@ function CallandServiceTypesSaveSuccess(data, status) {
     }
 }
 //---------------------------------------Fill Employee--------------------------------------------------//
-function FillCallTypes() {
-  
-   
-    var thisType = GetCallTypes(); //Binding Data
-    //Hidden
 
-    $("#MajorCommission").val(roundoff(thisType[1].MajorCommission));
-    $("#MinorCommission").val(roundoff(thisType[3].MinorCommission));
-    $("#MandatoryCommission").val(roundoff(thisType[2].MandatoryCommission));
-    $("#RepeatCommission").val(roundoff(thisType[4].RepeatCommission));
-    $("#DemoCommission").val(roundoff(thisType[0].DemoCommission));
-    
-}
 function FillServiceTypes()
 {
    
     var thisType = GetServiceTypes(); //Binding Data
-    $("#AMC1Commission").val(roundoff(thisType[0].AMC1Commission));
-    $("#AMC2Commission").val(roundoff(thisType[1].AMC2Commission));
+    if (thisType)
+    {
+    $("#AMC1Commission").val(roundoff(thisType.AMC1Commission));
+    $("#AMC2Commission").val(roundoff(thisType.AMC2Commission));
+    $("#MajorCommission").val(roundoff(thisType.MajorCommission));
+    $("#MinorCommission").val(roundoff(thisType.MinorCommission));
+    $("#MandatoryCommission").val(roundoff(thisType.MandatoryCommission));
+    $("#RepeatCommission").val(roundoff(thisType.RepeatCommission));
+    $("#DemoCommission").val(roundoff(thisType.DemoCommission));
+    }
+  
 }
 //---------------------------------------Get Call and service Details-------------------------------------//
-function GetCallTypes() {
-    try {
-        var data = { };
-        var ds = {};
-        ds = GetDataFromServer("CallandServiceTypes/GetCallTypes/", data);
-        if (ds != '') {
-            ds = JSON.parse(ds);
-        }
-        if (ds.Result == "OK") {
-            return ds.Record;
-        }
-        if (ds.Result == "ERROR") {
-            alert(ds.Message);
-        }
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
+
 
 function GetServiceTypes() {
     try {
@@ -86,7 +65,8 @@ function GetServiceTypes() {
             return ds.Record;
         }
         if (ds.Result == "ERROR") {
-            alert(ds.Message);
+            notyAlert('error', ds.Message);
+            
         }
     }
     catch (e) {

@@ -9,9 +9,9 @@ namespace SCManager.RepositoryServices.Contracts
 {
   public  interface ICallandServiceTypesRepository
     {
-        string UpdateServiceType(ServiceTypes serviceTypesObj);
-        string UpdateCallType(CallTypes callTypesObj);
+        Object UpdateServiceTypesAndCommission(ServiceTypes serviceTypesObj);
+       
         List<ServiceTypes> GetServiceTypes(UA UA);
-        List<CallTypes> GetCallTypes(UA UA);
+      
     }
 }

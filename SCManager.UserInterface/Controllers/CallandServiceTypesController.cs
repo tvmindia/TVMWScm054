@@ -31,25 +31,23 @@ namespace SCManager.UserInterface.Controllers
         {
             return View();
         }
-        #region GetCallTypes
-        [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
-        public string GetCallTypes()
-        {
-            UA ua = new UA();
-            List<CallandServiceTypesViewModel> callTypeList = Mapper.Map<List<CallTypes>, List<CallandServiceTypesViewModel>>(_iCallandServiceTypesBusiness.GetCallTypes(ua));
-            return JsonConvert.SerializeObject(new { Result = "OK", Record = callTypeList });
-
-        }
-        #endregion GetCallTypes
+      
         #region GetServiceTypes
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetServiceTypes()
         {
-            UA ua = new UA();
-            List<CallandServiceTypesViewModel> ServiceTypeList = Mapper.Map<List<ServiceTypes>, List<CallandServiceTypesViewModel>>(_iCallandServiceTypesBusiness.GetServiceTypes(ua));
-            return JsonConvert.SerializeObject(new { Result = "OK", Record =ServiceTypeList });
+            try
+            {
+                UA ua = new UA();
+                CallandServiceTypesViewModel _serviceType = Mapper.Map<ServiceTypes, CallandServiceTypesViewModel>(_iCallandServiceTypesBusiness.GetServiceTypes(ua));
+                return JsonConvert.SerializeObject(new { Result = "OK", Record = _serviceType });
+            }
+            catch(Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+         
 
         }
         #endregion GetServiceTypes
@@ -57,12 +55,11 @@ namespace SCManager.UserInterface.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
-        public string UpdateCallandServiceTypes(CallandServiceTypesViewModel callandServiceTypesViewModel)
+        public string UpdateServiceTypes(CallandServiceTypesViewModel callandServiceTypesViewModel)
         {
             object result = null;
             if (ModelState.IsValid)
             {
-
                 try
                 {
                     UA ua = new UA();
@@ -73,12 +70,8 @@ namespace SCManager.UserInterface.Controllers
                     callandServiceTypesViewModel.logDetails.UpdatedBy = callandServiceTypesViewModel.logDetails.CreatedBy;
                     callandServiceTypesViewModel.logDetails.UpdatedDate = callandServiceTypesViewModel.logDetails.CreatedDate;
                     callandServiceTypesViewModel.SCCode = ua.SCCode;
-
-
-                    result = _iCallandServiceTypesBusiness.UpdateCallandServiceTypes(Mapper.Map<CallandServiceTypesViewModel, CallTypes>(callandServiceTypesViewModel),Mapper.Map<CallandServiceTypesViewModel,ServiceTypes>(callandServiceTypesViewModel));
-
+                    result = _iCallandServiceTypesBusiness.UpdateServiceTypesAndCommission(Mapper.Map<CallandServiceTypesViewModel,ServiceTypes>(callandServiceTypesViewModel));
                     return JsonConvert.SerializeObject(new { Result = "OK", Records = result });
-
                 }
                 catch (Exception ex)
                 {
@@ -96,12 +89,10 @@ namespace SCManager.UserInterface.Controllers
                     }
                 }
                 return JsonConvert.SerializeObject(new { Result = "VALIDATION", Message = string.Join(",", modelErrors) });
-                //return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "Please Check the values" });
             }
 
         }
         #endregion UpdateCallandServiceTypes
-
         #region ButtonStyling
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]

@@ -15,36 +15,66 @@ namespace SCManager.BusinessService.Services
         {
             _iCallandServiceTypesRepository = iCallandServiceTypesRepository;
         }
-        public string UpdateCallandServiceTypes(CallTypes callTypesObj,ServiceTypes serviceTypesObj)
+        public Object UpdateServiceTypesAndCommission(ServiceTypes serviceTypesObj)
         {
-            string result = null;
-            try
-            {              
-                
-                    result = _iCallandServiceTypesRepository.UpdateCallType(callTypesObj);
-                if(result=="1")
-                {
-                    result = _iCallandServiceTypesRepository.UpdateServiceType(serviceTypesObj);
-                }
-                
+         try
+            {
+                // result = _iCallandServiceTypesRepository.UpdateCallType(callTypesObj);
+                return _iCallandServiceTypesRepository.UpdateServiceTypesAndCommission(serviceTypesObj);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return result;
+             
         }
-        public List<CallTypes> GetCallTypes(UA UA)
-        {
-            List<CallTypes> callTypesList = null;
-            callTypesList = _iCallandServiceTypesRepository.GetCallTypes(UA);
-            return callTypesList;
-        }
-        public List<ServiceTypes> GetServiceTypes(UA UA)
+      
+        public ServiceTypes GetServiceTypes(UA UA)
         {
             List<ServiceTypes> serviceTypesList = null;
-            serviceTypesList = _iCallandServiceTypesRepository.GetServiceTypes(UA);
-            return serviceTypesList;
+            ServiceTypes _serviceTypes = null;
+            try
+            {
+                serviceTypesList = _iCallandServiceTypesRepository.GetServiceTypes(UA);
+                if(serviceTypesList!=null)
+                {
+                    _serviceTypes = new ServiceTypes();
+                    foreach (ServiceTypes st in serviceTypesList)
+                    {
+                        switch (st.Code)
+                        {
+                            case "DMO":
+                                _serviceTypes.DemoCommission = st.DemoCommission;
+                                break;
+                            case "MJR":
+                                _serviceTypes.MajorCommission = st.MajorCommission;
+                                break;
+                            case "MND":
+                                _serviceTypes.MandatoryCommission = st.MandatoryCommission;
+                                break;
+                            case "MNR":
+                                _serviceTypes.MinorCommission = st.MinorCommission;
+                                break;
+                            case "RPT":
+                                _serviceTypes.RepeatCommission = st.RepeatCommission;
+                                break;
+                            case "AMC1":
+                                _serviceTypes.AMC1Commission = st.AMC1Commission;
+                                break;
+                            case "AMC2":
+                                _serviceTypes.AMC2Commission = st.AMC2Commission;
+                                break;
+
+                        }
+                    
+                }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return _serviceTypes;
         }
     }
 }

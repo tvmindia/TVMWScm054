@@ -26,70 +26,7 @@ namespace SCManager.RepositoryServices.Services
 
         #region Methods
 
-        #region GetCallTypes
-        public List<CallTypes> GetCallTypes(UA UA)
-        {
-            List<CallTypes> callTypeslist = null;
-            try
-            {
-                using (SqlConnection con = _databaseFactory.GetDBConnection())
-                {
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        if (con.State == ConnectionState.Closed)
-                        {
-                            con.Open();
-                        }
-                        cmd.Connection = con;
-                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
-                        cmd.CommandText = "[GetCallTypes]";
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        using (SqlDataReader sdr = cmd.ExecuteReader())
-                        {
-                            if ((sdr != null) && (sdr.HasRows))
-                            {
-                                callTypeslist = new List<CallTypes>();
-                                while (sdr.Read())
-                                {
-                                    CallTypes _CallTypesObj = new CallTypes();
-                                    {
-                                        _CallTypesObj.Code = (sdr["Code"].ToString() != "" ? sdr["Code"].ToString() : _CallTypesObj.Code);
-                                        if (_CallTypesObj.Code== "Demo")
-                                        {
-                                            _CallTypesObj.DemoCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _CallTypesObj.DemoCommission);
-                                        }
-                                        else if(_CallTypesObj.Code == "Major")
-                                        {
-                                            _CallTypesObj.MajorCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _CallTypesObj.MajorCommission);
-                                        }
-                                        else if (_CallTypesObj.Code == "Mandatory")
-                                        {
-                                            _CallTypesObj.MandatoryCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _CallTypesObj.MandatoryCommission);
-                                        }
-                                        else if (_CallTypesObj.Code == "Minor")
-                                        {
-                                            _CallTypesObj.MinorCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _CallTypesObj.MinorCommission);
-                                        }
-                                        else
-                                        {
-                                            _CallTypesObj.RepeatCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _CallTypesObj.RepeatCommission);
-                                        }
-                                    }
-
-                                    callTypeslist.Add(_CallTypesObj);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return callTypeslist;
-        }
-        #endregion  GetCallTypes
+      
 
         #region GetServiceTypes
         public List<ServiceTypes> GetServiceTypes(UA UA)
@@ -119,16 +56,32 @@ namespace SCManager.RepositoryServices.Services
                                     ServiceTypes _ServiceTypesObj = new ServiceTypes();
                                     {
                                         _ServiceTypesObj.Code = (sdr["Code"].ToString() != "" ? sdr["Code"].ToString() : _ServiceTypesObj.Code);
-                                        if(_ServiceTypesObj.Code== "AMC1")
+                                        switch(_ServiceTypesObj.Code)
                                         {
-                                            _ServiceTypesObj.AMC1Commission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _ServiceTypesObj.AMC1Commission);
+                                            case "DMO":
+                                                _ServiceTypesObj.DemoCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _ServiceTypesObj.DemoCommission);
+                                                break;
+                                            case "MJR":
+                                                _ServiceTypesObj.MajorCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _ServiceTypesObj.MajorCommission);
+                                                break;
+                                            case "MND":
+                                                _ServiceTypesObj.MandatoryCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _ServiceTypesObj.MandatoryCommission);
+                                                break;
+                                            case "MNR":
+                                                _ServiceTypesObj.MinorCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _ServiceTypesObj.MinorCommission);
+                                                break;
+                                            case "RPT":
+                                                _ServiceTypesObj.RepeatCommission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _ServiceTypesObj.RepeatCommission);
+                                                break;
+                                            case "AMC1":
+                                                _ServiceTypesObj.AMC1Commission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _ServiceTypesObj.AMC1Commission);
+                                                break;
+                                            case "AMC2":
+                                                _ServiceTypesObj.AMC2Commission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _ServiceTypesObj.AMC2Commission);
+                                                break;
+                                            
                                         }
-                                        else
-                                        {
-                                            _ServiceTypesObj.AMC2Commission = (sdr["Commission"].ToString() != "" ? float.Parse(sdr["Commission"].ToString()) : _ServiceTypesObj.AMC2Commission);
-                                        }
-                                       
-                                    }
+                                     }
 
                                     serviceTypeslist.Add(_ServiceTypesObj);
                                 }
@@ -145,53 +98,10 @@ namespace SCManager.RepositoryServices.Services
         }
         #endregion  GetServiceTypes
 
-        #region UpdateCallType
-        public string UpdateCallType(CallTypes callTypesObj)
-        {
-            SqlParameter outParameter = null;
-            try
-            {
-
-                using (SqlConnection con = _databaseFactory.GetDBConnection())
-                {
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        if (con.State == ConnectionState.Closed)
-                        {
-                            con.Open();
-                        }
-                        cmd.Connection = con;
-                        cmd.CommandText = "[UpdateCallType]";
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = callTypesObj.SCCode;
-                        cmd.Parameters.Add("@Code", SqlDbType.NVarChar, 20).Value = callTypesObj.Code;
-                        cmd.Parameters.Add("@MinorCommission", SqlDbType.Decimal).Value = callTypesObj.MinorCommission;
-                        cmd.Parameters.Add("@MajorCommission", SqlDbType.Decimal).Value = callTypesObj.MajorCommission;
-                        cmd.Parameters.Add("@MandatoryCommission", SqlDbType.Decimal).Value = callTypesObj.MandatoryCommission;
-                        cmd.Parameters.Add("@RepeatCommission", SqlDbType.Decimal).Value = callTypesObj.RepeatCommission;
-                        cmd.Parameters.Add("@DemoCommission", SqlDbType.Decimal).Value = callTypesObj.DemoCommission;
-                        cmd.Parameters.Add("@SubType", SqlDbType.NChar,10).Value = callTypesObj.SubType;
-                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = callTypesObj.logDetails.CreatedBy;
-                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.SmallDateTime).Value = callTypesObj.logDetails.CreatedDate;
-
-                        outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
-                        outParameter.Direction = ParameterDirection.Output;
-                        cmd.ExecuteNonQuery();
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return outParameter.Value.ToString();
-           
-        }
-        #endregion UpdateCallType
+      
 
         #region UpdateServiceType
-        public string UpdateServiceType(ServiceTypes serviceTypesObj)
+        public Object UpdateServiceTypesAndCommission(ServiceTypes serviceTypesObj)
         {
             SqlParameter outParameter = null;
             try
@@ -210,6 +120,11 @@ namespace SCManager.RepositoryServices.Services
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = serviceTypesObj.SCCode;
                         cmd.Parameters.Add("@Code", SqlDbType.NVarChar, 20).Value = serviceTypesObj.Code;
+                        cmd.Parameters.Add("@MinorCommission", SqlDbType.Decimal).Value = serviceTypesObj.MinorCommission;
+                        cmd.Parameters.Add("@MajorCommission", SqlDbType.Decimal).Value = serviceTypesObj.MajorCommission;
+                        cmd.Parameters.Add("@MandatoryCommission", SqlDbType.Decimal).Value = serviceTypesObj.MandatoryCommission;
+                        cmd.Parameters.Add("@RepeatCommission", SqlDbType.Decimal).Value = serviceTypesObj.RepeatCommission;
+                        cmd.Parameters.Add("@DemoCommission", SqlDbType.Decimal).Value = serviceTypesObj.DemoCommission;
                         cmd.Parameters.Add("@AMC1Commission", SqlDbType.Decimal).Value = serviceTypesObj.AMC1Commission;
                         cmd.Parameters.Add("@AMC2Commission", SqlDbType.Decimal).Value = serviceTypesObj.AMC2Commission;
                         cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = serviceTypesObj.logDetails.CreatedBy;
