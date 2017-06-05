@@ -13,20 +13,20 @@ using System.Web.Mvc;
 namespace SCManager.UserInterface.Controllers
 {
     [CustomAuthenticationFilter]
-    public class ReceiveFromOtherSCController : Controller
+    public class IssueToOtherSCController : Controller
     {
         #region Constructor_Injection
 
 
-        IReceiveFromOtherSCBusiness _iReceiveFromOtherSCBusiness;
-        
-        public ReceiveFromOtherSCController(IReceiveFromOtherSCBusiness iReceiveFromOtherSCBusiness)
+        IIssueToOtherSCBusiness _iIssueToOtherSCBusiness;
+
+        public IssueToOtherSCController(IIssueToOtherSCBusiness iIssueToOtherSCBusiness)
         {
-            _iReceiveFromOtherSCBusiness = iReceiveFromOtherSCBusiness;
-          
+            _iIssueToOtherSCBusiness = iIssueToOtherSCBusiness;
+
         }
         #endregion Constructor_Injection
-        // GET: ReceiveFromOtherSC
+        // GET: IssueToOtherSC
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
@@ -34,22 +34,22 @@ namespace SCManager.UserInterface.Controllers
         }
 
         Const c = new Const();
-        #region InsertUpdateReceiveFromOtherSC
+        #region InsertUpdateIssueToOtherSC
         [HttpPost]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string InsertUpdateReceiveFromOtherSC(ReceiveFromOtherSCViewModel ReceiveFromOtherSCViewModelObj)
+        public string InsertUpdateIssueToOtherSC(IssueToOtherSCViewModel issueToOtherSCViewModel)
         {
-         
+
             try
             {
                 if (ModelState.IsValid)
                 {
                     UA ua = new UA();
-                object ResultFromJS = JsonConvert.DeserializeObject(ReceiveFromOtherSCViewModelObj.DetailJSON);
-                string ReadableFormat = JsonConvert.SerializeObject(ResultFromJS);
-                ReceiveFromOtherSCViewModelObj.ReceiveFromOtherSCDetail = JsonConvert.DeserializeObject<List<ReceiveFromOtherSCDetailViewModel>>(ReadableFormat);
-                    ReceiveFromOtherSCViewModel r = Mapper.Map<ReceiveFromOtherSC, ReceiveFromOtherSCViewModel>(_iReceiveFromOtherSCBusiness.InsertUpdate(Mapper.Map<ReceiveFromOtherSCViewModel, ReceiveFromOtherSC>(ReceiveFromOtherSCViewModelObj), ua));
-                return JsonConvert.SerializeObject(new { Result = "OK", Message = c.InsertSuccess, Records = r });
+                    object ResultFromJS = JsonConvert.DeserializeObject(issueToOtherSCViewModel.DetailJSON);
+                    string ReadableFormat = JsonConvert.SerializeObject(ResultFromJS);
+                    issueToOtherSCViewModel.IssueToOtherSCDetail = JsonConvert.DeserializeObject<List<IssueToOtherSCDetailViewModel>>(ReadableFormat);
+                    IssueToOtherSCViewModel r = Mapper.Map<IssueToOtherSC, IssueToOtherSCViewModel>(_iIssueToOtherSCBusiness.InsertUpdate(Mapper.Map<IssueToOtherSCViewModel, IssueToOtherSC>(issueToOtherSCViewModel), ua));
+                    return JsonConvert.SerializeObject(new { Result = "OK", Message = c.InsertSuccess, Records = r });
                 }
                 else
                 {
@@ -73,35 +73,35 @@ namespace SCManager.UserInterface.Controllers
             }
             // return result;
         }
-        #endregion InsertUpdateReceiveFromOtherSC
+        #endregion InsertUpdateIssueToOtherSC
 
-        #region GetAllOtherSCReceipt
+        #region GetAllIssueToOtherSC
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
-        public string GetAllOtherSCReceipt()
+        public string GetAllIssueToOtherSC()
         {
             UA ua = new UA();
-            List<ReceiveFromOtherSCViewModel> ItemList = Mapper.Map<List<ReceiveFromOtherSC>, List<ReceiveFromOtherSCViewModel>>(_iReceiveFromOtherSCBusiness.GetAllOtherSCReceipt(ua));
+            List<IssueToOtherSCViewModel> ItemList = Mapper.Map<List<IssueToOtherSC>, List<IssueToOtherSCViewModel>>(_iIssueToOtherSCBusiness.GetAllIssueToOtherSC(ua));
             return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
 
         }
-        #endregion GetAllOtherSCReceipt
+        #endregion GetAllIssueToOtherSC
 
-        #region DeleteOtherSCReceipt
+        #region DeleteIssueToOtherSC
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string DeleteOtherSCReceipt(ReceiveFromOtherSCViewModel receiveFromOtherSCObj)
+        public string DeleteIssueToOtherSC(IssueToOtherSCViewModel issueToOtherSCViewModelObj)
         {
 
             try
             {
-                if (receiveFromOtherSCObj.ID.GetValueOrDefault() == Guid.Empty)
+                if (issueToOtherSCViewModelObj.ID.GetValueOrDefault() == Guid.Empty)
                 {
                     return JsonConvert.SerializeObject(new { Result = "ERROR", Message = c.NoItems });
                 }
 
                 UA ua = new UA();
-                _iReceiveFromOtherSCBusiness.DeleteOtherSCReceipt(receiveFromOtherSCObj.ID.GetValueOrDefault(), ua);
+                _iIssueToOtherSCBusiness.DeleteIssueToOtherSC(issueToOtherSCViewModelObj.ID.GetValueOrDefault(), ua);
                 return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess });
 
             }
@@ -112,26 +112,26 @@ namespace SCManager.UserInterface.Controllers
 
 
         }
-        #endregion DeleteOtherSCReceipt
+        #endregion DeleteIssueToOtherSC
 
-        #region DeleteOtherScReceiptDetail
+        #region DeleteIssueToOtherSCDetail
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string DeleteOtherScReceiptDetail(ReceiveFromOtherSCDetailViewModel receiveFromOtherSCDetailObj)
+        public string DeleteIssueToOtherSCDetail(IssueToOtherSCDetailViewModel issueToOtherSCDetailObj)
         {
 
             try
             {
                 UA ua = new UA();
-                Guid ID = receiveFromOtherSCDetailObj.ID.GetValueOrDefault();
-                Guid HeaderID = receiveFromOtherSCDetailObj.HeaderID.GetValueOrDefault();
+                Guid ID = issueToOtherSCDetailObj.ID.GetValueOrDefault();
+                Guid HeaderID = issueToOtherSCDetailObj.HeaderID.GetValueOrDefault();
                 if (ID == null || HeaderID == null)
                 {
                     return JsonConvert.SerializeObject(new { Result = "ERROR", Message = c.DeleteFailure });
                 }
                 else
                 {
-                    _iReceiveFromOtherSCBusiness.DeleteOtherScReceiptDetail(ID, HeaderID, ua);
+                    _iIssueToOtherSCBusiness.DeleteIssueToOtherSCDetail(ID, HeaderID, ua);
                     return JsonConvert.SerializeObject(new { Result = "OK", Message = c.DeleteSuccess });
                 }
 
@@ -145,18 +145,18 @@ namespace SCManager.UserInterface.Controllers
 
 
         }
-        #endregion DeleteOtherScReceiptDetail
+        #endregion DeleteIssueToOtherSCDetail
 
-        #region GetOtherSCReceiptByID
+        #region GetIssueToOtherSCByID
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string GetOtherSCReceiptByID(ReceiveFromOtherSCViewModel dataObj)
+        public string GetIssueToOtherSCByID(IssueToOtherSCViewModel dataObj)
         {
             try
             {
                 //   System.Threading.Thread.Sleep(5000);
                 UA ua = new UA();
-                ReceiveFromOtherSCViewModel receiveFromOtherSC = Mapper.Map<ReceiveFromOtherSC, ReceiveFromOtherSCViewModel>(_iReceiveFromOtherSCBusiness.GetOtherSCReceiptByID(dataObj.ID.GetValueOrDefault(), ua));
+                IssueToOtherSCViewModel receiveFromOtherSC = Mapper.Map<IssueToOtherSC, IssueToOtherSCViewModel>(_iIssueToOtherSCBusiness.GetIssueToOtherSCByID(dataObj.ID.GetValueOrDefault(), ua));
                 return JsonConvert.SerializeObject(new { Result = "OK", Records = receiveFromOtherSC });
             }
             catch (Exception ex)
@@ -164,7 +164,8 @@ namespace SCManager.UserInterface.Controllers
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
         }
-        #endregion GetOtherSCReceiptByID
+        #endregion GetIssueToOtherSCByID
+
 
         #region ButtonStyling
         [HttpGet]
@@ -191,17 +192,17 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Text = "New";
-                    ToolboxViewModelObj.addbtn.Title = "Add New Receipt From Other SC";
+                    ToolboxViewModelObj.addbtn.Title = "Add New Issue To Other SC";
                     ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save Receipt From Other SC";
+                    ToolboxViewModelObj.savebtn.Title = "Save Issue To Other SC";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete Receipt From Other SC";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete Issue To Other SC";
                     ToolboxViewModelObj.deletebtn.Event = "DeleteClick();";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;
@@ -219,21 +220,21 @@ namespace SCManager.UserInterface.Controllers
 
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Disable = true;
-                    ToolboxViewModelObj.addbtn.DisableReason = "N/A for new Receipt From Other SC";
+                    ToolboxViewModelObj.addbtn.DisableReason = "N/A for new Issue To Other SC";
                     ToolboxViewModelObj.addbtn.Text = "New";
                     ToolboxViewModelObj.addbtn.Title = "Add New";
                     ToolboxViewModelObj.addbtn.Event = "";
 
                     ToolboxViewModelObj.savebtn.Visible = true;
                     ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save Receipt From Other SC";
+                    ToolboxViewModelObj.savebtn.Title = "Save Issue To Other SC";
                     ToolboxViewModelObj.savebtn.Event = "save();";
 
                     ToolboxViewModelObj.deletebtn.Visible = true;
                     ToolboxViewModelObj.deletebtn.Disable = true;
                     ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete Receipt From Other SC";
-                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new Receipt From Other SC";
+                    ToolboxViewModelObj.deletebtn.Title = "Delete Issue To Other SC";
+                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new Issue To Other SC";
                     ToolboxViewModelObj.deletebtn.Event = "";
 
                     ToolboxViewModelObj.resetbtn.Visible = true;
@@ -258,5 +259,7 @@ namespace SCManager.UserInterface.Controllers
         }
 
         #endregion
+
+
     }
 }

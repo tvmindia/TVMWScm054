@@ -68,6 +68,8 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<JobCallTypesViewModel, JobCallTypes>().ReverseMap();
                 config.CreateMap<ReceiveFromOtherSCViewModel, ReceiveFromOtherSC>().ReverseMap();
                 config.CreateMap<ReceiveFromOtherSCDetailViewModel, ReceiveFromOtherScDetail>().ReverseMap();
+                config.CreateMap<IssueToOtherSCViewModel, IssueToOtherSC>().ReverseMap();
+                config.CreateMap<IssueToOtherSCDetailViewModel, IssueToOtherScDetail>().ReverseMap();
             });
         }
     }
