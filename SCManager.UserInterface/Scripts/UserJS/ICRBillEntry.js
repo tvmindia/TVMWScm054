@@ -191,7 +191,7 @@ function FillJobRelatedFields() {
         if (ds != '') {
             ds = JSON.parse(ds);
         }
-        if (ds.Result == "OK") {
+        if (ds.Result == "OK") { 
             try {
                 $("#CustomerName").val(ds.Record.CustomerName);
                 $("#CustomerLocation").val(ds.Record.CustomerLocation);
@@ -319,8 +319,7 @@ function DeleteItem(currentObj) {
 
 function BindICRBillEntryFields(Records) {
     try {
-
-        debugger;
+      
         ChangeButtonPatchView('ICRBillEntry', 'btnPatchICRBillEntrySettab', 'Edit');
         $('#HeaderID').val(Records.ID);
         $("#EmpID").val(Records.EmpID);
