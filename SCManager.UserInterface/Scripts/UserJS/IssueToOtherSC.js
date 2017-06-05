@@ -11,7 +11,7 @@ $(document).ready(function () {
            order: [],
            searching: true,
            paging: true,
-           data: GetAllOtherSCReceipt(),
+           data: GetAllIssueToOtherSC(),
            columns: [
              { "data": "ID", "defaultContent": "<i>-</i>" },
              { "data": "InvoiceDateFormatted", "defaultContent": "<i>-</i>" },
@@ -254,7 +254,7 @@ function FillUOM(row) {
 
 }
 //---------------Bind Invoices List-------------------
-function GetAllOtherSCReceipt() {
+function GetAllIssueToOtherSC() {
     try {
         var data = {};
         var ds = {};
@@ -317,7 +317,7 @@ function Edit(currentObj) {
         EG_ClearTable();
         $('#AddTab').trigger('click');
         $("#HeaderID").val(rowData.ID);
-        if (BindOtherSCReceipt(rowData.ID)) {
+        if (BindIssueToOtherSC(rowData.ID)) {
             ChangeButtonPatchView('IssueToOtherSC', 'btnPatchIssueToOtherSCSettab', 'Edit');
 
         }
@@ -349,11 +349,11 @@ function reset() {
         ResetForm();
     }
     else {
-        BindOtherSCReceipt($("#HeaderID").val());
+        BindIssueToOtherSC($("#HeaderID").val());
     }
 }
 
-function BindOtherSCReceipt(id) {
+function BindIssueToOtherSC(id) {
     try {
         var data = { "ID": id };
         var ds = {};
@@ -363,7 +363,7 @@ function BindOtherSCReceipt(id) {
         }
         if (ds.Result == "OK") {
 
-            BindOtherSCReceiptFields(ds.Records);
+            BindIssueToOtherSCFields(ds.Records);
         }
         if (ds.Result == "ERROR") {
             notyAlert('error', ds.Message);
@@ -379,7 +379,7 @@ function BindOtherSCReceipt(id) {
 
 }
 
-function BindOtherSCReceiptFields(Records) {
+function BindIssueToOtherSCFields(Records) {
     try {
 
         ChangeButtonPatchView('IssueToOtherSC', 'btnPatchIssueToOtherSCSettab', 'Edit');
@@ -416,10 +416,10 @@ function ResetForm() {
     validator.resetForm();
 }
 
-function BindAllOtherSCReceipt() {
+function BindAllIssueToOtherSC() {
     try {
 
-        DataTables.tblInvoicesList.clear().rows.add(GetAllOtherSCReceipt()).draw(false);
+        DataTables.tblInvoicesList.clear().rows.add(GetAllIssueToOtherSC()).draw(false);
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -431,8 +431,8 @@ function SaveSuccess(data, status) {
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
-            BindOtherSCReceipt(JsonResult.Records.ID);
-            BindAllOtherSCReceipt();
+            BindIssueToOtherSC(JsonResult.Records.ID);
+            BindAllIssueToOtherSC();
             notyAlert('success', JsonResult.Message);
             break;
         case "ERROR":
@@ -487,10 +487,10 @@ function Add() {
 
 
 function DeleteClick() {
-    notyConfirm('Are you sure to delete?', 'OtherSCReceiptDelete()', '', "Yes, delete it!");
+    notyConfirm('Are you sure to delete?', 'IssueToOtherSCDelete()', '', "Yes, delete it!");
 }
 
-function OtherSCReceiptDelete() {
+function IssueToOtherSCDelete() {
     try {
         var id = $('#HeaderID').val();
         if (id != '' && id != null) {
@@ -502,7 +502,7 @@ function OtherSCReceiptDelete() {
             }
             if (ds.Result == "OK") {
                 notyAlert('success', ds.Message);
-                BindAllOtherSCReceipt();
+                BindAllIssueToOtherSC();
                 $('#ListTab').trigger('click');
             }
             if (ds.Result == "ERROR") {
@@ -526,12 +526,12 @@ function DeleteItem(currentObj) {
     var rowData = EG_GridDataTable.row($(currentObj).parents('tr')).data();
 
     if ((rowData != null) && (rowData.ID != null)) {
-        notyConfirm('Are you sure to delete?', 'OtherScReceiptDetailDelete("' + rowData.ID + '","' + rowData[EG_SlColumn] + '")', '', "Yes, delete it!");
+        notyConfirm('Are you sure to delete?', 'IssueToOtherSCDetailDelete("' + rowData.ID + '","' + rowData[EG_SlColumn] + '")', '', "Yes, delete it!");
 
     }
 }
 
-function OtherScReceiptDetailDelete(id, rw) {
+function IssueToOtherSCDetailDelete(id, rw) {
     try {
 
         var Hid = $('#HeaderID').val();
@@ -544,7 +544,7 @@ function OtherScReceiptDetailDelete(id, rw) {
             }
             if (ds.Result == "OK") {
                 notyAlert('success', ds.Message);
-                BindOtherSCReceipt(Hid);
+                BindIssueToOtherSC(Hid);
             }
             if (ds.Result == "ERROR") {
                 notyAlert('error', ds.Message);
