@@ -9,9 +9,11 @@ $(document).ready(function () {
              order: [],
              searching: true,
              paging: true,
-             data: null,
+             data: GetServicefilterbyDays(true),
              columns: [
                { "data": "ID", "defaultContent": "<i>-</i>" },
+                  { "data": "Employee.Name", "defaultContent": "<i>-</i>" },
+                   { "data": "ServiceDateformatted", "defaultContent": "<i>-</i>" },
                { "data": "JobNo", "defaultContent": "<i>-</i>" },
                { "data": "CustomerName", "defaultContent": "<i>-</i>" },
                { "data": "CustomerLocation", "defaultContent": "<i>-</i>" },
@@ -20,14 +22,14 @@ $(document).ready(function () {
                { "data": "ModelNo", "defaultContent": "<i>-</i>" },
                { "data": "SerialNo", "defaultContent": "<i>-</i>" },
                { "data": "CallStatusDescription", "defaultContent": "<i>-</i>" },
-               { "data": "ICRNo","defaultContent": "<i>-</i>" },
+               { "data": "ICRNo", "defaultContent": "<i>-</i>" }, 
                { "data": "TechnicianRemark", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a data-toggle="tp" data-placement="top" data-delay={"show":2000, "hide":3000} title="Edit Job" href="#" class="actionLink" onclick="JobEdit(this)"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a>' },
                { "data": null, "orderable": false, "defaultContent": '<a data-toggle="tp" data-placement="top" data-delay={"show":2000, "hide":3000} title="Delete Job" href="#" class="DeleteLink" onclick="JobDelete(this)"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0,8], "visible": false, "searchable": false },
-                  { className: "text-left", "targets": [1,2,3,4,5,6,7,9,10] },
-                  { className: "text-center", "targets": [11,12] },
+                  { className: "text-left", "targets": [1,2,3,4,5,6,7,9,10,11,12] },
+                  { className: "text-center", "targets": [13,14] },
                   { className: "text-right", "targets": [] }
            ]
          });
@@ -157,6 +159,27 @@ function AddTechnicanJob()
    
 }
 
+function FilterOnChange() {
+    debugger;
+    $("#EmpSelector").val("");
+    $("#txtServiceDate").val("");
+
+    var checkedValue = $("input[name='filter']:checked").val()
+    if (checkedValue != "") {
+       
+        if (checkedValue == 30)
+        {
+            debugger;
+            DataTables.DailyService.clear().rows.add(GetServicefilterbyDays(true)).draw(false);
+        }
+        else if (checkedValue == 60)
+        {
+            debugger;
+            DataTables.DailyService.clear().rows.add(GetServicefilterbyDays(false)).draw(false);
+        }
+    }
+}
+
 function ServiceDateOnChange(curobj)
 {
     try
@@ -175,6 +198,9 @@ function TechnicianSelectOnChange(curobj)
 {
     try
     {
+        debugger;
+        $("#married-true").prop('checked', false);
+        $("#married-false").prop('checked', false);
         var v = $(curobj).val();
         $("#ModelTechEmpID").val(v);
         $("#txtServiceDate").val($("#hdfcurrentdate").val());
@@ -187,7 +213,29 @@ function TechnicianSelectOnChange(curobj)
     }
 }
 
-
+//
+function GetServicefilterbyDays(Isdefault) {
+    try {
+        debugger;
+        var data = { "Isdefault": Isdefault };
+        var ds = {};
+        ds = GetDataFromServer("DailyServiceReport/GetServicefilterbyDays/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+            var emptyarr = [];
+            return emptyarr;
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
 function GetAllServiceReportEntries(id,date) {
     try {
 

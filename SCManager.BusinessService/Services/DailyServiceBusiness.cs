@@ -66,6 +66,32 @@ namespace SCManager.BusinessService.Services
             return JobList;
         }
 
+        public List<Job> GetServicefilterbyDays(string SCCode,string CreatedDate ,string Isdefault)
+        {
+            List<Job> JobList = null;
+            try
+            {
+                JobList = _dailyServiceRepository.GetServicefilterbyDays(SCCode,CreatedDate,Isdefault);
+                if (JobList != null)
+                {
+                    foreach (Job EX in JobList)
+                    {
+                        SCManagerSettings settings = new SCManagerSettings();
+
+                        if (EX.ServiceDate != null)
+                            EX.ServiceDateformatted = Convert.ToDateTime(EX.ServiceDate).ToString(settings.dateformat);
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return JobList;
+        }
+
         public List<Job> GetAllJobNumbers(string SCCode)
         {
             List<Job> JobList = null;

@@ -4,7 +4,6 @@ var EmptyGuid = "00000000-0000-0000-0000-000000000000";
 
 $(document).ready(function () {
     try {
-        debugger;
         ChangeButtonPatchView('Expenses', 'btnPatchExpensesSettab', 'Add');
         DataTables.ExpensesTable = $('#tblExpensesList').DataTable(
        {
@@ -48,8 +47,6 @@ $(document).ready(function () {
     }
 });
 
- 
-
 //--------------------button actions ----------------------
 function List() {
     try {
@@ -60,13 +57,10 @@ function List() {
     } catch (x) {
         alert(x);
     }
-
 }
 function ExpenseTypeChange() {
-    debugger;
     if ($("#ExpenseTypeCode").val() == "IFBOT")
     {
-        debugger;
         $("#OutStandingPaymentArea").show();
         var thisItem = GetOutStandingPayment();
         $("#OutStandingPayment").text(thisItem.OutStandingPaymentFormatted); 
@@ -126,14 +120,12 @@ function clearfields() {
 //---------------------------------------Edit Expenses--------------------------------------------------//
 function Edit(currentObj) {
     //Tab Change on edit click
-    debugger; 
     $('#AddTab').trigger('click');
     ChangeButtonPatchView("CreditNotes", "btnPatchCreditNotesSettab", "Edit"); //ControllerName,id of the container div,Name of the action
     var rowData = DataTables.ExpensesTable.row($(currentObj).parents('tr')).data();
     if ((rowData != null) && (rowData.ID != null)) {
         fillExpenses(rowData.ID);
     }
-
 }
 //---------------------------------------Delete-------------------------------------------------------//
 function Delete() {
@@ -141,7 +133,6 @@ function Delete() {
 }
 
 function DeleteExpenses() {
-    debugger;
     var id = $("#UpdateID").val();
     if (id != EmptyGuid) {
         $("#btnFormDelete").click();
@@ -173,7 +164,6 @@ function GetExpensesByID(id) {
 
 //---------------------------------------Fill Expenses--------------------------------------------------//
 function fillExpenses(ID) {
-    debugger;
     ChangeButtonPatchView("Expenses", "btnPatchExpensesSettab", "Edit");
     var thisItem = GetExpensesByID(ID); //Binding Data
     //Hidden
@@ -205,7 +195,6 @@ function ResetForm() {
 }
 
 function Add(id) {
-    debugger;
     if (id != 1) {
         $('#AddTab').trigger('click');
     }
@@ -230,14 +219,12 @@ function showAllYNCheckedOrNot(i) {
 //---------------get grid fill result-------------------
 function GetAllExpenses(showAllYN) {
     try {
-        debugger;
         var FromDate = $("#fromDate").val();
         var ToDate = $("#toDate").val();
 
         var data = {"FromDate": FromDate, "ToDate": ToDate};
         var ds = {};
         ds = GetDataFromServer("Expenses/GetAllExpenses/", data);
-        debugger;
         if (ds != '') {
             ds = JSON.parse(ds);
         }
@@ -261,9 +248,7 @@ function save() {
 //---------------------------------------Bind All Expenses----------------------------------------------//
 function BindAllExpenses() {
     try {
-        debugger;
         DataTables.ExpensesTable.clear().rows.add(GetAllExpenses(false)).draw(false);
-
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -271,7 +256,6 @@ function BindAllExpenses() {
 }
 
 function SaveSuccess(data, status) {
-    debugger;
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -296,7 +280,6 @@ function SaveSuccess(data, status) {
 
 function DeleteSuccess(data, status) {
     var i = JSON.parse(data)
-    debugger;
     switch (i.Result) {
         case "OK":
             BindAllExpenses();

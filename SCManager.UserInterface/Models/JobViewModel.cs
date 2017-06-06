@@ -26,6 +26,9 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Service Date")]
         [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
         public string ServiceDate { get; set; }
+
+        public string ServiceDateformatted { get; set; }
+
         [Display(Name = "Repeat Job No")]
         public string Repeat_JobNo { get; set; }
         [Display(Name = "Technician Name")]
