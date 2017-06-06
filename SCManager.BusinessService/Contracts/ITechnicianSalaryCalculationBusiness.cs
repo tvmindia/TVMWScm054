@@ -9,6 +9,6 @@ namespace SCManager.BusinessService.Contracts
 {
     public interface ITechnicianSalaryCalculationBusiness
     {
-        List<TechnicianSalary> GetTechniciansCalculatedSalary(string SCCode, Int16? Month, Int16? Year);
+        List<TechnicianSalary> GetTechniciansCalculatedSalary(string SCCode, string Month, string Year);
     }
 }

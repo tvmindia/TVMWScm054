@@ -149,5 +149,26 @@
 
         }
 
+        @if (Model.calculateBtn.Visible)
+        {
+            if (Model.calculateBtn.Disable)
+            {
+
+                <a class="thr_disbtn" title="@Model.calculateBtn.Title-@Model.calculateBtn.DisableReason">
+                    <img class="btnImg" src="@Url.Content("~/Content/images/calculate.png")">
+                    <span class="btnText">@Model.calculateBtn.Text</span>
+                </a>
+            }
+            else
+            {
+
+                <a title="@Model.calculateBtn.Title" class="thr_btn" onclick=@Model.calculateBtn.Event>
+                    <img class="btnImg" src="@Url.Content("~/Content/images/calculate.png")">
+                    <span class="btnText">@Model.calculateBtn.Text</span>
+                </a>
+            }
+
+        }
+
     </div>
 
