@@ -136,6 +136,7 @@ function EG_Columns_Settings() {
         { className: "text-center", "targets": [3, 4, 6, 12] },
         { className: "text-right disabled", "targets": [9, 11] },
         { className: "text-center disabled", "targets": [7] },
+         { className: "text-left disabled", "targets": [5] },
         { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11] }
 
     ]
