@@ -297,6 +297,32 @@ namespace SCManager.UserInterface.Controllers
 
         }
 
+
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetServicefilterbyDays(string Isdefault)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Isdefault))
+                {
+                    UA ua = new UA();
+                    List<JobViewModel> jobList = Mapper.Map<List<Job>, List<JobViewModel>>(_dailyServiceBusiness.GetServicefilterbyDays(ua.SCCode,ua.GetCurrentDateTime().ToString(),Isdefault));
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = jobList });
+                }
+                else
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "ID or Date is Empty!" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+
+
+        }
+
         #region ButtonStyling
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]

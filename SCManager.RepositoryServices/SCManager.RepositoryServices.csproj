@@ -141,6 +141,7 @@
     <Compile Include="Contracts\ISubCategoryRepository.cs" />
     <Compile Include="Contracts\ITCRBillEntryRepository.cs" />
     <Compile Include="Contracts\ITechnicianRepository.cs" />
+    <Compile Include="Contracts\ITechnicianSalaryCalculationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AssignBillBookRepository.cs" />
     <Compile Include="Services\AuthenticationRepository.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Services\SubCategoryRepository.cs" />
     <Compile Include="Services\TCRBillEntryRepository.cs" />
     <Compile Include="Services\TechnicianRepository.cs" />
+    <Compile Include="Services\TechnicianSalaryCalculationRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -181,6 +181,78 @@ namespace SCManager.RepositoryServices.Services
         }
         #endregion GetAllDailyJobs
 
+
+        #region GetServicefilterbyDays
+        public List<Job> GetServicefilterbyDays(string SCCode,string Createddate,string days)
+        {
+            List<Job> jobList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[GetServicefilterbyDays]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = SCCode;
+                        cmd.Parameters.Add("@IsDefault", SqlDbType.Bit).Value =bool.Parse( days);
+                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DateTime.Parse(Createddate);
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                jobList = new List<Job>();
+                                while (sdr.Read())
+                                {
+                                    Job _job = new Job();
+                                    {
+                                        _job.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _job.SCCode);
+                                        _job.ID = (sdr["ID"].ToString() != "" ? (Guid.Parse(sdr["ID"].ToString())) : Guid.Empty);
+                                        _job.Employee = new Employees()
+                                        {
+                                            ID = (sdr["EmpID"].ToString() != "" ? (Guid.Parse(sdr["EmpID"].ToString())) : Guid.Empty),
+                                            Name = (sdr["EmployeeName"].ToString() != "" ? (sdr["EmployeeName"].ToString()) : _job.Employee.Name),
+                                            Type = (sdr["EmployeeType"].ToString() != "" ? (sdr["EmployeeType"].ToString()) : _job.Employee.Type),
+                                        };
+                                        _job.ServiceDate = (sdr["ServiceDate"].ToString() != "" ? (sdr["ServiceDate"].ToString()) : _job.ServiceDate);
+                                        _job.JobNo = (sdr["JobNo"].ToString() != "" ? (sdr["JobNo"].ToString()) : _job.JobNo);
+                                        _job.CustomerName = (sdr["CustomerName"].ToString() != "" ? sdr["CustomerName"].ToString() : _job.CustomerName);
+                                        _job.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : _job.CustomerLocation);
+                                        _job.ServiceType = (sdr["ServiceTypeCode"].ToString() != "" ? (sdr["ServiceTypeCode"].ToString()) : _job.ServiceType);
+                                        _job.CallType = (sdr["CallTypeCode"].ToString() != "" ? (sdr["CallTypeCode"].ToString()) : _job.CallType);
+                                        _job.ModelNo = (sdr["ModelNo"].ToString() != "" ? (sdr["ModelNo"].ToString()) : _job.ModelNo);
+                                        _job.SerialNo = (sdr["SerialNo"].ToString() != "" ? (sdr["SerialNo"].ToString()) : _job.SerialNo);
+
+                                        _job.CallStatusCode = (sdr["CallStatusCode"].ToString() != "" ? (sdr["CallStatusCode"].ToString()) : _job.CallStatusCode);
+                                        _job.ICRNo = (sdr["ICRNo"].ToString() != "" ? (sdr["ICRNo"].ToString()) : _job.ICRNo);
+                                        _job.TechnicianRemark = (sdr["TechnicianRemarks"].ToString() != "" ? (sdr["TechnicianRemarks"].ToString()) : _job.TechnicianRemark);
+                                        _job.RepeatEmpName = (sdr["Repeat_EmpName"].ToString() != "" ? (sdr["Repeat_EmpName"].ToString()) : _job.TechnicianRemark);
+                                        _job.RepeatJobNo = (sdr["Repeat_JobNo"].ToString() != "" ? (sdr["Repeat_JobNo"].ToString()) : _job.RepeatJobNo);
+                                        _job.CallStatusDescription = (sdr["CallStatusDescription"].ToString() != "" ? (sdr["CallStatusDescription"].ToString()) : _job.CallStatusDescription);
+                                        _job.JobCallTypeDescription = (sdr["JobCallTypeDescription"].ToString() != "" ? (sdr["JobCallTypeDescription"].ToString()) : _job.JobCallTypeDescription);
+                                        _job.ServiceTypeDescription = (sdr["ServiceTypeDescription"].ToString() != "" ? (sdr["ServiceTypeDescription"].ToString()) : _job.ServiceTypeDescription);
+                                        _job.SCCommAmount = (sdr["SpecialCommission"].ToString() != "" ? decimal.Parse(sdr["SpecialCommission"].ToString()) : _job.SCCommAmount);
+                                    }
+                                    jobList.Add(_job);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return jobList;
+        }
+        #endregion GetServicefilterbyDays
+
         #region InsertJob
         public object InsertJob(TechnicianJob technicianJob)
         {

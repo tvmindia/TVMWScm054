@@ -139,6 +139,7 @@
     <Compile Include="Contracts\ISubCategoriesBusiness.cs" />
     <Compile Include="Contracts\ITCRBillEntryBusiness.cs" />
     <Compile Include="Contracts\ITechnicianBusiness.cs" />
+    <Compile Include="Contracts\ITechnicianSalaryCalculationBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AssignBillBookBusiness.cs" />
     <Compile Include="Services\AuthenticationBusiness.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Services\SubCategoriesBusiness.cs" />
     <Compile Include="Services\TCRBillEntryBusiness.cs" />
     <Compile Include="Services\TechnicianBusiness.cs" />
+    <Compile Include="Services\TechnicianSalaryCalculationBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SCManager.DataAccessObject\SCManager.DataAccessObject.csproj">

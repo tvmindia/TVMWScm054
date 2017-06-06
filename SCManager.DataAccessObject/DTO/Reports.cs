@@ -64,4 +64,6 @@ namespace SCManager.DataAccessObject.DTO
 
     }
 
+
+
 }

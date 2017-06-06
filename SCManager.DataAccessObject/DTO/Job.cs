@@ -11,6 +11,7 @@ namespace SCManager.DataAccessObject.DTO
         public Guid ID { get; set; }
         public Employees Employee { get; set; }
         public string ServiceDate { get; set; }
+        public string ServiceDateformatted { get; set; }
         public string JobNo { get; set; }
         public string CustomerName { get; set; }
         public string CustomerLocation { get; set; }

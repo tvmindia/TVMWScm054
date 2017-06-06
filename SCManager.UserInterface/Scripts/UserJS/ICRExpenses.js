@@ -4,8 +4,7 @@ var EmptyGuid = "00000000-0000-0000-0000-000000000000";
 //---------------------------------------Docuement Ready--------------------------------------------------//
 
 $(document).ready(function () {
-    try {
-        debugger;
+    try { 
         ChangeButtonPatchView('ICRExpenses', 'btnPatchICRExpensesSettab', 'Add');
         DataTables.ICRExpensesTable = $('#tblICRExpensesList').DataTable(
        {
@@ -54,7 +53,6 @@ $(document).ready(function () {
 
 function BindOutStandingPayment()
 {
-    debugger;
     var thisItem = GetOutStandingICRPayment();
     $("#OutStandingICRPayment").text(thisItem.OutStandingPaymentFormatted);
 
@@ -63,7 +61,6 @@ function BindOutStandingPayment()
 
 function GetOutStandingICRPayment() {
     try {
-        debugger;
         var data = {};
         var ds = {};
         ds = GetDataFromServer("ICRExpenses/GetOutStandingICRPayment/", data);
@@ -115,10 +112,8 @@ function clearfields() {
 //---------------------------------------Edit ICRExpenses--------------------------------------------------//
 function Edit(currentObj) {
     //Tab Change on edit click
-    debugger;
     $('#AddTab').trigger('click');
     ChangeButtonPatchView("ICRExpenses", "btnPatchICRExpensesSettab", "Edit"); //ControllerName,id of the container div,Name of the action
-    debugger;
     var rowData = DataTables.ICRExpensesTable.row($(currentObj).parents('tr')).data();
     if ((rowData != null) && (rowData.ID != null)) {
         fillICRExpenses(rowData.ID);
@@ -131,7 +126,6 @@ function Delete() {
 }
 
 function DeleteICRExpenses() {
-    debugger;
     var id = $("#UpdateID").val();
     if (id != EmptyGuid) {
         $("#btnFormDelete").click();
@@ -142,7 +136,6 @@ function DeleteICRExpenses() {
 }
 //---------------------------------------Get ICRExpenses Details By ID-------------------------------------//
 function GetICRExpensesByID(id) {
-    debugger;
     try {
         var data = { "id": id };
         var ds = {};
@@ -164,7 +157,6 @@ function GetICRExpensesByID(id) {
 
 //---------------------------------------Fill ICRExpenses--------------------------------------------------//
 function fillICRExpenses(ID) {
-    debugger;
     ChangeButtonPatchView("ICRExpenses", "btnPatchICRExpensesSettab", "Edit");
     var thisItem = GetICRExpensesByID(ID); //Binding Data
     //Hidden
@@ -194,7 +186,6 @@ function ResetForm() {
 }
 
 function Add(id) {
-    debugger;
     if (id != 1) {
         $('#AddTab').trigger('click');
     }
@@ -219,14 +210,12 @@ function showAllYNCheckedOrNot(i) {
 //---------------get grid fill result-------------------
 function GetAllICRExpenses(showAllYN) {
     try {
-        debugger;
         var FromDate = $("#fromDate").val();
         var ToDate = $("#toDate").val();
 
         var data = {"FromDate": FromDate, "ToDate": ToDate };
         var ds = {};
         ds = GetDataFromServer("ICRExpenses/GetAllICRExpenses/", data);
-        debugger;
         if (ds != '') {
             ds = JSON.parse(ds);
         }
@@ -250,7 +239,6 @@ function save() {
 //---------------------------------------Bind All ICRExpenses----------------------------------------------//
 function BindAllICRExpenses() {
     try {
-        debugger;
         DataTables.ICRExpensesTable.clear().rows.add(GetAllICRExpenses(false)).draw(false);
     }
     catch (e) {
@@ -259,7 +247,6 @@ function BindAllICRExpenses() {
 }
 
 function SaveSuccess(data, status) {
-    debugger;
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -285,7 +272,6 @@ function SaveSuccess(data, status) {
 
 function DeleteSuccess(data, status) {
     var i = JSON.parse(data)
-    debugger;
     switch (i.Result) {
         case "OK":
             BindAllICRExpenses();
