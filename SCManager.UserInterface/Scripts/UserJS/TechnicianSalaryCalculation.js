@@ -6,8 +6,7 @@ $(document).ready(function () {
         DataTables.SalaryTable = $('#tblSalaryCalculation').DataTable(
         {
             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
-            order: [],
-            searching: true,
+            order: [],          
             paging: false,
             data: GetAllTechniciansSalaryWithoutDate(),
             autoWidth: false,
@@ -38,16 +37,20 @@ $(document).ready(function () {
             columnDefs: [
             { "width": "200px", "targets": 0 }, 
             { className: "text-left disabled", targets: [0] },
-             { className: "text-right", targets: [1,2,5,7,9,11,13,15,16,17,18,19] },
+             { className: "text-right", targets: [5,7,9,11,13,15,16,17,18,19] },
             { className: "text-center", targets: [6, 8, 10, 12, 14] },
-            { className: "text-right disabled", targets: [3]}
+            { className: "text-right disabled", targets: [1,2,3]}
 
             ]
             ,
             scrollY: false,
             scrollX: true,
-            //scrollCollapse: true,
-            //fixedColumns: true
+            scrollCollapse: true,
+            fixedColumns: {
+                leftColumns: 4
+                
+            }
+
         });
 
        
