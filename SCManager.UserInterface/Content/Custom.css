@@ -91,7 +91,7 @@
 .graphledger {
     width:100%;
     text-align:right;
-    font-size:smaller;
+    font-size:12px;
     color:gray;
     padding-right:15px;
 }
