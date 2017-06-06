@@ -64,6 +64,7 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/OfficeBillEntry").Include("~/Scripts/UserJS/OfficeBillEntry.js"));
             bundles.Add(new ScriptBundle("~/bundles/ReceiveFromOtherSC").Include("~/Scripts/UserJS/ReceiveFromOtherSC.js"));
             bundles.Add(new ScriptBundle("~/bundles/IssueToOtherSC").Include("~/Scripts/UserJS/IssueToOtherSC.js"));
+            bundles.Add(new ScriptBundle("~/bundles/AssignBillBook").Include("~/Scripts/UserJS/AssignBillBook.js"));
         }
     }
 }

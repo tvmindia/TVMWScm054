@@ -70,6 +70,7 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<ReceiveFromOtherSCDetailViewModel, ReceiveFromOtherScDetail>().ReverseMap();
                 config.CreateMap<IssueToOtherSCViewModel, IssueToOtherSC>().ReverseMap();
                 config.CreateMap<IssueToOtherSCDetailViewModel, IssueToOtherScDetail>().ReverseMap();
+                config.CreateMap<AssignBillBookViewModel, AssignBillBook>().ReverseMap();
             });
         }
     }
