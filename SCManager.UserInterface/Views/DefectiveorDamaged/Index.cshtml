@@ -1,12 +1,13 @@
 ﻿@model SCManager.UserInterface.Models.DefectiveorDamagedViewModel
+@using SCManager.UserInterface.App_Start
 
 @{
     ViewBag.Title = "Defective/Damaged";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 @section styles {
-    @Styles.Render("~/Content/DataTables/css/datatable")
-    @Styles.Render("~/Content/bootstrapdatepicker")
+    @Styles.RenderFormat(SiteKeys.StyleVersion,"~/Content/DataTables/css/datatable")
+    @Styles.RenderFormat(SiteKeys.StyleVersion,"~/Content/bootstrapdatepicker")
 }
 <div class="col-md-12">
     <div class="SCHeader col-md-6">
@@ -220,8 +221,8 @@
     <img src="~/Content/images/loading.gif" class="preloaderImg" />
 </div>
     @section Scripts {
-        @Scripts.Render("~/bundles/datatable")
-        @Scripts.Render("~/bundles/jqueryunobtrusiveajaxvalidate")
-        @Scripts.Render("~/bundles/bootstrapdatepicker")
-        @Scripts.Render("~/bundles/DefectDamage")
+        @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/datatable")
+        @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/jqueryunobtrusiveajaxvalidate")
+        @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/bootstrapdatepicker")
+        @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/DefectDamage")
     }

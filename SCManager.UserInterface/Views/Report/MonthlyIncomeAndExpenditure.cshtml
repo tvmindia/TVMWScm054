@@ -3,11 +3,12 @@
     ViewBag.Title = "Monthly Income And Expenditure Report";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
+@using SCManager.UserInterface.App_Start
 
 @section styles {
-    @Styles.Render("~/Content/DataTables/css/datatable")
-    @Styles.Render("~/Content/DataTables/css/datatableButtons")
-    @Styles.Render("~/Content/bootstrapdatepicker")
+    @Styles.RenderFormat(SiteKeys.StyleVersion,"~/Content/DataTables/css/datatable")
+    @Styles.RenderFormat(SiteKeys.StyleVersion,"~/Content/DataTables/css/datatableButtons")
+    @Styles.RenderFormat(SiteKeys.StyleVersion,"~/Content/bootstrapdatepicker")
 }
 
 
@@ -81,11 +82,11 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/datatable")
-    @Scripts.Render("~/bundles/jsZip")
-    @Scripts.Render("~/bundles/datatableButtons")
-    @Scripts.Render("~/bundles/bootstrapdatepicker")
-    @Scripts.Render("~/bundles/IncomeExpense")
+ @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/datatable")
+ @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/jsZip")
+ @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/datatableButtons")
+ @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/bootstrapdatepicker")
+ @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/IncomeExpense")
 }
 
 

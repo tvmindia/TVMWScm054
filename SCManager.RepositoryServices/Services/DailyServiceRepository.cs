@@ -466,7 +466,7 @@ namespace SCManager.RepositoryServices.Services
         }
         #endregion DeleteJob
 
-
+        #region GetServiceRegistrySummary
         public List<ServiceRegistrySummary> GetServiceRegistrySummary(string SCCode, string serviceDate)
         {
             List<ServiceRegistrySummary> serviceregistryList = null;
@@ -516,6 +516,6 @@ namespace SCManager.RepositoryServices.Services
             }
             return serviceregistryList;
         }
-
+        #endregion GetServiceRegistrySummary
     }
 }

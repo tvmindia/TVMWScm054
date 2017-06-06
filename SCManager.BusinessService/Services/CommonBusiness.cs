@@ -198,6 +198,41 @@ namespace SCManager.BusinessService.Services
 
         }
 
+        public string GetXMLfromIssueToOtherSCObject(List<IssueToOtherScDetail> issueToOtherScDetailObj, string mandatoryProperties, UA ua)
+        {
+            string result = "<Details>";
+            int totalRows = 0;
+            try
+            {
+                //-------------------------//
+                int mandIndx = getMAndatoryIndex(issueToOtherScDetailObj[0], mandatoryProperties); //int mandIndx = 0;                
+
+                foreach (object some_object in issueToOtherScDetailObj)
+                {
+                    XML(some_object, mandIndx, ref result, ref totalRows);
+
+                }
+
+                result = result + "</Details>";
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            if (totalRows > 0)
+            {
+                return result;
+            }
+            else
+            {
+                return "";
+            }
+
+        }
+
         public string GetXMLfromICRObject(List<ICRBillEntryDetail> icrDetailObj, string mandatoryProperties, UA ua)
         {
             string result = "<Details>";

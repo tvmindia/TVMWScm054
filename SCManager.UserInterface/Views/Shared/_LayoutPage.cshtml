@@ -8,7 +8,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
+    @using SCManager.UserInterface.App_Start
+    @Styles.RenderFormat(SiteKeys.StyleVersion,"~/Content/css")
     @RenderSection("styles", required: false)
     <link rel="icon" type="image/png" href="~/Content/images/SCManager.png"/>
      <style>
@@ -91,10 +92,10 @@
     </div><!-- /.modal -->
 
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/bootstrapdatepicker")
-    @Scripts.Render("~/bundles/userpluginjs")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/jquery")
+  @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/bootstrap")
+  @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/bootstrapdatepicker")
+@Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/userpluginjs")
   
     @RenderSection("scripts", required: false)
     <script type="text/javascript">

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace SCManager.UserInterface.Models
 {
-    public class ReceiveFromOtherSCViewModel
+    public class IssueToOtherSCViewModel
     {
         public string SCCode { get; set; }
         public Guid? ID { get; set; }
@@ -21,8 +21,8 @@ namespace SCManager.UserInterface.Models
         public DateTime? InvoiceDate { get; set; }
         public string InvoiceDateFormatted { get; set; }
         [Required(ErrorMessage = "Service Center is missing")]
-        [Display(Name = "From Service Center")]      
-        public string FromSCName { get; set; }
+        [Display(Name = "To Service Center")]
+        public string ToSCName { get; set; }
         [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }
         [Display(Name = "VAT %")]
@@ -36,9 +36,9 @@ namespace SCManager.UserInterface.Models
         public decimal GrandTotal { get; set; }
         public String DetailJSON { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
-        public List<ReceiveFromOtherSCDetailViewModel> ReceiveFromOtherSCDetail { get; set; }
+        public List<IssueToOtherSCDetailViewModel> IssueToOtherSCDetail { get; set; }
     }
-    public class ReceiveFromOtherSCDetailViewModel
+    public class IssueToOtherSCDetailViewModel
     {
         public string SCCode { get; set; }
         public Guid? ID { get; set; }
