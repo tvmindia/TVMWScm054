@@ -212,7 +212,7 @@ function ChangeButtonPatchView(Controller,Dom, Action) {
     ds = GetDataFromServer(Controller + "/ChangeButtonStyle/", data);
     if (ds == "Nochange")
     {
-        return;
+        return;0
     }
     $("#" + Dom).empty();
     $("#" + Dom).html(ds);

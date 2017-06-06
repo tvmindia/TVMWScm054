@@ -109,6 +109,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IAssignBillBookBusiness.cs" />
     <Compile Include="Contracts\IAuthenticationBusiness.cs" />
     <Compile Include="Contracts\ICallandServiceTypesBusiness.cs" />
     <Compile Include="Contracts\ICategoriesBusiness.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Contracts\ITechnicianBusiness.cs" />
     <Compile Include="Contracts\ITechnicianSalaryCalculationBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AssignBillBookBusiness.cs" />
     <Compile Include="Services\AuthenticationBusiness.cs" />
     <Compile Include="Services\CallandServiceTypesBusiness.cs" />
     <Compile Include="Services\CategoriesBusiness.cs" />
