@@ -26,7 +26,7 @@ namespace SCManager.UserInterface.Models
         public string Category { get; set; }
         public Guid SubcategoryID { get; set; }
         public string Subcategory { get; set; }
-        [Display(Name = "Stock Qty")]
+        [Display(Name = "Total Stock")]
         public string Stock { get; set; }
 
         [Required(ErrorMessage = "Please enter UOM")]
@@ -39,9 +39,9 @@ namespace SCManager.UserInterface.Models
 
         [Display(Name = "Product Commission (₹)")]
         public float? ProductCommission { get; set; }
-        [Display(Name = "Def/Damg Qty")]
+        [Display(Name = "Defective/Damage Pending Qty")]
         public string DefDamgStockQty { get; set; }
-        [Display(Name = "SC Qty")]
+        [Display(Name = "Service Center Qty")]
         public string SCQty { get; set; }
         [Display(Name = "Technician Qty")]
         public string TechnicianQty { get; set; }
