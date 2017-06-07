@@ -28,10 +28,14 @@ namespace SCManager.DataAccessObject.DTO
         public decimal? STAmount { get; set; }
         public decimal? Discount { get; set; }
         public string PaymentRefNo { get; set; }
+        public string AMCNO { get; set; }
+        public String AMCFromDateFormatted { get; set; }
+        public String AMCToDateFormatted { get; set; }
         public decimal? TotalServiceTaxAmt { get; set; }
         public Guid? jobNoID { get; set; }
         public LogDetails logDetails { get; set; }
         public string DetailXML { get; set; }
+        public decimal? Total { get; set; }
         public String ICRDateFormatted { get; set; }
         public List<ICRBillEntryDetail> ICRBillEntryDetail { get; set; }
     }

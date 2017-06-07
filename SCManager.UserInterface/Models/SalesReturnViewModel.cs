@@ -16,10 +16,11 @@ namespace SCManager.UserInterface.Models
         [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
         public DateTime? OpenDate { get; set; }
         [Display(Name = "Reference No.")]
+        [Required(ErrorMessage ="Please Enter Reference No.")]
         public string RefNo { get; set; }
         public Guid? ItemID { get; set; }
         [Display(Name = "Quantity")]
-        [Required(ErrorMessage = "Please enter Quantity")]
+        [Required(ErrorMessage = "Please Enter Quantity")]
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Quantity must be a number")]
         public string Qty { get; set; }
         [DataType(DataType.MultilineText)]
