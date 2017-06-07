@@ -19,6 +19,7 @@ $(document).ready(function () {
                { "data": "ID" },
                { "data": "InvoiceNo" },
                { "data": "InvoiceDateFormatted" },
+               { "data": "Customer", "defaultContent": "<i>-</i>" },
                { "data": "SPUNo" },
                { "data": "TicketNo" },
                { "data": "SaleOrderNo", "defaultContent": "<i>-</i>" },
@@ -30,8 +31,9 @@ $(document).ready(function () {
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false },
-                  { className: "text-right", "targets": [ 7, 8,9,10] },
-             { className: "text-center", "targets": [2, 3, 4, 5,6,11,12] }
+                  { className: "text-right", "targets": [7, 8, 9, 10] },
+                    { className: "text-left", "targets": [4] },
+             { className: "text-center", "targets": [2, 3,5,6,11,12] }
 
              ]
          });
