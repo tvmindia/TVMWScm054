@@ -18,5 +18,6 @@ namespace SCManager.RepositoryServices.Contracts
         object UpdateJob(TechnicianJob technicianJob);
         List<ServiceRegistrySummary> GetServiceRegistrySummary(string SCCode,string serviceDate);
         List<JobCallTypes> GetAllJobCallTypes(string SCCode);
+        List<ServiceRegistrySummary> GetServiceRegisterSummaryFilter(string SCCode, string CreatedDate, string Isdefault);
     }
 }
