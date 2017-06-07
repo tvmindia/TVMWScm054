@@ -28,10 +28,10 @@
 <div class="container SCtabContainer">
     <ul class="nav nav-pills">
         <li class="active">
-            <a id="DailyServiceReportTab" onclick="return true;" href="#DailyServiceReport" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>Daily Service Record</a>
+            <a id="DailyServiceReportTab" onclick="DailyserviceTabClick()" href="#DailyServiceReport" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>Daily Service Record</a>
         </li>
         <li>
-            <a id="ServiceReportSummaryTab" href="#ServiceReportList" data-toggle="tab" style="width:250px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Service Record Summary</a>
+            <a id="ServiceReportSummaryTab" onclick="SummaryTabClick()" href="#ServiceReportList" data-toggle="tab" style="width:250px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Service Record Summary</a>
         </li>
 
     </ul>
@@ -70,7 +70,7 @@
                     <div class="col-lg-12" style="padding:10px 0px 10px 0px;">
                         <div class="col-md-12 filterHead ">Quick Filter</div>
                         <div class="col-md-6">
-                            @Html.RadioButton("filter", "30", new { id = "married-true", @checked = true, @onchange = "FilterServiceRecord()" })  30 Days </br> 
+                            @Html.RadioButton("filter", "30", new { id = "married-true", @checked = true, @onchange = "FilterServiceRecord()" })  30 Days   
                             @Html.RadioButton("filter", "60", new { id = "married-false", @onchange = "FilterServiceRecord()" })  60 Days
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                     <div class="col-lg-12" style="padding:10px 0px 10px 0px;">
                         <div class="col-md-12 filterHead ">Quick Filter</div>
                         <div class="col-md-6">
-                            @Html.RadioButton("filter2", "30", new { id = "married-true2", @checked = true, @onchange = "FilterRecordSummary()" })  30 Days </br>
+                            @Html.RadioButton("filter2", "30", new { id = "married-true2", @checked = true, @onchange = "FilterRecordSummary()" })  30 Days 
                             @Html.RadioButton("filter2", "60", new { id = "married-false2", @onchange = "FilterRecordSummary()" })  60 Days
                         </div>
                     </div>

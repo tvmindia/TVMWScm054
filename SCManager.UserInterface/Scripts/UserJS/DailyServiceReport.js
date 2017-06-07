@@ -32,7 +32,10 @@ $(document).ready(function () {
                   { className: "text-center", "targets": [13,14] },
                   { className: "text-right", "targets": [] }
            ]
-         });
+         }); 
+        $('#tblDailyServiceReport tbody').on('dblclick', 'td', function () {
+            JobEdit(this)
+        });
       
     }
     catch(e)
@@ -66,6 +69,7 @@ $(document).ready(function () {
                  
              ]
          });
+    
 
     }
     catch (e) {
@@ -125,8 +129,7 @@ function RefreshDailyServiceTable(jobno) {
         {
             DataTables.DailyService.clear().rows.add(GetAllServiceReportEntries(empid, serdate)).draw(false);
             $('[data-toggle="tp"]').tooltip({ container: 'body' });
-        }
-      
+        }      
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -145,8 +148,6 @@ function AddTechnicanJob()
         })
         $("#modelContextLabel").text('Add Job');
         $("#ModelJobNo").removeAttr('disabled');
-     
-
         $("#TechnicianLabel").text($("#EmpSelector option:selected").text());
         $("#ServiceDateLabel").text(ConvertJsonToDate(serdat));
         ClearJobForm();
@@ -158,10 +159,18 @@ function AddTechnicanJob()
     }
    
 }
+function SummaryTabClick() { 
+    ChangeButtonPatchView('DailyServiceReport', 'btnPatchDailyServiceReport', 'Back');
+}
+function DailyserviceTabClick() { 
+    ChangeButtonPatchView('DailyServiceReport', 'btnPatchDailyServiceReport', 'Add');
+} 
+function goBack() {
+    $('#DailyServiceReportTab').trigger('click'); 
+} 
 //-------------------------------------------------------FILTERS-----------------------------------------------------//
 //TAB1
-function FilterServiceRecord() {
-    debugger;
+function FilterServiceRecord() { 
     $("#EmpSelector").val("");
     $("#txtServiceDate").val("");
 
@@ -169,20 +178,17 @@ function FilterServiceRecord() {
     if (checkedValue != "") {
        
         if (checkedValue == 30)
-        {
-            debugger;
+        { 
             DataTables.DailyService.clear().rows.add(GetServicefilterbyDays(true)).draw(false);
         }
         else if (checkedValue == 60)
-        {
-            debugger;
+        { 
             DataTables.DailyService.clear().rows.add(GetServicefilterbyDays(false)).draw(false);
         }
     }
 }
 function GetServicefilterbyDays(Isdefault) {
-    try {
-        debugger;
+    try { 
         var data = { "Isdefault": Isdefault };
         var ds = {};
         ds = GetDataFromServer("DailyServiceReport/GetServicefilterbyDays/", data);
@@ -203,26 +209,21 @@ function GetServicefilterbyDays(Isdefault) {
     }
 }
 //TAB2
-function FilterRecordSummary() {
-    debugger; 
+function FilterRecordSummary() { 
     $("#txtServiceDate2").val("");
 
     var checkedValue = $("input[name='filter2']:checked").val()
-    if (checkedValue != "") {
-
-        if (checkedValue == 30) {
-            debugger;
+    if (checkedValue != "") { 
+        if (checkedValue == 30) { 
             DataTables.DailyServiceReportSummary.clear().rows.add(GetServiceRegisterSummaryFilter(true)).draw(false);
         }
-        else if (checkedValue == 60) {
-            debugger;
+        else if (checkedValue == 60) { 
             DataTables.DailyServiceReportSummary.clear().rows.add(GetServiceRegisterSummaryFilter(false)).draw(false);
         }
     }
 }
 function GetServiceRegisterSummaryFilter(Isdefault) {
-    try {
-        debugger;
+    try { 
         var data = { "Isdefault": Isdefault };
         var ds = {};
         ds = GetDataFromServer("DailyServiceReport/GetServiceRegisterSummaryFilter/", data);
@@ -266,8 +267,13 @@ function TechnicianSelectOnChange(curobj)
         $("#married-false").prop('checked', false);
         var v = $(curobj).val();
         $("#ModelTechEmpID").val(v);
-        $("#txtServiceDate").val($("#hdfcurrentdate").val());
-        $("#ModelServiceDate").val($("#hdfcurrentdate").val())
+        if ($("#txtServiceDate").val() == "")
+        {
+            $("#txtServiceDate").val($("#hdfcurrentdate").val());
+            $("#ModelServiceDate").val($("#hdfcurrentdate").val());
+        }
+        $("#ModelServiceDate").val($("#txtServiceDate").val());
+       
         RefreshDailyServiceTable();
     }
     catch(e)

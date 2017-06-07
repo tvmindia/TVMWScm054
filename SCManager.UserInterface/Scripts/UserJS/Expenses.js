@@ -242,7 +242,6 @@ function GetAllExpenses(showAllYN) {
 
 //------------------------------- Expenses Save-----------------------------//
 function save() {
-    debugger;
     if ($("#Amount").val() != "") {
         if ($("#Amount").val() > 0) {
             $("#btnInsertUpdateExpenses").trigger('click');

@@ -108,7 +108,7 @@ namespace SCManager.BusinessService.Services
             try
             {
                 JobList = _dailyServiceRepository.GetAllDailyJobs(SCCode);
-                JobList = JobList == null ? null : JobList.Select(x => new Job { ID = x.ID, JobNo = x.JobNo }).ToList();
+                JobList = JobList == null ? null : JobList.Select(x => new Job { ID = x.ID, JobNo = x.JobNo }).OrderBy(x => x.JobNo).ToList();
             }
             catch (Exception ex)
             {
@@ -117,7 +117,7 @@ namespace SCManager.BusinessService.Services
             return JobList;
         }
 
-        public List<Employees> GetTechniciansForRepeatedJob(string SCCode)
+        public List<Employees> GetTechniciansForRepeatedJob(string SCCode,string JobNo)
         {
             List<Job> JobList = null;
             List<Employees> EmpList = null;
@@ -125,7 +125,7 @@ namespace SCManager.BusinessService.Services
             {
                 JobList = _dailyServiceRepository.GetAllDailyJobs(SCCode);
 
-                EmpList = JobList == null ? null : JobList.Select(x => new Employees { ID = x.Employee.ID, Name = x.Employee.Name }).ToList();
+                EmpList = JobList == null ? null : JobList.Where(x=>x.JobNo==JobNo).Select(x => new Employees { ID = x.Employee.ID, Name = x.Employee.Name }).ToList();
             }
             catch (Exception ex)
             {
