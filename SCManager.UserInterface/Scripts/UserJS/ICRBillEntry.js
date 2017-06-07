@@ -23,7 +23,7 @@ $(document).ready(function () {
        { "data": "CustomerContactNo", "defaultContent": "<i>-</i>" },
         { "data": "ModelNo", "defaultContent": "<i>-</i>" },
           { "data": "SerialNo", "defaultContent": "<i>-</i>" },
-       { "data": "GrandTotal", "defaultContent": "<i>-</i>" },
+       { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" },
        { "data": "Remarks", "defaultContent": "<i>-</i>" },
        { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
      ],

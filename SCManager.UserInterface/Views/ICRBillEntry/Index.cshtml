@@ -126,16 +126,7 @@
                             <div class="col-md-1 mandatory"></div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-4 ">
-                                @Html.LabelFor(model => model.AMCNO, htmlAttributes: new { @class = "control-label" })
-                            </div>
-                            <div class="col-md-6">
-                                @Html.EditorFor(model => model.AMCNO, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.AMCNO, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-1 mandatory"></div>
-                        </div>
+                     
 
                         <div class="form-group">
                             <!---------------- 2 -------------------->
@@ -247,7 +238,16 @@
                                 </div>
                             </div>
 
+                        <div class="form-group">
+                            <div class="col-md-4 ">
+                                @Html.LabelFor(model => model.AMCNO, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.AMCNO, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AMCNO, "", new { @class = "text-danger" })
+                            </div>
 
+                        </div>
                         <div class="form-group">
                             <div class="col-md-4 ">
                                 @Html.LabelFor(model => model.AMCValidFromDate, htmlAttributes: new { @class = "control-label" })
