@@ -64,7 +64,10 @@ namespace SCManager.RepositoryServices.Services
                                         _ICRBillEntrylistObj.CustomerContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : _ICRBillEntrylistObj.CustomerContactNo);
                                         _ICRBillEntrylistObj.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : _ICRBillEntrylistObj.CustomerLocation);
                                         _ICRBillEntrylistObj.Technician = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : _ICRBillEntrylistObj.Technician);
+                                        _ICRBillEntrylistObj.AMCValidFromDate = (sdr["AMCValidFromDate"].ToString() != "" ? DateTime.Parse(sdr["AMCValidFromDate"].ToString()) : _ICRBillEntrylistObj.AMCValidFromDate);
+                                        _ICRBillEntrylistObj.AMCValidToDate = (sdr["AMCValidToDate"].ToString() != "" ? DateTime.Parse(sdr["AMCValidToDate"].ToString()) : _ICRBillEntrylistObj.AMCValidToDate);
                                         _ICRBillEntrylistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _ICRBillEntrylistObj.Remarks);
+                                        _ICRBillEntrylistObj.AMCNO = (sdr["AMCNO"].ToString() != "" ? (sdr["AMCNO"].ToString()) : _ICRBillEntrylistObj.AMCNO);
                                     }
 
                                     ICRBillEntrylist.Add(_ICRBillEntrylistObj);
@@ -117,6 +120,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@ModelNo", SqlDbType.NVarChar,20).Value = iCRBillEntry.ModelNo;
                         cmd.Parameters.Add("@TotalServiceTaxAmount", SqlDbType.Decimal).Value =iCRBillEntry.TotalServiceTaxAmt;
                         cmd.Parameters.Add("@SerialNo", SqlDbType.NVarChar,20).Value = iCRBillEntry.SerialNo;
+                        cmd.Parameters.Add("@AMCNO", SqlDbType.NVarChar, 50).Value = iCRBillEntry.AMCNO;
                         cmd.Parameters.Add("@Discount", SqlDbType.Decimal).Value = iCRBillEntry.Discount;
                         cmd.Parameters.Add("@DetailXML", SqlDbType.Xml).Value = iCRBillEntry.DetailXML;
 
@@ -183,6 +187,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@CustomerName", SqlDbType.NVarChar, 250).Value = iCRBillEntry.CustomerName;
                         cmd.Parameters.Add("@CustomerContactNo", SqlDbType.NVarChar, 50).Value = iCRBillEntry.CustomerContactNo;
                         cmd.Parameters.Add("@CustomerLocation", SqlDbType.NVarChar, 50).Value = iCRBillEntry.CustomerLocation;
+                        cmd.Parameters.Add("@AMCNO", SqlDbType.NVarChar, 50).Value = iCRBillEntry.AMCNO;
                         cmd.Parameters.Add("@PaymentMode", SqlDbType.NVarChar, 20).Value = iCRBillEntry.PaymentMode;
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = iCRBillEntry.Remarks;
                         cmd.Parameters.Add("@STAmount", SqlDbType.Decimal).Value = iCRBillEntry.STAmount;
@@ -329,7 +334,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ICRBillEntryHeaderObj.TotalServiceTaxAmt = (sdr["TotalServiceTaxAmount"].ToString() != "" ? decimal.Parse(sdr["TotalServiceTaxAmount"].ToString()) : _ICRBillEntryHeaderObj.TotalServiceTaxAmt);
                                         _ICRBillEntryHeaderObj.ModelNo = (sdr["ModelNo"].ToString() != "" ? (sdr["ModelNo"].ToString()) : _ICRBillEntryHeaderObj.ModelNo);
                                         _ICRBillEntryHeaderObj.SerialNo = (sdr["SerialNo"].ToString() != "" ? (sdr["SerialNo"].ToString()) : _ICRBillEntryHeaderObj.SerialNo);
-
+                                        _ICRBillEntryHeaderObj.AMCNO = (sdr["AMCNO"].ToString() != "" ? (sdr["AMCNO"].ToString()) : _ICRBillEntryHeaderObj.AMCNO);
                                     }
 
                                     ICRBillEntryHeaderList = _ICRBillEntryHeaderObj;

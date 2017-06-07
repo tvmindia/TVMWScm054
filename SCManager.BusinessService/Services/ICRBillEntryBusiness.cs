@@ -125,6 +125,9 @@ namespace SCManager.BusinessService.Services
             if (I != null)
             {
                 SCManagerSettings settings = new SCManagerSettings();
+
+                I.Total = I.STAmount - I.Discount;
+
                 if(I.TotalServiceTaxAmt==null)
                 {
                     I.TotalServiceTaxAmt = 0;
@@ -136,7 +139,18 @@ namespace SCManager.BusinessService.Services
                 I.GrandTotal = I.STAmount + I.TotalServiceTaxAmt - I.Discount;
 
                 if (I.ICRDate != null)
+                {
                     I.ICRDateFormatted = I.ICRDate.GetValueOrDefault().ToString(settings.dateformat);
+                }
+                if (I.AMCValidFromDate != null)
+                {
+                    I.AMCFromDateFormatted = I.AMCValidFromDate.GetValueOrDefault().ToString(settings.dateformat);
+                }
+                if (I.AMCValidToDate != null)
+                {
+                    I.AMCToDateFormatted = I.AMCValidToDate.GetValueOrDefault().ToString(settings.dateformat);
+                }
+
             }
 
         }

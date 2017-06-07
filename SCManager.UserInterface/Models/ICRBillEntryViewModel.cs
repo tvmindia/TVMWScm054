@@ -49,25 +49,32 @@ namespace SCManager.UserInterface.Models
         [Required(ErrorMessage = "Please Select Payment Mode")]
         public string PaymentMode { get; set; }
         public decimal? STAmount { get; set; }
+        [Display(Name = "Discount %")]
         public decimal? Discount { get; set; }
         public String DetailJSON { get; set; }
         public String ICRDateFormatted { get; set; }
+        public String AMCFromDateFormatted { get; set; }
+        public String AMCToDateFormatted { get; set; }
         public List<SelectListItem> JobNoList { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
         public List<SelectListItem> TechniciansList { get; set; }
         public List<ICRBillEntryDetailViewModel> ICRBillEntryDetail { get; set; }
-        [Display(Name = "Sub Total (₹)")]
+        [Display(Name = "Base Rate (₹)")]
         [Range(0, 9999999999999999.99)]
         public decimal? Subtotal { get; set; }
         [Display(Name = "Payment Reference No")]
         public string PaymentRefNo { get; set; }
-        [Display(Name = "Total Service Tax Amount (₹)")]
+        [Display(Name = "Total Service Tax %")]
         [Range(0, 9999999999999999.99)]
         public decimal? TotalServiceTaxAmt { get; set; }
         [Required(ErrorMessage = "Grand total should have value")]
         [Display(Name = "Grand Total (₹)")]
         [Range(0, 9999999999999999.99)]
         public decimal GrandTotal { get; set; }
+        [Display(Name = "AMC No")]
+        public string AMCNO { get; set; }
+        [Display(Name = "Total (₹)")]
+        public decimal? Total { get; set; }
         public string Technician { get; set; }
     }
 
