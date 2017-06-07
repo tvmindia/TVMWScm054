@@ -5,7 +5,7 @@ $(document).ready(function () {
 
         DataTables.itemTable = $('#tblItemList').DataTable(
          {
-             dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
              buttons: [{
                  extend: 'excel',
                  exportOptions:
@@ -13,6 +13,10 @@ $(document).ready(function () {
                                   columns: [2, 3, 4, 5,6,7,8]
                               }
              }],
+             language: {
+                 search: "_INPUT_",
+                 searchPlaceholder: "Search Items..."
+             },
              order: [],
              searching: true,
              paging: true,

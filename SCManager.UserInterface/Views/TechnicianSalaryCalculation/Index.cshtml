@@ -31,10 +31,10 @@
     <div class="tab-content clearfix">
         <div class="tab-pane fade in active" id="TechnicianSalary">
 
-            <div class="col-md-12">
+            <div class="col-md-12" style="padding-left: 0px;">
                 <div class="col-md-12">&nbsp;</div>
-                <div class="col-md-4">
-                    <div class="col-md-12">
+                <div class="col-md-4" style="padding-left: 0px;">
+                    <div class="col-md-12" style="padding-left: 0px;">
                         <div class="form-group">
                             <div class="col-md-4">
                                 <label class="control-label">Month</label>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12" style="padding-top:5px">
+                    <div class="col-md-12" style="padding-top:5px;padding-left: 0px;">
                         <div class="form-group">
                             <div class="col-md-4">
                                 <label class="control-label">Year</label>
@@ -58,8 +58,16 @@
                         </div>
                     </div>
                 </div>
-                <div  class="col-md-8">
-                    <h4 id="MsgCalcu"></h4>
+                <div class="col-md-5">
+
+                </div>
+                <div class="well well-small col-md-3" style="display:none;margin-bottom: 0px;padding-bottom:0px;min-height:25px;padding-top:5px;">
+                    <span style="font-size: 13px;">Period &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</span>
+                    <span id="MsgCalcu" style="font-weight: 600;font-size: 15px;"></span>
+                   <p>
+                       <span style="font-size: 13px;">Total Payable&nbsp;&nbsp;:&nbsp;</span>
+                       <span id="Msgtotalpayable" style="font-weight: 600;font-size: 15px;"></span>
+                   </p>
                 </div>
             </div>
             <div class="col-md-12">&nbsp;</div>
@@ -88,7 +96,7 @@
                             <th>Repeat Deduct Comm.(₹)</th>
                             <th>Special Comm.(₹)</th>
                             <th>Service Charge Comm.(₹)</th>
-                            <th>Product Comm.()₹)</th>
+                            <th>Product Comm.(₹)</th>
                             <th>AMC Comm.(₹)</th>
 
                         </tr>
