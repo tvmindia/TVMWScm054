@@ -52,6 +52,7 @@
                             <th style="display:none;">Job No</th>
                             <th>Date</th>
                             <th>ICR No</th>
+                            <th>AMC Details</th>
                             <th>Customer</th>
                             <th>Customer Contact No.</th>
                             <th>Model</th>
@@ -124,6 +125,8 @@
                             </div>
                             <div class="col-md-1 mandatory"></div>
                         </div>
+
+                     
 
                         <div class="form-group">
                             <!---------------- 2 -------------------->
@@ -235,7 +238,16 @@
                                 </div>
                             </div>
 
+                        <div class="form-group">
+                            <div class="col-md-4 ">
+                                @Html.LabelFor(model => model.AMCNO, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.AMCNO, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AMCNO, "", new { @class = "text-danger" })
+                            </div>
 
+                        </div>
                         <div class="form-group">
                             <div class="col-md-4 ">
                                 @Html.LabelFor(model => model.AMCValidFromDate, htmlAttributes: new { @class = "control-label" })
@@ -295,10 +307,10 @@
 
                                     </div>
 
-                                    <div class="inputForm col-md-8">
+                                    <div class="inputForm col-md-7">
 
                                     </div>
-                                    <div class="inputForm col-md-4">
+                                    <div class="inputForm col-md-5">
                                         <div class="form-group">
                                             <div class="col-md-6">
                                                 @Html.LabelFor(model => model.Subtotal, htmlAttributes: new { @class = "control-label" })
@@ -308,21 +320,37 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="text" id="discountpercentage" class="form-control vattxt" onkeyup="CalculateDiscountPercentage()" />
+                                            </div>
                                             <div class="col-md-6">
-                                                @Html.LabelFor(model => model.TotalServiceTaxAmt, htmlAttributes: new { @class = "control-label" })
-                                            </div>                                            
-                                            <div class="col-md-6">
-                                                @Html.EditorFor(model => model.TotalServiceTaxAmt, new { htmlAttributes = new { @class = "form-control Amount", @onblur = "AmountSummary();", @onclick = "SelectAllValue(this);" } })
+                                                @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control Amount", @onblur = "AmountSummary();", @onclick = "SelectAllValue(this);" } })
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-6">
-                                                @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label" })
+                                                @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-6">
-                                                @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control Amount", @onblur = "AmountSummary();" ,@onclick= "SelectAllValue(this);" } })
+                                                @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control Amount", @readonly = "readonly", @id = "total" } })
+                                                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                @Html.LabelFor(model => model.TotalServiceTaxAmt, htmlAttributes: new { @class = "control-label" })
+                                            </div>     
+                                            <div class="col-md-2">
+                                                <input type="text" id="ServiceTaxpercentage" class="form-control vattxt" onkeyup="CalculateServiceTaxPercentage()" />
+                                            </div>                                       
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.TotalServiceTaxAmt, new { htmlAttributes = new { @class = "form-control Amount", @onblur = "AmountSummary();", @onclick = "SelectAllValue(this);" } })
+                                            </div>
+                                        </div>
+                                       
                                         <div class="form-group">
                                             <div class="col-md-6">
                                                 @Html.LabelFor(model => model.GrandTotal, htmlAttributes: new { @class = "control-label" })

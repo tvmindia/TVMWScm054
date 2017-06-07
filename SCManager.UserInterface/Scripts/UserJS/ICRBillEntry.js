@@ -18,17 +18,39 @@ $(document).ready(function () {
        { "data": "JobNo", "defaultContent": "<i>-</i>" },
        { "data": "ICRDateFormatted", "defaultContent": "<i>-</i>" },
        { "data": "ICRNo", "defaultContent": "<i>-</i>" },
+       { "data": "AMCNO", "defaultContent": "<i>-</i>" },
        { "data": "CustomerName", "defaultContent": "<i>-</i>" },
        { "data": "CustomerContactNo", "defaultContent": "<i>-</i>" },
         { "data": "ModelNo", "defaultContent": "<i>-</i>" },
           { "data": "SerialNo", "defaultContent": "<i>-</i>" },
-       { "data": "GrandTotal", "defaultContent": "<i>-</i>" },
+       { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" },
        { "data": "Remarks", "defaultContent": "<i>-</i>" },
        { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
      ],
      columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
-          { className: "text-right", "targets": [9] },
-     { className: "text-center", "targets": [1, 2, 3, 4, 9, 5, 6, 7, 8] }
+          { className: "text-right", "targets": [10] },
+     { className: "text-center", "targets": [1, 2, 3, 4, 9, 5, 6, 7, 8, 9] },
+     {
+         "render": function (data, type, row) {
+             var returnstring = '';
+             debugger;
+             if (data) {                
+                 returnstring = returnstring + '<span>' + row.AMCNO + ' / (' + row.AMCFromDateFormatted + ' to ' + row.AMCToDateFormatted + ' )</span><br/>';
+                 
+             }
+             else
+             {
+                 returnstring = returnstring + '<span>' + (row.AMCNO ? row.AMCNO : "-") + ' / (' + (row.AMCFromDateFormatted?row.AMCFromDateFormatted:"-") + ' to ' + (row.AMCToDateFormatted?row.AMCToDateFormatted:"-" )+ ' )</span><br/>';
+             }
+             if (row.AMCNO == null && row.AMCFromDateFormatted == null && row.AMCToDateFormatted == null)
+             {
+                 returnstring = "-";
+             }
+             
+             return returnstring;
+         },
+         "targets": 5
+     }
 
      ]
  });
@@ -270,6 +292,7 @@ function reset()
         $("#JobNo").val("");
         $("#jobnumberList").val("");
         $("#ICRNo").val("");
+        $("#AMCNO").val("");
         $("#CustomerName").val("");
         $("#CustomerContactNo").val("");
         $("#CustomerLocation").val("");
@@ -278,11 +301,14 @@ function reset()
         $("#subtotal").val("");
         $("#STAmount").val("");
         $("#TotalServiceTaxAmt").val("");
+        $("#discountpercentage").val("");
+        $("#ServiceTaxpercentage").val("");
         $("#Discount").val("");
         $("#ModelNo").val("");
         $("#PaymentRefNo").val("");
         $("#SerialNo").val("");
         $("#grandtotal").val("");
+        $("#total").val("");
         //$('#ICRNo').attr('readonly', false);
         var $datepicker = $('#ICRDate');
         $datepicker.datepicker('setDate', null);
@@ -326,6 +352,7 @@ function BindICRBillEntryFields(Records) {
         $("#ModelTechEmpID").val(Records.EmpID);
         $("#JobNo").val(Records.JobNo);
         $("#ICRNo").val(Records.ICRNo);
+        $("#AMCNO").val(Records.AMCNO);
         $("#CustomerName").val(Records.CustomerName);
         $("#CustomerContactNo").val(Records.CustomerContactNo);
         $("#CustomerLocation").val(Records.CustomerLocation);
@@ -340,6 +367,7 @@ function BindICRBillEntryFields(Records) {
         $('#TotalServiceTaxAmt').val(roundoff(Records.TotalServiceTaxAmt));
         $("#subtotal").val(roundoff(Records.STAmount))
         $("#grandtotal").val(roundoff(Records.GrandTotal));
+        $("#total").val(roundoff(Records.Total));
         EG_Rebind_WithData(Records.ICRBillEntryDetail, 1);
        // $('#ICRNo').attr('readonly', 'readonly');
 
@@ -510,6 +538,49 @@ function GetAllICRBill() {
         notyAlert('error', e.message);
     }
 }
+
+function CalculateServiceTaxPercentage() {
+    debugger;
+    var serviceTaxpercent = $("#ServiceTaxpercentage").val();
+    var baseAmt = $("#total").val();
+    serviceTaxpercent = parseInt(serviceTaxpercent);
+    if (serviceTaxpercent > 100) {
+        serviceTaxpercent = 100
+        $("#vatpercentage").val(serviceTaxpercent);
+    }
+    if (serviceTaxpercent < 0) {
+        serviceTaxpercent = 0
+        $("#vatpercentage").val(serviceTaxpercent);
+    }
+    baseAmt = parseInt(baseAmt);
+    var vatamt = (baseAmt*serviceTaxpercent / 100)
+    if (isNaN(vatamt)) { vatamt = 0.00 }
+    $("#TotalServiceTaxAmt").val(roundoff(vatamt));
+
+    AmountSummary();
+}
+
+function CalculateDiscountPercentage() {
+    debugger;
+    var discountpercent = $("#discountpercentage").val();
+    var baseAmt = $("#subtotal").val();
+    discountpercent = parseInt(discountpercent);
+    if (discountpercent > 100) {
+        discountpercent = 100
+        $("#vatpercentage").val(discountpercent);
+    }
+    if (discountpercent < 0) {
+        discountpercent = 0
+        $("#vatpercentage").val(discountpercent);
+    }
+    baseAmt = parseInt(baseAmt);
+    var Discount = (baseAmt*discountpercent / 100)
+    if (isNaN(Discount)) { Discount = 0.00 }
+    $("#Discount").val(roundoff(Discount));
+
+    AmountSummary();
+}
+
 function SaveSuccess(data, status) {
    
     var JsonResult = JSON.parse(data)
@@ -605,12 +676,13 @@ function BindJobNumberDropDown() {
     }
 }
 function AmountSummary() {
-  
+    debugger;
     var subtotal = parseFloat($('#subtotal').val()) || 0;
     var totalServiceTaxAmt = parseFloat($('#TotalServiceTaxAmt').val()) || 0;
     var discount = parseFloat($('#Discount').val()) || 0;
-    $('#grandtotal').val(roundoff(subtotal + totalServiceTaxAmt - discount));
-
+    $('#total').val(roundoff(subtotal - discount));
+    var total = parseFloat($('#total').val()) || 0;
+    $('#grandtotal').val(roundoff(total + totalServiceTaxAmt));    
     $('#subtotal').val(roundoff(subtotal));
     $('#TotalServiceTaxAmt').val(roundoff(totalServiceTaxAmt));
     $('#Discount').val(roundoff(discount))

@@ -86,8 +86,7 @@ namespace SCManager.UserInterface.Controllers
         #endregion GeBillBookByID
 
         #region DeleteBillBook
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DeleteBillBook(string ID)
         {
@@ -223,7 +222,7 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.resetbtn.Visible = true;
                     ToolboxViewModelObj.resetbtn.Text = "Reset";
                     ToolboxViewModelObj.resetbtn.Title = "Reset";
-                    ToolboxViewModelObj.resetbtn.Event = "reset();";
+                    ToolboxViewModelObj.resetbtn.Event = "Reset();";
 
                     break;
                 case "Add":
@@ -255,7 +254,7 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.resetbtn.Visible = true;
                     ToolboxViewModelObj.resetbtn.Text = "Reset";
                     ToolboxViewModelObj.resetbtn.Title = "Reset";
-                    ToolboxViewModelObj.resetbtn.Event = "reset();";
+                    ToolboxViewModelObj.resetbtn.Event = "Reset();";
 
                     break;
                 case "AddSub":

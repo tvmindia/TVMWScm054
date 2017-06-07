@@ -5,10 +5,14 @@ $(document).ready(function () {
     {
         DataTables.SalaryTable = $('#tblSalaryCalculation').DataTable(
         {
-            dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+            dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
             order: [],          
             paging: false,
             data: GetAllTechniciansSalaryWithoutDate(),
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search"
+            },
             autoWidth: false,
             columns: [
              
@@ -85,6 +89,7 @@ function GetAllTechniciansSalary(month,year) {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
+            $("#Msgtotalpayable").text(ds.Record);
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -109,6 +114,7 @@ function GetAllTechniciansSalaryWithoutDate() {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
+            $("#Msgtotalpayable").text(ds.Record);
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -131,11 +137,12 @@ function SalaryCalculate()
     try {
         var mon = $("#Month option:selected").text();
         var yea = $("#Year").val();
+        $(".well").show();
         if (($("#Month").val() != '') && (yea != ''))
         {
             // mon = (mon != '' && mon != '--Select Month--') ? mon : ' - ';
             // yea = yea != '' ? yea : ' - ';
-            $("#MsgCalcu").text("Calculated Salary for the month " + mon + "/" + yea);
+            $("#MsgCalcu").text("" + mon + "/" + yea);
             RefreshSalaryTable();
         }
         else

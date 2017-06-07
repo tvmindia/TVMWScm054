@@ -29,10 +29,10 @@
 <div id="exTab3" class="container SCtabContainer">
     <ul class="nav nav-pills">
         <li class="active">
-            <a id="ListTab" onclick="List()" href="#BillList" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>Bill List</a>
+            <a id="ListTab" onclick="List()" href="#BillList" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>Bill Book List</a>
         </li>
         <li>
-            <a id="AddTab" onclick="Add(1)" href="#BillEntry" data-toggle="tab" style="width:170px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Bill Entry</a>
+            <a id="AddTab" onclick="Add(1)" href="#BillEntry" data-toggle="tab" style="width:170px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Bill Book Entry</a>
         </li>
 
     </ul>
@@ -52,6 +52,7 @@
                             <th>Last Used</th>
                             <th>Technician</th>
                             <th>Status</th>
+                            <th>Bill Book Type</th>
                             <th>Remarks</th>
                             <th>...</th>
 
@@ -80,9 +81,29 @@
                                     @Html.LabelFor(model => model.BillNo, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.BillNo, new { htmlAttributes = new { @class = "form-control",@readonly="ReadOnly", @Value = "<<Auto Generated>>" } })
+                                    @Html.EditorFor(model => model.BillNo, new { htmlAttributes = new { @class = "form-control ",@readonly="ReadOnly" } })
                                     @Html.ValidationMessageFor(model => model.BillNo, "", new { @class = "text-danger" })
                                 </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.BillBookType, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="checkbox">
+                                        @{
+                                            List<SelectListItem> listBillBookType = new List<SelectListItem>();
+                                            listBillBookType.Add(new SelectListItem
+                                            { Text = "ICR", Value = "ICR" });
+                                            listBillBookType.Add(new SelectListItem
+                                            { Text = "TCR", Value = "TCR" });
+                                        }
+                                        @Html.DropDownListFor(model => model.BillBookType, listBillBookType, "-- Select Book Type --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
+                                        @Html.ValidationMessageFor(model => model.BillBookType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-1 mandatory"></div>
                             </div>
 
                             <div class="form-group">
@@ -107,7 +128,7 @@
                                     <div class="col-md-1 mandatory"></div>
                                 </div>
 
-                            <div class="form-group">
+                            <div class="form-group" hidden="hidden">
                                 <div class="col-md-3">
                                     @Html.LabelFor(model => model.LastUsed, htmlAttributes: new { @class = "control-label" })
                                     </div>
@@ -137,9 +158,9 @@
                                             @{
                                                 List<SelectListItem> listStatus = new List<SelectListItem>();
                                                 listStatus.Add(new SelectListItem
-                                                { Text = "Open", Value = "1" });
+                                                { Text = "Open", Value = "True" });
                                                 listStatus.Add(new SelectListItem
-                                                { Text = "Closed", Value = "0" });
+                                                { Text = "Closed", Value = "False" });
                                             }
                                             @Html.DropDownListFor(model => model.Status, listStatus, "-- Select Status --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;"})
                                             @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
@@ -147,6 +168,8 @@
                                     </div>
                                     <div class="col-md-1 mandatory"></div>
                                 </div>
+
+                        
 
                             <div class="form-group">
                                 <div class="col-md-3">
@@ -164,14 +187,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 mastersep">
+                        @*<div class="col-md-6 mastersep">
                             <div class="masterinfoHead">
                                 Missing Bill Entries
                             </div>
                             <br />
                             <div class="masterinfoDet">
                                 </div>
-                            </div>
+                            </div>*@
                        
                     </div>
                     @Html.HiddenFor(model => model.ID, htmlAttributes: new { @class = "control-label col-lg-2", id = "ID", @Value = Guid.Empty })

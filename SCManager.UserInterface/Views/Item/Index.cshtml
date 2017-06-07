@@ -78,7 +78,7 @@
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     @Html.LabelFor(model => model.ItemCode, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
@@ -89,7 +89,7 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     @Html.LabelFor(model => model.UOM, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
@@ -115,7 +115,7 @@
 
 
                             <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
@@ -128,7 +128,7 @@
 
 
                             <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     @Html.LabelFor(model => model.Subcategory, htmlAttributes: new { @class = "control-label" })
                                     </div>
                                     <div class="col-md-5">
@@ -141,7 +141,7 @@
                                     @*<div class="col-md-1 mandatory"></div>*@
                                 </div>
                             <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     @Html.LabelFor(model => model.SCQty, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     @Html.LabelFor(model => model.TechnicianQty, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
@@ -158,17 +158,9 @@
                                     @*@Html.ValidationMessageFor(model => model.Stock, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
+                           
                             <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Stock, htmlAttributes: new { @class = "control-label" })
-                                </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.Stock, new { htmlAttributes = new { @class = "form-control BlockEnter", @readonly = "readonly", style = "text-align:right;" } })
-                                    @*@Html.ValidationMessageFor(model => model.Stock, "", new { @class = "text-danger" })*@
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
                                     @Html.LabelFor(model => model.DefDamgStockQty, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
@@ -177,7 +169,16 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
+                                    @Html.LabelFor(model => model.Stock, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.Stock, new { htmlAttributes = new { @class = "form-control BlockEnter", @readonly = "readonly", style = "text-align:right;" } })
+                                    @*@Html.ValidationMessageFor(model => model.Stock, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-5">
                                     @Html.LabelFor(model => model.ReorderQty, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
@@ -187,7 +188,7 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     @Html.LabelFor(model => model.ProductCommission, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
@@ -198,7 +199,7 @@
 
                            
                             <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     @Html.LabelFor(model => model.SellingRate, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
@@ -210,11 +211,11 @@
 
 
                             <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control BlockEnter", @rows = "7" })
+                                    @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control BlockEnter", @rows = "3" })
                                     @*@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
@@ -233,14 +234,15 @@
                                     </div>
                                     <br />
                                     <div class="masterinfoHead">
-                                        Spare Item Master
+                                        Product/Spare Item Master
                                     </div>
                                     <br />
                                     <div class="masterinfoDet">
-                                        The spare item master  (often referred to simply as the "item master", comprising all the individual spares ,additives and accessories in store) contains descriptions of all items that service center keeps in stock.
-                                        It is the central repository of information on items (such as inventory levels) for the SC.
-                                        The reorder level, selling rate and the specific category od spares are defined here.
-                                        Descriptions of the individual items used in SC are stored in item master .
+                                        The product/spare item master (often referred to simply as the "item master", comprising all the individual spares, additives and accessories in store) contains descriptions of all items that service center keeps in stock. 
+                                        It is the central repository of information on items (such as inventory levels) for the SC. 
+                                        The reorder level, base rate and the specific category of spares are defined here. 
+                                        Descriptions of the individual items used in SC are stored in item master.
+
                                     </div>
                                 </div>
                             </div>

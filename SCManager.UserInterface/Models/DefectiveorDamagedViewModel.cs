@@ -55,5 +55,8 @@ namespace SCManager.UserInterface.Models
         public LogDetailsViewModel logDetails { get; set; }
         public String OpenDateFormatted { get; set; }
         public String ReceiveStatus { get; set; }
+        [Display(Name = "Customer")]
+        public string Customer { get; set; }
+        public string InvoiceNo { get; set; }
     }
 }

@@ -22,7 +22,9 @@
                 @Html.Action("ChangeButtonStyle", "DefectiveorDamaged", data);
             }
         </div>
+        
     </div>
+  
 </div>
 <div id="exTab3" class="container SCtabContainer">
     <ul class="nav nav-pills">
@@ -38,6 +40,7 @@
         <div class="tab-pane fade in active" id="DefectiveorDamagedList">
             <div class="col-md-12">&nbsp;</div>
             <div class="col-md-12">
+               
                 <table id="tblDefectiveorDamagedList" class="table table-striped table-bordered table-hover" cellspacing="0">
                     <thead>
                         <tr class="text-center">
@@ -48,6 +51,7 @@
                             <th>Code</th>
                             <th style="width:300px !important;">Description</th>
                             <th style="width:20px !important;">Quantity </th>
+                            <th style="width:20px !important;">Customer </th>
                             <th style="width:100px !important;">Returned To Company</th>
                             <th style="width:85px !important;">Receive Status</th>
                             <th >Remark</th>
@@ -59,8 +63,11 @@
             </div>
         </div>
         <div class="tab-pane fade" id="DefectiveorDamagedEntry">
+            
             <div class="col-md-12">&nbsp;</div>
+            
             <div class="col-md-12">
+                <span id="MsgReturn" style="position: absolute;right: 0px;top:-15px;font-size: 12px;color: #b50808;display:none;">Item Not Returned! Use 'Return' option to physically return the item</span>
                 @using (Ajax.BeginForm("InsertUpdateDefectDamaged", "DefectiveorDamaged", new AjaxOptions { HttpMethod = "POST", Confirm = "", OnSuccess = "DefectiveDamagedSaveSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "formIns_Up" }))
             {
                     @Html.AntiForgeryToken()
@@ -154,6 +161,15 @@
                                 <div class="col-md-5" id="TicketNoDiv">
                                     @Html.EditorFor(model => model.TicketNo, new { htmlAttributes = new { @class = "form-control BlockEnter",@onclick="RemoveCss();" } })
                                     @Html.ValidationMessageFor(model => model.TicketNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.LabelFor(model => model.Customer, htmlAttributes: new { @class = "control-label " })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.Customer, new { htmlAttributes = new { @class = "form-control BlockEnter", @onclick = "RemoveCss();" } })
+                                    @Html.ValidationMessageFor(model => model.Customer, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
