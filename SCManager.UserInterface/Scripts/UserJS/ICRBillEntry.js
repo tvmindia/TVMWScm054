@@ -42,6 +42,10 @@ $(document).ready(function () {
              {
                  returnstring = returnstring + '<span>' + (row.AMCNO ? row.AMCNO : "-") + ' / (' + (row.AMCFromDateFormatted?row.AMCFromDateFormatted:"-") + ' to ' + (row.AMCToDateFormatted?row.AMCToDateFormatted:"-" )+ ' )</span><br/>';
              }
+             if (row.AMCNO == null && row.AMCFromDateFormatted == null && row.AMCToDateFormatted == null)
+             {
+                 returnstring = "-";
+             }
              
              return returnstring;
          },
