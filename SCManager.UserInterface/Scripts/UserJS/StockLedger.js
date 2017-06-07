@@ -37,8 +37,9 @@ $(document).ready(function () {
 
              ],
              columnDefs: [
-                     { "targets": [0,1,4,5,6,7,8], "searchable": false },
+                     { "targets": [0,1], "searchable": false },
                     { "targets": [0, 1], "visible": false },
+                    { "targets": [4, 5, 6, 7, 8], "searchable": true },
                     { "targets": [2, 3], "visible": false, "searchable": true },
                     {orderable:false, className: "text-center", "targets": [6, 8] },
                     {orderable:false, className: "text-left", "targets": [4,5,7] }],
