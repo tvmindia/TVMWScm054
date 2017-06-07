@@ -5,10 +5,14 @@ $(document).ready(function () {
     {
         DataTables.SalaryTable = $('#tblSalaryCalculation').DataTable(
         {
-            dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+            dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
             order: [],          
             paging: false,
             data: GetAllTechniciansSalaryWithoutDate(),
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search"
+            },
             autoWidth: false,
             columns: [
              
