@@ -183,7 +183,7 @@ namespace SCManager.RepositoryServices.Services
 
 
         #region GetServicefilterbyDays
-        public List<Job> GetServicefilterbyDays(string SCCode,string Createddate,string days)
+        public List<Job> GetServicefilterbyDays(string SCCode,string Createddate,string Isdefault)
         {
             List<Job> jobList = null;
             try
@@ -200,7 +200,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.CommandText = "[GetServicefilterbyDays]";
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = SCCode;
-                        cmd.Parameters.Add("@IsDefault", SqlDbType.Bit).Value =bool.Parse( days);
+                        cmd.Parameters.Add("@IsDefault", SqlDbType.Bit).Value =bool.Parse(Isdefault);
                         cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DateTime.Parse(Createddate);
                         using (SqlDataReader sdr = cmd.ExecuteReader())
                         {
@@ -517,5 +517,58 @@ namespace SCManager.RepositoryServices.Services
             return serviceregistryList;
         }
         #endregion GetServiceRegistrySummary
+
+        #region GetServiceRegisterSummaryFilter
+        public List<ServiceRegistrySummary> GetServiceRegisterSummaryFilter(string SCCode, string CreatedDate, string Isdefault)
+        {
+            List<ServiceRegistrySummary> serviceregistryList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[GetServiceRegisterSummaryFilter]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = SCCode;
+                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = CreatedDate;
+                        cmd.Parameters.Add("@IsDefault", SqlDbType.Bit).Value = bool.Parse(Isdefault);
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                serviceregistryList = new List<ServiceRegistrySummary>();
+                                while (sdr.Read())
+                                {
+                                    ServiceRegistrySummary _serviceRegistrySummary = new ServiceRegistrySummary();
+                                    {
+                                        _serviceRegistrySummary.ServiceDate = (sdr["ServiceDate"].ToString() != "" ? (sdr["ServiceDate"].ToString()) : _serviceRegistrySummary.ServiceDate);
+                                        _serviceRegistrySummary.Technician = (sdr["Technician"].ToString() != "" ? (sdr["Technician"].ToString()) : _serviceRegistrySummary.Technician);
+                                        _serviceRegistrySummary.TotalCalls = (sdr["TotalCalls"].ToString() != "" ? (int.Parse(sdr["TotalCalls"].ToString())) : _serviceRegistrySummary.TotalCalls);
+                                        _serviceRegistrySummary.MinorCalls = (sdr["MinorCalls"].ToString() != "" ? (int.Parse(sdr["MinorCalls"].ToString())) : _serviceRegistrySummary.MinorCalls);
+                                        _serviceRegistrySummary.MajorCalls = (sdr["MajorCalls"].ToString() != "" ? (int.Parse(sdr["MajorCalls"].ToString())) : _serviceRegistrySummary.MajorCalls);
+                                        _serviceRegistrySummary.MandatoryCalls = (sdr["MandatoryCalls"].ToString() != "" ? (int.Parse(sdr["MandatoryCalls"].ToString())) : _serviceRegistrySummary.MandatoryCalls);
+                                        _serviceRegistrySummary.DemoCalls = (sdr["DemoCalls"].ToString() != "" ? (int.Parse(sdr["DemoCalls"].ToString())) : _serviceRegistrySummary.DemoCalls);
+                                        _serviceRegistrySummary.RepeatCalls = (sdr["RepeatCalls"].ToString() != "" ? (int.Parse(sdr["RepeatCalls"].ToString())) : _serviceRegistrySummary.RepeatCalls);
+                                    }
+                                    serviceregistryList.Add(_serviceRegistrySummary);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return serviceregistryList;
+        }
+        #endregion GetServiceRegisterSummaryFilter
     }
 }
