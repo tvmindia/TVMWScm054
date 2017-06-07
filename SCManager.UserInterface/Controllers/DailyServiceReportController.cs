@@ -262,7 +262,23 @@ namespace SCManager.UserInterface.Controllers
             try
             {
                 UA ua = new UA();
-                List<EmployeesViewModel> EmpListVM = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_dailyServiceBusiness.GetTechniciansForRepeatedJob(ua.SCCode));
+                List<EmployeesViewModel> EmpListVM = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_dailyServiceBusiness.GetAllTechnicians(ua));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = EmpListVM });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        //GetTechnicianByJobNo
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetTechnicianByJobNo(string JobNo)
+        {
+            try
+            {
+                UA ua = new UA();
+                List<EmployeesViewModel> EmpListVM = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_dailyServiceBusiness.GetTechniciansForRepeatedJob(ua.SCCode,JobNo));
                 return JsonConvert.SerializeObject(new { Result = "OK", Records = EmpListVM });
             }
             catch (Exception ex)
@@ -356,18 +372,12 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.addbtn.Title = "Add Job";
                     ToolboxViewModelObj.addbtn.Event = "AddTechnicanJob();";
                     break;
-                case "Save":
-                    //ToolboxViewModelObj.savebtn.Visible = true;
-                    //ToolboxViewModelObj.savebtn.Text = "Save";
-                    //ToolboxViewModelObj.savebtn.Title = "Save";
-                    //ToolboxViewModelObj.savebtn.Event = "SaveTechnicanJob();";
-                    //ToolboxViewModelObj.resetbtn.Visible = true;
-                    //ToolboxViewModelObj.resetbtn.Text = "Reset";
-                    //ToolboxViewModelObj.resetbtn.Title = "Reset";
-                    //ToolboxViewModelObj.resetbtn.Event = "Clear();";
-                    break;
-             
-                 
+                case "Back":
+                    ToolboxViewModelObj.backbtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Text = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back";
+                    ToolboxViewModelObj.backbtn.Event = "goBack();";
+                    break; 
                 default:
                     return Content("Nochange");
             }

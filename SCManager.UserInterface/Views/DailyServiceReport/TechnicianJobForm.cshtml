@@ -125,7 +125,7 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <input type="text" id="ModelRepeat_JobNo" name="Repeat_JobNo" class="form-control" list="jobnumberList" />
+                                                    <input type="text" id="ModelRepeat_JobNo" name="Repeat_JobNo" class="form-control" onchange="RepeatJobNumberChange()" list="jobnumberList" />
                                                     <datalist id="jobnumberList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
