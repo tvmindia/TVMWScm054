@@ -16,12 +16,23 @@ namespace SCManager.BusinessService.Services
             _technicianSalaryCalculationRepository=technicianSalaryCalculationRepository;
         }
 
-        public List<TechnicianSalary> GetTechniciansCalculatedSalary(string SCCode, short? Month, short? Year)
+        public List<TechnicianSalary> GetTechniciansCalculatedSalary(string SCCode, string Month, string Year)
         {
             List<TechnicianSalary> technicianSalaryList = null;
             try
             {
-                technicianSalaryList = _technicianSalaryCalculationRepository.GetTechniciansCalculatedSalary(SCCode, Month, Year);
+                Int16? M=null;
+                Int16? Y=null;
+                if (!string.IsNullOrEmpty(Month))
+                {
+                    M = Int16.Parse(Month);
+                }
+
+                if(!string.IsNullOrEmpty(Year))
+                {
+                    Y= Int16.Parse(Year);
+                }
+                technicianSalaryList = _technicianSalaryCalculationRepository.GetTechniciansCalculatedSalary(SCCode, M, Y);
                // ItemList = ItemList == null ? null : ItemList.Select(item => { item.Value = int.Parse(item.Stock) * item.SellingRate; return item; }).ToList();
 
             }

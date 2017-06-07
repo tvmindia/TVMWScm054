@@ -293,8 +293,6 @@ namespace SCManager.UserInterface.Controllers
             {
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
-
-
         }
 
 
@@ -319,8 +317,29 @@ namespace SCManager.UserInterface.Controllers
             {
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
+        }
 
-
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetServiceRegisterSummaryFilter(string Isdefault)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Isdefault))
+                {
+                    UA ua = new UA();
+                    List<ServiceRegistrySummaryViewModel> serviceList = Mapper.Map<List<ServiceRegistrySummary>, List<ServiceRegistrySummaryViewModel>>(_dailyServiceBusiness.GetServiceRegisterSummaryFilter(ua.SCCode, ua.GetCurrentDateTime().ToString(), Isdefault));
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = serviceList });
+                }
+                else
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "ID or Date is Empty!" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
         }
 
         #region ButtonStyling

@@ -14,7 +14,7 @@ $(document).ready(function () {
                               }
              }],
              order: [],
-             searching: false,
+             searching: true,
              paging: true,
              pageLength: 50,
              data: GetItemsSummary(),
@@ -32,9 +32,9 @@ $(document).ready(function () {
              
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
-                  { className: "text-right", "targets": [7, 8] },
-                    { className: "text-center", "targets": [ 5,6] },
-                    { className: "text-left", "targets": [2,3,4] },
+                  { className: "text-right", "targets": [7, 8], "searchable": true },
+                    { className: "text-center", "targets": [5, 6], "searchable": true },
+                    { className: "text-left", "targets": [2, 3, 4], "searchable": true },
 
              ]
          });

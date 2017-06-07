@@ -58,6 +58,16 @@ namespace SCManager.BusinessService.Services
             {
                 JobList = _dailyServiceRepository.GetAllDailyJobs(SCCode);
                 JobList = JobList == null ? null : JobList.Where(stype => stype.SCCode == SCCode && stype.Employee.ID==id && DateTime.Parse(stype.ServiceDate)== DateTime.Parse(servicedate)).ToList();
+                if (JobList != null)
+                {
+                    foreach (Job EX in JobList)
+                    {
+                        SCManagerSettings settings = new SCManagerSettings();
+
+                        if (EX.ServiceDate != null)
+                            EX.ServiceDateformatted = Convert.ToDateTime(EX.ServiceDate).ToString(settings.dateformat);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -235,6 +245,18 @@ namespace SCManager.BusinessService.Services
             return ServiceRegistrySummaryList;
         }
 
-       
+        public List<ServiceRegistrySummary> GetServiceRegisterSummaryFilter(string SCCode, string CreatedDate, string Isdefault)
+        {
+            List<ServiceRegistrySummary> ServiceRegistrySummaryList = null;
+            try
+            {
+                ServiceRegistrySummaryList = _dailyServiceRepository.GetServiceRegisterSummaryFilter(SCCode, CreatedDate, Isdefault);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ServiceRegistrySummaryList;
+        }
     }
 }

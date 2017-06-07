@@ -35,7 +35,7 @@ namespace SCManager.UserInterface.Models
         public string PaymentMode { get; set; }
 
         [Display(Name = "Amount (₹)")]
-        [Range(0.00, 1000000000.00, ErrorMessage = "Please enter a numeric")]
+        [Range(-1000000000.00, 1000000000.00, ErrorMessage = "Please enter a numeric")]
         public decimal Amount { get; set; } 
     
         public decimal OutStandingPayment { get; set; }

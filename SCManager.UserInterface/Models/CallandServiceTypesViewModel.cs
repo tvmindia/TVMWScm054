@@ -18,7 +18,7 @@ namespace SCManager.UserInterface.Models
         public float MandatoryCommission { get; set; }
         [Display(Name = "Repeat (₹)")]
         public float RepeatCommission { get; set; }
-        [Display(Name = "Demo (₹)")]
+        [Display(Name = "Installation (₹)")]
         public float DemoCommission { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
         //servicetype

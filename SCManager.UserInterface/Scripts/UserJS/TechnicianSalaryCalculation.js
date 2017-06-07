@@ -6,13 +6,12 @@ $(document).ready(function () {
         DataTables.SalaryTable = $('#tblSalaryCalculation').DataTable(
         {
             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
-            order: [],
-            searching: true,
+            order: [],          
             paging: false,
-            data: GetAllTechniciansSalary(),
+            data: GetAllTechniciansSalaryWithoutDate(),
             autoWidth: false,
             columns: [
-              { "data": "EmpID", "defaultContent": "<i>-</i>" },
+             
               { "data": "Name", "defaultContent": "<i>-</i>" },
               { "data": "TotalCommission",render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
               { "data": "SalaryAdvance", render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" },
@@ -35,18 +34,26 @@ $(document).ready(function () {
               { "data": "ProductCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
               { "data": "AMCCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
             ],
-            columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
-            { "width": "30%", "targets": 1 }, 
-            { className: "text-left", targets: [1] },
-            { className: "text-center", targets: [2, 3, 4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]}
+            columnDefs: [
+            { "width": "200px", "targets": 0 }, 
+            { className: "text-left disabled", targets: [0] },
+             { className: "text-right", targets: [5,7,9,11,13,15,16,17,18,19] },
+            { className: "text-center", targets: [6, 8, 10, 12, 14] },
+            { className: "text-right disabled", targets: [1,2,3]}
 
             ]
             ,
             scrollY: false,
             scrollX: true,
             scrollCollapse: true,
-            fixedColumns: true
+            fixedColumns: {
+                leftColumns: 4
+                
+            }
+
         });
+
+       
     }
     catch(e)
     {
@@ -59,21 +66,19 @@ $(document).ready(function () {
 
 function RefreshSalaryTable() {
     try {
-
-    
-        DataTables.SalaryTable.clear().rows.add(GetAllTechniciansSalary()).draw(false);
-       
-
+        var mon = $("#Month").val();
+        var yea = $("#Year").val();
+        DataTables.SalaryTable.clear().rows.add(GetAllTechniciansSalary(mon,yea)).draw(false);
     }
     catch (e) {
         notyAlert('error', e.message);
     }
 }
 
-function GetAllTechniciansSalary() {
+function GetAllTechniciansSalary(month,year) {
     try {
 
-        var data = {};
+        var data = { "Month": month,"Year":year };
         var ds = {};
         ds = GetDataFromServer("TechnicianSalaryCalculation/GetTechniciansCalculatedSalary/", data);
         if (ds != '') {
@@ -88,6 +93,57 @@ function GetAllTechniciansSalary() {
             return emptyarr;
 
         }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+function GetAllTechniciansSalaryWithoutDate() {
+    try {
+
+        var data = { };
+        var ds = {};
+        ds = GetDataFromServer("TechnicianSalaryCalculation/GetTechniciansCalculatedSalary/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+            var emptyarr = [];
+            return emptyarr;
+
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+
+
+function SalaryCalculate()
+{
+   
+    try {
+        var mon = $("#Month option:selected").text();
+        var yea = $("#Year").val();
+        if (($("#Month").val() != '') && (yea != ''))
+        {
+            // mon = (mon != '' && mon != '--Select Month--') ? mon : ' - ';
+            // yea = yea != '' ? yea : ' - ';
+            $("#MsgCalcu").text("Calculated Salary for the month " + mon + "/" + yea);
+            RefreshSalaryTable();
+        }
+        else
+        {
+            $("#MsgCalcu").text("Please Select Month and Year");
+        }
+      
+       
     }
     catch (e) {
         notyAlert('error', e.message);

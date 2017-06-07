@@ -61,11 +61,15 @@ namespace SCManager.UserInterface.Controllers
             }
            
             _technicianSalaryViewModel.YearList = selectListItem;
+                ViewBag.month = dt.AddDays(-30).Month;
+                ViewBag.year = dt.Year;
             }
             catch(Exception ex)
             {
                 throw ex;
             }
+           
+           
             return View(_technicianSalaryViewModel);
         }
 
@@ -76,13 +80,43 @@ namespace SCManager.UserInterface.Controllers
            try
                 {
                 UA ua = new UA();
-                List<TechnicianSalaryViewModel> tSVMList = Mapper.Map<List<TechnicianSalary>,List<TechnicianSalaryViewModel>>(_technicianSalaryCalculationBusiness.GetTechniciansCalculatedSalary(ua.SCCode,null,null));
+               
+                List<TechnicianSalaryViewModel> tSVMList = Mapper.Map<List<TechnicianSalary>,List<TechnicianSalaryViewModel>>(_technicianSalaryCalculationBusiness.GetTechniciansCalculatedSalary(ua.SCCode,Month,Year));
                 return JsonConvert.SerializeObject(new { Result = "OK", Records = tSVMList });
                 }
                 catch (Exception ex)
                 {
                     return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
                 }
+        }
+
+        #region ButtonStyling
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        public ActionResult ChangeButtonStyle(string ActionType)
+        {
+            ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();
+            switch (ActionType)
+            {
+
+                case "Calculate":
+
+                    ToolboxViewModelObj.calculateBtn.Visible = true;
+                    ToolboxViewModelObj.calculateBtn.Text = "Calc";
+                    ToolboxViewModelObj.calculateBtn.Title = "Calculate";
+                    ToolboxViewModelObj.calculateBtn.Event = "SalaryCalculate();";
+
+
+                    break;
+
+
+                default:
+                    return Content("Nochange");
             }
+            return PartialView("ToolboxView", ToolboxViewModelObj);
+        }
+
+        #endregion
+
     }
 }

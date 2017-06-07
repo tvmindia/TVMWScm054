@@ -123,7 +123,7 @@ function EditDepositWithdrawal(curObj)
                 $("#ChequeStatus").val('');
             }
             $("#RefNo").val(result.RefNo); 
-            $("#RefDate").val(ConvertJsonToDate(result.RefDate));
+            $("#RefDate").val(result.RefDate);
             $("#Amount").val(result.Amount);
             $("#Description").val(result.Description);
             $("#DepwithID").val(result.ID);

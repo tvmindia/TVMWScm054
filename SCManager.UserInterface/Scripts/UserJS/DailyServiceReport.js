@@ -48,7 +48,7 @@ $(document).ready(function () {
              order: [],
              searching: true,
              paging: true,
-             data: null,
+             data: GetServiceRegisterSummaryFilter(true),
              columns: [
                { "data": "ServiceDate",render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
                { "data": "Technician", "defaultContent": "<i>-</i>" },
@@ -158,8 +158,9 @@ function AddTechnicanJob()
     }
    
 }
-
-function FilterOnChange() {
+//-------------------------------------------------------FILTERS-----------------------------------------------------//
+//TAB1
+function FilterServiceRecord() {
     debugger;
     $("#EmpSelector").val("");
     $("#txtServiceDate").val("");
@@ -179,12 +180,74 @@ function FilterOnChange() {
         }
     }
 }
+function GetServicefilterbyDays(Isdefault) {
+    try {
+        debugger;
+        var data = { "Isdefault": Isdefault };
+        var ds = {};
+        ds = GetDataFromServer("DailyServiceReport/GetServicefilterbyDays/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+            var emptyarr = [];
+            return emptyarr;
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+//TAB2
+function FilterRecordSummary() {
+    debugger; 
+    $("#txtServiceDate2").val("");
+
+    var checkedValue = $("input[name='filter2']:checked").val()
+    if (checkedValue != "") {
+
+        if (checkedValue == 30) {
+            debugger;
+            DataTables.DailyServiceReportSummary.clear().rows.add(GetServiceRegisterSummaryFilter(true)).draw(false);
+        }
+        else if (checkedValue == 60) {
+            debugger;
+            DataTables.DailyServiceReportSummary.clear().rows.add(GetServiceRegisterSummaryFilter(false)).draw(false);
+        }
+    }
+}
+function GetServiceRegisterSummaryFilter(Isdefault) {
+    try {
+        debugger;
+        var data = { "Isdefault": Isdefault };
+        var ds = {};
+        ds = GetDataFromServer("DailyServiceReport/GetServiceRegisterSummaryFilter/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+            var emptyarr = [];
+            return emptyarr;
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+//-------------------------------------------------------FILTERS END-----------------------------------------------------//
 
 function ServiceDateOnChange(curobj)
 {
     try
-    {
-      
+    {      
         $("#ModelServiceDate").val($(curobj).val())
         RefreshDailyServiceTable();
     }
@@ -213,29 +276,7 @@ function TechnicianSelectOnChange(curobj)
     }
 }
 
-//
-function GetServicefilterbyDays(Isdefault) {
-    try {
-        debugger;
-        var data = { "Isdefault": Isdefault };
-        var ds = {};
-        ds = GetDataFromServer("DailyServiceReport/GetServicefilterbyDays/", data);
-        if (ds != '') {
-            ds = JSON.parse(ds);
-        }
-        if (ds.Result == "OK") {
-            return ds.Records;
-        }
-        if (ds.Result == "ERROR") {
-            notyAlert('error', ds.Message);
-            var emptyarr = [];
-            return emptyarr;
-        }
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
+
 function GetAllServiceReportEntries(id,date) {
     try {
 
@@ -259,12 +300,18 @@ function GetAllServiceReportEntries(id,date) {
     }
 }
 
-function RefreshServiceReportSummaryTable() {
+function RefreshServiceReportSummaryTable(this_obj) {
     try {
-        var serdate = $("#txtServiceDate2").val();
-        if ((serdate) && (DataTables.DailyServiceReportSummary != undefined)) {
-            DataTables.DailyServiceReportSummary.clear().rows.add(GetServiceRegisterSummary(serdate)).draw(false);
-        }
+        debugger;
+        if (this_obj.value!="")
+        {
+            $("#married-true2").prop('checked', false);
+            $("#married-false2").prop('checked', false);
+            var serdate = $("#txtServiceDate2").val();
+            if ((serdate) && (DataTables.DailyServiceReportSummary != undefined)) {
+                DataTables.DailyServiceReportSummary.clear().rows.add(GetServiceRegisterSummary(serdate)).draw(false);
+            }
+        } 
     }
     catch (e) {
         notyAlert('error', e.message);
