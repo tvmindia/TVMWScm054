@@ -24,7 +24,6 @@ namespace SCManager.BusinessService.Contracts
         object UpdateJob(TechnicianJob technicianJob);
         List<ServiceRegistrySummary> GetServiceRegistrySummary(string SCCode, string serviceDate);
         List<ServiceRegistrySummary> GetServiceRegisterSummaryFilter(string SCCode, string CreatedDate, string Isdefault);
-
-
+        
     }
 }

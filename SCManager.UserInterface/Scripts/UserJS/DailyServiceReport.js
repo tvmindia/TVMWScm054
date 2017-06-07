@@ -1,6 +1,5 @@
 ﻿var DataTables = {};
 $(document).ready(function () {
-    debugger;
     try
     {
       
@@ -243,7 +242,6 @@ function GetServiceRegisterSummaryFilter(Isdefault) {
         notyAlert('error', e.message);
     }
 }
-
 //-------------------------------------------------------FILTERS END-----------------------------------------------------//
 
 function ServiceDateOnChange(curobj)

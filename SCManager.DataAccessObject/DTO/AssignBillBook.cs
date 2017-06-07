@@ -14,9 +14,10 @@ namespace SCManager.DataAccessObject.DTO
         public string SeriesEnd { get; set; }
         public string LastUsed { get; set; }
         public Guid? EmpID { get; set; }
-        public bool Status { get; set; }
+        public string Status { get; set; }
         public string Remarks { get; set; }
         public string Technician { get; set; }
+        public string BillBookType { get; set; }
         public LogDetails logDetails { get; set; }
     }
 }

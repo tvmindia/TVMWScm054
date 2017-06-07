@@ -67,7 +67,6 @@ namespace SCManager.BusinessService.Services
                         if (EX.ServiceDate != null)
                             EX.ServiceDateformatted = Convert.ToDateTime(EX.ServiceDate).ToString(settings.dateformat);
                     }
-
                 }
             }
             catch (Exception ex)
@@ -259,7 +258,5 @@ namespace SCManager.BusinessService.Services
             }
             return ServiceRegistrySummaryList;
         }
-
-
     }
 }
