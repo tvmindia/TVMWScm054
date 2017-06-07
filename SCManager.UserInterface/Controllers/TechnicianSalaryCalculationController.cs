@@ -16,9 +16,11 @@ namespace SCManager.UserInterface.Controllers
     public class TechnicianSalaryCalculationController : Controller
     {
         ITechnicianSalaryCalculationBusiness _technicianSalaryCalculationBusiness;
-        public TechnicianSalaryCalculationController(ITechnicianSalaryCalculationBusiness technicianSalaryCalculationBusiness)
+        ICommonBusiness _commonBusiness;
+        public TechnicianSalaryCalculationController(ITechnicianSalaryCalculationBusiness technicianSalaryCalculationBusiness, ICommonBusiness commonBusiness)
         {
             _technicianSalaryCalculationBusiness = technicianSalaryCalculationBusiness;
+            _commonBusiness = commonBusiness;
         }
         // GET: TechnicianSalaryCalculation
         [HttpGet]
@@ -82,7 +84,9 @@ namespace SCManager.UserInterface.Controllers
                 UA ua = new UA();
                
                 List<TechnicianSalaryViewModel> tSVMList = Mapper.Map<List<TechnicianSalary>,List<TechnicianSalaryViewModel>>(_technicianSalaryCalculationBusiness.GetTechniciansCalculatedSalary(ua.SCCode,Month,Year));
-                return JsonConvert.SerializeObject(new { Result = "OK", Records = tSVMList });
+                decimal totalpaysum = tSVMList == null ? 0 : tSVMList.Select(T => T.TotalPayable).Sum();
+                string totalpayablewithrupee=_commonBusiness.ConvertCurrency(totalpaysum);
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = tSVMList,Record= totalpayablewithrupee });
                 }
                 catch (Exception ex)
                 {

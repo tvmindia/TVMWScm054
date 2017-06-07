@@ -375,14 +375,10 @@ namespace SCManager.BusinessService.Services
 
         public string ConvertCurrency(decimal value,int DecimalPoints=0) {
             string result = value.ToString();
-
             string fare = result;
             decimal parsed = decimal.Parse(fare, CultureInfo.InvariantCulture);
             CultureInfo hindi = new CultureInfo("hi-IN");
             result = string.Format(hindi, "{0:C"+ DecimalPoints + "}", parsed);
-
-
-
             return result;  
 
         }

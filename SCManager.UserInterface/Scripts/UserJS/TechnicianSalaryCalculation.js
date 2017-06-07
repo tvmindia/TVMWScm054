@@ -85,6 +85,7 @@ function GetAllTechniciansSalary(month,year) {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
+            $("#Msgtotalpayable").text(ds.Record);
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -109,6 +110,7 @@ function GetAllTechniciansSalaryWithoutDate() {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
+            $("#Msgtotalpayable").text(ds.Record);
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -131,11 +133,12 @@ function SalaryCalculate()
     try {
         var mon = $("#Month option:selected").text();
         var yea = $("#Year").val();
+        $(".well").show();
         if (($("#Month").val() != '') && (yea != ''))
         {
             // mon = (mon != '' && mon != '--Select Month--') ? mon : ' - ';
             // yea = yea != '' ? yea : ' - ';
-            $("#MsgCalcu").text("Calculated Salary for the month " + mon + "/" + yea);
+            $("#MsgCalcu").text("" + mon + "/" + yea);
             RefreshSalaryTable();
         }
         else
