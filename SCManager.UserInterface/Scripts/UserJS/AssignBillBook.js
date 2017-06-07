@@ -21,14 +21,26 @@ $(document).ready(function () {
                { "data": "LastUsed", "defaultContent": "<i>-</i>" },
                { "data": "Technician", "defaultContent": "<i>-</i>" },
                  { "data": "Status", "defaultContent": "<i>-</i>" },
+                 { "data": "BillBookType", "defaultContent": "<i>-</i>" },
                    { "data": "Remarks", "defaultContent": "<i>-</i>" },
            { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
          ],
          columnDefs: [{ "targets": [0], "visible": false, "searchable": false },            
-             { className: "text-center", "targets": [1, 2, 3,4,5,6,7,8] },
+             { className: "text-center", "targets": [1, 2, 3, 4, 5, 6, 7, 8,9] },
+              {
+                  "render": function (data, type, row) {
+                      return (data == "True" ? "Open "  : "Closed");
+                  },
+                  "targets": 6
+
+              },
             
          ]
      });
+        $('#tblBillList tbody').on('dblclick', 'td', function () {
+
+            Edit(this);
+        });
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -39,7 +51,7 @@ $(document).ready(function () {
 //--------------------button actions ----------------------
 function List() {
     try {
-
+        $("#ID").val(EmptyGuid);
         ChangeButtonPatchView('AssignBillBook', 'btnPatchAssignBillBookSettab', 'List');
         BindAllBillBooks()
 
@@ -47,6 +59,15 @@ function List() {
         alert(x);
     }
 
+}
+
+//-----------------------------------------Reset Validation Messages--------------------------------------//
+function ResetForm() {
+    var validator = $("#AssignBillBook").validate();
+    $('#AssignBillBook').find('.field-validation-error span').each(function () {
+        validator.settings.success($(this));
+    });
+    validator.resetForm();
 }
 
 //------------------------------- Bill Book Save-----------------------------//
@@ -66,7 +87,21 @@ function save() {
 
 function BindBillBookFields(Records)
 {
-    ChangeButtonPatchView('AssignBillBook', 'btnPatchAssignBillBookSettab', 'Edit');
+    debugger;
+    try {
+        ChangeButtonPatchView('AssignBillBook', 'btnPatchAssignBillBookSettab', 'Edit');
+        $("#ID").val(Records[0].ID);
+    $("#BillNo").val(Records[0].BillNo);
+    $("#SeriesStart").val(Records[0].SeriesStart);
+    $("#SeriesEnd").val(Records[0].SeriesEnd);
+    $("#LastUsed").val(Records[0].LastUsed);
+    $("#EmpID").val(Records[0].EmpID);
+    $("#Status").val(Records[0].Status);
+    $("#BillBookType").val(Records[0].BillBookType);
+    $("#Remarks").val(Records[0].Remarks);
+    } catch (e) {
+        notyAlert('error', e.message);
+    }
 }
 
 function fillBillBook(id)
@@ -107,7 +142,7 @@ function SaveSuccess(data, status) {
                 fillBillBook($("#ID").val());
             }
 
-            BindAllCreditNotes();
+            BindAllBillBooks();
             notyAlert('success', JsonResult.Records.Message);
             break;
         case "ERROR":
@@ -122,29 +157,82 @@ function goBack() {
     $('#AddTab').trigger('click');
     Reset();
 }
-//---------------------------------------Edit Item--------------------------------------------------//
-function Edit(currentObj) {
-    var rowData = DataTables.customerBillsTable.row($(currentObj).parents('tr')).data();
-    if ((rowData != null) && (rowData.ID != null)) {
-        $('#AddTab').trigger('click');
-        //if (BindICRBillEntry(rowData.ID)) {
-        //    ChangeButtonPatchView('ICRBillEntry', 'btnPatchICRBillEntrySettab', 'Edit');
-        //}
-        //else {
-        //    $('#ListTab').trigger('click');
-        //}
+function DeleteClick() {
+    notyConfirm('Are you sure to delete?', 'BillBookDelete()');
+}
+function BillBookDelete()
+{
+    debugger;
+    try {
+        var id = $('#ID').val();
+        if (id != '' && id != null) {
+            var data = { "ID": id };
+            var ds = {};
+            ds = GetDataFromServer("AssignBillBook/DeleteBillBook/", data);
+            if (ds != '') {
+                ds = JSON.parse(ds);
+            }
+            if (ds.Result == "OK") {
+                notyAlert('success', ds.Message);
+                $('#ListTab').trigger('click');
+            }
+            if (ds.Result == "ERROR") {
+                notyAlert('error', ds.Message);
+                return 0;
+            }
+            return 1;
+        }
+
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+        return 0;
     }
 }
-function Add() {
+//---------------------------------------Edit Item--------------------------------------------------//
+function Edit(currentObj) {
+    debugger;
+    var rowData = DataTables.BillListTable.row($(currentObj).parents('tr')).data();
+    if ((rowData != null) && (rowData.ID != null)) {
+        $('#AddTab').trigger('click');
+        if ((rowData != null) && (rowData.ID != null)) {
+            $("#ID").val(rowData.ID);
+            fillBillBook(rowData.ID);
+            
+        }       
+        else {
+            $('#ListTab').trigger('click');
+        }
+    }
+}
+function Add(id) {
+    debugger;
+    if (id != 1) {
+        $('#AddTab').trigger('click');      
+    }
+    $("#ID").val(EmptyGuid);   
     ChangeButtonPatchView('AssignBillBook', 'btnPatchAssignBillBookSettab', 'Add');
     Reset();
+    $("#Status").val("True");
 }
 function Reset()
 {
-    $("#BillNo").val("<<Auto Generated>>");
+    debugger;
+    if (($("#ID").val() == EmptyGuid) || ($("#ID").val() == 'undefined') || ($("#ID").val() == "0"))
+        {
+    $("#BillNo").val("");
     $("#SeriesStart").val("");
     $("#SeriesEnd").val("");
     $("#LastUsed").val("");
+    $("#EmpID").val("");
+    $("#Status").val("");
+    $("#BillBookType").val("");
+    $("#Remarks").val("");
+    ResetForm();
+    }
+    else {
+        fillBillBook($("#ID").val());
+    }
 }
 //---------------------------------------Bind All Bill Book----------------------------------------------//
 function BindAllBillBooks() {

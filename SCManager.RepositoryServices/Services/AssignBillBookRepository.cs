@@ -53,12 +53,13 @@ namespace SCManager.RepositoryServices.Services
 
                                     {
                                         assignBillBookObj.LastUsed = (sdr["LastUsed"].ToString() != "" ? (sdr["LastUsed"].ToString()) : assignBillBookObj.LastUsed);
-                                        assignBillBookObj.Status = (sdr["Status"].ToString() != "" ? bool.Parse(sdr["Status"].ToString()) : assignBillBookObj.Status);
+                                        assignBillBookObj.Status = (sdr["Status"].ToString() != "" ? (sdr["Status"].ToString()) : assignBillBookObj.Status);
                                         assignBillBookObj.Technician = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : assignBillBookObj.Technician);
                                         assignBillBookObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : assignBillBookObj.Remarks);
                                         assignBillBookObj.BillNo = (sdr["BookNo"].ToString() != "" ? (sdr["BookNo"].ToString()) : assignBillBookObj.BillNo);
                                         assignBillBookObj.SeriesStart = (sdr["SeriesStart"].ToString() != "" ? (sdr["SeriesStart"].ToString()) : assignBillBookObj.SeriesStart);
                                         assignBillBookObj.SeriesEnd = (sdr["SeriesEnd"].ToString() != "" ? (sdr["SeriesEnd"].ToString()) : assignBillBookObj.SeriesEnd);
+                                        assignBillBookObj.BillBookType = (sdr["BillBookType"].ToString() != "" ? (sdr["BillBookType"].ToString()) : assignBillBookObj.BillBookType);
                                         assignBillBookObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : assignBillBookObj.ID);
 
                                     };
@@ -108,11 +109,12 @@ namespace SCManager.RepositoryServices.Services
 
                                     {
                                         assignBillBookObj.LastUsed = (sdr["LastUsed"].ToString() != "" ? (sdr["LastUsed"].ToString()) : assignBillBookObj.LastUsed);
-                                        assignBillBookObj.Status = (sdr["Status"].ToString() != "" ? bool.Parse(sdr["Status"].ToString()) : assignBillBookObj.Status);
-                                        assignBillBookObj.Technician = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : assignBillBookObj.Technician);
+                                        assignBillBookObj.Status = (sdr["Status"].ToString() != "" ? (sdr["Status"].ToString()) : assignBillBookObj.Status);
+                                        assignBillBookObj.EmpID = (sdr["TechID"].ToString() != "" ? Guid.Parse(sdr["TechID"].ToString()) : assignBillBookObj.EmpID);
                                         assignBillBookObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : assignBillBookObj.Remarks);
                                         assignBillBookObj.BillNo = (sdr["BookNo"].ToString() != "" ? (sdr["BookNo"].ToString()) : assignBillBookObj.BillNo);
                                         assignBillBookObj.SeriesStart = (sdr["SeriesStart"].ToString() != "" ? (sdr["SeriesStart"].ToString()) : assignBillBookObj.SeriesStart);
+                                        assignBillBookObj.BillBookType = (sdr["BillBookType"].ToString() != "" ? (sdr["BillBookType"].ToString()) : assignBillBookObj.BillBookType);
                                         assignBillBookObj.SeriesEnd = (sdr["SeriesEnd"].ToString() != "" ? (sdr["SeriesEnd"].ToString()) : assignBillBookObj.SeriesEnd);
                                         assignBillBookObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : assignBillBookObj.ID);
 
@@ -158,7 +160,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@TechID", SqlDbType.UniqueIdentifier).Value = assignBillBook.EmpID;
                         cmd.Parameters.Add("@BookStatus", SqlDbType.Bit).Value = assignBillBook.Status;                       
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = assignBillBook.Remarks;
-                        
+                        cmd.Parameters.Add("@BillBookType", SqlDbType.NVarChar, 15).Value = assignBillBook.BillBookType;
                         cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = assignBillBook.logDetails.CreatedBy;
                         cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = assignBillBook.logDetails.CreatedDate;
 
@@ -213,7 +215,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@TechID", SqlDbType.UniqueIdentifier).Value = assignBillBook.EmpID;
                         cmd.Parameters.Add("@BookStatus", SqlDbType.Bit).Value = assignBillBook.Status;
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = assignBillBook.Remarks;
-
+                        cmd.Parameters.Add("@BillBookType", SqlDbType.NVarChar, 15).Value = assignBillBook.BillBookType;
                         cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = assignBillBook.logDetails.CreatedBy;
                         cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = assignBillBook.logDetails.CreatedDate;
 

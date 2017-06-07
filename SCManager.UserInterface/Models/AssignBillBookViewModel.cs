@@ -11,7 +11,7 @@ namespace SCManager.UserInterface.Models
     {
         public string SCCode { get; set; }
         public Guid? ID { get; set; }
-        [Display(Name ="Bill No")]
+        [Display(Name ="Book No")]
         public string BillNo { get; set; }
         [Required(ErrorMessage ="Please Enter Series Start")]
         [Display(Name ="Series Start")]
@@ -24,7 +24,10 @@ namespace SCManager.UserInterface.Models
         [Display(Name ="Technician")]
         [Required(ErrorMessage ="Please Select Technician")]
         public Guid? EmpID { get; set; }
-        public bool Status { get; set; }
+        public string Status { get; set; }
+        [Display(Name ="Bill Book Type")]
+        [Required(ErrorMessage = "Please Select Bill Book Type")]
+        public string BillBookType { get; set; }
         [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }
         public string Technician { get; set; }
