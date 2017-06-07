@@ -108,7 +108,7 @@ function EG_ComboSource(id, values, valueCol, textCol, textDesc) {
 //------------------------------- SalesReturn Save-----------------------------//
 function save() {
    
-    if (($('#OpenDate').val() != "") && ($("#ItemID").val() != "") && ($("#Qty").val() != ""))
+    if (($('#OpenDate').val() != "") && ($("#ItemID").val() != "") && ($("#Qty").val() != "") && ($("#RefNo").val()!=""))
     {
         var qty = SalesReturnValidation();
      
