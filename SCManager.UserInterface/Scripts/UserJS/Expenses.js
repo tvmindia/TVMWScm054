@@ -242,7 +242,24 @@ function GetAllExpenses(showAllYN) {
 
 //------------------------------- Expenses Save-----------------------------//
 function save() {
-    $("#btnInsertUpdateExpenses").trigger('click');
+    debugger;
+    if ($("#Amount").val() != "") {
+        if ($("#Amount").val() > 0) {
+            $("#btnInsertUpdateExpenses").trigger('click');
+        }
+        else {
+            if ($("#ExpenseTypeCode").val() == "SADV") {
+                $("#btnInsertUpdateExpenses").trigger('click');
+            }
+            else {
+                notyAlert('error', "Amount Cannot be Negative");
+            }
+        }
+    }
+    else
+    {
+        $("#btnInsertUpdateExpenses").trigger('click');
+    }
 }
 
 //---------------------------------------Bind All Expenses----------------------------------------------//

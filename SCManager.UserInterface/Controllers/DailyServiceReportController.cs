@@ -293,8 +293,6 @@ namespace SCManager.UserInterface.Controllers
             {
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
-
-
         }
 
 
@@ -319,8 +317,6 @@ namespace SCManager.UserInterface.Controllers
             {
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
-
-
         }
 
         [HttpGet]
@@ -344,11 +340,7 @@ namespace SCManager.UserInterface.Controllers
             {
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
-
-
         }
-
-        
 
         #region ButtonStyling
         [HttpGet]
