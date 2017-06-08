@@ -71,6 +71,7 @@ $(document).ready(function () {
 
     try {
 
+
         DataTables.JobCommissionDetails = $('#tblJobCommissionDetails').DataTable(
          {
              dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
