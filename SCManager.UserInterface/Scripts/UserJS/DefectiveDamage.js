@@ -20,6 +20,7 @@ $(document).ready(function () {
                       
                 { "data": "Description", "defaultContent": "<i>-</i>" },
                 { "data": "Qty", "defaultContent": "<i>-</i>" },
+                { "data": "Customer", "defaultContent": "<i>-</i>" },
                 { "data": "ReturnStatusYN", "defaultContent": "<i>-</i>" },
                 { "data": "ReceiveStatus", "defaultContent": "<i>-</i>" },
                 { "data": "Remarks", "defaultContent": "<i>-</i>" },
@@ -27,20 +28,20 @@ $(document).ready(function () {
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
                  { className: "text-right", "targets": [6] },
-                 { className: "text-center", "targets": [1, 2, 3, 4, 7,8] },
-                 { className: "text-left", "targets": [5,9] },
+                 { className: "text-center", "targets": [1, 2, 3, 4,8] },
+                 { className: "text-left", "targets": [5,7,9] },
                     {
                         "render": function (data, type, row) {
                             return (data == true ? "Returned " + '<i class="fa fa-check-circle" style="color:green;" aria-hidden="true"></i>' : "Not Returned");
                         },
-                        "targets": 7
+                        "targets": 8
 
                     },
                      {
                          "render": function (data, type, row) {
-                             return (data == 'Received' ? "Received " + '<i class="fa fa-check-circle" style="color:green;" aria-hidden="true"></i>' : data);
+                             return (data == 'Received' ? "Received " + '<i class="fa fa-check-circle" style="color:green;" aria-hidden="true"></i><p>(INV No:' + row.InvoiceNo + ')</p>' : data);
                          },
-                         "targets": 8
+                         "targets": 9
 
                      }
              ]
@@ -178,6 +179,7 @@ function ReturnSuccess(data, status) {
             BindAllDefectiveDamaged();
             ReturnedFields();
             notyAlert('success', i.Message);
+            $("#MsgReturn").hide();
             break;
         case "Error":
             notyAlert('error', "Error");
@@ -199,7 +201,9 @@ function ReturnedFields()
     $("#Qty").prop('disabled', true);
     $("#Remarks").prop('disabled', true);
     $('#OpenDate').prop('disabled', true);
+    $("#Customer").prop('disabled', true);
     ChangeButtonPatchView("DefectiveorDamaged", "btnPatchDefectiveorDamagedSettab", "Return");
+    $("#MsgReturn").hide();
 }
 function DeleteSuccess(data, status) {
     var i = JSON.parse(data)
@@ -236,6 +240,7 @@ function DefectiveDamagedSaveSuccess(data, status) {
             }
             BindAllDefectiveDamaged();
             notyAlert('success', JsonResult.Records.Message);
+            $("#MsgReturn").show();
             break;
         case "ERROR":
             notyAlert('error', "Error!");
@@ -279,6 +284,7 @@ function clearfields() {
     $("#HiddenQty").val("");
     $("#Remarks").val("")
     $("#TicketNo").css('border-color', '');
+    $("#Customer").val("");
     var $datepicker = $('#OpenDate');
     $datepicker.datepicker('setDate', null);
     $("#deleteId").val("0")
@@ -291,47 +297,52 @@ function clearfields() {
     $("#Qty").prop('disabled', false);
     $("#Remarks").prop('disabled', false);
     $('#OpenDate').prop('disabled', false);
+    $('#Customer').prop('disabled', false);
     ResetForm();
+    $("#MsgReturn").hide();
 }
 //---------------------------------------Fill DefectiveDamaged--------------------------------------------------//
 function fillDefectiveDamaged(ID) {
     
     ChangeButtonPatchView("DefectiveorDamaged", "btnPatchDefectiveorDamagedSettab", "Edit");
+    $("#MsgReturn").show();
     var thisItem = GetDefectiveDamagedByID(ID); //Binding Data
-    //Hidden
-    if (thisItem[0].Type == "Damaged")
-    {
-        $("#lblRefNo").show();
-        $("#lblSPUNo").hide();
+    if (thisItem) {
+        //Hidden
+        if (thisItem[0].Type == "Damaged") {
+            $("#lblRefNo").show();
+            $("#lblSPUNo").hide();
+        }
+        else {
+            $("#lblRefNo").hide();
+            $("#lblSPUNo").show();
+        }
+        $("#ID").val(thisItem[0].ID);
+        $("#ReturnID").val(thisItem[0].ID);
+        $("#Type").val(thisItem[0].Type);
+        $("#HiddenType").val(thisItem[0].Type);
+        $("#EmpID").val(thisItem[0].EmpID);
+        $("#HiddenEmpID").val(thisItem[0].EmpID);
+        if (thisItem[0].OpenDate != null) {
+            var $datepicker = $('#OpenDate');
+            $datepicker.datepicker('setDate', new Date(thisItem[0].OpenDate));
+        }
+        $("#RefNo").val(thisItem[0].RefNo)
+        $("#TicketNo").val(thisItem[0].TicketNo)
+        $("#Customer").val(thisItem[0].Customer)
+
+        //$("#ItemID").val(thisItem[0].ItemID)
+        $("#ItemID").val(thisItem[0].ItemID)
+        $("#Description").val(thisItem[0].Description)
+        $("#Qty").val(thisItem[0].Qty)
+        $("#HiddenQty").val(thisItem[0].Qty)
+        $("#Remarks").val(thisItem[0].Remarks)
+        $("#deleteId").val(thisItem[0].ID);
+        $("#returnId").val(thisItem[0].ID);
+        $("#EmpID").prop('disabled', true);
+        $("#Type").prop('disabled', true);
+        ReturnItemCode(thisItem[0].ItemID);
     }
-    else
-    {
-        $("#lblRefNo").hide();
-        $("#lblSPUNo").show();
-    }
-    $("#ID").val(thisItem[0].ID);
-    $("#ReturnID").val(thisItem[0].ID);
-    $("#Type").val(thisItem[0].Type);
-    $("#HiddenType").val(thisItem[0].Type);
-    $("#EmpID").val(thisItem[0].EmpID);
-    $("#HiddenEmpID").val(thisItem[0].EmpID);
-    if (thisItem[0].OpenDate != null) {
-        var $datepicker = $('#OpenDate');
-        $datepicker.datepicker('setDate', new Date(thisItem[0].OpenDate));
-    }
-    $("#RefNo").val(thisItem[0].RefNo)
-    $("#TicketNo").val(thisItem[0].TicketNo)
-    //$("#ItemID").val(thisItem[0].ItemID)
-    $("#ItemID").val(thisItem[0].ItemID)
-    $("#Description").val(thisItem[0].Description)
-    $("#Qty").val(thisItem[0].Qty)
-    $("#HiddenQty").val(thisItem[0].Qty)
-    $("#Remarks").val(thisItem[0].Remarks)
-    $("#deleteId").val(thisItem[0].ID);
-    $("#returnId").val(thisItem[0].ID);
-    $("#EmpID").prop('disabled', true);
-    $("#Type").prop('disabled', true);
-    ReturnItemCode(thisItem[0].ItemID);
 }
 //---------------------------------------Get DefectiveDamaged Details By ID-------------------------------------//
 function GetDefectiveDamagedByID(id) {
@@ -360,7 +371,7 @@ function Edit(currentObj) {
 
     $('#AddTab').trigger('click');
     ChangeButtonPatchView("DefectiveorDamaged", "btnPatchDefectiveorDamagedSettab", "Edit"); //ControllerName,id of the container div,Name of the action
-    
+    $("#MsgReturn").show();
     var rowData = DataTables.DefectiveDamagedTable.row($(currentObj).parents('tr')).data();
     if ((rowData != null) && (rowData.ID != null)) {
         fillDefectiveDamaged(rowData.ID);
@@ -389,6 +400,7 @@ function Add(id) {
     }
     clearfields();
     ChangeButtonPatchView('DefectiveorDamaged', 'btnPatchDefectiveorDamagedSettab', 'Add');
+    $("#MsgReturn").hide();
 }
 function goBack() {
     $('#DefectiveorDamagedTab').trigger('click');
@@ -422,6 +434,7 @@ function List() {
     try {
 
         ChangeButtonPatchView('DefectiveorDamaged', 'btnPatchDefectiveorDamagedSettab', 'List');
+        $("#MsgReturn").hide();
 
     } catch (x) {
         alert(x);

@@ -13,7 +13,7 @@ namespace SCManager.BusinessService.Contracts
         List<ServiceType> GetAllServiceTypes(UA ua);
         List<Job> GetAllDailyJobs(string SCCode);
         List<Job> GetAllJobNumbers(string SCCode);
-        List<Employees> GetTechniciansForRepeatedJob(string SCCode);
+        List<Employees> GetTechniciansForRepeatedJob(string SCCode,string JobNo);
         List<JobCallTypes> GetJobCallTypes(string SCCode);
         List<Employees> GetAllTechnicians(UA ua);
         object DeleteJob(Job job);

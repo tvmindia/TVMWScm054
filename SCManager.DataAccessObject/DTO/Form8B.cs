@@ -40,6 +40,7 @@ namespace SCManager.DataAccessObject.DTO
         public String InvoiceDateFormatted { get; set; }
         public List<Form8BDetail> Form8BDetail { get; set; }
         public string DetailXML { get; set; }
+        public string Customer { get; set; }
     }
 
 

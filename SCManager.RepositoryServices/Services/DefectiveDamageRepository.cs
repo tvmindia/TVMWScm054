@@ -62,6 +62,8 @@ namespace SCManager.RepositoryServices.Services
                                         _DefectiveDamagelistObj.ReturnStatusYN = (sdr["ReturnStatusYN"].ToString() != "" ?bool.Parse (sdr["ReturnStatusYN"].ToString()) : _DefectiveDamagelistObj.ReturnStatusYN);
                                         _DefectiveDamagelistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _DefectiveDamagelistObj.Remarks);
                                         _DefectiveDamagelistObj.ReceiveStatus = (sdr["ReceiveStatus"].ToString() != "" ? (sdr["ReceiveStatus"].ToString()) : _DefectiveDamagelistObj.ReceiveStatus);
+                                        _DefectiveDamagelistObj.Customer= (sdr["Customer"].ToString() != "" ? (sdr["Customer"].ToString()) : _DefectiveDamagelistObj.Customer);
+                                        _DefectiveDamagelistObj.InvoiceNo= (sdr["InvoiceNo"].ToString() != "" ? (sdr["InvoiceNo"].ToString()) : _DefectiveDamagelistObj.InvoiceNo);
                                     }
 
                                     DefectiveDamagelist.Add(_DefectiveDamagelistObj);
@@ -119,6 +121,7 @@ namespace SCManager.RepositoryServices.Services
                                         _DefectiveDamagelistObj.Qty = (sdr["Qty"].ToString() != "" ? int.Parse(sdr["Qty"].ToString()) : _DefectiveDamagelistObj.Qty);
                                         _DefectiveDamagelistObj.ReturnStatusYN = (sdr["ReturnStatusYN"].ToString() != "" ? bool.Parse(sdr["ReturnStatusYN"].ToString()) : _DefectiveDamagelistObj.ReturnStatusYN);
                                         _DefectiveDamagelistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _DefectiveDamagelistObj.Remarks);
+                                        _DefectiveDamagelistObj.Customer = (sdr["Customer"].ToString() != "" ? (sdr["Customer"].ToString()) : _DefectiveDamagelistObj.Customer);
                                     }
 
                                     DefectiveDamagelist.Add(_DefectiveDamagelistObj);
@@ -167,7 +170,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = defectiveDamageObj.EmpID;
                         cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = defectiveDamageObj.logDetails.CreatedBy;
                         cmd.Parameters.Add("@CreatedDate", SqlDbType.SmallDateTime).Value = defectiveDamageObj.logDetails.CreatedDate;
-
+                        cmd.Parameters.Add("@Customer", SqlDbType.NVarChar, 250).Value = defectiveDamageObj.Customer;
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
                         outParameter1 = cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
@@ -222,7 +225,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = defectiveDamageObj.EmpID;
                         cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = defectiveDamageObj.logDetails.CreatedBy;
                         cmd.Parameters.Add("@UpdatedDate", SqlDbType.SmallDateTime).Value = defectiveDamageObj.logDetails.CreatedDate;
-
+                        cmd.Parameters.Add("@Customer", SqlDbType.NVarChar, 250).Value = defectiveDamageObj.Customer;
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();

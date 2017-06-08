@@ -1,6 +1,7 @@
 ﻿
 function BindForm(ID)
 {
+    debugger;
     try
     {
         var result = GetServiceReportEntryByID(ID);
@@ -20,6 +21,8 @@ function BindForm(ID)
             //Hiddenfields
             $("#ModelTechEmpID").val(result.Employee.ID);
             $("#ModelJobID").val(result.ID);
+
+            $("#ModelServiceDate").val(ConvertJsonToDate(result.ServiceDate));
             BindTechnicianDropDown();
             BindJobNumberDropDown();
             if (result.ServiceType == "RPT") {
@@ -45,6 +48,7 @@ function BindForm(ID)
 function JobEdit(curobj) {
     try {
         ClearJobForm();
+
         var rowData = DataTables.DailyService.row($(curobj).parents('tr')).data();
         BindForm(rowData.ID);
         $("#modelContextLabel").text('Edit Job');
@@ -57,7 +61,7 @@ function JobEdit(curobj) {
 
 function GetServiceReportEntryByID(ID) {
     try {
-
+        debugger;
         var data = { "ID": ID };
         var ds = {};
         ds = GetDataFromServer("DailyServiceReport/GetDailyJobByID/", data);
@@ -143,9 +147,14 @@ function JobSaveSuccess(data, status, xhr) {
                 {
                     notyAlert('success', JsonResult.Record.Message);
                     $("#AddJobModel").modal('hide');
-                    RefreshDailyServiceTable($("#ModelJobNo").val());
-                }
-               
+                    debugger;
+                    if ($("#txtServiceDate").val() == "") {
+                        FilterServiceRecord(); //for binding table values (default filter)
+                    }
+                    else {
+                        RefreshDailyServiceTable($("#ModelJobNo").val()); //for binding table values ehen having empid and service date.
+                    }
+                }               
                 break;
             case "VALIDATION":
                 notyAlert('error', JsonResult.Message);
@@ -238,6 +247,40 @@ function BindJobNumberDropDown() {
         notyAlert('error', e.Message);
     }
 }
+
+function RepeatJobNumberChange() {
+    debugger;
+    var jobno = $("#ModelRepeat_JobNo").val();
+    var result = GetTechnicianByJobNo(jobno); 
+    var empid = result[0].ID;
+    var a = $("#EmployeeList").find('option[id="' + empid + '"]');
+    var itemID = a.attr('value');
+    $("#ModelEmployee").val(itemID);
+
+    }
+
+function GetTechnicianByJobNo(jobno)
+{
+    try
+    { 
+        var data = { "JobNo": jobno };
+        var ds = {};
+        ds = GetDataFromServer("DailyServiceReport/GetTechnicianByJobNo/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
 
 function TechnicianOnChange(i) {
     try

@@ -95,6 +95,7 @@ namespace SCManager.UserInterface.Models
         public String InvoiceDateFormatted { get; set; }
         public String DetailJSON { get; set; }
         public List<Form8BDetailViewModel> Form8BDetail { get; set; }
+        public string Customer { get; set; }
     }
 
     public class Form8BDetailViewModel
