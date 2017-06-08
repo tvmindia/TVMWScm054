@@ -19,7 +19,7 @@ $(document).ready(function () {
               { "data": "Name", "defaultContent": "<i>-</i>" },
               { "data": "TotalCommission",render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
               { "data": "SalaryAdvance", render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" },
-              { "data": "TotalPayable", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+              { "data": "TotalPayable", render: function (data, type, row) { var respay = roundoff(data, 1); return "<a data-toggle='tp' data-placement='top' data-delay={'show':2000, 'hide':3000} title='View Details' href='#' class='actionLink' onclick='ViewMore(this)'>" + respay + "</a>"; }, "defaultContent": "<i>-</i>" },
               { "data": "MajorCalls", "defaultContent": "<i>-</i>" },
               { "data": "MajorCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
               { "data": "DemoCalls", "defaultContent": "<i>-</i>" },
@@ -66,6 +66,18 @@ $(document).ready(function () {
 
 
 });
+
+function ViewMore(curobj)
+{
+    try
+    {
+        $("#ModelSalaryDetails").modal('show');
+    }
+    catch(e)
+    {
+        notyAlert('error', e.message);
+    }
+}
 
 
 function RefreshSalaryTable() {

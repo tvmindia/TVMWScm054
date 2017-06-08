@@ -112,6 +112,66 @@
     <img src="~/Content/images/loading.gif" class="preloaderImg" />
 </div>
 
+<div class="modal fade bs-example-modal-lg" id="ModelSalaryDetails" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;height: 36px;padding: 3px;">
+                <div class="container-fluid" style="padding-right: 0px;">
+                    <div class="col-md-8">
+                        <div class="col-md-12" style="padding-top: 8px;">
+                            <span style="font-weight: 600;font-size: 14px;"><i class="fa fa-user" aria-hidden="true"></i> Albert</span>
+                            <span class="modal-title" id="TechnicianLabel" style="font-weight: 600;font-size: 14px;"></span>
+                            &nbsp;&nbsp;&nbsp;
+                            <span style="font-weight: 600;font-size: 14px;"><i class="fa fa-calendar" aria-hidden="true"></i> January</span>
+                            <span class="modal-title" id="ServiceDateLabel" style="font-weight: 600;font-size: 14px;"></span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="padding-right: 4px;">
+                        <a class="close" data-dismiss="modal" aria-label="Close"><i style="font-size: 33px;" class="fa fa-times-circle" aria-hidden="true"></i></a>
+                    </div>
+
+                </div>
+            </div>
+
+         
+            <div class="container-fluid">
+                <br />
+                <br />
+                <br />
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid" style="min-height:500px;">
+                    <div class="row" style="border-style:solid;border:#cbc3cd;">
+                        <table id="tblDailyServiceReport" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>ID</th>
+                                    <th>Technician</th>
+                                    <th>Service Date</th>
+                                    <th>Job No</th>
+                                    <th>Customer Name</th>
+                                    <th>Customer Location</th>
+                                    <th>Service Type</th>
+
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;height: 50px;padding: 7px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                @*<a class="btn btn-default" onclick="ResetForm()"><i class="glyphicon glyphicon-refresh"></i> Close</a>*@
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
 
 
 
