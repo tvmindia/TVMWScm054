@@ -62,7 +62,7 @@ namespace SCManager.UserInterface.Models
         [Range(0, 9999999999999999.99)]
         public decimal? Discount { get; set; }
 
-        [Display(Name = "Sub Total (₹)")]
+        [Display(Name = "Net Total (₹)")]
         [Range(0, 9999999999999999.99)]
         public decimal? Subtotal { get; set; }
 
@@ -73,6 +73,8 @@ namespace SCManager.UserInterface.Models
 
         public LogDetailsViewModel logDetails { get; set; }
 
+        [Display(Name = "Total (₹)")]
+        [Range(0, 9999999999999999.99)]
         public decimal Total { get; set; }
 
         public String ChallanDateFormatted { get; set; }

@@ -266,7 +266,7 @@ function List() {
 }
 
 function Add() {
-
+    ResetForm();
     showLoader();
     ChangeButtonPatchView('Form8BRetailInvoice', 'btnPatchAttributeSettab', 'Add');
     EG_ClearTable();
@@ -414,6 +414,16 @@ function save() {
 function reset() {
     EG_ClearTable();
     EG_AddBlankRows(5)
+}
+
+//-----------------------------------------Reset Validation Messages--------------------------------------//
+function ResetForm() {
+    debugger;
+    var validator = $("#F8").validate();
+    $('#F8').find('.field-validation-error span').each(function () {
+        validator.settings.success($(this));
+    });
+    validator.resetForm();
 }
 
 function resetCurrent() {
