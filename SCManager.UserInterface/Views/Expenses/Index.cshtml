@@ -65,7 +65,7 @@
                                     @Html.LabelFor(model => model.RefDate, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.RefDate, new { htmlAttributes = new { @class = "form-control HeaderBox BlockEnter", @id = "Date" } })
+                                    @Html.EditorFor(model => model.RefDate, new { htmlAttributes = new { @class = "form-control HeaderBox BlockEnter", onchange = "GetTechnicianSalaryOnChange()", @id = "Date" } })
                                     @Html.ValidationMessageFor(model => model.RefDate, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -89,7 +89,7 @@
                                     @Html.LabelFor(model => model.EmpID, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
-                                        @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
+                                        @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --", new { @class = "form-control BlockEnter", onchange = "GetTechnicianSalaryOnChange()", value = -1, style = "padding:4px 12px;" })
                                         @Html.ValidationMessageFor(model => model.EmpID, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -153,6 +153,64 @@
                                         the total payment made till date to IFB after adjusting the Credit note issued if any.
                                     </div>
                                          
+                                </div>
+                            </div>
+                            <div class="col-md-12" id="SalaryCalculationArea" hidden="hidden">
+                                <div class="masterinfo">
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <div class="masterinfoHead">
+                                        Calculated Salary <br /><b>  </b>
+                                        <br />
+                                        <div class="col-md-8"  style="left: 135px;">
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                    <label>Period&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label id="lblmonthyear"></label>
+                                                </div>
+                                            </div>
+                                          
+                                           <div class="form-group">
+                                               <div class="col-md-6">
+                                                   <label>Total Commiss.&nbsp;&nbsp;:</label>
+                                               </div>
+                                               <div class="col-md-4">
+                                                   <label id="lbltotalcommission"></label>
+                                               </div>
+                                           </div>
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                    <label>Advance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label id="lbladvance"></label>
+                                                </div>
+                                                </div>
+
+                                               
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                    <label>Payable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label id="lblpayable"></label>
+                                                </div>
+                                            </div>
+                                               
+
+
+
+
+
+
+                                            </div>
+                                       
+                                    </div>
+                                    
+
                                 </div>
                             </div>
                         </div>

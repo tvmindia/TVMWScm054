@@ -27,17 +27,17 @@ namespace SCManager.DataAccessObject.DTO
         public decimal TotalCommission { get; set; }
         public decimal SalaryAdvance { get; set; }
         public decimal TotalPayable { get; set; }
-        public int MajorCalls { get; set; }
+        public int? MajorCalls { get; set; }
         public decimal MajorCommission { get; set; }
-        public int DemoCalls { get; set; }
+        public int? DemoCalls { get; set; }
         public decimal DemoCommission { get; set; }
-        public int MandatoryCalls { get; set; }
+        public int? MandatoryCalls { get; set; }
         public decimal MandatoryCommission { get; set; }
-        public int MinorCalls { get; set; }
+        public int? MinorCalls { get; set; }
         public decimal MinorCommission { get; set; }
-        public int RepeatCalls { get; set; }
+        public int? RepeatCalls { get; set; }
         public decimal RepeatCommission { get; set; }
-        public int RepeatDeductCalls { get; set; }
+        public int? RepeatDeductCalls { get; set; }
         public decimal RepeatDeductCommission { get; set; }
         public decimal SpecialCommission { get; set; }
         public decimal ServiceChargeCommission { get; set; }

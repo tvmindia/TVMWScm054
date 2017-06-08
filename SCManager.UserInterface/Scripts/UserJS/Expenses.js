@@ -77,6 +77,8 @@ function ExpenseTypeChange() {
         $("#EmpID").prop('disabled', true);
         $("#EmpID").val("");
     }
+
+    GetTechnicianSalaryOnChange();
 }
 
 function GetOutStandingPayment() {
@@ -312,5 +314,55 @@ function DeleteSuccess(data, status) {
             break;
         default:
             break;
+    }
+}
+
+function GetTechnicianSalaryOnChange()
+{
+    try
+    {
+        $("#SalaryCalculationArea").hide(); 
+        var expensetype = $("#ExpenseTypeCode").val();
+        var empid = $("#EmpID").val();
+        var dat = $("#Date").val();
+        if ((expensetype == 'SAL') && (empid != ''))
+        {
+            var techsal = GetTechnicanSalary(empid, dat);
+            if(techsal)
+            {
+                $("#lblmonthyear").text(techsal.Period);
+                $("#lbltotalcommission").text(techsal.TotalCommissionRupee);
+                $("#lbladvance").text(techsal.AdvanceRupee);
+                $("#lblpayable").text(techsal.PayableRupee);
+                $("#SalaryCalculationArea").show();
+            }
+        }
+        
+    }
+    catch(e)
+    {
+        notyAlert('error', e.message);
+    }
+}
+
+function GetTechnicanSalary(TechID,dat)
+{
+    try {
+        var data = { "ID": TechID, "Date": dat };
+        var ds = {};
+        ds = GetDataFromServer("Expenses/GetTechnicianSalaryByTechnician/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Record;
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+          
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
     }
 }
