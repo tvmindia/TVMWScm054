@@ -283,7 +283,7 @@ function DeleteClick() {
 }
 
 function Form8BDelete() {
-    try {
+    try { 
         var id = $('#HeaderID').val();
         if (id != '' && id != null) {
             var data = { "ID": id };
@@ -324,6 +324,7 @@ function Form8BDetailDelete(id, rw) {
             if (ds.Result == "OK") {
                 notyAlert('success', ds.Message);
                 BindForm8B(Hid);
+                AmountSummary();
             }
             if (ds.Result == "ERROR") {
                 notyAlert('error', ds.Message);
@@ -341,6 +342,7 @@ function Form8BDetailDelete(id, rw) {
                 reset();
                 EG_Rebind();
             }
+            AmountSummary();
             notyAlert('success', 'Deleted Successfully');
 
         }
@@ -451,13 +453,8 @@ function SaveSuccess(data, status, xhr) {
 
 //---------------------page related logics----------------------------------- 
 
-
-
 function getMaterials() {
-
-
     try {
-
         var data = {};
         var ds = {};
         ds = GetDataFromServer("Item/ItemsForDropdown/", data);
@@ -465,10 +462,7 @@ function getMaterials() {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-
             _Materials = ds.Records;
-
-
         }
         if (ds.Result == "ERROR") {
             alert(ds.Message);
@@ -477,17 +471,10 @@ function getMaterials() {
     catch (e) {
         notyAlert('error', e.message);
     }
-
-
-
 }
 
 
 function CalculateAmount(row) {
-
-
-
-
     //EG_GridData[row-1][Quantity] = value
     var qty = 0.00;
     var rate = 0.00;
@@ -523,12 +510,16 @@ function CalculateAmount(row) {
 }
 
 function AmountSummary() {
+    var BATotal = 0.00;
+    for (i = 0; i < EG_GridData.length; i++) { 
+        BATotal = BATotal + (parseFloat(EG_GridData[i]['BasicAmount']) || 0);
+    }
 
     var subtotal = parseFloat($('#subtotal').val()) || 0;
     var vatamount = parseFloat($('#vatamount').val()) || 0;   
     var vatp = (parseFloat($('#vatpercentage').val()) || 0);
     if (vatp > 0) {
-        vatamount = (subtotal * vatp) / 100;
+        vatamount = (BATotal * vatp) / 100;
         $('#vatamount').val(roundoff(vatamount));
     }
 
@@ -544,7 +535,12 @@ function calculateVat() {
         typingFlag = 1;
     }
 }
-
+function ClearVatPercent()
+{
+    debugger;
+    $('#vatpercentage').val('');
+    $('#discount').val($('#vatamount').val());
+}
 function calculateVatPercentage() {
     var vatp = parseFloat($('#vatpercentage').val()) || 0;
     var subtotal = parseFloat($('#subtotal').val()) || 0;
@@ -575,7 +571,7 @@ function FillUOM(row) {
 
 }
 
- 
+
 
 //-----------------------------------------------------------------------------EG_MandatoryFields
 

@@ -55,7 +55,7 @@ function List() {
         BindAllExpenses()
 
     } catch (x) {
-        alert(x);
+        notyAlert('error',x.message);
     }
 }
 function ExpenseTypeChange() {
@@ -93,7 +93,9 @@ function GetOutStandingPayment() {
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
-            alert(ds.Message);
+            notyAlert('error', ds.Message);
+            var emptyarr = [];
+            return emptyarr;
         }
     }
     catch (e) {
@@ -157,7 +159,9 @@ function GetExpensesByID(id) {
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
-            alert(ds.Message);
+            notyAlert('error', ds.Message);
+            var emptyarr = [];
+            return emptyarr;
         }
     }
     catch (e) {
@@ -235,7 +239,9 @@ function GetAllExpenses(showAllYN) {
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
-            alert(ds.Message);
+            notyAlert('error', ds.Message);
+            var emptyarr = [];
+            return emptyarr;
         }
     }
     catch (e) {

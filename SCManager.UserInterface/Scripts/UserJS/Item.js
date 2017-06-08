@@ -148,8 +148,7 @@ function GetItemDetailsByID(id) {
 
 //---------------------------------------Fill Items--------------------------------------------------//
 function fillItems(ID) {
-   
-    ChangeButtonPatchView("Item", "btnPatchItemSettab", "Edit");
+      ChangeButtonPatchView("Item", "btnPatchItemSettab", "Edit");
     var thisItem = GetItemDetailsByID(ID); //Binding Data
     //Hidden
     $("#ID").val(thisItem[0].ID);
@@ -158,6 +157,7 @@ function fillItems(ID) {
     $("#Stock").val(thisItem[0].Stock)
     $("#DefDamgStockQty").val(thisItem[0].DefDamgStockQty);
     $("#SCQty").val(thisItem[0].SCQty);
+    $("#SalesReturnPendingQty").val(thisItem[0].SalesReturnPendingQty);
     $("#TechnicianQty").val(thisItem[0].TechnicianQty);
     $("#UOM").val(thisItem[0].UOM)
     //Dropdown
@@ -183,6 +183,7 @@ function clearfields() {
     $("#DefDamgStockQty").val("")
     $("#SCQty").val("")
     $("#TechnicianQty").val("")
+    $("#SalesReturnPendingQty").val("");
     $("#UOM").val("")
     $("#ReorderQty").val("");
     $("#ProductCommission").val("");

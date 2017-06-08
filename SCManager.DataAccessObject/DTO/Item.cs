@@ -23,6 +23,7 @@ namespace SCManager.DataAccessObject.DTO
         public string Remarks { get; set; }
         public float SellingRate { get; set; }
         public float Value { get; set; }
+        public string SalesReturnPendingQty { get; set; }
         public LogDetails logDetails { get; set; }
         public string DefDamgStockQty { get; set; }
         public string SCQty { get; set; }
