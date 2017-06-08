@@ -251,6 +251,7 @@ namespace SCManager.BusinessService.Services
             try
             {
                 ServiceRegistrySummaryList = _dailyServiceRepository.GetServiceRegisterSummaryFilter(SCCode, CreatedDate, Isdefault);
+                ServiceRegistrySummaryList = ServiceRegistrySummaryList == null ? null : ServiceRegistrySummaryList.Select(c => { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("yyyy-MM-dd"); return c; }).ToList();
             }
             catch (Exception ex)
             {
