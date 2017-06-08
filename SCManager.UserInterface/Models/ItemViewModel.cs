@@ -49,6 +49,8 @@ namespace SCManager.UserInterface.Models
         public string Remarks { get; set; }
         [Display(Name = "Base Rate (₹)")]
         public float? SellingRate { get; set; }
+        [Display(Name = "Sales Return Pending Qty")]
+        public string SalesReturnPendingQty { get; set; }
         public string UOMDesc { get; set; }
         public List<SelectListItem> CategoryList { get; set; }
         public List<SelectListItem> UOMList { get; set; }
