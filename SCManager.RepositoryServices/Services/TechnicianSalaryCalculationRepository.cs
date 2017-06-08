@@ -20,6 +20,8 @@ namespace SCManager.RepositoryServices.Services
             _databaseFactory = databaseFactory;
         }
 
+      
+
 
         #endregion DataBaseFactory
         public List<TechnicianSalary> GetTechniciansCalculatedSalary(string SCCode, short? Month, short? Year)
@@ -75,6 +77,60 @@ namespace SCManager.RepositoryServices.Services
                                         technicianSalary.ProductCommission = (sdr["ProductCommission"].ToString() != "" ? decimal.Parse(sdr["ProductCommission"].ToString()) : technicianSalary.ProductCommission);
                                         technicianSalary.AMCCommission = (sdr["AMCCommission"].ToString() != "" ? decimal.Parse(sdr["AMCCommission"].ToString()) : technicianSalary.AMCCommission);
                                     
+                                    }
+                                    technicianSalaryList.Add(technicianSalary);
+                                }
+                            }//if
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return technicianSalaryList;
+        }
+
+
+        public List<TechnicianSalaryJobBreakUp> GetTechnicianJobCommissionBreakUp(string SCCode, Guid EmpID, short? Month, short? Year)
+        {
+            List<TechnicianSalaryJobBreakUp> technicianSalaryList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = SCCode;
+                        cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = EmpID;
+                        cmd.Parameters.Add("@month", SqlDbType.Int).Value = Month;
+                        cmd.Parameters.Add("@year", SqlDbType.Int).Value = Year;
+                        cmd.CommandText = "[CalculateTechSalaryBreakup_Job]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                technicianSalaryList = new List<TechnicianSalaryJobBreakUp>();
+                                while (sdr.Read())
+                                {
+                                    TechnicianSalaryJobBreakUp technicianSalary = new TechnicianSalaryJobBreakUp();
+                                    {
+                                        technicianSalary.ServiceDate = (sdr["ServiceDate"].ToString() != "" ? sdr["ServiceDate"].ToString() : technicianSalary.ServiceDate);
+                                        technicianSalary.JobNo = (sdr["JobNo"].ToString() != "" ? sdr["JobNo"].ToString() : technicianSalary.JobNo);
+                                        technicianSalary.CustomerName = (sdr["CustomerName"].ToString() != "" ? sdr["CustomerName"].ToString() : technicianSalary.CustomerName);
+                                        technicianSalary.Type = (sdr["Type"].ToString() != "" ? sdr["Type"].ToString() : technicianSalary.Type);
+                                        technicianSalary.Commission = (sdr["Commission"].ToString() != "" ? decimal.Parse(sdr["Commission"].ToString()) : technicianSalary.Commission);
+                                        technicianSalary.SpecialCommission = (sdr["SpecialCommission"].ToString() != "" ? decimal.Parse(sdr["SpecialCommission"].ToString()) : technicianSalary.SpecialCommission);
+                                        technicianSalary.Total = (sdr["Total"].ToString() != "" ? decimal.Parse(sdr["Total"].ToString()) : technicianSalary.SpecialCommission);
                                     }
                                     technicianSalaryList.Add(technicianSalary);
                                 }

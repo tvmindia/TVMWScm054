@@ -37,13 +37,18 @@ $(document).ready(function () {
               { "data": "ServiceChargeCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
               { "data": "ProductCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
               { "data": "AMCCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+              { "data": "SCCode", "defaultContent": "<i>-</i>" },
+              { "data": "EmpID", "defaultContent": "<i>-</i>" },
+              { "data": "Month", "defaultContent": "<i>-</i>" },
+              { "data": "Year", "defaultContent": "<i>-</i>" },
             ],
             columnDefs: [
             { "width": "200px", "targets": 0 }, 
             { className: "text-left disabled", targets: [0] },
              { className: "text-right", targets: [5,7,9,11,13,15,16,17,18,19] },
             { className: "text-center", targets: [6, 8, 10, 12, 14] },
-            { className: "text-right disabled", targets: [1,2,3]}
+            { className: "text-right disabled", targets: [1, 2, 3] },
+            { "visible": false, targets: [20,21,22,23] },
 
             ]
             ,
@@ -64,17 +69,177 @@ $(document).ready(function () {
         notyAlert('error', e.message);
     }
 
+    try {
+
+        DataTables.JobCommissionDetails = $('#tblJobCommissionDetails').DataTable(
+         {
+             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             order: [],
+             searching: false,
+             paging: false,
+             data: null,
+             columns: [
+               { "data": "ServiceDate", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "JobNo", "defaultContent": "<i>-</i>" },
+               { "data": "Type", "defaultContent": "<i>-</i>" },
+               { "data": "CustomerName", "defaultContent": "<i>-</i>" },
+               { "data": "SpecialCommission",render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "Commission",render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "Total",render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               
+
+             ],
+             columnDefs: [
+                  { className: "text-left", "targets": [1] },
+                  { className: "text-center", "targets": [0, 2, 3, 4, 5, 6] }
+
+             ]
+         });
+
+
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+
+    try {
+
+        DataTables.TCRBillCommissionDetails = $('#tblTCRBillDetails').DataTable(
+         {
+             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             order: [],
+             searching: false,
+             paging: false,
+             data: null,
+             columns: [
+               { "data": "Date", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "BillNo", "defaultContent": "<i>-</i>" },
+               { "data": "Customer", "defaultContent": "<i>-</i>" },
+               { "data": "ProductCommis", "defaultContent": "<i>-</i>" },
+               { "data": "ServiceCommis", "defaultContent": "<i>-</i>" },
+               { "data": "Total", "defaultContent": "<i>-</i>" },
+
+
+             ],
+             columnDefs: [
+                  { className: "text-left", "targets": [1] },
+                  { className: "text-center", "targets": [0, 2, 3, 4, 5] }
+
+             ]
+         });
+
+
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+
+
+    try {
+
+        DataTables.AMCCommissionDetails = $('#tblAMCDetails').DataTable(
+         {
+             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             order: [],
+             searching: false,
+             paging: false,
+             data: null,
+             columns: [
+               { "data": "Date", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "BillNo", "defaultContent": "<i>-</i>" },
+               { "data": "Customer", "defaultContent": "<i>-</i>" },
+               { "data": "Amount", "defaultContent": "<i>-</i>" },
+
+
+             ],
+             columnDefs: [
+                  { className: "text-left", "targets": [1] },
+                  { className: "text-center", "targets": [0, 2, 3] }
+
+             ]
+         });
+
+
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+
+
+    try {
+
+        DataTables.AdvanceDetails = $('#tblAdvanceDetails').DataTable(
+         {
+             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             order: [],
+             searching: false,
+             paging: false,
+             data: null,
+             columns: [
+               { "data": "Date", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+              
+               { "data": "Amount", "defaultContent": "<i>-</i>" },
+                 { "data": "Note", "defaultContent": "<i>-</i>" },
+
+
+             ],
+             columnDefs: [
+                  { className: "text-left", "targets": [1] },
+                  { className: "text-center", "targets": [0, 2] }
+
+             ]
+         });
+
+
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+
 
 });
 
 function ViewMore(curobj)
 {
+   
     try
     {
+        var rowData = DataTables.SalaryTable.row($(curobj).parents('tr')).data();
+        RefreshJobCommissionDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
         $("#ModelSalaryDetails").modal('show');
     }
     catch(e)
     {
+        notyAlert('error', e.message);
+    }
+}
+function RefreshJobCommissionDetailsTable(SCCode, EmpID, Month, Year) {
+    try {
+     
+        DataTables.JobCommissionDetails.clear().rows.add(GetJobCommissionDetails(SCCode, EmpID, Month, Year)).draw(false);
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+function GetJobCommissionDetails(SCCode, EmpID, Month, Year) {
+    try {
+        var data = { "SCCode": SCCode, "EmpID": EmpID, "Month": Month, "Year": Year };
+        var ds = {};
+        ds = GetDataFromServer("TechnicianSalaryCalculation/GetTechnicianJobCommissionBreakUp/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+            var emptyarr = [];
+            return emptyarr;
+        }
+    }
+    catch (e) {
         notyAlert('error', e.message);
     }
 }
