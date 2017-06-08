@@ -12,10 +12,12 @@ namespace SCManager.BusinessService.Services
     {
         private IExpensesRepository _expensesRepository;
         private ICommonBusiness _commonBusiness;
-        public ExpensesBusiness(IExpensesRepository expensesRepository, ICommonBusiness commonBusiness)
+        private ITechnicianSalaryCalculationBusiness _technicianSalaryCalculationBusiness;
+        public ExpensesBusiness(IExpensesRepository expensesRepository, ICommonBusiness commonBusiness, ITechnicianSalaryCalculationBusiness technicianSalaryCalculationBusiness)
         {
             _expensesRepository = expensesRepository;
             _commonBusiness = commonBusiness;
+            _technicianSalaryCalculationBusiness = technicianSalaryCalculationBusiness;
         }
 
       
@@ -93,6 +95,35 @@ namespace SCManager.BusinessService.Services
             expenseObj = _expensesRepository.GetOutStandingPayment(UA);
             expenseObj.OutStandingPaymentFormatted = _commonBusiness.ConvertCurrency(expenseObj.OutStandingPayment, 2);
             return expenseObj;
+        }
+
+        public TechnicianSalary GetTechnicianSalaryByTechnician(UA ua, Guid ID,string date)
+        {
+            List<TechnicianSalary> technicianSalaryList = null;
+            try
+            {
+                string m;
+                string y;
+                if (string.IsNullOrEmpty(date))
+                {
+                    DateTime dt = ua.CurrentDatetime();
+                    m = dt.AddMonths(-1).Month.ToString();
+                    y = dt.AddMonths(-1).Year.ToString();
+                }
+                else
+                {
+                    m = DateTime.Parse(date).AddMonths(-1).Month.ToString();
+                    y= DateTime.Parse(date).AddMonths(-1).Year.ToString();
+                }
+                technicianSalaryList = _technicianSalaryCalculationBusiness.GetTechniciansCalculatedSalary(ua.SCCode, m,y);
+                technicianSalaryList=technicianSalaryList != null && technicianSalaryList.Count > 0 ? technicianSalaryList.Where(t => t.EmpID == ID).ToList():null;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
+            return technicianSalaryList != null && technicianSalaryList.Count > 0 ? technicianSalaryList[0] : null;
         }
     }
 }

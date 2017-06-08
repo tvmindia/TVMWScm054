@@ -6,6 +6,7 @@ using SCManager.UserInterface.CustomAttributes;
 using SCManager.UserInterface.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,11 +19,13 @@ namespace SCManager.UserInterface.Controllers
         Const constObj = new Const();
         private IExpensesBusiness _expensesBusiness;
         IEmployeesBusiness _iEmployeesBusiness;
+        ICommonBusiness _commonBusiness;
 
-        public ExpensesController(IExpensesBusiness expensesBusiness, IEmployeesBusiness iEmployeesBusiness)
+        public ExpensesController(IExpensesBusiness expensesBusiness, IEmployeesBusiness iEmployeesBusiness, ICommonBusiness commonBusiness)
         {
             _expensesBusiness = expensesBusiness;
             _iEmployeesBusiness = iEmployeesBusiness;
+            _commonBusiness = commonBusiness;
         }
         // GET: Expenses
         public ActionResult Index()
@@ -214,6 +217,48 @@ namespace SCManager.UserInterface.Controllers
 
         }
         #endregion DeleteExpenses
+
+        #region GetTechnicianSalaryByTechnician
+        /// <summary>
+        /// Get Salary Summary of a Technicain  for the last month(last 30 days)
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns>TechnicianSalaryViewModel</returns>
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetTechnicianSalaryByTechnician(string ID,string Date)
+        {
+            try
+            {
+            if(!string.IsNullOrEmpty(ID))
+            {
+                UA ua = new UA();
+
+                TechnicianSalaryViewModel technicianSalaryVM = Mapper.Map<TechnicianSalary, TechnicianSalaryViewModel>(_expensesBusiness.GetTechnicianSalaryByTechnician(ua, Guid.Parse(ID),Date));
+                if(technicianSalaryVM!=null)
+                    {
+                      
+                 technicianSalaryVM.Period= CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName((int)technicianSalaryVM.Month)+"/"+ technicianSalaryVM.Year; 
+                 technicianSalaryVM.TotalCommissionRupee = _commonBusiness.ConvertCurrency(technicianSalaryVM.TotalCommission);
+                 technicianSalaryVM.AdvanceRupee= _commonBusiness.ConvertCurrency(technicianSalaryVM.SalaryAdvance);
+                 technicianSalaryVM.PayableRupee = _commonBusiness.ConvertCurrency(technicianSalaryVM.TotalPayable);
+                }
+                return JsonConvert.SerializeObject(new { Result = "OK", Record = technicianSalaryVM });
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "ID is Empty" });
+            }
+            }
+            catch(Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+
+
+
+        }
+        #endregion GetTechnicianSalaryByTechnician
 
         #region ButtonStyling
         [HttpGet]

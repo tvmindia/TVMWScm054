@@ -16,5 +16,6 @@ namespace SCManager.BusinessService.Contracts
         Expenses GetExpensesByID(UA UA,string ID);
         Expenses GetOutStandingPayment(UA UA);
         string DeleteExpenses(string ID, UA ua);
+        TechnicianSalary GetTechnicianSalaryByTechnician(UA ua, Guid ID,string date);
     }
 }

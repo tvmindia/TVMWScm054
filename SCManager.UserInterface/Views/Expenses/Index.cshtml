@@ -65,7 +65,7 @@
                                     @Html.LabelFor(model => model.RefDate, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.RefDate, new { htmlAttributes = new { @class = "form-control HeaderBox BlockEnter", @id = "Date" } })
+                                    @Html.EditorFor(model => model.RefDate, new { htmlAttributes = new { @class = "form-control HeaderBox BlockEnter", onchange = "GetTechnicianSalaryOnChange()", @id = "Date" } })
                                     @Html.ValidationMessageFor(model => model.RefDate, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -89,7 +89,7 @@
                                     @Html.LabelFor(model => model.EmpID, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
-                                        @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
+                                        @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --", new { @class = "form-control BlockEnter", onchange = "GetTechnicianSalaryOnChange()", value = -1, style = "padding:4px 12px;" })
                                         @Html.ValidationMessageFor(model => model.EmpID, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -155,7 +155,29 @@
                                          
                                 </div>
                             </div>
-                        </div>
+                            <div class="col-md-12" id="SalaryCalculationArea" hidden="hidden">
+                                <div class="masterinfo">
+                                    <br />
+                                    <br />
+                                     
+                                    <div class="masterinfoHead">
+                                        Calculated Salary
+                                    </div>
+                                    <br />
+                                        <div class="masterinfoDet" >
+                                            <div class="col-md-12">
+                                                <div class="col-md-6 salarysummarylbl">Period&nbsp; : </div><div class="col-md-6 salarysummary"><span id="lblmonthyear"></span></div>
+                                                <div class="col-md-6 salarysummarylbl">Total Commission&nbsp; : </div><div class="col-md-6 salarysummary"><span id="lbltotalcommission"></span></div>
+                                                <div class="col-md-6 salarysummarylbl">Previous Advance&nbsp; : </div><div class="col-md-6 salarysummary"><span id="lbladvance"></span></div>
+                                                <div class="col-md-6 salarysummarylbl">Payable&nbsp; : </div><div class="col-md-6 salarysummary"><span id="lblpayable"></span></div>
+                                            </div>                                              
+                                        </div>                           
+
+                                  </div>
+                             
+                            </div>
+                       </div>
+                         
 
                         <div class="col-md-6">
 
