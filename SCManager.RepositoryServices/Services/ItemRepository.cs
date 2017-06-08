@@ -186,6 +186,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ItemObj.SellingRate = (sdr["SellingRate"].ToString() != "" ? float.Parse(sdr["SellingRate"].ToString()) : _ItemObj.SellingRate);
                                         _ItemObj.ProductCommission = (sdr["ProductCommission"].ToString() != "" ? float.Parse(sdr["ProductCommission"].ToString()) : _ItemObj.ProductCommission);
                                         _ItemObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _ItemObj.Remarks);
+                                        _ItemObj.SalesReturnPendingQty= (sdr["SalesReturnPendingQty"].ToString() != "" ? (sdr["SalesReturnPendingQty"].ToString()) : _ItemObj.SalesReturnPendingQty);
                                     }
 
                                     Itemlist.Add(_ItemObj);
