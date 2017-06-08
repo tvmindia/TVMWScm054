@@ -2,8 +2,15 @@
 
 $(document).ready(function () {
     //---------------------------------bar chart weekly summary -------------------------
+    var chartjsData = [];
+    var labels = [];
+    var BarGraphData = GetWeeklySalesDetails()
+    for (var i = 0; i < BarGraphData.length; i++) {
+        labels.push(BarGraphData[i].Label);
+        chartjsData.push(BarGraphData[i].Value);
+    }
     var data = {
-        labels: ["Feb-W3", "Feb-W4", "Mar-W1", "Mar-W2", "Mar-W3", "Mar-W4", "Apr-W1"],
+        labels: labels,
         datasets: [
 
             {
@@ -11,14 +18,21 @@ $(document).ready(function () {
                 strokeColor: "rgba(151,187,205,1)",
                 pointColor: "rgba(151,187,205,1)",
                 pointStrokeColor: "#fff",
-                data: [50, 30, 40, 19, 96, 27, 80]
+                data: chartjsData
             }
         ]
     }
 
     var options = {
-        animation: true
+        animation: true,
+        tooltipFillColor: "rgba(255,255,255,.89)",
+        tooltipFontColor: "rgba(1,1,1,1)",
+        tooltipCaretSize: 0,
+        tooltipFontSize: 14,
+        tooltipFontStyle: "thick",
+        
     };
+
 
     //Get the context of the canvas element we want to select
     var c = $('#myChart');
@@ -79,7 +93,19 @@ $(document).ready(function () {
 
 });
 
+function GetWeeklySalesDetails() {
+    try {
+        var ds = {};
+        data = "";
+        ds = GetDataFromServer("DynamicUI/GetWeeklySalesDetails/", data);
+        if (ds != '') { ds = JSON.parse(ds); }
+        if (ds.Result == "OK") { return ds.Records; }
+        if (ds.Result == "ERROR") { alert(ds.Message); }
+    }
+    catch (e) {
 
+    }
+}
 function GetStockValueSummary() {
     var ds = {};
     var data = { "value": "" };

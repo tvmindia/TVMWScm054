@@ -492,3 +492,15 @@ color: #e32;
 .DTFC_LeftHeadWrapper {
     margin-bottom:-4.3%;
 }
+
+.salarysummarylbl {
+    text-align:right;
+     font-weight:300;
+}
+
+
+.salarysummary {
+    text-align:left;
+    font-size:16px;
+    font-weight:400;
+}

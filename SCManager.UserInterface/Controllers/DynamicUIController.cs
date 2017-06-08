@@ -16,9 +16,13 @@ namespace SCManager.UserInterface.Controllers
         //
         // GET: /DynamicUI/
         private IDynamicUIBusiness _dynamicUIBusiness;
-        public DynamicUIController(IDynamicUIBusiness dynamicUIBusiness)
+        private ICommonBusiness _commonBusiness;
+        private ISalesBusiness _salesBusiness;
+        public DynamicUIController(IDynamicUIBusiness dynamicUIBusiness,ICommonBusiness commonBusiness, ISalesBusiness salesBusiness)
         {
             _dynamicUIBusiness = dynamicUIBusiness;
+            _commonBusiness = commonBusiness;
+            _salesBusiness = salesBusiness;
         }
 
         public ActionResult _MenuNavBar()
@@ -71,6 +75,22 @@ namespace SCManager.UserInterface.Controllers
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
         }
+        #region GetWeeklySalesSummaryForChart
+        [HttpGet]
+        public string GetWeeklySalesDetails()
+        {
+            try
+            {
+                UA ua = new UA();
+                List<SalesGraphViewModel> salesSummaryList = Mapper.Map<List<SalesGraph>, List<SalesGraphViewModel>>(_salesBusiness.GetWeeklySalesDetails(ua));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = salesSummaryList });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        #endregion  GetWeeklySalesSummaryForChart
 
     }
 }

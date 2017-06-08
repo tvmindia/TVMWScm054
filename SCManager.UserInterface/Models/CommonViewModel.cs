@@ -25,4 +25,9 @@ namespace SCManager.UserInterface.Models
         public DateTime? UpdatedDate { get; set; }
 
     }
+    public class SalesGraphViewModel
+    {
+        public string Label { get; set; }
+        public decimal Value { get; set; }
+    }
 }
