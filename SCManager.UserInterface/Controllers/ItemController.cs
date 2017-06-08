@@ -93,6 +93,15 @@ namespace SCManager.UserInterface.Controllers
         }
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        public string ItemsForDropdownByTechnician(string empID)
+        {
+            UA ua = new UA();
+            List<ItemDropdownViewModel> ItemList = Mapper.Map<List<Item>, List<ItemDropdownViewModel>>(_itemBusiness.GetAllItemsByTechnician(empID,ua));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
+
+        }
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string ServiceTypesItemsForDropdown(ItemDropdownViewModel obj)
         {
             UA ua = new UA();

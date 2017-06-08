@@ -17,6 +17,7 @@ namespace SCManager.RepositoryServices.Contracts
         List<Item> GetAllItemCode(UA UA);
         List<Item> GetAllUOMs();
         List<Item> GetAllServiceTypeItems(UA UA);
+        List<Item> GetAllItemsByTechnician(string empID, UA UA);
 
     }
 }

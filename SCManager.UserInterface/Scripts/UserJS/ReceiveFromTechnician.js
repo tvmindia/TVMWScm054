@@ -151,6 +151,32 @@ function fillTechnicians() {
     BindAllReceiveList()
 }
 
+function getMaterialsByTechnician(empID)
+{
+
+    try {
+
+        var data = { "empID": empID };
+        var ds = {};
+        ds = GetDataFromServer("Item/ItemsForDropdownByTechnician/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            _Materials = [];
+            _Materials = ds.Records;
+            EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
+
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
 function getMaterials() {
 
 
@@ -163,7 +189,7 @@ function getMaterials() {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-
+            _Materials = [];
             _Materials = ds.Records;
 
 
@@ -279,8 +305,17 @@ function BindReceiveSheetFields(Records) {
 
 }
 function TechnicianChange(curObj) {
-   
+    debugger;
     $("#ddlReceiveListTech").val(curObj.value);
+    if (curObj.value != undefined && curObj.value != null && curObj.value!="")
+    {
+        getMaterialsByTechnician(curObj.value);
+    }
+    else
+    {
+        getMaterials();
+        EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description');
+    }
     GetReceiveSheetsByTechnician();
 }
 function Delete(currentObj) {
