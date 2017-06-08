@@ -177,6 +177,16 @@ function List() {
 
 }
 
+function ClearDiscountPercentage()
+{
+    $("#discountpercentage").val("");
+}
+
+function ClearServiceTaxPercentage()
+{
+    $("#ServiceTaxpercentage").val("");
+}
+
 function goBack() {
     $('#AddTab').trigger('click');
     $("#HeaderID").val("");
@@ -323,6 +333,8 @@ function reset()
     else
     {
         BindICRBillEntry($("#HeaderID").val());
+        $("#discountpercentage").val("");
+        $("#ServiceTaxpercentage").val("");
     }  
   
 }
@@ -539,44 +551,70 @@ function GetAllICRBill() {
     }
 }
 
-function CalculateServiceTaxPercentage() {
+function CalculateServiceTaxPercentage(id) {
     debugger;
     var serviceTaxpercent = $("#ServiceTaxpercentage").val();
     var baseAmt = $("#total").val();
-    serviceTaxpercent = parseInt(serviceTaxpercent);
-    if (serviceTaxpercent > 100) {
-        serviceTaxpercent = 100
-        $("#vatpercentage").val(serviceTaxpercent);
+    if (serviceTaxpercent != "") {
+        serviceTaxpercent = parseInt(serviceTaxpercent);
+        if (serviceTaxpercent > 100) {
+            serviceTaxpercent = 100
+            $("#ServiceTaxpercentage").val(serviceTaxpercent);
+        }
+        if (serviceTaxpercent < 0) {
+            serviceTaxpercent = 0
+            $("#ServiceTaxpercentage").val(serviceTaxpercent);
+        }
+        baseAmt = parseInt(baseAmt);
+        var vatamt = (baseAmt * serviceTaxpercent / 100)
+        if (isNaN(vatamt)) { vatamt = 0.00 }
+        $("#TotalServiceTaxAmt").val(roundoff(vatamt));
+
     }
-    if (serviceTaxpercent < 0) {
-        serviceTaxpercent = 0
-        $("#vatpercentage").val(serviceTaxpercent);
+    else {
+        if(id==1)
+        {
+            var vatamt = 0.00;
+            $("#TotalServiceTaxAmt").val(roundoff(vatamt));
+        }
     }
-    baseAmt = parseInt(baseAmt);
-    var vatamt = (baseAmt*serviceTaxpercent / 100)
-    if (isNaN(vatamt)) { vatamt = 0.00 }
-    $("#TotalServiceTaxAmt").val(roundoff(vatamt));
+       
+  
+    
 
     AmountSummary();
 }
 
-function CalculateDiscountPercentage() {
+function CalculateDiscountPercentage(id) {
     debugger;
     var discountpercent = $("#discountpercentage").val();
     var baseAmt = $("#subtotal").val();
-    discountpercent = parseInt(discountpercent);
-    if (discountpercent > 100) {
-        discountpercent = 100
-        $("#vatpercentage").val(discountpercent);
+    if (discountpercent != "")
+    {
+       
+        discountpercent = parseInt(discountpercent);
+        if (discountpercent > 100) {
+            discountpercent = 100
+            $("#discountpercentage").val(discountpercent);
+        }
+        if (discountpercent < 0) {
+            discountpercent = 0
+            $("#discountpercentage").val(discountpercent);
+        }
+        baseAmt = parseInt(baseAmt);
+        var Discount = (baseAmt * discountpercent / 100)
+        if (isNaN(Discount)) { Discount = 0.00 }
+        $("#Discount").val(roundoff(Discount));
     }
-    if (discountpercent < 0) {
-        discountpercent = 0
-        $("#vatpercentage").val(discountpercent);
+    else
+    {
+        if(id==1)
+        {
+            var Discount = 0.00
+            $("#Discount").val(roundoff(Discount));
+        }
     }
-    baseAmt = parseInt(baseAmt);
-    var Discount = (baseAmt*discountpercent / 100)
-    if (isNaN(Discount)) { Discount = 0.00 }
-    $("#Discount").val(roundoff(Discount));
+   
 
     AmountSummary();
 }
@@ -606,7 +644,7 @@ function SaveSuccess(data, status) {
 function CalculateAmount(row) {
 
 
-
+    debugger;
 
     //EG_GridData[row-1][Quantity] = value
     var qty = 0.00;
@@ -645,6 +683,8 @@ function CalculateAmount(row) {
     $('#subtotal').val(roundoff(total));
     $("#STAmount").val(roundoff(total));
     AmountSummary();
+    CalculateServiceTaxPercentage(0);
+    CalculateDiscountPercentage(0);
 
 }
 function BindJobNumberDropDown() {

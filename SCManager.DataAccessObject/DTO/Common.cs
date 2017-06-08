@@ -138,6 +138,10 @@ namespace SCManager.DataAccessObject.DTO
 
         }
     }
+    public class SalesGraph
+    {
+        public string Label { get; set; }
+        public decimal Value { get; set; }
+    }
 
-    
 }
