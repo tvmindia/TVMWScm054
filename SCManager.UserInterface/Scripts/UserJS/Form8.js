@@ -160,8 +160,7 @@ function GetAllForm8() {
         if (ds != '') {
             ds = JSON.parse(ds);
         }
-        if (ds.Result == "OK") {
-            // debugger;
+        if (ds.Result == "OK") { 
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -200,8 +199,7 @@ function BindForm8(id) {
 }
 
 function BindForm8Fields(Records) {
-    try {
-        debugger;
+    try { 
         $('#HeaderID').val(Records.ID);
         $('#InvNo').val(Records.InvoiceNo);        
         $('#Remarks').val(Records.Remarks);
@@ -290,8 +288,7 @@ function Form8Delete() {
 }
 
 function Form8DetailDelete(id,rw) {
-    try {
-        debugger;
+    try { 
         var Hid = $('#HeaderID').val();
         if (id != '' && id != null && Hid != '' && Hid != null && Hid != emptyGUID) {
             var data = { "ID": id, "HeaderID": Hid };
@@ -311,8 +308,7 @@ function Form8DetailDelete(id,rw) {
             }
             return 1;
         }
-        else {
-            debugger;
+        else { 
             if (EG_GridData.length != 1) {
                 EG_GridData.splice(rw-1,1); 
                 EG_Rebind_WithData(EG_GridData,0);
@@ -350,7 +346,6 @@ function RestForm8() {
     var $datepicker = $('#PODate');
     $datepicker.datepicker('setDate', null);
 }
-
 
 function Edit(currentObj) {
     showLoader();
@@ -395,8 +390,7 @@ function reset() {
 }
 
 //-----------------------------------------Reset Validation Messages--------------------------------------//
-function ResetForm() {
-    debugger;
+function ResetForm() { 
     var validator = $("#F8").validate();
     $('#F8').find('.field-validation-error span').each(function () {
         validator.settings.success($(this));
@@ -405,15 +399,10 @@ function ResetForm() {
 }
 
 function resetCurrent() {
-    try {
-        debugger;
+    try { 
         var id = $('#HeaderID').val();
-        BindForm8(id);
-
-
-    } catch (e) {
-
-    }
+        BindForm8(id); 
+    } catch (e) { }
 }
 
 function SaveSuccess(data, status, xhr) {
@@ -502,8 +491,7 @@ function CalculateAmount(row) {
 }
 
 function AmountSummary() {
-    debugger;
-
+    debugger; 
     var total = 0.00;
     for (i = 0; i < EG_GridData.length; i++) {
         total = total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
@@ -527,6 +515,7 @@ function AmountSummary() {
 
 var typingFlag = 0;
 function calculateVat() {
+    debugger;
     if (typingFlag == 0) {
         setTimeout(calculateVatPercentage, 2000);//done to wait till typing over
         typingFlag = 1;
@@ -535,16 +524,18 @@ function calculateVat() {
 
 function ClearVatPercent() {
     debugger;
+    if ($('#vatamount').val()!= $('#VatAmountValue').val())
     $('#vatpercentage').val('');
     var total = parseFloat($('#Total').val()) || 0;
     var vatamount = parseFloat($('#vatamount').val()||0);
     var GTotal = total + vatamount;
-    $('#grandtotal').val(GTotal);
+    $('#grandtotal').val(roundoff(GTotal));
 }
 
 function calculateVatPercentage() {
+    debugger;
     var vatp = parseFloat($('#vatpercentage').val()) || 0;
-    var subtotal = parseFloat($('#subtotal').val()) || 0;
+    var total = parseFloat($('#Total').val()) || 0;
     if (vatp > 100) {
         vatp = 100;
     }
@@ -553,7 +544,8 @@ function calculateVatPercentage() {
     }
 
     $('#vatpercentage').val(vatp);
-    $('#vatamount').val(roundoff(subtotal * vatp / 100));
+    $('#vatamount').val(roundoff(total * vatp / 100));
+    $('#VatAmountValue').val($('#vatamount').val());
     AmountSummary();
     typingFlag = 0;
 }
