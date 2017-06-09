@@ -161,6 +161,7 @@ namespace SCManager.RepositoryServices.Services
                                         _job.TechnicianRemark = (sdr["TechnicianRemarks"].ToString() != "" ? (sdr["TechnicianRemarks"].ToString()) : _job.TechnicianRemark);
                                         _job.RepeatEmpName= (sdr["Repeat_EmpName"].ToString() != "" ? (sdr["Repeat_EmpName"].ToString()) : _job.TechnicianRemark);
                                         _job.RepeatJobNo = (sdr["Repeat_JobNo"].ToString() != "" ? (sdr["Repeat_JobNo"].ToString()) : _job.RepeatJobNo);
+                                        _job.Repeat_EmpID = (sdr["Repeat_EmpID"].ToString() != "" ? (sdr["Repeat_EmpID"].ToString()) : _job.Repeat_EmpID);
                                         _job.CallStatusDescription = (sdr["CallStatusDescription"].ToString() != "" ? (sdr["CallStatusDescription"].ToString()) : _job.CallStatusDescription);
                                         _job.JobCallTypeDescription= (sdr["JobCallTypeDescription"].ToString() != "" ? (sdr["JobCallTypeDescription"].ToString()) : _job.JobCallTypeDescription);
                                         _job.ServiceTypeDescription = (sdr["ServiceTypeDescription"].ToString() != "" ? (sdr["ServiceTypeDescription"].ToString()) : _job.ServiceTypeDescription);
