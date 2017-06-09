@@ -160,7 +160,6 @@ function JobSaveSuccess(data, status, xhr) {
 
 function ServiceTypeOnChange(curobj) {
     try {
-        debugger;
         if (curobj.value != "RPT") {
             $(".calltypehidden").hide();
             $("#ModelRepeat_EmpID").val('');
