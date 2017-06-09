@@ -56,7 +56,7 @@ namespace SCManager.RepositoryServices.Services
                                     OtherIncome otherIncomeObj = new OtherIncome();
 
                                     {
-                                        otherIncomeObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()) : otherIncomeObj.RefDate);
+                                        otherIncomeObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()).ToString("dd-MMM-yyyy") : otherIncomeObj.RefDate);
                                         otherIncomeObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : otherIncomeObj.RefNo);
                                         otherIncomeObj.IncomeTypeCode = (sdr["IncomeTypeCode"].ToString() != "" ? (sdr["IncomeTypeCode"].ToString()) : otherIncomeObj.IncomeTypeCode);
                                         otherIncomeObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : otherIncomeObj.Description);
@@ -109,7 +109,7 @@ namespace SCManager.RepositoryServices.Services
                                     OtherIncome otherIncomeObj = new OtherIncome();
 
                                     {
-                                        otherIncomeObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()) : otherIncomeObj.RefDate);
+                                        otherIncomeObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()).ToString("dd-MMM-yyyy") : otherIncomeObj.RefDate);
                                         otherIncomeObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : otherIncomeObj.RefNo);
                                         otherIncomeObj.IncomeTypeCode = (sdr["IncomeTypeCode"].ToString() != "" ? (sdr["IncomeTypeCode"].ToString()) : otherIncomeObj.IncomeTypeCode);
                                         otherIncomeObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : otherIncomeObj.Description);
@@ -317,7 +317,7 @@ namespace SCManager.RepositoryServices.Services
                                     OtherIncome otherIncomeObj = new OtherIncome();
 
                                     {
-                                        otherIncomeObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()) : otherIncomeObj.RefDate);
+                                        otherIncomeObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()).ToString("dd-MMM-yyyy") : otherIncomeObj.RefDate);
                                         otherIncomeObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : otherIncomeObj.RefNo);
                                         otherIncomeObj.IncomeTypeCode = (sdr["IncomeTypeCode"].ToString() != "" ? (sdr["IncomeTypeCode"].ToString()) : otherIncomeObj.IncomeTypeCode);
                                         otherIncomeObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : otherIncomeObj.Description);

@@ -45,7 +45,7 @@ namespace SCManager.BusinessService.Services
                 I.GrandTotal = I.Subtotal + I.VATAmount - I.Discount;
 
                 if (I.BillDate != null)
-                    I.BillDateFormatted = I.BillDate.GetValueOrDefault().ToString(settings.dateformat);
+                    I.BillDateFormatted = I.BillDate;//.GetValueOrDefault().ToString(settings.dateformat);
             }
 
         }

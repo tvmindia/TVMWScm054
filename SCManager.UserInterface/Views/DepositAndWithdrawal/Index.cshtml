@@ -72,7 +72,7 @@
                                 @*@Html.LabelFor(model => model.fromDate, htmlAttributes: new { @class = "control-label" })*@
                             </div>
                             <div class="col-md-6">
-                                <input type="date" class="form-control HeaderBox" id="txtReferenceDateFrom" value=@ViewBag.fromdate onChange="ReferenceDateOnChange(this)">
+                                <input type="text" class="form-control HeaderBox datepicker" id="txtReferenceDateFrom" value=@ViewBag.fromdate onChange="ReferenceDateOnChange(this)">
                                 @*@Html.EditorFor(model => model.fromDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "fromDate" } })
                                 @Html.ValidationMessageFor(model => model.fromDate, "", new { @class = "text-danger" })*@
                             </div>
@@ -90,7 +90,7 @@
                                 @*@Html.LabelFor(model => model.toDate, htmlAttributes: new { @class = "control-label" })*@
                             </div>
                             <div class="col-md-6">
-                                <input type="date" class="form-control HeaderBox" id="txtReferenceDateTo" value=@ViewBag.todate onChange="ReferenceDateOnChange(this)">
+                                <input type="text" class="form-control HeaderBox datepicker" id="txtReferenceDateTo" value=@ViewBag.todate onChange="ReferenceDateOnChange(this)">
                                 @*@Html.EditorFor(model => model.toDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "toDate" } })
                                 @Html.ValidationMessageFor(model => model.toDate, "", new { @class = "text-danger" })*@
                             </div>
@@ -176,7 +176,7 @@
                                     @Html.LabelFor(model => model.RefDate, htmlAttributes: new { @class = "control-label" })
                                  </div>
                                 <div class="col-md-5">
-                                        @Html.EditorFor(model => model.RefDate, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.RefDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
                                         @Html.ValidationMessageFor(model => model.RefDate, "", new { @class = "text-danger" })
                                     </div>
                                 <div class="col-md-1 mandatory"></div>

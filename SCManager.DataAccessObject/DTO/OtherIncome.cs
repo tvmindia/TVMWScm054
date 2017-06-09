@@ -14,7 +14,7 @@ namespace SCManager.DataAccessObject.DTO
         public string IncomeTypeDescription { get; set; }
         public string RefNo { get; set; }
         public string HiddenRefNo { get; set; }
-        public DateTime? RefDate { get; set; }
+        public string RefDate { get; set; }
         public String RefDateFormatted { get; set; }
         public float Amount { get; set; }
         public string PaymentMode { get; set; }

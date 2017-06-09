@@ -55,7 +55,7 @@ namespace SCManager.RepositoryServices.Services
                                     CreditNotes creditNotesObj = new CreditNotes();
 
                                     {
-                                        creditNotesObj.Date = (sdr["Date"].ToString() != "" ? DateTime.Parse(sdr["Date"].ToString()) : creditNotesObj.Date);
+                                        creditNotesObj.Date = (sdr["Date"].ToString() != "" ? DateTime.Parse(sdr["Date"].ToString()).ToString("dd-MMM-yyyy") : creditNotesObj.Date);
                                         creditNotesObj.CreditNoteNo = (sdr["CreditNoteNo"].ToString() != "" ? (sdr["CreditNoteNo"].ToString()) : creditNotesObj.CreditNoteNo);
                                         creditNotesObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : creditNotesObj.Description);
                                         creditNotesObj.Amount = (sdr["Amount"].ToString() != "" ? float.Parse(sdr["Amount"].ToString()) : creditNotesObj.Amount);
@@ -115,7 +115,7 @@ namespace SCManager.RepositoryServices.Services
                                     CreditNotes creditNotesObj = new CreditNotes();
 
                                     {
-                                        creditNotesObj.Date = (sdr["Date"].ToString() != "" ? DateTime.Parse(sdr["Date"].ToString()) : creditNotesObj.Date);
+                                        creditNotesObj.Date = (sdr["Date"].ToString() != "" ? DateTime.Parse(sdr["Date"].ToString()).ToString("dd-MMM-yyyy") : creditNotesObj.Date);
                                         creditNotesObj.CreditNoteNo = (sdr["CreditNoteNo"].ToString() != "" ? (sdr["CreditNoteNo"].ToString()) : creditNotesObj.CreditNoteNo);
                                         creditNotesObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : creditNotesObj.Description);
                                         creditNotesObj.Amount = (sdr["Amount"].ToString() != "" ? float.Parse(sdr["Amount"].ToString()) : creditNotesObj.Amount);
@@ -167,7 +167,7 @@ namespace SCManager.RepositoryServices.Services
                                     CreditNotes creditNotesObj = new CreditNotes();
 
                                     {
-                                        creditNotesObj.Date = (sdr["Date"].ToString() != "" ? DateTime.Parse(sdr["Date"].ToString()) : creditNotesObj.Date);
+                                        creditNotesObj.Date = (sdr["Date"].ToString() != "" ? DateTime.Parse(sdr["Date"].ToString()).ToString("dd-MMM-yyyy") : creditNotesObj.Date);
                                         creditNotesObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : creditNotesObj.ID);
                                         creditNotesObj.CreditNoteNo = (sdr["CreditNoteNo"].ToString() != "" ? (sdr["CreditNoteNo"].ToString()) : creditNotesObj.CreditNoteNo);
                                         creditNotesObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : creditNotesObj.Description);

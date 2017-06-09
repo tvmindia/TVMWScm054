@@ -14,7 +14,7 @@ $(document).ready(function () {
              columns: [
                { "data": "ID", "defaultContent": "<i>-</i>" },
                 { "data": "TransactionDescription", "defaultContent": "<i>-</i>" },
-               { "data": "RefDate",render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "RefDate", "defaultContent": "<i>-</i>" },
               
                { "data": "RefNo", "defaultContent": "<i>-</i>" },
                { "data": "Amount",render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },

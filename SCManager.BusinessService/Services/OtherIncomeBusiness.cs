@@ -66,7 +66,7 @@ namespace SCManager.BusinessService.Services
                 SCManagerSettings settings = new SCManagerSettings();
 
                 if (oi.RefDate != null)
-                    oi.RefDateFormatted = oi.RefDate.GetValueOrDefault().ToString(settings.dateformat);
+                    oi.RefDateFormatted = oi.RefDate;//.GetValueOrDefault().ToString(settings.dateformat);
             }
 
         }
