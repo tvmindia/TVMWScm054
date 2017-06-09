@@ -46,7 +46,7 @@ namespace SCManager.RepositoryServices.Services
                                     {
                                         _weeklysalesDetailObj.Value = (sdr["Value"].ToString() != "" ? decimal.Parse(sdr["Value"].ToString()) : _weeklysalesDetailObj.Value);
                                         _weeklysalesDetailObj.Label = (sdr["Label"].ToString() != "" ? sdr["Label"].ToString() : _weeklysalesDetailObj.Label);
-
+                                        _weeklysalesDetailObj.Amount= (sdr["Value"].ToString() != "" ? decimal.Parse(sdr["Value"].ToString()) : _weeklysalesDetailObj.Value);
                                     }
                                     weeklySalesSummaryList.Add(_weeklysalesDetailObj);
                                 }

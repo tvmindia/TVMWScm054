@@ -33,7 +33,7 @@ namespace SCManager.BusinessService.Services
                     SCManagerSettings settings = new SCManagerSettings();
 
                     if (EX.RefDate != null)
-                        EX.DateFormatted = EX.RefDate.ToString(settings.dateformat);
+                        EX.DateFormatted = EX.RefDate;//.ToString(settings.dateformat);
                 }
 
             }

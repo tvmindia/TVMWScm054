@@ -10,9 +10,9 @@ $(document).ready(function () {
              buttons: [{
                  extend: 'excel',
                  exportOptions:
-                              {
-                                  columns: [0,1, 2, 3, 4, 5, 6]
-                              }
+                {
+                    columns: [0,1, 2, 3, 4, 5, 6]
+                }
              }],
              language: {
                  search: "_INPUT_",
@@ -31,7 +31,7 @@ $(document).ready(function () {
                { "data": "Income",render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "Expense", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "Balance",render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-               { "data": "logDetails", render: function (data, type, row) { return ConvertJsonToDate(data.CreatedDate) }, "defaultContent": "<i>-</i>" }
+               { "data": "logDetails.CreatedDatestr", "defaultContent": "<i>-</i>" }
 
              ],
              columnDefs: [

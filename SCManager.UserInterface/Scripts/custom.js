@@ -52,7 +52,15 @@ $(document).ready(function () {
         autoclose: true,
         todayHighlight: true
     });
-    
+    $('input.datepicker').datepicker({
+        format: "dd-M-yyyy",//",
+        maxViewMode: 0,
+        todayBtn: "linked",
+        clearBtn: true,
+        autoclose: true,
+        todayHighlight: true
+    });
+   
     $('input,select').keydown(function (e) {
         var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
         if (key == 13) {

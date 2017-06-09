@@ -13,7 +13,7 @@ namespace SCManager.DataAccessObject.DTO
         public string EntryNo { get; set; }
         public string ExpenseTypeCode { get; set; }
         public  string RefNo	{ get; set; }
-        public DateTime RefDate { get; set; }
+        public string RefDate { get; set; }
         public Guid EmpID { get; set; }
         public string PaymentMode { get; set; }
         public decimal Amount { get; set; }

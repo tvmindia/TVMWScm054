@@ -19,9 +19,9 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Payment Ref. No.")]
         public string RefNo { get; set; }
 
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
+        [Required(ErrorMessage = "Must be date")]
         [Display(Name = "Date")]
-        public DateTime RefDate { get; set; }
+        public string RefDate { get; set; }
 
         [Display(Name = "Mode of Payment")]
         [Required(ErrorMessage = "Please Select Mode of Payment")]
@@ -42,13 +42,9 @@ namespace SCManager.UserInterface.Models
         public string Description { get; set; }
 
         [Display(Name = "From Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        public DateTime? fromDate { get; set; }
+        public string fromDate { get; set; }
         [Display(Name = "To Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        public DateTime? toDate { get; set; }
+        public string toDate { get; set; }
         [Display(Name = "Show All Expenses")]
         public bool showAllYN { get; set; }
 

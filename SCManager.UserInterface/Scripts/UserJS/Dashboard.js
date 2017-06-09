@@ -2,14 +2,18 @@
 
 $(document).ready(function () {
     //---------------------------------bar chart weekly summary -------------------------
+    debugger;
     var chartjsData = [];
     var labels = [];
+    var Amount = [];
     var BarGraphData = GetWeeklySalesDetails()
     for (var i = 0; i < BarGraphData.length; i++) {
-        labels.push(BarGraphData[i].Label);
+        labels.push(BarGraphData[i].Label);//+ "||" + BarGraphData[i].Amountstr);
         chartjsData.push(BarGraphData[i].Value);
+        Amount.push(BarGraphData[i].Amountstr);
     }
-    var data = {
+    var data = 
+        {
         labels: labels,
         datasets: [
 
@@ -19,21 +23,26 @@ $(document).ready(function () {
                 pointColor: "rgba(151,187,205,1)",
                 pointStrokeColor: "#fff",
                 data: chartjsData
+
             }
-        ]
+        ],
+      
     }
 
     var options = {
+        
         animation: true,
+        tooltipTemplate: function (V) {
+            debugger;
+            return V.label + ":: ₹ " + V.value * 1000
+        },
         tooltipFillColor: "rgba(255,255,255,.89)",
         tooltipFontColor: "rgba(1,1,1,1)",
         tooltipCaretSize: 0,
         tooltipFontSize: 14,
-        tooltipFontStyle: "thick",
-        
+        tooltipFontStyle: "thick",      
+       
     };
-
-
     //Get the context of the canvas element we want to select
     var c = $('#myChart');
     var ct = c.get(0).getContext('2d');
@@ -137,4 +146,9 @@ function getDonutAmount(l, v) {
     }
     return l + ' ' + v + '%';
 
+}
+function getTooltipstr(l,v)
+{
+    debugger;
+    return l +":"+ v;
 }
