@@ -115,6 +115,7 @@ namespace SCManager.RepositoryServices.Services
                                         _stockLedgerObj.GroupCode= (sdr["GroupCode"].ToString() != "" ? (sdr["GroupCode"].ToString()) : _stockLedgerObj.GroupCode);
                                         _stockLedgerObj.logDetails = new LogDetails();
                                         _stockLedgerObj.logDetails.CreatedDate = (sdr["CreatedDate"].ToString() != "" ? (DateTime.Parse(sdr["CreatedDate"].ToString())) : _stockLedgerObj.logDetails.CreatedDate);
+                                        _stockLedgerObj.logDetails.CreatedDatestr= (sdr["CreatedDate"].ToString() != "" ? (DateTime.Parse(sdr["CreatedDate"].ToString())).ToString("dd-MMM-yyyy") : _stockLedgerObj.logDetails.CreatedDatestr);
                                     }
                                     stockLedgerList.Add(_stockLedgerObj);
                                 }
@@ -167,6 +168,7 @@ namespace SCManager.RepositoryServices.Services
                                         _incomeExpense.Balance = (sdr["Balance"].ToString() != "" ? decimal.Parse(sdr["Balance"].ToString()) : _incomeExpense.Balance);
                                         _incomeExpense.logDetails = new LogDetails();
                                         _incomeExpense.logDetails.CreatedDate = (sdr["CreatedDate"].ToString() != "" ? (DateTime.Parse(sdr["CreatedDate"].ToString())) : _incomeExpense.logDetails.CreatedDate);
+                                        _incomeExpense.logDetails.CreatedDatestr= (sdr["CreatedDate"].ToString() != "" ? (DateTime.Parse(sdr["CreatedDate"].ToString())).ToString("dd-MMM-yyyy") : _incomeExpense.logDetails.CreatedDatestr);
                                     }
                                     incomeexpenseList.Add(_incomeExpense);
                                 }

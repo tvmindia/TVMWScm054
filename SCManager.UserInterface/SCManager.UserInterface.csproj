@@ -394,6 +394,7 @@
     <Content Include="Content\images\add.png" />
     <Content Include="Content\images\back.png" />
     <Content Include="Content\images\calculate.png" />
+    <Content Include="Content\images\calendar.png" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\employees.png" />
     <Content Include="Content\images\favicon.ico" />

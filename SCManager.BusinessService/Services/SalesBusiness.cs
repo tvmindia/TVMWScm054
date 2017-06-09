@@ -12,9 +12,11 @@ namespace SCManager.BusinessService.Services
     public class SalesBusiness: ISalesBusiness
     {
         ISalesRepository _salesRepository;
-        public SalesBusiness(ISalesRepository salesRepository)
+        ICommonBusiness _commonBusiness;
+        public SalesBusiness(ISalesRepository salesRepository, ICommonBusiness commonBusiness)
         {
             _salesRepository = salesRepository;
+            _commonBusiness = commonBusiness;
         }
         public List<SalesGraph> GetWeeklySalesDetails(UA UA)
         {
@@ -30,6 +32,7 @@ namespace SCManager.BusinessService.Services
                         int weekOfMonth = GenerateWeekNumber(dt) - GenerateWeekNumber(dt.AddDays(1 - dt.Day)) + 1;
                         string Month = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dt.Month);
                         i.Label = Month + " Wk " + weekOfMonth;
+                        i.Amountstr= _commonBusiness.ConvertCurrency(i.Amount);
                     }
                 }
 
