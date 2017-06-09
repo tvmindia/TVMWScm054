@@ -134,6 +134,53 @@ namespace SCManager.RepositoryServices.Services
             return AssignBillBooklist;
         }
         #endregion GeBillBookByID
+             
+
+        #region GetMissingSerials
+        public DataSet GetMissingSerials(string seriesStart, string seriesEnd,string BillBookType,UA UA)
+        {
+           
+            DataSet ds = null;
+            SqlDataAdapter sda = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }                 
+                      
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        if(! string.IsNullOrEmpty(seriesStart))
+                        {
+                            cmd.Parameters.Add("@start", SqlDbType.Int).Value = int.Parse(seriesStart);
+                        }
+                       if(! string.IsNullOrEmpty(seriesEnd))
+                        {
+                            cmd.Parameters.Add("@end", SqlDbType.Int).Value = int.Parse(seriesEnd);
+                        }
+                        
+                        cmd.Parameters.Add("@BillBookType", SqlDbType.NVarChar, 15).Value = BillBookType;
+                        cmd.CommandText = "[GetMissingSerials]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        sda = new SqlDataAdapter();
+                        sda.SelectCommand = cmd;
+                        ds = new DataSet();
+                        sda.Fill(ds);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ds;
+        }
+        #endregion GetMissingSerials
 
         #region InsertBillBook
         public object InsertBillBook(AssignBillBook assignBillBook)
@@ -276,5 +323,49 @@ namespace SCManager.RepositoryServices.Services
             return outParameter.Value.ToString();
         }
         #endregion DeleteBillBook
+
+        #region BillBookRangeValidation
+        public string BillBookRangeValidation(string seriesStart,string seriesEnd,string BillNo,string BillBookType, UA UA)
+        {
+            SqlParameter outParameter = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        if(! string.IsNullOrEmpty(seriesStart))
+                        {
+                            cmd.Parameters.Add("@start", SqlDbType.Int).Value = int.Parse(seriesStart);
+                        }
+                        if(! string.IsNullOrEmpty(seriesEnd))
+                        {
+                            cmd.Parameters.Add("@end", SqlDbType.Int).Value = int.Parse(seriesEnd);
+                        }
+                                             
+                        cmd.Parameters.Add("@BookNo", SqlDbType.NVarChar, 50).Value = BillNo;
+                        cmd.Parameters.Add("@BillBookType", SqlDbType.NVarChar, 15).Value = BillBookType;
+                        cmd.CommandText = "[BillBookRangeValidation]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
+                        outParameter.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return outParameter.Value.ToString();
+        }
+        #endregion BillBookRangeValidation
     }
 }

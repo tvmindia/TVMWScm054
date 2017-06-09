@@ -89,7 +89,18 @@ namespace SCManager.DataAccessObject.DTO
         {
             get { return "No items"; }
         }
-
+        public string SeriesStartDuplication
+        {
+            get { return "Series Start Already Exists"; }
+        }
+        public string SeriesEndDuplication
+        {
+            get { return "Series End Already Exists"; }
+        }
+        public string SeriesStartAndEndDuplication
+        {
+            get { return "Series start and End Already Exists"; }
+        }
         public ConstMessage GetMessage(string MsgCode) {
             ConstMessage result=new ConstMessage(MsgCode,"","ERROR") ;
           

@@ -3,6 +3,7 @@ using SCManager.DataAccessObject.DTO;
 using SCManager.RepositoryServices.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -29,12 +30,33 @@ namespace SCManager.BusinessService.Services
             assignBillBookList = _iAssignBillBookRepository.GeBillBookByID(UA, ID);
             return assignBillBookList;
         }
+        public DataSet GetMissingSerials(string seriesStart, string seriesEnd, string BillBookType, UA UA)
+        {
+            DataSet ds = new DataSet();
+            ds = _iAssignBillBookRepository.GetMissingSerials(seriesStart,seriesEnd,BillBookType,UA);
+            return ds;
+        }
         public string DeleteBillBook(string ID, UA ua)
         {
             string status = null;
             try
             {
                 status = _iAssignBillBookRepository.DeleteBillBook(ID, ua);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return status;
+        }
+
+
+        public string BillBookRangeValidation(string seriesStart, string seriesEnd,string BillNo, string BillBookType, UA UA)
+        {
+            string status = null;
+            try
+            {
+                status = _iAssignBillBookRepository.BillBookRangeValidation(seriesStart,seriesEnd,BillNo,BillBookType, UA);
             }
             catch (Exception ex)
             {

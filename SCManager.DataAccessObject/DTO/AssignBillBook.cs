@@ -18,6 +18,7 @@ namespace SCManager.DataAccessObject.DTO
         public string Remarks { get; set; }
         public string Technician { get; set; }
         public string BillBookType { get; set; }
+        public string MissingSerials { get; set; }
         public LogDetails logDetails { get; set; }
     }
 }
