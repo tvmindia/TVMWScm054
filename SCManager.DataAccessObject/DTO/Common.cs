@@ -13,6 +13,7 @@ namespace SCManager.DataAccessObject.DTO
     {
         public string CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }
+        public string CreatedDatestr { get; set; }
         public string UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
 
@@ -89,7 +90,18 @@ namespace SCManager.DataAccessObject.DTO
         {
             get { return "No items"; }
         }
-
+        public string SeriesStartDuplication
+        {
+            get { return "Series Start Already Exists"; }
+        }
+        public string SeriesEndDuplication
+        {
+            get { return "Series End Already Exists"; }
+        }
+        public string SeriesStartAndEndDuplication
+        {
+            get { return "Series start and End Already Exists"; }
+        }
         public ConstMessage GetMessage(string MsgCode) {
             ConstMessage result=new ConstMessage(MsgCode,"","ERROR") ;
           
@@ -142,6 +154,8 @@ namespace SCManager.DataAccessObject.DTO
     {
         public string Label { get; set; }
         public decimal Value { get; set; }
+        public decimal Amount { get; set; }
+        public string Amountstr { get; set; }
     }
 
 }

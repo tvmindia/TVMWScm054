@@ -6,6 +6,7 @@ using SCManager.UserInterface.CustomAttributes;
 using SCManager.UserInterface.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -85,6 +86,18 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion GeBillBookByID
 
+        #region GetMissingSerials
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetMissingSerials(string seriesStart, string seriesEnd, string BillBookType)
+        {
+            UA ua = new UA();
+            DataSet ds =(_iAssignBillBookBusiness.GetMissingSerials(seriesStart,seriesEnd,BillBookType,ua));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = ds });
+
+        }
+        #endregion GetMissingSerials
+
         #region DeleteBillBook
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
@@ -128,6 +141,52 @@ namespace SCManager.UserInterface.Controllers
 
         }
         #endregion DeleteBillBook
+
+        #region BillBookRangeValidation
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string BillBookRangeValidation(string seriesStart, string seriesEnd,string BillNo, string BillBookType)
+        {
+            string status = null;
+            string msg = null;
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    UA ua = new UA();
+                    
+                        status = _iAssignBillBookBusiness.BillBookRangeValidation(seriesStart,seriesEnd, BillNo,BillBookType, ua);
+                    
+                    switch (status)
+                    {
+                        case "0":
+                            msg = c.SeriesStartDuplication;
+                            break;
+                        case "1":
+                            msg = c.SeriesEndDuplication;
+                            break;
+                        case "2":
+                            msg = c.SeriesStartAndEndDuplication;
+                            break;
+                        case "3":
+                            msg = "3";
+                            break;
+                    }
+                    return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message = msg });
+                }
+                catch (Exception ex)
+                {
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                }
+            }
+            else
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "Please Check the values" });
+            }
+
+        }
+        #endregion BillBookRangeValidation
 
         #region InsertUpdateBillBook
         [HttpPost]
@@ -250,6 +309,30 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.deletebtn.Title = "Delete Bill Book";
                     ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new Bill Book";
                     ToolboxViewModelObj.deletebtn.Event = "";
+
+                    ToolboxViewModelObj.resetbtn.Visible = true;
+                    ToolboxViewModelObj.resetbtn.Text = "Reset";
+                    ToolboxViewModelObj.resetbtn.Title = "Reset";
+                    ToolboxViewModelObj.resetbtn.Event = "Reset();";
+
+                    break;
+                case "Closed":
+                    ToolboxViewModelObj.backbtn.Visible = true;
+                    ToolboxViewModelObj.backbtn.Text = "Back";
+                    ToolboxViewModelObj.backbtn.Title = "Back to list";
+                    ToolboxViewModelObj.backbtn.Event = "$('#ListTab').trigger('click');";
+
+                    ToolboxViewModelObj.addbtn.Visible = true;
+                    ToolboxViewModelObj.addbtn.Text = "New";
+                    ToolboxViewModelObj.addbtn.Title = "Add New Bill Book";
+                    ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
+
+
+                    ToolboxViewModelObj.savebtn.Visible = true;
+                    ToolboxViewModelObj.savebtn.Text = "Save";
+                    ToolboxViewModelObj.savebtn.Title = "Save Bill Book";
+                    ToolboxViewModelObj.savebtn.Event = "save();";
+                  
 
                     ToolboxViewModelObj.resetbtn.Visible = true;
                     ToolboxViewModelObj.resetbtn.Text = "Reset";

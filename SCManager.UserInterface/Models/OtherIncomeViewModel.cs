@@ -18,9 +18,8 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Reference No.")]
         public string RefNo { get; set; }
         [Display(Name = "Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        public DateTime RefDate { get; set; }
+        [Required(ErrorMessage = "Must be a date")]
+        public string RefDate { get; set; }
         [Display(Name = "Amount (₹)")]
         public float Amount { get; set; }
         [Display(Name = "Mode Of Payment")]
@@ -29,13 +28,9 @@ namespace SCManager.UserInterface.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Display(Name = "From Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        public DateTime? fromDate { get; set; }
+        public string fromDate { get; set; }
         [Display(Name = "To Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        public DateTime? toDate { get; set; }
+        public string toDate { get; set; }
         [Display(Name = "Show All Entries")]
         public bool showAllYN { get; set; }
         public string HiddenRefNo { get; set; }

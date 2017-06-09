@@ -53,7 +53,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ICRBillEntrylistObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _ICRBillEntrylistObj.ID);
                                         _ICRBillEntrylistObj.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _ICRBillEntrylistObj.SCCode);
                                         _ICRBillEntrylistObj.ICRNo = (sdr["ICRNo"].ToString() != "" ? (sdr["ICRNo"].ToString()) : _ICRBillEntrylistObj.ICRNo);
-                                        _ICRBillEntrylistObj.ICRDate = (sdr["ICRDate"].ToString() != "" ? DateTime.Parse(sdr["ICRDate"].ToString()) : _ICRBillEntrylistObj.ICRDate);
+                                        _ICRBillEntrylistObj.ICRDate = (sdr["ICRDate"].ToString() != "" ? DateTime.Parse(sdr["ICRDate"].ToString()).ToString("dd-MMM-yyyy") : _ICRBillEntrylistObj.ICRDate);
                                         _ICRBillEntrylistObj.ModelNo = (sdr["ModelNo"].ToString() != "" ? (sdr["ModelNo"].ToString()) : _ICRBillEntrylistObj.ModelNo);
                                         _ICRBillEntrylistObj.SerialNo = (sdr["SerialNo"].ToString() != "" ? (sdr["SerialNo"].ToString()) : _ICRBillEntrylistObj.SerialNo);
                                         _ICRBillEntrylistObj.STAmount = (sdr["STAmount"].ToString() != "" ?decimal.Parse(sdr["STAmount"].ToString()) : _ICRBillEntrylistObj.STAmount);
@@ -64,8 +64,8 @@ namespace SCManager.RepositoryServices.Services
                                         _ICRBillEntrylistObj.CustomerContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : _ICRBillEntrylistObj.CustomerContactNo);
                                         _ICRBillEntrylistObj.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : _ICRBillEntrylistObj.CustomerLocation);
                                         _ICRBillEntrylistObj.Technician = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : _ICRBillEntrylistObj.Technician);
-                                        _ICRBillEntrylistObj.AMCValidFromDate = (sdr["AMCValidFromDate"].ToString() != "" ? DateTime.Parse(sdr["AMCValidFromDate"].ToString()) : _ICRBillEntrylistObj.AMCValidFromDate);
-                                        _ICRBillEntrylistObj.AMCValidToDate = (sdr["AMCValidToDate"].ToString() != "" ? DateTime.Parse(sdr["AMCValidToDate"].ToString()) : _ICRBillEntrylistObj.AMCValidToDate);
+                                        _ICRBillEntrylistObj.AMCValidFromDate = (sdr["AMCValidFromDate"].ToString() != "" ? DateTime.Parse(sdr["AMCValidFromDate"].ToString()).ToString("dd-MMM-yyyy") : _ICRBillEntrylistObj.AMCValidFromDate);
+                                        _ICRBillEntrylistObj.AMCValidToDate = (sdr["AMCValidToDate"].ToString() != "" ? DateTime.Parse(sdr["AMCValidToDate"].ToString()).ToString("dd-MMM-yyyy") : _ICRBillEntrylistObj.AMCValidToDate);
                                         _ICRBillEntrylistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _ICRBillEntrylistObj.Remarks);
                                         _ICRBillEntrylistObj.AMCNO = (sdr["AMCNO"].ToString() != "" ? (sdr["AMCNO"].ToString()) : _ICRBillEntrylistObj.AMCNO);
                                     }
@@ -318,7 +318,7 @@ namespace SCManager.RepositoryServices.Services
                                     {
                                         _ICRBillEntryHeaderObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _ICRBillEntryHeaderObj.ID);
                                         _ICRBillEntryHeaderObj.EmpID = (sdr["EmpID"].ToString() != "" ? Guid.Parse(sdr["EmpID"].ToString()) : _ICRBillEntryHeaderObj.EmpID);
-                                        _ICRBillEntryHeaderObj.ICRDate = (sdr["ICRDate"].ToString() != "" ? DateTime.Parse(sdr["ICRDate"].ToString()) : _ICRBillEntryHeaderObj.ICRDate);
+                                        _ICRBillEntryHeaderObj.ICRDate = (sdr["ICRDate"].ToString() != "" ? DateTime.Parse(sdr["ICRDate"].ToString()).ToString("dd-MMM-yyyy") : _ICRBillEntryHeaderObj.ICRDate);
                                         _ICRBillEntryHeaderObj.ICRNo = (sdr["ICRNo"].ToString() != "" ? (sdr["ICRNo"].ToString()) : _ICRBillEntryHeaderObj.ICRNo);
                                         _ICRBillEntryHeaderObj.JobNo = (sdr["JobNo"].ToString() != "" ? (sdr["JobNo"].ToString()) : _ICRBillEntryHeaderObj.JobNo);
                                         _ICRBillEntryHeaderObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : _ICRBillEntryHeaderObj.CustomerName);
@@ -329,8 +329,8 @@ namespace SCManager.RepositoryServices.Services
                                         _ICRBillEntryHeaderObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _ICRBillEntryHeaderObj.Remarks);
                                         _ICRBillEntryHeaderObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : _ICRBillEntryHeaderObj.Discount);
                                         _ICRBillEntryHeaderObj.STAmount = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : _ICRBillEntryHeaderObj.STAmount);
-                                        _ICRBillEntryHeaderObj.AMCValidFromDate = (sdr["AMCValidFromDate"].ToString() != "" ? DateTime.Parse(sdr["AMCValidFromDate"].ToString()) : _ICRBillEntryHeaderObj.AMCValidFromDate);
-                                        _ICRBillEntryHeaderObj.AMCValidToDate = (sdr["AMCValidToDate"].ToString() != "" ? DateTime.Parse(sdr["AMCValidToDate"].ToString()) : _ICRBillEntryHeaderObj.AMCValidToDate);
+                                        _ICRBillEntryHeaderObj.AMCValidFromDate = (sdr["AMCValidFromDate"].ToString() != "" ? DateTime.Parse(sdr["AMCValidFromDate"].ToString()).ToString("dd-MMM-yyyy") : _ICRBillEntryHeaderObj.AMCValidFromDate);
+                                        _ICRBillEntryHeaderObj.AMCValidToDate = (sdr["AMCValidToDate"].ToString() != "" ? DateTime.Parse(sdr["AMCValidToDate"].ToString()).ToString("dd-MMM-yyyy") : _ICRBillEntryHeaderObj.AMCValidToDate);
                                         _ICRBillEntryHeaderObj.TotalServiceTaxAmt = (sdr["TotalServiceTaxAmount"].ToString() != "" ? decimal.Parse(sdr["TotalServiceTaxAmount"].ToString()) : _ICRBillEntryHeaderObj.TotalServiceTaxAmt);
                                         _ICRBillEntryHeaderObj.ModelNo = (sdr["ModelNo"].ToString() != "" ? (sdr["ModelNo"].ToString()) : _ICRBillEntryHeaderObj.ModelNo);
                                         _ICRBillEntryHeaderObj.SerialNo = (sdr["SerialNo"].ToString() != "" ? (sdr["SerialNo"].ToString()) : _ICRBillEntryHeaderObj.SerialNo);

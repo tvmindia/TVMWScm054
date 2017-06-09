@@ -33,7 +33,7 @@ $(document).ready(function () {
                { "data": "RefNo", "defaultContent": "<i>-</i>" },
                { "data": "Qty", "defaultContent": "<i>-</i>" },
                { "data": "Location", "defaultContent": "<i>-</i>" },
-               { "data": "logDetails", render: function (data, type, row) { return ConvertJsonToDate(data.CreatedDate) }, "defaultContent": "<i>-</i>" }
+               { "data": "logDetails.CreatedDatestr", "defaultContent": "<i>-</i>" }
 
              ],
              columnDefs: [
@@ -72,6 +72,7 @@ $(document).ready(function () {
 });
 function GetAllStockLedger() {
     try {
+        debugger;
         var frdate = $("#fromdate").val();
         var todate = $("#todate").val();
         var data = {};

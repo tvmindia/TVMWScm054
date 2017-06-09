@@ -52,7 +52,7 @@ namespace SCManager.RepositoryServices.Services
                                     {
                                         _OfficeBillEntrylistObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _OfficeBillEntrylistObj.ID);                                      
                                         _OfficeBillEntrylistObj.BillNo = (sdr["BillNo"].ToString() != "" ? (sdr["BillNo"].ToString()) : _OfficeBillEntrylistObj.BillNo);
-                                        _OfficeBillEntrylistObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()) : _OfficeBillEntrylistObj.BillDate);                                      
+                                        _OfficeBillEntrylistObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()).ToString("dd-MMM-yyyy") : _OfficeBillEntrylistObj.BillDate);                                      
                                         _OfficeBillEntrylistObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : _OfficeBillEntrylistObj.Discount);
                                         _OfficeBillEntrylistObj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : _OfficeBillEntrylistObj.VATAmount);
                                         _OfficeBillEntrylistObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : _OfficeBillEntrylistObj.CustomerName);
@@ -295,7 +295,7 @@ namespace SCManager.RepositoryServices.Services
                                     OfficeBillEntry _OfficeBillEntryHeaderObj = new OfficeBillEntry();
                                     {
                                         _OfficeBillEntryHeaderObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _OfficeBillEntryHeaderObj.ID);                                       
-                                        _OfficeBillEntryHeaderObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()) : _OfficeBillEntryHeaderObj.BillDate);
+                                        _OfficeBillEntryHeaderObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()).ToString("dd-MMM-yyyy") : _OfficeBillEntryHeaderObj.BillDate);
                                         _OfficeBillEntryHeaderObj.BillNo = (sdr["BillNo"].ToString() != "" ? (sdr["BillNo"].ToString()) : _OfficeBillEntryHeaderObj.BillNo);                                       
                                         _OfficeBillEntryHeaderObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : _OfficeBillEntryHeaderObj.CustomerName);
                                         _OfficeBillEntryHeaderObj.CustomerContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : _OfficeBillEntryHeaderObj.CustomerContactNo);

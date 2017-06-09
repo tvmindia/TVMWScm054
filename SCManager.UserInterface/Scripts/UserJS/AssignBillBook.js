@@ -1,5 +1,6 @@
 ﻿var DataTables = {};
 var EmptyGuid = "00000000-0000-0000-0000-000000000000";
+var seriesTyping = 0;
 
 //---------------------------------------Docuement Ready--------------------------------------------------//
 
@@ -70,12 +71,131 @@ function ResetForm() {
     validator.resetForm();
 }
 
+function SeriesChange()
+{
+    debugger;
+    seriesTyping = 1;
+}
+
+function SerialStartandEndValidation()
+{
+    debugger;
+    var seriesStart = $("#SeriesStart").val();
+    var seriesEnd = $("#SeriesEnd").val();
+    var LastUsed = $("#LastUsed").val();
+    if(seriesEnd!="" && seriesEnd!="")
+    {
+        seriesStart = parseInt(seriesStart);
+        seriesEnd = parseInt(seriesEnd);
+        if(seriesStart>seriesEnd)
+        {
+            notyAlert('error', "Series End Should Be Greater Than Series Start");
+            $("#SeriesEnd").css('border-color', 'red');
+            return false;
+        }
+        else
+        {
+            $("#SeriesEnd").css('border-color', '');
+            return true;
+        }
+    }
+}
+
+
+function SerialStartandEndRangeValidation(seriesStart,seriesEnd)
+{
+    debugger;
+    try {
+       
+        if (seriesTyping == 1)
+        {
+            var BillNo = $("#BillNo").val();
+            var BillBookType=$("#BillBookType").val();
+            var data = { "SeriesStart": seriesStart, "SeriesEnd": seriesEnd,"BillNo":BillNo,"BillBookType":BillBookType };
+            var ds = {};
+            ds = GetDataFromServer("AssignBillBook/BillBookRangeValidation/", data);
+            if (ds != '') {
+                ds = JSON.parse(ds);
+            }
+            if (ds.Result == "OK") {
+                if (ds.Message == "3") {
+                    return true;
+                }
+                else {
+                    notyAlert('error', ds.Message);
+                    return false;
+                }
+
+            }
+            if (ds.Result == "ERROR") {
+                notyAlert('error', ds.Message);
+                return false;
+            }
+        }
+        else
+        {
+            return true;
+        }
+                   
+
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+        return 0;
+    }
+}
+
+function GetMissingSerials(seriesStart,seriesEnd,BillBookType)
+{
+    try {
+
+        var data = {"SeriesStart": seriesStart,"SeriesEnd":seriesEnd,"BillBookType":BillBookType};
+        var ds = {};
+        ds = GetDataFromServer("AssignBillBook/GetMissingSerials/", data);
+
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+
+
+
 //------------------------------- Bill Book Save-----------------------------//
 function save() {
     debugger;
     try
     {
-        $("#btnSave").trigger('click');
+        var seriesStart = $("#SeriesStart").val();
+        var seriesEnd = $("#SeriesEnd").val();
+        var LastUsed = $("#LastUsed").val();
+        if (seriesStart != "" && seriesEnd != "")
+        {
+            if (SerialStartandEndValidation() == true) {
+                if (SerialStartandEndRangeValidation(seriesStart, LastUsed) == true)
+                {
+                    $("#btnSave").trigger('click');
+                }
+                
+            }
+        }
+        else
+        {
+            $("#btnSave").trigger('click');
+        }
+        
+        
     }
     catch (e)
     {
@@ -89,7 +209,14 @@ function BindBillBookFields(Records)
 {
     debugger;
     try {
-        ChangeButtonPatchView('AssignBillBook', 'btnPatchAssignBillBookSettab', 'Edit');
+        if (Records[0].Status == "True")
+        {
+            ChangeButtonPatchView('AssignBillBook', 'btnPatchAssignBillBookSettab', 'Edit');
+        }
+        else
+        {
+            ChangeButtonPatchView('AssignBillBook', 'btnPatchAssignBillBookSettab', 'Closed');
+        }
         $("#ID").val(Records[0].ID);
     $("#BillNo").val(Records[0].BillNo);
     $("#SeriesStart").val(Records[0].SeriesStart);
@@ -99,6 +226,21 @@ function BindBillBookFields(Records)
     $("#Status").val(Records[0].Status);
     $("#BillBookType").val(Records[0].BillBookType);
     $("#Remarks").val(Records[0].Remarks);
+    $(".masterinfoDet").html('');
+    var result = GetMissingSerials(Records[0].SeriesStart, Records[0].LastUsed, Records[0].BillBookType);
+    if (result != "" && result != undefined) {
+        if (result.Table.length > 0) {
+            $(".masterinfoDet").append('<div>Book Series ' + Records[0].SeriesStart + " - " + Records[0].SeriesEnd + '</div>');
+            for (var i = 0; i < result.Table.length; i++) {
+                $(".masterinfoDet").append('<label for="name" style="font-weight:normal;">' + result.Table[i].id + '</label>');
+            }
+        }
+        else {
+            $(".masterinfoDet").append('<div>Book Series ' + Records[0].SeriesStart + " - " + Records[0].SeriesEnd + '</div><br>');
+            $(".masterinfoDet").append('<label for="name" style="font-weight:normal;">No Missing Numbers!</label>');
+        }
+    }
+    
     } catch (e) {
         notyAlert('error', e.message);
     }
@@ -136,9 +278,19 @@ function SaveSuccess(data, status) {
     switch (JsonResult.Result) {
         case "OK":
             if ($("#ID").val() == EmptyGuid) {
+                if (JsonResult.Records.Status == "True")
+                {
+                    ChangeButtonPatchView('AssignBillBook', 'btnPatchAssignBillBookSettab', 'Edit');
+                }
+                else
+                {
+                    ChangeButtonPatchView('AssignBillBook', 'btnPatchAssignBillBookSettab', 'Closed');
+                }
+               
                 fillBillBook(JsonResult.Records.ID);
             }
             else {
+                ChangeButtonPatchView('AssignBillBook', 'btnPatchAssignBillBookSettab', 'Edit');
                 fillBillBook($("#ID").val());
             }
 
@@ -193,11 +345,41 @@ function BillBookDelete()
 function Edit(currentObj) {
     debugger;
     var rowData = DataTables.BillListTable.row($(currentObj).parents('tr')).data();
-    if ((rowData != null) && (rowData.ID != null)) {
+    if ((rowData != null) && (rowData.ID != null)) {       
         $('#AddTab').trigger('click');
         if ((rowData != null) && (rowData.ID != null)) {
             $("#ID").val(rowData.ID);
             fillBillBook(rowData.ID);
+            if (rowData.Status == "False") {
+                ChangeButtonPatchView('AssignBillBook', 'btnPatchAssignBillBookSettab', 'Closed');
+            }
+            else {
+                ChangeButtonPatchView('AssignBillBook', 'btnPatchAssignBillBookSettab', 'Edit');
+            }
+            debugger;
+            $(".masterinfoDet").html('');
+            var result = GetMissingSerials(rowData.SeriesStart, rowData.LastUsed, rowData.BillBookType);
+            if(result!="" && result!=undefined)
+            {
+                if (result.Table.length > 0)
+                {
+                    $(".masterinfoDet").append('<div>Book Series ' + rowData.SeriesStart + " - " + rowData.SeriesEnd + '</div><br>');
+                    for (var i = 0; i < result.Table.length; i++) {
+                        if (i != result.Table.length - 1) {
+                            $(".masterinfoDet").append('<label for="name" style="font-weight:normal;">' + result.Table[i].id + '</label>' + ',');
+                        }
+                        else {
+                            $(".masterinfoDet").append('<label for="name" style="font-weight:normal;">' + result.Table[i].id + '</label>');
+                        }
+
+                    }
+                }
+                else {
+                    $(".masterinfoDet").append('<div>Book Series ' + rowData.SeriesStart + " - " + rowData.SeriesEnd + '</div><br>');
+                    $(".masterinfoDet").append('<label for="name" style="font-weight:normal;">No Missing Numbers!</label>');
+                }
+                
+            }
             
         }       
         else {
@@ -228,9 +410,12 @@ function Reset()
     $("#Status").val("");
     $("#BillBookType").val("");
     $("#Remarks").val("");
+    $("#SeriesEnd").css('border-color', '');
+    $(".masterinfoDet").html('');
     ResetForm();
     }
     else {
+        ChangeButtonPatchView('AssignBillBook', 'btnPatchAssignBillBookSettab', 'Edit');
         fillBillBook($("#ID").val());
     }
 }

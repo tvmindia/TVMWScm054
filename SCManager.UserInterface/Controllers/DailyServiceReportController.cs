@@ -217,6 +217,25 @@ namespace SCManager.UserInterface.Controllers
                 }
             }
             jobVM.ServiceTypes = selectListItem;
+
+            selectListItem = null;
+            selectListItem = new List<SelectListItem>();
+            List<EmployeesViewModel> EmpVM = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_dailyServiceBusiness.GetAllTechnicians(ua));
+            if (EmpVM != null)
+            {
+                foreach (EmployeesViewModel emp in EmpVM)
+                {
+                    selectListItem.Add(new SelectListItem
+                    {
+                        Text = emp.Name,
+                        Value = emp.ID.ToString(),
+                        Selected = false
+                    });
+                }
+            }
+            jobVM.Employees = selectListItem;
+
+
             selectListItem = null;
             selectListItem = new List<SelectListItem>();
             List<JobCallTypesViewModel> jobcalltypeListVM = Mapper.Map<List<JobCallTypes>, List<JobCallTypesViewModel>>(_dailyServiceBusiness.GetJobCallTypes(ua.SCCode));
@@ -253,23 +272,8 @@ namespace SCManager.UserInterface.Controllers
             {
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
-        }
+        } 
 
-        [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string GetAllTechnicianForServiceTypeDropDown()
-        {
-            try
-            {
-                UA ua = new UA();
-                List<EmployeesViewModel> EmpListVM = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_dailyServiceBusiness.GetAllTechnicians(ua));
-                return JsonConvert.SerializeObject(new { Result = "OK", Records = EmpListVM });
-            }
-            catch (Exception ex)
-            {
-                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
-            }
-        }
         //GetTechnicianByJobNo
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]

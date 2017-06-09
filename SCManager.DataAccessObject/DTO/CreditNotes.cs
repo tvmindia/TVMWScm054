@@ -13,9 +13,9 @@ namespace SCManager.DataAccessObject.DTO
         public float Amount { get; set; }
         public string Description { get; set; }
         public bool showAllYN { get; set; }
-        public DateTime? Date { get; set; }
-        public DateTime fromDate { get; set; }
-        public DateTime toDate { get; set; }
+        public string Date { get; set; }
+        public string fromDate { get; set; }
+        public string toDate { get; set; }
         public string HiddenCreditNoteNo { get; set; }
         public LogDetails logDetails { get; set; }
         public String DateFormatted { get; set; }

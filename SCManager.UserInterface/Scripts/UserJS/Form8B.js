@@ -164,7 +164,6 @@ function GetAllForm8B() {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            // debugger;
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -204,8 +203,6 @@ function BindForm8B(id) {
 
 function BindForm8BFields(Records) {
     try {
-
-        debugger;
         $('#HeaderID').val(Records.ID);
         $('#InvNo').val(Records.InvoiceNo);
         $('#Remarks').val(Records.Remarks);
@@ -243,10 +240,6 @@ function BindForm8BFields(Records) {
     } catch (e) {
         notyAlert('error', e.message);
     }
-
-
-
-
 }
 
 
@@ -333,7 +326,6 @@ function Form8BDetailDelete(id, rw) {
             return 1;
         }
         else {
-            debugger;
             if (EG_GridData.length != 1) {
                 EG_GridData.splice(rw - 1, 1);
                 EG_Rebind_WithData(EG_GridData, 0);
@@ -418,7 +410,6 @@ function reset() {
 
 //-----------------------------------------Reset Validation Messages--------------------------------------//
 function ResetForm() {
-    debugger;
     var validator = $("#F8").validate();
     $('#F8').find('.field-validation-error span').each(function () {
         validator.settings.success($(this));
@@ -428,7 +419,6 @@ function ResetForm() {
 
 function resetCurrent() {
     try {
-        debugger;
         var id = $('#HeaderID').val();
         BindForm8B(id);
 
@@ -529,6 +519,7 @@ function AmountSummary() {
     var vatamount = parseFloat($('#vatamount').val()) || 0;   
     var vatp = (parseFloat($('#vatpercentage').val()) || 0);
     if (vatp > 0) {
+        debugger;
         vatamount = (BATotal * vatp) / 100;
         $('#vatamount').val(roundoff(vatamount));
     }
@@ -539,19 +530,25 @@ function AmountSummary() {
 }
 
 var typingFlag = 0;
-function calculateVat() {
-    if (typingFlag == 0) {
-        setTimeout(calculateVatPercentage, 2000);//done to wait till typing over
-        typingFlag = 1;
-    }
-}
+//function calculateVat() {
+//    if (typingFlag == 0) {
+//        setTimeout(calculateVatPercentage, 2000);//done to wait till typing over
+//        typingFlag = 1;
+//    }
+//}
 function ClearVatPercent()
 {
     debugger;
+    if ($('#vatamount').val() != $('#VatAmountValue').val())
     $('#vatpercentage').val('');
     $('#discount').val($('#vatamount').val());
 }
 function calculateVatPercentage() {
+    debugger;
+    var BATotal = 0.00;
+    for (i = 0; i < EG_GridData.length; i++) {
+        BATotal = BATotal + (parseFloat(EG_GridData[i]['BasicAmount']) || 0);
+    }
     var vatp = parseFloat($('#vatpercentage').val()) || 0;
     var subtotal = parseFloat($('#subtotal').val()) || 0;
     if (vatp > 100) {
@@ -562,7 +559,8 @@ function calculateVatPercentage() {
     }
 
     $('#vatpercentage').val(vatp);
-    $('#vatamount').val(roundoff(subtotal * vatp / 100));
+    $('#vatamount').val(roundoff(BATotal * vatp / 100));
+    $('#VatAmountValue').val($('#vatamount').val());
     AmountSummary();
     typingFlag = 0;
 }

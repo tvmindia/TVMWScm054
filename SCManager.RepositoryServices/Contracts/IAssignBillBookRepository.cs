@@ -1,6 +1,7 @@
 ﻿using SCManager.DataAccessObject.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,5 +15,7 @@ namespace SCManager.RepositoryServices.Contracts
         List<AssignBillBook> GeBillBookByID(UA UA, string ID);
         object UpdateBillBook(AssignBillBook assignBillBook);
         string DeleteBillBook(string ID, UA ua);
+        string BillBookRangeValidation(string seriesStart, string seriesEnd,string BillNo, string BillBookType, UA UA);
+        DataSet GetMissingSerials(string seriesStart, string seriesEnd, string BillBookType, UA UA);
     }
 }

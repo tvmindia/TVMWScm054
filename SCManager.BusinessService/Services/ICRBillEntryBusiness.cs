@@ -140,15 +140,15 @@ namespace SCManager.BusinessService.Services
 
                 if (I.ICRDate != null)
                 {
-                    I.ICRDateFormatted = I.ICRDate.GetValueOrDefault().ToString(settings.dateformat);
+                    I.ICRDateFormatted = I.ICRDate;//.GetValueOrDefault().ToString(settings.dateformat);
                 }
                 if (I.AMCValidFromDate != null)
                 {
-                    I.AMCFromDateFormatted = I.AMCValidFromDate.GetValueOrDefault().ToString(settings.dateformat);
+                    I.AMCFromDateFormatted = I.AMCValidFromDate;//.GetValueOrDefault().ToString(settings.dateformat);
                 }
                 if (I.AMCValidToDate != null)
                 {
-                    I.AMCToDateFormatted = I.AMCValidToDate.GetValueOrDefault().ToString(settings.dateformat);
+                    I.AMCToDateFormatted = I.AMCValidToDate;//.GetValueOrDefault().ToString(settings.dateformat);
                 }
 
             }

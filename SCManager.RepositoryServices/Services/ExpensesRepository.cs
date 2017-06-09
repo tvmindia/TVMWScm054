@@ -193,7 +193,7 @@ namespace SCManager.RepositoryServices.Services
                                     Expenses expensesObj = new Expenses();
                                     { 
                                         expensesObj.ExpenseTypeCode = (sdr["ExpenseTypeCode"].ToString() != "" ? (sdr["ExpenseTypeCode"].ToString()) : expensesObj.ExpenseTypeCode);
-                                        expensesObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()) : expensesObj.RefDate);
+                                        expensesObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()).ToString("dd-MMM-yyyy") : expensesObj.RefDate);
                                         expensesObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : expensesObj.RefNo);
                                         expensesObj.EntryNo = (sdr["EntryNo"].ToString() != "" ? (sdr["EntryNo"].ToString()) : expensesObj.EntryNo);
                                         expensesObj.PaymentMode = (sdr["PaymentMode"].ToString() != "" ? (sdr["PaymentMode"].ToString()) : expensesObj.PaymentMode);
@@ -242,7 +242,7 @@ namespace SCManager.RepositoryServices.Services
                                 while (sdr.Read())
                                 {
                                         expensesObj.ExpenseTypeCode = (sdr["ExpenseTypeCode"].ToString() != "" ? (sdr["ExpenseTypeCode"].ToString()) : expensesObj.ExpenseTypeCode);
-                                        expensesObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()) : expensesObj.RefDate);
+                                        expensesObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()).ToString("dd-MMM-yyyy") : expensesObj.RefDate);
                                         expensesObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : expensesObj.RefNo);
                                         expensesObj.EntryNo = (sdr["EntryNo"].ToString() != "" ? (sdr["EntryNo"].ToString()) : expensesObj.EntryNo);
                                         expensesObj.PaymentMode = (sdr["PaymentMode"].ToString() != "" ? (sdr["PaymentMode"].ToString()) : expensesObj.PaymentMode);

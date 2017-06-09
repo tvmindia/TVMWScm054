@@ -32,8 +32,8 @@ namespace SCManager.UserInterface.Controllers
         {
             UA ua = new UA();
             DateTime dt = ua.CurrentDatetime();
-            ViewBag.fromdate = dt.AddDays(-30).ToString("yyyy-MM-dd");
-            ViewBag.todate = dt.ToString("yyyy-MM-dd");
+            ViewBag.fromdate = dt.AddDays(-30).ToString("dd-MMM-yyyy");
+            ViewBag.todate = dt.ToString("dd-MMM-yyyy");
             // return View();
             ExpensesViewModel expenseViewModel = null;
             try

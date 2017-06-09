@@ -10,7 +10,7 @@ namespace SCManager.DataAccessObject.DTO
         public string SCCode { get; set; }
         public Guid ID { get; set; }
         public string BillNo { get; set; }
-        public DateTime? BillDate { get; set; }
+        public string BillDate { get; set; }
         public string BillDateFormatted { get; set; }
         public Guid? EmpID { get; set; }
         public string JobNo { get; set; }

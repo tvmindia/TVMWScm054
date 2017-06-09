@@ -31,6 +31,7 @@ namespace SCManager.UserInterface.Models
         [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }
         public string Technician { get; set; }
+        public string MissingSerials { get; set; }
         public List<SelectListItem> TechniciansList { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
     }
