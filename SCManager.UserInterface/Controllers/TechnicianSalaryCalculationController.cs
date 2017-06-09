@@ -94,6 +94,21 @@ namespace SCManager.UserInterface.Controllers
                 }
         }
 
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        public string GetTechnicianJobCommissionBreakUp(string SCCode,string EmpID,string Month, string Year)
+        {
+            try
+            {
+                UA ua = new UA();
+                List<TechnicianSalaryJobBreakUpViewModel> tSVMList = Mapper.Map<List<TechnicianSalaryJobBreakUp>, List<TechnicianSalaryJobBreakUpViewModel>>(_technicianSalaryCalculationBusiness.GetTechnicianJobCommissionBreakUp(ua.SCCode,Guid.Parse(EmpID), Int16.Parse(Month),Int16.Parse(Year)));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = tSVMList });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+
         #region ButtonStyling
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]

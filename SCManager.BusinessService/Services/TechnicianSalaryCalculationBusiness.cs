@@ -18,6 +18,8 @@ namespace SCManager.BusinessService.Services
            
         }
 
+       
+
         public List<TechnicianSalary> GetTechniciansCalculatedSalary(string SCCode, string Month, string Year)
         {
             List<TechnicianSalary> technicianSalaryList = null;
@@ -42,6 +44,21 @@ namespace SCManager.BusinessService.Services
                 throw ex;
             }
             return technicianSalaryList;
+        }
+        public List<TechnicianSalaryJobBreakUp> GetTechnicianJobCommissionBreakUp(string SCCode, Guid EmpID, short? Month, short? Year)
+        {
+            List<TechnicianSalaryJobBreakUp> TechnicianSalaryJobBreakUpList = null;
+            try
+            {
+                //
+                TechnicianSalaryJobBreakUpList = _technicianSalaryCalculationRepository.GetTechnicianJobCommissionBreakUp(SCCode, EmpID, Month, Year);
+                TechnicianSalaryJobBreakUpList = TechnicianSalaryJobBreakUpList != null ? TechnicianSalaryJobBreakUpList.Select(c => { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("yyyy-MM-dd"); return c; }).ToList() : null;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return TechnicianSalaryJobBreakUpList;
         }
     }
 
