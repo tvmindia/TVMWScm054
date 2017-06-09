@@ -53,7 +53,7 @@ namespace SCManager.BusinessService.Services
                 SCManagerSettings settings = new SCManagerSettings();
 
                 if (cn.Date != null)
-                    cn.DateFormatted = cn.Date.GetValueOrDefault().ToString(settings.dateformat);
+                    cn.DateFormatted = cn.Date;//.GetValueOrDefault().ToString(settings.dateformat);
             }
 
         }

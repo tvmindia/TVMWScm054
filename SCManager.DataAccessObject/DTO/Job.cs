@@ -24,6 +24,7 @@ namespace SCManager.DataAccessObject.DTO
         public string TechnicianRemark { get; set; }
         public string RepeatEmpName { get; set; }
         public string RepeatJobNo { get; set; }
+        public string Repeat_EmpID { get; set; }
         public string CallStatusDescription { get; set; }
         public string ServiceTypeDescription { get; set; }
         public string JobCallTypeDescription { get; set; }

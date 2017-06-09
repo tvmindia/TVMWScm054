@@ -159,7 +159,7 @@ namespace SCManager.RepositoryServices.Services
                                 {
                                     ICRExpenses expensesObj = new ICRExpenses();
                                     {                                      
-                                        expensesObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()) : expensesObj.RefDate);
+                                        expensesObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()).ToString("dd-MMM-yyyy") : expensesObj.RefDate);
                                         expensesObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : expensesObj.RefNo);
                                         expensesObj.EntryNo = (sdr["EntryNo"].ToString() != "" ? (sdr["EntryNo"].ToString()) : expensesObj.EntryNo);
                                         expensesObj.PaymentMode = (sdr["PaymentMode"].ToString() != "" ? (sdr["PaymentMode"].ToString()) : expensesObj.PaymentMode);
@@ -206,7 +206,7 @@ namespace SCManager.RepositoryServices.Services
                             {
                                 while (sdr.Read())
                                 {
-                                    expensesObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()) : expensesObj.RefDate);
+                                    expensesObj.RefDate = (sdr["RefDate"].ToString() != "" ? DateTime.Parse(sdr["RefDate"].ToString()).ToString("dd-MMM-yyyy") : expensesObj.RefDate);
                                     expensesObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : expensesObj.RefNo);
                                     expensesObj.EntryNo = (sdr["EntryNo"].ToString() != "" ? (sdr["EntryNo"].ToString()) : expensesObj.EntryNo);
                                     expensesObj.PaymentMode = (sdr["PaymentMode"].ToString() != "" ? (sdr["PaymentMode"].ToString()) : expensesObj.PaymentMode);

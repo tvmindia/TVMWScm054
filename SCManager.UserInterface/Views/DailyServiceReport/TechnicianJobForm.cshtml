@@ -134,11 +134,8 @@
                                                 <div class="col-md-4">
                                                     @Html.LabelFor(model => model.TechEmpID)
                                                 </div>
-
                                                 <div class="col-md-6">
-                                                    <input type="text" id="ModelEmployee" name="txtEmployee" class="form-control" list="EmployeeList" onChange="TechnicianOnChange(this)" />
-                                                    @Html.HiddenFor(model => model.Repeat_EmpID, htmlAttributes: new { Value = "", @id = "ModelRepeat_EmpID" })
-                                                    <datalist id="EmployeeList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>
+                                                    @Html.DropDownListFor(model => model.Repeat_EmpID, Model.Employees, "--Select Technicians--", new { @class = "form-control", @style = "padding:4px 12px;" })
                                                 </div>
                                                 <div class="col-md-1 mandatory"></div>
                                             </div>

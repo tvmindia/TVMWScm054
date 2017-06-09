@@ -504,3 +504,9 @@ color: #e32;
     font-size:16px;
     font-weight:400;
 }
+ input.datepicker {
+        background-image: url('../Content/images/calendar.png');
+        background-Position: 97% center;
+        background-Repeat: no-repeat;
+        cursor: pointer;
+    }

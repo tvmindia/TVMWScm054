@@ -24,8 +24,8 @@ namespace SCManager.UserInterface.Models
         public string RefNo { get; set; }
 
         [Display(Name = "Date")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        public DateTime RefDate { get; set; }
+        [Required(ErrorMessage = "Must be date")]
+        public string RefDate { get; set; }
 
         [Display(Name = "Technician")]
         public Guid EmpID { get; set; }
@@ -47,13 +47,9 @@ namespace SCManager.UserInterface.Models
         public string Description { get; set; }
 
         [Display(Name = "From Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        public DateTime? fromDate { get; set; }
+        public string fromDate { get; set; }
         [Display(Name = "To Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        public DateTime? toDate { get; set; }
+        public string toDate { get; set; }
         [Display(Name = "Show All Expenses")]
         public bool showAllYN { get; set; }
 

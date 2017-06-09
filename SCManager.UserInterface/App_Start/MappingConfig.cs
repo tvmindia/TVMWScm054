@@ -72,6 +72,9 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<IssueToOtherSCDetailViewModel, IssueToOtherScDetail>().ReverseMap();
                 config.CreateMap<AssignBillBookViewModel, AssignBillBook>().ReverseMap();
                 config.CreateMap<TechnicianSalaryViewModel, TechnicianSalary>().ReverseMap();
+                config.CreateMap<SalesGraphViewModel, SalesGraph>().ReverseMap();
+                config.CreateMap<TechnicianSalaryJobBreakUpViewModel, TechnicianSalaryJobBreakUp>().ReverseMap();
+                
             });
         }
     }

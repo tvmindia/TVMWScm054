@@ -15,10 +15,8 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "ICR No")]
         public string ICRNo { get; set; }
         [Required(ErrorMessage = "Please select ICR date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
         [Display(Name = "ICR Date")]
-        public DateTime? ICRDate { get; set; }
+        public string ICRDate { get; set; }
         [Required(ErrorMessage = "Please Select Technician")]
         [Display(Name = "Technician")]
         public Guid? EmpID { get; set; }
@@ -36,13 +34,9 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Customer Location")]
         public string CustomerLocation { get; set; }
         [Display(Name = "AMC Valid From")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        public DateTime? AMCValidFromDate { get; set; }
+        public string AMCValidFromDate { get; set; }
         [Display(Name = "AMC Valid To")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        public DateTime? AMCValidToDate { get; set; }
+        public string AMCValidToDate { get; set; }
         [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }
         [Display(Name = "Mode Of Payment")]

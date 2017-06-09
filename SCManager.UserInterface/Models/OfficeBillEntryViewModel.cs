@@ -14,10 +14,8 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Bill No")]
         public string BillNo { get; set; }
         [Required(ErrorMessage = "Please select Bill date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
         [Display(Name = "Bill Date")]
-        public DateTime? BillDate { get; set; }
+        public string BillDate { get; set; }
         public string BillDateFormatted { get; set; }
         [Required(ErrorMessage = "Please Enter Customer Name")]
         [Display(Name = "Customer Name")]

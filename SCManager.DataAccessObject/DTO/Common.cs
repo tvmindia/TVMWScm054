@@ -13,6 +13,7 @@ namespace SCManager.DataAccessObject.DTO
     {
         public string CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }
+        public string CreatedDatestr { get; set; }
         public string UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
 
@@ -149,6 +150,12 @@ namespace SCManager.DataAccessObject.DTO
 
         }
     }
+    public class SalesGraph
+    {
+        public string Label { get; set; }
+        public decimal Value { get; set; }
+        public decimal Amount { get; set; }
+        public string Amountstr { get; set; }
+    }
 
-    
 }

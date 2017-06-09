@@ -160,8 +160,7 @@ function GetAllForm8() {
         if (ds != '') {
             ds = JSON.parse(ds);
         }
-        if (ds.Result == "OK") {
-            // debugger;
+        if (ds.Result == "OK") { 
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -200,9 +199,7 @@ function BindForm8(id) {
 }
 
 function BindForm8Fields(Records) {
-    try {
-
-        debugger;
+    try { 
         $('#HeaderID').val(Records.ID);
         $('#InvNo').val(Records.InvoiceNo);        
         $('#Remarks').val(Records.Remarks);
@@ -213,35 +210,23 @@ function BindForm8Fields(Records) {
         $('#vatamount').val(roundoff(Records.VATAmount));
         $('#discount').val(roundoff(Records.Discount));
         $('#grandtotal').val(roundoff(Records.GrandTotal));
+        $('#Total').val(roundoff(Records.GrandTotal - Records.VATAmount));
         EG_Rebind_WithData(Records.Form8Detail,1);
         $('#InvNo').attr('readonly', 'readonly');
-
         var $datepicker = $('#InvDate');      
         $datepicker.datepicker('setDate', new Date(Records.InvoiceDateFormatted));
-
         if (Records.ChallanDateFormatted != null) {
             var $datepicker = $('#CDate');           
             $datepicker.datepicker('setDate', new Date(Records.ChallanDateFormatted));
-        }
-      
+        } 
         if (Records.PODateFormatted!=null) {
             var $datepicker = $('#PODate');            
             $datepicker.datepicker('setDate', new Date(Records.PODateFormatted));
-        }
-      
-
-        
-
+        } 
     } catch (e) {
         notyAlert('error', e.message);
-    }
-   
-
-
-
+    } 
 }
-
-
 
 
 //--------------------button actions ----------------------
@@ -254,11 +239,14 @@ function List() {
     } catch (x) {
        // alert(x);
     }
-
 }
 
 function Add() {
-
+    try {
+        ResetForm()
+    }
+    catch(X)
+    {}
     showLoader();
     ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Add');
     EG_ClearTable();
@@ -268,10 +256,8 @@ function Add() {
     hideLoader();
 }
 
-function DeleteClick() {
-    
-   notyConfirm('Are you sure to delete?', 'Form8Delete()');       
-     
+function DeleteClick() {    
+   notyConfirm('Are you sure to delete?', 'Form8Delete()'); 
 }
 
 function Form8Delete() {    
@@ -293,18 +279,16 @@ function Form8Delete() {
                 return 0;
             }
             return 1;
-        }
-               
+        }               
     }
     catch (e) {
         notyAlert('error', e.message);
         return 0;
-    }
-          
+    }          
 }
 
 function Form8DetailDelete(id,rw) {
-   try {
+    try { 
         var Hid = $('#HeaderID').val();
         if (id != '' && id != null && Hid != '' && Hid != null && Hid != emptyGUID) {
             var data = { "ID": id, "HeaderID": Hid };
@@ -315,6 +299,7 @@ function Form8DetailDelete(id,rw) {
             }
             if (ds.Result == "OK") {
                 notyAlert('success', ds.Message);
+                AmountSummary()
                 BindForm8(Hid);
             }
             if (ds.Result == "ERROR") {
@@ -323,8 +308,7 @@ function Form8DetailDelete(id,rw) {
             }
             return 1;
         }
-        else {
-            debugger;
+        else { 
             if (EG_GridData.length != 1) {
                 EG_GridData.splice(rw-1,1); 
                 EG_Rebind_WithData(EG_GridData,0);
@@ -334,15 +318,13 @@ function Form8DetailDelete(id,rw) {
                 EG_Rebind();
             }
             notyAlert('success', 'Deleted Successfully');
-
+            AmountSummary();
         }
-
-               }
+    }
     catch (e) {
         notyAlert('error', e.message);
         return 0;
-}
-
+    }
 }
 
 function DeleteItem(currentObj) {
@@ -365,7 +347,6 @@ function RestForm8() {
     $datepicker.datepicker('setDate', null);
 }
 
-
 function Edit(currentObj) {
     showLoader();
     var rowData = DataTables.eventTable.row($(currentObj).parents('tr')).data();
@@ -375,16 +356,13 @@ function Edit(currentObj) {
         EG_ClearTable();
         $('#AddTab').trigger('click');
         if (BindForm8(rowData.ID)) {
-            ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Edit');
-            
+            ChangeButtonPatchView('Form8TaxInvoice', 'btnPatchAttributeSettab', 'Edit');            
         }
         else {
             $('#ListTab').trigger('click');
         }
-
     }
-    hideLoader();
-   
+    hideLoader();   
 }
 
 function save() {
@@ -402,20 +380,29 @@ function save() {
 }
 
 function reset() {
+
     EG_ClearTable();
-    EG_AddBlankRows(5)
+    EG_AddBlankRows(5);
+    $('#discount').val('');
+    $('#Total').val('');
+    $('#grandtotal').val('');
+    $('#subtotal').val('');
+}
+
+//-----------------------------------------Reset Validation Messages--------------------------------------//
+function ResetForm() { 
+    var validator = $("#F8").validate();
+    $('#F8').find('.field-validation-error span').each(function () {
+        validator.settings.success($(this));
+    });
+    validator.resetForm();
 }
 
 function resetCurrent() {
-    try {
-        debugger;
+    try { 
         var id = $('#HeaderID').val();
-        BindForm8(id);
-
-
-    } catch (e) {
-
-    }
+        BindForm8(id); 
+    } catch (e) { }
 }
 
 function SaveSuccess(data, status, xhr) {
@@ -441,17 +428,10 @@ function SaveSuccess(data, status, xhr) {
     }
 }
 
-
-
 //---------------------page related logics----------------------------------- 
 
-
-
 function getMaterials() {
-
-
     try {
-
         var data = {};
         var ds = {};
         ds = GetDataFromServer("Item/ItemsForDropdown/", data);
@@ -459,10 +439,7 @@ function getMaterials() {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-
             _Materials = ds.Records;
-
-
         }
         if (ds.Result == "ERROR") {
             alert(ds.Message);
@@ -471,17 +448,9 @@ function getMaterials() {
     catch (e) {
         notyAlert('error', e.message);
     }
-
-
-
 }
 
-
 function CalculateAmount(row) {
-
-
-
-
     //EG_GridData[row-1][Quantity] = value
     var qty = 0.00;
     var rate = 0.00;
@@ -516,37 +485,57 @@ function CalculateAmount(row) {
     for (i = 0; i < EG_GridData.length; i++) {
         total = total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
     }
-
     $('#subtotal').val(roundoff(total));
     AmountSummary();
 
 }
 
 function AmountSummary() {
+    debugger; 
+    var total = 0.00;
+    for (i = 0; i < EG_GridData.length; i++) {
+        total = total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
+    }
+    $('#subtotal').val(roundoff(total));
 
     var subtotal = parseFloat($('#subtotal').val()) || 0;
     var vatamount = parseFloat($('#vatamount').val()) || 0;
     var discount = parseFloat($('#discount').val()) || 0;
+    var total = subtotal - discount;
+    $('#Total').val(roundoff(total));
+
     var vatp = (parseFloat($('#vatpercentage').val()) || 0);
     if (vatp > 0) {
-        vatamount = (subtotal * vatp) / 100;
+        vatamount = (total * vatp) / 100;
         $('#vatamount').val(roundoff(vatamount));
     }
 
-    $('#grandtotal').val(roundoff(subtotal + vatamount - discount));
+    $('#grandtotal').val(roundoff(total + vatamount));
 }
 
 var typingFlag = 0;
-function calculateVat() {
-    if (typingFlag == 0) {
-        setTimeout(calculateVatPercentage, 2000);//done to wait till typing over
-        typingFlag = 1;
-    }
+//function calculateVat() {
+//    debugger;
+//    if (typingFlag == 0) {
+//        setTimeout(calculateVatPercentage, 2000);//done to wait till typing over
+//        typingFlag = 1;
+//    }
+//}
+
+function ClearVatPercent() {
+    debugger;
+    if ($('#vatamount').val()!= $('#VatAmountValue').val())
+    $('#vatpercentage').val('');
+    var total = parseFloat($('#Total').val()) || 0;
+    var vatamount = parseFloat($('#vatamount').val()||0);
+    var GTotal = total + vatamount;
+    $('#grandtotal').val(roundoff(GTotal));
 }
 
 function calculateVatPercentage() {
+    debugger;
     var vatp = parseFloat($('#vatpercentage').val()) || 0;
-    var subtotal = parseFloat($('#subtotal').val()) || 0;
+    var total = parseFloat($('#Total').val()) || 0;
     if (vatp > 100) {
         vatp = 100;
     }
@@ -555,7 +544,8 @@ function calculateVatPercentage() {
     }
 
     $('#vatpercentage').val(vatp);
-    $('#vatamount').val(roundoff(subtotal * vatp / 100));
+    $('#vatamount').val(roundoff(total * vatp / 100));
+    $('#VatAmountValue').val($('#vatamount').val());
     AmountSummary();
     typingFlag = 0;
 }

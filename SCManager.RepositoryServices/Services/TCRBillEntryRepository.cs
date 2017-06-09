@@ -51,7 +51,7 @@ namespace SCManager.RepositoryServices.Services
                                     TCRBillEntry _TCRBillEntrylistObj = new TCRBillEntry();
                                     {
                                         _TCRBillEntrylistObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _TCRBillEntrylistObj.ID);
-                                        _TCRBillEntrylistObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()) : _TCRBillEntrylistObj.BillDate);
+                                        _TCRBillEntrylistObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()).ToString("dd-MMM-yyyy") : _TCRBillEntrylistObj.BillDate);
                                         _TCRBillEntrylistObj.BillNo = (sdr["BillNo"].ToString() != "" ? (sdr["BillNo"].ToString()) : _TCRBillEntrylistObj.BillNo);
                                         _TCRBillEntrylistObj.JobNo = (sdr["JobNo"].ToString() != "" ? (sdr["JobNo"].ToString()) : _TCRBillEntrylistObj.JobNo);
                                         _TCRBillEntrylistObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : _TCRBillEntrylistObj.CustomerName);
@@ -308,7 +308,7 @@ namespace SCManager.RepositoryServices.Services
                                     {
                                         _TCRBillEntryHeaderObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _TCRBillEntryHeaderObj.ID);
                                         _TCRBillEntryHeaderObj.EmpID = (sdr["EmpID"].ToString() != "" ? Guid.Parse(sdr["EmpID"].ToString()) : _TCRBillEntryHeaderObj.EmpID);
-                                        _TCRBillEntryHeaderObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()) : _TCRBillEntryHeaderObj.BillDate);
+                                        _TCRBillEntryHeaderObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()).ToString("dd-MMM-yyyy") : _TCRBillEntryHeaderObj.BillDate);
                                         _TCRBillEntryHeaderObj.BillNo = (sdr["BillNo"].ToString() != "" ? (sdr["BillNo"].ToString()) : _TCRBillEntryHeaderObj.BillNo);
                                         _TCRBillEntryHeaderObj.JobNo = (sdr["JobNo"].ToString() != "" ? (sdr["JobNo"].ToString()) : _TCRBillEntryHeaderObj.JobNo);
                                         _TCRBillEntryHeaderObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : _TCRBillEntryHeaderObj.CustomerName);

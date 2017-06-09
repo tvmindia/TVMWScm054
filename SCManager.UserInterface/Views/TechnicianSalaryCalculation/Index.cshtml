@@ -98,6 +98,10 @@
                             <th>Service Charge Comm.(₹)</th>
                             <th>Product Comm.(₹)</th>
                             <th>AMC Comm.(₹)</th>
+                            <th>SCCode</th>
+                            <th>EmpID</th>
+                            <th>Month</th>
+                            <th>Year</th>
 
                         </tr>
                     </thead>
@@ -110,6 +114,187 @@
 </div>
 <div class="preloader" id="prelaoder">
     <img src="~/Content/images/loading.gif" class="preloaderImg" />
+</div>
+
+<div class="modal fade bs-example-modal-lg" id="ModelSalaryDetails" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="max-height:650px;overflow-y:auto">
+            <div class="modal-header" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;height: 36px;padding: 3px;">
+                <div class="container-fluid" style="padding-right: 0px;">
+                    <div class="col-md-8">
+                        <div class="col-md-12" style="padding-top: 8px;">
+                            <span style="font-weight: 600;font-size: 14px;"><i class="fa fa-user" aria-hidden="true"></i> Albert</span>
+                            <span class="modal-title" id="TechnicianLabel" style="font-weight: 600;font-size: 14px;"></span>
+                            &nbsp;&nbsp;&nbsp;
+                            <span style="font-weight: 600;font-size: 14px;"><i class="fa fa-calendar" aria-hidden="true"></i> January</span>
+                            <span class="modal-title" id="ServiceDateLabel" style="font-weight: 600;font-size: 14px;"></span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="padding-right: 4px;">
+                        <a class="close" data-dismiss="modal" aria-label="Close"><i style="font-size: 33px;" class="fa fa-times-circle" aria-hidden="true"></i></a>
+                    </div>
+
+                </div>
+            </div>
+
+         
+            
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="container-fluid" style="padding-right: 0px;">
+                        <div class="col-md-8">
+
+                            <span style="font-weight: 600;font-size: 14px;">Job Commission</span>
+
+                        </div>
+                        <div class="col-md-4" style="padding-right: 4px;text-align: right;">
+                            <span style="font-weight: 600;font-size: 14px;">Sum:</span>
+                            <span style="font-weight: 600;font-size: 14px;">256358</span>
+                        </div>
+
+                    </div>
+                    <div class="row" style="background-color: ghostwhite;max-height:200px;overflow-y:auto">
+                       
+                        <table id="tblJobCommissionDetails" class="table compact" cellspacing="0" width="100%">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Date</th>
+                                    <th>Job No.</th>
+                                    <th>Type</th>
+                                    <th>Customer</th>
+                                    <th>Special Commis.</th>
+                                    <th>Commission.</th>
+                                  
+                                    <th>Total</th>
+
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <br/>
+
+                    <br />
+
+                    <br />
+
+                    <br />
+
+                    <br />
+                    <div class="row" style="background-color: ghostwhite;max-height:200px;overflow-y:auto;">
+                        <div class="container-fluid" style="padding-right: 0px;">
+                            <div class="col-md-8">
+                               
+                                    <span style="font-weight: 600;font-size: 14px;">TCR Commission</span>
+                               
+                            </div>
+                            <div class="col-md-4"  style="padding-right: 4px;text-align: right;">
+                                <span style="font-weight: 600;font-size: 14px;">Sum:</span>
+                                <span style="font-weight: 600;font-size: 14px;">256358</span>
+                            </div>
+
+                        </div>
+                        <table id="tblTCRBillDetails" class="table compact" cellspacing="0" width="100%">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Date</th>
+                                    <th>Bill No.</th>
+                                    <th>Customer</th>
+                                    <th>Product Commis.</th>
+                                    <th>Service Commis.</th>
+                                    <th>Total</th>
+
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+
+                    <br />
+
+                    <br />
+
+
+                    <br />
+
+                    <br />
+
+                    <div class="row" style="background-color: ghostwhite;max-height:200px;overflow-y:auto;">
+                        <div class="container-fluid" style="padding-right: 0px;">
+                            <div class="col-md-8">
+                               
+                                    <span style="font-weight: 600;font-size: 14px;">AMC Commission</span>
+                              
+                            </div>
+                            <div class="col-md-4" style="padding-right: 4px;text-align: right;">
+                                <span style="font-weight: 600;font-size: 14px;">Sum:</span>
+                                <span style="font-weight: 600;font-size: 14px;">256358</span>
+                            </div>
+
+                        </div>
+                        <table id="tblAMCDetails" class="table compact" cellspacing="0" width="100%">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Date</th>
+                                    <th>Bill No.</th>
+                                    <th>Customer</th>
+                                 
+                                    <th>Amount</th>
+
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <br />
+
+                    <br />
+
+
+                    <br />
+
+                    <br />
+
+                    <div class="row" style="background-color: ghostwhite;max-height:200px;overflow-y:auto;">
+                        <div class="container-fluid" style="padding-right: 0px;">
+                            <div class="col-md-8">
+
+                                <span style="font-weight: 600;font-size: 14px;">Advance</span>
+
+                            </div>
+                            <div class="col-md-4" style="padding-right: 4px;text-align: right;">
+                                <span style="font-weight: 600;font-size: 14px;">Sum:</span>
+                                <span style="font-weight: 600;font-size: 14px;">256358</span>
+                            </div>
+
+                        </div>
+                        <table id="tblAdvanceDetails" class="table compact" cellspacing="0" width="100%">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Note</th>
+
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;height: 50px;padding: 7px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                @*<a class="btn btn-default" onclick="ResetForm()"><i class="glyphicon glyphicon-refresh"></i> Close</a>*@
+
+            </div>
+
+        </div>
+    </div>
+
 </div>
 
 

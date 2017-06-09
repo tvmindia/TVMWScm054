@@ -10,7 +10,7 @@ namespace SCManager.DataAccessObject.DTO
         public string SCCode { get; set; }
         public Guid? ID { get; set; }
         public string ICRNo { get; set; }
-        public DateTime? ICRDate { get; set; }
+        public string ICRDate { get; set; }
         public Guid? EmpID { get; set; }
         public string JobNo { get; set; }
         public string ModelNo { get; set; }
@@ -20,8 +20,8 @@ namespace SCManager.DataAccessObject.DTO
         public decimal? GrandTotal { get; set; }
         public decimal? Subtotal { get; set; }
         public string CustomerLocation { get; set; }
-        public DateTime? AMCValidFromDate { get; set; }
-        public DateTime? AMCValidToDate { get; set; }
+        public string AMCValidFromDate { get; set; }
+        public string AMCValidToDate { get; set; }
         public string Remarks { get; set; }
         public string PaymentMode { get; set; }
         public string Technician { get; set; }

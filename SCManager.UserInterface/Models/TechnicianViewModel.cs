@@ -53,4 +53,14 @@ namespace SCManager.UserInterface.Models
         public string PayableRupee { get; set; }
 
     }
+    public class TechnicianSalaryJobBreakUpViewModel
+    {
+        public string ServiceDate { get; set; }
+        public string JobNo { get; set; }
+        public string CustomerName { get; set; }
+        public string Type { get; set; }
+        public decimal Commission { get; set; }
+        public decimal SpecialCommission { get; set; }
+        public decimal Total { get; set; }
+    }
 }

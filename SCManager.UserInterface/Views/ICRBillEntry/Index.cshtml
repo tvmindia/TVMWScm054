@@ -135,7 +135,7 @@
                                 @Html.LabelFor(model => model.ICRDate, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6 ">
-                                @Html.EditorFor(model => model.ICRDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "ICRDate" } })
+                                @Html.EditorFor(model => model.ICRDate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker", @id = "ICRDate" } })
 
                                 @Html.ValidationMessageFor(model => model.ICRDate, "", new { @class = "text-danger" })
                             </div>
@@ -253,7 +253,7 @@
                                 @Html.LabelFor(model => model.AMCValidFromDate, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
-                                @Html.EditorFor(model => model.AMCValidFromDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "AMCValidFromDate" } })
+                                @Html.EditorFor(model => model.AMCValidFromDate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker", @id = "AMCValidFromDate" } })
                                 @Html.ValidationMessageFor(model => model.AMCValidFromDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -263,7 +263,7 @@
                                 @Html.LabelFor(model => model.AMCValidToDate, htmlAttributes: new { @class = "control-label HeaderBox" })
                             </div>
                             <div class="col-md-6">
-                                @Html.EditorFor(model => model.AMCValidToDate, new { htmlAttributes = new { @class = "form-control", @id = "AMCValidtoDate" } })
+                                @Html.EditorFor(model => model.AMCValidToDate, new { htmlAttributes = new { @class = "form-control datepicker", @id = "AMCValidtoDate" } })
                                 @Html.ValidationMessageFor(model => model.AMCValidToDate, "", new { @class = "text-danger" })
                             </div>
                         </div>

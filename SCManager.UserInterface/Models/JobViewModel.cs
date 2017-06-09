@@ -10,6 +10,7 @@ namespace SCManager.UserInterface.Models
     public class JobViewModel
     {
         public string SCCode { get; set; }
+        [Display(Name = "Technician Name")]
         public Guid? Repeat_EmpID { get; set; }
         public EmployeesViewModel Employee { get; set; }
         public string RepeatEmpName { get; set; }
