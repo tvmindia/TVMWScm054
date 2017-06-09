@@ -514,13 +514,13 @@ function AmountSummary() {
 }
 
 var typingFlag = 0;
-function calculateVat() {
-    debugger;
-    if (typingFlag == 0) {
-        setTimeout(calculateVatPercentage, 2000);//done to wait till typing over
-        typingFlag = 1;
-    }
-}
+//function calculateVat() {
+//    debugger;
+//    if (typingFlag == 0) {
+//        setTimeout(calculateVatPercentage, 2000);//done to wait till typing over
+//        typingFlag = 1;
+//    }
+//}
 
 function ClearVatPercent() {
     debugger;
