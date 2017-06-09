@@ -74,7 +74,9 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<TechnicianSalaryViewModel, TechnicianSalary>().ReverseMap();
                 config.CreateMap<SalesGraphViewModel, SalesGraph>().ReverseMap();
                 config.CreateMap<TechnicianSalaryJobBreakUpViewModel, TechnicianSalaryJobBreakUp>().ReverseMap();
-                
+                config.CreateMap<TechnicianSalaryTCRBreakUpViewModel, TechnicianSalaryTCRBreakUp>().ReverseMap();
+                config.CreateMap<TechnicianSalaryAMCBreakUpViewModel, TechnicianSalaryAMCBreakUp>().ReverseMap();
+                config.CreateMap<TechnicianSalaryAdvanceBreakUpViewModel, TechnicianSalaryAdvanceBreakUp>().ReverseMap();
             });
         }
     }

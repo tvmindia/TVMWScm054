@@ -56,4 +56,31 @@ namespace SCManager.DataAccessObject.DTO
         public decimal Total { get; set; }
     }
 
+    public class TechnicianSalaryTCRBreakUp
+    {
+        public string BillDate { get; set; }
+        public string BillNo { get; set; }
+        public string CustomerName { get; set; }
+        public string Type { get; set; }
+        public decimal ServiceChargeCommission { get; set; }
+        public decimal ProductCommission { get; set; }
+        public decimal Total { get; set; }
     }
+    public class TechnicianSalaryAMCBreakUp
+    {
+        public string ICRDate { get; set; }
+        public string ICRNo { get; set; }
+        public string CustomerName { get; set; }
+        public decimal AMCCommission { get; set; }
+        
+    }
+    public class TechnicianSalaryAdvanceBreakUp
+    {
+        public string RefDate { get; set; }
+        public decimal Advance { get; set; }
+        public string Note { get; set; }
+       
+
+    }
+
+}

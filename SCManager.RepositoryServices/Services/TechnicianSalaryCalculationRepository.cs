@@ -147,6 +147,159 @@ namespace SCManager.RepositoryServices.Services
 
             return technicianSalaryList;
         }
+
+        public List<TechnicianSalaryTCRBreakUp> GetTechnicianTCRCommissionBreakUp(string SCCode, Guid EmpID, short? Month, short? Year)
+        {
+            List<TechnicianSalaryTCRBreakUp> technicianSalaryList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = SCCode;
+                        cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = EmpID;
+                        cmd.Parameters.Add("@month", SqlDbType.Int).Value = Month;
+                        cmd.Parameters.Add("@year", SqlDbType.Int).Value = Year;
+                        cmd.CommandText = "[CalculateTechSalaryBreakup_TCR]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                technicianSalaryList = new List<TechnicianSalaryTCRBreakUp>();
+                                while (sdr.Read())
+                                {
+                                    TechnicianSalaryTCRBreakUp technicianSalary = new TechnicianSalaryTCRBreakUp();
+                                    {
+                                        technicianSalary.BillDate = (sdr["BillDate"].ToString() != "" ? sdr["BillDate"].ToString() : technicianSalary.BillDate);
+                                        technicianSalary.BillNo = (sdr["BillNo"].ToString() != "" ? sdr["BillNo"].ToString() : technicianSalary.BillNo);
+                                        technicianSalary.CustomerName = (sdr["CustomerName"].ToString() != "" ? sdr["CustomerName"].ToString() : technicianSalary.CustomerName);
+                                        technicianSalary.Type = (sdr["Type"].ToString() != "" ? sdr["Type"].ToString() : technicianSalary.Type);
+                                        technicianSalary.ServiceChargeCommission = (sdr["ServiceChargeComm"].ToString() != "" ? decimal.Parse(sdr["ServiceChargeComm"].ToString()) : technicianSalary.ServiceChargeCommission);
+                                        technicianSalary.ProductCommission = (sdr["ProductCommission"].ToString() != "" ? decimal.Parse(sdr["ProductCommission"].ToString()) : technicianSalary.ProductCommission);
+                                        technicianSalary.Total = (sdr["Total"].ToString() != "" ? decimal.Parse(sdr["Total"].ToString()) : technicianSalary.Total);
+                                    }
+                                    technicianSalaryList.Add(technicianSalary);
+                                }
+                            }//if
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return technicianSalaryList;
+        }
+
+        public List<TechnicianSalaryAMCBreakUp> GetTechnicianAMCCommissionBreakUp(string SCCode, Guid EmpID, short? Month, short? Year)
+        {
+            List<TechnicianSalaryAMCBreakUp> technicianSalaryList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = SCCode;
+                        cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = EmpID;
+                        cmd.Parameters.Add("@month", SqlDbType.Int).Value = Month;
+                        cmd.Parameters.Add("@year", SqlDbType.Int).Value = Year;
+                        cmd.CommandText = "[CalculateTechSalaryBreakup_AMC]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                technicianSalaryList = new List<TechnicianSalaryAMCBreakUp>();
+                                while (sdr.Read())
+                                {
+                                    TechnicianSalaryAMCBreakUp technicianSalary = new TechnicianSalaryAMCBreakUp();
+                                    {
+                                        technicianSalary.ICRDate = (sdr["ICRDate"].ToString() != "" ? sdr["ICRDate"].ToString() : technicianSalary.ICRDate);
+                                        technicianSalary.ICRNo = (sdr["ICRNo"].ToString() != "" ? sdr["ICRNo"].ToString() : technicianSalary.ICRNo);
+                                        technicianSalary.CustomerName = (sdr["CustomerName"].ToString() != "" ? sdr["CustomerName"].ToString() : technicianSalary.CustomerName);
+                                        technicianSalary.AMCCommission = (sdr["AMCCommission"].ToString() != "" ? decimal.Parse(sdr["AMCCommission"].ToString()) : technicianSalary.AMCCommission);
+                                    }
+                                    technicianSalaryList.Add(technicianSalary);
+                                }
+                            }//if
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return technicianSalaryList;
+
+        }
+
+        public List<TechnicianSalaryAdvanceBreakUp> GetTechnicianSalaryAdvanceBreakUp(string SCCode, Guid EmpID, short? Month, short? Year)
+        {
+            List<TechnicianSalaryAdvanceBreakUp> technicianSalaryList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = SCCode;
+                        cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = EmpID;
+                        cmd.Parameters.Add("@month", SqlDbType.Int).Value = Month;
+                        cmd.Parameters.Add("@year", SqlDbType.Int).Value = Year;
+                        cmd.CommandText = "[CalculateTechSalaryBreakup_Advance]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                technicianSalaryList = new List<TechnicianSalaryAdvanceBreakUp>();
+                                while (sdr.Read())
+                                {
+                                    TechnicianSalaryAdvanceBreakUp technicianSalary = new TechnicianSalaryAdvanceBreakUp();
+                                    {
+                                        technicianSalary.RefDate = (sdr["RefDate"].ToString() != "" ? sdr["RefDate"].ToString() : technicianSalary.RefDate);
+                                        technicianSalary.Advance = (sdr["Advance"].ToString() != "" ? decimal.Parse(sdr["Advance"].ToString()) : technicianSalary.Advance);
+                                        technicianSalary.Note = (sdr["Note"].ToString() != "" ? sdr["Note"].ToString() : technicianSalary.Note);
+                                    }
+                                    technicianSalaryList.Add(technicianSalary);
+                                }
+                            }//if
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return technicianSalaryList;
+        }
     }
 }
     

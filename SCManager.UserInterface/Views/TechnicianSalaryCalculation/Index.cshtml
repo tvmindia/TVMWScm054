@@ -1,12 +1,18 @@
 ﻿@model SCManager.UserInterface.Models.TechnicianSalaryViewModel
 @using SCManager.UserInterface.App_Start
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Technician Salary Calculation";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 @section styles {
     @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatable")
    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatableFixedColumns")
+<style>
+  #totalsummary>tbody>tr>td{
+  text-align: center;
+ 
+}
+</style>
 
 }
 
@@ -118,16 +124,16 @@
 
 <div class="modal fade bs-example-modal-lg" id="ModelSalaryDetails" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content" style="max-height:650px;overflow-y:auto">
+        <div class="modal-content">
             <div class="modal-header" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;height: 36px;padding: 3px;">
                 <div class="container-fluid" style="padding-right: 0px;">
                     <div class="col-md-8">
-                        <div class="col-md-12" style="padding-top: 8px;">
-                            <span style="font-weight: 600;font-size: 14px;"><i class="fa fa-user" aria-hidden="true"></i> Albert</span>
-                            <span class="modal-title" id="TechnicianLabel" style="font-weight: 600;font-size: 14px;"></span>
+                        <div class="col-md-12" style="padding-top: 4px;position: absolute;left: -17px;">
+                            <span style="font-weight: 600;font-size: 16px;"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <span class="modal-title" id="TechnicianLabel" style="font-weight: 600;font-size: 16px;"></span>
                             &nbsp;&nbsp;&nbsp;
-                            <span style="font-weight: 600;font-size: 14px;"><i class="fa fa-calendar" aria-hidden="true"></i> January</span>
-                            <span class="modal-title" id="ServiceDateLabel" style="font-weight: 600;font-size: 14px;"></span>
+                            <span style="font-weight: 600;font-size: 16px;"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                            <span class="modal-title" id="ServiceDateLabel" style="font-weight: 600;font-size: 16px;"></span>
 
                         </div>
                     </div>
@@ -138,159 +144,201 @@
                 </div>
             </div>
 
-         
+          
             
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="container-fluid" style="padding-right: 0px;">
-                        <div class="col-md-8">
-
-                            <span style="font-weight: 600;font-size: 14px;">Job Commission</span>
-
-                        </div>
-                        <div class="col-md-4" style="padding-right: 4px;text-align: right;">
-                            <span style="font-weight: 600;font-size: 14px;">Sum:</span>
-                            <span style="font-weight: 600;font-size: 14px;">256358</span>
-                        </div>
-
-                    </div>
-                    <div class="row" style="background-color: ghostwhite;max-height:200px;overflow-y:auto">
-                       
-                        <table id="tblJobCommissionDetails" class="table compact" cellspacing="0" width="100%">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Date</th>
-                                    <th>Job No.</th>
-                                    <th>Type</th>
-                                    <th>Customer</th>
-                                    <th>Special Commis.</th>
-                                    <th>Commission.</th>
-                                  
-                                    <th>Total</th>
+            <div class="modal-body" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;">
+                @*-------*@
+               
+                <div class="container-fluid" style="background-color: white;margin-bottom: 15px;">
 
 
-                                </tr>
-                            </thead>
+                    <div class="col-md-12" style="padding-top: 5px;padding-left: 0px;padding-bottom: 5px;">
+                        <table id="totalsummary" style="width:100%;">
+                            <tr>
+                                <td>
+                                    <span style="font-weight: 300;font-size: 14px;">Total Commission(₹):</span>
+                                    <span id="lblTotalCommission" style="font-weight: 300;font-size: 14px;">45435</span>
+                                </td>
+                                <td style="border-left: 1px solid;">
+
+                                </td>
+
+                                <td>
+                                    <span style="font-weight: 300;font-size: 14px;">Salary Advance(₹):</span>
+                                    <span id="lblSalaryAdvance" style="font-weight: 300;font-size: 14px;">45435</span>
+                                </td>
+                                <td style="border-left: 1px solid;"></td>
+                                <td>
+                                    <span style="font-weight: 300;font-size: 14px;">Net Payable Salary(₹):</span>
+                                    <span id="lblNetPayable" style="font-weight: 300;font-size: 14px;">45435</span>
+                                </td>
+                            </tr>
                         </table>
+
                     </div>
 
-                    <br/>
-
-                    <br />
-
-                    <br />
-
-                    <br />
-
-                    <br />
-                    <div class="row" style="background-color: ghostwhite;max-height:200px;overflow-y:auto;">
-                        <div class="container-fluid" style="padding-right: 0px;">
-                            <div class="col-md-8">
-                               
-                                    <span style="font-weight: 600;font-size: 14px;">TCR Commission</span>
-                               
-                            </div>
-                            <div class="col-md-4"  style="padding-right: 4px;text-align: right;">
-                                <span style="font-weight: 600;font-size: 14px;">Sum:</span>
-                                <span style="font-weight: 600;font-size: 14px;">256358</span>
-                            </div>
-
-                        </div>
-                        <table id="tblTCRBillDetails" class="table compact" cellspacing="0" width="100%">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Date</th>
-                                    <th>Bill No.</th>
-                                    <th>Customer</th>
-                                    <th>Product Commis.</th>
-                                    <th>Service Commis.</th>
-                                    <th>Total</th>
-
-
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-
-
-                    <br />
-
-                    <br />
-
-
-                    <br />
-
-                    <br />
-
-                    <div class="row" style="background-color: ghostwhite;max-height:200px;overflow-y:auto;">
-                        <div class="container-fluid" style="padding-right: 0px;">
-                            <div class="col-md-8">
-                               
-                                    <span style="font-weight: 600;font-size: 14px;">AMC Commission</span>
-                              
-                            </div>
-                            <div class="col-md-4" style="padding-right: 4px;text-align: right;">
-                                <span style="font-weight: 600;font-size: 14px;">Sum:</span>
-                                <span style="font-weight: 600;font-size: 14px;">256358</span>
-                            </div>
-
-                        </div>
-                        <table id="tblAMCDetails" class="table compact" cellspacing="0" width="100%">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Date</th>
-                                    <th>Bill No.</th>
-                                    <th>Customer</th>
-                                 
-                                    <th>Amount</th>
-
-
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-
-                    <br />
-
-                    <br />
-
-
-                    <br />
-
-                    <br />
-
-                    <div class="row" style="background-color: ghostwhite;max-height:200px;overflow-y:auto;">
-                        <div class="container-fluid" style="padding-right: 0px;">
-                            <div class="col-md-8">
-
-                                <span style="font-weight: 600;font-size: 14px;">Advance</span>
-
-                            </div>
-                            <div class="col-md-4" style="padding-right: 4px;text-align: right;">
-                                <span style="font-weight: 600;font-size: 14px;">Sum:</span>
-                                <span style="font-weight: 600;font-size: 14px;">256358</span>
-                            </div>
-
-                        </div>
-                        <table id="tblAdvanceDetails" class="table compact" cellspacing="0" width="100%">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>Note</th>
-
-
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
                 </div>
-            </div>
-            <div class="modal-footer" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;height: 50px;padding: 7px;">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                @*<a class="btn btn-default" onclick="ResetForm()"><i class="glyphicon glyphicon-refresh"></i> Close</a>*@
+                    <ul class="nav nav-tabs nav-pills">
+                        <li class="active">
+                            <a id="" onclick="return true;" href="#1" data-toggle="tab">Job Commissions</a>
+                        </li>
+                        <li>
+                            <a id="" onclick="return true;" href="#2" data-toggle="tab" style="width:170px">TCR Commissions</a>
+                        </li>
+                        <li>
+                            <a id="" onclick="return true;" href="#3" data-toggle="tab" style="width:170px">AMC Commissions</a>
+                        </li>
+                        <li>
+                            <a id="" onclick="return true;" href="#4" data-toggle="tab" style="width:170px">Salary Advances</a>
+                        </li>
+                    </ul>
+                   
+                    
+                    <div class="tab-content clearfix">
+                        <div class="tab-pane fade in active" id="1">
+                            <div class="col-md-12">&nbsp;</div>
 
+                            <div class="container-fluid">
+                              
+                                <div class="row" style="background-color: ghostwhite;">
+
+                                    <table id="tblJobCommissionDetails" class="table compact" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th>Date</th>
+                                                <th>Job No.</th>
+                                                <th>Type</th>
+                                                <th>Customer</th>
+                                                <th>Special Commis.(₹)<br />(A)</th>
+                                                <th>Service Type Commis.(₹)<br />(B)</th>
+                                                <th>Total(₹)<br />(A+B)</th>
+
+
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="container-fluid" style="padding-right: 0px;">
+                                <div class="col-md-8">
+
+                                    
+
+                                </div>
+                                <div class="col-md-4" style="padding-right: 4px;text-align: right;">
+                                    <span style="font-weight: 600;font-size: 14px;">Sum:</span>
+                                    <span id="lbljobsum" style="font-weight: 600;font-size: 14px;"></span>
+                                </div>
+
+                            </div>
+                          
+                        </div>
+                        <div class="tab-pane fade" id="2">
+                            <div class="col-md-12">&nbsp;</div>
+                        <div class="container-fluid">
+                            <div class="container-fluid" style="padding-right: 0px;">
+                                <div class="col-md-8">
+                                    <span style="font-weight: 600;font-size: 14px;position: absolute;left: -29px;">TCR Commission</span>
+                                </div>
+                                <div class="col-md-4" style="padding-right: 4px;text-align: right;">
+                                    <span style="font-weight: 600;font-size: 14px;">Sum:</span>
+                                    <span id="lbltcrsum" style="font-weight: 600;font-size: 14px;"></span>
+                                </div>
+
+                            </div>
+                            <div class="row" style="background-color: ghostwhite;">
+
+                                <table id="tblTCRBillDetails" class="table compact" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>Date</th>
+                                            <th>Bill No.</th>
+                                            <th>Customer</th>
+                                            <th>Product Commis.(₹)<br/>(A)</th>
+                                            <th>Service Commis.(₹)<br/>(B)</th>
+                                            <th>Total<br />(A+B)</th>
+
+
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="3">
+                            <div class="col-md-12">&nbsp;</div>
+                            <div class="container-fluid">
+                                <div class="container-fluid" style="padding-right: 0px;">
+                                    <div class="col-md-8">
+
+                                        <span style="font-weight: 600;font-size: 14px;position: absolute;left: -29px;">AMC Commission</span>
+
+                                    </div>
+                                    <div class="col-md-4" style="padding-right: 4px;text-align: right;">
+                                        <span style="font-weight: 600;font-size: 14px;">Sum:</span>
+                                        <span id="lblamcsum" style="font-weight: 600;font-size: 14px;"></span>
+                                    </div>
+
+                                </div>
+                                <div class="row" style="background-color: ghostwhite;">
+
+                                    <table id="tblAMCDetails" class="table compact" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th>Date</th>
+                                                <th>Bill No.</th>
+                                                <th>Customer</th>
+                                                <th>Commission Amount(₹)</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+
+                             </div>
+                            </div>
+                      
+                        <div class="tab-pane fade" id="4">
+                            <div class="col-md-12">&nbsp;</div>
+                            <div class="container-fluid">
+                                <div class="container-fluid" style="padding-right: 0px;">
+                                    <div class="col-md-8">
+                                        <span style="font-weight: 600;font-size: 14px;position: absolute;left: -29px;">Advance</span>
+                                    </div>
+                                    <div class="col-md-4" style="padding-right: 4px;text-align: right;">
+                                        <span style="font-weight: 600;font-size: 14px;">Sum:</span>
+                                        <span id="lbladvancesum" style="font-weight: 600;font-size: 14px;"></span>
+                                    </div>
+
+                                </div>
+                                <div class="row" style="background-color: ghostwhite;">
+
+                                    <table id="tblAdvanceDetails" class="table compact" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th>Date</th>
+                                                <th>Note</th>
+                                                <th>Advance Amount(₹)</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            </div>
+                       
+                    </div>
+              
+             
+
+           
+                @*-------*@
+             
             </div>
+            @*<div class="modal-footer" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;height: 50px;padding: 7px;">
+               
+
+            </div>*@
 
         </div>
     </div>

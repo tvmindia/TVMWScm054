@@ -77,7 +77,8 @@ $(document).ready(function () {
              dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
              order: [],
              searching: false,
-             paging: false,
+             paging: true,
+             pageLength: 50,
              data: null,
              columns: [
                { "data": "ServiceDate", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
@@ -110,15 +111,16 @@ $(document).ready(function () {
              dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
              order: [],
              searching: false,
-             paging: false,
+             paging: true,
+             pageLength: 50,
              data: null,
              columns: [
-               { "data": "Date", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "BillDate", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
                { "data": "BillNo", "defaultContent": "<i>-</i>" },
-               { "data": "Customer", "defaultContent": "<i>-</i>" },
-               { "data": "ProductCommis", "defaultContent": "<i>-</i>" },
-               { "data": "ServiceCommis", "defaultContent": "<i>-</i>" },
-               { "data": "Total", "defaultContent": "<i>-</i>" },
+               { "data": "CustomerName", "defaultContent": "<i>-</i>" },
+               { "data": "ProductCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "ServiceChargeCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "Total", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
 
 
              ],
@@ -143,15 +145,14 @@ $(document).ready(function () {
              dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
              order: [],
              searching: false,
-             paging: false,
+             paging: true,
+             pageLength: 50,
              data: null,
              columns: [
-               { "data": "Date", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
-               { "data": "BillNo", "defaultContent": "<i>-</i>" },
-               { "data": "Customer", "defaultContent": "<i>-</i>" },
-               { "data": "Amount", "defaultContent": "<i>-</i>" },
-
-
+               { "data": "ICRDate", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "ICRNo", "defaultContent": "<i>-</i>" },
+               { "data": "CustomerName", "defaultContent": "<i>-</i>" },
+               { "data": "AMCCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
              ],
              columnDefs: [
                   { className: "text-left", "targets": [1] },
@@ -174,13 +175,14 @@ $(document).ready(function () {
              dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
              order: [],
              searching: false,
-             paging: false,
+             paging: true,
+             pageLength: 50,
              data: null,
              columns: [
-               { "data": "Date", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
-              
-               { "data": "Amount", "defaultContent": "<i>-</i>" },
-                 { "data": "Note", "defaultContent": "<i>-</i>" },
+               { "data": "RefDate", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "Note", "defaultContent": "<i>-</i>" },
+               { "data": "Advance", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               
 
 
              ],
@@ -207,6 +209,12 @@ function ViewMore(curobj)
     {
         var rowData = DataTables.SalaryTable.row($(curobj).parents('tr')).data();
         RefreshJobCommissionDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
+        RefreshTCRCommissionDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
+        RefreshAMCCommissionDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
+        RefreshAdvanceDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
+        $("#TechnicianLabel").text(rowData.Name);
+        var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        $("#ServiceDateLabel").text(monthNames[rowData.Month]);
         $("#ModelSalaryDetails").modal('show');
     }
     catch(e)
@@ -214,6 +222,104 @@ function ViewMore(curobj)
         notyAlert('error', e.message);
     }
 }
+
+function RefreshAdvanceDetailsTable(SCCode, EmpID, Month, Year) {
+    try {
+
+        DataTables.AdvanceDetails.clear().rows.add(GetAdvanceDetails(SCCode, EmpID, Month, Year)).draw(false);
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+function GetAdvanceDetails(SCCode, EmpID, Month, Year) {
+    try {
+        var data = { "SCCode": SCCode, "EmpID": EmpID, "Month": Month, "Year": Year };
+        var ds = {};
+        ds = GetDataFromServer("TechnicianSalaryCalculation/GetTechnicianSalaryAdvanceBreakUp/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            $("#lbladvancesum").text(ds.Record);
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+            var emptyarr = [];
+            return emptyarr;
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+
+function RefreshAMCCommissionDetailsTable(SCCode, EmpID, Month, Year) {
+    try {
+
+        DataTables.AMCCommissionDetails.clear().rows.add(GetAMCCommissionDetails(SCCode, EmpID, Month, Year)).draw(false);
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+function GetAMCCommissionDetails(SCCode, EmpID, Month, Year) {
+    try {
+        var data = { "SCCode": SCCode, "EmpID": EmpID, "Month": Month, "Year": Year };
+        var ds = {};
+        ds = GetDataFromServer("TechnicianSalaryCalculation/GetTechnicianAMCCommissionBreakUp/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            $("#lblamcsum").text(ds.Record);
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+            var emptyarr = [];
+            return emptyarr;
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+function RefreshTCRCommissionDetailsTable(SCCode, EmpID, Month, Year) {
+    try {
+
+        DataTables.TCRBillCommissionDetails.clear().rows.add(GetTCRCommissionDetails(SCCode, EmpID, Month, Year)).draw(false);
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+function GetTCRCommissionDetails(SCCode, EmpID, Month, Year) {
+    try {
+        var data = { "SCCode": SCCode, "EmpID": EmpID, "Month": Month, "Year": Year };
+        var ds = {};
+        ds = GetDataFromServer("TechnicianSalaryCalculation/GetTechnicianTCRCommissionBreakUp/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            $("#lbltcrsum").text(ds.Record);
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+            var emptyarr = [];
+            return emptyarr;
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
 function RefreshJobCommissionDetailsTable(SCCode, EmpID, Month, Year) {
     try {
      
@@ -232,6 +338,7 @@ function GetJobCommissionDetails(SCCode, EmpID, Month, Year) {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
+            $("#lbljobsum").text(ds.Record);
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
