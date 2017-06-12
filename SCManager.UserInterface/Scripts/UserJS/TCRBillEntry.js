@@ -360,7 +360,7 @@ function BillBookNumberValidation()
             if (ds != '') {
                 ds = JSON.parse(ds);
             }
-            if (ds.Records !='') {
+            if (ds.Records !='') { 
                 return 1;
             }
             else
