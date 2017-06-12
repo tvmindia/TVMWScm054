@@ -94,72 +94,9 @@ namespace SCManager.UserInterface.Controllers
                 }
         }
 
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
-        public string GetTechnicianJobCommissionBreakUp(string SCCode,string EmpID,string Month, string Year)
-        {
-            try
-            {
-                UA ua = new UA();
-                List<TechnicianSalaryJobBreakUpViewModel> tSVMList = Mapper.Map<List<TechnicianSalaryJobBreakUp>, List<TechnicianSalaryJobBreakUpViewModel>>(_technicianSalaryCalculationBusiness.GetTechnicianJobCommissionBreakUp(ua.SCCode,Guid.Parse(EmpID), Int16.Parse(Month),Int16.Parse(Year)));
-                decimal totalsum = tSVMList == null ? 0 : tSVMList.Select(T => T.Total).Sum();
-                string totalsumwithrupee = _commonBusiness.ConvertCurrency(totalsum);
-                return JsonConvert.SerializeObject(new { Result = "OK", Records = tSVMList,Record= totalsumwithrupee });
-            }
-            catch (Exception ex)
-            {
-                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
-            }
-        }
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
-        public string GetTechnicianTCRCommissionBreakUp(string SCCode, string EmpID, string Month, string Year)
-        {
-            try
-            {
-                UA ua = new UA();
-                List<TechnicianSalaryTCRBreakUpViewModel> tSVMList = Mapper.Map<List<TechnicianSalaryTCRBreakUp>, List<TechnicianSalaryTCRBreakUpViewModel>>(_technicianSalaryCalculationBusiness.GetTechnicianTCRCommissionBreakUp(ua.SCCode, Guid.Parse(EmpID), Int16.Parse(Month), Int16.Parse(Year)));
-                decimal totalsum = tSVMList == null ? 0 : tSVMList.Select(T => T.Total).Sum();
-                string totalsumwithrupee = _commonBusiness.ConvertCurrency(totalsum);
-                return JsonConvert.SerializeObject(new { Result = "OK", Records = tSVMList, Record = totalsumwithrupee });
-            }
-            catch (Exception ex)
-            {
-                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
-            }
-        }
-
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
-        public string GetTechnicianAMCCommissionBreakUp(string SCCode, string EmpID, string Month, string Year)
-        {
-            try
-            {
-                UA ua = new UA();
-                List<TechnicianSalaryAMCBreakUpViewModel> tSVMList = Mapper.Map<List<TechnicianSalaryAMCBreakUp>, List<TechnicianSalaryAMCBreakUpViewModel>>(_technicianSalaryCalculationBusiness.GetTechnicianAMCCommissionBreakUp(ua.SCCode, Guid.Parse(EmpID), Int16.Parse(Month), Int16.Parse(Year)));
-                decimal totalsum = tSVMList == null ? 0 : tSVMList.Select(T => T.AMCCommission).Sum();
-                string totalsumwithrupee = _commonBusiness.ConvertCurrency(totalsum);
-                return JsonConvert.SerializeObject(new { Result = "OK", Records = tSVMList, Record = totalsumwithrupee });
-            }
-            catch (Exception ex)
-            {
-                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
-            }
-        }
-
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
-        public string GetTechnicianSalaryAdvanceBreakUp(string SCCode, string EmpID, string Month, string Year)
-        {
-            try
-            {
-                UA ua = new UA();
-                List<TechnicianSalaryAdvanceBreakUpViewModel> tSVMList = Mapper.Map<List<TechnicianSalaryAdvanceBreakUp>, List<TechnicianSalaryAdvanceBreakUpViewModel>>(_technicianSalaryCalculationBusiness.GetTechnicianSalaryAdvanceBreakUp(ua.SCCode, Guid.Parse(EmpID), Int16.Parse(Month), Int16.Parse(Year)));
-                decimal totalsum = tSVMList == null ? 0 : tSVMList.Select(T => T.Advance).Sum();
-                string totalsumwithrupee = _commonBusiness.ConvertCurrency(totalsum);
-                return JsonConvert.SerializeObject(new { Result = "OK", Records = tSVMList, Record = totalsumwithrupee });
-            }
-            catch (Exception ex)
-            {
-                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
-            }
-        }
+      
+       
+       
 
         /// <summary>
         /// /////////

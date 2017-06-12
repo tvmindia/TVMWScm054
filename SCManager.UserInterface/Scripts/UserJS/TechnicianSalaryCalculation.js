@@ -85,7 +85,7 @@ $(document).ready(function () {
                  searchPlaceholder: "Search"
              },
              columns: [
-               { "data": "ServiceDate", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "ServiceDate","defaultContent": "<i>-</i>" },
                { "data": "JobNo", "defaultContent": "<i>-</i>" },
                { "data": "Type", "defaultContent": "<i>-</i>" },
                { "data": "CustomerName", "defaultContent": "<i>-</i>" },
@@ -123,7 +123,7 @@ $(document).ready(function () {
                  searchPlaceholder: "Search"
              },
              columns: [
-               { "data": "BillDate", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "BillDate", "defaultContent": "<i>-</i>" },
                { "data": "BillNo", "defaultContent": "<i>-</i>" },
                { "data": "CustomerName", "defaultContent": "<i>-</i>" },
                { "data": "ProductCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
@@ -161,7 +161,7 @@ $(document).ready(function () {
                  searchPlaceholder: "Search"
              },
              columns: [
-               { "data": "ICRDate", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "ICRDate", "defaultContent": "<i>-</i>" },
                { "data": "ICRNo", "defaultContent": "<i>-</i>" },
                { "data": "CustomerName", "defaultContent": "<i>-</i>" },
                { "data": "AMCCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
@@ -195,7 +195,7 @@ $(document).ready(function () {
                  searchPlaceholder: "Search"
              },
              columns: [
-               { "data": "RefDate", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "RefDate", "defaultContent": "<i>-</i>" },
                { "data": "Note", "defaultContent": "<i>-</i>" },
                { "data": "Advance", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                
@@ -224,15 +224,12 @@ function ViewMore(curobj)
     try
     {
         var rowData = DataTables.SalaryTable.row($(curobj).parents('tr')).data();
-       // RefreshJobCommissionDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
-       // RefreshTCRCommissionDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
-       // RefreshAMCCommissionDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
-        //   RefreshAdvanceDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
         BindAllCommissionTables(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
         $("#TechnicianLabel").text(rowData.Name);
         var monthNames = ["","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         $("#ServiceDateLabel").text(monthNames[rowData.Month] +'/'+ rowData.Year);
         $("#ModelSalaryDetails").modal('show');
+        $("#jobcommis").trigger('click');
     }
     catch(e)
     {
@@ -240,134 +237,17 @@ function ViewMore(curobj)
     }
 }
 
-function RefreshAdvanceDetailsTable(SCCode, EmpID, Month, Year) {
-    try {
-
-        DataTables.AdvanceDetails.clear().rows.add(GetAdvanceDetails(SCCode, EmpID, Month, Year)).draw(false);
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
-function GetAdvanceDetails(SCCode, EmpID, Month, Year) {
-    try {
-        var data = { "SCCode": SCCode, "EmpID": EmpID, "Month": Month, "Year": Year };
-        var ds = {};
-        ds = GetDataFromServer("TechnicianSalaryCalculation/GetTechnicianSalaryAdvanceBreakUp/", data);
-        if (ds != '') {
-            ds = JSON.parse(ds);
-        }
-        if (ds.Result == "OK") {
-            $("#lbladvancesum").text(ds.Record);
-            return ds.Records;
-        }
-        if (ds.Result == "ERROR") {
-            notyAlert('error', ds.Message);
-            var emptyarr = [];
-            return emptyarr;
-        }
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
 
 
-function RefreshAMCCommissionDetailsTable(SCCode, EmpID, Month, Year) {
-    try {
 
-        DataTables.AMCCommissionDetails.clear().rows.add(GetAMCCommissionDetails(SCCode, EmpID, Month, Year)).draw(false);
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
-function GetAMCCommissionDetails(SCCode, EmpID, Month, Year) {
-    try {
-        var data = { "SCCode": SCCode, "EmpID": EmpID, "Month": Month, "Year": Year };
-        var ds = {};
-        ds = GetDataFromServer("TechnicianSalaryCalculation/GetTechnicianAMCCommissionBreakUp/", data);
-        if (ds != '') {
-            ds = JSON.parse(ds);
-        }
-        if (ds.Result == "OK") {
-            $("#lblamcsum").text(ds.Record);
-            return ds.Records;
-        }
-        if (ds.Result == "ERROR") {
-            notyAlert('error', ds.Message);
-            var emptyarr = [];
-            return emptyarr;
-        }
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
 
-function RefreshTCRCommissionDetailsTable(SCCode, EmpID, Month, Year) {
-    try {
 
-        DataTables.TCRBillCommissionDetails.clear().rows.add(GetTCRCommissionDetails(SCCode, EmpID, Month, Year)).draw(false);
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
-function GetTCRCommissionDetails(SCCode, EmpID, Month, Year) {
-    try {
-        var data = { "SCCode": SCCode, "EmpID": EmpID, "Month": Month, "Year": Year };
-        var ds = {};
-        ds = GetDataFromServer("TechnicianSalaryCalculation/GetTechnicianTCRCommissionBreakUp/", data);
-        if (ds != '') {
-            ds = JSON.parse(ds);
-        }
-        if (ds.Result == "OK") {
-            $("#lbltcrsum").text(ds.Record);
-            return ds.Records;
-        }
-        if (ds.Result == "ERROR") {
-            notyAlert('error', ds.Message);
-            var emptyarr = [];
-            return emptyarr;
-        }
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
 
-function RefreshJobCommissionDetailsTable(SCCode, EmpID, Month, Year) {
-    try {
-     
-        DataTables.JobCommissionDetails.clear().rows.add(GetJobCommissionDetails(SCCode, EmpID, Month, Year)).draw(false);
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
-function GetJobCommissionDetails(SCCode, EmpID, Month, Year) {
-    try {
-        var data = { "SCCode": SCCode, "EmpID": EmpID, "Month": Month, "Year": Year };
-        var ds = {};
-        ds = GetDataFromServer("TechnicianSalaryCalculation/GetTechnicianJobCommissionBreakUp/", data);
-        if (ds != '') {
-            ds = JSON.parse(ds);
-        }
-        if (ds.Result == "OK") {
-            $("#lbljobsum").text(ds.Record);
-            return ds.Records;
-        }
-        if (ds.Result == "ERROR") {
-            notyAlert('error', ds.Message);
-            var emptyarr = [];
-            return emptyarr;
-        }
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
+
+
+
+
+
 
 
 function RefreshSalaryTable() {
