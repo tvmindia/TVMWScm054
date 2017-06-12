@@ -205,7 +205,7 @@ namespace SCManager.BusinessService.Services
             try
             {
                 JobList = _dailyServiceRepository.GetAllDailyJobs(SCCode);
-                JobList = JobList == null ? null : JobList.Where(j=>j.ID== Guid.Parse(JobID)).Select(c=> { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("yyyy-MM-dd");return c; }).ToList();
+                JobList = JobList == null ? null : JobList.Where(j=>j.ID== Guid.Parse(JobID)).Select(c=> { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("dd-MMM-yyyy");return c; }).ToList();
             }
             catch (Exception ex)
             {
@@ -236,7 +236,7 @@ namespace SCManager.BusinessService.Services
             try
             {
                 ServiceRegistrySummaryList = _dailyServiceRepository.GetServiceRegistrySummary(SCCode, serviceDate);
-                ServiceRegistrySummaryList = ServiceRegistrySummaryList == null ? null : ServiceRegistrySummaryList.Select(c => { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("yyyy-MM-dd"); return c; }).ToList();
+                ServiceRegistrySummaryList = ServiceRegistrySummaryList == null ? null : ServiceRegistrySummaryList.Select(c => { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("dd-MMM-yyyy"); return c; }).ToList();
             }
             catch (Exception ex)
             {
@@ -251,7 +251,7 @@ namespace SCManager.BusinessService.Services
             try
             {
                 ServiceRegistrySummaryList = _dailyServiceRepository.GetServiceRegisterSummaryFilter(SCCode, CreatedDate, Isdefault);
-                ServiceRegistrySummaryList = ServiceRegistrySummaryList == null ? null : ServiceRegistrySummaryList.Select(c => { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("yyyy-MM-dd"); return c; }).ToList();
+                ServiceRegistrySummaryList = ServiceRegistrySummaryList == null ? null : ServiceRegistrySummaryList.Select(c => { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("dd-MMM-yyyy"); return c; }).ToList();
             }
             catch (Exception ex)
             {

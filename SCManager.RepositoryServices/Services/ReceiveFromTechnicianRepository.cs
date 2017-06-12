@@ -271,7 +271,7 @@ namespace SCManager.RepositoryServices.Services
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             return receiveFromTechnicianList;
         }

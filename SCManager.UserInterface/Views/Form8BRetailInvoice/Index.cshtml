@@ -105,7 +105,7 @@
                                 @Html.LabelFor(model => model.InvoiceDate, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6 ">
-                                @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "InvDate" } })
+                                @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker", @id = "InvDate" } })
 
                                 @Html.ValidationMessageFor(model => model.InvoiceDate, "", new { @class = "text-danger" })
                             </div>
@@ -165,7 +165,7 @@
                                 @Html.LabelFor(model => model.ChallanDate, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
-                                @Html.EditorFor(model => model.ChallanDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "CDate" } })
+                                @Html.EditorFor(model => model.ChallanDate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker", @id = "CDate" } })
                                 @Html.ValidationMessageFor(model => model.ChallanDate, "", new { @class = "text-danger" })
                             </div>
 
@@ -191,7 +191,7 @@
                                 @Html.LabelFor(model => model.PODate, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
-                                @Html.EditorFor(model => model.PODate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "PODate" } })
+                                @Html.EditorFor(model => model.PODate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker", @id = "PODate" } })
                                 @Html.ValidationMessageFor(model => model.PODate, "", new { @class = "text-danger" })
                             </div>
 

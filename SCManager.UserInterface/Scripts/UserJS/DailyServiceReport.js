@@ -53,7 +53,7 @@ $(document).ready(function () {
              paging: true,
              data: GetServiceRegisterSummaryFilter(true),
              columns: [
-               { "data": "ServiceDate",render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "ServiceDate", "defaultContent": "<i>-</i>" },
                { "data": "Technician", "defaultContent": "<i>-</i>" },
                { "data": "TotalCalls", "defaultContent": "<i>-</i>" },
                { "data": "MinorCalls", "defaultContent": "<i>-</i>" },
@@ -149,7 +149,7 @@ function AddTechnicanJob()
         $("#modelContextLabel").text('Add Job');
         $("#ModelJobNo").removeAttr('disabled');
         $("#TechnicianLabel").text($("#EmpSelector option:selected").text());
-        $("#ServiceDateLabel").text(ConvertJsonToDate(serdat));
+        $("#ServiceDateLabel").text((serdat));
         ClearJobForm();
         $(".calltypehidden").hide();
     }
