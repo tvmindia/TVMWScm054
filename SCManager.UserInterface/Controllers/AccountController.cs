@@ -80,7 +80,7 @@ namespace SCManager.UserInterface.Controllers
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
            return RedirectToLogin();
         }

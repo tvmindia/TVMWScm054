@@ -40,7 +40,7 @@ namespace SCManager.UserInterface.Controllers
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string InsertUpdateOfficeBillEntry(OfficeBillEntryViewModel OfficeBillEntryViewModelObj)
         {
-            string result = "";
+            //string result = "";
 
             try
             {

@@ -38,7 +38,7 @@ namespace SCManager.BusinessService.Services
                 SCManagerSettings settings = new SCManagerSettings();
 
                 if (sr.OpenDate != null)
-                    sr.OpenDateFormatted = sr.OpenDate.GetValueOrDefault().ToString(settings.dateformat);
+                    sr.OpenDateFormatted = sr.OpenDate;//.GetValueOrDefault().ToString(settings.dateformat);
             }
 
         }

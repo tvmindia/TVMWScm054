@@ -30,7 +30,7 @@ namespace SCManager.RepositoryServices.Services
 
         public OpeningSetting InsertOpeningSetting(OpeningSetting opn, UA UA)
         {
-            OpeningSetting Result = null;
+            //OpeningSetting Result = null;
             try
             {
                 SqlParameter outputStatus, outputID = null;

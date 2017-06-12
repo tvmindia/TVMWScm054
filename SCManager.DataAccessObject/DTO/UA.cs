@@ -27,7 +27,7 @@ namespace SCManager.DataAccessObject.DTO
             }
             catch(Exception ex)
             {
-                
+                throw ex;
             }
   
         }
