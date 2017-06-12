@@ -1,6 +1,6 @@
 ﻿var DataTables = {};
 var EmptyGuid = "00000000-0000-0000-0000-000000000000";
-
+var ToDateVal, FromDateVal;
 //---------------------------------------Docuement Ready--------------------------------------------------//
 
 $(document).ready(function () {
@@ -33,6 +33,9 @@ $(document).ready(function () {
         $('#tblICRExpensesList tbody').on('dblclick', 'td', function () {
             Edit(this);
         });
+        FromDateVal = $("#fromDate").val();
+        ToDateVal = $("#toDate").val();
+
         $('#fromDate').change(function () {
             $("#showAllYNCheckbox").prop('checked', false);
             BindAllICRExpenses();
@@ -199,7 +202,9 @@ function showAllYNCheckedOrNot(i) {
         $('#toDate').val("");
         DataTables.ICRExpensesTable.clear().rows.add(GetAllICRExpenses(true)).draw(false); 
     }
-    else { 
+    else {
+        $('#fromDate').val(FromDateVal);
+        $('#toDate').val(ToDateVal);
         DataTables.ICRExpensesTable.clear().rows.add(GetAllICRExpenses(false)).draw(false);
     }
 
