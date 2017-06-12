@@ -96,8 +96,11 @@ $(document).ready(function () {
 
              ],
              columnDefs: [
-                  { className: "text-left", "targets": [1] },
-                  { className: "text-center", "targets": [0, 2, 3, 4, 5, 6] }
+                  { className: "text-left", "targets": [1,2,3] },
+                  { className: "text-center", "targets": [0] },
+                   { className: "text-right", "targets": [4, 5, 6] }
+
+
 
              ]
          });
@@ -133,9 +136,9 @@ $(document).ready(function () {
 
              ],
              columnDefs: [
-                  { className: "text-left", "targets": [1] },
-                  { className: "text-center", "targets": [0, 2, 3, 4, 5] }
-
+                  { className: "text-left", "targets": [1,2] },
+                  { className: "text-center", "targets": [0] },
+                  { className: "text-right", "targets": [3,4,5] }
              ]
          });
 
@@ -167,13 +170,11 @@ $(document).ready(function () {
                { "data": "AMCCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
              ],
              columnDefs: [
-                  { className: "text-left", "targets": [1] },
-                  { className: "text-center", "targets": [0, 2, 3] }
-
+                  { className: "text-left", "targets": [1,2] },
+                  { className: "text-center", "targets": [0] },
+                  { className: "text-right", "targets": [3] }
              ]
          });
-
-
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -271,7 +272,10 @@ function GetAllTechniciansSalary(month,year) {
             ds = JSON.parse(ds);
         }
         if (ds.Result == "OK") {
-            $("#Msgtotalpayable").text(ds.Record);
+            $("#MsgTotalCommission").text(ds.Record.TotalCommission);
+            $("#MsgTotalSalaryAdvance").text(ds.Record.TotalAdvanceSalary);
+            $("#MsgTotalPayable").text(ds.Record.TotalPayable);
+          
             return ds.Records;
         }
         if (ds.Result == "ERROR") {
@@ -324,12 +328,12 @@ function SalaryCalculate()
         {
             // mon = (mon != '' && mon != '--Select Month--') ? mon : ' - ';
             // yea = yea != '' ? yea : ' - ';
-            $("#MsgCalcu").text("" + mon + "/" + yea);
+            $("#MsgPeriod").text("" + mon + "/" + yea);
             RefreshSalaryTable();
         }
         else
         {
-            $("#MsgCalcu").text("Please Select Month and Year");
+            $("#MsgPeriod").text("Please Select Month and Year");
         }
       
        
