@@ -1,5 +1,6 @@
 ﻿var DataTables = {};
 var EmptyGuid = "00000000-0000-0000-0000-000000000000";
+var ToDateVal, FromDateVal;
 
 //---------------------------------------Docuement Ready--------------------------------------------------//
 
@@ -34,6 +35,9 @@ $(document).ready(function () {
 
             Edit(this);
         });
+      
+        FromDateVal = $("#fromDate").val();
+        ToDateVal = $("#toDate").val();
       
         $('#fromDate').change(function () {
           
@@ -226,6 +230,8 @@ function showAllYNCheckedOrNot(i) {
         $('#toDate').val("");
     }
     else {
+        $('#fromDate').val(FromDateVal);
+        $('#toDate').val(ToDateVal);
         DataTables.OtherIncomeTable.clear().rows.add(GetAllOtherIncome(false)).draw(false);
        
     }

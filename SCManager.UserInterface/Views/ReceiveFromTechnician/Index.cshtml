@@ -68,7 +68,7 @@
                             @Html.LabelFor(model => model.fromDate, htmlAttributes: new {  style = "font-weight:normal;" })
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.fromDate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker", @id = "fromDate" } })
+                            @Html.EditorFor(model => model.fromDate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker", @id = "fromDate", @Value = ViewBag.fromDate } })
                             @Html.ValidationMessageFor(model => model.fromDate, "", new { @class = "text-danger" })
                         </div>
 
@@ -82,7 +82,7 @@
                             @Html.LabelFor(model => model.toDate, htmlAttributes: new {  style = "font-weight:normal;" })
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.toDate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker", @id = "toDate" } })
+                            @Html.EditorFor(model => model.toDate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker", @id = "toDate" , @Value = ViewBag.toDate } })
                             @Html.ValidationMessageFor(model => model.toDate, "", new { @class = "text-danger" })
                         </div>
 

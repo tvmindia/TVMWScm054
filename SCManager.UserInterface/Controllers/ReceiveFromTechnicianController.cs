@@ -31,11 +31,15 @@ namespace SCManager.UserInterface.Controllers
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
+            UA ua = new UA();
+            DateTime dt = ua.CurrentDatetime();
+            ViewBag.fromdate = dt.AddDays(-30).ToString("dd-MMM-yyyy");
+            ViewBag.todate = dt.ToString("dd-MMM-yyyy");
             ReceiveFromTechnicianViewModel receiveFromTechnicianViewModel = null;
             try
             {
                 receiveFromTechnicianViewModel = new ReceiveFromTechnicianViewModel();
-                UA ua = new UA();
+               
                 List<SelectListItem> selectListItem = new List<SelectListItem>();
                 //Technician Drop down bind
                 List<EmployeesViewModel> TechniciansList = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_iEmployeesBusiness.GetAllTechnicians(ua));
