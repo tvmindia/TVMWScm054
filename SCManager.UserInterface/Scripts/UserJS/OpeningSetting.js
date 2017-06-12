@@ -158,9 +158,9 @@ function BindOpeningFields(Records) {
 
         if (Records.WithEffectDate != null) {
             $('#WithEffectDateLbl').html(Records.WithEffectDateFormatted);
-
-            $datepicker = $('#WithEffectDate');
-            $datepicker.datepicker('setDate', new Date(Records.WithEffectDate));
+            $('#WithEffectDate').val((Records.WithEffectDate));
+            //$datepicker = $('#WithEffectDate').val((Records.WithEffectDate));
+            //$datepicker.datepicker('setDate', new Date(Records.WithEffectDate));
         }
 
 

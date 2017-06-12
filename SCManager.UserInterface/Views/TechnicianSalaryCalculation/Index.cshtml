@@ -46,6 +46,17 @@ bottom: 20px;
     font-size: 17px;
     font-family:'Segoe UI';
 }
+    .BoardLabel
+    {
+    font-size: 13px;
+    font-family:'Segoe UI';
+    }
+    .BoardValue
+    {
+    font-weight: 400;
+    font-size: 17px;
+    font-family:'Segoe UI';
+    }
 </style>
 
 }
@@ -102,12 +113,24 @@ bottom: 20px;
 
                 </div>
                 <div class="well well-small col-md-3" style="display:none;margin-bottom: 0px;padding-bottom:0px;min-height:25px;padding-top:5px;">
-                    <span style="font-size: 13px;">Period &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</span>
-                    <span id="MsgCalcu" style="font-weight: 600;font-size: 15px;"></span>
+                    <span class="col-md-5 BoardLabel">Period</span>
+                    <span class="col-md-2">:</span>
+                    <span class="col-md-5 BoardValue" id="MsgPeriod"></span>
                    <p>
-                       <span style="font-size: 13px;">Total Payable&nbsp;&nbsp;:&nbsp;</span>
-                       <span id="Msgtotalpayable" style="font-weight: 600;font-size: 15px;"></span>
+                       <span class="col-md-5 BoardLabel">Total Comission</span>
+                       <span class="col-md-2">:</span>
+                       <span class="col-md-5 BoardValue" id="MsgTotalCommission"></span>
                    </p>
+                    <p>
+                        <span class="col-md-5 BoardLabel">Salary Advance</span>
+                        <span class="col-md-2">:</span>
+                        <span class="col-md-5 BoardValue" id="MsgTotalSalaryAdvance"></span>
+                    </p>
+                    <p>
+                        <span class="col-md-5 BoardLabel">Total Payable</span>
+                        <span class="col-md-2">:</span>
+                        <span class="col-md-5 BoardValue" id="MsgTotalPayable"></span>
+                    </p>
                 </div>
             </div>
             <div class="col-md-12">&nbsp;</div>
@@ -243,9 +266,9 @@ bottom: 20px;
                                                 <th>Job No.</th>
                                                 <th>Type</th>
                                                 <th>Customer</th>
-                                                <th>Special Commis.(₹)<br />(A)</th>
-                                                <th>Service Type Commis.(₹)<br />(B)</th>
-                                                <th>Total(₹)<br />(A+B)</th>
+                                                <th>Special Commis.(₹)(A)</th>
+                                                <th>Service Type Commis.(₹)(B)</th>
+                                                <th>Total(₹)(A+B)</th>
 
 
                                             </tr>
@@ -271,9 +294,9 @@ bottom: 20px;
                                             <th>Date</th>
                                             <th>Bill No.</th>
                                             <th>Customer</th>
-                                            <th>Product Commis.(₹)<br/>(A)</th>
-                                            <th>Service Commis.(₹)<br/>(B)</th>
-                                            <th>Total<br />(A+B)</th>
+                                            <th>Product Commis.(₹)(A)</th>
+                                            <th>Service Commis.(₹)(B)</th>
+                                            <th>Total(A+B)</th>
 
 
                                         </tr>

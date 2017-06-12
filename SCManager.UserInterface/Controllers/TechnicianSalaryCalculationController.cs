@@ -75,34 +75,35 @@ namespace SCManager.UserInterface.Controllers
             return View(_technicianSalaryViewModel);
         }
 
-
+        #region GetTechniciansCalculatedSalary
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetTechniciansCalculatedSalary(string Month,string Year)
         {
            try
                 {
                 UA ua = new UA();
-               
                 List<TechnicianSalaryViewModel> tSVMList = Mapper.Map<List<TechnicianSalary>,List<TechnicianSalaryViewModel>>(_technicianSalaryCalculationBusiness.GetTechniciansCalculatedSalary(ua.SCCode,Month,Year));
+                decimal totlcommiss = tSVMList == null ? 0 : tSVMList.Select(T => T.TotalCommission).Sum();
+                decimal totlAdvance = tSVMList == null ? 0 : tSVMList.Select(T => T.SalaryAdvance).Sum();
                 decimal totalpaysum = tSVMList == null ? 0 : tSVMList.Select(T => T.TotalPayable).Sum();
+                string totalcommisswithrupee=_commonBusiness.ConvertCurrency(totlcommiss);
+                string totalAdvancewithrupee= _commonBusiness.ConvertCurrency(totlAdvance);
                 string totalpayablewithrupee=_commonBusiness.ConvertCurrency(totalpaysum);
-                return JsonConvert.SerializeObject(new { Result = "OK", Records = tSVMList,Record= totalpayablewithrupee });
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = tSVMList,Record= new { TotalCommission= totalcommisswithrupee,TotalAdvanceSalary= totalAdvancewithrupee,TotalPayable= totalpayablewithrupee } });
                 }
                 catch (Exception ex)
                 {
                     return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
                 }
         }
-
-      
-       
-       
+        #endregion GetTechniciansCalculatedSalary
+        #region  GetAllBreakUpSalaryByTechnician
 
         /// <summary>
-        /// /////////
+        /// Get All Break Up Salary By Technician
         /// </summary>
         /// <param name="ActionType"></param>
-        /// <returns></returns>
+        /// <returns>details of different salary break ups combined</returns>
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetAllBreakUpSalaryByTechnician(string SCCode, string EmpID, string Month, string Year)
         {
@@ -140,7 +141,7 @@ namespace SCManager.UserInterface.Controllers
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
         }
-
+        #endregion GetAllBreakUpSalaryByTechnician
         #region ButtonStyling
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]

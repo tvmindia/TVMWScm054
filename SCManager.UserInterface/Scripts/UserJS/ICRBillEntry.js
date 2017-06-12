@@ -334,6 +334,7 @@ function reset()
         $("#SerialNo").val("");
         $("#grandtotal").val("");
         $("#total").val("");
+        $('#BillNoMandatory').find('i').remove()
         //$('#ICRNo').attr('readonly', false);
         var $datepicker = $('#ICRDate');
         $datepicker.datepicker('setDate', null);
@@ -360,6 +361,41 @@ function ResetForm() {
         validator.settings.success($(this));
     });
     validator.resetForm();
+}
+function BillBookNumberValidation() {
+    debugger;
+    try {
+        var BillNo = $('#ICRNo').val();
+
+        var data = { "BillNo": BillNo, "BillBookType": "TCR" };
+        var ds = {};
+        ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
+        debugger;
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Records != '') {
+            return 1;
+        }
+        else {
+            if ($(".fa-exclamation-triangle").length == 0)
+            {
+                $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="Bill Book For This Entry does not exists!"></i>');
+            }
+            
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+            return 0;
+        }
+        return 1;
+
+
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+        return 0;
+    }
 }
 function DeleteItem(currentObj) {
    
@@ -532,6 +568,7 @@ function BindICRBillEntry(id) {
         if (ds.Result == "OK") {
 
             BindICRBillEntryFields(ds.Records);
+            BillBookNumberValidation();
         }
         if (ds.Result == "ERROR") {
             notyAlert('error', ds.Message);

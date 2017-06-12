@@ -367,5 +367,43 @@ namespace SCManager.RepositoryServices.Services
             return outParameter.Value.ToString();
         }
         #endregion BillBookRangeValidation
+
+        #region BillBookNumberValidation
+        public string BillBookNumberValidation(UA UA, string BillNo,string billBookType)
+        {
+            SqlParameter outParameter1, outParameter2 = null;
+            try
+            {
+               
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@number", SqlDbType.NVarChar,50).Value = BillNo;
+                        cmd.Parameters.Add("@BillBookType", SqlDbType.NVarChar, 15).Value = billBookType;
+                        cmd.CommandText = "[BillBookNumberValidation]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        outParameter1 = cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
+                        outParameter1.Direction = ParameterDirection.Output;
+                        outParameter2 = cmd.Parameters.Add("@BookNo", SqlDbType.NVarChar,50);
+                        outParameter2.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return outParameter1.Value.ToString();
+        }
+        #endregion BillBookNumberValidation
     }
 }

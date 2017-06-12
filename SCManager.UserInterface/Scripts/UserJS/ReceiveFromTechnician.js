@@ -410,6 +410,7 @@ function GetReceiveSheetsByTechnician() {
 //--------------------button actions ----------------------
 function List() {
     try {
+        debugger;
         ChangeButtonPatchView('ReceiveFromTechnician', 'btnPatchReceiveFromTechnicianSettab', 'List');
         var empID = $("#ddlReceiveListTech").val();
         var fromDate = $("#fromDate").val();
@@ -418,10 +419,7 @@ function List() {
             if (toDate != "" || fromDate != "") {
                 BindAllReceiveList();
             }
-            else {
-                FillDates();
-            }
-
+           
         }
 
         // DataTables.eventTable.clear().rows.add(GetAllForm8()).draw(false);
@@ -465,31 +463,3 @@ function Add() {
     }
 }
 
-function FillDates() {
-   
-    var m_names = new Array("Jan", "Feb", "Mar",
- "Apr", "May", "Jun", "Jul", "Aug", "Sep",
- "Oct", "Nov", "Dec");
-
-    var d = new Date();
-    var curr_date = d.getDate();
-    var curr_month = d.getMonth();
-    var curr_year = d.getFullYear();
-    var toDate = curr_date + "-" + m_names[curr_month]
-    + "-" + curr_year;
-    var $datepicker = $('#toDate');
-    $datepicker.datepicker('setDate', new Date(toDate));
-    var today = new Date()
-    var pd = new Date();
-    pd.setDate(pd.getDate() - 30);
-    var priorDate = pd.toLocaleString()
-    priorDate = priorDate.split(' ')[0];
-    var p_month = parseInt(priorDate.split('/')[0]) - 1;
-    var p_date = priorDate.split('/')[1];
-    var p_year = priorDate.split('/')[2];
-    var fromDate = p_date + "-" + m_names[p_month]
-    + "-" + p_year;
-    var $datepicker = $('#fromDate');
-    $datepicker.datepicker('setDate', new Date(fromDate));
-    BindAllReceiveList();
-}
