@@ -176,7 +176,7 @@ namespace SCManager.RepositoryServices.Services
                                         _OpeningSettingObj.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _OpeningSettingObj.SCCode);
                                         _OpeningSettingObj.Cash = (sdr["Cash"].ToString() != "" ? decimal.Parse(sdr["Cash"].ToString()) : _OpeningSettingObj.Cash);
                                         _OpeningSettingObj.Bank = (sdr["Bank"].ToString() != "" ? decimal.Parse(sdr["Bank"].ToString()) : _OpeningSettingObj.Bank);
-                                        _OpeningSettingObj.WithEffectDate = (sdr["WithEffectDate"].ToString() != "" ? DateTime.Parse(sdr["WithEffectDate"].ToString()).Date : _OpeningSettingObj.WithEffectDate);
+                                        _OpeningSettingObj.WithEffectDate = (sdr["WithEffectDate"].ToString() != "" ? DateTime.Parse(sdr["WithEffectDate"].ToString()).ToString("dd-MMM-yyyy") : _OpeningSettingObj.WithEffectDate);
 
                                         
                                     }

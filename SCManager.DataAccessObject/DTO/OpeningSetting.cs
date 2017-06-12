@@ -11,7 +11,7 @@ namespace SCManager.DataAccessObject.DTO
         public Guid ID { get; set; }
         public decimal Cash { get; set; }
         public decimal Bank { get; set; }
-        public DateTime WithEffectDate { get; set; }
+        public string WithEffectDate { get; set; }
         public string WithEffectDateFormatted { get; set; }
         public string CashFormatted { get; set; }
         public string BankFormatted { get; set; }
