@@ -131,9 +131,6 @@ namespace SCManager.UserInterface.Controllers
                 string totalcommissonwithrupee = _commonBusiness.ConvertCurrency(totalcommission);
                 decimal netpayable = totalcommission - totalAdvancesum;
                 string totalpayablewithrupee= _commonBusiness.ConvertCurrency(netpayable);
-               
-
-
                 return JsonConvert.SerializeObject(new { Result = "OK", JobRecords = tSjBVMList,JobRecord= totaljobsumwithrupee,TCRRecords= tSTCRVMList, TCRRecord = totalTCRsumwithrupee,AMCRecords= tSAMCVMList, AMCRecord= totalAMCsumwithrupee,SARecords= tSAVMList, SARecord= totalAdvancesumwithrupee,TotalComm= totalcommissonwithrupee, NetPayable= totalpayablewithrupee });
             }
             catch (Exception ex)
