@@ -18,9 +18,7 @@ namespace SCManager.UserInterface.Models
 
         [Required(ErrorMessage = "Bill Date is missing")]
         [Display(Name = "Bill Date")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime InvoiceDate { get; set; }
+        public string InvoiceDate { get; set; }
 
         [Display(Name = "Vendor")]
         [MaxLength(50)]

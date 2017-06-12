@@ -10,7 +10,7 @@ namespace SCManager.DataAccessObject.DTO
         public string SCCode { get; set; }
         public Guid ID { get; set; }
         public string InvoiceNo { get; set; }
-        public DateTime InvoiceDate { get; set; }
+        public string InvoiceDate { get; set; }
         public string VendorName { get; set; }      
         public string Remarks { get; set; }
         public decimal VATAmount { get; set; }

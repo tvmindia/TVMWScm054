@@ -32,8 +32,7 @@ $(document).ready(function () {
      { className: "text-center", "targets": [1, 2, 3, 4, 9, 5, 6, 7, 8, 9] },
      {
          "render": function (data, type, row) {
-             var returnstring = '';
-             debugger;
+             var returnstring = ''; 
              if (data) {                
                  returnstring = returnstring + '<span>' + row.AMCNO + ' / (' + row.AMCFromDateFormatted + ' to ' + row.AMCToDateFormatted + ' )</span><br/>';
                  
@@ -179,12 +178,28 @@ function List() {
 
 function ClearDiscountPercentage()
 {
-    $("#discountpercentage").val("");
+    debugger;
+    if ($('#Discount').val() != $('#DiscountAmount').val())
+        $("#discountpercentage").val("");
+
+    var subtotal = parseFloat($('#subtotal').val()) || 0; 
+    var discount = parseFloat($('#Discount').val()) || 0;
+    $('#total').val(roundoff(subtotal - discount));
+    var totalServiceTaxAmt = parseFloat($('#TotalServiceTaxAmt').val()) || 0;
+    var total = parseFloat($('#total').val()) || 0;
+    $('#grandtotal').val(roundoff(total + totalServiceTaxAmt));
+
 }
 
 function ClearServiceTaxPercentage()
 {
-    $("#ServiceTaxpercentage").val("");
+    debugger;
+    if ($('#TotalServiceTaxAmt').val() != $('#TotalServiceTaxAmount').val())
+        $("#ServiceTaxpercentage").val("");
+
+    var totalServiceTaxAmt = parseFloat($('#TotalServiceTaxAmt').val()) || 0; 
+    var total = parseFloat($('#total').val()) || 0;
+    $('#grandtotal').val(roundoff(total + totalServiceTaxAmt));
 }
 
 function goBack() {
@@ -319,6 +334,7 @@ function reset()
         $("#SerialNo").val("");
         $("#grandtotal").val("");
         $("#total").val("");
+        $('#BillNoMandatory').find('i').remove()
         //$('#ICRNo').attr('readonly', false);
         var $datepicker = $('#ICRDate');
         $datepicker.datepicker('setDate', null);
@@ -345,6 +361,41 @@ function ResetForm() {
         validator.settings.success($(this));
     });
     validator.resetForm();
+}
+function BillBookNumberValidation() {
+    debugger;
+    try {
+        var BillNo = $('#ICRNo').val();
+
+        var data = { "BillNo": BillNo, "BillBookType": "TCR" };
+        var ds = {};
+        ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
+        debugger;
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Records != '') {
+            return 1;
+        }
+        else {
+            if ($(".fa-exclamation-triangle").length == 0)
+            {
+                $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="Bill Book For This Entry does not exists!"></i>');
+            }
+            
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+            return 0;
+        }
+        return 1;
+
+
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+        return 0;
+    }
 }
 function DeleteItem(currentObj) {
    
@@ -461,7 +512,6 @@ function ICRBillDelete() {
 }
 function ICRBillDetailDelete(id, rw) {
     try {
-      
         var Hid = $('#HeaderID').val();
         if (id != '' && id != null && Hid != '' && Hid != null && Hid != emptyGUID) {
             var data = { "ID": id, "HeaderID": Hid };
@@ -473,6 +523,9 @@ function ICRBillDetailDelete(id, rw) {
             if (ds.Result == "OK") {
                 notyAlert('success', ds.Message);
                 BindICRBillEntry(Hid);
+                CalculateDiscountPercentage(0);
+                CalculateServiceTaxPercentage(0);
+                AmountSummary();
             }
             if (ds.Result == "ERROR") {
                 notyAlert('error', ds.Message);
@@ -488,10 +541,12 @@ function ICRBillDetailDelete(id, rw) {
             }
             else {
                 reset();
-                EG_Rebind();
+                EG_Rebind(); 
             }
             notyAlert('success', 'Deleted Successfully');
-
+            CalculateDiscountPercentage(0);
+            CalculateServiceTaxPercentage(0);
+            AmountSummary();
         }
 
     }
@@ -513,6 +568,7 @@ function BindICRBillEntry(id) {
         if (ds.Result == "OK") {
 
             BindICRBillEntryFields(ds.Records);
+            BillBookNumberValidation();
         }
         if (ds.Result == "ERROR") {
             notyAlert('error', ds.Message);
@@ -556,7 +612,7 @@ function CalculateServiceTaxPercentage(id) {
     var serviceTaxpercent = $("#ServiceTaxpercentage").val();
     var baseAmt = $("#total").val();
     if (serviceTaxpercent != "") {
-        serviceTaxpercent = parseInt(serviceTaxpercent);
+         serviceTaxpercent = parseFloat(serviceTaxpercent);
         if (serviceTaxpercent > 100) {
             serviceTaxpercent = 100
             $("#ServiceTaxpercentage").val(serviceTaxpercent);
@@ -569,6 +625,7 @@ function CalculateServiceTaxPercentage(id) {
         var vatamt = (baseAmt * serviceTaxpercent / 100)
         if (isNaN(vatamt)) { vatamt = 0.00 }
         $("#TotalServiceTaxAmt").val(roundoff(vatamt));
+        $('#TotalServiceTaxAmount').val(roundoff(vatamt));
 
     }
     else {
@@ -576,12 +633,9 @@ function CalculateServiceTaxPercentage(id) {
         {
             var vatamt = 0.00;
             $("#TotalServiceTaxAmt").val(roundoff(vatamt));
+            $('#TotalServiceTaxAmount').val(roundoff(vatamt));
         }
-    }
-       
-  
-    
-
+    } 
     AmountSummary();
 }
 
@@ -592,7 +646,7 @@ function CalculateDiscountPercentage(id) {
     if (discountpercent != "")
     {
        
-        discountpercent = parseInt(discountpercent);
+        discountpercent = parseFloat(discountpercent);
         if (discountpercent > 100) {
             discountpercent = 100
             $("#discountpercentage").val(discountpercent);
@@ -601,10 +655,11 @@ function CalculateDiscountPercentage(id) {
             discountpercent = 0
             $("#discountpercentage").val(discountpercent);
         }
-        baseAmt = parseInt(baseAmt);
+        baseAmt = parseFloat(baseAmt);
         var Discount = (baseAmt * discountpercent / 100)
         if (isNaN(Discount)) { Discount = 0.00 }
         $("#Discount").val(roundoff(Discount));
+        $('#DiscountAmount').val(roundoff(Discount));
     }
     else
     {
@@ -612,11 +667,12 @@ function CalculateDiscountPercentage(id) {
         {
             var Discount = 0.00
             $("#Discount").val(roundoff(Discount));
+            $('#DiscountAmount').val(roundoff(Discount));
         }
-    }
-   
+    } 
 
     AmountSummary();
+    CalculateServiceTaxPercentage(0);
 }
 
 function SaveSuccess(data, status) {
@@ -642,10 +698,6 @@ function SaveSuccess(data, status) {
     }
 }
 function CalculateAmount(row) {
-
-
-    debugger;
-
     //EG_GridData[row-1][Quantity] = value
     var qty = 0.00;
     var rate = 0.00;
@@ -682,10 +734,10 @@ function CalculateAmount(row) {
 
     $('#subtotal').val(roundoff(total));
     $("#STAmount").val(roundoff(total));
-    AmountSummary();
-    CalculateServiceTaxPercentage(0);
-    CalculateDiscountPercentage(0);
 
+    CalculateDiscountPercentage(0);
+    CalculateServiceTaxPercentage(0);
+    AmountSummary(); 
 }
 function BindJobNumberDropDown() {
 
@@ -717,6 +769,13 @@ function BindJobNumberDropDown() {
 }
 function AmountSummary() {
     debugger;
+    var total = 0.00;
+    for (i = 0; i < EG_GridData.length; i++) {
+        total = total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
+    }
+    $('#subtotal').val(roundoff(total));
+    $("#STAmount").val(roundoff(total));
+
     var subtotal = parseFloat($('#subtotal').val()) || 0;
     var totalServiceTaxAmt = parseFloat($('#TotalServiceTaxAmt').val()) || 0;
     var discount = parseFloat($('#Discount').val()) || 0;
@@ -725,7 +784,7 @@ function AmountSummary() {
     $('#grandtotal').val(roundoff(total + totalServiceTaxAmt));    
     $('#subtotal').val(roundoff(subtotal));
     $('#TotalServiceTaxAmt').val(roundoff(totalServiceTaxAmt));
-    $('#Discount').val(roundoff(discount))
+    $('#Discount').val(roundoff(discount)) 
 }
 
 

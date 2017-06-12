@@ -19,7 +19,7 @@ function BindForm(ID)
             //Hiddenfields
             $("#ModelTechEmpID").val(result.Employee.ID);
             $("#ModelJobID").val(result.ID);
-            $("#ModelServiceDate").val(ConvertJsonToDate(result.ServiceDate));
+            $("#ModelServiceDate").val((result.ServiceDate));
             BindJobNumberDropDown();
             if (result.ServiceType == "RPT") {
                 $(".calltypehidden").show();

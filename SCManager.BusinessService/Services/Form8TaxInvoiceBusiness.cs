@@ -84,11 +84,11 @@ namespace SCManager.BusinessService.Services
                 F.GrandTotal = F.Subtotal + F.VATAmount - F.Discount;
 
                 if (F.ChallanDate != null)
-                    F.ChallanDateFormatted = F.ChallanDate.GetValueOrDefault().ToString(settings.dateformat);
+                    F.ChallanDateFormatted = F.ChallanDate;//.GetValueOrDefault().ToString(settings.dateformat);
                 if (F.PODate != null)
-                    F.PODateFormatted = F.PODate.GetValueOrDefault().ToString(settings.dateformat);
+                    F.PODateFormatted = F.PODate;//.GetValueOrDefault().ToString(settings.dateformat);
                 if (F.InvoiceDate != null)
-                    F.InvoiceDateFormatted = F.InvoiceDate.ToString(settings.dateformat);
+                    F.InvoiceDateFormatted = F.InvoiceDate;//.ToString(settings.dateformat);
             }
          
         }
