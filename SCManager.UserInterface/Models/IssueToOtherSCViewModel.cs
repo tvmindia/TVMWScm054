@@ -16,9 +16,7 @@ namespace SCManager.UserInterface.Models
         public string InvoiceNo { get; set; }
         [Required(ErrorMessage = "Invoice Date is missing")]
         [Display(Name = "Invoice Date")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? InvoiceDate { get; set; }
+        public string InvoiceDate { get; set; }
         public string InvoiceDateFormatted { get; set; }
         [Required(ErrorMessage = "Service Center is missing")]
         [Display(Name = "To Service Center")]

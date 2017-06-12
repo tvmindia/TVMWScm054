@@ -86,7 +86,7 @@ namespace SCManager.RepositoryServices.Services
 
         public Form8B InsertForm8B(Form8B frm8B, UA UA)
         {
-            Form8B Result = null;
+            //Form8B Result = null;
             try
             {
                 SqlParameter outputStatus, outputID = null;

@@ -19,13 +19,9 @@ namespace SCManager.UserInterface.Models
       
         public string Technician { get; set; }
         [Required(ErrorMessage = "Please select open date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
         [Display(Name = "Open Date")]
         public string OpenDate { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        public DateTime? ReturnDate { get; set; }
+        public string ReturnDate { get; set; }
         [Required(ErrorMessage = "Please select Technician")]
         public Guid? EmpID { get; set; }
      

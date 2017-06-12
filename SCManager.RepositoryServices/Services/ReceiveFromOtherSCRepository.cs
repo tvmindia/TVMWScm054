@@ -51,7 +51,7 @@ namespace SCManager.RepositoryServices.Services
                                     ReceiveFromOtherSC _ReceiveFromOtherSClistObj = new ReceiveFromOtherSC();
                                     {
                                         _ReceiveFromOtherSClistObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _ReceiveFromOtherSClistObj.ID);
-                                        _ReceiveFromOtherSClistObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()) : _ReceiveFromOtherSClistObj.InvoiceDate);
+                                        _ReceiveFromOtherSClistObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).ToString("dd-MMM-yyyy") : _ReceiveFromOtherSClistObj.InvoiceDate);
                                         _ReceiveFromOtherSClistObj.InvoiceNo = (sdr["InvoiceNo"].ToString() != "" ? (sdr["InvoiceNo"].ToString()) : _ReceiveFromOtherSClistObj.InvoiceNo);
                                        
                                         _ReceiveFromOtherSClistObj.FromSCName = (sdr["FromSCName"].ToString() != "" ? (sdr["FromSCName"].ToString()) : _ReceiveFromOtherSClistObj.FromSCName);
@@ -135,7 +135,7 @@ namespace SCManager.RepositoryServices.Services
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             return receiveFromOtherSC;
         }
@@ -285,7 +285,7 @@ namespace SCManager.RepositoryServices.Services
                                     ReceiveFromOtherSC _ReceiveFromOtherSCObj = new ReceiveFromOtherSC();
                                     {
                                         _ReceiveFromOtherSCObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _ReceiveFromOtherSCObj.ID);                                      
-                                        _ReceiveFromOtherSCObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()) : _ReceiveFromOtherSCObj.InvoiceDate);
+                                        _ReceiveFromOtherSCObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).ToString("dd-MMM-yyyy") : _ReceiveFromOtherSCObj.InvoiceDate);
                                         _ReceiveFromOtherSCObj.InvoiceNo = (sdr["InvoiceNo"].ToString() != "" ? (sdr["InvoiceNo"].ToString()) : _ReceiveFromOtherSCObj.InvoiceNo);                                       
                                         _ReceiveFromOtherSCObj.FromSCName = (sdr["FromSCName"].ToString() != "" ? (sdr["FromSCName"].ToString()) : _ReceiveFromOtherSCObj.FromSCName);
                                         _ReceiveFromOtherSCObj.Subtotal = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : _ReceiveFromOtherSCObj.Subtotal);

@@ -133,7 +133,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ReceiveFromTechnicianObj.Material = (sdr["Material"].ToString() != "" ? (sdr["Material"].ToString()) : _ReceiveFromTechnicianObj.Material);
                                         _ReceiveFromTechnicianObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _ReceiveFromTechnicianObj.Description);
                                         _ReceiveFromTechnicianObj.empName = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : _ReceiveFromTechnicianObj.empName);
-                                        _ReceiveFromTechnicianObj.ReceiveDate = (sdr["ReceiveDate"].ToString() != "" ? DateTime.Parse(sdr["ReceiveDate"].ToString()) : _ReceiveFromTechnicianObj.ReceiveDate);
+                                        _ReceiveFromTechnicianObj.ReceiveDate = (sdr["ReceiveDate"].ToString() != "" ? DateTime.Parse(sdr["ReceiveDate"].ToString()).ToString("dd-MMM-yyyy") : _ReceiveFromTechnicianObj.ReceiveDate);
                                         _ReceiveFromTechnicianObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _ReceiveFromTechnicianObj.UOM);
                                     }
 
@@ -154,7 +154,7 @@ namespace SCManager.RepositoryServices.Services
 
         #region InsertReceiveFromTechnician
 
-        public List<ReceiveFromTechnician> InsertReceiveFromTechnician(ReceiveFromTechnician receiveFromTechnician, Guid? empID, DateTime? receiveDate, UA UA)
+        public List<ReceiveFromTechnician> InsertReceiveFromTechnician(ReceiveFromTechnician receiveFromTechnician, Guid? empID, string receiveDate, UA UA)
         {
             List<ReceiveFromTechnician> issueToTechList = null;
             try
@@ -210,7 +210,7 @@ namespace SCManager.RepositoryServices.Services
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             return issueToTechList;
         }
@@ -219,7 +219,7 @@ namespace SCManager.RepositoryServices.Services
 
         #region UpdateReceiveFromTechnician
 
-        public List<ReceiveFromTechnician> UpdateReceiveFromTechnician(ReceiveFromTechnician receiveFromTechnician, Guid? empID, DateTime? issueDate, UA UA)
+        public List<ReceiveFromTechnician> UpdateReceiveFromTechnician(ReceiveFromTechnician receiveFromTechnician, Guid? empID, string issueDate, UA UA)
         {
             List<ReceiveFromTechnician> receiveFromTechnicianList = null;
             try

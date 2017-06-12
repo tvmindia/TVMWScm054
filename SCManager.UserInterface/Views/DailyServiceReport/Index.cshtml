@@ -59,7 +59,7 @@
                                 <label class="control-label">Service Date</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="date" class="form-control" id="txtServiceDate" onChange="ServiceDateOnChange(this)">
+                                <input type="text" class="form-control datepicker" id="txtServiceDate" onChange="ServiceDateOnChange(this)">
                                 <input type="hidden" id="hdfcurrentdate" value=@ViewBag.Servdate name="hdfcurrentdate" />
                             </div>
                             <div class="col-md-1 mandatory"></div>
@@ -118,7 +118,7 @@
                                 <label class="control-label">Service Date</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="date" class="form-control" id="txtServiceDate2" onChange="RefreshServiceReportSummaryTable(this)">
+                                <input type="text" class="form-control datepicker" id="txtServiceDate2" onChange="RefreshServiceReportSummaryTable(this)">
                             </div>
                             <div class="col-md-1 mandatory"></div>
                         </div>

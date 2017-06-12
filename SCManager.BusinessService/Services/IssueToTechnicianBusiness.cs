@@ -51,11 +51,11 @@ namespace SCManager.BusinessService.Services
                 SCManagerSettings settings = new SCManagerSettings();
 
                 if (itt.IssueDate != null)
-                    itt.DateFormatted = itt.IssueDate.GetValueOrDefault().ToString(settings.dateformat);
+                    itt.DateFormatted = itt.IssueDate;//.GetValueOrDefault().ToString(settings.dateformat);
             }
 
         }
-        public List<IssueToTechnician> InsertUpdateIssueToTechnician(List<IssueToTechnician> issueToTechnician, Guid? empID, DateTime? issueDate, UA UA)
+        public List<IssueToTechnician> InsertUpdateIssueToTechnician(List<IssueToTechnician> issueToTechnician, Guid? empID, string issueDate, UA UA)
         {
             List<IssueToTechnician> itemToTech = null;
 

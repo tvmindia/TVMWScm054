@@ -81,7 +81,7 @@ namespace SCManager.RepositoryServices.Services
 
         public LocalPurchase InsertLocalPurchase(LocalPurchase LP, UA UA)
         {
-            LocalPurchase Result = null;
+            //LocalPurchase Result = null;
             try
             {
                 SqlParameter outputStatus, outputID = null;

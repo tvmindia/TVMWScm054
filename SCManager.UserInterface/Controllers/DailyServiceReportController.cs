@@ -46,7 +46,7 @@ namespace SCManager.UserInterface.Controllers
             }
             jobVM.Employees = selectListItem;
 
-            ViewBag.Servdate = DateTime.Now.ToString("yyyy-MM-dd");
+            ViewBag.Servdate = DateTime.Now.ToString("dd-MMM-yyyy");
          
             return View(jobVM);
         }

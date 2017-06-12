@@ -10,7 +10,7 @@ namespace SCManager.DataAccessObject.DTO
         public string SCCode { get; set; }
         public Guid? ID { get; set; }
         public Guid? EmpID { get; set; }
-        public DateTime? IssueDate { get; set; }
+        public string IssueDate { get; set; }
         public int? Qty { get; set; }
         public Guid? HiddenEmpID { get; set; }
         public LogDetails logDetails { get; set; }
