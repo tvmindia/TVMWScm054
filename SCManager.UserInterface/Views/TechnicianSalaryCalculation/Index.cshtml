@@ -8,10 +8,31 @@
     @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatable")
    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatableFixedColumns")
 <style>
-  #totalsummary>tbody>tr>td{
+  #totalsummary>tbody>tr>td
+    {
   text-align: center;
  
 }
+.modelfooter
+{
+padding-right: 50px;
+text-align: right;
+position: fixed;
+width: 100%;
+bottom: 15px;
+
+}
+.totallabel
+{
+    font-size: 15px;
+    font-family:'Segoe UI';
+}
+.totalfooter
+{
+    font-weight: 500;
+    font-size: 26px;
+    font-family:'Segoe UI';
+ }
 </style>
 
 }
@@ -146,7 +167,7 @@
 
           
             
-            <div class="modal-body" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;">
+            <div class="modal-body" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;padding-top: 0px;padding-bottom: 1px;">
                 @*-------*@
                
                 <div class="container-fluid" style="background-color: white;margin-bottom: 15px;">
@@ -156,7 +177,7 @@
                         <table id="totalsummary" style="width:100%;">
                             <tr>
                                 <td>
-                                    <span style="font-weight: 300;font-size: 14px;">Total Commission(₹):</span>
+                                    <span style="font-weight: 300;font-size: 14px;">Total Commission:</span>
                                     <span id="lblTotalCommission" style="font-weight: 300;font-size: 14px;">45435</span>
                                 </td>
                                 <td style="border-left: 1px solid;">
@@ -164,12 +185,12 @@
                                 </td>
 
                                 <td>
-                                    <span style="font-weight: 300;font-size: 14px;">Salary Advance(₹):</span>
+                                    <span style="font-weight: 300;font-size: 14px;">Salary Advance:</span>
                                     <span id="lblSalaryAdvance" style="font-weight: 300;font-size: 14px;">45435</span>
                                 </td>
                                 <td style="border-left: 1px solid;"></td>
                                 <td>
-                                    <span style="font-weight: 300;font-size: 14px;">Net Payable Salary(₹):</span>
+                                    <span style="font-weight: 300;font-size: 14px;">Net Payable Salary:</span>
                                     <span id="lblNetPayable" style="font-weight: 300;font-size: 14px;">45435</span>
                                 </td>
                             </tr>
@@ -200,7 +221,7 @@
 
                             <div class="container-fluid">
                               
-                                <div class="row" style="background-color: ghostwhite;">
+                                <div class="row">
 
                                     <table id="tblJobCommissionDetails" class="table compact" cellspacing="0" width="100%">
                                         <thead>
@@ -219,34 +240,17 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="container-fluid" style="padding-right: 0px;">
-                                <div class="col-md-8">
-
-                                    
-
-                                </div>
-                                <div class="col-md-4" style="padding-right: 4px;text-align: right;">
-                                    <span style="font-weight: 600;font-size: 14px;">Sum:</span>
-                                    <span id="lbljobsum" style="font-weight: 600;font-size: 14px;"></span>
-                                </div>
-
+                            <div class="footer modelfooter">
+                                <span class="totallabel">Total:</span>
+                                <span id="lbljobsum" class="totalfooter"></span>
                             </div>
                           
-                        </div>
+                           </div>
                         <div class="tab-pane fade" id="2">
                             <div class="col-md-12">&nbsp;</div>
                         <div class="container-fluid">
-                            <div class="container-fluid" style="padding-right: 0px;">
-                                <div class="col-md-8">
-                                    <span style="font-weight: 600;font-size: 14px;position: absolute;left: -29px;">TCR Commission</span>
-                                </div>
-                                <div class="col-md-4" style="padding-right: 4px;text-align: right;">
-                                    <span style="font-weight: 600;font-size: 14px;">Sum:</span>
-                                    <span id="lbltcrsum" style="font-weight: 600;font-size: 14px;"></span>
-                                </div>
-
-                            </div>
-                            <div class="row" style="background-color: ghostwhite;">
+                          
+                            <div class="row">
 
                                 <table id="tblTCRBillDetails" class="table compact" cellspacing="0" width="100%">
                                     <thead>
@@ -263,26 +267,24 @@
                                     </thead>
                                 </table>
                             </div>
+
+
                         </div>
+                            <div class="footer modelfooter">
+
+                                <span class="totallabel">Total:</span>
+                                <span id="lbltcrsum" class="totalfooter"></span>
+
+                            </div>
+                           
 
                         </div>
 
                         <div class="tab-pane fade" id="3">
                             <div class="col-md-12">&nbsp;</div>
                             <div class="container-fluid">
-                                <div class="container-fluid" style="padding-right: 0px;">
-                                    <div class="col-md-8">
-
-                                        <span style="font-weight: 600;font-size: 14px;position: absolute;left: -29px;">AMC Commission</span>
-
-                                    </div>
-                                    <div class="col-md-4" style="padding-right: 4px;text-align: right;">
-                                        <span style="font-weight: 600;font-size: 14px;">Sum:</span>
-                                        <span id="lblamcsum" style="font-weight: 600;font-size: 14px;"></span>
-                                    </div>
-
-                                </div>
-                                <div class="row" style="background-color: ghostwhite;">
+                              
+                                <div class="row">
 
                                     <table id="tblAMCDetails" class="table compact" cellspacing="0" width="100%">
                                         <thead>
@@ -297,22 +299,18 @@
                                 </div>
 
                              </div>
+                            <div class="footer modelfooter">
+                                <span class="totallabel">Total:</span>
+                                <span id="lblamcsum" class="totalfooter"></span>
+
+                            </div>
                             </div>
                       
                         <div class="tab-pane fade" id="4">
                             <div class="col-md-12">&nbsp;</div>
                             <div class="container-fluid">
-                                <div class="container-fluid" style="padding-right: 0px;">
-                                    <div class="col-md-8">
-                                        <span style="font-weight: 600;font-size: 14px;position: absolute;left: -29px;">Advance</span>
-                                    </div>
-                                    <div class="col-md-4" style="padding-right: 4px;text-align: right;">
-                                        <span style="font-weight: 600;font-size: 14px;">Sum:</span>
-                                        <span id="lbladvancesum" style="font-weight: 600;font-size: 14px;"></span>
-                                    </div>
-
-                                </div>
-                                <div class="row" style="background-color: ghostwhite;">
+                             
+                                <div class="row">
 
                                     <table id="tblAdvanceDetails" class="table compact" cellspacing="0" width="100%">
                                         <thead>
@@ -324,6 +322,11 @@
                                         </thead>
                                     </table>
                                 </div>
+                            </div>
+                            <div class="footer modelfooter">
+                                <span class="totallabel">Total:</span>
+                                <span id="lbladvancesum" class="totalfooter"></span>
+
                             </div>
                             </div>
                        

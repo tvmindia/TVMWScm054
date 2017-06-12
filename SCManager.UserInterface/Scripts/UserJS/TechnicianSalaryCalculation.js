@@ -74,12 +74,16 @@ $(document).ready(function () {
 
         DataTables.JobCommissionDetails = $('#tblJobCommissionDetails').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
              order: [],
-             searching: false,
+             searching: true,
              paging: true,
-             pageLength: 50,
+             pageLength: 8,
              data: null,
+             language: {
+                 search: "_INPUT_",
+                 searchPlaceholder: "Search"
+             },
              columns: [
                { "data": "ServiceDate", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
                { "data": "JobNo", "defaultContent": "<i>-</i>" },
@@ -108,12 +112,16 @@ $(document).ready(function () {
 
         DataTables.TCRBillCommissionDetails = $('#tblTCRBillDetails').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
              order: [],
-             searching: false,
+             searching: true,
              paging: true,
-             pageLength: 50,
+             pageLength: 8,
              data: null,
+             language: {
+                 search: "_INPUT_",
+                 searchPlaceholder: "Search"
+             },
              columns: [
                { "data": "BillDate", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
                { "data": "BillNo", "defaultContent": "<i>-</i>" },
@@ -142,12 +150,16 @@ $(document).ready(function () {
 
         DataTables.AMCCommissionDetails = $('#tblAMCDetails').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
              order: [],
-             searching: false,
+             searching: true,
              paging: true,
-             pageLength: 50,
+             pageLength: 8,
              data: null,
+             language: {
+                 search: "_INPUT_",
+                 searchPlaceholder: "Search"
+             },
              columns: [
                { "data": "ICRDate", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
                { "data": "ICRNo", "defaultContent": "<i>-</i>" },
@@ -172,12 +184,16 @@ $(document).ready(function () {
 
         DataTables.AdvanceDetails = $('#tblAdvanceDetails').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
              order: [],
-             searching: false,
+             searching: true,
              paging: true,
-             pageLength: 50,
+             pageLength: 8,
              data: null,
+             language: {
+                 search: "_INPUT_",
+                 searchPlaceholder: "Search"
+             },
              columns: [
                { "data": "RefDate", render: function (data, type, row) { return ConvertJsonToDate(data); }, "defaultContent": "<i>-</i>" },
                { "data": "Note", "defaultContent": "<i>-</i>" },
@@ -208,13 +224,14 @@ function ViewMore(curobj)
     try
     {
         var rowData = DataTables.SalaryTable.row($(curobj).parents('tr')).data();
-        RefreshJobCommissionDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
-        RefreshTCRCommissionDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
-        RefreshAMCCommissionDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
-        RefreshAdvanceDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
+       // RefreshJobCommissionDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
+       // RefreshTCRCommissionDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
+       // RefreshAMCCommissionDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
+        //   RefreshAdvanceDetailsTable(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
+        BindAllCommissionTables(rowData.SCCode, rowData.EmpID, rowData.Month, rowData.Year);
         $("#TechnicianLabel").text(rowData.Name);
-        var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        $("#ServiceDateLabel").text(monthNames[rowData.Month]);
+        var monthNames = ["","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        $("#ServiceDateLabel").text(monthNames[rowData.Month] +'/'+ rowData.Year);
         $("#ModelSalaryDetails").modal('show');
     }
     catch(e)
@@ -436,6 +453,93 @@ function SalaryCalculate()
         }
       
        
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+
+
+function BindAllCommissionTables(SCCode, EmpID, Month, Year) {
+    try {
+        var emptyarr = [];
+        var data = { "SCCode": SCCode, "EmpID": EmpID, "Month": Month, "Year": Year };
+        var ds = {};
+        ds = GetDataFromServer("TechnicianSalaryCalculation/GetAllBreakUpSalaryByTechnician/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            if (ds.JobRecords)
+            {
+                DataTables.JobCommissionDetails.clear().rows.add(ds.JobRecords).draw(false);
+                $("#lbljobsum").text(ds.JobRecord);
+            }
+            else
+            {
+               
+                DataTables.JobCommissionDetails.clear().rows.add(emptyarr).draw(false);
+                $("#lbljobsum").text('');
+            }
+            if (ds.TCRRecords)
+            {
+                DataTables.TCRBillCommissionDetails.clear().rows.add(ds.TCRRecords).draw(false);
+                $("#lbltcrsum").text(ds.TCRRecord);
+            }
+            else
+            {
+               
+                DataTables.TCRBillCommissionDetails.clear().rows.add(emptyarr).draw(false);
+                $("#lbltcrsum").text('');
+            }
+            if (ds.AMCRecords) {
+                DataTables.AMCCommissionDetails.clear().rows.add(ds.AMCRecords).draw(false);
+                $("#lblamcsum").text(ds.AMCRecord);
+             
+            }
+            else {
+
+                DataTables.AMCCommissionDetails.clear().rows.add(emptyarr).draw(false);
+                $("#lblamcsum").text('');
+            }
+
+            if (ds.SARecords) {
+                DataTables.AdvanceDetails.clear().rows.add(ds.SARecords).draw(false);
+                $("#lbladvancesum").text(ds.SARecord);
+
+            }
+            else {
+
+                DataTables.AdvanceDetails.clear().rows.add(emptyarr).draw(false);
+                $("#lbladvancesum").text('');
+            }
+            if (ds.TotalComm)
+            {
+                $("#lblTotalCommission").text(ds.TotalComm);
+            }
+            else
+            {
+                $("#lblTotalCommission").text('');
+            }
+            if (ds.SARecord) {
+                $("#lblSalaryAdvance").text(ds.SARecord);
+            }
+            else {
+                $("#lblSalaryAdvance").text('');
+            }
+            if (ds.NetPayable) {
+                $("#lblNetPayable").text(ds.NetPayable);
+            }
+            else {
+                $("#lblNetPayable").text('');
+            }
+           
+        }
+        if (ds.Result == "ERROR") {
+            notyAlert('error', ds.Message);
+           
+        }
     }
     catch (e) {
         notyAlert('error', e.message);
