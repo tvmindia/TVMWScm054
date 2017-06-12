@@ -152,7 +152,7 @@ namespace SCManager.BusinessService.Services
                 T.GrandTotal = T.Subtotal + T.VATAmount;
 
                 if (T.InvoiceDate != null)
-                    T.InvoiceDateFormatted = T.InvoiceDate.GetValueOrDefault().ToString(settings.dateformat);
+                    T.InvoiceDateFormatted = T.InvoiceDate;//.GetValueOrDefault().ToString(settings.dateformat);
             }
 
         }

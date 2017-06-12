@@ -11,8 +11,8 @@ namespace SCManager.RepositoryServices.Contracts
     {
         List<ReceiveFromTechnician> GetReceiptsSheet(string empID, string transferDate, UA UA);
         List<ReceiveFromTechnician> GetAllReceiptsFromTechnician(string empID, string fromDate, string toDate, UA UA);
-        List<ReceiveFromTechnician> InsertReceiveFromTechnician(ReceiveFromTechnician receiveFromTechnician, Guid? empID, DateTime? receiveDate, UA UA);
-        List<ReceiveFromTechnician> UpdateReceiveFromTechnician(ReceiveFromTechnician receiveFromTechnician, Guid? empID, DateTime? issueDate, UA UA);
+        List<ReceiveFromTechnician> InsertReceiveFromTechnician(ReceiveFromTechnician receiveFromTechnician, Guid? empID, string receiveDate, UA UA);
+        List<ReceiveFromTechnician> UpdateReceiveFromTechnician(ReceiveFromTechnician receiveFromTechnician, Guid? empID, string issueDate, UA UA);
         string DeleteReceiveFromTechnician(string ID, UA ua);
     }
 }

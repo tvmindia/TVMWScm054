@@ -51,11 +51,11 @@ namespace SCManager.BusinessService.Services
                 SCManagerSettings settings = new SCManagerSettings();
 
                 if (rft.ReceiveDate != null)
-                    rft.DateFormatted = rft.ReceiveDate.GetValueOrDefault().ToString(settings.dateformat);
+                    rft.DateFormatted = rft.ReceiveDate;//.GetValueOrDefault().ToString(settings.dateformat);
             }
 
         }
-        public List<ReceiveFromTechnician> InsertUpdateReceiveFromTechnician(List<ReceiveFromTechnician> receiveFromTechnician, Guid? empID, DateTime? receiveDate, UA UA)
+        public List<ReceiveFromTechnician> InsertUpdateReceiveFromTechnician(List<ReceiveFromTechnician> receiveFromTechnician, Guid? empID, string receiveDate, UA UA)
         {
             List<ReceiveFromTechnician> receiveFromTech = null;
 

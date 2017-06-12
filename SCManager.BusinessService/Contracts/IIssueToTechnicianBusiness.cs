@@ -9,7 +9,7 @@ namespace SCManager.BusinessService.Contracts
 {
    public interface IIssueToTechnicianBusiness
     {
-        List<IssueToTechnician> InsertUpdateIssueToTechnician(List<IssueToTechnician> issueToTechnician,Guid? empID,DateTime? issueDate, UA UA);
+        List<IssueToTechnician> InsertUpdateIssueToTechnician(List<IssueToTechnician> issueToTechnician,Guid? empID,string issueDate, UA UA);
         List<IssueToTechnician> GetAllIssueToTechnician(string empID, string fromDate, string toDate, UA UA);
         List<IssueToTechnician> GetIssueSheets(string ID, string transferDate, UA UA);
         string DeleteIssueToTechnician(string ID, UA ua);

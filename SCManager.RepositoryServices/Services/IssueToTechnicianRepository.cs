@@ -132,7 +132,7 @@ namespace SCManager.RepositoryServices.Services
                                         _IssueToTechnicianObj.Material = (sdr["Material"].ToString() != "" ? (sdr["Material"].ToString()) : _IssueToTechnicianObj.Material);
                                         _IssueToTechnicianObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _IssueToTechnicianObj.Description);
                                         _IssueToTechnicianObj.empName = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : _IssueToTechnicianObj.empName);
-                                        _IssueToTechnicianObj.IssueDate = (sdr["IssueDate"].ToString() != "" ? DateTime.Parse(sdr["IssueDate"].ToString()) : _IssueToTechnicianObj.IssueDate);
+                                        _IssueToTechnicianObj.IssueDate = (sdr["IssueDate"].ToString() != "" ? DateTime.Parse(sdr["IssueDate"].ToString()).ToString("dd-MMM-yyyy") : _IssueToTechnicianObj.IssueDate);
                                         _IssueToTechnicianObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _IssueToTechnicianObj.UOM);
                                     }
 
@@ -153,7 +153,7 @@ namespace SCManager.RepositoryServices.Services
 
         #region InsertIssueToTechnician
 
-        public List<IssueToTechnician> InsertIssueToTechnician(IssueToTechnician issueToTechnician, Guid? empID, DateTime? issueDate, UA UA)
+        public List<IssueToTechnician> InsertIssueToTechnician(IssueToTechnician issueToTechnician, Guid? empID, string issueDate, UA UA)
         {
             List<IssueToTechnician> issueToTechList = null;
             try
@@ -218,7 +218,7 @@ namespace SCManager.RepositoryServices.Services
 
         #region UpdateIssueToTechnician
 
-        public List<IssueToTechnician> UpdateIssueToTechnician(IssueToTechnician issueToTechnician, Guid? empID, DateTime? issueDate, UA UA)
+        public List<IssueToTechnician> UpdateIssueToTechnician(IssueToTechnician issueToTechnician, Guid? empID, string issueDate, UA UA)
         {
             List<IssueToTechnician> issueToTechList = null;
             try
