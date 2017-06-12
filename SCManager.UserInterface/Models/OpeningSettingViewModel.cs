@@ -24,9 +24,7 @@ namespace SCManager.UserInterface.Models
 
         [Required(ErrorMessage = "With effect Date is missing")]
         [Display(Name = "With Effect Date")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime WithEffectDate { get; set; }
+        public string WithEffectDate { get; set; }
 
         public List<OpeningDetailViewModel> OpeningDetails { get; set; }
         public String DetailJSON { get; set; }

@@ -57,9 +57,9 @@ namespace SCManager.BusinessService.Services
         private void OpeningSettingBL(OpeningSetting F)
         {
             SCManagerSettings settings = new SCManagerSettings();
-           
+
             if (F.WithEffectDate != null)
-                F.WithEffectDateFormatted = F.WithEffectDate.ToString(settings.dateformat);
+                F.WithEffectDateFormatted = F.WithEffectDate;//.ToString(settings.dateformat);
             F.CashFormatted = _commonBusiness.ConvertCurrency(F.Cash,2);
             F.BankFormatted = _commonBusiness.ConvertCurrency(F.Bank,2);
 
