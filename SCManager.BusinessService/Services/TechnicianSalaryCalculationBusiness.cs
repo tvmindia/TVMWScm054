@@ -52,13 +52,61 @@ namespace SCManager.BusinessService.Services
             {
                 //
                 TechnicianSalaryJobBreakUpList = _technicianSalaryCalculationRepository.GetTechnicianJobCommissionBreakUp(SCCode, EmpID, Month, Year);
-                TechnicianSalaryJobBreakUpList = TechnicianSalaryJobBreakUpList != null ? TechnicianSalaryJobBreakUpList.Select(c => { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("yyyy-MM-dd"); return c; }).ToList() : null;
+                TechnicianSalaryJobBreakUpList = TechnicianSalaryJobBreakUpList != null ? TechnicianSalaryJobBreakUpList.Select(c => { c.ServiceDate = DateTime.Parse(c.ServiceDate).Date.ToString("dd-MMM-yyyy"); return c; }).ToList() : null;
             }
             catch(Exception ex)
             {
                 throw ex;
             }
             return TechnicianSalaryJobBreakUpList;
+        }
+
+        public List<TechnicianSalaryTCRBreakUp> GetTechnicianTCRCommissionBreakUp(string SCCode, Guid EmpID, short? Month, short? Year)
+        {
+            List<TechnicianSalaryTCRBreakUp> TechnicianSalaryTCRBreakUpList = null;
+            try
+            {
+                //
+                TechnicianSalaryTCRBreakUpList = _technicianSalaryCalculationRepository.GetTechnicianTCRCommissionBreakUp(SCCode, EmpID, Month, Year);
+                TechnicianSalaryTCRBreakUpList = TechnicianSalaryTCRBreakUpList != null ? TechnicianSalaryTCRBreakUpList.Select(c => { c.BillDate = DateTime.Parse(c.BillDate).Date.ToString("dd-MMM-yyyy"); return c; }).ToList() : null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return TechnicianSalaryTCRBreakUpList;
+        }
+
+        public List<TechnicianSalaryAMCBreakUp> GetTechnicianAMCCommissionBreakUp(string SCCode, Guid EmpID, short? Month, short? Year)
+        {
+            List<TechnicianSalaryAMCBreakUp> TechnicianSalaryAMCBreakUpList = null;
+            try
+            {
+                //
+                TechnicianSalaryAMCBreakUpList = _technicianSalaryCalculationRepository.GetTechnicianAMCCommissionBreakUp(SCCode, EmpID, Month, Year);
+                TechnicianSalaryAMCBreakUpList = TechnicianSalaryAMCBreakUpList != null ? TechnicianSalaryAMCBreakUpList.Select(c => { c.ICRDate = DateTime.Parse(c.ICRDate).Date.ToString("dd-MMM-yyyy"); return c; }).ToList() : null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return TechnicianSalaryAMCBreakUpList;
+        }
+
+        public List<TechnicianSalaryAdvanceBreakUp> GetTechnicianSalaryAdvanceBreakUp(string SCCode, Guid EmpID, short? Month, short? Year)
+        {
+            List<TechnicianSalaryAdvanceBreakUp> TechnicianSalaryAdvanceBreakUpList = null;
+            try
+            {
+                //
+                TechnicianSalaryAdvanceBreakUpList = _technicianSalaryCalculationRepository.GetTechnicianSalaryAdvanceBreakUp(SCCode, EmpID, Month, Year);
+                TechnicianSalaryAdvanceBreakUpList = TechnicianSalaryAdvanceBreakUpList != null ? TechnicianSalaryAdvanceBreakUpList.Select(c => { c.RefDate = DateTime.Parse(c.RefDate).Date.ToString("dd-MMM-yyyy"); return c; }).ToList() : null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return TechnicianSalaryAdvanceBreakUpList;
         }
     }
 

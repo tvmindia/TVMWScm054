@@ -11,7 +11,7 @@ namespace SCManager.BusinessService.Contracts
     {
         List<ReceiveFromTechnician> GetReceiptsSheet(string ID, string transferDate, UA UA);
         List<ReceiveFromTechnician> GetAllReceiptsFromTechnician(string empID, string fromDate, string toDate, UA UA);
-        List<ReceiveFromTechnician> InsertUpdateReceiveFromTechnician(List<ReceiveFromTechnician> receiveFromTechnician, Guid? empID, DateTime? receiveDate, UA UA);
+        List<ReceiveFromTechnician> InsertUpdateReceiveFromTechnician(List<ReceiveFromTechnician> receiveFromTechnician, Guid? empID, string receiveDate, UA UA);
         string DeleteReceiveFromTechnician(string ID, UA ua);
     }
 }

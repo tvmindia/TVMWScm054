@@ -55,7 +55,7 @@ namespace SCManager.RepositoryServices.Services
                                         _DefectiveDamagelistObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _DefectiveDamagelistObj.ID);
                                         _DefectiveDamagelistObj.ItemCode = (sdr["ItemCode"].ToString() != "" ? (sdr["ItemCode"].ToString()) : _DefectiveDamagelistObj.ItemCode);
                                         _DefectiveDamagelistObj.Type = (sdr["Type"].ToString() != "" ? (sdr["Type"].ToString()) : _DefectiveDamagelistObj.Type);
-                                        _DefectiveDamagelistObj.OpenDate = (sdr["OpenDate"].ToString() != "" ? DateTime.Parse(sdr["OpenDate"].ToString()) : _DefectiveDamagelistObj.OpenDate);
+                                        _DefectiveDamagelistObj.OpenDate = (sdr["OpenDate"].ToString() != "" ? DateTime.Parse(sdr["OpenDate"].ToString()).ToString("dd-MMM-yyyy") : _DefectiveDamagelistObj.OpenDate);
                                         _DefectiveDamagelistObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : _DefectiveDamagelistObj.RefNo);
                                         _DefectiveDamagelistObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _DefectiveDamagelistObj.Description);
                                         _DefectiveDamagelistObj.Qty = (sdr["Qty"].ToString() != "" ? int.Parse(sdr["Qty"].ToString()) : _DefectiveDamagelistObj.Qty);
@@ -114,7 +114,7 @@ namespace SCManager.RepositoryServices.Services
                                         _DefectiveDamagelistObj.EmpID = (sdr["EmpID"].ToString() != "" ? Guid.Parse(sdr["EmpID"].ToString()) : _DefectiveDamagelistObj.EmpID);
                                         _DefectiveDamagelistObj.ItemCode = (sdr["ItemCode"].ToString() != "" ? (sdr["ItemCode"].ToString()) : _DefectiveDamagelistObj.ItemCode);
                                         _DefectiveDamagelistObj.Type = (sdr["Type"].ToString() != "" ? (sdr["Type"].ToString()) : _DefectiveDamagelistObj.Type);
-                                        _DefectiveDamagelistObj.OpenDate = (sdr["OpenDate"].ToString() != "" ? DateTime.Parse(sdr["OpenDate"].ToString()) : _DefectiveDamagelistObj.OpenDate);
+                                        _DefectiveDamagelistObj.OpenDate = (sdr["OpenDate"].ToString() != "" ? DateTime.Parse(sdr["OpenDate"].ToString()).ToString("dd-MMM-yyyy") : _DefectiveDamagelistObj.OpenDate);
                                         _DefectiveDamagelistObj.RefNo = (sdr["RefNo"].ToString() != "" ? (sdr["RefNo"].ToString()) : _DefectiveDamagelistObj.RefNo);
                                         _DefectiveDamagelistObj.TicketNo = (sdr["TicketNo"].ToString() != "" ? (sdr["TicketNo"].ToString()) : _DefectiveDamagelistObj.TicketNo);
                                         _DefectiveDamagelistObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _DefectiveDamagelistObj.Description);

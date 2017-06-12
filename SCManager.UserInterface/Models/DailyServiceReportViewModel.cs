@@ -15,9 +15,8 @@ namespace SCManager.UserInterface.Models
         public List<SelectListItem> Technicians { get; set; }
 
         [Required(ErrorMessage = "Choose Service date")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
         [Display(Name = "Service Date")]
-        public DateTime ServiceDate { get; set; }
+        public string ServiceDate { get; set; }
 
     }
 }

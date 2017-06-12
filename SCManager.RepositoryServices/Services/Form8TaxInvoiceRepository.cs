@@ -54,11 +54,11 @@ namespace SCManager.RepositoryServices.Services
                                     {
                                         _Form8Obj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _Form8Obj.ID);
                                         _Form8Obj.SCCode = (sdr["SCCode"].ToString() != "" ?  (sdr["SCCode"].ToString()) : _Form8Obj.SCCode);
-                                        _Form8Obj.ChallanDate = (sdr["ChallanDate"].ToString() != "" ? DateTime.Parse(sdr["ChallanDate"].ToString()).Date : _Form8Obj.ChallanDate);
+                                        _Form8Obj.ChallanDate = (sdr["ChallanDate"].ToString() != "" ? DateTime.Parse(sdr["ChallanDate"].ToString()).ToString("dd-MMM-yyyy") : _Form8Obj.ChallanDate);
                                         _Form8Obj.ChallanNo = (sdr["ChallanNo"].ToString() != "" ? (sdr["ChallanNo"].ToString()) : _Form8Obj.ChallanNo);
-                                        _Form8Obj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).Date : _Form8Obj.InvoiceDate);
+                                        _Form8Obj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).ToString("dd-MMM-yyyy") : _Form8Obj.InvoiceDate);
                                         _Form8Obj.InvoiceNo = (sdr["InvoiceNo"].ToString() != "" ? (sdr["InvoiceNo"].ToString()) : _Form8Obj.InvoiceNo);
-                                        _Form8Obj.PODate = (sdr["PODate"].ToString() != "" ? DateTime.Parse(sdr["PODate"].ToString()).Date : _Form8Obj.PODate);
+                                        _Form8Obj.PODate = (sdr["PODate"].ToString() != "" ? DateTime.Parse(sdr["PODate"].ToString()).ToString("dd-MMM-yyyy") : _Form8Obj.PODate);
                                         _Form8Obj.PONo = (sdr["PONo"].ToString() != "" ? (sdr["PONo"].ToString()) : _Form8Obj.PONo);
                                         _Form8Obj.SaleOrderNo = (sdr["SaleOrderNo"].ToString() != "" ? (sdr["SaleOrderNo"].ToString()) : _Form8Obj.SaleOrderNo);
                                         _Form8Obj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _Form8Obj.Remarks);
@@ -82,7 +82,7 @@ namespace SCManager.RepositoryServices.Services
         }
 
         public Form8 InsertForm8(Form8 frm8, UA UA) {
-            Form8 Result = null;
+            //Form8 Result = null;
             try
             {
                 SqlParameter outputStatus, outputID = null;
@@ -141,7 +141,7 @@ namespace SCManager.RepositoryServices.Services
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             return frm8;
         }
@@ -240,11 +240,11 @@ namespace SCManager.RepositoryServices.Services
                                     {
                                         _Form8Obj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _Form8Obj.ID);
                                         _Form8Obj.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _Form8Obj.SCCode);
-                                        _Form8Obj.ChallanDate = (sdr["ChallanDate"].ToString() != "" ? DateTime.Parse(sdr["ChallanDate"].ToString()).Date : _Form8Obj.ChallanDate);
+                                        _Form8Obj.ChallanDate = (sdr["ChallanDate"].ToString() != "" ? DateTime.Parse(sdr["ChallanDate"].ToString()).ToString("dd-MMM-yyyy") : _Form8Obj.ChallanDate);
                                         _Form8Obj.ChallanNo = (sdr["ChallanNo"].ToString() != "" ? (sdr["ChallanNo"].ToString()) : _Form8Obj.ChallanNo);
-                                        _Form8Obj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).Date : _Form8Obj.InvoiceDate);
+                                        _Form8Obj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).ToString("dd-MMM-yyyy") : _Form8Obj.InvoiceDate);
                                         _Form8Obj.InvoiceNo = (sdr["InvoiceNo"].ToString() != "" ? (sdr["InvoiceNo"].ToString()) : _Form8Obj.InvoiceNo);
-                                        _Form8Obj.PODate = (sdr["PODate"].ToString() != "" ? DateTime.Parse(sdr["PODate"].ToString()).Date : _Form8Obj.PODate);
+                                        _Form8Obj.PODate = (sdr["PODate"].ToString() != "" ? DateTime.Parse(sdr["PODate"].ToString()).ToString("dd-MMM-yyyy") : _Form8Obj.PODate);
                                         _Form8Obj.PONo = (sdr["PONo"].ToString() != "" ? (sdr["PONo"].ToString()) : _Form8Obj.PONo);
                                         _Form8Obj.SaleOrderNo = (sdr["SaleOrderNo"].ToString() != "" ? (sdr["SaleOrderNo"].ToString()) : _Form8Obj.SaleOrderNo);
                                         _Form8Obj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _Form8Obj.Remarks);

@@ -51,7 +51,7 @@ namespace SCManager.RepositoryServices.Services
                                     IssueToOtherSC _IssueToOtherSClistObj = new IssueToOtherSC();
                                     {
                                         _IssueToOtherSClistObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _IssueToOtherSClistObj.ID);
-                                        _IssueToOtherSClistObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()) : _IssueToOtherSClistObj.InvoiceDate);
+                                        _IssueToOtherSClistObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).ToString("dd-MMM-yyyy") : _IssueToOtherSClistObj.InvoiceDate);
                                         _IssueToOtherSClistObj.InvoiceNo = (sdr["InvoiceNo"].ToString() != "" ? (sdr["InvoiceNo"].ToString()) : _IssueToOtherSClistObj.InvoiceNo);
 
                                         _IssueToOtherSClistObj.ToSCName = (sdr["ToSCName"].ToString() != "" ? (sdr["ToSCName"].ToString()) : _IssueToOtherSClistObj.ToSCName);
@@ -135,7 +135,7 @@ namespace SCManager.RepositoryServices.Services
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             return issueToOtherSC;
         }
@@ -285,7 +285,7 @@ namespace SCManager.RepositoryServices.Services
                                     IssueToOtherSC _IssueToOtherSCObj = new IssueToOtherSC();
                                     {
                                         _IssueToOtherSCObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _IssueToOtherSCObj.ID);
-                                        _IssueToOtherSCObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()) : _IssueToOtherSCObj.InvoiceDate);
+                                        _IssueToOtherSCObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).ToString("dd-MMM-yyyy") : _IssueToOtherSCObj.InvoiceDate);
                                         _IssueToOtherSCObj.InvoiceNo = (sdr["InvoiceNo"].ToString() != "" ? (sdr["InvoiceNo"].ToString()) : _IssueToOtherSCObj.InvoiceNo);
                                         _IssueToOtherSCObj.ToSCName = (sdr["ToSCName"].ToString() != "" ? (sdr["ToSCName"].ToString()) : _IssueToOtherSCObj.ToSCName);
                                         _IssueToOtherSCObj.Subtotal = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : _IssueToOtherSCObj.Subtotal);

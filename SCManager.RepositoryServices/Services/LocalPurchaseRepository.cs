@@ -56,7 +56,7 @@ namespace SCManager.RepositoryServices.Services
                                         _LPObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _LPObj.ID);
                                         _LPObj.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _LPObj.SCCode);
                                         _LPObj.VendorName = (sdr["VendorName"].ToString() != "" ? (sdr["VendorName"].ToString()) : _LPObj.VendorName);
-                                        _LPObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).Date : _LPObj.InvoiceDate);
+                                        _LPObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).ToString("dd-MMM-yyyy") : _LPObj.InvoiceDate);
                                         _LPObj.InvoiceNo = (sdr["InvoiceNo"].ToString() != "" ? (sdr["InvoiceNo"].ToString()) : _LPObj.InvoiceNo);
                                       
                                         _LPObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _LPObj.Remarks);
@@ -81,7 +81,7 @@ namespace SCManager.RepositoryServices.Services
 
         public LocalPurchase InsertLocalPurchase(LocalPurchase LP, UA UA)
         {
-            LocalPurchase Result = null;
+            //LocalPurchase Result = null;
             try
             {
                 SqlParameter outputStatus, outputID = null;
@@ -228,7 +228,7 @@ namespace SCManager.RepositoryServices.Services
                                         LPObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : LPObj.ID);
                                         LPObj.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : LPObj.SCCode);
                                        
-                                        LPObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).Date : LPObj.InvoiceDate);
+                                        LPObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).ToString("dd-MMM-yyyy") : LPObj.InvoiceDate);
                                         LPObj.InvoiceNo = (sdr["InvoiceNo"].ToString() != "" ? (sdr["InvoiceNo"].ToString()) : LPObj.InvoiceNo);
                                         LPObj.VendorName = (sdr["VendorName"].ToString() != "" ? (sdr["VendorName"].ToString()) : LPObj.VendorName);
 

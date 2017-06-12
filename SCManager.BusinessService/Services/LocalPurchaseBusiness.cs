@@ -50,7 +50,7 @@ namespace SCManager.BusinessService.Services
                 SCManagerSettings settings = new SCManagerSettings();
                 F.GrandTotal = F.Subtotal + F.VATAmount;
                 if (F.InvoiceDate != null)
-                    F.InvoiceDateFormatted = F.InvoiceDate.ToString(settings.dateformat);
+                    F.InvoiceDateFormatted = F.InvoiceDate;//.ToString(settings.dateformat);
 
             }
 

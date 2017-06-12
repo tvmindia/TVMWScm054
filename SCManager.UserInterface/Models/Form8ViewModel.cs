@@ -20,9 +20,7 @@ namespace SCManager.UserInterface.Models
 
         [Required(ErrorMessage = "Invoice Date is missing")]
         [Display(Name = "Invoice Date")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? InvoiceDate { get; set; }
+        public string InvoiceDate { get; set; }
 
         [Display(Name = "Sale Order No")]
         [MaxLength(20)]
@@ -33,9 +31,7 @@ namespace SCManager.UserInterface.Models
         public string ChallanNo { get; set; }
 
         [Display(Name = "Challan Date")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        public DateTime? ChallanDate { get; set; }
+        public string ChallanDate { get; set; }
 
         [Display(Name = "PO No")]
         [MaxLength(20)]
@@ -43,9 +39,7 @@ namespace SCManager.UserInterface.Models
         public string PONo { get; set; }
 
         [Display(Name = "PO Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        public DateTime? PODate { get; set; }
+        public string PODate { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }

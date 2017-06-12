@@ -88,6 +88,7 @@ namespace SCManager.BusinessService.Services
             }
             catch (Exception ex)
             {
+                throw ex;
             }
             return plainText;
         }

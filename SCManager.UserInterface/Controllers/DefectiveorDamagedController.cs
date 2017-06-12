@@ -250,7 +250,7 @@ namespace SCManager.UserInterface.Controllers
         public string DefectiveDamagedValidation(string itemID, string empID,string type)
         {
             string status = null;
-            string msg = null;
+            //string msg = null;
             
                 try
                 {

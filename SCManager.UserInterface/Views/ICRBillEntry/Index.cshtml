@@ -333,7 +333,8 @@
                                                 <input type="text" id="discountpercentage" class="form-control vattxt" onkeyup="CalculateDiscountPercentage(1)" />
                                             </div>
                                             <div class="col-md-6">
-                                                @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control Amount", @onkeyup="ClearDiscountPercentage();", @onblur = "AmountSummary();", @onclick = "SelectAllValue(this);" } })
+                                                @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control Amount", @onkeyup="ClearDiscountPercentage();", @onclick = "SelectAllValue(this);" } })
+                                            @Html.Hidden("DiscountAmount", 0)
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -353,7 +354,8 @@
                                                 <input type="text" id="ServiceTaxpercentage" class="form-control vattxt" onkeyup="CalculateServiceTaxPercentage(1)" />
                                             </div>                                       
                                             <div class="col-md-6">
-                                                @Html.EditorFor(model => model.TotalServiceTaxAmt, new { htmlAttributes = new { @class = "form-control Amount", @onkeyup = "ClearServiceTaxPercentage();", @onblur = "AmountSummary();", @onclick = "SelectAllValue(this);" } })
+                                                @Html.EditorFor(model => model.TotalServiceTaxAmt, new { htmlAttributes = new { @class = "form-control Amount", @onkeyup = "ClearServiceTaxPercentage();", @onclick = "SelectAllValue(this);" } })
+                                                @Html.Hidden("TotalServiceTaxAmount", 0)
                                             </div>
                                         </div>
                                        

@@ -75,7 +75,7 @@
                             @Html.LabelFor(model => model.fromDate, htmlAttributes: new { style = "font-weight:normal;" })
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.fromDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "fromDate" } })
+                            @Html.EditorFor(model => model.fromDate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker", @id = "fromDate" } })
                             @Html.ValidationMessageFor(model => model.fromDate, "", new { @class = "text-danger" })
                         </div>
 
@@ -89,7 +89,7 @@
                             @Html.LabelFor(model => model.toDate, htmlAttributes: new { style = "font-weight:normal;" })
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.toDate, new { htmlAttributes = new { @class = "form-control HeaderBox", @id = "toDate" } })
+                            @Html.EditorFor(model => model.toDate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker", @id = "toDate" } })
                             @Html.ValidationMessageFor(model => model.toDate, "", new { @class = "text-danger" })
                         </div>
 
@@ -146,7 +146,7 @@
                                     @Html.LabelFor(model => model.IssueDate, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.IssueDate, new { htmlAttributes = new { @class = "form-control", @id = "IssueDate" } })
+                                    @Html.EditorFor(model => model.IssueDate, new { htmlAttributes = new { @class = "form-control datepicker", @id = "IssueDate" } })
                                     @Html.ValidationMessageFor(model => model.IssueDate, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-1 mandatory"></div>

@@ -63,4 +63,30 @@ namespace SCManager.UserInterface.Models
         public decimal SpecialCommission { get; set; }
         public decimal Total { get; set; }
     }
+    public class TechnicianSalaryTCRBreakUpViewModel
+    {
+        public string BillDate { get; set; }
+        public string BillNo { get; set; }
+        public string CustomerName { get; set; }
+        public string Type { get; set; }
+        public decimal ServiceChargeCommission { get; set; }
+        public decimal ProductCommission { get; set; }
+        public decimal Total { get; set; }
+    }
+    public class TechnicianSalaryAMCBreakUpViewModel
+    {
+        public string ICRDate { get; set; }
+        public string ICRNo { get; set; }
+        public string CustomerName { get; set; }
+        public decimal AMCCommission { get; set; }
+
+    }
+    public class TechnicianSalaryAdvanceBreakUpViewModel
+    {
+        public string RefDate { get; set; }
+        public decimal Advance { get; set; }
+        public string Note { get; set; }
+
+
+    }
 }

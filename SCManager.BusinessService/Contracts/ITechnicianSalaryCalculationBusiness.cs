@@ -11,5 +11,8 @@ namespace SCManager.BusinessService.Contracts
     {
         List<TechnicianSalary> GetTechniciansCalculatedSalary(string SCCode, string Month, string Year);
         List<TechnicianSalaryJobBreakUp> GetTechnicianJobCommissionBreakUp(string SCCode, Guid EmpID, Int16? Month, Int16? Year);
+        List<TechnicianSalaryTCRBreakUp> GetTechnicianTCRCommissionBreakUp(string SCCode, Guid EmpID, Int16? Month, Int16? Year);
+        List<TechnicianSalaryAMCBreakUp> GetTechnicianAMCCommissionBreakUp(string SCCode, Guid EmpID, Int16? Month, Int16? Year);
+        List<TechnicianSalaryAdvanceBreakUp> GetTechnicianSalaryAdvanceBreakUp(string SCCode, Guid EmpID, Int16? Month, Int16? Year);
     }
 }

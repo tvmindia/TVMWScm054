@@ -12,9 +12,7 @@ namespace SCManager.UserInterface.Models
         public Guid? ID { get; set; }
         [Display(Name = "Date")]
         [Required(ErrorMessage = "Please Select Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "Must be a Date")]
-        public DateTime? OpenDate { get; set; }
+        public string OpenDate { get; set; }
         [Display(Name = "Reference No.")]
         [Required(ErrorMessage ="Please Enter Reference No.")]
         public string RefNo { get; set; }
@@ -26,7 +24,7 @@ namespace SCManager.UserInterface.Models
         [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }
         public string ReturnStatusYN { get; set; }
-        public DateTime? ReturnDate { get; set; }
+        public string ReturnDate { get; set; }
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Required(ErrorMessage = "Please Select Item Code")]

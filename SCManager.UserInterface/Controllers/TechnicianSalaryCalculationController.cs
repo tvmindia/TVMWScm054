@@ -94,14 +94,46 @@ namespace SCManager.UserInterface.Controllers
                 }
         }
 
+      
+       
+       
+
+        /// <summary>
+        /// /////////
+        /// </summary>
+        /// <param name="ActionType"></param>
+        /// <returns></returns>
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
-        public string GetTechnicianJobCommissionBreakUp(string SCCode,string EmpID,string Month, string Year)
+        public string GetAllBreakUpSalaryByTechnician(string SCCode, string EmpID, string Month, string Year)
         {
             try
             {
                 UA ua = new UA();
-                List<TechnicianSalaryJobBreakUpViewModel> tSVMList = Mapper.Map<List<TechnicianSalaryJobBreakUp>, List<TechnicianSalaryJobBreakUpViewModel>>(_technicianSalaryCalculationBusiness.GetTechnicianJobCommissionBreakUp(ua.SCCode,Guid.Parse(EmpID), Int16.Parse(Month),Int16.Parse(Year)));
-                return JsonConvert.SerializeObject(new { Result = "OK", Records = tSVMList });
+               
+                    List<TechnicianSalaryJobBreakUpViewModel> tSjBVMList = Mapper.Map<List<TechnicianSalaryJobBreakUp>, List<TechnicianSalaryJobBreakUpViewModel>>(_technicianSalaryCalculationBusiness.GetTechnicianJobCommissionBreakUp(ua.SCCode, Guid.Parse(EmpID), Int16.Parse(Month), Int16.Parse(Year)));
+                    decimal totaljobsum = tSjBVMList == null ? 0 : tSjBVMList.Select(T => T.Total).Sum();
+                    string totaljobsumwithrupee = _commonBusiness.ConvertCurrency(totaljobsum);
+               
+                
+                    List<TechnicianSalaryTCRBreakUpViewModel> tSTCRVMList = Mapper.Map<List<TechnicianSalaryTCRBreakUp>, List<TechnicianSalaryTCRBreakUpViewModel>>(_technicianSalaryCalculationBusiness.GetTechnicianTCRCommissionBreakUp(ua.SCCode, Guid.Parse(EmpID), Int16.Parse(Month), Int16.Parse(Year)));
+                    decimal totalTCRsum = tSTCRVMList == null ? 0 : tSTCRVMList.Select(T => T.Total).Sum();
+                    string totalTCRsumwithrupee = _commonBusiness.ConvertCurrency(totalTCRsum);
+
+                List<TechnicianSalaryAMCBreakUpViewModel> tSAMCVMList = Mapper.Map<List<TechnicianSalaryAMCBreakUp>, List<TechnicianSalaryAMCBreakUpViewModel>>(_technicianSalaryCalculationBusiness.GetTechnicianAMCCommissionBreakUp(ua.SCCode, Guid.Parse(EmpID), Int16.Parse(Month), Int16.Parse(Year)));
+                decimal totalAMCsum = tSAMCVMList == null ? 0 : tSAMCVMList.Select(T => T.AMCCommission).Sum();
+                string totalAMCsumwithrupee = _commonBusiness.ConvertCurrency(totalAMCsum);
+
+                List<TechnicianSalaryAdvanceBreakUpViewModel> tSAVMList = Mapper.Map<List<TechnicianSalaryAdvanceBreakUp>, List<TechnicianSalaryAdvanceBreakUpViewModel>>(_technicianSalaryCalculationBusiness.GetTechnicianSalaryAdvanceBreakUp(ua.SCCode, Guid.Parse(EmpID), Int16.Parse(Month), Int16.Parse(Year)));
+                decimal totalAdvancesum = tSAVMList == null ? 0 : tSAVMList.Select(T => T.Advance).Sum();
+                string totalAdvancesumwithrupee = _commonBusiness.ConvertCurrency(totalAdvancesum);
+                decimal totalcommission = totaljobsum + totalTCRsum + totalAMCsum;
+                string totalcommissonwithrupee = _commonBusiness.ConvertCurrency(totalcommission);
+                decimal netpayable = totalcommission - totalAdvancesum;
+                string totalpayablewithrupee= _commonBusiness.ConvertCurrency(netpayable);
+               
+
+
+                return JsonConvert.SerializeObject(new { Result = "OK", JobRecords = tSjBVMList,JobRecord= totaljobsumwithrupee,TCRRecords= tSTCRVMList, TCRRecord = totalTCRsumwithrupee,AMCRecords= tSAMCVMList, AMCRecord= totalAMCsumwithrupee,SARecords= tSAVMList, SARecord= totalAdvancesumwithrupee,TotalComm= totalcommissonwithrupee, NetPayable= totalpayablewithrupee });
             }
             catch (Exception ex)
             {
