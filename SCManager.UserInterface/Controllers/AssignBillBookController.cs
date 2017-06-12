@@ -86,6 +86,18 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion GeBillBookByID
 
+        #region BillBookNumberValidation
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string BillBookNumberValidation(string BillNo, string billBookType)
+        {
+            UA ua = new UA();
+           string ID = _iAssignBillBookBusiness.BillBookNumberValidation(ua, BillNo,billBookType);
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = ID });
+
+        }
+        #endregion BillBookNumberValidation
+
         #region GetMissingSerials
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]

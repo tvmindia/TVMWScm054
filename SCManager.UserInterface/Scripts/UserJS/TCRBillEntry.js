@@ -211,6 +211,7 @@ function Edit(currentObj) {
 }
 
 function BindTCRBillEntry(id) {
+    debugger;
     try {
         var data = { "ID": id };
         var ds = {};
@@ -221,6 +222,7 @@ function BindTCRBillEntry(id) {
         if (ds.Result == "OK") {
 
             BindTCRBillEntryFields(ds.Records);
+            BillBookNumberValidation();
         }
         if (ds.Result == "ERROR") {
             notyAlert('error', ds.Message);
@@ -345,6 +347,43 @@ function FillUOM(row) {
 
 }
 
+function BillBookNumberValidation()
+{
+    debugger;
+    try {
+        var BillNo = $('#BillNo').val();
+       
+        var data = { "BillNo": BillNo ,"BillBookType":"TCR"};
+            var ds = {};
+            ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
+            debugger;
+            if (ds != '') {
+                ds = JSON.parse(ds);
+            }
+            if (ds.Records !='') {
+                return 1;
+            }
+            else
+            {
+                if ($(".fa-exclamation-triangle").length == 0) {
+                    $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="Bill Book For This Entry does not exists!"></i>');
+                }
+               
+            }
+            if (ds.Result == "ERROR") {
+                notyAlert('error', ds.Message);
+                return 0;
+            }
+            return 1;
+        
+
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+        return 0;
+    }
+}
+
 function DeleteClick()
 {
     notyConfirm('Are you sure to delete?', 'TCRBillDelete()', '', "Yes, delete it!");
@@ -384,7 +423,7 @@ function SaveSuccess(data, status) {
         case "OK":
             BindTCRBillEntry(JsonResult.Records.ID);
             BindAllCustomerBill();
-            notyAlert('success', JsonResult.Message);
+            notyAlert('success', JsonResult.Message);            
             break;
         case "ERROR":
             notyAlert('error', JsonResult.Message);
@@ -627,6 +666,7 @@ function reset()
         $("#vatpercentage").val("");
         $("#discount").val("");
         $("#grandtotal").val("");
+        $('#BillNoMandatory').find('i').remove()
         //$("#ServiceCharge").val("");
         $("#SCCommAmount").val("");
         $("#SpecialComm").val("");

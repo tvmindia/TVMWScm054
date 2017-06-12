@@ -9,7 +9,13 @@
     @Styles.RenderFormat(SiteKeys.StyleVersion,"~/Content/bootstrapdatepicker")
     @Styles.RenderFormat(SiteKeys.StyleVersion,"~/Content/UserCSS/DailyServiceReport")
 }
-
+<style>
+    .fa-exclamation-triangle {
+        color: orange;
+        cursor: pointer;
+        margin-left: -11px;
+    }
+</style>
 <div class="col-md-12">
     <div class="SCHeader col-md-6">
         ICR Bill Entry
@@ -123,7 +129,7 @@
                                 @Html.EditorFor(model => model.ICRNo, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.ICRNo, "", new { @class = "text-danger" })
                             </div>
-                            <div class="col-md-1 mandatory"></div>
+                            <div class="col-md-1 mandatory" id="BillNoMandatory"></div>
                         </div>
 
                      
