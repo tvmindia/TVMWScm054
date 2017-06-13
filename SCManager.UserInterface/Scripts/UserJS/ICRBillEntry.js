@@ -185,6 +185,15 @@ function ClearDiscountPercentage()
     var subtotal = parseFloat($('#subtotal').val()) || 0; 
     var discount = parseFloat($('#Discount').val()) || 0;
     $('#total').val(roundoff(subtotal - discount));
+    debugger;
+    var serviceTaxpercent = $("#ServiceTaxpercentage").val();
+    if (serviceTaxpercent != "") {
+        var baseAmt = $("#total").val();
+        baseAmt = parseFloat(baseAmt);
+        var vatamt = (baseAmt * serviceTaxpercent / 100)
+        $("#TotalServiceTaxAmt").val(roundoff(vatamt));
+        $('#TotalServiceTaxAmount').val(roundoff(vatamt));
+    }
     var totalServiceTaxAmt = parseFloat($('#TotalServiceTaxAmt').val()) || 0;
     var total = parseFloat($('#total').val()) || 0;
     $('#grandtotal').val(roundoff(total + totalServiceTaxAmt));
@@ -335,7 +344,7 @@ function reset()
         $("#grandtotal").val("");
         $("#total").val("");
         $('#BillNoMandatory').find('i').remove()
-        //$('#ICRNo').attr('readonly', false);
+        $('#ICRNo').attr('readonly', false);
         var $datepicker = $('#ICRDate');
         $datepicker.datepicker('setDate', null);
         var $datepicker = $('#AMCValidFromDate');
@@ -366,21 +375,43 @@ function BillBookNumberValidation() {
     debugger;
     try {
         var BillNo = $('#ICRNo').val();
+        var empID = $("#EmpID").val();
 
-        var data = { "BillNo": BillNo, "BillBookType": "TCR" };
+        var data = { "BillNo": BillNo, "BillBookType": "ICR" ,"EmpID": empID};
         var ds = {};
         ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
         debugger;
         if (ds != '') {
             ds = JSON.parse(ds);
         }
-        if (ds.Records != '') {
-            return 1;
+        if (ds.Records == '') {
+            return 0;
         }
         else {
-            if ($(".fa-exclamation-triangle").length == 0)
+            var msg = '';
+            if (ds.Records.Status == "BLB02")
             {
-                $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="Bill Book For This Entry does not exists!"></i>');
+                msg = Messages.BLB02;
+            }
+            if (ds.Records.Status == "BLB03") {
+                msg = Messages.BLB03;
+            }
+            if (ds.Records.Status == "BLB04") {
+                msg = Messages.BLB04;
+            }
+            if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02")
+            {                
+                if ($(".fa-exclamation-triangle").length == 0) {
+                    $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + "( " + ds.Records.BookNo+" )" + '"></i>');
+                }
+            }
+            if (ds.Records.Status == "BLB02") {
+                if ($(".fa-exclamation-triangle").length == 0) {
+                    $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + '"></i>');
+                }
+            }
+            if (ds.Records.Status == "BLB01") {
+                $("#BillNoMandatory").html('');
             }
             
         }
@@ -432,7 +463,7 @@ function BindICRBillEntryFields(Records) {
         $("#grandtotal").val(roundoff(Records.GrandTotal));
         $("#total").val(roundoff(Records.Total));
         EG_Rebind_WithData(Records.ICRBillEntryDetail, 1);
-       // $('#ICRNo').attr('readonly', 'readonly');
+        $('#ICRNo').attr('readonly', 'readonly');
 
        
         if (Records.ICRDate != null)
@@ -621,7 +652,7 @@ function CalculateServiceTaxPercentage(id) {
             serviceTaxpercent = 0
             $("#ServiceTaxpercentage").val(serviceTaxpercent);
         }
-        baseAmt = parseInt(baseAmt);
+        baseAmt = parseFloat(baseAmt);
         var vatamt = (baseAmt * serviceTaxpercent / 100)
         if (isNaN(vatamt)) { vatamt = 0.00 }
         $("#TotalServiceTaxAmt").val(roundoff(vatamt));
@@ -811,6 +842,7 @@ function TechnicianSelectOnChange(curobj) {
     try {
         var v = $(curobj).val();
         $("#ModelTechEmpID").val(v);
+        BillBookNumberValidation();
     }
     catch (e) {
         notyAlert('error', e.Message);

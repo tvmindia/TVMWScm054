@@ -15,6 +15,7 @@ namespace SCManager.DataAccessObject.DTO
         public string CustomerContactNo { get; set; }
         public string CustomerLocation { get; set; }
         public string PaymentMode { get; set; }
+        public string PaymentRefNo { get; set; }
         public string Remarks { get; set; }
         public decimal? VATAmount { get; set; }
         public decimal? Discount { get; set; }

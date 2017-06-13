@@ -145,6 +145,7 @@ function fillOtherIncome(ID) {
     $("#Amount").val(roundoff(thisItem[0].Amount));
     $("#Description").val(thisItem[0].Description);
     $("#PaymentMode").val(thisItem[0].PaymentMode);
+    $("#PaymentRefNo").val(thisItem[0].PaymentRefNo);
     $("#RefNo").prop('disabled', true);
     if (thisItem[0].RefDate != null) {
         var $datepicker = $('#RefDate');
@@ -254,6 +255,7 @@ function clearfields() {
     var $datepicker = $('#RefDate');
     $datepicker.datepicker('setDate', null);
     $("#PaymentMode").val("");
+    $("#PaymentRefNo").val("");
     $("#deleteId").val("0")
     $("#RefNo").prop('disabled', false);
     var $datepicker = $('#RefDate');

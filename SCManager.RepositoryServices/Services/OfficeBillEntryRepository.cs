@@ -102,6 +102,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@CustomerContactNo", SqlDbType.NVarChar, 50).Value = officeBillEntry.CustomerContactNo;
                         cmd.Parameters.Add("@CustomerLocation", SqlDbType.NVarChar, 50).Value = officeBillEntry.CustomerLocation;
                         cmd.Parameters.Add("@PaymentMode", SqlDbType.NVarChar, 20).Value = officeBillEntry.PaymentMode;
+                        cmd.Parameters.Add("@PaymentRefNo", SqlDbType.NVarChar, 20).Value = officeBillEntry.PaymentRefNo;
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = officeBillEntry.Remarks;
                         cmd.Parameters.Add("@VATAmount", SqlDbType.Decimal).Value = officeBillEntry.VATAmount;                    
                        
@@ -171,6 +172,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@CustomerContactNo", SqlDbType.NVarChar, 50).Value = officeBillEntry.CustomerContactNo;
                         cmd.Parameters.Add("@CustomerLocation", SqlDbType.NVarChar, 50).Value = officeBillEntry.CustomerLocation;
                         cmd.Parameters.Add("@PaymentMode", SqlDbType.NVarChar, 20).Value = officeBillEntry.PaymentMode;
+                        cmd.Parameters.Add("@PaymentRefNo", SqlDbType.NVarChar, 20).Value = officeBillEntry.PaymentRefNo;
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = officeBillEntry.Remarks;
                         cmd.Parameters.Add("@VATAmount", SqlDbType.Decimal).Value = officeBillEntry.VATAmount;
                         cmd.Parameters.Add("@Discount", SqlDbType.Decimal).Value = officeBillEntry.Discount;
@@ -301,6 +303,7 @@ namespace SCManager.RepositoryServices.Services
                                         _OfficeBillEntryHeaderObj.CustomerContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : _OfficeBillEntryHeaderObj.CustomerContactNo);
                                         _OfficeBillEntryHeaderObj.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : _OfficeBillEntryHeaderObj.CustomerLocation);
                                         _OfficeBillEntryHeaderObj.PaymentMode = (sdr["PaymentMode"].ToString() != "" ? (sdr["PaymentMode"].ToString()) : _OfficeBillEntryHeaderObj.PaymentMode);
+                                        _OfficeBillEntryHeaderObj.PaymentRefNo = (sdr["PaymentRefNo"].ToString() != "" ? (sdr["PaymentRefNo"].ToString()) : _OfficeBillEntryHeaderObj.PaymentRefNo);
                                         _OfficeBillEntryHeaderObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _OfficeBillEntryHeaderObj.Remarks);
                                         _OfficeBillEntryHeaderObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : _OfficeBillEntryHeaderObj.Discount);                                       
                                         _OfficeBillEntryHeaderObj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : _OfficeBillEntryHeaderObj.VATAmount);

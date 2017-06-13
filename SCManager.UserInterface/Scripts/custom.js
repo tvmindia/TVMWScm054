@@ -62,7 +62,6 @@ $(document).ready(function () {
     });
    
     $('input,select').keydown(function (e) {
-        debugger;
         var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
         if (key == 13) {
             e.preventDefault();
@@ -372,4 +371,11 @@ function roundoff(num, opt) {
     return (Math.round(num * 100) / 100).toFixed(2);
 }
 
+
+//---* Order Status Notification * ---//
+var Messages = {
+    BLB02: "This bill no doesn't belong to selected technician ",
+    BLB03: "A few bill entries are missing ",
+    BLB04: "This bill book is already closed "
+}
 

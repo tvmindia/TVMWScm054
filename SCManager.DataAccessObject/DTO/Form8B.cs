@@ -27,6 +27,7 @@ namespace SCManager.DataAccessObject.DTO
 
         public string Remarks { get; set; }
 
+        public decimal TotalBaseValue { get; set; }
         public decimal VATAmount { get; set; }
         public decimal Subtotal { get; set; }
         public decimal VATExpense { get; set; }

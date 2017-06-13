@@ -116,6 +116,7 @@ namespace SCManager.RepositoryServices.Services
                                         otherIncomeObj.Amount = (sdr["Amount"].ToString() != "" ? float.Parse(sdr["Amount"].ToString()) : otherIncomeObj.Amount);
                                         otherIncomeObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : otherIncomeObj.ID);
                                         otherIncomeObj.PaymentMode = (sdr["PaymentMode"].ToString() != "" ? (sdr["PaymentMode"].ToString()) : otherIncomeObj.PaymentMode);
+                                        otherIncomeObj.PaymentRefNo = (sdr["PaymentRefNo"].ToString() != "" ? (sdr["PaymentRefNo"].ToString()) : otherIncomeObj.PaymentRefNo);
                                     };
 
                                     OtherIncomelist.Add(otherIncomeObj);
@@ -157,6 +158,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@RefNo", SqlDbType.NVarChar, 20).Value = otherIncomeObj.RefNo;
                         cmd.Parameters.Add("@RefDate", SqlDbType.SmallDateTime).Value = otherIncomeObj.RefDate;
                         cmd.Parameters.Add("@PaymentMode", SqlDbType.NVarChar, 20).Value = otherIncomeObj.PaymentMode;
+                        cmd.Parameters.Add("@PaymentRefNo", SqlDbType.NVarChar, 20).Value = otherIncomeObj.PaymentRefNo;
                         cmd.Parameters.Add("@Amount", SqlDbType.Decimal).Value = otherIncomeObj.Amount;
                         cmd.Parameters.Add("@Description", SqlDbType.NVarChar, -1).Value = otherIncomeObj.Description;
                      
@@ -209,6 +211,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@RefNo", SqlDbType.NVarChar, 20).Value = otherIncomeObj.RefNo;
                         cmd.Parameters.Add("@RefDate", SqlDbType.SmallDateTime).Value = otherIncomeObj.RefDate;
                         cmd.Parameters.Add("@PaymentMode", SqlDbType.NVarChar, 20).Value = otherIncomeObj.PaymentMode;
+                        cmd.Parameters.Add("@PaymentRefNo", SqlDbType.NVarChar, 20).Value = otherIncomeObj.PaymentRefNo;
                         cmd.Parameters.Add("@Amount", SqlDbType.Decimal).Value = otherIncomeObj.Amount;
                         cmd.Parameters.Add("@Description", SqlDbType.NVarChar, -1).Value = otherIncomeObj.Description;
                         cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = otherIncomeObj.logDetails.CreatedBy;
@@ -323,6 +326,8 @@ namespace SCManager.RepositoryServices.Services
                                         otherIncomeObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : otherIncomeObj.Description);
                                         otherIncomeObj.Amount = (sdr["Amount"].ToString() != "" ? float.Parse(sdr["Amount"].ToString()) : otherIncomeObj.Amount);
                                         otherIncomeObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : otherIncomeObj.ID);
+                                        otherIncomeObj.PaymentRefNo = (sdr["PaymentRefNo"].ToString() != "" ? (sdr["PaymentRefNo"].ToString()) : otherIncomeObj.PaymentRefNo);
+
 
                                     };
 

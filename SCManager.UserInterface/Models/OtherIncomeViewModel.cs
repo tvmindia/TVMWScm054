@@ -25,6 +25,8 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Mode Of Payment")]
         [Required(ErrorMessage = "Please Select Mode Of Payment")]
         public string PaymentMode { get; set; }
+        [Display(Name = "Payment Ref.No.")]
+        public string PaymentRefNo { get; set; }
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Display(Name = "From Date")]
@@ -35,6 +37,7 @@ namespace SCManager.UserInterface.Models
         public bool showAllYN { get; set; }
         public string HiddenRefNo { get; set; }
         public List<SelectListItem> IncomeTypeList { get; set; }
+        public List<SelectListItem> PaymentModeList { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
         public string IncomeTypeDescription { get; set; }
         public String RefDateFormatted { get; set; }

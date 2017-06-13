@@ -20,5 +20,6 @@ namespace SCManager.DataAccessObject.DTO
         public string PaymentMode { get; set; }
         public string Description { get; set; }
         public LogDetails logDetails { get; set; }
+        public string PaymentRefNo { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace SCManager.UserInterface.Models
 {
@@ -27,6 +28,8 @@ namespace SCManager.UserInterface.Models
         [Required(ErrorMessage = "Please select mode of payment")]
         [Display(Name = "Mode Of Payment")]
         public string PaymentMode { get; set; }
+        [Display(Name = "Payment Ref.No.")]
+        public string PaymentRefNo { get; set; }
         [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }
         [Display(Name = "VAT %")]
@@ -41,6 +44,7 @@ namespace SCManager.UserInterface.Models
         public decimal? Subtotal { get; set; }
         public String DetailJSON { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
+        public List<SelectListItem> PaymentModeList { get; set; }
         public List<OfficeBillEntryDetailViewModel> OfficeBillEntryDetail { get; set; }
     }
     public class OfficeBillEntryDetailViewModel
