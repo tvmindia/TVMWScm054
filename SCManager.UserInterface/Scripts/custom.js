@@ -62,7 +62,6 @@ $(document).ready(function () {
     });
    
     $('input,select').keydown(function (e) {
-        debugger;
         var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
         if (key == 13) {
             e.preventDefault();

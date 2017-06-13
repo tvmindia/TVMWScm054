@@ -185,6 +185,15 @@ function ClearDiscountPercentage()
     var subtotal = parseFloat($('#subtotal').val()) || 0; 
     var discount = parseFloat($('#Discount').val()) || 0;
     $('#total').val(roundoff(subtotal - discount));
+    debugger;
+    var serviceTaxpercent = $("#ServiceTaxpercentage").val();
+    if (serviceTaxpercent != "") {
+        var baseAmt = $("#total").val();
+        baseAmt = parseFloat(baseAmt);
+        var vatamt = (baseAmt * serviceTaxpercent / 100)
+        $("#TotalServiceTaxAmt").val(roundoff(vatamt));
+        $('#TotalServiceTaxAmount').val(roundoff(vatamt));
+    }
     var totalServiceTaxAmt = parseFloat($('#TotalServiceTaxAmt').val()) || 0;
     var total = parseFloat($('#total').val()) || 0;
     $('#grandtotal').val(roundoff(total + totalServiceTaxAmt));
@@ -621,7 +630,7 @@ function CalculateServiceTaxPercentage(id) {
             serviceTaxpercent = 0
             $("#ServiceTaxpercentage").val(serviceTaxpercent);
         }
-        baseAmt = parseInt(baseAmt);
+        baseAmt = parseFloat(baseAmt);
         var vatamt = (baseAmt * serviceTaxpercent / 100)
         if (isNaN(vatamt)) { vatamt = 0.00 }
         $("#TotalServiceTaxAmt").val(roundoff(vatamt));
