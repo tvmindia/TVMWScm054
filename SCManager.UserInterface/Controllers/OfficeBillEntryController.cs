@@ -31,7 +31,24 @@ namespace SCManager.UserInterface.Controllers
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
-            return View();
+            OfficeBillEntryViewModel OfficeBillEntryViewModel = null;
+            try
+            {
+                OfficeBillEntryViewModel = new OfficeBillEntryViewModel();
+                List<SelectListItem> selectListItem = new List<SelectListItem>(); 
+
+                selectListItem = null;
+                selectListItem = new List<SelectListItem>();
+                CommonViewModel CVM = new CommonViewModel();
+                selectListItem = CVM.PaymentModelist;
+                OfficeBillEntryViewModel.PaymentModeList = selectListItem; 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View(OfficeBillEntryViewModel);
+         
         }
 
         Const c = new Const();

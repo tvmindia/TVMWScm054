@@ -287,12 +287,13 @@ function BindOfficeBillEntryFields(Records) {
      
         ChangeButtonPatchView('OfficeBillEntry', 'btnPatchOfficeBillEntrySettab', 'Edit');
         $('#HeaderID').val(Records.ID);      
-      
+        debugger;
         $("#BillNo").val(Records.BillNo);
         $("#CustomerName").val(Records.CustomerName);
         $("#CustomerContactNo").val(Records.CustomerContactNo);
         $("#CustomerLocation").val(Records.CustomerLocation);
         $("#PaymentMode").val(Records.PaymentMode);
+        $("#PaymentRefNo").val(Records.PaymentRefNo);
         $("#Remarks").val(Records.Remarks);
         $("#subtotal").val(roundoff(Records.Subtotal));       
         $("#VATAmount").val(roundoff(Records.VATAmount));       
@@ -491,6 +492,7 @@ function reset()
         $("#CustomerContactNo").val("");
         $("#CustomerLocation").val("");
         $("#PaymentMode").val("");
+        $("#PaymentRefNo").val("");
         $("#Remarks").val("");
         $("#subtotal").val("");       
         $("#VATAmount").val("");
