@@ -66,6 +66,8 @@ namespace SCManager.RepositoryServices.Services
                                         _Form8Obj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _Form8Obj.Remarks);
                                         _Form8Obj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) :0);
                                         _Form8Obj.Subtotal = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : 0);
+                                        _Form8Obj.TotalBaseValue = (sdr["TotalBaseValue"].ToString() != "" ? decimal.Parse(sdr["TotalBaseValue"].ToString()) :_Form8Obj.TotalBaseValue);
+                                            
                                         _Form8Obj.VATExpense = (sdr["VATExpense"].ToString() != "" ? decimal.Parse(sdr["VATExpense"].ToString()) : 0);
                                         _Form8Obj.Customer= (sdr["Customer"].ToString() != "" ? (sdr["Customer"].ToString()) : _Form8Obj.Customer);
                                     }
