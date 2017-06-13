@@ -80,6 +80,7 @@ $(document).ready(function () {
              paging: true,
              pageLength: 8,
              data: null,
+             autoWidth:false,
              language: {
                  search: "_INPUT_",
                  searchPlaceholder: "Search"
@@ -98,7 +99,11 @@ $(document).ready(function () {
              columnDefs: [
                   { className: "text-left", "targets": [1,2,3] },
                   { className: "text-center", "targets": [0] },
-                   { className: "text-right", "targets": [4, 5, 6] }
+                   { className: "text-right", "targets": [4, 5, 6] },
+                    { width: "20%", "targets": [4] },
+                    { width: "25%", "targets": [5] }
+
+ 
 
 
 

@@ -179,7 +179,7 @@
                                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label " })
                                     </div>
                                     <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control HeaderBox BlockEnter", rows = 3, @readonly = "readonly" } })
+                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 3, @readonly = "readonly" } })
                                         @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -191,7 +191,7 @@
                                    </div>
 
                                      <div class="col-md-5">
-                                        @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control HeaderBox BlockEnter", rows = 4, @id = "Remarks" } })
+                                        @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 4, @id = "Remarks" } })
                                         @*@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })*@
                                     </div>
                                 </div>
