@@ -1,5 +1,6 @@
 ﻿var DataTables = {};
 var EmptyGuid = "00000000-0000-0000-0000-000000000000";
+var ToDateVal, FromDateVal;
 
 //---------------------------------------Docuement Ready--------------------------------------------------//
 
@@ -34,6 +35,9 @@ $(document).ready(function () {
 
             Edit(this);
         });
+      
+        FromDateVal = $("#fromDate").val();
+        ToDateVal = $("#toDate").val();
       
         $('#fromDate').change(function () {
           
@@ -141,6 +145,7 @@ function fillOtherIncome(ID) {
     $("#Amount").val(roundoff(thisItem[0].Amount));
     $("#Description").val(thisItem[0].Description);
     $("#PaymentMode").val(thisItem[0].PaymentMode);
+    $("#PaymentRefNo").val(thisItem[0].PaymentRefNo);
     $("#RefNo").prop('disabled', true);
     if (thisItem[0].RefDate != null) {
         var $datepicker = $('#RefDate');
@@ -226,6 +231,8 @@ function showAllYNCheckedOrNot(i) {
         $('#toDate').val("");
     }
     else {
+        $('#fromDate').val(FromDateVal);
+        $('#toDate').val(ToDateVal);
         DataTables.OtherIncomeTable.clear().rows.add(GetAllOtherIncome(false)).draw(false);
        
     }
@@ -248,6 +255,7 @@ function clearfields() {
     var $datepicker = $('#RefDate');
     $datepicker.datepicker('setDate', null);
     $("#PaymentMode").val("");
+    $("#PaymentRefNo").val("");
     $("#deleteId").val("0")
     $("#RefNo").prop('disabled', false);
     var $datepicker = $('#RefDate');

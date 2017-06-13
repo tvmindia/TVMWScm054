@@ -1,5 +1,6 @@
 ﻿var DataTables = {};
-var EmptyGuid = "00000000-0000-0000-0000-000000000000"; 
+var EmptyGuid = "00000000-0000-0000-0000-000000000000";
+var ToDateVal, FromDateVal;
 //---------------------------------------Docuement Ready--------------------------------------------------//
 
 $(document).ready(function () {
@@ -33,7 +34,9 @@ $(document).ready(function () {
 
         $('#tblExpensesList tbody').on('dblclick', 'td', function () {
             Edit(this);
-        }); 
+        });
+        FromDateVal = $("#fromDate").val();
+        ToDateVal = $("#toDate").val();
         $('#fromDate').change(function () { 
             BindAllExpenses();
         });
@@ -216,6 +219,8 @@ function showAllYNCheckedOrNot(i) {
         DataTables.ExpensesTable.clear().rows.add(GetAllExpenses(true)).draw(false);
     }
     else {
+        $('#fromDate').val(FromDateVal);
+        $('#toDate').val(ToDateVal);
         DataTables.ExpensesTable.clear().rows.add(GetAllExpenses(false)).draw(false);      
     }
 

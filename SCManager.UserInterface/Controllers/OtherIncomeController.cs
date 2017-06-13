@@ -55,6 +55,12 @@ namespace SCManager.UserInterface.Controllers
                     });
                 }
                 otherIncomeViewModel.IncomeTypeList = selectListIncome;
+
+                selectListIncome = null;
+                selectListIncome = new List<SelectListItem>();
+                CommonViewModel CVM = new CommonViewModel();
+                selectListIncome = CVM.PaymentModelist;
+                otherIncomeViewModel.PaymentModeList = selectListIncome;
             }
             catch (Exception ex)
             {
