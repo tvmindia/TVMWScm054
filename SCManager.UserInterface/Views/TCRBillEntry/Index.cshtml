@@ -254,7 +254,50 @@ margin-left:-11px;
                     <div class="inputForm col-md-3">
 
                     </div>
-                   
+                    <div class="inputForm col-md-5">
+
+                        <div style="border:1px solid #c1c1c0;border-radius:10px;">
+
+                            <div class="col-md-12" style="text-align:center;background-color:rgba(210, 210, 210, 0.24);"><label class="control-label">Technician Commissions for Direct Calls</label></div>
+                            <br />
+                            <div class="form-group">
+
+                                <div class="col-md-6">
+                                    <div class="col-md-1">&nbsp;</div>
+                                    @Html.LabelFor(model => model.ServiceChargeComm, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.ServiceChargeComm, new { htmlAttributes = new { @class = "form-control", style = "text-align:right", @onblur = "CalculateSCCommissionAmt(); ", @id = "ServiceChargeComm" } })
+                                    @Html.ValidationMessageFor(model => model.ServiceChargeComm, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-md-6">
+                                    <div class="col-md-1">&nbsp;</div>
+                                    @Html.LabelFor(model => model.SCCommAmount, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.SCCommAmount, new { htmlAttributes = new { @class = "form-control", style = "text-align:right", @onclick = "SelectAllValue(this);" } })
+                                    @Html.ValidationMessageFor(model => model.SCCommAmount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group" hidden="hidden">
+
+                                <div class="col-md-6">
+                                    <div class="col-md-1">&nbsp;</div>
+                                    @Html.LabelFor(model => model.SpecialComm, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.SpecialComm, new { htmlAttributes = new { @class = "form-control", style = "text-align:right", @onclick = "SelectAllValue(this);" } })
+                                    @Html.ValidationMessageFor(model => model.SpecialComm, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
                     <div class="inputForm col-md-4">
                         <div class="form-group">
                             <div class="col-md-6">
@@ -303,50 +346,7 @@ margin-left:-11px;
                             </div>
                         </div>
                     </div>
-                    <div class="inputForm col-md-5">
-                     
-                        <div style="border:1px solid #c1c1c0;border-radius:10px;">
-                            
-                            <div class="col-md-12" style="text-align:center;background-color:rgba(210, 210, 210, 0.24);"><label class="control-label">Technician Commissions for Direct Calls</label></div>
-                          <br />
-                            <div class="form-group">
-                               
-                                <div class="col-md-6">
-                                    <div class="col-md-1">&nbsp;</div>
-                                    @Html.LabelFor(model => model.ServiceChargeComm, htmlAttributes: new { @class = "control-label" })
-                                </div>
-                                <div class="col-md-3">
-                                    @Html.EditorFor(model => model.ServiceChargeComm, new { htmlAttributes = new { @class = "form-control", style = "text-align:right", @onblur = "CalculateSCCommissionAmt(); ", @id = "ServiceChargeComm" } })
-                                    @Html.ValidationMessageFor(model => model.ServiceChargeComm, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-
-                                <div class="col-md-6">
-                                    <div class="col-md-1">&nbsp;</div>
-                                    @Html.LabelFor(model => model.SCCommAmount, htmlAttributes: new { @class = "control-label" })
-                                </div>
-                                <div class="col-md-5">
-                                    @Html.EditorFor(model => model.SCCommAmount, new { htmlAttributes = new { @class = "form-control", style = "text-align:right", @onclick = "SelectAllValue(this);" } })
-                                    @Html.ValidationMessageFor(model => model.SCCommAmount, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group" hidden="hidden">
-
-                                <div class="col-md-6">
-                                    <div class="col-md-1">&nbsp;</div>
-                                    @Html.LabelFor(model => model.SpecialComm, htmlAttributes: new { @class = "control-label" })
-                                </div>
-                                <div class="col-md-5">
-                                    @Html.EditorFor(model => model.SpecialComm, new { htmlAttributes = new { @class = "form-control", style = "text-align:right", @onclick = "SelectAllValue(this);" } })
-                                    @Html.ValidationMessageFor(model => model.SpecialComm, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            
-                        </div>
-                      
-                    </div>
+                
                      <div class="form-horizontal">
                         
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })                                   

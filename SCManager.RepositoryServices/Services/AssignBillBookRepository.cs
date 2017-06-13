@@ -369,9 +369,9 @@ namespace SCManager.RepositoryServices.Services
         #endregion BillBookRangeValidation
 
         #region BillBookNumberValidation
-        public string BillBookNumberValidation(UA UA, string BillNo,string billBookType)
+        public object BillBookNumberValidation(UA UA, string BillNo,string billBookType, string empID)
         {
-            SqlParameter outParameter1, outParameter2 = null;
+            SqlParameter outParameter1, outParameter2,outParameter3 = null;
             try
             {
                
@@ -387,6 +387,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
                         cmd.Parameters.Add("@number", SqlDbType.NVarChar,50).Value = BillNo;
                         cmd.Parameters.Add("@BillBookType", SqlDbType.NVarChar, 15).Value = billBookType;
+                        cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value =Guid.Parse(empID);
                         cmd.CommandText = "[BillBookNumberValidation]";
                         cmd.CommandType = CommandType.StoredProcedure;
 
@@ -394,6 +395,8 @@ namespace SCManager.RepositoryServices.Services
                         outParameter1.Direction = ParameterDirection.Output;
                         outParameter2 = cmd.Parameters.Add("@BookNo", SqlDbType.NVarChar,50);
                         outParameter2.Direction = ParameterDirection.Output;
+                        outParameter3 = cmd.Parameters.Add("@Status", SqlDbType.NVarChar, 20);
+                        outParameter3.Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -402,7 +405,12 @@ namespace SCManager.RepositoryServices.Services
             {
                 throw ex;
             }
-            return outParameter1.Value.ToString();
+            return new
+            {
+                Status = outParameter3.Value.ToString(),
+                BookNo = outParameter2.Value.ToString()
+            };
+           
         }
         #endregion BillBookNumberValidation
     }

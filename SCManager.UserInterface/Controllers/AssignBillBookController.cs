@@ -89,11 +89,11 @@ namespace SCManager.UserInterface.Controllers
         #region BillBookNumberValidation
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string BillBookNumberValidation(string BillNo, string billBookType)
+        public string BillBookNumberValidation(string BillNo, string billBookType,string empID)
         {
             UA ua = new UA();
-           string ID = _iAssignBillBookBusiness.BillBookNumberValidation(ua, BillNo,billBookType);
-            return JsonConvert.SerializeObject(new { Result = "OK", Records = ID });
+            object result = _iAssignBillBookBusiness.BillBookNumberValidation(ua, BillNo,billBookType,empID);
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = result });
 
         }
         #endregion BillBookNumberValidation

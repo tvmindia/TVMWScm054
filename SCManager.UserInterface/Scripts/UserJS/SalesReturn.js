@@ -129,7 +129,7 @@ function save() {
             if (qty > enteredQty) {
                 if (hdfQty != enteredQty) {
                     var totalQty = qty + hdfQty - enteredQty;
-                    notyConfirm("Do you want to continue ?", 'SaveClick()', "The stock for selected item will reduce to " + totalQty + ".", "Yes, Save it!");
+                    notyConfirm('Do you want to continue ?', ' SaveClick()', "", "Yes, Save it!", 1); 
                 }
                 else {
                     SaveClick();
@@ -195,8 +195,8 @@ function ReturnToCompany() {
    
     var ReturnID = $("#ID").val();
     if (ReturnID != EmptyGuid) {
-        notyConfirm('Are you sure to Return?', 'ReturnDefectiveDamaged()', '', "Yes, Return it!");
-        
+        var qty = SalesReturnValidation();
+        notyConfirm("Do you want to continue ?", 'ReturnDefectiveDamaged()', "The stock for selected item will reduce to " + qty + ".", "Yes, Save it!");
     }
     else {
         notyAlert('error', 'Error');
