@@ -208,6 +208,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@BookStatus", SqlDbType.Bit).Value = assignBillBook.Status;                       
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = assignBillBook.Remarks;
                         cmd.Parameters.Add("@BillBookType", SqlDbType.NVarChar, 15).Value = assignBillBook.BillBookType;
+                        cmd.Parameters.Add("@BookNo", SqlDbType.NVarChar, 50).Value = assignBillBook.BillNo;
                         cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = assignBillBook.logDetails.CreatedBy;
                         cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = assignBillBook.logDetails.CreatedDate;
 
@@ -387,7 +388,11 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
                         cmd.Parameters.Add("@number", SqlDbType.NVarChar,50).Value = BillNo;
                         cmd.Parameters.Add("@BillBookType", SqlDbType.NVarChar, 15).Value = billBookType;
-                        cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value =Guid.Parse(empID);
+                        if(! string.IsNullOrEmpty(empID))
+                        {
+                            cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = Guid.Parse(empID);
+                        }
+                        
                         cmd.CommandText = "[BillBookNumberValidation]";
                         cmd.CommandType = CommandType.StoredProcedure;
 
