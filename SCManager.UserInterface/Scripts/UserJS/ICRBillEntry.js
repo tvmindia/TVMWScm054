@@ -344,7 +344,7 @@ function reset()
         $("#grandtotal").val("");
         $("#total").val("");
         $('#BillNoMandatory').find('i').remove()
-       // $('#ICRNo').attr('readonly', false);
+        $('#ICRNo').attr('readonly', false);
         var $datepicker = $('#ICRDate');
         $datepicker.datepicker('setDate', null);
         var $datepicker = $('#AMCValidFromDate');
@@ -461,7 +461,7 @@ function BindICRBillEntryFields(Records) {
         $("#grandtotal").val(roundoff(Records.GrandTotal));
         $("#total").val(roundoff(Records.Total));
         EG_Rebind_WithData(Records.ICRBillEntryDetail, 1);
-       // $('#ICRNo').attr('readonly', 'readonly');
+        $('#ICRNo').attr('readonly', 'readonly');
 
        
         if (Records.ICRDate != null)

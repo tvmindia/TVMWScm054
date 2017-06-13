@@ -315,7 +315,7 @@ function BindTCRBillEntryFields(Records) {
         $("#SCCommAmount").val(roundoff(Records.SCCommAmount));
         $("#SpecialComm").val(roundoff(Records.SpecialComm));
         EG_Rebind_WithData(Records.TCRBillEntryDetail, 1);
-       // $('#BillNo').attr('readonly', 'readonly');
+        $('#BillNo').attr('readonly', 'readonly');
        // $('#EmpID').attr('disabled', 'true');
        // $("#EmpID").val(Records.EmpID);
 
@@ -688,7 +688,7 @@ function reset()
         //$("#ServiceCharge").val("");
         $("#SCCommAmount").val("");
         $("#SpecialComm").val("");
-       // $('#BillNo').attr('readonly', false);
+        $('#BillNo').attr('readonly', false);
         $('#EmpID').attr('disabled', false);
         var $datepicker = $('#BillDate');
         $datepicker.datepicker('setDate', null);
