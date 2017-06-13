@@ -5,6 +5,7 @@ var _Materials = [];
 //---------------------------------------Docuement Ready--------------------------------------------------//
 $(document).ready(function () {
     try {
+
         var EventRequestsViewModel = new Object();
         DataTables.eventTable = $('#tblInvoices').DataTable(
          {
@@ -51,6 +52,7 @@ $(document).ready(function () {
            columns: EG_Columns(),
            columnDefs: EG_Columns_Settings()
        });
+
         getMaterials();
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.DetailTable;
@@ -152,7 +154,7 @@ function EG_Columns_Settings() {
 //---------------Bind logics-------------------
 function GetAllForm8B() {
     try {
-        debugger;
+
         var data = {};
         var ds = {};
         ds = GetDataFromServer("Form8BRetailInvoice/GetAllForm8B/", data);
@@ -472,9 +474,6 @@ function getMaterials() {
 
 function CalculateAmount(row) {
     //EG_GridData[row-1][Quantity] = value
-
-    debugger;
-
     var qty = 0.00;
     var rate = 0.00;
     var dic = 0.00;
@@ -482,7 +481,7 @@ function CalculateAmount(row) {
     var EGqty = '';
     var EGrate = '';
     var EGdic = '';
-    debugger;
+
     EGqty = EG_GridData[row - 1]["Quantity"];
     EGrate = EG_GridData[row - 1]['Rate'];
     EGdic = EG_GridData[row - 1]['TradeDiscount'];
