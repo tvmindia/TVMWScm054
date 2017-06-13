@@ -17,6 +17,6 @@ namespace SCManager.RepositoryServices.Contracts
         string DeleteBillBook(string ID, UA ua);
         string BillBookRangeValidation(string seriesStart, string seriesEnd,string BillNo, string BillBookType, UA UA);
         DataSet GetMissingSerials(string seriesStart, string seriesEnd, string BillBookType, UA UA);
-        string BillBookNumberValidation(UA UA, string BillNo, string billBookType);
+        string BillBookNumberValidation(UA UA, string BillNo, string billBookType, string empID);
     }
 }

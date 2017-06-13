@@ -352,23 +352,35 @@ function BillBookNumberValidation()
     debugger;
     try {
         var BillNo = $('#BillNo').val();
-       
-        var data = { "BillNo": BillNo ,"BillBookType":"TCR"};
+        var empID = $("#EmpID").val();
+        var data = { "BillNo": BillNo, "BillBookType": "TCR", "EmpID": empID };
             var ds = {};
             ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
             debugger;
             if (ds != '') {
                 ds = JSON.parse(ds);
             }
-            if (ds.Records !='') { 
-                return 1;
+            if (ds.Records == '') {
+                return 0;
             }
-            else
-            {
-                if ($(".fa-exclamation-triangle").length == 0) {
-                    $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="Bill Book For This Entry does not exists!"></i>');
+            else {
+                var msg = '';
+                if (ds.Records == "BLB02") {
+                    msg = Messages.BLB02;
                 }
-               
+                if (ds.Records == "BLB03") {
+                    msg = Messages.BLB03;
+                }
+                if (ds.Records == "BLB04") {
+                    msg = Messages.BLB04;
+                }
+                if (ds.Records != "BLB01") {
+                    if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + '"></i>');
+                    }
+                }
+
+
             }
             if (ds.Result == "ERROR") {
                 notyAlert('error', ds.Message);

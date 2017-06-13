@@ -372,3 +372,10 @@ function roundoff(num, opt) {
 }
 
 
+//---* Order Status Notification * ---//
+var Messages = {
+    BLB02: "This bill no doesn't belong to selected technician ",
+    BLB03: "A few bill entries are missing ",
+    BLB04: "This bill book is already closed "
+}
+

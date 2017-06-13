@@ -335,7 +335,7 @@ function reset()
         $("#grandtotal").val("");
         $("#total").val("");
         $('#BillNoMandatory').find('i').remove()
-        //$('#ICRNo').attr('readonly', false);
+        $('#ICRNo').attr('readonly', false);
         var $datepicker = $('#ICRDate');
         $datepicker.datepicker('setDate', null);
         var $datepicker = $('#AMCValidFromDate');
@@ -366,22 +366,37 @@ function BillBookNumberValidation() {
     debugger;
     try {
         var BillNo = $('#ICRNo').val();
+        var empID = $("#EmpID").val();
 
-        var data = { "BillNo": BillNo, "BillBookType": "TCR" };
+        var data = { "BillNo": BillNo, "BillBookType": "ICR" ,"EmpID": empID};
         var ds = {};
         ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
         debugger;
         if (ds != '') {
             ds = JSON.parse(ds);
         }
-        if (ds.Records != '') {
-            return 1;
+        if (ds.Records == '') {
+            return 0;
         }
         else {
-            if ($(".fa-exclamation-triangle").length == 0)
+            var msg = '';
+            if (ds.Records == "BLB02")
             {
-                $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="Bill Book For This Entry does not exists!"></i>');
+                msg = Messages.BLB02;
             }
+            if (ds.Records == "BLB03") {
+                msg = Messages.BLB03;
+            }
+            if (ds.Records == "BLB04") {
+                msg = Messages.BLB04;
+            }
+            if (ds.Records != "BLB01")
+            {                
+                if ($(".fa-exclamation-triangle").length == 0) {
+                    $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + '"></i>');
+                }
+            }
+           
             
         }
         if (ds.Result == "ERROR") {
@@ -432,7 +447,7 @@ function BindICRBillEntryFields(Records) {
         $("#grandtotal").val(roundoff(Records.GrandTotal));
         $("#total").val(roundoff(Records.Total));
         EG_Rebind_WithData(Records.ICRBillEntryDetail, 1);
-       // $('#ICRNo').attr('readonly', 'readonly');
+        $('#ICRNo').attr('readonly', 'readonly');
 
        
         if (Records.ICRDate != null)
