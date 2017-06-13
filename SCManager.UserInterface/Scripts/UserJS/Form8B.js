@@ -23,17 +23,15 @@ $(document).ready(function () {
                { "data": "SPUNo" },
                { "data": "TicketNo" },
                { "data": "SaleOrderNo", "defaultContent": "<i>-</i>" },
-               { "data": "Subtotal", render: function (data, type, row) { return roundoff(data); }, "defaultContent": "<i>-</i>" },
-               { "data": "VATAmount", render: function (data, type, row) { return roundoff(data); }, "defaultContent": "<i>-</i>" },
-               { "data": "VATExpense", render: function (data, type, row) { return roundoff(data); }, "defaultContent": "<i>-</i>" },
-               { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "TotalBaseValue", render: function (data, type, row) { return roundoff(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "VATAmount", render: function (data, type, row) { return roundoff(data); }, "defaultContent": "<i>-</i>" }, 
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false },
-                  { className: "text-right", "targets": [7, 8, 9, 10,11] },
+                  { className: "text-right", "targets": [7, 8, 9] },
                     { className: "text-left", "targets": [4] },
-             { className: "text-center", "targets": [2, 3,5,6,12] }
+             { className: "text-center", "targets": [2, 3,5,6,10] }
 
              ]
          });
@@ -42,7 +40,7 @@ $(document).ready(function () {
 
             Edit(this);
         });
-
+      
         DataTables.DetailTable = $('#tblInvDetails').DataTable(
        {
            dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
@@ -114,8 +112,8 @@ function EG_Columns() {
                 { "data": "UOM", "defaultContent": "<i></i>" },
                 { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'Rate', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "BasicAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i></i>" },
-                { "data": "TradeDiscount",  "defaultContent": "<i></i>" },
-                { "data": "NetAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i></i>" },
+                { "data": "TradeDiscount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i></i>" },
+                { "data": "NetAmount", render: function (data, type, row) {return roundoff(data); }, "defaultContent": "<i></i>" },
                 { "data": null, "orderable": false, "defaultContent": '<a href="#" class="DeleteLink"  onclick="DeleteItem(this)" ><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>' }
 
     ]

@@ -67,6 +67,8 @@ namespace SCManager.UserInterface.Models
         [Range(0, 9999999999999999.99)]
         public decimal? TotalItemsValue { get; set; }
 
+        public decimal TotalBaseValue { get; set; }
+
         [Display(Name = "Vat Expense (₹)")]
         [Range(0, 9999999999999999.99)]
         public decimal? VATExpense { get; set; }
