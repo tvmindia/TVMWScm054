@@ -14,6 +14,7 @@ namespace SCManager.BusinessService.Services
     {
         string key = System.Web.Configuration.WebConfigurationManager.AppSettings["cryptography"];
         private IAuthenticationRepository _authenticationRepository;
+        private Const constObj = new Const();
         public AuthenticationBusiness(IAuthenticationRepository authenticationRepository)
         {
             _authenticationRepository = authenticationRepository;
@@ -93,5 +94,44 @@ namespace SCManager.BusinessService.Services
             return plainText;
         }
 
+        public object UpdateUserProfile(UserProfile userProfile)
+        {
+            object result = null;
+            List<User> userList = null;
+            try
+            {
+
+                if(string.IsNullOrEmpty(userProfile.CurrentPassword))
+                {
+                    result = _authenticationRepository.UpdateUserProfile(userProfile);
+                }
+                else
+                {
+                    userList = _authenticationRepository.GetAllUsers();
+                    userList = userList == null ? null : userList.Where(us => us.ID == userProfile.ID && us.serviceCenter.Code == userProfile.SCCode && Decrypt(us.Password) == userProfile.CurrentPassword).ToList();
+                    if (userList != null && userList.Count > 0)
+                    {
+                        userProfile.NewPassword = Encrypt(userProfile.NewPassword);
+                        result = _authenticationRepository.UpdateUserProfile(userProfile);
+                    }
+                    else
+                    {
+                       //not exist or wrong password
+                       return "2";
+                       
+                    }
+
+                }
+                
+              
+              
+               
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return result;
+        }
     }
 }

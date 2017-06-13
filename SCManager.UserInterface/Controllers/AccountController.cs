@@ -2,8 +2,10 @@
 using Newtonsoft.Json;
 using SCManager.BusinessService.Contracts;
 using SCManager.DataAccessObject.DTO;
+using SCManager.UserInterface.CustomAttributes;
 using SCManager.UserInterface.Models;
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -22,6 +24,8 @@ namespace SCManager.UserInterface.Controllers
         {
             return View();
         }
+
+
 
 
         #region Login
@@ -45,6 +49,7 @@ namespace SCManager.UserInterface.Controllers
                 //session setting
                 UA ua = new UA();
                 ua.UserName = uservm.UserName;
+                ua.UserID = uservm.ID;
                 ua.SCCode = uservm.serviceCenter.Code;
                 Session.Add("TvmValid", ua);
                 return RedirectToLocal();
@@ -116,5 +121,9 @@ namespace SCManager.UserInterface.Controllers
 
             return JsonConvert.SerializeObject(new { Result = "OK", Record = result });
         }
+
+     
+        
+
     }
 }
