@@ -344,7 +344,7 @@ function reset()
         $("#grandtotal").val("");
         $("#total").val("");
         $('#BillNoMandatory').find('i').remove()
-        $('#ICRNo').attr('readonly', false);
+       // $('#ICRNo').attr('readonly', false);
         var $datepicker = $('#ICRDate');
         $datepicker.datepicker('setDate', null);
         var $datepicker = $('#AMCValidFromDate');
@@ -389,18 +389,23 @@ function BillBookNumberValidation() {
         }
         else {
             var msg = '';
-            if (ds.Records == "BLB02")
+            if (ds.Records.Status == "BLB02")
             {
                 msg = Messages.BLB02;
             }
-            if (ds.Records == "BLB03") {
+            if (ds.Records.Status == "BLB03") {
                 msg = Messages.BLB03;
             }
-            if (ds.Records == "BLB04") {
+            if (ds.Records.Status == "BLB04") {
                 msg = Messages.BLB04;
             }
-            if (ds.Records != "BLB01")
+            if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02")
             {                
+                if ($(".fa-exclamation-triangle").length == 0) {
+                    $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + "( " + ds.Records.BookNo+" )" + '"></i>');
+                }
+            }
+            if (ds.Records.Status == "BLB02") {
                 if ($(".fa-exclamation-triangle").length == 0) {
                     $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + '"></i>');
                 }
@@ -456,7 +461,7 @@ function BindICRBillEntryFields(Records) {
         $("#grandtotal").val(roundoff(Records.GrandTotal));
         $("#total").val(roundoff(Records.Total));
         EG_Rebind_WithData(Records.ICRBillEntryDetail, 1);
-        $('#ICRNo').attr('readonly', 'readonly');
+       // $('#ICRNo').attr('readonly', 'readonly');
 
        
         if (Records.ICRDate != null)

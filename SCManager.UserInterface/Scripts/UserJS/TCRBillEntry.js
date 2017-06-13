@@ -315,7 +315,7 @@ function BindTCRBillEntryFields(Records) {
         $("#SCCommAmount").val(roundoff(Records.SCCommAmount));
         $("#SpecialComm").val(roundoff(Records.SpecialComm));
         EG_Rebind_WithData(Records.TCRBillEntryDetail, 1);
-        $('#BillNo').attr('readonly', 'readonly');
+       // $('#BillNo').attr('readonly', 'readonly');
        // $('#EmpID').attr('disabled', 'true');
        // $("#EmpID").val(Records.EmpID);
 
@@ -365,18 +365,24 @@ function BillBookNumberValidation()
             }
             else {
                 var msg = '';
-                if (ds.Records == "BLB02") {
+                if (ds.Records.Status == "BLB02") {
                     msg = Messages.BLB02;
                 }
-                if (ds.Records == "BLB03") {
+                if (ds.Records.Status == "BLB03") {
                     msg = Messages.BLB03;
                 }
-                if (ds.Records == "BLB04") {
+                if (ds.Records.Status == "BLB04") {
                     msg = Messages.BLB04;
                 }
-                if (ds.Records != "BLB01") {
+                if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02") {
                     if ($(".fa-exclamation-triangle").length == 0) {
-                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + '"></i>');
+                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + "( " + ds.Records.BookNo + " )" + '"></i>');
+                    }
+                }
+                if( ds.Records.Status == "BLB02")
+                {
+                    if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg +  '"></i>');
                     }
                 }
 
@@ -682,7 +688,7 @@ function reset()
         //$("#ServiceCharge").val("");
         $("#SCCommAmount").val("");
         $("#SpecialComm").val("");
-        $('#BillNo').attr('readonly', false);
+       // $('#BillNo').attr('readonly', false);
         $('#EmpID').attr('disabled', false);
         var $datepicker = $('#BillDate');
         $datepicker.datepicker('setDate', null);

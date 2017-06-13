@@ -369,7 +369,7 @@ namespace SCManager.RepositoryServices.Services
         #endregion BillBookRangeValidation
 
         #region BillBookNumberValidation
-        public string BillBookNumberValidation(UA UA, string BillNo,string billBookType, string empID)
+        public object BillBookNumberValidation(UA UA, string BillNo,string billBookType, string empID)
         {
             SqlParameter outParameter1, outParameter2,outParameter3 = null;
             try
@@ -405,7 +405,12 @@ namespace SCManager.RepositoryServices.Services
             {
                 throw ex;
             }
-            return outParameter3.Value.ToString();
+            return new
+            {
+                Status = outParameter3.Value.ToString(),
+                BookNo = outParameter2.Value.ToString()
+            };
+           
         }
         #endregion BillBookNumberValidation
     }

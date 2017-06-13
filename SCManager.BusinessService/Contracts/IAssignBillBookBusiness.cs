@@ -16,6 +16,6 @@ namespace SCManager.BusinessService.Contracts
         object InsertUpdateBillBook(AssignBillBook assignBillBookObj);
         string BillBookRangeValidation(string seriesStart, string seriesEnd,string BillNo, string BillBookType, UA UA);
         DataSet GetMissingSerials(string seriesStart, string seriesEnd, string BillBookType, UA UA);
-        string BillBookNumberValidation(UA UA, string ID, string billBookType, string empID);
+        object BillBookNumberValidation(UA UA, string ID, string billBookType, string empID);
     }
 }
