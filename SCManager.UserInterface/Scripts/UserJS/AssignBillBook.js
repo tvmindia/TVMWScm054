@@ -230,9 +230,16 @@ function BindBillBookFields(Records)
     var result = GetMissingSerials(Records[0].SeriesStart, Records[0].LastUsed, Records[0].BillBookType);
     if (result != "" && result != undefined) {
         if (result.Table.length > 0) {
-            $(".masterinfoDet").append('<div>Book Series ' + Records[0].SeriesStart + " - " + Records[0].SeriesEnd + '</div>');
+            $(".masterinfoDet").append('<div>Book Series ' + Records[0].SeriesStart + " - " + Records[0].SeriesEnd + '</div><br/>');
             for (var i = 0; i < result.Table.length; i++) {
-                $(".masterinfoDet").append('<label for="name" style="font-weight:normal;">' + result.Table[i].id + '</label>');
+                if (i != result.Table.length - 1) {
+                    $(".masterinfoDet").append('<label for="name" style="font-weight:normal;">' + result.Table[i].id + ',' + '</label>');
+                }
+                else
+                {
+                    $(".masterinfoDet").append('<label for="name" style="font-weight:normal;">' + result.Table[i].id + '</label>');
+                }
+               
             }
         }
         else {

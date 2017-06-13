@@ -30,10 +30,10 @@ namespace SCManager.BusinessService.Services
             assignBillBookList = _iAssignBillBookRepository.GeBillBookByID(UA, ID);
             return assignBillBookList;
         }
-        public string BillBookNumberValidation(UA UA, string BookNo, string billBookType)
+        public string BillBookNumberValidation(UA UA, string BookNo, string billBookType, string empID)
         {
             string ID = null;
-            ID = _iAssignBillBookRepository.BillBookNumberValidation(UA, BookNo,billBookType);
+            ID = _iAssignBillBookRepository.BillBookNumberValidation(UA, BookNo,billBookType,empID);
             return ID;
         }
         public DataSet GetMissingSerials(string seriesStart, string seriesEnd, string BillBookType, UA UA)
