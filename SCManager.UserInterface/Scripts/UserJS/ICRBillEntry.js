@@ -19,6 +19,8 @@ $(document).ready(function () {
        { "data": "ICRDateFormatted", "defaultContent": "<i>-</i>" },
        { "data": "ICRNo", "defaultContent": "<i>-</i>" },
        { "data": "AMCNO", "defaultContent": "<i>-</i>" },
+        { "data": "AMCFromDateFormatted", "defaultContent": "<i>-</i>" },
+         { "data": "AMCToDateFormatted", "defaultContent": "<i>-</i>" },
        { "data": "CustomerName", "defaultContent": "<i>-</i>" },
        { "data": "CustomerContactNo", "defaultContent": "<i>-</i>" },
         { "data": "ModelNo", "defaultContent": "<i>-</i>" },
@@ -29,27 +31,28 @@ $(document).ready(function () {
      ],
      columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
           { className: "text-right", "targets": [10] },
-     { className: "text-center", "targets": [1, 2, 3, 4, 9, 5, 6, 7, 8, 9] },
-     {
-         "render": function (data, type, row) {
-             var returnstring = ''; 
-             if (data) {                
-                 returnstring = returnstring + '<span>' + row.AMCNO + ' / (' + row.AMCFromDateFormatted + ' to ' + row.AMCToDateFormatted + ' )</span><br/>';
+     { className: "text-center", "targets": [1, 2, 3, 4, 9, 5, 6, 7, 8, 9] }
+     //,
+     //{
+     //    "render": function (data, type, row) {
+     //        var returnstring = ''; 
+     //        if (data) {                
+     //            returnstring = returnstring + '<span>' + row.AMCNO + ' / (' + row.AMCFromDateFormatted + ' to ' + row.AMCToDateFormatted + ' )</span><br/>';
                  
-             }
-             else
-             {
-                 returnstring = returnstring + '<span>' + (row.AMCNO ? row.AMCNO : "-") + ' / (' + (row.AMCFromDateFormatted?row.AMCFromDateFormatted:"-") + ' to ' + (row.AMCToDateFormatted?row.AMCToDateFormatted:"-" )+ ' )</span><br/>';
-             }
-             if (row.AMCNO == null && row.AMCFromDateFormatted == null && row.AMCToDateFormatted == null)
-             {
-                 returnstring = "-";
-             }
+     //        }
+     //        else
+     //        {
+     //            returnstring = returnstring + '<span>' + (row.AMCNO ? row.AMCNO : "-") + ' / (' + (row.AMCFromDateFormatted?row.AMCFromDateFormatted:"-") + ' to ' + (row.AMCToDateFormatted?row.AMCToDateFormatted:"-" )+ ' )</span><br/>';
+     //        }
+     //        if (row.AMCNO == null && row.AMCFromDateFormatted == null && row.AMCToDateFormatted == null)
+     //        {
+     //            returnstring = "-";
+     //        }
              
-             return returnstring;
-         },
-         "targets": 5
-     }
+     //        return returnstring;
+     //    },
+     //    "targets": 5
+     //}
 
      ]
  });
