@@ -126,7 +126,7 @@ margin-left:-11px;
                                 @Html.LabelFor(model => model.BillNo, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.BillNo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.BillNo, new { htmlAttributes = new { @class = "form-control", @onkeyup = "BillBookNumberValidation();" } })
                                     @Html.ValidationMessageFor(model => model.BillNo, "", new { @class = "text-danger" })
                                 </div>
                             <div class="col-md-1  mandatory" id="BillNoMandatory"></div>  

@@ -102,6 +102,10 @@ namespace SCManager.DataAccessObject.DTO
         {
             get { return "Series start and End Already Exists"; }
         }
+        public string PasswordError
+        {
+            get { return "Password is wrong"; }
+        }
         public ConstMessage GetMessage(string MsgCode) {
             ConstMessage result=new ConstMessage(MsgCode,"","ERROR") ;
           

@@ -10,5 +10,6 @@ namespace SCManager.RepositoryServices.Contracts
     public interface IAuthenticationRepository
     {
         List<User> GetAllUsers();
+        object UpdateUserProfile(UserProfile userProfile);
     }
 }

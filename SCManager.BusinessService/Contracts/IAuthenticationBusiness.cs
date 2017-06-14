@@ -10,5 +10,6 @@ namespace SCManager.BusinessService.Contracts
     public interface IAuthenticationBusiness
     {
         User CheckUserCredentials(User user);
+        object UpdateUserProfile(UserProfile userProfile);
     }
 }

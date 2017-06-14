@@ -185,6 +185,7 @@
     <Compile Include="Controllers\TCRBillEntryController.cs" />
     <Compile Include="Controllers\TechnicianController.cs" />
     <Compile Include="Controllers\TechnicianSalaryCalculationController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="CustomAttributes\CustomAuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -569,6 +570,7 @@
     <Content Include="Scripts\UserJS\TCRBillEntry.js" />
     <Content Include="Scripts\UserJS\TechnicianSalaryCalculation.js" />
     <Content Include="Scripts\UserJS\TechnicianStock.js" />
+    <Content Include="Scripts\UserJS\UserProfile.js" />
     <Content Include="Views\Form8TaxInvoice\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -627,6 +629,7 @@
     <Content Include="Views\IssueToOtherSC\Index.cshtml" />
     <Content Include="Views\AssignBillBook\Index.cshtml" />
     <Content Include="Views\TechnicianSalaryCalculation\Index.cshtml" />
+    <Content Include="Views\UserProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

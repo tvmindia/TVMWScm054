@@ -385,6 +385,10 @@ function BillBookNumberValidation()
                         $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg +  '"></i>');
                     }
                 }
+                if (ds.Records.Status == "BLB01" )
+                {
+                    $("#BillNoMandatory").html('');
+                }
 
 
             }
@@ -770,6 +774,7 @@ function TechnicianSelectOnChange(curobj) {
     try {
         var v = $(curobj).val();
         $("#ModelTechEmpID").val(v);
+        BillBookNumberValidation();
     }
     catch (e) {
         notyAlert('error', e.Message);

@@ -11,6 +11,7 @@ namespace SCManager.DataAccessObject.DTO
         public string UserName { get; set; }
         public string SCCode { get; set; }
         public DateTime DateTime { get; set; }
+        public Guid UserID { get; set; }
 
 
         public UA()
@@ -22,6 +23,7 @@ namespace SCManager.DataAccessObject.DTO
                     UA uaObj = (UA)HttpContext.Current.Session["TvmValid"];
                     UserName = uaObj.UserName;
                     SCCode = uaObj.SCCode;
+                    UserID = uaObj.UserID;
                     uaObj.DateTime = GetCurrentDateTime();
                 }
             }

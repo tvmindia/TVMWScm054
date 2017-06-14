@@ -23,4 +23,16 @@ namespace SCManager.DataAccessObject.DTO
         public string RoleName { get; set; }
         public LogDetails logDetails { get; set; }
     }
+    public class UserProfile
+    {
+       
+        public string UserName { get; set; }
+        public string CurrentPassword { get; set; }
+        public string NewPassword { get; set; }
+        public string SCCode { get; set; }
+        public Guid? ID { get; set; }
+        public LogDetails logDetails { get; set; }
+    }
+
+
 }

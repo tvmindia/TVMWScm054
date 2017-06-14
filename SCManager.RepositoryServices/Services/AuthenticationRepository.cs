@@ -75,5 +75,42 @@ namespace SCManager.RepositoryServices.Services
 
 
         }
+
+        public object UpdateUserProfile(UserProfile userProfile)
+        {
+           SqlParameter outParameter= null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[UpdateUserProfile]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = userProfile.SCCode;
+                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = userProfile.ID;
+                        cmd.Parameters.Add("@Name", SqlDbType.NVarChar, 250).Value = userProfile.UserName;
+                        cmd.Parameters.Add("@NewPassword", SqlDbType.NVarChar, 250).Value = userProfile.NewPassword;
+                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = userProfile.logDetails.UpdatedBy;
+                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = userProfile.logDetails.UpdatedDate;
+                        outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
+                        outParameter.Direction = ParameterDirection.Output;
+                      
+                        cmd.ExecuteNonQuery();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        return outParameter.Value.ToString();
     }
+}
 }
