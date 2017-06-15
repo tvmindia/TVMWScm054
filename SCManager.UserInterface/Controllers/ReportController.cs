@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SCManager.UserInterface.CustomAttributes;
+using System.Data;
 
 namespace SCManager.UserInterface.Controllers
 {
@@ -49,6 +50,62 @@ namespace SCManager.UserInterface.Controllers
         }
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public ActionResult TechnicianPerformance()
+        {
+            TechnicianPerformanceViewModel _technicianPerformanceViewModel = new TechnicianPerformanceViewModel();
+            try
+            {
+                UA ua = new UA();
+                List<SelectListItem> selectListItem = new List<SelectListItem>();
+                string[] months = { "", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+                for (int i = 1; i < 13; i++)
+                {
+                    selectListItem.Add(new SelectListItem
+                    {
+                        Text = months[i],
+                        Value = i.ToString(),
+                        Selected = false
+                    });
+                }
+
+                _technicianPerformanceViewModel.MonthList = selectListItem;
+                selectListItem = null;
+                selectListItem = new List<SelectListItem>();
+                DateTime dt = ua.CurrentDatetime();
+                Int16 prevyears = Int16.Parse(dt.AddYears(-5).Year.ToString());
+                Int16 comyears = Int16.Parse(dt.AddYears(5).Year.ToString());
+                for (Int16 j = prevyears; j <= comyears; j++)
+                {
+                    selectListItem.Add(new SelectListItem
+                    {
+                        Text = j.ToString(),
+                        Value = j.ToString(),
+                        Selected = false
+                    });
+                }
+
+                _technicianPerformanceViewModel.YearList = selectListItem;
+                ViewBag.month = dt.Month;
+                ViewBag.year = dt.Year;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+            return View(_technicianPerformanceViewModel);
+        }
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetTechnicianPerformance(string EmpID = null,string month = null, string year = null)
+        {
+            UA ua = new UA();
+            DataTable PerformanceList = _reportBusiness.GetTechnicianPerformance(ua,Guid.Parse(EmpID),int.Parse(month), int.Parse(year));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = PerformanceList });
+        }
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult StockLedger()
         {
             UA ua = new UA();
@@ -63,7 +120,6 @@ namespace SCManager.UserInterface.Controllers
         {
             return View();
         }
-
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult MonthlyIncomeAndExpenditure()

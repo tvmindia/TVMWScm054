@@ -11,6 +11,7 @@ namespace SCManager.UserInterface.Models
     {
         public string SCCode { get; set; }
         public Guid? ID { get; set; }
+        [Required(ErrorMessage = "Please Enter Book No")]
         [Display(Name ="Book No")]
         public string BillNo { get; set; }
         [Required(ErrorMessage ="Please Enter Series Start")]

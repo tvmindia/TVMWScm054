@@ -12,7 +12,7 @@ namespace SCManager.BusinessService.Contracts
     {
         List<AssignBillBook> GetAllBillBook(UA UA);
         List<AssignBillBook> GeBillBookByID(UA UA, string ID);
-        string DeleteBillBook(string ID, UA ua);
+        string DeleteBillBook(string ID, string BillBookType, UA ua);
         object InsertUpdateBillBook(AssignBillBook assignBillBookObj);
         string BillBookRangeValidation(string seriesStart, string seriesEnd,string BillNo, string BillBookType, UA UA);
         DataSet GetMissingSerials(string seriesStart, string seriesEnd, string BillBookType, UA UA);

@@ -214,7 +214,7 @@ function BindTCRBillEntry(id) {
         if (ds.Result == "OK") {
 
             BindTCRBillEntryFields(ds.Records);
-            BillBookNumberValidation();
+           
         }
         if (ds.Result == "ERROR") {
             notyAlert('error', ds.Message);
@@ -340,8 +340,10 @@ function BillBookNumberValidation()
     debugger;
     try {
         var BillNo = $('#BillNo').val();
-        var empID = $("#EmpID").val();
-        var data = { "BillNo": BillNo, "BillBookType": "TCR", "EmpID": empID };
+        if (BillNo != "" && BillNo != null)
+        {
+            var empID = $("#EmpID").val();
+            var data = { "BillNo": BillNo, "BillBookType": "TCR", "EmpID": empID };
             var ds = {};
             ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
             debugger;
@@ -367,14 +369,12 @@ function BillBookNumberValidation()
                         $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + "( " + ds.Records.BookNo + " )" + '"></i>');
                     }
                 }
-                if( ds.Records.Status == "BLB02")
-                {
+                if (ds.Records.Status == "BLB02") {
                     if ($(".fa-exclamation-triangle").length == 0) {
-                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg +  '"></i>');
+                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + '"></i>');
                     }
                 }
-                if (ds.Records.Status == "BLB01" )
-                {
+                if (ds.Records.Status == "BLB01") {
                     $("#BillNoMandatory").html('');
                 }
 
@@ -385,6 +385,8 @@ function BillBookNumberValidation()
                 return 0;
             }
             return 1;
+        }
+       
         
 
     }
@@ -430,8 +432,16 @@ function SaveSuccess(data, status) {
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
-            BindTCRBillEntry(JsonResult.Records.ID);
-            BindAllCustomerBill();
+            if ($("#HeaderID").val() == emptyGUID || $("#HeaderID").val() == "") {
+                BindTCRBillEntry(JsonResult.Records.ID);
+                BillBookNumberValidation();
+            }
+            else
+            {
+                BindTCRBillEntry($("#HeaderID").val());
+            }
+           
+            BindAllCustomerBill();           
             notyAlert('success', JsonResult.Message);            
             break;
         case "ERROR":

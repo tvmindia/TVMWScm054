@@ -14,7 +14,7 @@ namespace SCManager.RepositoryServices.Contracts
         object InsertBillBook(AssignBillBook assignBillBook);
         List<AssignBillBook> GeBillBookByID(UA UA, string ID);
         object UpdateBillBook(AssignBillBook assignBillBook);
-        string DeleteBillBook(string ID, UA ua);
+        string DeleteBillBook(string ID, string BillBookType, UA ua);
         string BillBookRangeValidation(string seriesStart, string seriesEnd,string BillNo, string BillBookType, UA UA);
         DataSet GetMissingSerials(string seriesStart, string seriesEnd, string BillBookType, UA UA);
         object BillBookNumberValidation(UA UA, string BillNo, string billBookType, string empID);
