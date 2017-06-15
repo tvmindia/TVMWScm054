@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using SCManager.DataAccessObject.DTO;
+using System.Data;
 
 namespace SCManager.BusinessService.Services
 {
@@ -87,5 +88,37 @@ namespace SCManager.BusinessService.Services
             }
             return TechnicianList;
         }
+        public DataTable GetTechnicianPerformance(UA UA, Guid EMPID, int? month = null, int? year = null)
+        {
+            DataTable PerformanceList = null;
+            try
+            {
+                string d = "";
+                int i = 0;
+                PerformanceList = _reportRepository.GetTechnicianPerformance(UA, EMPID, month, year);
+                if(PerformanceList!=null)
+                {
+                    PerformanceList.Columns.RemoveAt(4);
+                    foreach (DataRow dr in PerformanceList.Rows)
+                    {
+
+                        d = dr["Date"].ToString();
+                        DateTime date = DateTime.Parse(d);
+                        d = date.ToString("dd-MMM-yyyy");
+                        PerformanceList.Rows[i]["Date"] = d;
+                        i++;
+                    }
+                    PerformanceList.Columns["Date"].SetOrdinal(0);
+                    
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return PerformanceList;
+        }
+        
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace SCManager.RepositoryServices.Services
@@ -281,6 +282,41 @@ namespace SCManager.RepositoryServices.Services
                 throw ex;
             }
             return Reportlist;
+        }
+        public DataTable GetTechnicianPerformance(UA UA,Guid EMPID, int? month = null, int? year = null)
+        {
+            DataTable dt = null;
+            try
+            {
+                
+                SqlDataAdapter sda = null;
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@EMPID", SqlDbType.UniqueIdentifier).Value = EMPID;
+                        cmd.Parameters.Add("@month", SqlDbType.Int).Value = month;
+                        cmd.Parameters.Add("@year", SqlDbType.Int).Value = year;
+                        cmd.CommandText = "[RPT_GetTechPerformance]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        sda = new SqlDataAdapter();
+                        sda.SelectCommand = cmd;
+                        dt = new DataTable();
+                        sda.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dt;
         }
     }
 }

@@ -411,6 +411,7 @@
     <Content Include="Content\images\scmanagerback1.JPG" />
     <Content Include="Content\images\stock.png" />
     <Content Include="Content\images\wrench.png" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="Content\UserCSS\DailyServiceReport.css" />
     <Content Include="Content\UserCSS\Form8.css" />
@@ -568,6 +569,7 @@
     <Content Include="Scripts\UserJS\StockSummary.js" />
     <Content Include="Scripts\UserJS\SalesReturn.js" />
     <Content Include="Scripts\UserJS\TCRBillEntry.js" />
+    <Content Include="Scripts\UserJS\TechnicianPerformance.js" />
     <Content Include="Scripts\UserJS\TechnicianSalaryCalculation.js" />
     <Content Include="Scripts\UserJS\TechnicianStock.js" />
     <Content Include="Scripts\UserJS\UserProfile.js" />
@@ -630,6 +632,7 @@
     <Content Include="Views\AssignBillBook\Index.cshtml" />
     <Content Include="Views\TechnicianSalaryCalculation\Index.cshtml" />
     <Content Include="Views\UserProfile\Index.cshtml" />
+    <Content Include="Views\Report\TechnicianPerformance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />
