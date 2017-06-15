@@ -14,5 +14,6 @@ namespace SCManager.RepositoryServices.Contracts
         List<StockLedger> GetStockLedger(UA UA, string fromdate = null, string todate = null);
         List<TechnicianStock> GetTechniciansStockSummary(UA UA, string fromdate = null, string todate = null);
         List<IncomeExpense> GetMonthlyIncomeAndExpenditure(UA UA, string fromdate = null, string todate = null);
+        List<AmcReport> GetAmcReportTable(UA UA, string fromdate, string todate);
     }
 }

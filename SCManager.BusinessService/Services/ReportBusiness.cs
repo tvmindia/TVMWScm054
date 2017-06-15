@@ -87,5 +87,33 @@ namespace SCManager.BusinessService.Services
             }
             return TechnicianList;
         }
+
+        public List<AmcReport> GetAmcReportTable(UA UA, string fromdate = null, string todate = null)
+        {
+            List<AmcReport> ItemList = null;
+            try
+            {
+                ItemList = _reportRepository.GetAmcReportTable(UA, fromdate, todate);
+                if (ItemList != null)
+                {
+                    foreach (AmcReport EX in ItemList)
+                    {
+                        SCManagerSettings settings = new SCManagerSettings();
+
+                        if (EX.AmcStartDate != null)
+                            EX.AmcStartDate = Convert.ToDateTime(EX.AmcStartDate).ToString(settings.dateformat);
+                        if (EX.AmcEndDate != null)
+                            EX.AmcEndDate = Convert.ToDateTime(EX.AmcEndDate).ToString(settings.dateformat);
+                    }
+                }
+                //ItemList = ItemList == null ? null : ItemList.Select(item => { item.Value = int.Parse(item.Stock) * item.SellingRate; return item; }).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ItemList;
+        }
     }
 }
