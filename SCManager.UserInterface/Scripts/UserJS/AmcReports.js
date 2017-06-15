@@ -3,6 +3,7 @@ var ToDate, FromDate,CurrentDate;
 var appAddress = window.location.protocol + "//" + window.location.host + "/";   //Retrieving browser Url 
 $(document).ready(function () {
     try {
+        debugger;
 
         DataTables.itemTable = $('#tblAMCReportList').DataTable(
          {
@@ -40,8 +41,10 @@ $(document).ready(function () {
 
                        if (data < 0)
                            return "Expired"
-                       else if (data > 0 && data <= 10)
+                       else if (data >0 && data <= 10)
                            return "Expiring Soon"
+                       else if (data ==0 )
+                           return "Expiring Today"
                        else
                            return "Active ";
                    }, "defaultContent": "<i>-</i>"
@@ -72,6 +75,7 @@ $(document).ready(function () {
 
 function GetAmcReportTable() {
     try {
+        debugger;
         var frdate = $("#fromdate").val();
         var todate = $("#todate").val();
         var data = {};
@@ -100,9 +104,11 @@ function GetAmcReportTable() {
 
 function RefreshAmcReportTable() {
     try {
+        debugger;
         var fromdate = $("#fromdate").val();
         var todate = $("#todate").val();
         if (fromdate != "" && todate != "") {
+            if (DataTables.itemTable!=undefined)
             DataTables.itemTable.clear().rows.add(GetAmcReportTable()).draw(false);
         }
     }
