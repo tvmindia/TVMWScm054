@@ -40,6 +40,7 @@ namespace SCManager.UserInterface.Models
         public string Remarks { get; set; }
         [Display(Name = "VAT %")]
         public decimal? VATAmount { get; set; }
+        [Range(0, 9999999999999999.99)]
         public decimal? Discount { get; set; }
         [Display(Name = "Service Charge")]
         public decimal? ServiceCharge { get; set; }
@@ -57,6 +58,9 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Sub Total (₹)")]
         [Range(0, 9999999999999999.99)]
         public decimal? Subtotal { get; set; }
+        [Display(Name = "Total (₹)")]
+        [Range(0, 9999999999999999.99)]
+        public decimal? Total { get; set; }
         public String DetailJSON { get; set; }
         public string Technician { get; set; }
         public Guid? jobNoID { get; set; }

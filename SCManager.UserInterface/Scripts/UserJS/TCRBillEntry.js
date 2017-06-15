@@ -90,7 +90,6 @@ function EG_TableDefn() {
 
     return tempObj
 }
-
 function EG_Columns() {
      
     var obj = [
@@ -112,7 +111,6 @@ function EG_Columns() {
     return obj
 
 }
-
 function EG_Columns_Settings() {
 
     var obj = [
@@ -137,7 +135,6 @@ function EG_Columns_Settings() {
     return obj;
 
 }
-
 //------------------------------------------------------------------
 
 //--------------------button actions ----------------------
@@ -154,7 +151,6 @@ function List() {
     }
 
 }
-
 function goBack() {
     $('#AddTab').trigger('click');
     $("#HeaderID").val("");
@@ -181,12 +177,9 @@ function CalculateSCCommissionAmt()
         }
         $("#SCCommAmount").val(roundoff(a));
     }
-    AmountSummary();
+    
    
 }
-
-
-
 //---------------------------------------Edit Item--------------------------------------------------//
 function Edit(currentObj) {
      
@@ -209,7 +202,6 @@ function Edit(currentObj) {
     
 
 }
-
 function BindTCRBillEntry(id) {
     debugger;
     try {
@@ -306,10 +298,12 @@ function BindTCRBillEntryFields(Records) {
         $("#PaymentMode").val(Records.PaymentMode);
         $("#Remarks").val(Records.Remarks);
         $("#subtotal").val(roundoff(Records.Subtotal));
+        $("#discount").val(roundoff(Records.Discount));
+        $("#total").val(roundoff(Records.Subtotal - Records.Discount));
         $("#SCAmount").val(roundoff(Records.ServiceCharge));
         $("#VATAmount").val(roundoff(Records.VATAmount));
-        //$("#vatpercentage").val(Records.EmpID);
-        $("#discount").val(roundoff(Records.Discount));
+        $("#VATPercentageAmount").val(Records.VATAmount);
+    
         $("#grandtotal").val(roundoff(Records.GrandTotal));
        // $("#ServiceChargeComm").val(Records.ServiceCharge/100);
         $("#SCCommAmount").val(roundoff(Records.SCCommAmount));
@@ -325,12 +319,7 @@ function BindTCRBillEntryFields(Records) {
     } catch (e) {
         notyAlert('error', e.message);
     }
-
-
-
-
 }
-
 
 function FillUOM(row) {
      
@@ -346,7 +335,6 @@ function FillUOM(row) {
     }
 
 }
-
 function BillBookNumberValidation()
 {
     debugger;
@@ -405,7 +393,6 @@ function BillBookNumberValidation()
         return 0;
     }
 }
-
 function DeleteClick()
 {
     notyConfirm('Are you sure to delete?', 'TCRBillDelete()', '', "Yes, delete it!");
@@ -455,7 +442,6 @@ function SaveSuccess(data, status) {
             break;
     }
 }
-
 function BindAllCustomerBill()
 {
     try {
@@ -466,9 +452,6 @@ function BindAllCustomerBill()
         notyAlert('error', e.message);
     }
 }
-
-
-
 //---------------get grid fill result-------------------
 function GetAllTCRBill() {
     try {
@@ -493,8 +476,6 @@ function GetAllTCRBill() {
         notyAlert('error', e.message);
     }
 }
-
-
 function save()
 {
     //$("#JobNo").val("123ERT32q");
@@ -511,10 +492,9 @@ function save()
     }
    
 }
-
 function Add() {
      
-   
+    debugger;
     ChangeButtonPatchView('TCRBillEntry', 'btnPatchTCRBillEntrySettab', 'Add');
     EG_ClearTable();
    // RestForm8();
@@ -523,33 +503,8 @@ function Add() {
     reset();
 }
 
-function CalculateVAT()
-{
-     
-    var vatpercent = $("#vatpercentage").val(); 
 
-    var subTotal = $("#subtotal").val();
-    vatpercent = parseInt(vatpercent);
-    if (vatpercent > 100) {
-        vatpercent = 100
-        $("#vatpercentage").val(vatpercent);
-    }
-    if (vatpercent < 0) {
-        vatpercent = 0
-        $("#vatpercentage").val(vatpercent);
-    }
-    subTotal = parseInt(subTotal);
-    var vatamt = (subTotal * vatpercent / 100)
-    if (isNaN(vatamt)) { vatamt=0.00}
-    $("#VATAmount").val(roundoff(vatamt));
-
-    AmountSummary();
-}
-
-function CalculateAmount(row) {
-
-
-
+function CalculateAmount(row) { 
 
     //EG_GridData[row-1][Quantity] = value
     var qty = 0.00;
@@ -579,16 +534,80 @@ function CalculateAmount(row) {
     EG_GridData[row - 1]['NetAmount'] = roundoff(qty * rate);
     EG_GridData[row - 1]['Discount'] = roundoff(dic);
     EG_Rebind();
-
-    var total = 0.00;
-    for (i = 0; i < EG_GridData.length; i++) {
-        total = total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
-    }
-
-    $('#subtotal').val(roundoff(total));
+     
     AmountSummary();
 
 }
+function ServiceAmountchange()
+{
+    AmountSummary()
+    //var total = parseFloat($('#total').val()) || 0;
+    //var vatamount = parseFloat($('#VATAmount').val()) || 0;
+    //var SCAmount = parseFloat($('#SCAmount').val()) || 0;
+    //$('#grandtotal').val(roundoff(total + vatamount + SCAmount));
+}
+
+function DiscountChange() {
+    debugger;
+    //var subtotal = parseFloat($('#subtotal').val()) || 0;
+    //var discount = parseFloat($('#discount').val()) || 0;
+    //$('#total').val(roundoff(subtotal - discount));
+    AmountSummary()
+}
+
+function ClearDiscountPercentage() {
+    debugger;
+    if ($('#VATAmount').val() != $('#VATPercentageAmount').val())
+        $("#vatpercentage").val("");
+
+    var total = parseFloat($('#total').val()) || 0;
+    var vatAmount = parseFloat($('#VATAmount').val()) || 0;
+    var SCAmount = parseFloat($('#SCAmount').val()) || 0;
+    $('#grandtotal').val(roundoff(total + vatAmount + SCAmount));
+}
+
+
+function CalculateVAT() {
+    debugger;
+    var vatpercent = $("#vatpercentage").val();
+    var Total = $("#total").val();
+    vatpercent = parseFloat(vatpercent);
+    if (vatpercent > 100) {
+        vatpercent = 100
+        $("#vatpercentage").val(vatpercent);
+    }
+    if (vatpercent < 0) {
+        vatpercent = 0
+        $("#vatpercentage").val(vatpercent);
+    }
+    Total = parseFloat(Total);
+    var vatamt = (Total * vatpercent / 100)
+    if (isNaN(vatamt)) { vatamt = 0.00 }
+    $("#VATAmount").val(roundoff(vatamt));
+    $('#VATPercentageAmount').val(roundoff(vatamt));
+}
+
+function AmountSummary() {
+    debugger;
+    var Total = 0.00;
+    for (i = 0; i < EG_GridData.length; i++) {
+        Total = Total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
+    }
+    $('#subtotal').val(roundoff(Total));
+    var discount = parseFloat($('#discount').val()) || 0;
+
+    $('#total').val(roundoff(Total - discount));
+     
+    var total = parseFloat($('#total').val()) || 0;
+
+    if ($("#vatpercentage").val() != "")
+        CalculateVAT();
+
+    var vatamount = parseFloat($('#VATAmount').val()) || 0;
+    var SCAmount = parseFloat($('#SCAmount').val()) || 0;   
+    $('#grandtotal').val(roundoff(total + vatamount + SCAmount));
+}
+
 function BindJobNumberDropDown() {
 
     try {
@@ -617,25 +636,6 @@ function BindJobNumberDropDown() {
         notyAlert('error', e.Message);
     }
 }
-function AmountSummary() {
-     
-    var subtotal = parseFloat($('#subtotal').val()) || 0;
-    var vatamount = parseFloat($('#VATAmount').val()) || 0;
-    var SCAmount = parseFloat($('#SCAmount').val()) || 0;
-    var discount = parseFloat($('#discount').val()) || 0;
-    var vatp = (parseFloat($('#vatpercentage').val()) || 0);
-    if (vatp > 0) {
-        vatamount = (subtotal * vatp) / 100;
-        $('#VATAmount').val(roundoff(vatamount));
-    }
-    $('#subtotal').val(roundoff(subtotal));
-    $('#VATAmount').val(roundoff(vatamount));
-    $('#SCAmount').val(roundoff(SCAmount));
-    $('#discount').val(roundoff(discount))
-    $('#grandtotal').val(roundoff(subtotal + vatamount + SCAmount - discount));
-}
-
-
 function getMaterials() {
 
 
@@ -664,8 +664,6 @@ function getMaterials() {
 
 
 }
-
-
 function reset()
 {
     if (($("#HeaderID").val() == "") || ($("#HeaderID").val() == 'undefined') || ($("#HeaderID").val() == "0")) {
@@ -687,6 +685,7 @@ function reset()
         $("#VATAmount").val("");
         $("#vatpercentage").val("");
         $("#discount").val("");
+        $("#total").val("");
         $("#grandtotal").val("");
         $('#BillNoMandatory').find('i').remove()
         //$("#ServiceCharge").val("");
@@ -698,14 +697,14 @@ function reset()
         $datepicker.datepicker('setDate', null);
         EG_ClearTable();
         EG_AddBlankRows(5);
-        ResetForm();
+        debugger;
+        ResetTCRForm();
     }
     else
     {
         BindTCRBillEntry($("#HeaderID").val());
     }
 }
-
 function FillJobRelatedFields() {
     var job = $("#JobNo").val();
     try {
@@ -740,20 +739,15 @@ function FillJobRelatedFields() {
 
 
 }
-
-
-
 //-----------------------------------------Reset Validation Messages--------------------------------------//
-function ResetForm() {
-    var validator = $("#F8").validate();
-    $('#F8').find('.field-validation-error span').each(function () {
+function ResetTCRForm() {
+    debugger;
+    var validator = $("#TCR").validate();
+    $('#TCR').find('.field-validation-error span').each(function () {
         validator.settings.success($(this));
     });
     validator.resetForm();
 }
-
-
-
 function AddTechnicanJob() {
     var techi = $("#ModelTechEmpID").val();
      
@@ -780,8 +774,6 @@ function TechnicianSelectOnChange(curobj) {
         notyAlert('error', e.Message);
     }
 }
-
-
 function RefreshDailyServiceTable(jobNo) {
     //need to write code to refresh combo
    
@@ -821,7 +813,6 @@ function ReBindJobNoDropdown() {
         notyAlert('error', e.message);
     }
 }
-
 function JobSelect(obj) {
     FillJobRelatedFields();
     //var v = $(obj).val();
