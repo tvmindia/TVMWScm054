@@ -305,7 +305,7 @@ function SaveSuccess(data, status) {
             notyAlert('success', JsonResult.Records.Message);
             break;
         case "ERROR":
-            notyAlert('error', "Error!");
+            notyAlert('error', JsonResult.Message);
             break;
         default:
             notyAlert('error', JsonResult.Message);
@@ -324,8 +324,9 @@ function BillBookDelete()
     debugger;
     try {
         var id = $('#ID').val();
+        var Type = $("#BillBookType").val();
         if (id != '' && id != null) {
-            var data = { "ID": id };
+            var data = { "ID": id,"BillBookType":Type };
             var ds = {};
             ds = GetDataFromServer("AssignBillBook/DeleteBillBook/", data);
             if (ds != '') {

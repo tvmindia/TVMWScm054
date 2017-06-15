@@ -251,6 +251,10 @@ function GetIssuedList() {
         var empID = $("#ddlIssueListTech").val();
         var fromDate = $("#fromDate").val();
         var toDate = $("#toDate").val();
+        if (empID == "")
+        {
+            empID = "All";
+        }
         if (toDate == "" && fromDate == "" && empID=="") {
             //DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(false)).draw(false);
         }

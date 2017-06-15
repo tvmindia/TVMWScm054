@@ -42,12 +42,12 @@ namespace SCManager.BusinessService.Services
             ds = _iAssignBillBookRepository.GetMissingSerials(seriesStart,seriesEnd,BillBookType,UA);
             return ds;
         }
-        public string DeleteBillBook(string ID, UA ua)
+        public string DeleteBillBook(string ID, string BillBookType, UA ua)
         {
             string status = null;
             try
             {
-                status = _iAssignBillBookRepository.DeleteBillBook(ID, ua);
+                status = _iAssignBillBookRepository.DeleteBillBook(ID,BillBookType, ua);
             }
             catch (Exception ex)
             {

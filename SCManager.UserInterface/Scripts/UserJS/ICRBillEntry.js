@@ -322,6 +322,7 @@ function save() {
 
 function reset()
 {
+    debugger;
     if (($("#HeaderID").val() == "") || ($("#HeaderID").val() == 'undefined') || ($("#HeaderID").val() == "0"))
     {
         $("#EmpID").val("");
@@ -356,7 +357,7 @@ function reset()
         $datepicker.datepicker('setDate', null);
         EG_ClearTable();
         EG_AddBlankRows(5);
-        ResetForm();
+        ResetICRForm();
     }
     else
     {
@@ -367,7 +368,8 @@ function reset()
   
 }
 //-----------------------------------------Reset Validation Messages--------------------------------------//
-function ResetForm() {
+function ResetICRForm() {
+    debugger;
     var validator = $("#ICR").validate();
     $('#ICR').find('.field-validation-error span').each(function () {
         validator.settings.success($(this));
@@ -378,51 +380,52 @@ function BillBookNumberValidation() {
     debugger;
     try {
         var BillNo = $('#ICRNo').val();
-        var empID = $("#EmpID").val();
+        if (BillNo != "" && BillNo != null)
+        {
+            var empID = $("#EmpID").val();
 
-        var data = { "BillNo": BillNo, "BillBookType": "ICR" ,"EmpID": empID};
-        var ds = {};
-        ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
-        debugger;
-        if (ds != '') {
-            ds = JSON.parse(ds);
-        }
-        if (ds.Records == '') {
-            return 0;
-        }
-        else {
-            var msg = '';
-            if (ds.Records.Status == "BLB02")
-            {
-                msg = Messages.BLB02;
+            var data = { "BillNo": BillNo, "BillBookType": "ICR", "EmpID": empID };
+            var ds = {};
+            ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
+            debugger;
+            if (ds != '') {
+                ds = JSON.parse(ds);
             }
-            if (ds.Records.Status == "BLB03") {
-                msg = Messages.BLB03;
+            if (ds.Records == '') {
+                return 0;
             }
-            if (ds.Records.Status == "BLB04") {
-                msg = Messages.BLB04;
-            }
-            if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02")
-            {                
-                if ($(".fa-exclamation-triangle").length == 0) {
-                    $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + "( " + ds.Records.BookNo+" )" + '"></i>');
+            else {
+                var msg = '';
+                if (ds.Records.Status == "BLB02") {
+                    msg = Messages.BLB02;
                 }
-            }
-            if (ds.Records.Status == "BLB02") {
-                if ($(".fa-exclamation-triangle").length == 0) {
-                    $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + '"></i>');
+                if (ds.Records.Status == "BLB03") {
+                    msg = Messages.BLB03;
                 }
+                if (ds.Records.Status == "BLB04") {
+                    msg = Messages.BLB04;
+                }
+                if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02") {
+                    if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + "( " + ds.Records.BookNo + " )" + '"></i>');
+                    }
+                }
+                if (ds.Records.Status == "BLB02") {
+                    if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + '"></i>');
+                    }
+                }
+                if (ds.Records.Status == "BLB01") {
+                    $("#BillNoMandatory").html('');
+                }
+
             }
-            if (ds.Records.Status == "BLB01") {
-                $("#BillNoMandatory").html('');
+            if (ds.Result == "ERROR") {
+                notyAlert('error', ds.Message);
+                return 0;
             }
-            
-        }
-        if (ds.Result == "ERROR") {
-            notyAlert('error', ds.Message);
-            return 0;
-        }
-        return 1;
+            return 1;
+        }      
 
 
     }
@@ -602,7 +605,7 @@ function BindICRBillEntry(id) {
         if (ds.Result == "OK") {
 
             BindICRBillEntryFields(ds.Records);
-            BillBookNumberValidation();
+          
         }
         if (ds.Result == "ERROR") {
             notyAlert('error', ds.Message);
@@ -716,6 +719,7 @@ function SaveSuccess(data, status) {
         case "OK":
             if ($("#HeaderID").val() == emptyGUID || $("#HeaderID").val()=="") {
                 BindICRBillEntry(JsonResult.Records.ID);
+                BillBookNumberValidation();
             }
             else {
                 BindICRBillEntry($("#HeaderID").val());
