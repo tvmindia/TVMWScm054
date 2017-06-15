@@ -5,11 +5,15 @@ $(document).ready(function () {
       
         DataTables.DailyService = $('#tblDailyServiceReport').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"f>rt<"bottom"ip><"clear">',
              order: [],
              searching: true,
              paging: true,
              data: GetServicefilterbyDays(true),
+             language: {
+                 search: "_INPUT_",
+                 searchPlaceholder: "Search"
+             },
              columns: [
                { "data": "ID", "defaultContent": "<i>-</i>" },
                   { "data": "Employee.Name", "defaultContent": "<i>-</i>" },
@@ -47,11 +51,15 @@ $(document).ready(function () {
 
         DataTables.DailyServiceReportSummary = $('#tblServiceReportSummary').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"f>rt<"bottom"ip><"clear">',
              order: [],
              searching: true,
              paging: true,
              data: GetServiceRegisterSummaryFilter(true),
+             language: {
+                 search: "_INPUT_",
+                 searchPlaceholder: "Search"
+             },
              columns: [
                { "data": "ServiceDate", "defaultContent": "<i>-</i>" },
                { "data": "Technician", "defaultContent": "<i>-</i>" },
