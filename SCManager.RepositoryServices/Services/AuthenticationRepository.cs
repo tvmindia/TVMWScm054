@@ -161,7 +161,7 @@ namespace SCManager.RepositoryServices.Services
                     return new
                     {
                         userID = Guid.Parse(outParameter1.Value.ToString()),
-                        Status = constObj.UpdateSuccess
+                        Status = constObj.InsertSuccess
                     };
 
                 case "2":
@@ -175,7 +175,7 @@ namespace SCManager.RepositoryServices.Services
                     return new
                     {
 
-                        Status = constObj.LoginAndEmailExist
+                        Status = constObj.InsertFailure
                     };
 
             }
@@ -240,7 +240,7 @@ namespace SCManager.RepositoryServices.Services
                     return new
                     {
 
-                        Status = constObj.LoginAndEmailExist
+                        Status = constObj.UpdateFailure
                     };
 
             }

@@ -155,6 +155,7 @@ namespace SCManager.BusinessService.Services
             try
             {
                 serviceCenterList=_authenticationRepository.GetAllServiceCenters();
+                serviceCenterList = serviceCenterList != null ? serviceCenterList.OrderBy(s => s.Code).ToList():null;
             }
             catch(Exception ex)
             {
