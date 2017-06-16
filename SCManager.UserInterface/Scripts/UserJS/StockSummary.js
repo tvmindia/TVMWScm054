@@ -27,18 +27,20 @@ $(document).ready(function () {
                { "data": "ID", "defaultContent": "<i>-</i>" },
                { "data": null, "defaultContent": "<i>-</i>" },
                { "data": "ItemCode", "defaultContent": "<i>-</i>" },
-               { "data": "Description", "defaultContent": "<i>-</i>" },
+               { "data": "Description", "defaultContent": "<i>-</i>" },              
                { "data": "Category", "defaultContent": "<i>-</i>" },
                { "data": "Stock", "defaultContent": "<i>-</i>" },
                { "data": "UOM", "defaultContent": "<i>-</i>" },
                { "data": "SellingRate",render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" },
-               { "data": "Value",render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" }
-             
+               { "data": "Value",render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" },
+              { "data": "Remarks", "defaultContent": "<i>-</i>" },
              ],
-             columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
+             columnDefs: [{ "width": "20%", "targets": 3 },
+                 { "width": "20%", "targets": 9 },
+                 { "targets": [0], "visible": false, "searchable": false },
                   { className: "text-right", "targets": [7, 8], "searchable": true },
                     { className: "text-center", "targets": [5, 6], "searchable": true },
-                    { className: "text-left", "targets": [2, 3, 4], "searchable": true },
+                    { className: "text-left", "targets": [2, 3, 4,9], "searchable": true },
 
              ]
          });
