@@ -199,7 +199,10 @@ namespace SCManager.BusinessService.Services
             object result = null;
             try
             {
-                user.Password = Encrypt(user.Password);
+                if (!string.IsNullOrEmpty(user.Password))
+                {
+                    user.Password= Encrypt(user.Password);
+                }
                 result = _authenticationRepository.InserUser(user);
             }
             catch(Exception ex)

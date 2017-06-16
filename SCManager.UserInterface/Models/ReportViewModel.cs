@@ -108,5 +108,6 @@ namespace SCManager.UserInterface.Models
         public Int16? Year { get; set; }
         public List<SelectListItem> MonthList { get; set; }
         public List<SelectListItem> YearList { get; set; }
+        public List<SelectListItem> TechniciansList { get; set; }
     }
 }
