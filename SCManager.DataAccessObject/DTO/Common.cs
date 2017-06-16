@@ -45,7 +45,10 @@ namespace SCManager.DataAccessObject.DTO
             //
         }
 
-
+        public string LoginAndEmailExist
+        {
+            get { return "Login or Email Exist! "; }
+        }
         public string InsertFailure
         {
             get { return "Insertion Not Successfull! "; }

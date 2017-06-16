@@ -74,6 +74,8 @@ namespace SCManager.UserInterface.App_Start
             
 
 
+            bundles.Add(new ScriptBundle("~/bundles/BuildMember").Include("~/Scripts/UserJS/BuildMember.js"));
+
         }
     }
 }

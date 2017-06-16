@@ -20,17 +20,17 @@ $(document).ready(function () {
               { "data": "TotalCommission",render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
               { "data": "SalaryAdvance", render: function (data, type, row) { return roundoff(data, 1); },"defaultContent": "<i>-</i>" },
               { "data": "TotalPayable", render: function (data, type, row) { var respay = roundoff(data, 1); return "<a data-toggle='tp' data-placement='top' data-delay={'show':2000, 'hide':3000} title='View Details' href='#' class='actionLink' onclick='ViewMore(this)'>" + respay + "</a>"; }, "defaultContent": "<i>-</i>" },
-              { "data": "MajorCalls", "defaultContent": "<i>-</i>" },
+              { "data": "MajorCalls", render: function (data, type, row) { return RemoveZero(data); }, "defaultContent": "<i>-</i>" },
               { "data": "MajorCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "DemoCalls", "defaultContent": "<i>-</i>" },
+              { "data": "DemoCalls", render: function (data, type, row) { return RemoveZero(data); }, "defaultContent": "<i>-</i>" },
               { "data": "DemoCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "MandatoryCalls", "defaultContent": "<i>-</i>" },
+              { "data": "MandatoryCalls", render: function (data, type, row) { return RemoveZero(data); }, "defaultContent": "<i>-</i>" },
               { "data": "MandatoryCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "MinorCalls", "defaultContent": "<i>-</i>" },
+              { "data": "MinorCalls", render: function (data, type, row) { return RemoveZero(data); }, "defaultContent": "<i>-</i>" },
               { "data": "MinorCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "RepeatCalls", "defaultContent": "<i>-</i>" },
+              { "data": "RepeatCalls", render: function (data, type, row) { return RemoveZero(data); }, "defaultContent": "<i>-</i>" },
               { "data": "RepeatCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "RepeatDeductCalls", "defaultContent": "<i>-</i>" },
+              { "data": "RepeatDeductCalls", render: function (data, type, row) { return RemoveZero(data); }, "defaultContent": "<i>-</i>" },
               { "data": "RepeatDeductCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
          
               { "data": "SpecialCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
@@ -46,7 +46,7 @@ $(document).ready(function () {
             { "width": "200px", "targets": 0 }, 
             { className: "text-left disabled", targets: [0] },
              { className: "text-right", targets: [5,7,9,11,13,15,16,17,18,19] },
-            { className: "text-center", targets: [6, 8, 10, 12, 14] },
+            { className: "text-center", targets: [4,6, 8, 10, 12, 14] },
             { className: "text-right disabled", targets: [1, 2, 3] },
             { "visible": false, targets: [20,21,22,23] },
 
@@ -243,6 +243,12 @@ function ViewMore(curobj)
     }
 }
 
+
+function RemoveZero(data) {
+
+    if (data == 0) { return "";}
+    else { return data;}
+}
 
 
 
