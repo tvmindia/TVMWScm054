@@ -281,13 +281,14 @@ function UserSaveSuccess(data, status) {
         case "OK":
             notyAlert('success', JsonResult.Message.Status);
             RefreshUsersTable();
-            $("#ID").val(JsonResult.Record.userID);
-            $("#deleteId").val(JsonResult.Record.userID);
-            $("#Password").val('');
-            $("#ConfirmPassword").val('');
-            ChangeButtonPatchView("UserProfile", "btnPatchBuildMember", "Edit"); //ControllerName,id of the container div,Name of the action
-            $("#userform").removeAttr('data-ajax-begin');
-            $("#LoginName").attr('readonly', 'true');
+            //$("#ID").val(JsonResult.Record.userID);
+            //$("#deleteId").val(JsonResult.Record.userID);
+            //$("#Password").val('');
+            //$("#ConfirmPassword").val('');
+            //ChangeButtonPatchView("UserProfile", "btnPatchBuildMember", "Edit"); //ControllerName,id of the container div,Name of the action
+            //$("#userform").removeAttr('data-ajax-begin');
+            //$("#LoginName").attr('readonly', 'true');
+            goBack();
             break;
         case "ERROR":
             notyAlert('error', JsonResult.Message);
