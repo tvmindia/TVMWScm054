@@ -466,7 +466,7 @@ function GetAllDefectiveDamaged() {
 }
 //------------------------------- Defective/Damaged Save-----------------------------//
 function save() {
-   
+    debugger;
     var type = $("#Type").val();
     
         if (($("#Type").val() != "") && ($("#ItemID").val() != "") && ($("#Qty").val() != "") && ($("#OpenDate").val() != "")) {
@@ -479,10 +479,10 @@ function save() {
          
             if (qty == "0" || qty == "No items") {
                 if (type == "Defective") {
-                    notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
+                    notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done! Availabe Stock : "+qty);
                 }
                 else {
-                    notyAlert('error', "Office is not having enough stock of the selected item. Damage entry cannot be done!");
+                    notyAlert('error', "Office is not having enough stock of the selected item. Damage entry cannot be done! Availabe Stock : "+qty);
                 }
 
 
@@ -515,10 +515,10 @@ function save() {
                 else {
 
                     if (type == "Defective") {
-                        notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done!");
+                        notyAlert('error', "Technician is not having enough stock of the selected item. Defective entry cannot be done! Availabe Stock : "+qty);
                     }
                     else {
-                        notyAlert('error', "Office is not having enough stock of the selected item. Damage entry cannot be done!");
+                        notyAlert('error', "Office is not having enough stock of the selected item. Damage entry cannot be done! Availabe Stock : "+qty);
                     }
 
                 }
