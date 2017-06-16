@@ -198,7 +198,7 @@ namespace SCManager.RepositoryServices.Services
                             con.Open();
                         }
                         cmd.Connection = con;
-                        cmd.CommandText = "[UpdateUser]";
+                        cmd.CommandText = "[UpdateUser]"; 
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@UserID", SqlDbType.UniqueIdentifier).Value = user.ID;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = user.SCCode;
