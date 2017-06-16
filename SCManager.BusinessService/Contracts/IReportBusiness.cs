@@ -1,6 +1,7 @@
 ﻿using SCManager.DataAccessObject.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,5 +15,8 @@ namespace SCManager.BusinessService.Contracts
         List<StockLedger> GetStockLedger(UA UA, string fromdate = null, string todate = null);
         List<TechnicianStock> GetTechniciansStockSummary(UA UA, string fromdate = null, string todate = null);
         List<IncomeExpense> GetMonthlyIncomeAndExpenditure(UA UA, string fromdate = null, string todate = null);
+        List<AmcReport> GetAmcReportTable(UA UA, string fromdate, string todate);
+        
+        DataTable GetTechnicianPerformance(UA UA, Guid EMPID, int? month = null, int? year = null);
     }
 }

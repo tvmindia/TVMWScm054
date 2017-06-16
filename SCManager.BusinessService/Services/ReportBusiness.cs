@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using SCManager.DataAccessObject.DTO;
+using System.Data;
 
 namespace SCManager.BusinessService.Services
 {
@@ -87,5 +88,65 @@ namespace SCManager.BusinessService.Services
             }
             return TechnicianList;
         }
+
+        public List<AmcReport> GetAmcReportTable(UA UA, string fromdate = null, string todate = null)
+        {
+            List<AmcReport> ItemList = null;
+            try
+            {
+                ItemList = _reportRepository.GetAmcReportTable(UA, fromdate, todate);
+                if (ItemList != null)
+                {
+                    foreach (AmcReport EX in ItemList)
+                    {
+                        SCManagerSettings settings = new SCManagerSettings();
+
+                        if (EX.AmcStartDate != null)
+                            EX.AmcStartDate = Convert.ToDateTime(EX.AmcStartDate).ToString(settings.dateformat);
+                        if (EX.AmcEndDate != null)
+                            EX.AmcEndDate = Convert.ToDateTime(EX.AmcEndDate).ToString(settings.dateformat);
+                    }
+                }
+                //ItemList = ItemList == null ? null : ItemList.Select(item => { item.Value = int.Parse(item.Stock) * item.SellingRate; return item; }).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ItemList;
+        }
+        public DataTable GetTechnicianPerformance(UA UA, Guid EMPID, int? month = null, int? year = null)
+        {
+            DataTable PerformanceList = null;
+            try
+            {
+                string d = "";
+                int i = 0;
+                PerformanceList = _reportRepository.GetTechnicianPerformance(UA, EMPID, month, year);
+                if(PerformanceList!=null)
+                {
+                    PerformanceList.Columns.RemoveAt(4);
+                    foreach (DataRow dr in PerformanceList.Rows)
+                    {
+
+                        d = dr["Date"].ToString();
+                        DateTime date = DateTime.Parse(d);
+                        d = date.ToString("dd-MMM-yyyy");
+                        PerformanceList.Rows[i]["Date"] = d;
+                        i++;
+                    }
+                    PerformanceList.Columns["Date"].SetOrdinal(0);
+                    
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return PerformanceList;
+        }
+        
     }
 }
