@@ -84,6 +84,7 @@ $(document).ready(function () {
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.ICRBillDetail;
         List();
+       
     } catch (x) {
 
         notyAlert('error', x.message);
