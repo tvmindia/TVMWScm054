@@ -126,8 +126,10 @@ namespace SCManager.BusinessService.Services
                 PerformanceList = _reportRepository.GetTechnicianPerformance(UA, EMPID, month, year);
                 if(PerformanceList!=null)
                 {
+                    //Removing Date duplication
                     PerformanceList.Columns.Remove("Date1");
                     PerformanceList.Columns.Remove("Date2");
+                    //Changing Date format 
                     foreach (DataRow dr in PerformanceList.Rows)
                     {
 
@@ -137,7 +139,9 @@ namespace SCManager.BusinessService.Services
                         PerformanceList.Rows[i]["Date"] = d;
                         i++;
                     }
+                    //Changing the Column order for UI purposes
                     PerformanceList.Columns["Date"].SetOrdinal(0);
+                    //Adding a new row at the bottom with sum of column
                     DataRow row = PerformanceList.NewRow();
                     for (int j = 0; j < PerformanceList.Columns.Count; j++)
                     {
