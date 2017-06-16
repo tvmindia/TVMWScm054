@@ -147,6 +147,7 @@ namespace SCManager.BusinessService.Services
                         }
                         else
                         {
+                            //PerformanceList.Columns[j].DataType = typeof(int);
                             row[j] = PerformanceList.Compute("Sum([" + PerformanceList.Columns[j].Caption + "])", "");
                         }                        
                     }
