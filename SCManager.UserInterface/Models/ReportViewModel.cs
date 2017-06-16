@@ -110,4 +110,29 @@ namespace SCManager.UserInterface.Models
         public List<SelectListItem> YearList { get; set; }
         public List<SelectListItem> TechniciansList { get; set; }
     }
+
+    public class AmcBaseValueSummaryViewModel
+    {
+        public string ICRDate { get; set; }
+        public string ICRNo { get; set; }
+        public string AMCNo { get; set; }
+        public string AMCValidFromDate { get; set; }
+        public string AMCValidToDate { get; set; }
+        public string Technician { get; set; }
+        public string CustomerName { get; set; }
+        public decimal BaseAmount { get; set; }
+        public decimal ServiceCharge { get; set; }
+        public decimal Discount { get; set; }
+        public decimal Total { get; set; }
+    }
+    public class ProfitAndLossReportViewModel
+    {
+       
+        public string SCCode { get; set; }
+        public string BaseType { get; set; }
+        public string Type { get; set; }
+        public string Description { get; set; }
+        public decimal Amount { get; set; }
+
+    }
 }

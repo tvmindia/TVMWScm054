@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using SCManager.UserInterface.CustomAttributes;
 using System.Data;
+using System.Globalization;
 
 namespace SCManager.UserInterface.Controllers
 {
@@ -18,10 +19,13 @@ namespace SCManager.UserInterface.Controllers
     {
         IReportBusiness _reportBusiness;
         IEmployeesBusiness _iEmployeesBusiness;
-        public ReportController(IReportBusiness reportBusiness, IEmployeesBusiness iEmployeesBusiness)
+        ICommonBusiness _commonBusiness;
+        public ReportController(IReportBusiness reportBusiness, IEmployeesBusiness iEmployeesBusiness, ICommonBusiness commonBusiness)
         {
+            _commonBusiness = commonBusiness;
             _reportBusiness = reportBusiness;
             _iEmployeesBusiness = iEmployeesBusiness;
+
         }
         // GET: OfficeStockReport
         [HttpGet]
@@ -195,6 +199,80 @@ namespace SCManager.UserInterface.Controllers
             UA ua = new UA();
             List<AmcReportViewModel> ItemList = Mapper.Map<List<AmcReport>, List<AmcReportViewModel>>(_reportBusiness.GetAmcReportTable(ua, fromdate, todate));
             return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
+        }
+
+
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public ActionResult AMCBaseSummary()
+        {
+            UA ua = new UA();
+            DateTime dt = ua.CurrentDatetime();
+            ViewBag.fromdate = dt.AddDays(-90).ToString("dd-MMM-yyyy"); 
+            ViewBag.todate = dt.ToString("dd-MMM-yyyy");
+            ViewBag.CurrentDate = dt.ToString("dd-MMM-yyyy");
+            return View();
+        }
+
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetAMCBaseValueSummaryReport(string fromdate = null, string todate = null)
+        {
+
+          UA ua = new UA();
+            List<AmcBaseValueSummaryViewModel> AmcBaseValueSummaryVMList=null;
+            string totalsumwithrupee="";
+            if ((!string.IsNullOrEmpty(fromdate))&&(!string.IsNullOrEmpty(todate)))
+            {
+                DateTime expectedDate;
+                SCManagerSettings settings = new SCManagerSettings();
+                if (DateTime.TryParseExact(fromdate, settings.dateformat, new CultureInfo("en-US"),DateTimeStyles.None, out expectedDate)&& DateTime.TryParseExact(todate, settings.dateformat, new CultureInfo("en-US"), DateTimeStyles.None, out expectedDate))
+                {
+                    AmcBaseValueSummaryVMList = Mapper.Map<List<AmcBaseValueSummary>, List<AmcBaseValueSummaryViewModel>>(_reportBusiness.GetAMCBaseValueSummary(ua, fromdate, todate));
+                    decimal totalsum = AmcBaseValueSummaryVMList == null ? 0 : AmcBaseValueSummaryVMList.Select(T => T.Total).Sum();
+                    totalsumwithrupee = _commonBusiness.ConvertCurrency(totalsum);
+                }
+               
+              
+            }
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = AmcBaseValueSummaryVMList, Record = new { TotalSum = totalsumwithrupee } });
+
+        }
+
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public ActionResult ProfitAndLoss()
+        {
+            UA ua = new UA();
+            DateTime dt = ua.CurrentDatetime();
+            ViewBag.fromdate = "01-Jan-"+ dt.Year;
+            ViewBag.todate = dt.ToString("dd-MMM-yyyy");
+            ViewBag.CurrentDate = dt.ToString("dd-MMM-yyyy");
+            return View();
+        }
+
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetProfitAndLossReport(string fromdate = null, string todate = null)
+        {
+
+            UA ua = new UA();
+            List<ProfitAndLossReportViewModel> ProfitAndLossReportVMList = null;
+            
+            if ((!string.IsNullOrEmpty(fromdate)) && (!string.IsNullOrEmpty(todate)))
+            {
+                DateTime expectedDate;
+                SCManagerSettings settings = new SCManagerSettings();
+                if (DateTime.TryParseExact(fromdate, settings.dateformat, new CultureInfo("en-US"), DateTimeStyles.None, out expectedDate) && DateTime.TryParseExact(todate, settings.dateformat, new CultureInfo("en-US"), DateTimeStyles.None, out expectedDate))
+                {
+                    ProfitAndLossReportVMList = Mapper.Map<List<ProfitAndLossReport>, List<ProfitAndLossReportViewModel>>(_reportBusiness.GetProfitAndLossReport(ua, fromdate, todate));
+                   
+                }
+
+
+            }
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = ProfitAndLossReportVMList });
+
         }
 
         #region ButtonStyling
