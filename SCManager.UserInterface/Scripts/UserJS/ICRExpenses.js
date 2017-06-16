@@ -95,9 +95,24 @@ function List() {
 
 }
 
+function ChequeTypeDisplay() {
+    debugger;
+
+    if ($("#PaymentMode").val() == "CHEQUE") {
+        $("#ChequeTypeDiv").show();
+        $("#ChequeType").val("IFB");
+    }
+    else {
+        $("#ChequeTypeDiv").hide();
+        $("#ChequeType").val("");
+    }
+}
+
 function clearfields() {
     $("#UpdateID").val(EmptyGuid);
     $("#ID").val(EmptyGuid);
+    $("#ChequeType").val("");
+    $("#ChequeTypeDiv").hide();
     $("#EntryNo").prop('disabled', true);
     $("#EmpID").val("");
     $("#EmpID").prop('disabled', true);
@@ -171,7 +186,15 @@ function fillICRExpenses(ID) {
     $("#PaymentMode").val(thisItem.PaymentMode);
     $("#Amount").val(roundoff(thisItem.Amount));
     $("#Description").val(thisItem.Description);
-
+    debugger;
+    if (thisItem.PaymentMode == "CHEQUE") {
+        $("#ChequeTypeDiv").show();
+        $("#ChequeType").val(thisItem.ChequeType);
+    }
+    else {
+        $("#ChequeTypeDiv").hide();
+        $("#ChequeType").val("");
+    }
     if (thisItem.RefDate != null) {
         var $datepicker = $('#Date');
         $datepicker.datepicker('setDate', new Date(thisItem.RefDate));

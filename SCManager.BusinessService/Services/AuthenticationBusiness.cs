@@ -38,6 +38,21 @@ namespace SCManager.BusinessService.Services
 
         }
 
+        public List<User> GetAllUsersInSystem()
+        {
+            List<User> userList = null;
+            try
+            {
+                userList = _authenticationRepository.GetAllUsers();
+               
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return userList;
+        }
+
         private string Encrypt(string plainText)
         {
             //AES 128bit Cross Platform (Java and C#) Encryption Compatibility
@@ -130,6 +145,101 @@ namespace SCManager.BusinessService.Services
             catch(Exception ex)
             {
 
+            }
+            return result;
+        }
+
+        public List<ServiceCenter> GetAllServiceCenters()
+        {
+            List<ServiceCenter> serviceCenterList = null;
+            try
+            {
+                serviceCenterList=_authenticationRepository.GetAllServiceCenters();
+                serviceCenterList = serviceCenterList != null ? serviceCenterList.OrderBy(s => s.Code).ToList():null;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return serviceCenterList;
+
+        }
+
+        public List<Role> GetAllRolesByServicecenter(string SCCode)
+        {
+            List<Role> RoleList = null;
+            try
+            {
+                RoleList=_authenticationRepository.GetAllRolesByServicecenter(SCCode);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return RoleList;
+        }
+
+        public User GetUserDetailsByUser(Guid ID, string SCCode)
+        {
+            List<User> userList = null;
+            try
+            {
+                userList = GetAllUsersInSystem();
+                userList = userList != null && userList.Count > 0 ? userList.Where(u => u.ID == ID && u.serviceCenter.Code == SCCode).ToList() : null;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return userList != null && userList.Count > 0 ? userList[0] : null;
+        }
+
+        public object InserUser(User user)
+        {
+            object result = null;
+            try
+            {
+                user.Password = Encrypt(user.Password);
+                result = _authenticationRepository.InserUser(user);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        public object UpdateUser(User user)
+        {
+            object result = null;
+            try
+            {
+                if(!string.IsNullOrEmpty(user.Password))
+                {
+                    user.Password = Encrypt(user.Password);
+                }
+              
+                result = _authenticationRepository.UpdateUser(user);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        public object DeleteUser(User user)
+        {
+            object result = null;
+            try
+            {
+                
+
+                result = _authenticationRepository.DeleteUser(user);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             return result;
         }

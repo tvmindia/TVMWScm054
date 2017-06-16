@@ -538,7 +538,9 @@
     <Content Include="Scripts\jszip.min.js" />
     <Content Include="Scripts\lightbox.min.js" />
     <Content Include="Scripts\sweetalert.min.js" />
+    <Content Include="Scripts\UserJS\AmcReports.js" />
     <Content Include="Scripts\UserJS\AssignBillBook.js" />
+    <Content Include="Scripts\UserJS\BuildMember.js" />
     <Content Include="Scripts\UserJS\CallandServiceTypes.js" />
     <Content Include="Scripts\UserJS\CreditNotes.js" />
     <Content Include="Scripts\UserJS\DailyServiceReport.js" />
@@ -632,7 +634,9 @@
     <Content Include="Views\AssignBillBook\Index.cshtml" />
     <Content Include="Views\TechnicianSalaryCalculation\Index.cshtml" />
     <Content Include="Views\UserProfile\Index.cshtml" />
+    <Content Include="Views\Report\AMCReport.cshtml" />
     <Content Include="Views\Report\TechnicianPerformance.cshtml" />
+    <Content Include="Views\UserProfile\BuildMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

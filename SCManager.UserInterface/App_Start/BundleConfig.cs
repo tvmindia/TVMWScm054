@@ -70,7 +70,12 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/TechnicianSalaryCalcu").Include("~/Scripts/UserJS/TechnicianSalaryCalculation.js"));
             bundles.Add(new ScriptBundle("~/bundles/AssignBillBook").Include("~/Scripts/UserJS/AssignBillBook.js"));
             bundles.Add(new ScriptBundle("~/bundles/UserProfile").Include("~/Scripts/UserJS/UserProfile.js"));
+            bundles.Add(new ScriptBundle("~/bundles/AmcReports").Include("~/Scripts/UserJS/AmcReports.js"));
             
+
+
+            bundles.Add(new ScriptBundle("~/bundles/BuildMember").Include("~/Scripts/UserJS/BuildMember.js"));
+
         }
     }
 }

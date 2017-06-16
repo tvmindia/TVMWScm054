@@ -38,6 +38,18 @@ namespace SCManager.UserInterface.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public ActionResult AMCReport()
+        {
+            UA ua = new UA();
+            DateTime dt = ua.CurrentDatetime();
+            ViewBag.fromdate = dt.AddDays(-dt.Day+1).ToString("dd-MMM-yyyy");
+            ViewBag.todate = dt.AddDays(-dt.Day +91).ToString("dd-MMM-yyyy");
+            ViewBag.CurrentDate= dt.ToString("dd-MMM-yyyy");
+            return View();
+        }
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult TechnicianPerformance()
@@ -171,6 +183,17 @@ namespace SCManager.UserInterface.Controllers
         {
             UA ua = new UA();
             List<StockSummaryViewModel> ItemList = Mapper.Map<List<Item>, List<StockSummaryViewModel>>(_reportBusiness.GetItemsSummary(ua, fromdate, todate));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
+        }
+
+        //GetAmcReportTable
+
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetAmcReportTable(string fromdate, string todate)
+        {
+            UA ua = new UA();
+            List<AmcReportViewModel> ItemList = Mapper.Map<List<AmcReport>, List<AmcReportViewModel>>(_reportBusiness.GetAmcReportTable(ua, fromdate, todate));
             return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
         }
 

@@ -78,6 +78,8 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<TechnicianSalaryAMCBreakUpViewModel, TechnicianSalaryAMCBreakUp>().ReverseMap();
                 config.CreateMap<TechnicianSalaryAdvanceBreakUpViewModel, TechnicianSalaryAdvanceBreakUp>().ReverseMap();
                 config.CreateMap<UserProfileViewModel, UserProfile>().ReverseMap();
+                config.CreateMap<AmcReportViewModel, AmcReport>().ReverseMap();
+                
             });
         }
     }

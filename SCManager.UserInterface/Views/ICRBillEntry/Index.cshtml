@@ -14,8 +14,8 @@
         color: orange;
         cursor: pointer;
         margin-left: -11px;
-    }
-    
+    }  
+
 </style>
 <div class="col-md-12">
     <div class="SCHeader col-md-6">
@@ -175,11 +175,14 @@
                                         Value = "Online"
                                     });
                                 }
-                                @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
+                                @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" ,@onchange="ChequeTypeDisplay();"})
                                 @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1 mandatory"></div>
                         </div>
+
+
+                   
                         <div class="form-group">
                             <div class="col-md-4 ">
                                 @Html.LabelFor(model => model.PaymentRefNo, htmlAttributes: new { @class = "control-label" })

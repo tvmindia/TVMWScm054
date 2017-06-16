@@ -44,6 +44,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@PaymentMode", SqlDbType.NVarChar, 20).Value = ExpensesObj.PaymentMode;
                         cmd.Parameters.Add("@Amount", SqlDbType.Decimal).Value = ExpensesObj.Amount;
                         cmd.Parameters.Add("@Description", SqlDbType.NVarChar, -1).Value = ExpensesObj.Description;
+                        cmd.Parameters.Add("@ChequeType", SqlDbType.NVarChar, 20).Value = ExpensesObj.ChequeType;
                         cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = ExpensesObj.logDetails.CreatedBy;
                         cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = ExpensesObj.logDetails.CreatedDate;
 
@@ -100,6 +101,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@PaymentMode", SqlDbType.NVarChar, 20).Value = ExpensesObj.PaymentMode;
                         cmd.Parameters.Add("@Amount", SqlDbType.Decimal).Value = ExpensesObj.Amount;
                         cmd.Parameters.Add("@Description", SqlDbType.NVarChar, -1).Value = ExpensesObj.Description;
+                        cmd.Parameters.Add("@ChequeType", SqlDbType.NVarChar, 20).Value = ExpensesObj.ChequeType;
                         cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = ExpensesObj.logDetails.UpdatedBy;
                         cmd.Parameters.Add("@UpdatedDate", SqlDbType.SmallDateTime).Value = ExpensesObj.logDetails.UpdatedDate;
 
@@ -211,6 +213,7 @@ namespace SCManager.RepositoryServices.Services
                                     expensesObj.EntryNo = (sdr["EntryNo"].ToString() != "" ? (sdr["EntryNo"].ToString()) : expensesObj.EntryNo);
                                     expensesObj.PaymentMode = (sdr["PaymentMode"].ToString() != "" ? (sdr["PaymentMode"].ToString()) : expensesObj.PaymentMode);
                                     expensesObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : expensesObj.Description);
+                                    expensesObj.ChequeType = (sdr["ChequeType"].ToString() != "" ? (sdr["ChequeType"].ToString()) : expensesObj.ChequeType);
                                     expensesObj.Amount = (sdr["Amount"].ToString() != "" ? decimal.Parse(sdr["Amount"].ToString()) : expensesObj.Amount);
                                     expensesObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : expensesObj.ID);
                                 }

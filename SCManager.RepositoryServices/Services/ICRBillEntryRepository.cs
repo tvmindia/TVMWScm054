@@ -68,6 +68,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ICRBillEntrylistObj.AMCValidToDate = (sdr["AMCValidToDate"].ToString() != "" ? DateTime.Parse(sdr["AMCValidToDate"].ToString()).ToString("dd-MMM-yyyy") : _ICRBillEntrylistObj.AMCValidToDate);
                                         _ICRBillEntrylistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _ICRBillEntrylistObj.Remarks);
                                         _ICRBillEntrylistObj.AMCNO = (sdr["AMCNO"].ToString() != "" ? (sdr["AMCNO"].ToString()) : _ICRBillEntrylistObj.AMCNO);
+                                        _ICRBillEntrylistObj.ChequeType = (sdr["ChequeType"].ToString() != "" ? (sdr["ChequeType"].ToString()) : _ICRBillEntrylistObj.ChequeType);
                                     }
 
                                     ICRBillEntrylist.Add(_ICRBillEntrylistObj);
@@ -120,6 +121,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@ModelNo", SqlDbType.NVarChar,20).Value = iCRBillEntry.ModelNo;
                         cmd.Parameters.Add("@TotalServiceTaxAmount", SqlDbType.Decimal).Value =iCRBillEntry.TotalServiceTaxAmt;
                         cmd.Parameters.Add("@SerialNo", SqlDbType.NVarChar,20).Value = iCRBillEntry.SerialNo;
+                        cmd.Parameters.Add("@ChequeType", SqlDbType.NVarChar, 20).Value = iCRBillEntry.ChequeType;
                         cmd.Parameters.Add("@AMCNO", SqlDbType.NVarChar, 50).Value = iCRBillEntry.AMCNO;
                         cmd.Parameters.Add("@Discount", SqlDbType.Decimal).Value = iCRBillEntry.Discount;
                         cmd.Parameters.Add("@DetailXML", SqlDbType.Xml).Value = iCRBillEntry.DetailXML;
@@ -195,6 +197,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@AMCValidToDate", SqlDbType.SmallDateTime).Value = iCRBillEntry.AMCValidToDate;
                         cmd.Parameters.Add("@ModelNo", SqlDbType.NVarChar,20).Value = iCRBillEntry.ModelNo;
                         cmd.Parameters.Add("@SerialNo", SqlDbType.NVarChar,20).Value = iCRBillEntry.SerialNo;
+                        cmd.Parameters.Add("@ChequeType", SqlDbType.NVarChar, 20).Value = iCRBillEntry.ChequeType;
                         cmd.Parameters.Add("@Discount", SqlDbType.Decimal).Value = iCRBillEntry.Discount;
                         cmd.Parameters.Add("@PaymentRefNo", SqlDbType.NVarChar, 50).Value = iCRBillEntry.PaymentRefNo;
                         cmd.Parameters.Add("@TotalServiceTaxAmount", SqlDbType.Decimal).Value = iCRBillEntry.TotalServiceTaxAmt;
@@ -334,6 +337,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ICRBillEntryHeaderObj.TotalServiceTaxAmt = (sdr["TotalServiceTaxAmount"].ToString() != "" ? decimal.Parse(sdr["TotalServiceTaxAmount"].ToString()) : _ICRBillEntryHeaderObj.TotalServiceTaxAmt);
                                         _ICRBillEntryHeaderObj.ModelNo = (sdr["ModelNo"].ToString() != "" ? (sdr["ModelNo"].ToString()) : _ICRBillEntryHeaderObj.ModelNo);
                                         _ICRBillEntryHeaderObj.SerialNo = (sdr["SerialNo"].ToString() != "" ? (sdr["SerialNo"].ToString()) : _ICRBillEntryHeaderObj.SerialNo);
+                                        _ICRBillEntryHeaderObj.ChequeType = (sdr["ChequeType"].ToString() != "" ? (sdr["ChequeType"].ToString()) : _ICRBillEntryHeaderObj.ChequeType);
                                         _ICRBillEntryHeaderObj.AMCNO = (sdr["AMCNO"].ToString() != "" ? (sdr["AMCNO"].ToString()) : _ICRBillEntryHeaderObj.AMCNO);
                                     }
 

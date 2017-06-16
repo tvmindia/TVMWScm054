@@ -84,6 +84,22 @@ namespace SCManager.UserInterface.Models
         public int RepeatCalls { get; set; }
 
     }
+
+    public class AmcReportViewModel
+    {
+        public string CustomerName { get; set; }
+        public string Location { get; set; }
+        public string ContactNo { get; set; }
+        public string Model { get; set; }
+        public string SerialNo { get; set; }
+        public string AmcNo { get; set; }
+        public string AmcStartDate { get; set; }
+        public string AmcEndDate { get; set; }
+        public string Remarks { get; set; }
+        public string DueDays { get; set; }
+
+
+    }
     public class TechnicianPerformanceViewModel
     {
         public string SCCode { get; set; }
