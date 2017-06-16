@@ -11,7 +11,7 @@ namespace SCManager.DataAccessObject.DTO
         public string UserName { get; set; }
         public string SCCode { get; set; }
         public DateTime DateTime { get; set; }
-        public Guid UserID { get; set; }
+        public Guid? UserID { get; set; }
 
 
         public UA()

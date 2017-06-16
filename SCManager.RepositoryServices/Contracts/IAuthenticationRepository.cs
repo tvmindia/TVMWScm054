@@ -11,5 +11,10 @@ namespace SCManager.RepositoryServices.Contracts
     {
         List<User> GetAllUsers();
         object UpdateUserProfile(UserProfile userProfile);
+        List<ServiceCenter> GetAllServiceCenters();
+        List<Role> GetAllRolesByServicecenter(string SCCode);
+        object InserUser(User user);
+        object UpdateUser(User user);
+        object DeleteUser(User user);
     }
 }

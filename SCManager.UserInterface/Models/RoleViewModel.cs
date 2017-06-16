@@ -13,8 +13,9 @@ namespace SCManager.UserInterface.Models
     }
     public static class RoleContants
     {
-        public const string SuperAdminRole = "SA";
+        public const string SuperAdminRole = "SAdmin";
         public const string AdministratorRole = "Admin";
         public const string ManagerRole = "Manager";
+       
     }
 }
