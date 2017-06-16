@@ -42,6 +42,8 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Mode Of Payment")]
         [Required(ErrorMessage = "Please Select Payment Mode")]
         public string PaymentMode { get; set; }
+        [Display(Name = "Cheque Type")]
+        public string ChequeType { get; set; }
         public decimal? STAmount { get; set; }
         [Display(Name = "Discount %")]
         public decimal? Discount { get; set; }

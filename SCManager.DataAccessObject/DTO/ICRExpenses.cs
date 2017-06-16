@@ -20,6 +20,7 @@ namespace SCManager.DataAccessObject.DTO
         public string EmpName { get; set; }
         public string DateFormatted { get; set; }
         public string ExpenseType { get; set; }
+        public string ChequeType { get; set; }
         public decimal OutStandingPayment { get; set; }
         public string OutStandingPaymentFormatted { get; set; }
 

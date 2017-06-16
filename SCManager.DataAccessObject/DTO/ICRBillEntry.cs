@@ -32,6 +32,7 @@ namespace SCManager.DataAccessObject.DTO
         public String AMCFromDateFormatted { get; set; }
         public String AMCToDateFormatted { get; set; }
         public decimal? TotalServiceTaxAmt { get; set; }
+        public string ChequeType { get; set; }
         public Guid? jobNoID { get; set; }
         public LogDetails logDetails { get; set; }
         public string DetailXML { get; set; }
