@@ -98,7 +98,8 @@ namespace SCManager.BusinessService.Services
                 PerformanceList = _reportRepository.GetTechnicianPerformance(UA, EMPID, month, year);
                 if(PerformanceList!=null)
                 {
-                    PerformanceList.Columns.RemoveAt(4);
+                    PerformanceList.Columns.Remove("Date1");
+                    PerformanceList.Columns.Remove("Date2");
                     foreach (DataRow dr in PerformanceList.Rows)
                     {
 
@@ -109,7 +110,19 @@ namespace SCManager.BusinessService.Services
                         i++;
                     }
                     PerformanceList.Columns["Date"].SetOrdinal(0);
-                    
+                    DataRow row = PerformanceList.NewRow();
+                    for (int j = 0; j < PerformanceList.Columns.Count; j++)
+                    {
+                        if(PerformanceList.Columns[j].Caption=="Date"|| PerformanceList.Columns[j].Caption == "Day")
+                        {
+                            row[j] = "Total";
+                        }
+                        else
+                        {
+                            row[j] = PerformanceList.Compute("Sum([" + PerformanceList.Columns[j].Caption + "])", "");
+                        }                        
+                    }
+                    PerformanceList.Rows.Add(row);
                 }
                 
             }

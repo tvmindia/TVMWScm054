@@ -17,9 +17,11 @@ namespace SCManager.UserInterface.Controllers
     public class ReportController : Controller
     {
         IReportBusiness _reportBusiness;
-        public ReportController(IReportBusiness reportBusiness)
+        IEmployeesBusiness _iEmployeesBusiness;
+        public ReportController(IReportBusiness reportBusiness, IEmployeesBusiness iEmployeesBusiness)
         {
             _reportBusiness = reportBusiness;
+            _iEmployeesBusiness = iEmployeesBusiness;
         }
         // GET: OfficeStockReport
         [HttpGet]
@@ -73,6 +75,21 @@ namespace SCManager.UserInterface.Controllers
                 }
 
                 _technicianPerformanceViewModel.YearList = selectListItem;
+                selectListItem = null;
+                selectListItem = new List<SelectListItem>();
+                List<EmployeesViewModel> TechniciansList = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_iEmployeesBusiness.GetAllTechnicians(ua));
+                TechniciansList = TechniciansList == null ? null : TechniciansList.OrderBy(attset => attset.Name).ToList();
+                foreach (EmployeesViewModel clvm in TechniciansList)
+                {
+                    selectListItem.Add(new SelectListItem
+                    {
+                        Text = clvm.Name,
+                        Value = clvm.ID.ToString(),
+                        Selected = false
+                    });
+                }
+                _technicianPerformanceViewModel.TechniciansList = selectListItem;
+                //receiveFromTechnicianViewModel.TechniciansListItems = selectListItem;
                 ViewBag.month = dt.Month;
                 ViewBag.year = dt.Year;
             }

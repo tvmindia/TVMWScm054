@@ -33,6 +33,17 @@
                         <div class="col-md-12" style="padding-left: 0px;">
                             <div class="form-group">
                                 <div class="col-md-4">
+                                    <label class="control-label">Technician</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "--Select Technician--", new {  @class = "form-control", @style = "padding:4px 12px;" })
+                                </div>
+                                @*<div class="col-md-1 mandatory"></div>*@
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="padding-left: 0px;">
+                            <div class="form-group">
+                                <div class="col-md-4">
                                     <label class="control-label">Month</label>
                                 </div>
                                 <div class="col-md-8">
@@ -74,14 +85,8 @@
                     <div class="row" id="DynamictblContainer">
 
                         <table id="tblTechnicianPerformanceList" class="table compact" cellspacing="0" width="100%">
-                            <thead>
-                                <tr class="text-center" id="trTechPerform">
-                                  
-                                </tr>
-                            </thead>
-                            <tbody id="tbodyPerform">
-
-                            </tbody>
+                            <thead><tr class="text-center" id="trTechPerform"></tr></thead>
+                            <tbody id="tbodyPerform"></tbody>
                         </table>
                     </div>
                 </div>
