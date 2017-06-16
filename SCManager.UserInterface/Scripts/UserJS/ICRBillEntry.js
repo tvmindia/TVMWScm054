@@ -180,6 +180,22 @@ function List() {
 
 }
 
+
+function ChequeTypeDisplay()
+{
+    debugger;
+    if ($("#PaymentMode").val() == "Cheque")
+    {
+        $("#ChequeTypeDiv").show();
+        $("#ChequeType").val("IFB");
+    }
+    else
+    {
+        $("#ChequeTypeDiv").hide();
+        $("#ChequeType").val("");
+    }
+}
+
 function ClearDiscountPercentage()
 {
     debugger;
@@ -348,6 +364,8 @@ function reset()
         $("#SerialNo").val("");
         $("#grandtotal").val("");
         $("#total").val("");
+        $("#ChequeType").val("");
+        $("#ChequeTypeDiv").hide();
         $('#BillNoMandatory').find('i').remove()
         $('#ICRNo').attr('readonly', false);
         var $datepicker = $('#ICRDate');
@@ -471,7 +489,16 @@ function BindICRBillEntryFields(Records) {
         $("#total").val(roundoff(Records.Total));
         EG_Rebind_WithData(Records.ICRBillEntryDetail, 1);
         $('#ICRNo').attr('readonly', 'readonly');
-
+        if (Records.PaymentMode == "Cheque")
+        {
+            $("#ChequeTypeDiv").show();
+            $("#ChequeType").val(Records.ChequeType);
+        }
+        else
+        {
+            $("#ChequeTypeDiv").hide();
+            $("#ChequeType").val("");
+        }
        
         if (Records.ICRDate != null)
         {

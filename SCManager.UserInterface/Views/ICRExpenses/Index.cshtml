@@ -76,10 +76,35 @@
                                     @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.DropDownListFor(model => model.PaymentMode, Model.PaymentModeList, "-- Select Payment Mode --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
+                                    @Html.DropDownListFor(model => model.PaymentMode, Model.PaymentModeList, "-- Select Payment Mode --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;", @onchange = "ChequeTypeDisplay();" })
                                     @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
+                            </div>
+
+                            <div class="form-group" id="ChequeTypeDiv" hidden="hidden">
+                                <div class="col-md-4 ">
+                                    @Html.LabelFor(model => model.ChequeType, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @{
+                                        List<SelectListItem> listChequeType = new List<SelectListItem>();
+                                        listChequeType.Add(new SelectListItem
+                                        {
+                                            Text = "To IFB",
+                                            Value = "IFB"
+                                        });
+                                        listChequeType.Add(new SelectListItem
+                                        {
+                                            Text = "To Service Center",
+                                            Value = "SC"
+                                        });
+
+                                    }
+                                    @Html.DropDownListFor(model => model.ChequeType, listChequeType, new { @class = "form-control BlockEnter", value = "IFB", style = "padding:4px 12px;" })
+                                    @Html.ValidationMessageFor(model => model.ChequeType, "", new { @class = "text-danger" })
+                                </div>
+
                             </div>
 
                             <div class="form-group">

@@ -27,6 +27,9 @@ namespace SCManager.UserInterface.Models
         [Required(ErrorMessage = "Please Select Mode of Payment")]
         public string PaymentMode { get; set; }
 
+        [Display(Name = "Cheque Type")]
+        public string ChequeType { get; set; }
+
         [Display(Name = "Amount (₹)")]
         [Range(0.00, 1000000000.00, ErrorMessage = "Please enter a numeric")]
         public decimal Amount { get; set; }
