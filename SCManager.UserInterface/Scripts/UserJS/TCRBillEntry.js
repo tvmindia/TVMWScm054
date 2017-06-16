@@ -490,7 +490,7 @@ function save()
 {
     //$("#JobNo").val("123ERT32q");
     $("#ID").val(emptyGUID);
-    var validation = EG_Validate();
+    var validation = EG_Validate(false);
     if (validation == "") {
       
         var result = JSON.stringify(EG_GridData);

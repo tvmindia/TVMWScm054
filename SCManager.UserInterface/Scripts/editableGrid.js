@@ -389,7 +389,7 @@ function EG_KeyDown() {
 }
 
 
-function EG_Validate() {
+function EG_Validate(MinOneReq) {
     if (EG_MandatoryFields != undefined && EG_MandatoryFields != '') {
         var fields = EG_MandatoryFields.split(',');
         var missing = 'A few mandatory fields are missing in row(s)'
@@ -419,7 +419,7 @@ function EG_Validate() {
         if (errorRows != '') {
             return missing + errorRows;
         }
-        else if (validrowExist == 0) {
+        else if ((MinOneReq ==undefined || MinOneReq==true) && validrowExist == 0) {
             return "Minimum one detail is required to save."
         }
         else { return "" };
