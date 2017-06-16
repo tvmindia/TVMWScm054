@@ -35,7 +35,7 @@ function DrawTable()
                 });
 
                 for (var i = 0; i < Header.length; i++) {
-                    $("#trTechPerform").append('<th>' + Header[i] + '</th>')
+                    $("#trTechPerform").append('<th style="width:200px">' + Header[i] + '</th>')
                 }
             }
             var html = "";
@@ -62,20 +62,17 @@ function DrawTable()
 function FireDatatable()
 {
     $('#tblTechnicianPerformanceList').DataTable({
+        dom: 'Bfrtip',
         buttons: [
-       {
-           extend: 'excel',
-           text: 'Save current page',
-           exportOptions: {
-               modifier: {
-                   page: 'current'
-               }
-           }
-       }],
-        dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
-        order: [],
+           'excel'
+           ],        
+        order: [[0, "asc"]],
+        scrollX: true,
+        scrollY: true,
+        scrollCollapse: true,
         searching: true,
         paging: false,
+        autoWidth: false,       
         language: {
             search: "_INPUT_",
             searchPlaceholder: "Search Items..."
@@ -84,7 +81,11 @@ function FireDatatable()
         {
             targets: [1],
             visible: false,
-            searchable: true
+            searchable: true,
+        },
+        {
+            width: "100px",
+            "targets": 0
         },
         {
             targets: [1],
@@ -92,8 +93,8 @@ function FireDatatable()
         }
         ]
     });
-    //$(".buttons-print").hide();
-    //$(".buttons-excel").hide();
+    $(".buttons-print").hide();
+    $(".buttons-excel").hide();
 }
 function GetItemsSummary() {
     debugger;

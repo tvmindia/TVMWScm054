@@ -6,7 +6,7 @@ function BindForm(ID)
         var result = GetServiceReportEntryByID(ID);
         if (result) {
             $("#ModelJobNo").val(result.JobNo);
-            $("#ModelJobNo").attr({ 'disabled': 'disabled' });
+          //  $("#ModelJobNo").attr({ 'disabled': 'disabled' });
             $("#ModelCustomerName").val(result.CustomerName);
             $("#ModelCustomerLocation").val(result.CustomerLocation);
             $("#ModelServiceType").val(result.ServiceType);
@@ -76,7 +76,7 @@ function ClearJobForm() {
     $('#jobform')[0].reset();
     $("#ModelJobID").val('');
     $('#AddJobModel').on('shown.bs.modal', function () {
-        $('#ModelJobNo').focus()
+        $('#ModelCustomerName').focus()
     })
 }
 function ResetForm() {

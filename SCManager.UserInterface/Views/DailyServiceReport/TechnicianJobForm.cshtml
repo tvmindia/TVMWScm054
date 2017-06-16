@@ -62,7 +62,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        @Html.EditorFor(model => model.JobNo, new { htmlAttributes = new { @class = "form-control", @id = "ModelJobNo", autofocus = "autofocus" } })
+                                        @Html.EditorFor(model => model.JobNo, new { htmlAttributes = new { @class = "form-control BlockEnter", @Value = "<<Auto Generated>>", @id = "ModelJobNo" } })
                                         @Html.HiddenFor(model => model.ID, htmlAttributes: new { Value = "", @id = "ModelJobID" })
                                         @Html.HiddenFor(model => model.TechEmpID, htmlAttributes: new { Value = "", @id = "ModelTechEmpID" })
                                         @if (Model.Source == "TechnicianJob")
@@ -78,7 +78,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", @id = "ModelCustomerName" } })
+                                        @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", @id = "ModelCustomerName" , autofocus = "autofocus" } })
                                         @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="col-md-1 mandatory"></div>

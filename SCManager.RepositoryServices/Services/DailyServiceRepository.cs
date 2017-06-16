@@ -275,7 +275,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = technicianJob.SCCode;
                         cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = technicianJob.TechEmpID;
                         cmd.Parameters.Add("@ServiceDate", SqlDbType.DateTime).Value = DateTime.Parse(technicianJob.ServiceDate);
-                        cmd.Parameters.Add("@JobNo", SqlDbType.NVarChar, 50).Value = technicianJob.JobNo;
+                       // cmd.Parameters.Add("@JobNo", SqlDbType.NVarChar, 50).Value = technicianJob.JobNo;
                         cmd.Parameters.Add("@CustomerName", SqlDbType.NVarChar, 250).Value = technicianJob.CustomerName;
                         cmd.Parameters.Add("@CustomerLocation", SqlDbType.NVarChar, 250).Value = technicianJob.CustomerLocation;
                         cmd.Parameters.Add("@ServiceTypeCode", SqlDbType.NVarChar, 5).Value = technicianJob.ServiceType;
