@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace SCManager.RepositoryServices.Services
@@ -281,6 +282,96 @@ namespace SCManager.RepositoryServices.Services
                 throw ex;
             }
             return Reportlist;
+        }
+
+        public List<AmcReport> GetAmcReportTable(UA UA, string fromdate, string todate)
+        {
+            List<AmcReport> Reportlist = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@CurrentDate", SqlDbType.DateTime).Value = UA.GetCurrentDateTime();
+                        cmd.Parameters.Add("@Fromdate", SqlDbType.DateTime).Value = fromdate;
+                        cmd.Parameters.Add("@Todate", SqlDbType.DateTime).Value = todate;
+                        cmd.CommandText = "[RPT_AmcExpiryAlert]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                Reportlist = new List<AmcReport>();
+                                while (sdr.Read())
+                                {
+                                    AmcReport _ReportObj = new AmcReport();
+                                    {
+                                        _ReportObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : _ReportObj.CustomerName);
+                                        _ReportObj.Location = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : _ReportObj.Location);
+                                        _ReportObj.ContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : _ReportObj.ContactNo);
+                                        _ReportObj.Model = (sdr["ModelNo"].ToString() != "" ? sdr["ModelNo"].ToString() : _ReportObj.Model);
+                                        _ReportObj.SerialNo = (sdr["SerialNo"].ToString() != "" ? sdr["SerialNo"].ToString() : _ReportObj.SerialNo);
+                                        _ReportObj.AmcNo = (sdr["AMCNO"].ToString() != "" ? sdr["AMCNO"].ToString() : _ReportObj.AmcNo);
+                                        _ReportObj.AmcStartDate = (sdr["AMCValidFromDate"].ToString() != "" ? sdr["AMCValidFromDate"].ToString() : _ReportObj.AmcStartDate);
+                                        _ReportObj.AmcEndDate = (sdr["AMCValidToDate"].ToString() != "" ? sdr["AMCValidToDate"].ToString() : _ReportObj.AmcEndDate);
+                                        _ReportObj.Remarks = (sdr["Remarks"].ToString() != "" ? sdr["Remarks"].ToString() : _ReportObj.Remarks);
+                                        _ReportObj.DueDays = (sdr["DaysCount"].ToString() != "" ? sdr["DaysCount"].ToString() : _ReportObj.DueDays);
+                                    }
+                                    Reportlist.Add(_ReportObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Reportlist;
+
+        }
+        public DataTable GetTechnicianPerformance(UA UA,Guid EMPID, int? month = null, int? year = null)
+        {
+            DataTable dt = null;
+            try
+            {
+                
+                SqlDataAdapter sda = null;
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@EMPID", SqlDbType.UniqueIdentifier).Value = EMPID;
+                        cmd.Parameters.Add("@month", SqlDbType.Int).Value = month;
+                        cmd.Parameters.Add("@year", SqlDbType.Int).Value = year;
+                        cmd.CommandText = "[RPT_GetTechPerformance]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        sda = new SqlDataAdapter();
+                        sda.SelectCommand = cmd;
+                        dt = new DataTable();
+                        sda.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dt;
         }
     }
 }

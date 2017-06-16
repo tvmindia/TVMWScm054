@@ -19,6 +19,8 @@ $(document).ready(function () {
        { "data": "ICRDateFormatted", "defaultContent": "<i>-</i>" },
        { "data": "ICRNo", "defaultContent": "<i>-</i>" },
        { "data": "AMCNO", "defaultContent": "<i>-</i>" },
+        { "data": "AMCFromDateFormatted", "defaultContent": "<i>-</i>" },
+         { "data": "AMCToDateFormatted", "defaultContent": "<i>-</i>" },
        { "data": "CustomerName", "defaultContent": "<i>-</i>" },
        { "data": "CustomerContactNo", "defaultContent": "<i>-</i>" },
         { "data": "ModelNo", "defaultContent": "<i>-</i>" },
@@ -29,27 +31,28 @@ $(document).ready(function () {
      ],
      columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
           { className: "text-right", "targets": [10] },
-     { className: "text-center", "targets": [1, 2, 3, 4, 9, 5, 6, 7, 8, 9] },
-     {
-         "render": function (data, type, row) {
-             var returnstring = ''; 
-             if (data) {                
-                 returnstring = returnstring + '<span>' + row.AMCNO + ' / (' + row.AMCFromDateFormatted + ' to ' + row.AMCToDateFormatted + ' )</span><br/>';
+     { className: "text-center", "targets": [1, 2, 3, 4, 9, 5, 6, 7, 8, 9] }
+     //,
+     //{
+     //    "render": function (data, type, row) {
+     //        var returnstring = ''; 
+     //        if (data) {                
+     //            returnstring = returnstring + '<span>' + row.AMCNO + ' / (' + row.AMCFromDateFormatted + ' to ' + row.AMCToDateFormatted + ' )</span><br/>';
                  
-             }
-             else
-             {
-                 returnstring = returnstring + '<span>' + (row.AMCNO ? row.AMCNO : "-") + ' / (' + (row.AMCFromDateFormatted?row.AMCFromDateFormatted:"-") + ' to ' + (row.AMCToDateFormatted?row.AMCToDateFormatted:"-" )+ ' )</span><br/>';
-             }
-             if (row.AMCNO == null && row.AMCFromDateFormatted == null && row.AMCToDateFormatted == null)
-             {
-                 returnstring = "-";
-             }
+     //        }
+     //        else
+     //        {
+     //            returnstring = returnstring + '<span>' + (row.AMCNO ? row.AMCNO : "-") + ' / (' + (row.AMCFromDateFormatted?row.AMCFromDateFormatted:"-") + ' to ' + (row.AMCToDateFormatted?row.AMCToDateFormatted:"-" )+ ' )</span><br/>';
+     //        }
+     //        if (row.AMCNO == null && row.AMCFromDateFormatted == null && row.AMCToDateFormatted == null)
+     //        {
+     //            returnstring = "-";
+     //        }
              
-             return returnstring;
-         },
-         "targets": 5
-     }
+     //        return returnstring;
+     //    },
+     //    "targets": 5
+     //}
 
      ]
  });
@@ -81,6 +84,7 @@ $(document).ready(function () {
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.ICRBillDetail;
         List();
+       
     } catch (x) {
 
         notyAlert('error', x.message);
@@ -319,6 +323,7 @@ function save() {
 
 function reset()
 {
+    debugger;
     if (($("#HeaderID").val() == "") || ($("#HeaderID").val() == 'undefined') || ($("#HeaderID").val() == "0"))
     {
         $("#EmpID").val("");
@@ -353,7 +358,7 @@ function reset()
         $datepicker.datepicker('setDate', null);
         EG_ClearTable();
         EG_AddBlankRows(5);
-        ResetForm();
+        ResetICRForm();
     }
     else
     {
@@ -364,7 +369,8 @@ function reset()
   
 }
 //-----------------------------------------Reset Validation Messages--------------------------------------//
-function ResetForm() {
+function ResetICRForm() {
+    debugger;
     var validator = $("#ICR").validate();
     $('#ICR').find('.field-validation-error span').each(function () {
         validator.settings.success($(this));
@@ -375,51 +381,52 @@ function BillBookNumberValidation() {
     debugger;
     try {
         var BillNo = $('#ICRNo').val();
-        var empID = $("#EmpID").val();
+        if (BillNo != "" && BillNo != null)
+        {
+            var empID = $("#EmpID").val();
 
-        var data = { "BillNo": BillNo, "BillBookType": "ICR" ,"EmpID": empID};
-        var ds = {};
-        ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
-        debugger;
-        if (ds != '') {
-            ds = JSON.parse(ds);
-        }
-        if (ds.Records == '') {
-            return 0;
-        }
-        else {
-            var msg = '';
-            if (ds.Records.Status == "BLB02")
-            {
-                msg = Messages.BLB02;
+            var data = { "BillNo": BillNo, "BillBookType": "ICR", "EmpID": empID };
+            var ds = {};
+            ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
+            debugger;
+            if (ds != '') {
+                ds = JSON.parse(ds);
             }
-            if (ds.Records.Status == "BLB03") {
-                msg = Messages.BLB03;
+            if (ds.Records == '') {
+                return 0;
             }
-            if (ds.Records.Status == "BLB04") {
-                msg = Messages.BLB04;
-            }
-            if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02")
-            {                
-                if ($(".fa-exclamation-triangle").length == 0) {
-                    $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + "( " + ds.Records.BookNo+" )" + '"></i>');
+            else {
+                var msg = '';
+                if (ds.Records.Status == "BLB02") {
+                    msg = Messages.BLB02;
                 }
-            }
-            if (ds.Records.Status == "BLB02") {
-                if ($(".fa-exclamation-triangle").length == 0) {
-                    $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + '"></i>');
+                if (ds.Records.Status == "BLB03") {
+                    msg = Messages.BLB03;
                 }
+                if (ds.Records.Status == "BLB04") {
+                    msg = Messages.BLB04;
+                }
+                if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02") {
+                    if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + "( " + ds.Records.BookNo + " )" + '"></i>');
+                    }
+                }
+                if (ds.Records.Status == "BLB02") {
+                    if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + '"></i>');
+                    }
+                }
+                if (ds.Records.Status == "BLB01") {
+                    $("#BillNoMandatory").html('');
+                }
+
             }
-            if (ds.Records.Status == "BLB01") {
-                $("#BillNoMandatory").html('');
+            if (ds.Result == "ERROR") {
+                notyAlert('error', ds.Message);
+                return 0;
             }
-            
-        }
-        if (ds.Result == "ERROR") {
-            notyAlert('error', ds.Message);
-            return 0;
-        }
-        return 1;
+            return 1;
+        }      
 
 
     }
@@ -599,7 +606,7 @@ function BindICRBillEntry(id) {
         if (ds.Result == "OK") {
 
             BindICRBillEntryFields(ds.Records);
-            BillBookNumberValidation();
+          
         }
         if (ds.Result == "ERROR") {
             notyAlert('error', ds.Message);
@@ -713,6 +720,7 @@ function SaveSuccess(data, status) {
         case "OK":
             if ($("#HeaderID").val() == emptyGUID || $("#HeaderID").val()=="") {
                 BindICRBillEntry(JsonResult.Records.ID);
+                BillBookNumberValidation();
             }
             else {
                 BindICRBillEntry($("#HeaderID").val());

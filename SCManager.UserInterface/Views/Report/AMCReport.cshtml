@@ -1,13 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "StockSummary";
+    ViewBag.Title = "AMC Report";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
+
 @using SCManager.UserInterface.App_Start
 @section styles {
-    @Styles.RenderFormat(SiteKeys.StyleVersion,"~/Content/DataTables/css/datatable")
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatable")
     @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatableButtons")
-   @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/bootstrapdatepicker")
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/bootstrapdatepicker")
 
 }
 
@@ -31,10 +32,10 @@
                 <div class="col-md-12 ">
                     <div id="external_filter" class="form-inline">
                         <label><b>From Date</b></label>
-                        <input class="form-control datepicker" onchange="RefreshItemSummaryTable()" style="width:190px" name="fromdate" id="fromdate" type="text">
+                        <input class="form-control datepicker" onchange="RefreshAmcReportTable()" value=@ViewBag.fromDate style="width:190px" name="fromdate" id="fromdate" type="text">
                         <label><b>To Date</b> </label>
-                        <input class="form-control datepicker" onchange="RefreshItemSummaryTable()" style="width:190px" name="todate" id="todate" type="text">
-
+                        <input class="form-control datepicker" onchange="RefreshAmcReportTable()" value=@ViewBag.toDate style="width:190px" name="todate" id="todate" type="text">
+                        <input type="hidden" id="CurrentDate" value=@ViewBag.CurrentDate> 
                     </div>
                 </div>
             </div>
@@ -51,23 +52,24 @@
             <div class="col-md-12">&nbsp;</div>
 
             <div class="col-md-12">
-                <div class="col-md-12 ReportHead">Stock Summary Report</div>
+                <div class="col-md-12 ReportHead"> AMC Expiry Alert Report</div>
                 <div class="container-fluid">
                     <div class="row">
 
-                        <table id="tblItemList" class="table compact" cellspacing="0" width="100%">
+                        <table id="tblAMCReportList" class="table compact" cellspacing="0" width="100%">
                             <thead>
-                                <tr class="text-center">
-                                    <th style="display:none;">ID</th>
-                                    <th>Sl No</th>
-                                    <th>Item Code</th>
-                                    <th>Description</th>                                   
-                                    <th>Category</th>
-                                    <th>Stock Qty </th>
-                                    <th>UOM</th>
-                                    <th>Rate</th>
-                                    <th>Value</th>
+                                <tr class="text-center"> 
+                                    <th>Customer Name</th>
+                                    <th>Location</th>
+                                    <th>Contact No.</th>
+                                    <th>Model</th>
+                                    <th>Serial No.</th>
+                                    <th>AMC No.</th>
+                                    <th>AMC Start Date</th>
+                                    <th>AMC End Date</th>
                                     <th>Remarks</th>
+                                    <th>Due Days</th> 
+                                    <th>Status </th> 
                                 </tr>
                             </thead>
                         </table>
@@ -84,11 +86,13 @@
 </div>
 
 @section Scripts {
-    @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/datatable")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/datatable")
     @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/jsZip")
     @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/datatableButtons")
     @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/bootstrapdatepicker")
-    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/StockSummary")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/AmcReports")
 }
+
+
 
 

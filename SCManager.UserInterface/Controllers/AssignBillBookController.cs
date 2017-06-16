@@ -113,7 +113,7 @@ namespace SCManager.UserInterface.Controllers
         #region DeleteBillBook
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string DeleteBillBook(string ID)
+        public string DeleteBillBook(string ID, string BillBookType)
         {
             string status = null;
             string msg = null;
@@ -125,7 +125,7 @@ namespace SCManager.UserInterface.Controllers
                     UA ua = new UA();
                     if (!string.IsNullOrEmpty(ID))
                     {
-                        status = _iAssignBillBookBusiness.DeleteBillBook(ID, ua);
+                        status = _iAssignBillBookBusiness.DeleteBillBook(ID,BillBookType, ua);
                     }
                     switch (status)
                     {

@@ -284,10 +284,8 @@ function BindOfficeBillEntry(id) {
 }
 function BindOfficeBillEntryFields(Records) {
     try {
-     
         ChangeButtonPatchView('OfficeBillEntry', 'btnPatchOfficeBillEntrySettab', 'Edit');
         $('#HeaderID').val(Records.ID);      
-        debugger;
         $("#BillNo").val(Records.BillNo);
         $("#CustomerName").val(Records.CustomerName);
         $("#CustomerContactNo").val(Records.CustomerContactNo);
@@ -296,8 +294,10 @@ function BindOfficeBillEntryFields(Records) {
         $("#PaymentRefNo").val(Records.PaymentRefNo);
         $("#Remarks").val(Records.Remarks);
         $("#subtotal").val(roundoff(Records.Subtotal));       
-        $("#VATAmount").val(roundoff(Records.VATAmount));       
+        $("#VATAmount").val(roundoff(Records.VATAmount));
+        $("#VATPercentageAmount").val(roundoff(Records.VATAmount)); 
         $("#discount").val(roundoff(Records.Discount));
+        $("#total").val(roundoff(Records.Subtotal - Records.Discount));
         $("#grandtotal").val(roundoff(Records.GrandTotal));       
         EG_Rebind_WithData(Records.OfficeBillEntryDetail, 1);
         $('#BillNo').attr('readonly', 'readonly');
@@ -415,38 +415,54 @@ function CalculateAmount(row) {
     EG_GridData[row - 1]['NetAmount'] = roundoff(qty * rate);
     EG_GridData[row - 1]['Discount'] = roundoff(dic);
     EG_Rebind();
-
-    var total = 0.00;
-    for (i = 0; i < EG_GridData.length; i++) {
-        total = total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
-    }
-
-    $('#subtotal').val(roundoff(total));
+    
     AmountSummary();
 
 }
-function AmountSummary() {
-  
-    var subtotal = parseFloat($('#subtotal').val()) || 0;
-    var vatAmount = parseFloat($('#VATAmount').val()) || 0;
-    var discount = parseFloat($('#discount').val()) || 0;
-    var vatp = (parseFloat($('#vatpercentage').val()) || 0);
-    if (vatp > 0) {
-        vatAmount = (subtotal * vatp) / 100;
-        $('#VATAmount').val(roundoff(vatAmount));
-    }
-    $('#grandtotal').val(roundoff(subtotal + vatAmount - discount));
 
-    $('#subtotal').val(roundoff(subtotal));
-    $('#VATAmount').val(roundoff(vatAmount));
-    $('#discount').val(roundoff(discount))
+function DiscountChange()
+{
+    var subtotal = parseFloat($('#subtotal').val()) || 0;
+    var discount = parseFloat($('#discount').val()) || 0;
+    $('#total').val(roundoff(subtotal - discount));
+    AmountSummary()
+}
+
+function ClearDiscountPercentage() {
+    debugger;
+    if ($('#VATAmount').val() != $('#VATPercentageAmount').val())
+        $("#vatpercentage").val("");
+
+    var total = parseFloat($('#total').val()) || 0;
+    var vatAmount = parseFloat($('#VATAmount').val()) || 0;
+    $('#grandtotal').val(roundoff(total + vatAmount )); 
+}
+
+function AmountSummary() {
+    debugger;
+    var Total = 0.00;
+    for (i = 0; i < EG_GridData.length; i++) {
+        Total = Total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
+    } 
+    $('#subtotal').val(roundoff(Total));
+    var discount = parseFloat($('#discount').val()) || 0;
+    $('#total').val(roundoff(Total - discount));
+    if ($("#vatpercentage").val()!="")
+        CalculateVAT();
+
+    var total = parseFloat($('#total').val()) || 0;
+    var vatAmount = parseFloat($('#VATAmount').val()) || 0;
+    var discount = parseFloat($('#discount').val()) || 0;   
+    $('#grandtotal').val(roundoff(total + vatAmount )); 
+    $('#total').val(roundoff(total)); 
 }
 function CalculateVAT() {
-
+    debugger;
     var vatpercent = $("#vatpercentage").val();
+    var Total = $("#total").val();
 
-    var subTotal = $("#subtotal").val();
-    vatpercent = parseInt(vatpercent);
+    vatpercent = parseFloat(vatpercent);
+
     if (vatpercent > 100) {
         vatpercent = 100
         $("#vatpercentage").val(vatpercent);
@@ -455,12 +471,13 @@ function CalculateVAT() {
         vatpercent = 0
         $("#vatpercentage").val(vatpercent);
     }
-    subTotal = parseInt(subTotal);
-    var vatamt = (subTotal * vatpercent / 100)
+    Total = parseFloat(Total);
+    var vatamt = (Total * vatpercent / 100)
     if (isNaN(vatamt)) { vatamt = 0.00 }
     $("#VATAmount").val(roundoff(vatamt));
+    $('#VATPercentageAmount').val(roundoff(vatamt));
 
-    AmountSummary();
+    
 }
 //-----------------------------------------Reset Validation Messages--------------------------------------//
 function ResetForm() {

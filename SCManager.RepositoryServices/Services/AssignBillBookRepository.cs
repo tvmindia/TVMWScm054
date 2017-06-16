@@ -291,7 +291,7 @@ namespace SCManager.RepositoryServices.Services
         #endregion UpdateBillBook
 
         #region DeleteBillBook
-        public string DeleteBillBook(string ID, UA ua)
+        public string DeleteBillBook(string ID, string BillBookType,UA ua)
         {
             SqlParameter outParameter = null;
             try
@@ -309,6 +309,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = Guid.Parse(ID);
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = ua.SCCode;
+                        cmd.Parameters.Add("@BillBookType", SqlDbType.NVarChar, 15).Value = BillBookType;
 
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;

@@ -55,6 +55,7 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/ReceiveFromTechnician").Include("~/Scripts/UserJS/ReceiveFromTechnician.js"));
             bundles.Add(new ScriptBundle("~/bundles/StockLedger").Include("~/Scripts/UserJS/StockLedger.js"));
             bundles.Add(new ScriptBundle("~/bundles/TechnicianStock").Include("~/Scripts/UserJS/TechnicianStock.js"));
+            bundles.Add(new ScriptBundle("~/bundles/TechnicianPerformance").Include("~/Scripts/UserJS/TechnicianPerformance.js"));
             bundles.Add(new ScriptBundle("~/bundles/TCRBillEntry").Include("~/Scripts/UserJS/TCRBillEntry.js"));
             bundles.Add(new ScriptBundle("~/bundles/ICRBillEntry").Include("~/Scripts/UserJS/ICRBillEntry.js"));
             bundles.Add(new ScriptBundle("~/bundles/DailyServiceReport").Include("~/Scripts/UserJS/DailyServiceReport.js"));
@@ -69,6 +70,10 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/TechnicianSalaryCalcu").Include("~/Scripts/UserJS/TechnicianSalaryCalculation.js"));
             bundles.Add(new ScriptBundle("~/bundles/AssignBillBook").Include("~/Scripts/UserJS/AssignBillBook.js"));
             bundles.Add(new ScriptBundle("~/bundles/UserProfile").Include("~/Scripts/UserJS/UserProfile.js"));
+            bundles.Add(new ScriptBundle("~/bundles/AmcReports").Include("~/Scripts/UserJS/AmcReports.js"));
+            
+
+
             bundles.Add(new ScriptBundle("~/bundles/BuildMember").Include("~/Scripts/UserJS/BuildMember.js"));
 
         }

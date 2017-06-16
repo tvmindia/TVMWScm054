@@ -35,6 +35,7 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "VAT %")]
         public decimal? VATAmount { get; set; }
         public decimal? Discount { get; set; }
+        public decimal? Total { get; set; }
         [Required(ErrorMessage = "Grand total should have value")]
         [Display(Name = "Grand Total (₹)")]
         [Range(0, 9999999999999999.99)]
