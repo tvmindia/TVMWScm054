@@ -40,7 +40,7 @@ $(document).ready(function () {
         $('#tblDailyServiceReport tbody').on('dblclick', 'td', function () {
             JobEdit(this)
         });
-      
+        $("#ModelJobNo").attr({ 'disabled': true });
     }
     catch(e)
     {
@@ -152,10 +152,10 @@ function AddTechnicanJob()
     {
         $("#AddJobModel").modal('show');
         $('#AddJobModel').on('shown.bs.modal', function () {
-            $('#ModelJobNo').focus()
+            $('#ModelCustomerName').focus()
         })
         $("#modelContextLabel").text('Add Job');
-        $("#ModelJobNo").removeAttr('disabled');
+        //$("#ModelJobNo").removeAttr('disabled');
         $("#TechnicianLabel").text($("#EmpSelector option:selected").text());
         $("#ServiceDateLabel").text((serdat));
         ClearJobForm();
