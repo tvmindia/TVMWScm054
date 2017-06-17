@@ -30,7 +30,7 @@ function BindForm(ID)
                 $(".calltypehidden").hide();
             }
             $("#TechnicianLabel").text(result.Employee.Name);
-            $("#ServiceDateLabel").text(ConvertJsonToDate(result.ServiceDate));
+            $("#ServiceDateLabel").text(result.ServiceDate);
         }
     }
     catch(e)
@@ -236,7 +236,7 @@ function GetTechnicianByJobNo(jobno)
 function ModelServiceDateOnChange(curobj)
 {
     var val = $(curobj).val();
-    $("#ServiceDateLabel").text(ConvertJsonToDate(val));
+    $("#ServiceDateLabel").text(val);
 }
 
 

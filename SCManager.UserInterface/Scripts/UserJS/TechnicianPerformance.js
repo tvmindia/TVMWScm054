@@ -85,7 +85,7 @@ function FireDatatable()
         },
         {
             width: "100px",
-            "targets": 0
+            "targets": "_all"
         },
         {
             targets: [1],

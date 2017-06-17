@@ -221,7 +221,7 @@ namespace SCManager.UserInterface.Controllers
 
           UA ua = new UA();
             List<AmcBaseValueSummaryViewModel> AmcBaseValueSummaryVMList=null;
-            string totalsumwithrupee="";
+            string totalsumwithrupee= "₹0";
             if ((!string.IsNullOrEmpty(fromdate))&&(!string.IsNullOrEmpty(todate)))
             {
                 DateTime expectedDate;

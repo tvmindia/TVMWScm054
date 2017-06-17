@@ -5,7 +5,8 @@ $(document).ready(function () {
 
         DataTables.AMCBaseValueTable = $('#tblAMCBaseValue').DataTable(
          {
-             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
+             //"dom": '<"top"i>rt<"bottom"flp><"clear">'
+             dom: '<"pull-right"Bf><"pull-left"i>rt<"pull-left"p><"clear">',
              buttons: [{
                  extend: 'excel',
                  exportOptions:
