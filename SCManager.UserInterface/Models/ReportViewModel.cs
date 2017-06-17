@@ -133,6 +133,7 @@ namespace SCManager.UserInterface.Models
         public string Type { get; set; }
         public string Description { get; set; }
         public decimal Amount { get; set; }
+        public string formatedAmount { get; set; }
 
     }
 }
