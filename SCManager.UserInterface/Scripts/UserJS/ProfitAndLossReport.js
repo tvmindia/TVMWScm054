@@ -57,11 +57,11 @@ $(document).ready(function () {
 
 function GetProfitAndLossSummary() {
     try {
-        var frdate = $("#fromdate").val();
+        var fromdate = $("#fromdate").val();
         var todate = $("#todate").val();
         var data = {};
-        if ((frdate) && (todate)) {
-            data = { "fromdate": frdate, "todate": todate };
+        if (IsVaildDateFormat(fromdate) && IsVaildDateFormat(todate)) {
+            data = { "fromdate": fromdate, "todate": todate };
         }
         var EmptyArr = [];
         var ds = {};
@@ -111,7 +111,7 @@ function RefreshProfitAndLossSummaryTable() {
     try {
         var fromdate = $("#fromdate").val();
         var todate = $("#todate").val();
-        if (fromdate && todate && DataTables.ProfitAndLossTable) {
+        if (IsVaildDateFormat(fromdate) && IsVaildDateFormat(todate) && DataTables.ProfitAndLossTable) {
             DataTables.ProfitAndLossTable.clear().rows.add(GetProfitAndLossSummary()).draw(false);
         }
     }

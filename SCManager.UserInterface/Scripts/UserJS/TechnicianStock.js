@@ -90,11 +90,11 @@ $(document).ready(function () {
 
 function GetAllTechnicianStock() {
     try {
-        var frdate = $("#fromdate").val();
+        var fromdate = $("#fromdate").val();
         var todate = $("#todate").val();
         var data = {};
-        if ((frdate) && (todate)) {
-            data = { "fromdate": frdate, "todate": todate };
+        if (IsVaildDateFormat(fromdate) && IsVaildDateFormat(todate)) {
+            data = { "fromdate": fromdate, "todate": todate };
         }
 
         var ds = {};
@@ -126,10 +126,10 @@ function RefreshTechnicianStockTable() {
     try {
         var fromdate = $("#fromdate").val();
         var todate = $("#todate").val();
-        if (fromdate != "" && todate != "") {
-
+        if (IsVaildDateFormat(fromdate) && IsVaildDateFormat(todate) &&  DataTables.TechnicianStockTable)
+            {
             DataTables.TechnicianStockTable.clear().rows.add(GetAllTechnicianStock()).draw(false);
-        }
+            }
     }
     catch (e) {
         notyAlert('error', e.message);

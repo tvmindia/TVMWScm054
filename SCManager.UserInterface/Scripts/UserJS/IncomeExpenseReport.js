@@ -58,11 +58,11 @@ $(document).ready(function () {
 
 function GetIncomeExpenseSummary() {
     try {
-        var frdate = $("#fromdate").val();
+        var fromdate = $("#fromdate").val();
         var todate = $("#todate").val();
         var data = {};
-        if ((frdate) && (todate)) {
-            data = { "fromdate": frdate, "todate": todate };
+        if (IsVaildDateFormat(fromdate) && IsVaildDateFormat(todate) ) {
+            data = { "fromdate": fromdate, "todate": todate };
         }
 
         var ds = {};
@@ -88,7 +88,8 @@ function RefreshIncomeExpenseSummaryTable()
     try {
         var fromdate = $("#fromdate").val();
         var todate = $("#todate").val();
-        if (DataTables.IncomeExpenseTable != undefined && fromdate != "" && todate != "") {
+        if (IsVaildDateFormat(fromdate) && IsVaildDateFormat(todate) && DataTables.IncomeExpenseTable != undefined)
+        {
             DataTables.IncomeExpenseTable.clear().rows.add(GetIncomeExpenseSummary()).draw(false);
         }
     }

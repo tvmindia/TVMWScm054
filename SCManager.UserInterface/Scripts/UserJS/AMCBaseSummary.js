@@ -64,11 +64,11 @@ $(document).ready(function () {
 
 function GetAMCBaseValueSummary() {
     try {
-        var frdate = $("#fromdate").val();
+        var fromdate = $("#fromdate").val();
         var todate = $("#todate").val();
         var data = {};
-        if ((frdate) && (todate)) {
-            data = { "fromdate": frdate, "todate": todate };
+        if (IsVaildDateFormat(fromdate) && IsVaildDateFormat(todate) ) {
+            data = { "fromdate": fromdate, "todate": todate };
         }
         var EmptyArr = [];
         var ds = {};
@@ -121,7 +121,7 @@ function RefreshAMCBaseValueSummaryTable() {
     try {
         var fromdate = $("#fromdate").val();
         var todate = $("#todate").val();
-        if (fromdate&&todate&&DataTables.AMCBaseValueTable) {
+        if (IsVaildDateFormat(fromdate) && IsVaildDateFormat(todate) && DataTables.AMCBaseValueTable != undefined) {
             DataTables.AMCBaseValueTable.clear().rows.add(GetAMCBaseValueSummary()).draw(false);
         }
     }
