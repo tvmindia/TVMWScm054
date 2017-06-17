@@ -65,6 +65,8 @@ namespace SCManager.BusinessService.Services
             ICRExpenses expenseObj = null;
             expenseObj = _iicrexpensesRepository.GetOutStandingICRPayment(UA);
             expenseObj.OutStandingPaymentFormatted = _commonBusiness.ConvertCurrency(expenseObj.OutStandingPayment, 2);
+            expenseObj.OutstandingCashFormatted = _commonBusiness.ConvertCurrency(expenseObj.OutstandingCash,2);
+            expenseObj.OutstandingChequeFormatted = _commonBusiness.ConvertCurrency(expenseObj.OutstandingCheque,2);
             return expenseObj;
         } 
 

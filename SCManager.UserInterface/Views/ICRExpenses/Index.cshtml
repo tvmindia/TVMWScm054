@@ -9,6 +9,14 @@
    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/bootstrapdatepicker")
 }
 
+<style>
+    .Outstanding{
+        font-size: 15px;
+    font-style: normal;
+    font-weight: 100;
+    }
+</style>
+
 <div class="col-md-12">
     <div class="SCHeader col-md-6">
         ICR Payments to IFB
@@ -147,7 +155,23 @@
                                     <div class="masterinfoHead">
                                         Outstanding ICR Payment<br/>
                                         <span> <b> @Html.LabelFor(model => model.OutStandingICRPayment, htmlAttributes: new { id = "OutStandingICRPayment" })</b> </span>
-
+                                        <br />
+                                        <div class="col-lg-12">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-4" style="text-align:left;"><label class="Outstanding">Outstanding Cheque</label></div>
+                                            <div class="col-md-3" style="text-align:right;"><span class="Outstanding">  @Html.LabelFor(model => model.OutstandingCheque, htmlAttributes: new { id = "OutstandingCheque", @class = "Outstanding" }) </span></div>
+                                            <div class="col-md-3"></div>
+                                         </div>
+                                      
+                                       <div class="col-md-12">
+                                           <div class="col-md-2"></div>
+                                           <div class="col-md-4" style="text-align:left;"><label class="Outstanding">Outstanding Cash</label></div>
+                                           <div class="col-md-3" style="text-align:right;"><span>  @Html.LabelFor(model => model.OutstandingCash, htmlAttributes: new { id = "OutstandingCash", @class = "Outstanding" }) </span></div>
+                                           <div class="col-md-3"></div>
+                                        </div>
+                                      
+                                         
+                                       
                                     </div>
                                     <br />
                                     <div class="masterinfoDet">

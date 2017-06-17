@@ -1,6 +1,8 @@
 ﻿var DataTables = {};
 var EmptyGuid = "00000000-0000-0000-0000-000000000000";
-
+var fromDate = "";
+var toDate = "";
+var ShowAllChecked = false;
 //---------------------------------------Docuement Ready--------------------------------------------------//
 
 $(document).ready(function () {
@@ -55,7 +57,7 @@ $(document).ready(function () {
 function List() {
     try {
 
-        ChangeButtonPatchView('CreditNotes', 'btnPatchCreditNotesSettab', 'List');
+        ChangeButtonPatchView('CreditNotes', 'btnPatchCreditNotesSettab', 'List');        
         BindAllCreditNotes()
 
     } catch (x) {
@@ -197,14 +199,19 @@ function showAllYNCheckedOrNot(i)
     
     if(i.checked==true)
     {
+        ShowAllChecked = "true";
         DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(true)).draw(false);
+        fromDate = $('#fromDate').val();
+        toDate = $('#toDate').val();
         $('#fromDate').val("");
         $('#toDate').val("");
     }
     else
     {
+        ShowAllChecked = "false";
         DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(false)).draw(false);
-     
+        $('#fromDate').val(fromDate);
+        $('#toDate').val(toDate);
     }
     
 }
@@ -277,8 +284,14 @@ function save() {
 //---------------------------------------Bind All CreditNotes----------------------------------------------//
 function BindAllCreditNotes() {
     try {
-      
-        DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(false)).draw(false);
+        if (ShowAllChecked == "true") {
+            DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(true)).draw(false);
+        }
+        else
+        {
+            DataTables.CreditNotesTable.clear().rows.add(GetAllCreditNotes(false)).draw(false);
+        }
+       
        
     }
     catch (e) {

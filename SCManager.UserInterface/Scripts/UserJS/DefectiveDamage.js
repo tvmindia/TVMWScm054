@@ -565,7 +565,7 @@ function GetAllItemCode() {
 
         var data = {};
         var ds = {};
-        ds = GetDataFromServer("DefectiveorDamaged/GetAllItemCode/", data);
+        ds = GetDataFromServer("Item/ItemsForDropdown/", data);
         if (ds != '') {
             ds = JSON.parse(ds);
         }
