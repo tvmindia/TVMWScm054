@@ -5,7 +5,8 @@ $(document).ready(function () {
 
         DataTables.ProfitAndLossTable = $('#tblProfitAndLoss').DataTable(
          {
-             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
+             
+             //dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
              buttons: [{
                  extend: 'excel',
                  exportOptions:
@@ -18,6 +19,7 @@ $(document).ready(function () {
              ordering:false,
              searching: false,
              paging: false,
+             info: false,
              data: GetProfitAndLossSummary(),
              columns: [
 
@@ -25,13 +27,31 @@ $(document).ready(function () {
                { "data": "Type", "defaultContent": "<i>-</i>" },
                { "data": "Description", "defaultContent": "<i>-</i>" },
                { "data": "Amount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-               { "data": "BaseType", createdRow: function (row, data, dataIndex) { if (data == "T") { $(row).addClass('important'); } }, "defaultContent": "<i>-</i>" },
+               { "data": "BaseType", "defaultContent": "<i>-</i>" },
              
 
              ],
+             //"createdRow": function (row, data, dataIndex) {
+             //    debugger;
+             //    if (data[3] == "T") {
+             //        // $(row).addClass('important');
+             //        $('td', row).addClass('important');
+             //    }
+             //},
+             "rowCallback": function (row, data, index) {
+                 switch(data.BaseType)
+                 {
+                     case "T":
+                         $(row).addClass('tableTotal');
+                         break;
+                     case "GT":
+                         $(row).addClass('tablNetIncome');
+                         break;
+                 }
              
+             },
              columnDefs: [
-
+                
 
                   { className: "text-right", "targets": [2] },
                     { "visible":false,"targets":[3] },

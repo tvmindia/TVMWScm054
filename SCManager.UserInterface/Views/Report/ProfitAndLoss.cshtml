@@ -13,6 +13,15 @@
     @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/bootstrapdatepicker")
 
 }
+<style>
+    .tableTotal{
+         background-color: #f8f8ec;
+    }
+    .tablNetIncome
+    {
+         background-color: #add8e6;
+    }
+ </style>
 
 <div class="col-md-12">
     <div class="SCHeader col-md-6">
@@ -56,22 +65,23 @@
             <div class="col-md-12">
                 <div class="col-md-12 ReportHead">Profit And Loss Summary</div>
                 <div class="container-fluid">
-                    <div class="row">
-                        <table id="tblProfitAndLoss" class="table compact" cellspacing="0" width="100%">
-                            <thead>
-                                <tr class="text-center">
+                    <div class="col-md-2"></div>
+                        <div class="col-md-10">
+                            <table id="tblProfitAndLoss" class="table compact" cellspacing="0" width="80%">
+                                <thead>
+                                    <tr class="text-center">
 
-                                    <th>Type</th>
-                                    <th>Description</th>
-                                    <th style="text-align: center!important;">Amount(₹)</th>
-                                    <th>BaseType</th>
-                                    
-                                </tr>
-                            </thead>
-                        </table>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th style="text-align: center!important;">Amount(₹)</th>
+                                        <th>BaseType</th>
+
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    <div class="col-md-2"></div>
                     </div>
-
-                </div>
         
 
             </div>
