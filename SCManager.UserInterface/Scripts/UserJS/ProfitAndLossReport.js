@@ -6,7 +6,7 @@ $(document).ready(function () {
         DataTables.ProfitAndLossTable = $('#tblProfitAndLoss').DataTable(
          {
              
-             //dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
              buttons: [{
                  extend: 'excel',
                  exportOptions:
