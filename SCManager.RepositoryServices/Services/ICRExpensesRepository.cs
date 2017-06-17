@@ -288,7 +288,8 @@ namespace SCManager.RepositoryServices.Services
                                 while (sdr.Read())
                                 {
                                     expensesObj.OutStandingPayment = (sdr["OutStandingPayments"].ToString() != "" ? Decimal.Parse(sdr["OutStandingPayments"].ToString()) : expensesObj.OutStandingPayment);
-
+                                    expensesObj.OutstandingCheque = (sdr["OutStandingCheque"].ToString() != "" ? Decimal.Parse(sdr["OutStandingCheque"].ToString()) : expensesObj.OutstandingCheque);
+                                    expensesObj.OutstandingCash = (sdr["OutStandingCash"].ToString() != "" ? Decimal.Parse(sdr["OutStandingCash"].ToString()) : expensesObj.OutstandingCash);
                                 }
                             }
                         }
