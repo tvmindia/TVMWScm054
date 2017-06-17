@@ -24,9 +24,9 @@ $(document).ready(function () {
              columns: [
 
               
-               { "data": "Type", "defaultContent": "<i>-</i>" },
-               { "data": "Description", "defaultContent": "<i>-</i>" },
-               { "data": "formatedAmount", "defaultContent": "<i>-</i>" },
+               { "data": "Type", "defaultContent": "<i></i>" },
+               { "data": "Description", "defaultContent": "<i></i>" },
+               { "data": "formatedAmount", "defaultContent": "<i></i>" },
                { "data": "BaseType", "defaultContent": "<i>-</i>" },
              
 

@@ -205,7 +205,7 @@ namespace SCManager.BusinessService.Services
                 ProfitAndLossReportList = _reportRepository.GetProfitAndLossReport(UA, fromdate, todate);
                 if (ProfitAndLossReportList != null)
                 {
-                    (from rpt in ProfitAndLossReportList
+                    (from rpt in ProfitAndLossReportList.Where(rpt => rpt.Type != "Income" && rpt.Type != "Expense")
                      select rpt).ToList().ForEach((rpt) =>
                      {
 
