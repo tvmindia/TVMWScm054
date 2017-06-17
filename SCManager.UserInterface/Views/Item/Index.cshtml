@@ -93,7 +93,7 @@
                                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control BlockEnter", @rows = "2" })
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control ", @rows = "2" })
                                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
@@ -224,7 +224,7 @@
                                     @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-5">
-                                    @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control BlockEnter", @rows = "3" })
+                                    @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control", @rows = "3" })
                                     @*@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
