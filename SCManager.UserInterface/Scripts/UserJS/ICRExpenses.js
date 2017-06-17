@@ -58,6 +58,8 @@ function BindOutStandingPayment()
 {
     var thisItem = GetOutStandingICRPayment();
     $("#OutStandingICRPayment").text(thisItem.OutStandingPaymentFormatted);
+    $("#OutstandingCheque").text(thisItem.OutstandingChequeFormatted);
+    $("#OutstandingCash").text(thisItem.OutstandingCashFormatted);
 
 }
 

@@ -6,7 +6,7 @@ $(document).ready(function () {
         DataTables.ProfitAndLossTable = $('#tblProfitAndLoss').DataTable(
          {
              
-             //dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
              buttons: [{
                  extend: 'excel',
                  exportOptions:
@@ -24,9 +24,9 @@ $(document).ready(function () {
              columns: [
 
               
-               { "data": "Type", "defaultContent": "<i>-</i>" },
-               { "data": "Description", "defaultContent": "<i>-</i>" },
-               { "data": "Amount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "Type", "defaultContent": "<i></i>" },
+               { "data": "Description", "defaultContent": "<i></i>" },
+               { "data": "formatedAmount", "defaultContent": "<i></i>" },
                { "data": "BaseType", "defaultContent": "<i>-</i>" },
              
 

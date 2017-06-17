@@ -12,9 +12,11 @@ namespace SCManager.BusinessService.Services
     public class ReportBusiness: IReportBusiness
     {
         IReportRepository _reportRepository;
-        public ReportBusiness(IReportRepository reportRepository)
+        ICommonBusiness _commonBusiness;
+        public ReportBusiness(IReportRepository reportRepository, ICommonBusiness commonBusiness)
         {
             _reportRepository = reportRepository;
+            _commonBusiness =commonBusiness;
         }
 
         public List<Item> GetItemsSummary(UA UA, string fromdate = null, string todate = null)
@@ -201,6 +203,15 @@ namespace SCManager.BusinessService.Services
             try
             {
                 ProfitAndLossReportList = _reportRepository.GetProfitAndLossReport(UA, fromdate, todate);
+                if (ProfitAndLossReportList != null)
+                {
+                    (from rpt in ProfitAndLossReportList.Where(rpt => rpt.Type != "Income" && rpt.Type != "Expense")
+                     select rpt).ToList().ForEach((rpt) =>
+                     {
+
+                         rpt.formatedAmount = _commonBusiness.ConvertCurrency(rpt.Amount, 2, false);
+                     });
+                }
             }
             catch (Exception ex)
             {

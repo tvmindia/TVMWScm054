@@ -385,7 +385,7 @@ namespace SCManager.BusinessService.Services
                 if (DecimalPoints == 0)
                 { result = string.Format(hindi, "{0:#,#.##}", parsed); }
                 else
-                { result = string.Format(hindi, "{0:#,#.##0.00}", parsed); }
+                { result = string.Format(hindi, "{0:#,#0.00}", parsed); }
             }
             return result;  
 

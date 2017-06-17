@@ -38,7 +38,10 @@ namespace SCManager.UserInterface.Models
         public decimal OutStandingICRPayment { get; set; }
         public string OutStandingPaymentFormatted { get; set; }
 
-
+        public decimal OutstandingCash { get; set; }
+        public string OutstandingCashFormatted { get; set; }
+        public decimal OutstandingCheque { get; set; }
+        public string OutstandingChequeFormatted { get; set; }
 
         [Display(Name = "Note")]
         [DataType(DataType.MultilineText)]
