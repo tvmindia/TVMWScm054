@@ -77,7 +77,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllIssueToOtherSC
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllIssueToOtherSC()
         {
             UA ua = new UA();

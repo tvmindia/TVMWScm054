@@ -101,7 +101,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllOfficeBillEntry
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllOfficeBillEntry()
         {
             UA ua = new UA();

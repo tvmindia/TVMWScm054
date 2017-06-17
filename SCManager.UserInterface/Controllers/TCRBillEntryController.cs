@@ -119,7 +119,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllTCRBillEntry
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllTCRBillEntry()
         {
             UA ua = new UA();

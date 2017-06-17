@@ -83,7 +83,7 @@ namespace SCManager.UserInterface.Controllers
         }
         Const c = new Const();
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.ManagerRole, RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string ItemsForDropdown(ItemDropdownViewModel obj)
         {
             UA ua = new UA();
@@ -92,7 +92,7 @@ namespace SCManager.UserInterface.Controllers
 
         }
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.ManagerRole, RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string ItemsForDropdownByTechnician(string empID)
         {
             UA ua = new UA();
@@ -101,7 +101,7 @@ namespace SCManager.UserInterface.Controllers
 
         }
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.ManagerRole, RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string ServiceTypesItemsForDropdown(ItemDropdownViewModel obj)
         {
             UA ua = new UA();
@@ -110,7 +110,7 @@ namespace SCManager.UserInterface.Controllers
 
         }
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.ManagerRole,RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetAllItems()
         {
             UA ua = new UA();
@@ -119,7 +119,7 @@ namespace SCManager.UserInterface.Controllers
 
         }
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.ManagerRole,RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetItemByID(string ID)
         {
             UA ua = new UA();
@@ -129,7 +129,7 @@ namespace SCManager.UserInterface.Controllers
         }
         #region GetAllSubCategories
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.ManagerRole,RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetAllSubCategories(string CategoryID)
         {
            try
@@ -153,7 +153,7 @@ namespace SCManager.UserInterface.Controllers
         #region InsertItem
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.ManagerRole,RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string InsertUpdateItem(ItemViewModel itemViewmodelObj)
         {
             object result = null;
@@ -217,7 +217,7 @@ namespace SCManager.UserInterface.Controllers
         #region DeleteItem
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.ManagerRole,RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string DeleteItem(string ID)
         {
             string status = null;
@@ -258,7 +258,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.ManagerRole,RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();
