@@ -61,6 +61,8 @@ $(document).ready(function () {
                  searchPlaceholder: "Search"
              },
              columns: [
+                 
+               { "data": "EmpID", "defaultContent": "<i>-</i>" },
                { "data": "ServiceDate", "defaultContent": "<i>-</i>" },
                { "data": "Technician", "defaultContent": "<i>-</i>" },
                { "data": "TotalCalls", "defaultContent": "<i>-</i>" },
@@ -71,12 +73,16 @@ $(document).ready(function () {
                { "data": "RepeatCalls", "defaultContent": "<i>-</i>" }
               
              ],
-             columnDefs: [
-                  { className: "text-left", "targets": [1] },
-                  { className: "text-center", "targets": [0,2,3,4,5,6,7] }
+             columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
+                  { className: "text-left", "targets": [2] },
+                  { className: "text-center", "targets": [1,3,4,5,6,7,8] }
                  
              ]
          });
+
+        $('#tblServiceReportSummary tbody').on('dblclick', 'td', function () {
+            ServiceRecordSummaryclick(this)
+        });
     
 
     }
@@ -84,6 +90,24 @@ $(document).ready(function () {
 
     }
 });
+
+
+function ServiceRecordSummaryclick(curobj) {
+    debugger;
+    try {
+        var rowData = DataTables.DailyServiceReportSummary.row($(curobj).parents('tr')).data();
+        debugger;
+        $("#EmpSelector").val(rowData.EmpID);
+        $("#txtServiceDate").val(rowData.ServiceDate);
+        RefreshDailyServiceTable();
+        goBack();
+
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+
+}
 
 
 

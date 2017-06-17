@@ -497,6 +497,7 @@ namespace SCManager.RepositoryServices.Services
                                     {
                                         _serviceRegistrySummary.ServiceDate = (sdr["ServiceDate"].ToString() != "" ? (sdr["ServiceDate"].ToString()) : _serviceRegistrySummary.ServiceDate);
                                         _serviceRegistrySummary.Technician = (sdr["Technician"].ToString() != "" ? (sdr["Technician"].ToString()) : _serviceRegistrySummary.Technician);
+                                        _serviceRegistrySummary.EmpID = (sdr["EmpID"].ToString() != "" ? (sdr["EmpID"].ToString()) : _serviceRegistrySummary.EmpID);
                                         _serviceRegistrySummary.TotalCalls = (sdr["TotalCalls"].ToString() != "" ? (int.Parse(sdr["TotalCalls"].ToString())) : _serviceRegistrySummary.TotalCalls);
                                         _serviceRegistrySummary.MinorCalls = (sdr["MinorCalls"].ToString() != "" ? (int.Parse(sdr["MinorCalls"].ToString())) : _serviceRegistrySummary.MinorCalls);
                                         _serviceRegistrySummary.MajorCalls = (sdr["MajorCalls"].ToString() != "" ? (int.Parse(sdr["MajorCalls"].ToString())) : _serviceRegistrySummary.MajorCalls);
@@ -549,6 +550,7 @@ namespace SCManager.RepositoryServices.Services
                                     ServiceRegistrySummary _serviceRegistrySummary = new ServiceRegistrySummary();
                                     {
                                         _serviceRegistrySummary.ServiceDate = (sdr["ServiceDate"].ToString() != "" ? (sdr["ServiceDate"].ToString()) : _serviceRegistrySummary.ServiceDate);
+                                        _serviceRegistrySummary.EmpID = (sdr["EmpID"].ToString() != "" ? (sdr["EmpID"].ToString()) : _serviceRegistrySummary.EmpID);
                                         _serviceRegistrySummary.Technician = (sdr["Technician"].ToString() != "" ? (sdr["Technician"].ToString()) : _serviceRegistrySummary.Technician);
                                         _serviceRegistrySummary.TotalCalls = (sdr["TotalCalls"].ToString() != "" ? (int.Parse(sdr["TotalCalls"].ToString())) : _serviceRegistrySummary.TotalCalls);
                                         _serviceRegistrySummary.MinorCalls = (sdr["MinorCalls"].ToString() != "" ? (int.Parse(sdr["MinorCalls"].ToString())) : _serviceRegistrySummary.MinorCalls);
