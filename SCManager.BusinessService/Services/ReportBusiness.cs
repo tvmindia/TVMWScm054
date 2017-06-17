@@ -126,8 +126,10 @@ namespace SCManager.BusinessService.Services
                 PerformanceList = _reportRepository.GetTechnicianPerformance(UA, EMPID, month, year);
                 if(PerformanceList!=null)
                 {
+                    //Removing Date duplication
                     PerformanceList.Columns.Remove("Date1");
                     PerformanceList.Columns.Remove("Date2");
+                    //Changing Date format 
                     foreach (DataRow dr in PerformanceList.Rows)
                     {
 
@@ -137,7 +139,9 @@ namespace SCManager.BusinessService.Services
                         PerformanceList.Rows[i]["Date"] = d;
                         i++;
                     }
+                    //Changing the Column order for UI purposes
                     PerformanceList.Columns["Date"].SetOrdinal(0);
+                    //Adding a new row at the bottom with sum of column
                     DataRow row = PerformanceList.NewRow();
                     for (int j = 0; j < PerformanceList.Columns.Count; j++)
                     {
@@ -147,6 +151,7 @@ namespace SCManager.BusinessService.Services
                         }
                         else
                         {
+                            //PerformanceList.Columns[j].DataType = typeof(int);
                             row[j] = PerformanceList.Compute("Sum([" + PerformanceList.Columns[j].Caption + "])", "");
                         }                        
                     }
@@ -160,6 +165,48 @@ namespace SCManager.BusinessService.Services
             }
             return PerformanceList;
         }
-        
+
+        public List<AmcBaseValueSummary> GetAMCBaseValueSummary(UA UA, string fromdate, string todate)
+        {
+            SCManagerSettings settings = new SCManagerSettings();
+            List<AmcBaseValueSummary> AmcBaseValueSummaryList = null;
+            try
+            {
+                AmcBaseValueSummaryList = _reportRepository.GetAMCBaseValueSummary(UA, fromdate, todate);
+                if(AmcBaseValueSummaryList!=null)
+                {
+                    (from rpt in AmcBaseValueSummaryList
+                     select rpt).ToList().ForEach((rpt) =>
+                     {
+                         rpt.ICRDate = Convert.ToDateTime(rpt.ICRDate).ToString(settings.dateformat);
+                         rpt.AMCValidFromDate = Convert.ToDateTime(rpt.AMCValidFromDate).ToString(settings.dateformat);
+                         rpt.AMCValidToDate = Convert.ToDateTime(rpt.AMCValidToDate).ToString(settings.dateformat);
+
+                     });
+                }
+               
+             
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return AmcBaseValueSummaryList;
+        }
+
+        public List<ProfitAndLossReport> GetProfitAndLossReport(UA UA, string fromdate, string todate)
+        {
+         
+            List<ProfitAndLossReport> ProfitAndLossReportList = null;
+            try
+            {
+                ProfitAndLossReportList = _reportRepository.GetProfitAndLossReport(UA, fromdate, todate);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ProfitAndLossReportList;
+        }
     }
 }

@@ -18,5 +18,7 @@ namespace SCManager.BusinessService.Contracts
         List<AmcReport> GetAmcReportTable(UA UA, string fromdate, string todate);
         
         DataTable GetTechnicianPerformance(UA UA, Guid EMPID, int? month = null, int? year = null);
+        List<AmcBaseValueSummary> GetAMCBaseValueSummary(UA UA, string fromdate, string todate);
+        List<ProfitAndLossReport> GetProfitAndLossReport(UA UA, string fromdate, string todate);
     }
 }

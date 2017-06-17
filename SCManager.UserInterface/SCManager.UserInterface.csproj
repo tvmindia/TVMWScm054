@@ -538,6 +538,7 @@
     <Content Include="Scripts\jszip.min.js" />
     <Content Include="Scripts\lightbox.min.js" />
     <Content Include="Scripts\sweetalert.min.js" />
+    <Content Include="Scripts\UserJS\AMCBaseSummary.js" />
     <Content Include="Scripts\UserJS\AmcReports.js" />
     <Content Include="Scripts\UserJS\AssignBillBook.js" />
     <Content Include="Scripts\UserJS\BuildMember.js" />
@@ -565,6 +566,7 @@
     <Content Include="Scripts\UserJS\OfficeBillEntry.js" />
     <Content Include="Scripts\UserJS\OpeningSetting.js" />
     <Content Include="Scripts\UserJS\OtherIncome.js" />
+    <Content Include="Scripts\UserJS\ProfitAndLossReport.js" />
     <Content Include="Scripts\UserJS\ReceiveFromOtherSC.js" />
     <Content Include="Scripts\UserJS\ReceiveFromTechnician.js" />
     <Content Include="Scripts\UserJS\StockLedger.js" />
@@ -637,6 +639,8 @@
     <Content Include="Views\Report\AMCReport.cshtml" />
     <Content Include="Views\Report\TechnicianPerformance.cshtml" />
     <Content Include="Views\UserProfile\BuildMember.cshtml" />
+    <Content Include="Views\Report\AMCBaseSummary.cshtml" />
+    <Content Include="Views\Report\ProfitAndLoss.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

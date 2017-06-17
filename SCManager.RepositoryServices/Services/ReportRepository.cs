@@ -373,5 +373,110 @@ namespace SCManager.RepositoryServices.Services
             }
             return dt;
         }
+
+        public List<AmcBaseValueSummary> GetAMCBaseValueSummary(UA UA, string fromdate, string todate)
+        {
+            List<AmcBaseValueSummary> AmcBaseValueSummaryList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@Fromdate", SqlDbType.DateTime).Value = fromdate;
+                        cmd.Parameters.Add("@Todate", SqlDbType.DateTime).Value = todate;
+                        cmd.CommandText = "[RPT_AMCBaseValueSummary]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                AmcBaseValueSummaryList = new List<AmcBaseValueSummary>();
+                                while (sdr.Read())
+                                {
+                                    AmcBaseValueSummary _amcBaseValueSummary = new AmcBaseValueSummary();
+                                    {
+                                        _amcBaseValueSummary.ICRDate = (sdr["ICRDATE"].ToString() != "" ? sdr["ICRDATE"].ToString() : _amcBaseValueSummary.ICRDate);
+                                        _amcBaseValueSummary.ICRNo = (sdr["ICRNo"].ToString() != "" ? (sdr["ICRNo"].ToString()) : _amcBaseValueSummary.ICRNo);
+                                        _amcBaseValueSummary.AMCNo = (sdr["AMCNO"].ToString() != "" ? (sdr["AMCNO"].ToString()) : _amcBaseValueSummary.AMCNo);
+                                        _amcBaseValueSummary.AMCValidFromDate = (sdr["AMCValidFromDate"].ToString() != "" ? sdr["AMCValidFromDate"].ToString() : _amcBaseValueSummary.AMCValidFromDate);
+                                        _amcBaseValueSummary.AMCValidToDate = (sdr["AMCValidToDate"].ToString() != "" ? sdr["AMCValidToDate"].ToString() : _amcBaseValueSummary.AMCValidToDate);
+                                        _amcBaseValueSummary.Technician = (sdr["Technician"].ToString() != "" ? sdr["Technician"].ToString() : _amcBaseValueSummary.Technician);
+                                        _amcBaseValueSummary.CustomerName = (sdr["CustomerName"].ToString() != "" ? sdr["CustomerName"].ToString() : _amcBaseValueSummary.CustomerName);
+                                        _amcBaseValueSummary.BaseAmount = (sdr["BaseAmount"].ToString() != "" ? (decimal.Parse(sdr["BaseAmount"].ToString())) : _amcBaseValueSummary.BaseAmount);
+                                        _amcBaseValueSummary.ServiceCharge = (sdr["ServiceCharge"].ToString() != "" ? (decimal.Parse(sdr["ServiceCharge"].ToString())) : _amcBaseValueSummary.ServiceCharge);
+                                        _amcBaseValueSummary.Discount = (sdr["Discount"].ToString() != "" ? (decimal.Parse(sdr["Discount"].ToString())) : _amcBaseValueSummary.Discount);
+                                        _amcBaseValueSummary.Total = (sdr["Total"].ToString() != "" ? (decimal.Parse(sdr["Total"].ToString())) : _amcBaseValueSummary.Total);
+
+                                    }
+                                    AmcBaseValueSummaryList.Add(_amcBaseValueSummary);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return AmcBaseValueSummaryList;
+        }
+
+        public List<ProfitAndLossReport> GetProfitAndLossReport(UA UA, string fromdate, string todate)
+        {
+            List<ProfitAndLossReport> ProfitAndLossReportList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@startDate", SqlDbType.DateTime).Value = fromdate;
+                        cmd.Parameters.Add("@endDate", SqlDbType.DateTime).Value = todate;
+                        cmd.CommandText = "[RPT_ProfitAndLoss]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                ProfitAndLossReportList = new List<ProfitAndLossReport>();
+                                while (sdr.Read())
+                                {
+                                    ProfitAndLossReport _profitAndLossReport = new ProfitAndLossReport();
+                                    {
+                                        _profitAndLossReport.SCCode = (sdr["SCCode"].ToString() != "" ? sdr["SCCode"].ToString() : _profitAndLossReport.SCCode);
+                                        _profitAndLossReport.BaseType = (sdr["BaseType"].ToString() != "" ? (sdr["BaseType"].ToString()) : _profitAndLossReport.BaseType);
+                                        _profitAndLossReport.Type = (sdr["Type"].ToString() != "" ? (sdr["Type"].ToString()) : _profitAndLossReport.Type);
+                                        _profitAndLossReport.Description = (sdr["Description"].ToString() != "" ? sdr["Description"].ToString() : _profitAndLossReport.Description);
+                                        _profitAndLossReport.Amount = (sdr["Amount"].ToString() != "" ? (decimal.Parse(sdr["Amount"].ToString())) : _profitAndLossReport.Amount);
+                                       
+
+                                    }
+                                    ProfitAndLossReportList.Add(_profitAndLossReport);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ProfitAndLossReportList;
+        }
     }
 }

@@ -115,7 +115,7 @@
                                 @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control BlockEnter", @rows = "3" } })
+                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @rows = "3" } })
                                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                                 @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-5">
-                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control BlockEnter", @rows = "3" } })
+                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control", @rows = "3" } })
                                 @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
                             </div>
                         </div>
