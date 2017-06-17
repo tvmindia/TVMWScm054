@@ -42,16 +42,7 @@ var appAddress = window.location.protocol + "//" + window.location.host + "/";  
 
 
 $(document).ready(function () {
-  
-  
-    $('input[type="date"]').datepicker({
-        format: "yyyy-mm-dd",//dd-M-yyyy",
-        maxViewMode: 0,
-        todayBtn: "linked",
-        clearBtn: true,
-        autoclose: true,
-        todayHighlight: true
-    });
+ 
     $('input.datepicker').datepicker({
         format: "dd-M-yyyy",//",
         maxViewMode: 0,
@@ -61,7 +52,7 @@ $(document).ready(function () {
         todayHighlight: true
     });
    
-    $('input,select').keydown(function (e) {
+    $('input').keydown(function (e) {
         var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
         if (key == 13) {
             e.preventDefault();
@@ -92,15 +83,6 @@ $(document).ready(function () {
             dropdownMenu.parent().toggleClass("open");
         }
     });
-
-    //$('input').keydown(function (e) {
-    //    var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
-    //    if (key == 13) {
-    //        e.preventDefault();
-    //        var inputs = $(this).closest('form').find(':input:visible');
-    //        inputs.eq(inputs.index(this) + 1).focus();
-    //    }
-    //});
 
     $('.BlockEnter').keydown(function (e) {
     
@@ -141,21 +123,7 @@ function notyAlert(type, msgtxt,title) {
     //});
    
 }
-function ConvertDateFormats(thisdate) {
-    try {
-        if (thisdate != null) {
-            thisdate = thisdate.replace(/-/g, ' ');
-            var converteddate = new Date(thisdate);
-            result = ('0' + (converteddate.getMonth() + 1)).slice(-2) + ' ' + ('0' + converteddate.getDate()).slice(-2) + ' '
-             + converteddate.getFullYear();
-            //var result = converteddate.getDate() + '-' + (converteddate.getMonth()+1) + '-' + converteddate.getFullYear();
-            return result;
-        }
-    }
-    catch (e) {
-        notyAlert('error', e.message);
-    }
-}
+
 function SelectAllValue(e) {
     $(e).select();
 }
@@ -249,26 +217,7 @@ function ClearFields() {
 
 }
 
-//------Date Formating :Return Result Eg: 01-Jan-2017--------------------//
-//Passing value
-//Argument Eg:"2017-03-30T00:00:00"
-//Returns 30-Mar-2017
-function ConvertJsonToDate(jsonDate) {
-    try
-    {
-        if (jsonDate != null) {
-            var currentTime = new Date(jsonDate.substr(0, 10));
-            var monthNames = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct","Nov", "Dec"];
-            var result = currentTime.getDate() + '-' + monthNames[currentTime.getMonth()] + '-' + currentTime.getFullYear();
-            return result;
-        }
-    }
-    catch(e)
-    {
-        notyAlert('error', e.message);
-    }
-   
-}
+
 //only number validation
 function isNumber(e) {
     var unicode = e.charCode ? e.charCode : e.keyCode
