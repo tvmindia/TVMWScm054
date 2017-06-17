@@ -13,7 +13,7 @@ namespace SCManager.BusinessService.Contracts
         string GetXMLfromForm8BDetail(List<Form8BDetail> myObj, string mandatoryProperties, UA ua);
         string GetXMLfromLocalPurchaseDetail(List<LocalPurchaseDetail> myObj, string mandatoryProperties, UA ua);
         string GetXMLfromOpenDetail(List<OpeningDetail> myObj, string mandatoryProperties, UA ua);
-        string ConvertCurrency(decimal value, int DecimalPoints = 0);
+        string ConvertCurrency(decimal value, int DecimalPoints = 0, bool Symbol = true);
         string GetXMLfromTCRObject(List<TCRBillEntryDetail> tcrDetailObj, string mandatoryProperties, UA ua);
         string GetXMLfromICRObject(List<ICRBillEntryDetail> icrDetailObj, string mandatoryProperties, UA ua);
         string GetXMLfromOfficeObject(List<OfficeBillEntryDetail> officeDetailObj, string mandatoryProperties, UA ua);
