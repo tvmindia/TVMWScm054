@@ -341,7 +341,7 @@ function save() {
 
 function reset()
 {
-    debugger;
+   
     if (($("#HeaderID").val() == "") || ($("#HeaderID").val() == 'undefined') || ($("#HeaderID").val() == "0"))
     {
         $("#EmpID").val("");
@@ -368,8 +368,8 @@ function reset()
         $("#total").val("");
         $("#ChequeType").val("");
         $("#ChequeTypeDiv").hide();
-        $('#BillNoMandatory').hide();//find('i').remove()
-        $('#ICRNo').attr('readonly', false);
+        $('#BillNoMandatory').find('i').remove()
+       // $('#ICRNo').attr('readonly', false);
         var $datepicker = $('#ICRDate');
         $datepicker.datepicker('setDate', null);
         var $datepicker = $('#AMCValidFromDate');
@@ -504,7 +504,7 @@ function BindICRBillEntryFields(Records) {
         $("#grandtotal").val(roundoff(Records.GrandTotal));
         $("#total").val(roundoff(Records.Total));
         EG_Rebind_WithData(Records.ICRBillEntryDetail, 1);
-        $('#ICRNo').attr('readonly', 'readonly');
+       // $('#ICRNo').attr('readonly', 'readonly');
         if (Records.PaymentMode == "Cheque")
         {
             $("#ChequeTypeDiv").show();
