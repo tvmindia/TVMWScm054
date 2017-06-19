@@ -5,8 +5,10 @@ var _JobNoValue = '';
 //---------------------------------------Docuement Ready--------------------------------------------------//
 $(document).ready(function () {
     try {
+        $('[data-toggle="popover"]').popover();
+
         DataTables.customerBillsTable = $('#tblCustomerBills').DataTable(
- {
+      {
      dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
      order: [],
      searching: true,
@@ -339,7 +341,7 @@ function save() {
 
 function reset()
 {
-    debugger;
+   
     if (($("#HeaderID").val() == "") || ($("#HeaderID").val() == 'undefined') || ($("#HeaderID").val() == "0"))
     {
         $("#EmpID").val("");
@@ -366,8 +368,8 @@ function reset()
         $("#total").val("");
         $("#ChequeType").val("");
         $("#ChequeTypeDiv").hide();
-        $('#BillNoMandatory').find('i').remove()
-        $('#ICRNo').attr('readonly', false);
+        $('#BillNoMandatory').hide()//.find('i').remove()
+       // $('#ICRNo').attr('readonly', false);
         var $datepicker = $('#ICRDate');
         $datepicker.datepicker('setDate', null);
         var $datepicker = $('#AMCValidFromDate');
@@ -398,54 +400,68 @@ function ResetICRForm() {
 function BillBookNumberValidation() {
     debugger;
     try {
-        var BillNo = $('#ICRNo').val();
-        if (BillNo != "" && BillNo != null)
-        {
-            var empID = $("#EmpID").val();
+        var empID = $("#EmpID").val();
+        if (empID == "") {
+            notyAlert('error', "Technician is missing");
+        }
+        else {
+            if ($('.popover:visible').length > 0) {
+                $("#ahlinkMandatory").click();
+            }
+            var BillNo = $('#ICRNo').val();
+            if (BillNo != "" && BillNo != null) {
+                var empID = $("#EmpID").val();
 
-            var data = { "BillNo": BillNo, "BillBookType": "ICR", "EmpID": empID };
-            var ds = {};
-            ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
-            debugger;
-            if (ds != '') {
-                ds = JSON.parse(ds);
-            }
-            if (ds.Records == '') {
-                return 0;
-            }
-            else {
-                var msg = '';
-                if (ds.Records.Status == "BLB02") {
-                    msg = Messages.BLB02;
+                var data = { "BillNo": BillNo, "BillBookType": "ICR", "EmpID": empID };
+                var ds = {};
+                ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
+                debugger;
+                if (ds != '') {
+                    ds = JSON.parse(ds);
                 }
-                if (ds.Records.Status == "BLB03") {
-                    msg = Messages.BLB03;
+                if (ds.Records == '') {
+                    return 0;
                 }
-                if (ds.Records.Status == "BLB04") {
-                    msg = Messages.BLB04;
-                }
-                if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02") {
-                    if ($(".fa-exclamation-triangle").length == 0) {
-                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + "( " + ds.Records.BookNo + " )" + '"></i>');
+                else {
+                    var msg = '';
+                    if (ds.Records.Status == "BLB02") {
+                        msg = Messages.BLB02;
                     }
-                }
-                if (ds.Records.Status == "BLB02") {
-                    if ($(".fa-exclamation-triangle").length == 0) {
-                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + '"></i>');
+                    if (ds.Records.Status == "BLB03") {
+                        msg = Messages.BLB03;
                     }
-                }
-                if (ds.Records.Status == "BLB01") {
-                    $("#BillNoMandatory").html('');
-                }
+                    if (ds.Records.Status == "BLB04") {
+                        msg = Messages.BLB04;
+                    }
+                    if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02") {
+                        //if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#BillNoMandatory").show()//('<i class="fa fa-exclamation-triangle" title="' + msg + "( " + ds.Records.BookNo + " )" + '"></i>');
+                        $("#ahlinkMandatory").click();
+                        $(".popover-content").text("");
+                        $(".popover-content").text(msg + "( " + ds.Records.BookNo + " )");
+                        //}
+                    }
+                    if (ds.Records.Status == "BLB02") {
+                        //if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#BillNoMandatory").show();//.append('<i class="fa fa-exclamation-triangle" data-toggle="popover" data-placement="left" data-content="Content" title="' + msg + '"></i>');
+                        //$("#ahlinkMandatory").attr('data-content', ds.Records.BookNo);                       
+                        $("#ahlinkMandatory").click();
+                        $(".popover-content").text("");
+                        $(".popover-content").text(msg);
+                        //}
+                    }
+                    if (ds.Records.Status == "BLB01") {
+                        $("#BillNoMandatory").hide();
+                    }
 
+                }
+                if (ds.Result == "ERROR") {
+                    notyAlert('error', ds.Message);
+                    return 0;
+                }
+                return 1;
             }
-            if (ds.Result == "ERROR") {
-                notyAlert('error', ds.Message);
-                return 0;
-            }
-            return 1;
-        }      
-
+        }
 
     }
     catch (e) {
@@ -488,7 +504,7 @@ function BindICRBillEntryFields(Records) {
         $("#grandtotal").val(roundoff(Records.GrandTotal));
         $("#total").val(roundoff(Records.Total));
         EG_Rebind_WithData(Records.ICRBillEntryDetail, 1);
-        $('#ICRNo').attr('readonly', 'readonly');
+       // $('#ICRNo').attr('readonly', 'readonly');
         if (Records.PaymentMode == "Cheque")
         {
             $("#ChequeTypeDiv").show();

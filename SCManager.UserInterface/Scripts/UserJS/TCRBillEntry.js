@@ -5,7 +5,11 @@ var _Materials = [];
 
 $(document).ready(function () {
     try {
-         
+        debugger;
+        
+        $('[data-toggle="popover"]').popover();    
+
+
         DataTables.customerBillsTable = $('#tblCustomerBills').DataTable(
         {
             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
@@ -309,7 +313,7 @@ function BindTCRBillEntryFields(Records) {
         $("#SCCommAmount").val(roundoff(Records.SCCommAmount));
         $("#SpecialComm").val(roundoff(Records.SpecialComm));
         EG_Rebind_WithData(Records.TCRBillEntryDetail, 1);
-        $('#BillNo').attr('readonly', 'readonly');
+       // $('#BillNo').attr('readonly', 'readonly');
        // $('#EmpID').attr('disabled', 'true');
        // $("#EmpID").val(Records.EmpID);
 
@@ -339,55 +343,71 @@ function BillBookNumberValidation()
 {
     debugger;
     try {
-        var BillNo = $('#BillNo').val();
-        if (BillNo != "" && BillNo != null)
+        var empID = $("#EmpID").val();
+        if (empID == "")
         {
-            var empID = $("#EmpID").val();
-            var data = { "BillNo": BillNo, "BillBookType": "TCR", "EmpID": empID };
-            var ds = {};
-            ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
-            debugger;
-            if (ds != '') {
-                ds = JSON.parse(ds);
-            }
-            if (ds.Records == '') {
-                return 0;
-            }
-            else {
-                var msg = '';
-                if (ds.Records.Status == "BLB02") {
-                    msg = Messages.BLB02;
-                }
-                if (ds.Records.Status == "BLB03") {
-                    msg = Messages.BLB03;
-                }
-                if (ds.Records.Status == "BLB04") {
-                    msg = Messages.BLB04;
-                }
-                if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02") {
-                    if ($(".fa-exclamation-triangle").length == 0) {
-                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + "( " + ds.Records.BookNo + " )" + '"></i>');
-                    }
-                }
-                if (ds.Records.Status == "BLB02") {
-                    if ($(".fa-exclamation-triangle").length == 0) {
-                        $("#BillNoMandatory").append('<i class="fa fa-exclamation-triangle" title="' + msg + '"></i>');
-                    }
-                }
-                if (ds.Records.Status == "BLB01") {
-                    $("#BillNoMandatory").html('');
-                }
-
-
-            }
-            if (ds.Result == "ERROR") {
-                notyAlert('error', ds.Message);
-                return 0;
-            }
-            return 1;
+            notyAlert('error', "Technician is missing");
         }
-       
-        
+        else
+        {
+            if ($('.popover:visible').length > 0) {
+                $("#ahlinkMandatory").click();
+            }
+            var BillNo = $('#BillNo').val();
+            if (BillNo != "" && BillNo != null) {
+
+                var data = { "BillNo": BillNo, "BillBookType": "TCR", "EmpID": empID };
+                var ds = {};
+                ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
+                debugger;
+                if (ds != '') {
+                    ds = JSON.parse(ds);
+                }
+                if (ds.Records == '') {
+                    return 0;
+                }
+                else {
+                    var msg = '';
+                    if (ds.Records.Status == "BLB02") {
+                        msg = Messages.BLB02;
+                    }
+                    if (ds.Records.Status == "BLB03") {
+                        msg = Messages.BLB03;
+                    }
+                    if (ds.Records.Status == "BLB04") {
+                        msg = Messages.BLB04;
+                    }
+                    if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02") {
+                        //if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#BillNoMandatory").show()//.append('<i class="fa fa-exclamation-triangle" data-toggle="popover" data-placement="left" data-content="Content" title="' + msg + "( " + ds.Records.BookNo + " )" + '"></i>');
+                        //$("#ahlinkMandatory").attr('data-content', ds.Records.BookNo);
+                        $("#ahlinkMandatory").click();
+                        $(".popover-content").text("");
+                        $(".popover-content").text(msg + "( " + ds.Records.BookNo + " )");
+                        //}
+                    }
+                    if (ds.Records.Status == "BLB02") {
+                        //if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#BillNoMandatory").show();//.append('<i class="fa fa-exclamation-triangle" data-toggle="popover" data-placement="left" data-content="Content" title="' + msg + '"></i>');
+                        //$("#ahlinkMandatory").attr('data-content', ds.Records.BookNo);                       
+                        $("#ahlinkMandatory").click();
+                        $(".popover-content").text("");
+                        $(".popover-content").text(msg);
+                        //}
+                    }
+                    if (ds.Records.Status == "BLB01") {
+                        $("#BillNoMandatory").hide();
+                    }
+
+
+                }
+                if (ds.Result == "ERROR") {
+                    notyAlert('error', ds.Message);
+                    return 0;
+                }
+                return 1;
+            }
+        }
 
     }
     catch (e) {
@@ -697,11 +717,11 @@ function reset()
         $("#discount").val("");
         $("#total").val("");
         $("#grandtotal").val("");
-        $('#BillNoMandatory').find('i').remove()
+        $('#BillNoMandatory').hide();//.find('i').remove()
         //$("#ServiceCharge").val("");
         $("#SCCommAmount").val("");
         $("#SpecialComm").val("");
-        $('#BillNo').attr('readonly', false);
+       // $('#BillNo').attr('readonly', false);
         $('#EmpID').attr('disabled', false);
         var $datepicker = $('#BillDate');
         $datepicker.datepicker('setDate', null);
