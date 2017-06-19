@@ -199,7 +199,7 @@ function BindForm8B(id) {
 
 }
 
-function BindForm8BFields(Records) {
+function  BindForm8BFields(Records) {
     try {
         $('#HeaderID').val(Records.ID);
         $('#InvNo').val(Records.InvoiceNo);
@@ -215,6 +215,11 @@ function BindForm8BFields(Records) {
        // $('#InvNo').attr('readonly', 'readonly');
         $('#SPUNo').val(Records.SPUNo);
         $('#TicketNo').val(Records.TicketNo);
+        if ((Records.SPUNo) && (Records.TicketNo))
+        {
+            $("#divCustomer").show();
+            $("#Customer").val(Records.Customer);
+        }
         $('#CustDel').val(Records.CustomerDelvAddrs);
         $('#CustBill').val(Records.CustomerBillAddrs);
 
@@ -413,6 +418,8 @@ function ResetForm() {
         validator.settings.success($(this));
     });
     validator.resetForm();
+    $("#divCustomer").hide();
+    $("#Customer").val('');
 }
 
 function resetCurrent() {

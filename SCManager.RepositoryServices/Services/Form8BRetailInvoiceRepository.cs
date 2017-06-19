@@ -269,6 +269,7 @@ namespace SCManager.RepositoryServices.Services
                                         _Form8Obj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : _Form8Obj.VATAmount);
                                         _Form8Obj.Subtotal = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : _Form8Obj.Subtotal);
                                         _Form8Obj.VATExpense = (sdr["VATExpense"].ToString() != "" ? decimal.Parse(sdr["VATExpense"].ToString()) : _Form8Obj.VATExpense);
+                                        _Form8Obj.Customer = (sdr["Customer"].ToString() != "" ? (sdr["Customer"].ToString()) : _Form8Obj.Customer);
                                     }
 
                                     Form8 = _Form8Obj;

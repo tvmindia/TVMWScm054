@@ -301,10 +301,17 @@ function ShowAll(curobj)
     if (curobj.checked == true)
     {
         RefreshDepositsAndWithdrawalsTable();
+        $("#txtReferenceDateFrom").val('');
+        $("#txtReferenceDateTo").val('');
 
     }
-    $("#txtReferenceDateFrom").val('');
-    $("#txtReferenceDateTo").val('');
+    else
+    {
+        $("#txtReferenceDateFrom").val($("#hdfFromDate").val());
+        $("#txtReferenceDateTo").val($("#hdfToDate").val());
+        ReferenceDateOnChange(curobj);
+    }
+   // 
 }
 
 
