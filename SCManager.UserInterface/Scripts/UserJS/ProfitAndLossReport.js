@@ -6,7 +6,7 @@ $(document).ready(function () {
         DataTables.ProfitAndLossTable = $('#tblProfitAndLoss').DataTable(
          {
              
-             //dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
              buttons: [{
                  extend: 'excel',
                  exportOptions:
@@ -24,9 +24,9 @@ $(document).ready(function () {
              columns: [
 
               
-               { "data": "Type", "defaultContent": "<i>-</i>" },
-               { "data": "Description", "defaultContent": "<i>-</i>" },
-               { "data": "Amount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "Type", "defaultContent": "<i></i>" },
+               { "data": "Description", "defaultContent": "<i></i>" },
+               { "data": "formatedAmount", "defaultContent": "<i></i>" },
                { "data": "BaseType", "defaultContent": "<i>-</i>" },
              
 
@@ -77,11 +77,11 @@ $(document).ready(function () {
 
 function GetProfitAndLossSummary() {
     try {
-        var frdate = $("#fromdate").val();
+        var fromdate = $("#fromdate").val();
         var todate = $("#todate").val();
         var data = {};
-        if ((frdate) && (todate)) {
-            data = { "fromdate": frdate, "todate": todate };
+        if (IsVaildDateFormat(fromdate) && IsVaildDateFormat(todate)) {
+            data = { "fromdate": fromdate, "todate": todate };
         }
         var EmptyArr = [];
         var ds = {};
@@ -131,7 +131,7 @@ function RefreshProfitAndLossSummaryTable() {
     try {
         var fromdate = $("#fromdate").val();
         var todate = $("#todate").val();
-        if (fromdate && todate && DataTables.ProfitAndLossTable) {
+        if (IsVaildDateFormat(fromdate) && IsVaildDateFormat(todate) && DataTables.ProfitAndLossTable) {
             DataTables.ProfitAndLossTable.clear().rows.add(GetProfitAndLossSummary()).draw(false);
         }
     }

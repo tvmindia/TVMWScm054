@@ -27,6 +27,8 @@ namespace SCManager.UserInterface.Controllers
 
 
         // GET: ICRExpenses
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
             UA ua = new UA();

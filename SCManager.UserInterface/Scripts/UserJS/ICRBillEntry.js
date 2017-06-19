@@ -185,7 +185,7 @@ function List() {
 
 function ChequeTypeDisplay()
 {
-    debugger;
+  
     if ($("#PaymentMode").val() == "Cheque")
     {
         $("#ChequeTypeDiv").show();
@@ -893,7 +893,7 @@ function TechnicianSelectOnChange(curobj) {
     try {
         var v = $(curobj).val();
         $("#ModelTechEmpID").val(v);
-        BillBookNumberValidation();
+        BillBookNumberValidation();       
     }
     catch (e) {
         notyAlert('error', e.Message);

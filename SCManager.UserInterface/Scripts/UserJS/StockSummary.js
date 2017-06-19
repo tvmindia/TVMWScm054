@@ -62,12 +62,12 @@ $(document).ready(function () {
 
 function GetItemsSummary() {
     try {
-        var frdate = $("#fromdate").val();
+        var fromdate = $("#fromdate").val();
         var todate = $("#todate").val();
         var data = {};
-        if ((frdate) && (todate))
+        if (IsVaildDateFormat(fromdate) && IsVaildDateFormat(todate))
         {
-            data = { "fromdate": frdate, "todate": todate };
+            data = { "fromdate": fromdate, "todate": todate };
         }
         
         var ds = {};
@@ -94,8 +94,8 @@ function RefreshItemSummaryTable()
     try
     {
         var fromdate = $("#fromdate").val();
-        var todate = $("#todate").val();
-        if (fromdate != "" && todate != "") {
+        var todate = $("#todate").val(); 
+        if (IsVaildDateFormat(fromdate) && IsVaildDateFormat(todate) &&  DataTables.itemTable!=undefined) {
             DataTables.itemTable.clear().rows.add(GetItemsSummary()).draw(false);
         }
     }

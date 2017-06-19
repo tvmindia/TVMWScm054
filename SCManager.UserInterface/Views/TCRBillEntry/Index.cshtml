@@ -97,7 +97,7 @@ font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                                 @Html.LabelFor(model => model.EmpID, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;",@onchange = "TechnicianSelectOnChange(this)",@id= "EmpID" })
+                                    @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --", new { @class = "form-control HeaderBox BlockEnter", value = -1, style = "padding:4px 12px;",@onchange = "TechnicianSelectOnChange(this)",@id= "EmpID" })
                                    
                                     @Html.ValidationMessageFor(model => model.EmpID, "", new { @class = "text-danger" })
                                 </div>
@@ -130,7 +130,7 @@ font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                                 @Html.LabelFor(model => model.BillNo, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.BillNo, new { htmlAttributes = new { @class = "form-control", @onblur = "BillBookNumberValidation();" } })
+                                    @Html.EditorFor(model => model.BillNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @onblur = "BillBookNumberValidation();" } })
                                     @Html.ValidationMessageFor(model => model.BillNo, "", new { @class = "text-danger" })
                                 </div>
                             <div class="col-md-1  mandatory" id="BillNoMandatory">
@@ -143,7 +143,7 @@ font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                                 @Html.LabelFor(model => model.BillDate, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.BillDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                    @Html.EditorFor(model => model.BillDate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker" } })
                                     @Html.ValidationMessageFor(model => model.BillDate, "", new { @class = "text-danger" })
                                 </div>
                             <div class="col-md-1 mandatory"></div>  
@@ -171,7 +171,7 @@ font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                                         Value = "Online"
                                     });
                                 }
-                                @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" })
+                                @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control HeaderBox BlockEnter", value = -1, style = "padding:4px 12px;" })
                                 @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1 mandatory"></div>
@@ -181,7 +181,7 @@ font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                                 @Html.LabelFor(model => model.PaymentRefNo, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
-                                @Html.EditorFor(model => model.PaymentRefNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.PaymentRefNo, new { htmlAttributes = new { @class = "form-control HeaderBox" } })
                                 @Html.ValidationMessageFor(model => model.PaymentRefNo, "", new { @class = "text-danger" })
                             </div>
                            
@@ -195,7 +195,7 @@ font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                                 @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
-                                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control HeaderBox" } })
                                 @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1 mandatory"></div>
@@ -205,7 +205,7 @@ font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                                 @Html.LabelFor(model => model.CustomerContactNo, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.CustomerContactNo, new { htmlAttributes = new { @class = "form-control", onkeypress = "return isNumber(event)" } })
+                                    @Html.EditorFor(model => model.CustomerContactNo, new { htmlAttributes = new { @class = "form-control HeaderBox", onkeypress = "return isNumber(event)" } })
                                     @Html.ValidationMessageFor(model => model.CustomerContactNo, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -214,7 +214,7 @@ font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                                 @Html.LabelFor(model => model.CustomerLocation, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.CustomerLocation, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.CustomerLocation, new { htmlAttributes = new { @class = "form-control HeaderBox" } })
                                     @Html.ValidationMessageFor(model => model.CustomerLocation, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -224,7 +224,7 @@ font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                                 @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control", rows = 2, @id = "Remarks" } })
+                                    @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 2, @id = "Remarks" } })
                                     @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
                                 </div>
                             </div>

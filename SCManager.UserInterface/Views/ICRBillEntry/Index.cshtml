@@ -98,7 +98,7 @@
                                 @Html.LabelFor(model => model.EmpID, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
-                                @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;", @onchange = "TechnicianSelectOnChange(this)" })
+                                @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --", new { @class = "form-control HeaderBox BlockEnter", value = -1, style = "padding:4px 12px;", @onchange = "TechnicianSelectOnChange(this)" })
 
                                 @Html.ValidationMessageFor(model => model.EmpID, "", new { @class = "text-danger" })
                             </div>
@@ -133,7 +133,7 @@
                                 @Html.LabelFor(model => model.ICRNo, htmlAttributes: new { @class = "control-label" })
                             </div>
                             <div class="col-md-6">
-                                @Html.EditorFor(model => model.ICRNo, new { htmlAttributes = new { @class = "form-control",@onblur= "BillBookNumberValidation();" } })
+                                @Html.EditorFor(model => model.ICRNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @onblur= "BillBookNumberValidation();" } })
                                 @Html.ValidationMessageFor(model => model.ICRNo, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1 mandatory" id="BillNoMandatory">
@@ -181,7 +181,7 @@
                                         Value = "Online"
                                     });
                                 }
-                                @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control BlockEnter", value = -1, style = "padding:4px 12px;" ,@onchange="ChequeTypeDisplay();"})
+                                @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control HeaderBox BlockEnter", value = -1, style = "padding:4px 12px;" ,@onchange="ChequeTypeDisplay();"})
                                 @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1 mandatory"></div>
@@ -207,7 +207,7 @@
                                     });
 
                                 }
-                                @Html.DropDownListFor(model => model.ChequeType, listChequeType, new { @class = "form-control BlockEnter", value = "IFB", style = "padding:4px 12px;" })
+                                @Html.DropDownListFor(model => model.ChequeType, listChequeType, new { @class = "form-control HeaderBox BlockEnter", value = "IFB", style = "padding:4px 12px;" })
                                 @Html.ValidationMessageFor(model => model.ChequeType, "", new { @class = "text-danger" })
                             </div>
 
