@@ -209,7 +209,7 @@ function BindLocalPurchaseFields(Records) {
         $('#vatamount').val(roundoff(Records.VATAmount));     
         $('#grandtotal').val(roundoff(Records.GrandTotal));
         EG_Rebind_WithData(Records.LocalPurchaseDetail, 1);
-        $('#InvNo').attr('readonly', 'readonly');
+      //  $('#InvNo').attr('readonly', 'readonly');
 
         var $datepicker = $('#InvDate');
         $datepicker.datepicker('setDate', new Date(Records.InvoiceDateFormatted));
@@ -340,7 +340,7 @@ function DeleteItem(currentObj) {
 function RestLocalPurchase() {
     ClearFields();
     $('#HeaderID').val(emptyGUID);//clear field will make this field model invalid
-    $('#InvNo').removeAttr('readonly')
+   // $('#InvNo').removeAttr('readonly')
     var $datepicker = $('#InvDate');
     $datepicker.datepicker('setDate', null);
     

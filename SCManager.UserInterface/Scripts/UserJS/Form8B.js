@@ -212,7 +212,7 @@ function BindForm8BFields(Records) {
         $('#discount').val(roundoff(Records.VATExpense));
         $('#grandtotal').val(roundoff(Records.GrandTotal));
      
-        $('#InvNo').attr('readonly', 'readonly');
+       // $('#InvNo').attr('readonly', 'readonly');
         $('#SPUNo').val(Records.SPUNo);
         $('#TicketNo').val(Records.TicketNo);
         $('#CustDel').val(Records.CustomerDelvAddrs);
@@ -356,7 +356,7 @@ function DeleteItem(currentObj) {
 function RestForm8B() {
     ClearFields();
     $('#HeaderID').val(emptyGUID);//clear field will make this field model invalid
-    $('#InvNo').removeAttr('readonly')
+   // $('#InvNo').removeAttr('readonly')
     var $datepicker = $('#InvDate');
     $datepicker.datepicker('setDate', null);
     var $datepicker = $('#CDate');
