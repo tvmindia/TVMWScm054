@@ -325,7 +325,9 @@ function roundoff(num, opt) {
 var Messages = {
     BLB02: "This bill no doesn't belong to selected technician ",
     BLB03: "A few bill entries are missing ",
-    BLB04: "This bill book is already closed "
+    BLB04: "This bill book is already closed ",
+    AMCDAte: "AMC To Date Should Be Greater Than AMC From Date",
+    BillBookSeries: "Series End Should Be Greater Than Series Start"
 }
 
 //DATE FORMAT

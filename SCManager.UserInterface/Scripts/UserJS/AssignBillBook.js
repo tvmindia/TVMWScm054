@@ -89,7 +89,7 @@ function SerialStartandEndValidation()
         seriesEnd = parseInt(seriesEnd);
         if(seriesStart>seriesEnd)
         {
-            notyAlert('error', "Series End Should Be Greater Than Series Start");
+            notyAlert('error', Messages.BillBookSeries);
             $("#SeriesEnd").css('border-color', 'red');
             return false;
         }

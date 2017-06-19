@@ -341,7 +341,7 @@ function reset() {
         $("#vatamount").val("");
         $("#vatpercentage").val("");
         $("#grandtotal").val("");
-        $('#InvoiceNo').attr('readonly', false);
+       // $('#InvoiceNo').attr('readonly', false);
         var $datepicker = $('#InvoiceDate');
         $datepicker.datepicker('setDate', null);
         EG_ClearTable();
@@ -394,7 +394,7 @@ function BindIssueToOtherSCFields(Records) {
         $("#grandtotal").val(roundoff(Records.GrandTotal));
 
         EG_Rebind_WithData(Records.IssueToOtherSCDetail, 1);
-        $('#InvoiceNo').attr('readonly', 'readonly');
+       // $('#InvoiceNo').attr('readonly', 'readonly');
 
         var $datepicker = $('#InvoiceDate');
         $datepicker.datepicker('setDate', new Date(Records.InvoiceDate));

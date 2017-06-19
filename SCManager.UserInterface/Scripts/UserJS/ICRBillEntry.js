@@ -332,7 +332,11 @@ function save() {
     if (validation == "") {
         var result = JSON.stringify(EG_GridData);
         $("#DetailJSON").val(result);
-        $("#btnSave").trigger('click');
+        if (AMCDateValidation(0) == true)
+        {
+            $("#btnSave").trigger('click');
+        }
+       
     }
     else {
         notyAlert('error', validation);
@@ -367,6 +371,7 @@ function reset()
         $("#grandtotal").val("");
         $("#total").val("");
         $("#ChequeType").val("");
+        $("#AMCValidtoDate").css('border-color', '');
         $("#ChequeTypeDiv").hide();
         $('#BillNoMandatory').hide()//.find('i').remove()
        // $('#ICRNo').attr('readonly', false);
@@ -476,6 +481,36 @@ function DeleteItem(currentObj) {
     if ((rowData != null) && (rowData.ID != null)) {
         notyConfirm('Are you sure to delete?', 'ICRBillDetailDelete("' + rowData.ID + '","' + rowData[EG_SlColumn] + '")', '', "Yes, delete it!");       
     }
+}
+
+function AMCDateValidation(id)
+{
+    debugger;
+    if (id == 1)
+    {
+        //if (($("#AMCValidtoDate").val()) < ($("#AMCValidFromDate").val())) {
+        //    $("#AMCValidtoDate").css('border-color', 'red');
+        //}
+        //else
+        //{
+            $("#AMCValidtoDate").css('border-color', '');
+       // }
+    }
+    else
+    {
+        if ($("#AMCValidFromDate").val() != "" && $("#AMCValidtoDate").val() != "") {
+            if (($("#AMCValidtoDate").val()) < ($("#AMCValidFromDate").val())) {
+                notyAlert('error', Messages.AMCDAte);
+                $("#AMCValidtoDate").css('border-color', 'red');
+                return false;
+            }
+            else {
+                $("#AMCValidtoDate").css('border-color', '');
+                return true;
+            }
+        }
+    }
+    
 }
 
 function BindICRBillEntryFields(Records) {

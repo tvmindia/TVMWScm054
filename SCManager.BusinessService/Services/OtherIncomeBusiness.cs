@@ -96,7 +96,7 @@ namespace SCManager.BusinessService.Services
                 }
                 else
                 {
-                    otherIncomeObj.RefNo = otherIncomeObj.HiddenRefNo;
+                   // otherIncomeObj.RefNo = otherIncomeObj.HiddenRefNo;
                     result = _iOtherIncomeRepository.UpdateOtherIncome(otherIncomeObj);
                 }
             }

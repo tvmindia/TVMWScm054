@@ -300,7 +300,7 @@ function BindOfficeBillEntryFields(Records) {
         $("#total").val(roundoff(Records.Subtotal - Records.Discount));
         $("#grandtotal").val(roundoff(Records.GrandTotal));       
         EG_Rebind_WithData(Records.OfficeBillEntryDetail, 1);
-        $('#BillNo').attr('readonly', 'readonly');
+        //$('#BillNo').attr('readonly', 'readonly');
        
         var $datepicker = $('#BillDate');
         $datepicker.datepicker('setDate', new Date(Records.BillDate));
@@ -516,7 +516,7 @@ function reset()
         $("#vatpercentage").val("");
         $("#discount").val("");
         $("#grandtotal").val("");     
-        $('#BillNo').attr('readonly', false);      
+      //  $('#BillNo').attr('readonly', false);      
         var $datepicker = $('#BillDate');
         $datepicker.datepicker('setDate', null);
         EG_ClearTable();
