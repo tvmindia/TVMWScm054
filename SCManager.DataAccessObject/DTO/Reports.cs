@@ -61,6 +61,7 @@ namespace SCManager.DataAccessObject.DTO
         public int MandatoryCalls { get; set; }
         public int DemoCalls { get; set; }
         public int RepeatCalls { get; set; }
+        public string EmpID { get; set; }
 
     }
 
@@ -102,7 +103,8 @@ namespace SCManager.DataAccessObject.DTO
         public string Type { get; set; }
         public string Description { get; set; }
         public decimal Amount { get; set; }
-       
+        public string formatedAmount { get; set; }
+
     }
 
 

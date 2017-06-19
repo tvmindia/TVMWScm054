@@ -77,7 +77,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllOtherSCReceipt
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllOtherSCReceipt()
         {
             UA ua = new UA();

@@ -67,7 +67,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetReceiptsSheet
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetReceiptsSheet(string empID, string transferDate)
         {
             UA ua = new UA();
@@ -79,7 +79,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllReceiptsFromTechnician
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllReceiptsFromTechnician(string empID, string fromDate, string toDate)
         {
             UA ua = new UA();
@@ -91,7 +91,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region InsertUpdateReceiveFromTechnician
         [HttpPost]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string InsertUpdateReceiveFromTechnician(ReceiveFromTechnicianViewModel ReceiveFromTechnicianViewModelObj)
         {
             // string result = "";
@@ -141,7 +141,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region DeleteReceiveFromTechnician
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string DeleteReceiveFromTechnician(string ID)
         {
             string status = null;
@@ -197,7 +197,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ButtonStyling
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();

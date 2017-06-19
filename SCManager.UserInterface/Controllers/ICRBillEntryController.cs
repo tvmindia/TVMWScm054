@@ -80,7 +80,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region GetAllICRBillEntry
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.ManagerRole,RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string GetAllICRBillEntry()
         {
             UA ua = new UA();
@@ -93,7 +93,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region RebindJobNo
         [HttpGet]
-        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        [AuthorizeRoles(RoleContants.ManagerRole, RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
         public string RebindJobNo()
         {
             UA ua = new UA();

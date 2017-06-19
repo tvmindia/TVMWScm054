@@ -15,7 +15,11 @@
         cursor: pointer;
         margin-left: -11px;
     }  
-
+    .popover-content {
+    width: 218px;
+    color: #be1010;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+     }
 </style>
 <div class="col-md-12">
     <div class="SCHeader col-md-6">
@@ -132,7 +136,9 @@
                                 @Html.EditorFor(model => model.ICRNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @onblur= "BillBookNumberValidation();" } })
                                 @Html.ValidationMessageFor(model => model.ICRNo, "", new { @class = "text-danger" })
                             </div>
-                            <div class="col-md-1 mandatory" id="BillNoMandatory"></div>
+                            <div class="col-md-1 mandatory" id="BillNoMandatory">
+                                <i class="fa fa-exclamation-triangle" id="ahlinkMandatory" data-toggle="popover" data-trigger="click" data-placement="right" data-content="This bill no doesn't belong to selected technician "></i>
+                            </div>
                         </div>
 
                      
