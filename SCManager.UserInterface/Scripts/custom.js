@@ -31,8 +31,8 @@ var appAddress = window.location.protocol + "//" + window.location.host + "/";  
             // Schedule the next request when the current one's complete
             //  setTimeout(Checker, 126000);
             if (flag != true) {
-                //for 15.2 minutes
-                setTimeout(Checker, 912000);
+                //for 15.1 minutes
+                setTimeout(Checker, 906000);
                // setTimeout(Checker, 126000);
             }
 
