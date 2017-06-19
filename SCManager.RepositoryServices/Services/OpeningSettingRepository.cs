@@ -160,7 +160,7 @@ namespace SCManager.RepositoryServices.Services
                             con.Open();
                         }
                         cmd.Connection = con;
-                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;                    
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value =UA.SCCode;                    
                         cmd.CommandText = "[GetOpeningSetting]";
                         cmd.CommandType = CommandType.StoredProcedure;
                         using (SqlDataReader sdr = cmd.ExecuteReader())

@@ -102,7 +102,7 @@ var EG_GridData;//DATA SOURCE OBJ ARRAY
 var EG_GridDataTable;//DATA TABLE ITSELF FOR REBIND PURPOSE
 var EG_SlColumn = 'SlNo';
 var EG_GridInputPerRow = 3;
-var EG_MandatoryFields = 'Quantity,Rate'
+var EG_MandatoryFields = 'Material,Quantity,Rate'
 
 function EG_TableDefn() {
 
@@ -508,6 +508,10 @@ function AMCDateValidation(id)
                 $("#AMCValidtoDate").css('border-color', '');
                 return true;
             }
+        }
+        else
+        {
+            return true;
         }
     }
     

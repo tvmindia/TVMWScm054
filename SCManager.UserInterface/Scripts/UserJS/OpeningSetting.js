@@ -179,10 +179,14 @@ function List() {
     try {
          
         ChangeButtonPatchView('OpeningSetting', 'btnPatchAttributeSettab', 'List');
-        var result =GetAllOpening();
-        BindOpeningFields(result);
-        DataTables.ListTable.clear().rows.add(result.OpeningDetails).draw(false);
+        var result = GetAllOpening();
+        if (result != "" && result != null)
+        {
+            BindOpeningFields(result);
+       
         
+        DataTables.ListTable.clear().rows.add(result.OpeningDetails).draw(false);
+        }
     } catch (x) {
         // alert(x);
     }
