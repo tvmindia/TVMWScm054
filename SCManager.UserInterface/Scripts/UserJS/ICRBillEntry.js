@@ -368,7 +368,7 @@ function reset()
         $("#total").val("");
         $("#ChequeType").val("");
         $("#ChequeTypeDiv").hide();
-        $('#BillNoMandatory').find('i').remove()
+        $('#BillNoMandatory').hide()//.find('i').remove()
        // $('#ICRNo').attr('readonly', false);
         var $datepicker = $('#ICRDate');
         $datepicker.datepicker('setDate', null);
