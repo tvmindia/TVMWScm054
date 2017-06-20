@@ -3,7 +3,7 @@ var ToDate, FromDate,CurrentDate;
 var appAddress = window.location.protocol + "//" + window.location.host + "/";   //Retrieving browser Url 
 $(document).ready(function () {
     try {
-        debugger;
+   
 
         DataTables.itemTable = $('#tblAMCReportList').DataTable(
          {
