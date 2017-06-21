@@ -42,6 +42,18 @@ namespace SCManager.DataAccessObject.DTO
             ConstMessage.Add(new ConstMessage("Items from this invoice already used,Form8 Cannot be deleted!", "DF8B1", "ERROR"));
             ConstMessage.Add(new ConstMessage("Transfer item stock from Technician before deleting!", "DE1", "ERROR"));
             ConstMessage.Add(new ConstMessage("Minimum one item required for bill", "DLPD2", "ERROR"));
+            ConstMessage.Add(new ConstMessage("Login Name or Email Exists", "LE01", "ERROR"));
+            ConstMessage.Add(new ConstMessage("TCR Number already exists", "TCRNE", "ERROR"));
+            ConstMessage.Add(new ConstMessage("Invoice Number already exist!", "INVE01", "ERROR"));
+            ConstMessage.Add(new ConstMessage("Reference Number already exist!", "REFN01", "ERROR"));
+            ConstMessage.Add(new ConstMessage("Bill Number already exist!", "BLN01", "ERROR"));
+            ConstMessage.Add(new ConstMessage("ICR Number already exist!", "ICRNE", "ERROR"));
+            ConstMessage.Add(new ConstMessage("CreditNote No already exist!", "CNNE01", "ERROR"));
+            ConstMessage.Add(new ConstMessage("Item already exist!", "IE01", "ERROR"));
+            ConstMessage.Add(new ConstMessage("opening already exist!", "OPE01", "ERROR"));
+            ConstMessage.Add(new ConstMessage("Book No already exists!", "BKN01", "ERROR"));
+            ConstMessage.Add(new ConstMessage("Deletion Not Successfull!-Already In Use", "DNS01", "ERROR"));
+            ConstMessage.Add(new ConstMessage("Items from this Bill already used, Cannot be deleted", "ITBD01", "ERROR"));
             //
         }
 

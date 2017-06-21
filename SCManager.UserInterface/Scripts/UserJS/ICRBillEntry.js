@@ -200,14 +200,14 @@ function ChequeTypeDisplay()
 
 function ClearDiscountPercentage()
 {
-    debugger;
+   
     if ($('#Discount').val() != $('#DiscountAmount').val())
         $("#discountpercentage").val("");
 
     var subtotal = parseFloat($('#subtotal').val()) || 0; 
     var discount = parseFloat($('#Discount').val()) || 0;
     $('#total').val(roundoff(subtotal - discount));
-    debugger;
+  
     var serviceTaxpercent = $("#ServiceTaxpercentage").val();
     if (serviceTaxpercent != "") {
         var baseAmt = $("#total").val();
@@ -224,7 +224,7 @@ function ClearDiscountPercentage()
 
 function ClearServiceTaxPercentage()
 {
-    debugger;
+   
     if ($('#TotalServiceTaxAmt').val() != $('#TotalServiceTaxAmount').val())
         $("#ServiceTaxpercentage").val("");
 
@@ -395,7 +395,7 @@ function reset()
 }
 //-----------------------------------------Reset Validation Messages--------------------------------------//
 function ResetICRForm() {
-    debugger;
+  
     var validator = $("#ICR").validate();
     $('#ICR').find('.field-validation-error span').each(function () {
         validator.settings.success($(this));
@@ -403,7 +403,7 @@ function ResetICRForm() {
     validator.resetForm();
 }
 function BillBookNumberValidation() {
-    debugger;
+  
     try {
         var empID = $("#EmpID").val();
         if (empID == "") {
@@ -420,7 +420,7 @@ function BillBookNumberValidation() {
                 var data = { "BillNo": BillNo, "BillBookType": "ICR", "EmpID": empID };
                 var ds = {};
                 ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
-                debugger;
+              
                 if (ds != '') {
                     ds = JSON.parse(ds);
                 }
@@ -485,7 +485,7 @@ function DeleteItem(currentObj) {
 
 function AMCDateValidation(id)
 {
-    debugger;
+   
     if (id == 1)
     {
         //if (($("#AMCValidtoDate").val()) < ($("#AMCValidFromDate").val())) {
@@ -728,7 +728,7 @@ function GetAllICRBill() {
 }
 
 function CalculateServiceTaxPercentage(id) {
-    debugger;
+   
     var serviceTaxpercent = $("#ServiceTaxpercentage").val();
     var baseAmt = $("#total").val();
     if (serviceTaxpercent != "") {
@@ -760,7 +760,7 @@ function CalculateServiceTaxPercentage(id) {
 }
 
 function CalculateDiscountPercentage(id) {
-    debugger;
+   
     var discountpercent = $("#discountpercentage").val();
     var baseAmt = $("#subtotal").val();
     if (discountpercent != "")
@@ -889,7 +889,7 @@ function BindJobNumberDropDown() {
     }
 }
 function AmountSummary() {
-    debugger;
+  
     var total = 0.00;
     for (i = 0; i < EG_GridData.length; i++) {
         total = total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);

@@ -5,7 +5,7 @@ var _Materials = [];
 
 $(document).ready(function () {
     try {
-        debugger;
+      
         
         $('[data-toggle="popover"]').popover();    
 
@@ -207,7 +207,7 @@ function Edit(currentObj) {
 
 }
 function BindTCRBillEntry(id) {
-    debugger;
+  
     try {
         var data = { "ID": id };
         var ds = {};
@@ -341,7 +341,7 @@ function FillUOM(row) {
 }
 function BillBookNumberValidation()
 {
-    debugger;
+   
     try {
         var empID = $("#EmpID").val();
         if (empID == "")
@@ -359,7 +359,7 @@ function BillBookNumberValidation()
                 var data = { "BillNo": BillNo, "BillBookType": "TCR", "EmpID": empID };
                 var ds = {};
                 ds = GetDataFromServer("AssignBillBook/BillBookNumberValidation/", data);
-                debugger;
+               
                 if (ds != '') {
                     ds = JSON.parse(ds);
                 }
@@ -524,7 +524,7 @@ function save()
 }
 function Add() {
      
-    debugger;
+   
     ChangeButtonPatchView('TCRBillEntry', 'btnPatchTCRBillEntrySettab', 'Add');
     EG_ClearTable();
    // RestForm8();
@@ -578,7 +578,7 @@ function ServiceAmountchange()
 }
 
 function DiscountChange() {
-    debugger;
+  
     //var subtotal = parseFloat($('#subtotal').val()) || 0;
     //var discount = parseFloat($('#discount').val()) || 0;
     //$('#total').val(roundoff(subtotal - discount));
@@ -586,7 +586,7 @@ function DiscountChange() {
 }
 
 function ClearDiscountPercentage() {
-    debugger;
+   
     if ($('#VATAmount').val() != $('#VATPercentageAmount').val())
         $("#vatpercentage").val("");
 
@@ -598,7 +598,7 @@ function ClearDiscountPercentage() {
 
 
 function CalculateVAT() {
-    debugger;
+  
     var vatpercent = $("#vatpercentage").val();
     var Total = $("#total").val();
     vatpercent = parseFloat(vatpercent);
@@ -618,7 +618,7 @@ function CalculateVAT() {
 }
 
 function AmountSummary() {
-    debugger;
+  
     var Total = 0.00;
     for (i = 0; i < EG_GridData.length; i++) {
         Total = Total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
@@ -727,7 +727,7 @@ function reset()
         $datepicker.datepicker('setDate', null);
         EG_ClearTable();
         EG_AddBlankRows(5);
-        debugger;
+       
         ResetTCRForm();
     }
     else
@@ -771,7 +771,7 @@ function FillJobRelatedFields() {
 }
 //-----------------------------------------Reset Validation Messages--------------------------------------//
 function ResetTCRForm() {
-    debugger;
+  
     var validator = $("#TCR").validate();
     $('#TCR').find('.field-validation-error span').each(function () {
         validator.settings.success($(this));

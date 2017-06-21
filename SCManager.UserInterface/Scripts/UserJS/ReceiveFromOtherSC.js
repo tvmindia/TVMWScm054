@@ -209,7 +209,7 @@ function CalculateAmount(row) {
 }
 
 function calculateVat() {
-    debugger;
+  
     var vatp = parseFloat($('#vatpercentage').val()) || 0;
     var subtotal = parseFloat($('#subtotal').val()) || 0;
     if (vatp > 100) {
@@ -459,7 +459,7 @@ function List() {
 }
 
 function save() {
-    debugger;
+   
     $("#ID").val(emptyGUID);
     var validation = EG_Validate();
     if (validation == "") {
