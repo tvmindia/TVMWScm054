@@ -234,7 +234,6 @@ namespace SCManager.UserInterface.Controllers
                 }
             }
             return JsonConvert.SerializeObject(new { Result = "OK", Records = AmcBaseValueSummaryVMList, Record = new { TotalSum = totalsumwithrupee } });
-
         }
 
         [HttpGet]
