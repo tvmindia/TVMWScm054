@@ -6,7 +6,9 @@ var _JobNoValue = '';
 $(document).ready(function () {
     try {
         $('[data-toggle="popover"]').popover();
-
+        //$(document).on("click", ".popover", function () {
+        //    $(this).popover('hide');
+        //});
         DataTables.customerBillsTable = $('#tblCustomerBills').DataTable(
       {
      dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
@@ -440,6 +442,7 @@ function BillBookNumberValidation() {
                     }
                     if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02") {
                         //if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#MandatoryStar").hide();
                         $("#BillNoMandatory").show()//('<i class="fa fa-exclamation-triangle" title="' + msg + "( " + ds.Records.BookNo + " )" + '"></i>');
                         $("#ahlinkMandatory").click();
                         $(".popover-content").text("");
@@ -448,6 +451,7 @@ function BillBookNumberValidation() {
                     }
                     if (ds.Records.Status == "BLB02") {
                         //if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#MandatoryStar").hide();
                         $("#BillNoMandatory").show();//.append('<i class="fa fa-exclamation-triangle" data-toggle="popover" data-placement="left" data-content="Content" title="' + msg + '"></i>');
                         //$("#ahlinkMandatory").attr('data-content', ds.Records.BookNo);                       
                         $("#ahlinkMandatory").click();
@@ -456,6 +460,7 @@ function BillBookNumberValidation() {
                         //}
                     }
                     if (ds.Records.Status == "BLB01") {
+                        $("#MandatoryStar").show();
                         $("#BillNoMandatory").hide();
                     }
 

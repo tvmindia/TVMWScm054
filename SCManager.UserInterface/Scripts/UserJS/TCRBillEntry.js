@@ -8,7 +8,9 @@ $(document).ready(function () {
       
         
         $('[data-toggle="popover"]').popover();    
-
+        //$(document).on("click", ".popover", function () {
+        //    $(this).popover('hide');
+        //});
 
         DataTables.customerBillsTable = $('#tblCustomerBills').DataTable(
         {
@@ -379,6 +381,7 @@ function BillBookNumberValidation()
                     }
                     if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02") {
                         //if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#MandatoryStar").hide();
                         $("#BillNoMandatory").show()//.append('<i class="fa fa-exclamation-triangle" data-toggle="popover" data-placement="left" data-content="Content" title="' + msg + "( " + ds.Records.BookNo + " )" + '"></i>');
                         //$("#ahlinkMandatory").attr('data-content', ds.Records.BookNo);
                         $("#ahlinkMandatory").click();
@@ -388,6 +391,7 @@ function BillBookNumberValidation()
                     }
                     if (ds.Records.Status == "BLB02") {
                         //if ($(".fa-exclamation-triangle").length == 0) {
+                        $("#MandatoryStar").hide();
                         $("#BillNoMandatory").show();//.append('<i class="fa fa-exclamation-triangle" data-toggle="popover" data-placement="left" data-content="Content" title="' + msg + '"></i>');
                         //$("#ahlinkMandatory").attr('data-content', ds.Records.BookNo);                       
                         $("#ahlinkMandatory").click();
@@ -396,6 +400,7 @@ function BillBookNumberValidation()
                         //}
                     }
                     if (ds.Records.Status == "BLB01") {
+                        $("#MandatoryStar").show();
                         $("#BillNoMandatory").hide();
                     }
 
