@@ -241,7 +241,7 @@ function List() {
 
 }
 function SaveSuccess(data, status) {
-
+  
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -429,7 +429,7 @@ function DiscountChange()
 }
 
 function ClearDiscountPercentage() {
-    debugger;
+   
     if ($('#VATAmount').val() != $('#VATPercentageAmount').val())
         $("#vatpercentage").val("");
 
@@ -439,7 +439,7 @@ function ClearDiscountPercentage() {
 }
 
 function AmountSummary() {
-    debugger;
+  
     var Total = 0.00;
     for (i = 0; i < EG_GridData.length; i++) {
         Total = Total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
@@ -457,7 +457,7 @@ function AmountSummary() {
     $('#total').val(roundoff(total)); 
 }
 function CalculateVAT() {
-    debugger;
+  
     var vatpercent = $("#vatpercentage").val();
     var Total = $("#total").val();
 

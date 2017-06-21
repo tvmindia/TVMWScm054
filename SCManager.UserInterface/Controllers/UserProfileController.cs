@@ -27,6 +27,7 @@ namespace SCManager.UserInterface.Controllers
         {
             return View();
         }
+        Const c = new Const();
         #region UpdateUserProfile
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -211,9 +212,10 @@ namespace SCManager.UserInterface.Controllers
                 }
                 catch (Exception ex)
                 {
-                   
-                        return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
-                   
+
+                    ConstMessage cm = c.GetMessage(ex.Message);
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = cm.Message });
+
                 }
             }
             else

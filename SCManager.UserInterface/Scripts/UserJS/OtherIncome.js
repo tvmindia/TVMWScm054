@@ -189,7 +189,7 @@ function DeleteOtherIncome() {
     }
 }
 function OtherIncomeSaveSuccess(data, status) {
-    debugger;
+   
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":

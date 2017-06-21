@@ -76,7 +76,8 @@ namespace SCManager.UserInterface.Controllers
             catch (Exception ex)
             {
 
-                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                ConstMessage cm = c.GetMessage(ex.Message);
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = cm.Message });
             }
             return result;
         }
@@ -98,7 +99,8 @@ namespace SCManager.UserInterface.Controllers
             }
             catch (Exception ex)
             {
-                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+                ConstMessage cm = c.GetMessage(ex.Message);
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = cm.Message });
             }
 
             
