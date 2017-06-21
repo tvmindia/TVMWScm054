@@ -109,11 +109,13 @@ function DeleteDefectiveDamaged() {
     }
 }
 function ReturnToCompany() {
-  
+    debugger;
     var type = $("#Type").val();
     var ReturnID = $("#ID").val();
     var ticketNo = $("#TicketNo").val();
+    ticketNo = ticketNo.trim();
     var spuNo = $("#RefNo").val();
+    spuNo = spuNo.trim();
     if ((type == "Defective" && ticketNo == "") || (type == "Defective" && spuNo == "")) {
         
         if (ticketNo == "" && spuNo!="") {

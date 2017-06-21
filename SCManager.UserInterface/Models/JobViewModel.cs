@@ -61,12 +61,12 @@ namespace SCManager.UserInterface.Models
 
         
         [Display(Name = "Model No")]
-       
+        [MaxLength(50)]
         public string ModelNo { get; set; }
 
        
         [Display(Name = "Serial No")]
-      
+        [MaxLength(50)]
         public string SerialNo { get; set; }
 
        

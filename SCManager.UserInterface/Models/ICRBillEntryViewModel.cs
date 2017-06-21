@@ -23,8 +23,10 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Job No")]
         public string JobNo { get; set; }
         [Display(Name = "Model No")]
+        [MaxLength(20)]
         public string ModelNo { get; set; }
         [Display(Name = "Serial No")]
+        [MaxLength(20)]
         public string SerialNo { get; set; }
         [Required(ErrorMessage = "Please Enter Customer Name")]
         [Display(Name = "Customer Name")]
