@@ -27,7 +27,7 @@ namespace SCManager.BusinessService.Services
             try
             {
                 userList = _authenticationRepository.GetAllUsers();
-                userList = userList == null ? null : userList.Where(us => us.LoginName.ToLower() == user.LoginName.ToLower() && Decrypt(us.Password) == user.Password).ToList();
+                userList = userList == null ? null : userList.Where(us => us.LoginName.ToLower() == user.LoginName.ToLower() && Decrypt(us.Password) == user.Password && us.Active).ToList();
                 _user = (userList == null)||(userList.Count==0) ? null : userList[0];
             }
             catch (Exception ex)
