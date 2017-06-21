@@ -199,7 +199,7 @@ function BindForm8B(id) {
 
 }
 
-function BindForm8BFields(Records) {
+function  BindForm8BFields(Records) {
     try {
         $('#HeaderID').val(Records.ID);
         $('#InvNo').val(Records.InvoiceNo);
@@ -212,9 +212,14 @@ function BindForm8BFields(Records) {
         $('#discount').val(roundoff(Records.VATExpense));
         $('#grandtotal').val(roundoff(Records.GrandTotal));
      
-        $('#InvNo').attr('readonly', 'readonly');
+       // $('#InvNo').attr('readonly', 'readonly');
         $('#SPUNo').val(Records.SPUNo);
         $('#TicketNo').val(Records.TicketNo);
+        if ((Records.SPUNo) && (Records.TicketNo))
+        {
+            $("#divCustomer").show();
+            $("#Customer").val(Records.Customer);
+        }
         $('#CustDel').val(Records.CustomerDelvAddrs);
         $('#CustBill').val(Records.CustomerBillAddrs);
 
@@ -356,7 +361,7 @@ function DeleteItem(currentObj) {
 function RestForm8B() {
     ClearFields();
     $('#HeaderID').val(emptyGUID);//clear field will make this field model invalid
-    $('#InvNo').removeAttr('readonly')
+   // $('#InvNo').removeAttr('readonly')
     var $datepicker = $('#InvDate');
     $datepicker.datepicker('setDate', null);
     var $datepicker = $('#CDate');
@@ -413,6 +418,8 @@ function ResetForm() {
         validator.settings.success($(this));
     });
     validator.resetForm();
+    $("#divCustomer").hide();
+    $("#Customer").val('');
 }
 
 function resetCurrent() {

@@ -75,7 +75,7 @@ function clearfields()
     $("#HiddenCreditNoteNo").val("");
     var $datepicker = $('#Date');
     $datepicker.datepicker('setDate', null);   
-    $("#CreditNoteNo").prop('disabled', false);
+ //   $("#CreditNoteNo").prop('disabled', false);
     $("#deleteId").val("0")
     ResetForm();
 }
@@ -168,7 +168,7 @@ function fillCreditNotes(ID) {
     $("#CreditNoteNo").val(thisItem[0].CreditNoteNo);
     $("#Amount").val(roundoff(thisItem[0].Amount));
     $("#Description").val(thisItem[0].Description);
-    $("#CreditNoteNo").prop('disabled', true);
+   // $("#CreditNoteNo").prop('disabled', true);
     if (thisItem[0].Date != null) {
         var $datepicker = $('#Date');
         $datepicker.datepicker('setDate', new Date(thisItem[0].Date));
@@ -315,7 +315,7 @@ function CreditNotesSaveSuccess(data, status) {
             notyAlert('success', JsonResult.Records.Message);
             break;
         case "ERROR":
-            notyAlert('error', "Error!");
+            notyAlert('error', JsonResult.Message);
             break;
         default:
             notyAlert('error', JsonResult.Message);

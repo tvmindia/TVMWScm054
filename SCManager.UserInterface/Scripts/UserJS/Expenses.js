@@ -39,9 +39,11 @@ $(document).ready(function () {
         ToDateVal = $("#toDate").val();
         $('#fromDate').change(function () { 
             BindAllExpenses();
+            $("#showAllYNCheckbox").prop('checked', false);
         });
         $('#toDate').change(function () { 
             BindAllExpenses();
+            $("#showAllYNCheckbox").prop('checked', false);
         }); 
         clearfields();
     }
@@ -54,8 +56,13 @@ $(document).ready(function () {
 function List() {
     try {
         ChangeButtonPatchView('Expenses', 'btnPatchExpensesSettab', 'List');
-        $("#showAllYNCheckbox").prop('checked', false);
-        BindAllExpenses()
+        if ($("#showAllYNCheckbox").prop('checked'))
+        {
+            BindAllExpenses();
+        }
+      
+      //  $("#showAllYNCheckbox").prop('checked', false);
+     //   BindAllExpenses()
 
     } catch (x) {
         notyAlert('error',x.message);

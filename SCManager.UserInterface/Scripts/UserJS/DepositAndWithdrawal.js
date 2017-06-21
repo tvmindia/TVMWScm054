@@ -85,8 +85,15 @@ function DepositModeOnChange(curobj)
 function Add()
 {
     ChangeButtonPatchView('DepositAndWithdrawal', 'btnPatchDepositandwithdrawal', 'Save');
-    ClearForm();
+    ClearForm(); 
+}
 
+function ResetForm() {
+    var validator = $('#formdepositwithdrwal').validate();
+    $('#formdepositwithdrwal').find('.field-validation-error span').each(function () {
+        validator.settings.success($(this));
+    });
+    validator.resetForm();
 }
 
 function EditDepositWithdrawal(curObj)
@@ -182,6 +189,7 @@ function ValidateForm() {
 
 function ClearForm()
 {
+    ResetForm();
     $('#formdepositwithdrwal')[0].reset();
     $("#DepwithID").val('');
     $("#deleteId").val('');
@@ -190,6 +198,7 @@ function ClearForm()
     $(".hdChequeStatus").hide();
     $("#DepositMode").val('');
     $("#ChequeStatus").val('');
+  
 }
 
 function GetDepositandwithdrawalEntryByID(ID) {
@@ -301,10 +310,17 @@ function ShowAll(curobj)
     if (curobj.checked == true)
     {
         RefreshDepositsAndWithdrawalsTable();
+        $("#txtReferenceDateFrom").val('');
+        $("#txtReferenceDateTo").val('');
 
     }
-    $("#txtReferenceDateFrom").val('');
-    $("#txtReferenceDateTo").val('');
+    else
+    {
+        $("#txtReferenceDateFrom").val($("#hdfFromDate").val());
+        $("#txtReferenceDateTo").val($("#hdfToDate").val());
+        ReferenceDateOnChange(curobj);
+    }
+   // 
 }
 
 

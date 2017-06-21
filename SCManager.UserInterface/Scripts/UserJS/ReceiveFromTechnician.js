@@ -305,7 +305,7 @@ function BindReceiveSheetFields(Records) {
 
 }
 function TechnicianChange(curObj) {
-    debugger;
+    
     $("#ddlReceiveListTech").val(curObj.value);
     if (curObj.value != undefined && curObj.value != null && curObj.value!="")
     {
@@ -410,7 +410,7 @@ function GetReceiveSheetsByTechnician() {
 //--------------------button actions ----------------------
 function List() {
     try {
-        debugger;
+      
         ChangeButtonPatchView('ReceiveFromTechnician', 'btnPatchReceiveFromTechnicianSettab', 'List');
         var empID = $("#ddlReceiveListTech").val();
         var fromDate = $("#fromDate").val();

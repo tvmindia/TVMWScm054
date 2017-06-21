@@ -241,7 +241,7 @@ function List() {
 
 }
 function SaveSuccess(data, status) {
-
+  
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -300,7 +300,7 @@ function BindOfficeBillEntryFields(Records) {
         $("#total").val(roundoff(Records.Subtotal - Records.Discount));
         $("#grandtotal").val(roundoff(Records.GrandTotal));       
         EG_Rebind_WithData(Records.OfficeBillEntryDetail, 1);
-        $('#BillNo').attr('readonly', 'readonly');
+        //$('#BillNo').attr('readonly', 'readonly');
        
         var $datepicker = $('#BillDate');
         $datepicker.datepicker('setDate', new Date(Records.BillDate));
@@ -429,7 +429,7 @@ function DiscountChange()
 }
 
 function ClearDiscountPercentage() {
-    debugger;
+   
     if ($('#VATAmount').val() != $('#VATPercentageAmount').val())
         $("#vatpercentage").val("");
 
@@ -439,7 +439,7 @@ function ClearDiscountPercentage() {
 }
 
 function AmountSummary() {
-    debugger;
+  
     var Total = 0.00;
     for (i = 0; i < EG_GridData.length; i++) {
         Total = Total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
@@ -457,7 +457,7 @@ function AmountSummary() {
     $('#total').val(roundoff(total)); 
 }
 function CalculateVAT() {
-    debugger;
+  
     var vatpercent = $("#vatpercentage").val();
     var Total = $("#total").val();
 
@@ -516,7 +516,7 @@ function reset()
         $("#vatpercentage").val("");
         $("#discount").val("");
         $("#grandtotal").val("");     
-        $('#BillNo').attr('readonly', false);      
+      //  $('#BillNo').attr('readonly', false);      
         var $datepicker = $('#BillDate');
         $datepicker.datepicker('setDate', null);
         EG_ClearTable();

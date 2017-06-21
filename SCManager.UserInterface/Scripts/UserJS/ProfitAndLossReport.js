@@ -106,7 +106,7 @@ function GetProfitAndLossSummary() {
 
 
 function IsValidDate(dateString) {
-    debugger;
+   
     // First check for the pattern
     if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString))
         return false;

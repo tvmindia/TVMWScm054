@@ -146,7 +146,7 @@ function fillOtherIncome(ID) {
     $("#Description").val(thisItem[0].Description);
     $("#PaymentMode").val(thisItem[0].PaymentMode);
     $("#PaymentRefNo").val(thisItem[0].PaymentRefNo);
-    $("#RefNo").prop('disabled', true);
+    //$("#RefNo").prop('disabled', true);
     if (thisItem[0].RefDate != null) {
         var $datepicker = $('#RefDate');
         $datepicker.datepicker('setDate', new Date(thisItem[0].RefDate));
@@ -189,7 +189,7 @@ function DeleteOtherIncome() {
     }
 }
 function OtherIncomeSaveSuccess(data, status) {
-    
+   
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -204,7 +204,7 @@ function OtherIncomeSaveSuccess(data, status) {
             notyAlert('success', JsonResult.Records.Message);
             break;
         case "ERROR":
-            notyAlert('error', "Error!");
+            notyAlert('error', JsonResult.Message);
             break;
         default:
             notyAlert('error', JsonResult.Message);
@@ -257,7 +257,7 @@ function clearfields() {
     $("#PaymentMode").val("");
     $("#PaymentRefNo").val("");
     $("#deleteId").val("0")
-    $("#RefNo").prop('disabled', false);
+  //  $("#RefNo").prop('disabled', false);
     var $datepicker = $('#RefDate');
     $datepicker.datepicker('setDate', null);
     ResetForm();

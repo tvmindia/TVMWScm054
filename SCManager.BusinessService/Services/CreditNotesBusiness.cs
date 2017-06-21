@@ -87,7 +87,7 @@ namespace SCManager.BusinessService.Services
                 }
                 else
                 {
-                    creditNotesObj.CreditNoteNo = creditNotesObj.HiddenCreditNoteNo;
+                    //creditNotesObj.CreditNoteNo = creditNotesObj.HiddenCreditNoteNo;
                     result = _iCreditNotesRepository.UpdateCreditNotes(creditNotesObj);
                 }
             }

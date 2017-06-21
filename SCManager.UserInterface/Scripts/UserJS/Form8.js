@@ -212,7 +212,7 @@ function BindForm8Fields(Records) {
         $('#grandtotal').val(roundoff(Records.GrandTotal));
         $('#Total').val(roundoff(Records.GrandTotal - Records.VATAmount));
         EG_Rebind_WithData(Records.Form8Detail,1);
-        $('#InvNo').attr('readonly', 'readonly');
+        //$('#InvNo').attr('readonly', 'readonly');
         var $datepicker = $('#InvDate');      
         $datepicker.datepicker('setDate', new Date(Records.InvoiceDateFormatted));
         if (Records.ChallanDateFormatted != null) {
@@ -338,7 +338,7 @@ function DeleteItem(currentObj) {
 function RestForm8() {
     ClearFields();
     $('#HeaderID').val(emptyGUID);//clear field will make this field model invalid
-    $('#InvNo').removeAttr('readonly')
+   // $('#InvNo').removeAttr('readonly')
     var $datepicker = $('#InvDate');
     $datepicker.datepicker('setDate', null);
     var $datepicker = $('#CDate');

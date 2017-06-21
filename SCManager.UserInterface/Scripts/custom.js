@@ -31,8 +31,8 @@ var appAddress = window.location.protocol + "//" + window.location.host + "/";  
             // Schedule the next request when the current one's complete
             //  setTimeout(Checker, 126000);
             if (flag != true) {
-                //for 15.2 minutes
-                setTimeout(Checker, 912000);
+                //for 15.1 minutes
+                setTimeout(Checker, 906000);
                // setTimeout(Checker, 126000);
             }
 
@@ -325,11 +325,15 @@ function roundoff(num, opt) {
 var Messages = {
     BLB02: "This bill no doesn't belong to selected technician ",
     BLB03: "A few bill entries are missing ",
-    BLB04: "This bill book is already closed "
+    BLB04: "This bill book is already closed ",
+    AMCDAte: "AMC To Date Should Be Greater Than AMC From Date",
+    BillBookSeries: "Series End Should Be Greater Than Series Start"
 }
 
 //DATE FORMAT
 function IsVaildDateFormat(date) {
-    var regExp = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+   
+  
+    var regExp = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:2[0-9][0-9][0-9])$|^(?:29(\/|-|\.)(?:0?2|(?:Feb)))\3(?:2[0-9][13579][26]|2[0-9][02468][048])$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:2[0-9][0-9][0-9])$/;
     return regExp.test(date);
 }

@@ -180,9 +180,9 @@ namespace SCManager.BusinessService.Services
                     (from rpt in AmcBaseValueSummaryList
                      select rpt).ToList().ForEach((rpt) =>
                      {
-                         rpt.ICRDate = Convert.ToDateTime(rpt.ICRDate).ToString(settings.dateformat);
-                         rpt.AMCValidFromDate = Convert.ToDateTime(rpt.AMCValidFromDate).ToString(settings.dateformat);
-                         rpt.AMCValidToDate = Convert.ToDateTime(rpt.AMCValidToDate).ToString(settings.dateformat);
+                         rpt.ICRDate = rpt.ICRDate!=null?Convert.ToDateTime(rpt.ICRDate).ToString(settings.dateformat):null;
+                         rpt.AMCValidFromDate = rpt.AMCValidFromDate!=null?Convert.ToDateTime(rpt.AMCValidFromDate).ToString(settings.dateformat):null;
+                         rpt.AMCValidToDate = rpt.AMCValidToDate!=null?Convert.ToDateTime(rpt.AMCValidToDate).ToString(settings.dateformat):null;
 
                      });
                 }

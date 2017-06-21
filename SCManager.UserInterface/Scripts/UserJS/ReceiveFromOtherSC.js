@@ -209,7 +209,7 @@ function CalculateAmount(row) {
 }
 
 function calculateVat() {
-    debugger;
+  
     var vatp = parseFloat($('#vatpercentage').val()) || 0;
     var subtotal = parseFloat($('#subtotal').val()) || 0;
     if (vatp > 100) {
@@ -341,7 +341,7 @@ function reset() {
         $("#vatamount").val("");
         $("#vatpercentage").val("");
         $("#grandtotal").val("");
-        $('#InvoiceNo').attr('readonly', false);
+     //   $('#InvoiceNo').attr('readonly', false);
         var $datepicker = $('#InvoiceDate');
         $datepicker.datepicker('setDate', null);
         EG_ClearTable();
@@ -394,7 +394,7 @@ function BindOtherSCReceiptFields(Records) {
         $("#grandtotal").val(roundoff(Records.GrandTotal));
         
         EG_Rebind_WithData(Records.ReceiveFromOtherSCDetail, 1);
-        $('#InvoiceNo').attr('readonly', 'readonly');
+       // $('#InvoiceNo').attr('readonly', 'readonly');
        
         var $datepicker = $('#InvoiceDate');
         $datepicker.datepicker('setDate', new Date(Records.InvoiceDate));
@@ -459,7 +459,7 @@ function List() {
 }
 
 function save() {
-    debugger;
+   
     $("#ID").val(emptyGUID);
     var validation = EG_Validate();
     if (validation == "") {
