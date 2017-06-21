@@ -232,8 +232,6 @@ namespace SCManager.UserInterface.Controllers
                     decimal totalsum = AmcBaseValueSummaryVMList == null ? 0 : AmcBaseValueSummaryVMList.Select(T => T.Total).Sum();
                     totalsumwithrupee = _commonBusiness.ConvertCurrency(totalsum);
                 }
-               
-              
             }
             return JsonConvert.SerializeObject(new { Result = "OK", Records = AmcBaseValueSummaryVMList, Record = new { TotalSum = totalsumwithrupee } });
 
