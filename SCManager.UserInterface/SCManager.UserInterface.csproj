@@ -406,6 +406,7 @@
     <Content Include="Content\images\purse-with-bills.png" />
     <Content Include="Content\images\reset.png" />
     <Content Include="Content\images\return.png" />
+    <Content Include="Content\images\ring.gif" />
     <Content Include="Content\images\save.png" />
     <Content Include="Content\images\SCManager.png" />
     <Content Include="Content\images\scmanagerback1.JPG" />

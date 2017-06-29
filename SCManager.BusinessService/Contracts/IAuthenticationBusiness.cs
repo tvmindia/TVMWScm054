@@ -18,5 +18,9 @@ namespace SCManager.BusinessService.Contracts
         object InserUser(User user);
         object UpdateUser(User user);
         object DeleteUser(User user);
+        object EmailValidation(string emailID);
+        object VerificationCodeEmit(User user);
+        object VerifyCode(User user);
+        object ResetPassword(User user);
     }
 }

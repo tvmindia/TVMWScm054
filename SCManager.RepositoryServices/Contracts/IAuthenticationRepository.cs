@@ -16,5 +16,9 @@ namespace SCManager.RepositoryServices.Contracts
         object InserUser(User user);
         object UpdateUser(User user);
         object DeleteUser(User user);
+        object EmailValidation(string emailID);
+        object AddVerificationCode(User user);
+        string SendEmail(string status,string message,string emailID,string verificationCode);
+        object ResetPassword(User user);
     }
 }

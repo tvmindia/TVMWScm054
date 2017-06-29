@@ -246,5 +246,167 @@ namespace SCManager.BusinessService.Services
             }
             return result;
         }
+
+        public object VerificationCodeEmit(User user)
+        {
+            object result = null;
+            string username = string.Empty;           
+            string msg = string.Empty;
+            string MailSend = null;
+            try
+            {
+                Random random = new Random();
+                int verificationCode = 0;
+                if (user.Email == "")
+                {
+                    return "false";
+                }
+                List<User> userList = (from a in _authenticationRepository.GetAllUsers()
+                                       where a.Email == user.Email
+                                       select a).ToList();
+                foreach(var a in userList)
+                {
+                    user.ID=a.ID;
+                    user.LoginName = a.LoginName;
+                    verificationCode = random.Next(1000, 10000);
+                    user.VerificationCode = verificationCode.ToString();
+                    user.VerificationCodeDate = DateTime.Now;
+                    user.SCCode = a.serviceCenter.Code;
+                    _authenticationRepository.AddVerificationCode(user);
+                }
+                //----------*Get verification code*------------//
+                List<User> VerificationDetails = (from a in _authenticationRepository.GetAllUsers()
+                                       where a.Email == user.Email
+                                       select a).ToList();
+
+                foreach(var b in VerificationDetails)
+                {
+                    verificationCode =Convert.ToInt32(b.VerificationCode);
+                    username = b.UserName;
+                    msg = "<body><p>Your verification code with login name " + username + " is <font color='red'>" + verificationCode + "</font></p><p>" + msg + "</p></body>";
+                }
+
+                if (msg != string.Empty)
+                {                 
+                   
+                    MailSend=_authenticationRepository.SendEmail("true",msg,user.Email,verificationCode.ToString());
+                    if(MailSend=="1")
+                    {
+                        result = "true";
+                    }
+                    else
+                    {
+                        result = "Error";
+                    }                   
+
+                }
+                else
+                {
+                    result = "false";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        public object VerifyCode(User user)
+        {
+            int verificationCode = 0;           
+            bool Verified = false;
+            bool TimeExpired = false;
+            object result = null;
+            try
+            {
+                List<User> userList = (from a in _authenticationRepository.GetAllUsers()
+                                       where a.Email == user.Email
+                                       select a).ToList();
+                foreach(var a in userList)
+                {
+                    verificationCode =Convert.ToInt32(a.VerificationCode);
+                    user.VerificationCodeDate =DateTime.Parse(a.VerificationCodeDate.ToString());
+                    user.ID = a.ID;
+
+                    DateTime CurrentTime = DateTime.Now;
+                    if ((CurrentTime - user.VerificationCodeDate) < TimeSpan.FromDays(1))
+                    {
+
+                        if (verificationCode.ToString() == user.VerificationCode)
+                        {
+                            Verified = Verified | true;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        TimeExpired = TimeExpired | true;
+                    }
+                }
+                if (Verified)
+                {
+                    if (TimeExpired == false)
+                    {                        
+                        result = "True";
+                        
+                    }
+                    else
+                    {
+                        result = "TimeExpired";
+                       
+                    }
+                }
+
+                else
+                {
+                    result = "False";
+                    
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+
+            return new
+            {
+
+               Message=result,
+               ID=user.ID
+            };
+
+        }
+
+        public object ResetPassword(User user)
+        {
+            object result= null;
+            try
+            {
+               user.Password = Encrypt(user.Password);
+              result=  _authenticationRepository.ResetPassword(user);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        public object EmailValidation(string emailID)
+        {
+            object result = null;
+            try
+            {
+
+
+                result = _authenticationRepository.EmailValidation(emailID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
     }
 }

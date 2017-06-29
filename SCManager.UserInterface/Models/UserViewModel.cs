@@ -49,6 +49,8 @@ namespace SCManager.UserInterface.Models
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
         [StringLength(250, MinimumLength = 6, ErrorMessage = "{0} should be minimum 6 Char")]
         public string ConfirmPassword { get; set; }
+        public string VerificationCode { get; set; }
+        public DateTime? VerificationCodeDate { get; set; }
     }
     public class UserProfileViewModel
     {

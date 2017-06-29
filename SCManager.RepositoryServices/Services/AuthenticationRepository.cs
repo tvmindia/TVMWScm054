@@ -6,6 +6,7 @@ using System.Web;
 using SCManager.DataAccessObject.DTO;
 using System.Data.SqlClient;
 using System.Data;
+using System.Net.Mail;
 
 namespace SCManager.RepositoryServices.Services
 {
@@ -18,6 +19,20 @@ namespace SCManager.RepositoryServices.Services
         {
             _databaseFactory = databaseFactory;
         }
+
+        #region Public Variables
+
+        //---* Keys assosiated with mail sending.its values are set in web.config ,app settings section -- *//
+
+        string EmailFromAddress = System.Web.Configuration.WebConfigurationManager.AppSettings["EmailFromAddress"];
+        string host = System.Web.Configuration.WebConfigurationManager.AppSettings["SMTP-host"];
+        string smtpUserName = System.Web.Configuration.WebConfigurationManager.AppSettings["SMTP-UserName"];
+        string smtpPassword = System.Web.Configuration.WebConfigurationManager.AppSettings["SMTP-Password"];
+        string emailVerificationCode = System.Web.Configuration.WebConfigurationManager.AppSettings["VerificationCode"];
+        string port = System.Web.Configuration.WebConfigurationManager.AppSettings["Port"];
+
+        #endregion   Public Variables
+
         public List<User> GetAllUsers()
         {
             List<User> userList = null;
@@ -55,6 +70,8 @@ namespace SCManager.RepositoryServices.Services
                                         _userObj.Password = (sdr["Password"].ToString() != "" ? sdr["Password"].ToString() : _userObj.Password);
                                         _userObj.Email = (sdr["Email"].ToString() != "" ? sdr["Email"].ToString() : _userObj.Email);
                                         _userObj.Active = (sdr["ActiveYN"].ToString() != "" ? bool.Parse(sdr["ActiveYN"].ToString()) : _userObj.Active);
+                                        _userObj.VerificationCode= (sdr["VerificationCode"].ToString() != "" ? sdr["VerificationCode"].ToString() : _userObj.VerificationCode);
+                                        _userObj.VerificationCodeDate = (sdr["VerifyCodeDate"].ToString() != "" ?DateTime.Parse(sdr["VerifyCodeDate"].ToString()) : _userObj.VerificationCodeDate);
                                         if (!string.IsNullOrEmpty(_userObj.RoleList))
                                         {
                                             _userObj.Roles = _userObj.RoleList.Split(',').Select(t => t.Trim()).ToArray();
@@ -296,6 +313,45 @@ namespace SCManager.RepositoryServices.Services
            
 
         }
+
+        public object EmailValidation(string emailID)
+        {
+            SqlParameter outParameter = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[EmailValidation]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@Email", SqlDbType.NVarChar,100).Value = emailID;
+                       // cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
+                        outParameter.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+                       
+                return new
+                {
+
+                    Status = outParameter.Value.ToString()
+                };                     
+
+
+        }
         public List<ServiceCenter> GetAllServiceCenters()
         {
             List<ServiceCenter> serviceCenterList = null;
@@ -388,5 +444,123 @@ namespace SCManager.RepositoryServices.Services
 
             return RoleList;
         }
+
+        public object AddVerificationCode(User user)
+        {
+            SqlParameter outParameter = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[AddVerificationCode]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = user.SCCode;                       
+                        cmd.Parameters.Add("@LoginName", SqlDbType.NVarChar, 255).Value = user.LoginName;
+                        cmd.Parameters.Add("@VerificationCode", SqlDbType.NVarChar, 20).Value = user.VerificationCode;
+                        cmd.Parameters.Add("@VerifyCodeDate", SqlDbType.DateTime).Value = user.VerificationCodeDate;                        
+                        outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
+                        outParameter.Direction = ParameterDirection.Output;                        
+                        cmd.ExecuteNonQuery();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+                    return new
+                    {
+
+                        Status = outParameter.Value.ToString()
+                    };
+            
+        }
+
+        public object ResetPassword(User user)
+        {
+            SqlParameter outParameter = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.CommandText = "[ResetPassword]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@Password", SqlDbType.NVarChar, 250).Value = user.Password;
+                        cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = user.ID;                        
+                        outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
+                        outParameter.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return new
+            {
+
+                Status = outParameter.Value.ToString()
+            };
+
+        }
+
+        #region SendEmail
+
+        public string SendEmail(string status, string msg, string Email, string verificationCode)
+        {            
+            try
+            {
+                MailMessage Msg = new MailMessage();
+
+                Msg.From = new MailAddress(EmailFromAddress);
+
+                Msg.To.Add(Email);
+
+                string message = "<body><h3>Hello ,</h3>" + msg + "<p>Enter Your Code in given field and change your Password<p><p><p><p>&nbsp;&nbsp;&nbsp;&nbsp; SCM&nbsp; Admin<p><p><p><p><p>Please do not reply to this email with your password. We will never ask for your password, and we strongly discourage you from sharing it with anyone.</body>";
+                Msg.Subject = verificationCode;
+                Msg.Body = message;
+                Msg.IsBodyHtml = true;
+
+                // your remote SMTP server IP.
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = host;
+                smtp.Port = 587;
+                //smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential(smtpUserName, smtpPassword);
+                //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.EnableSsl = true;
+                smtp.Send(Msg);
+                Msg = null;
+                status = "1";
+            }
+            catch (Exception ex)
+            {
+                status = "500";//Exception of foreign key
+              
+            }
+            return status;
+        }
+
+
+        #endregion SendEmail
     }
 }

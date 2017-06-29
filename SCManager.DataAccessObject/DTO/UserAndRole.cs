@@ -17,8 +17,12 @@ namespace SCManager.DataAccessObject.DTO
         public string[] Roles { get; set; }
         public bool Active { get; set; }
         public string Email { get; set; }
+        public string VerificationCode { get; set; }
+        public DateTime? VerificationCodeDate { get; set; }
         public Role role { get; set; }
         public LogDetails logDetails { get; set; }
+
+      
     }
     public class Role
     {

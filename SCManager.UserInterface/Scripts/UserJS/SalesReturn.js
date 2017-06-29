@@ -194,9 +194,11 @@ function DeleteSuccess(data, status) {
 function ReturnToCompany() {
    
     var ReturnID = $("#ID").val();
+    var txtQTY = $("#Qty").val();
+    txtQTY = parseInt(txtQTY);
     if (ReturnID != EmptyGuid) {
         var qty = SalesReturnValidation();
-        notyConfirm("Do you want to continue ?", 'ReturnDefectiveDamaged()', "The stock for selected item will reduce to " + qty + ".", "Yes, Save it!");
+        notyConfirm("Do you want to continue ?", 'ReturnDefectiveDamaged()', "Office stock for selected item will be reduced from "+ (txtQTY+parseInt(qty)) +" to " + qty + ".", "Yes, Save it!");
     }
     else {
         notyAlert('error', 'Error');

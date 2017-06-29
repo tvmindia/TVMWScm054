@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="card card-container">
+        <div class="card card-container" id="LoginBoxDiv">
 
             <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
             <p id="profile-name" class="profile-name-card"></p>
@@ -36,7 +36,7 @@
 
             }
 
-            <a href="#" class="forgot-password">
+            <a href="#" class="forgot-password" onclick="ForgotPassword();">
                 Forgot the password?
             </a>
            @{
@@ -49,10 +49,13 @@
                }
            }
         </div><!-- /card-container -->
+
+        <div class="card card-container" id="ForgorPassDiv" style="display:none;"></div>
     </div><!-- /container -->
+    
 </body>
 </html>
 @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/jquery")
+@Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/jqueryunobtrusiveajaxvalidate")
 @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/bootstrap")
-@Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/jqueryunobtrusiveajaxvalidate")
 @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/Login")

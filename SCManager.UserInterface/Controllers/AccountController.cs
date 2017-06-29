@@ -63,6 +63,120 @@ namespace SCManager.UserInterface.Controllers
            
         }
         #endregion Login
+
+        #region EmailValidation
+        [HttpGet]
+        public string EmailValidation(string EmailID)
+        {
+            object result = null;
+
+            try
+            {
+               // UA ua = new UA();
+                result = _authenticationBusiness.EmailValidation(EmailID);
+                return JsonConvert.SerializeObject(new { Result = "OK", Message = result });
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+
+            }
+
+
+
+        }
+        #endregion EmailValidation
+
+        #region VerificationCodeEmit
+        [HttpGet]
+        public string VerificationCodeEmit(string email)
+        {
+            UserViewModel userObj=new UserViewModel();
+            userObj.Email = email;
+            object result = null;
+
+            try
+            {
+                // UA ua = new UA();
+                result = _authenticationBusiness.VerificationCodeEmit(Mapper.Map<UserViewModel, User>(userObj)); ;
+                return JsonConvert.SerializeObject(new { Result = "OK", Message = result });
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+
+            }
+
+
+
+        }
+        #endregion VerificationCodeEmit
+
+        #region VerifyCode
+        [HttpGet]
+        public string VerifyCode(string email,string verificationCode)
+        {
+            UserViewModel userObj = new UserViewModel();
+            userObj.Email = email;
+            userObj.VerificationCode = verificationCode;
+            object result = null;
+
+            try
+            {
+                // UA ua = new UA();
+                result = _authenticationBusiness.VerifyCode(Mapper.Map<UserViewModel, User>(userObj)); 
+                return JsonConvert.SerializeObject(new { Result = "OK", Message = result });
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+
+            }
+
+
+
+        }
+        #endregion VerifyCode
+
+        #region UpdatePassword
+        [HttpGet]
+        public string UpdatePassword(string ID, string password)
+        {
+            UserViewModel userObj = new UserViewModel();
+            userObj.ID = Guid.Parse(ID);
+            userObj.Password = password;
+            object result = null;
+
+            try
+            {
+                // UA ua = new UA();
+                result = _authenticationBusiness.ResetPassword(Mapper.Map<UserViewModel, User>(userObj));
+                return JsonConvert.SerializeObject(new { Result = "OK", Message = result });
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+
+            }
+
+
+
+        }
+        #endregion UpdatePassword
+
+
         private ActionResult RedirectToLocal()
         {
          return RedirectToAction("Index", "DashBoard");
