@@ -375,13 +375,18 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.addbtn.Text = "Add";
                     ToolboxViewModelObj.addbtn.Title = "Add Job";
                     ToolboxViewModelObj.addbtn.Event = "AddTechnicanJob();";
+
+                    ToolboxViewModelObj.PrintBtn.Visible = true;
+                    ToolboxViewModelObj.PrintBtn.Text = "Print";
+                    ToolboxViewModelObj.PrintBtn.Title = "Print";
+                    ToolboxViewModelObj.PrintBtn.Event = "PrintTableToDoc();";
                     break;
                 case "Back":
                     ToolboxViewModelObj.backbtn.Visible = true;
                     ToolboxViewModelObj.backbtn.Text = "Back";
                     ToolboxViewModelObj.backbtn.Title = "Back";
                     ToolboxViewModelObj.backbtn.Event = "goBack();";
-                    break; 
+                    break;
                 default:
                     return Content("Nochange");
             }

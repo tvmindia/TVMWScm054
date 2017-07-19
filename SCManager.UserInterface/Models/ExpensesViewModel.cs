@@ -19,6 +19,7 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "Expense Type")]
         [Required(ErrorMessage = "Please Select Expense Type")]
         public string ExpenseTypeCode { get; set; }
+        public string hdfExpenseTypeCode { get; set; }
 
         [Display(Name = "Payment Ref. No.")]
         public string RefNo { get; set; }

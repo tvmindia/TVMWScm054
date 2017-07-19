@@ -12,7 +12,9 @@ namespace SCManager.DataAccessObject.DTO
         public Guid ID { get; set; }
         public string EntryNo { get; set; }
         public string ExpenseTypeCode { get; set; }
-        public  string RefNo	{ get; set; }
+        public string hdfExpenseTypeCode { get; set; }
+
+        public string RefNo	{ get; set; }
         public string RefDate { get; set; }
         public Guid EmpID { get; set; }
         public string PaymentMode { get; set; }

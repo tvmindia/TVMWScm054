@@ -5,15 +5,23 @@ $(document).ready(function () {
       
         DataTables.DailyService = $('#tblDailyServiceReport').DataTable(
          {
-             dom: '<"pull-right"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
+             buttons: [{
+                 extend: 'excel',
+                 exportOptions:
+                              {
+                                  columns: [2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
+                              }
+             }],
              order: [],
              searching: true,
              paging: true,
-             data: GetServicefilterbyDays(true),
+             pageLength: 50,
              language: {
                  search: "_INPUT_",
                  searchPlaceholder: "Search"
              },
+             data: GetServicefilterbyDays(true),
              columns: [
                { "data": "ID", "defaultContent": "<i>-</i>" },
                   { "data": "Employee.Name", "defaultContent": "<i>-</i>" },
@@ -21,30 +29,35 @@ $(document).ready(function () {
                { "data": "JobNo", "defaultContent": "<i>-</i>" },
                { "data": "CustomerName", "defaultContent": "<i>-</i>" },
                { "data": "CustomerLocation", "defaultContent": "<i>-</i>" },
+               { "data": "MobileNumber", "defaultContent": "<i>-</i>" },
                { "data": "ServiceTypeDescription", "defaultContent": "<i>-</i>" },
                { "data": "JobCallTypeDescription", "defaultContent": "<i>-</i>" },
                { "data": "ModelNo", "defaultContent": "<i>-</i>" },
                { "data": "SerialNo", "defaultContent": "<i>-</i>" },
                { "data": "CallStatusDescription", "defaultContent": "<i>-</i>" },
-               { "data": "ICRNo", "defaultContent": "<i>-</i>" }, 
                { "data": "TechnicianRemark", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a data-toggle="tp" data-placement="top" data-delay={"show":2000, "hide":3000} title="Edit Job" href="#" class="actionLink" onclick="JobEdit(this)"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a>' },
                { "data": null, "orderable": false, "defaultContent": '<a data-toggle="tp" data-placement="top" data-delay={"show":2000, "hide":3000} title="Delete Job" href="#" class="DeleteLink" onclick="JobDelete(this)"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>' }
              ],
-             columnDefs: [{ "targets": [0,8], "visible": false, "searchable": false },
-                  { className: "text-left", "targets": [1,2,3,4,5,6,7,9,10,11,12] },
-                  { className: "text-center", "targets": [13,14] },
-                  { className: "text-right", "targets": [] }
-           ]
-         }); 
-        $('#tblDailyServiceReport tbody').on('dblclick', 'td', function () {
+             columnDefs: [{ "targets": [0,9], "visible": false, "searchable": false },
+                  { className: "text-left", "targets": [1,3,4,5,6,7,8,10,12] },
+                  { className: "text-center", "targets": [2,11,13,14] }
+                
+             ],   
+         });
+       // hide button of jquery datatable
+         $(".buttons-print").hide();
+         $(".buttons-excel").hide();
+    
+    
+         $('#tblDailyServiceReport tbody').on('dblclick', 'td', function () {
             JobEdit(this)
         });
         $("#ModelJobNo").attr({ 'disabled': true });
     }
     catch(e)
     {
-     
+        notyAlert('error', e.message);
     }
 
     try {
@@ -378,6 +391,18 @@ function GetServiceRegisterSummary(date) {
     }
 }
 
+function PrintTableToDoc()
+{
+    debugger;
+
+    try {
+
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
 
 
 

@@ -19,7 +19,7 @@ namespace SCManager.DataAccessObject.DTO
         public string ModelNo { get; set; }
         public string SerialNo { get; set; }
         public string CallStatusCode { get; set; }
-        public string ICRNo { get; set; }
+        public string MobileNumber { get; set; }
         public string TechnicianRemark { get; set; }
         public Guid Repeat_EmpID { get; set; }
         public string Repeat_JobNo { get; set; }

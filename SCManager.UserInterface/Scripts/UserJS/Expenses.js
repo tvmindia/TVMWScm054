@@ -122,18 +122,21 @@ function clearfields() {
     $("#EntryNo").val("<<Auto Generated>>");
     $("#PaymentMode").val("");
     $("#ExpenseTypeCode").val("");
+    $("#ExpenseTypeCode").prop('disabled', false);
     $("#Amount").val("");
     $("#Description").val("");
     $("#RefNo").val("");
     var $datepicker = $('#Date');
     $datepicker.datepicker('setDate', null); 
     $("#deleteId").val("0");
+    $("#hdfExpenseTypeCode").val("0");
     $("#OutStandingPaymentArea").hide();
     $("#SalaryCalculationArea").hide();
     ResetForm();
 }
 //---------------------------------------Edit Expenses--------------------------------------------------//
 function Edit(currentObj) {
+    debugger;
     //Tab Change on edit click
     $('#AddTab').trigger('click');
     ChangeButtonPatchView("CreditNotes", "btnPatchCreditNotesSettab", "Edit"); //ControllerName,id of the container div,Name of the action
@@ -189,7 +192,9 @@ function fillExpenses(ID) {
     $("#ID").val(thisItem.ID);
     $("#EntryNo").val(thisItem.EntryNo);
     $("#RefNo").val(thisItem.RefNo);
+    $("#hdfExpenseTypeCode").val(thisItem.ExpenseTypeCode);
     $("#ExpenseTypeCode").val(thisItem.ExpenseTypeCode);
+    $("#ExpenseTypeCode").prop('disabled', true);
     $("#EmpID").val(thisItem.EmpID);
     $("#PaymentMode").val(thisItem.PaymentMode);
     $("#Amount").val(roundoff(thisItem.Amount));
@@ -263,6 +268,7 @@ function GetAllExpenses(showAllYN) {
 
 //------------------------------- Expenses Save-----------------------------//
 function save() {
+    debugger;
     if ($("#Amount").val() != "") {
         if ($("#Amount").val() > 0) {
             $("#btnInsertUpdateExpenses").trigger('click');

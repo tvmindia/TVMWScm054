@@ -97,8 +97,8 @@ namespace SCManager.UserInterface.Controllers
             {
                 ModelState.Remove("CreditNoteNo");
             }
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
                     UA ua = new UA();
@@ -119,20 +119,20 @@ namespace SCManager.UserInterface.Controllers
                         return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
                 
                 }
-            }
-            else
-            {
-                List<string> modelErrors = new List<string>();
-                foreach (var modelState in ModelState.Values)
-                {
-                    foreach (var modelError in modelState.Errors)
-                    {
-                        modelErrors.Add(modelError.ErrorMessage);
-                    }
-                }
-                return JsonConvert.SerializeObject(new { Result = "VALIDATION", Message = string.Join(",", modelErrors) });
-                //return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "Please Check the values" });
-            }
+            //}
+            //else
+            //{
+            //    List<string> modelErrors = new List<string>();
+            //    foreach (var modelState in ModelState.Values)
+            //    {
+            //        foreach (var modelError in modelState.Errors)
+            //        {
+            //            modelErrors.Add(modelError.ErrorMessage);
+            //        }
+            //    }
+            //    return JsonConvert.SerializeObject(new { Result = "VALIDATION", Message = string.Join(",", modelErrors) });
+            //    //return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "Please Check the values" });
+            //}
 
         }
         #endregion InsertUpdateExpenses

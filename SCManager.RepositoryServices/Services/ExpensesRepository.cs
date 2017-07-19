@@ -140,7 +140,7 @@ namespace SCManager.RepositoryServices.Services
                             cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = ExpensesObj.EmpID;
                         cmd.Parameters.Add("@RefDate", SqlDbType.DateTime).Value = ExpensesObj.RefDate;
                         cmd.Parameters.Add("@RefNo", SqlDbType.NVarChar, 20).Value = ExpensesObj.RefNo;
-                        cmd.Parameters.Add("@ExpenseTypeCode", SqlDbType.NVarChar, 5).Value = ExpensesObj.ExpenseTypeCode;
+                        cmd.Parameters.Add("@ExpenseTypeCode", SqlDbType.NVarChar, 5).Value = ExpensesObj.hdfExpenseTypeCode;
                         cmd.Parameters.Add("@PaymentMode", SqlDbType.NVarChar, 20).Value = ExpensesObj.PaymentMode;
                         cmd.Parameters.Add("@Amount", SqlDbType.Decimal).Value = ExpensesObj.Amount;
                         cmd.Parameters.Add("@Description", SqlDbType.NVarChar, -1).Value = ExpensesObj.Description;

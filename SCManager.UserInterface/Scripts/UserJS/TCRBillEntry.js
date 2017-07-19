@@ -165,7 +165,8 @@ function goBack() {
 
 function CalculateSCCommissionAmt()
 {
-     
+    debugger;
+    $("#SCAmount").val(roundoff($("#SCAmount").val()));
     var serviceCharge = $("#SCAmount").val();
     var SCcmmsn = $("#ServiceChargeComm").val();
     serviceCharge = parseInt(serviceCharge);
@@ -211,6 +212,7 @@ function Edit(currentObj) {
 function BindTCRBillEntry(id) {
   
     try {
+        debugger;
         var data = { "ID": id };
         var ds = {};
         ds = GetDataFromServer("TCRBillEntry/GetTCRBillHeaderByID/", data);
@@ -290,12 +292,14 @@ function TCRBillDetailDelete(id, rw) {
 
 function BindTCRBillEntryFields(Records) {
     try {
-
+        debugger;
         ChangeButtonPatchView('TCRBillEntry', 'btnPatchTCRBillEntrySettab', 'Edit');
         $('#HeaderID').val(Records.ID);
         $("#EmpID").val(Records.EmpID);
         $("#ModelTechEmpID").val(Records.EmpID);
         $("#JobNo").val(Records.JobNo);
+        debugger;
+        $("#BillDate").val(Records.BillDateFormatted);
         $("#BillNo").val(Records.BillNo);
         $("#CustomerName").val(Records.CustomerName);
         $("#PaymentRefNo").val(Records.PaymentRefNo);
@@ -311,7 +315,7 @@ function BindTCRBillEntryFields(Records) {
         $("#VATPercentageAmount").val(Records.VATAmount);
     
         $("#grandtotal").val(roundoff(Records.GrandTotal));
-       // $("#ServiceChargeComm").val(Records.ServiceCharge/100);
+        $("#ServiceChargeComm").val(roundoff(Records.ServiceCharge/100));
         $("#SCCommAmount").val(roundoff(Records.SCCommAmount));
         $("#SpecialComm").val(roundoff(Records.SpecialComm));
         EG_Rebind_WithData(Records.TCRBillEntryDetail, 1);
@@ -319,8 +323,8 @@ function BindTCRBillEntryFields(Records) {
        // $('#EmpID').attr('disabled', 'true');
        // $("#EmpID").val(Records.EmpID);
 
-        var $datepicker = $('#BillDate');
-        $datepicker.datepicker('setDate', new Date(Records.BillDate));
+        //var $datepicker = $('#BillDate');
+        //$datepicker.datepicker('setDate', new Date(Records.BillDate));
 
     } catch (e) {
         notyAlert('error', e.message);
@@ -335,7 +339,10 @@ function FillUOM(row) {
             EG_GridData[row - 1]['MaterialID'] = _Materials[i].ID;
             EG_GridData[row - 1]['Description'] = _Materials[i].Description;
             EG_GridData[row - 1]['Rate'] = _Materials[i].SellingRate;
-            EG_Rebind();
+            //----for calculating amount on changing item(if already quantity exists)
+            CalculateAmount(row)
+            //EG_Rebind();
+            //----------------------------------------------------------------
             break;
         }
     }
@@ -453,7 +460,7 @@ function TCRBillDelete() {
 
 }
 function SaveSuccess(data, status) {
-     
+    debugger;
     var JsonResult = JSON.parse(data)
     switch (JsonResult.Result) {
         case "OK":
@@ -513,6 +520,7 @@ function GetAllTCRBill() {
 }
 function save()
 {
+
     //$("#JobNo").val("123ERT32q");
     $("#ID").val(emptyGUID);
     var validation = EG_Validate(false);
@@ -540,7 +548,7 @@ function Add() {
 
 
 function CalculateAmount(row) { 
-
+    debugger;
     //EG_GridData[row-1][Quantity] = value
     var qty = 0.00;
     var rate = 0.00;
@@ -575,6 +583,7 @@ function CalculateAmount(row) {
 }
 function ServiceAmountchange()
 {
+    debugger;
     AmountSummary()
     //var total = parseFloat($('#total').val()) || 0;
     //var vatamount = parseFloat($('#VATAmount').val()) || 0;
@@ -583,7 +592,7 @@ function ServiceAmountchange()
 }
 
 function DiscountChange() {
-  
+    debugger;
     //var subtotal = parseFloat($('#subtotal').val()) || 0;
     //var discount = parseFloat($('#discount').val()) || 0;
     //$('#total').val(roundoff(subtotal - discount));
@@ -591,7 +600,7 @@ function DiscountChange() {
 }
 
 function ClearDiscountPercentage() {
-   
+    debugger;
     if ($('#VATAmount').val() != $('#VATPercentageAmount').val())
         $("#vatpercentage").val("");
 
@@ -603,7 +612,7 @@ function ClearDiscountPercentage() {
 
 
 function CalculateVAT() {
-  
+    debugger;
     var vatpercent = $("#vatpercentage").val();
     var Total = $("#total").val();
     vatpercent = parseFloat(vatpercent);
@@ -617,13 +626,17 @@ function CalculateVAT() {
     }
     Total = parseFloat(Total);
     var vatamt = (Total * vatpercent / 100)
-    if (isNaN(vatamt)) { vatamt = 0.00 }
+    if (isNaN(vatamt))
+    { vatamt = 0.00 }
     $("#VATAmount").val(roundoff(vatamt));
     $('#VATPercentageAmount').val(roundoff(vatamt));
+    $('#grandtotal').val(roundoff(Total + vatamt));
+  
+
 }
 
 function AmountSummary() {
-  
+    debugger;
     var Total = 0.00;
     for (i = 0; i < EG_GridData.length; i++) {
         Total = Total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);

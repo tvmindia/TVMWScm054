@@ -6,6 +6,7 @@
 }
 @section styles {
     @Styles.RenderFormat(SiteKeys.StyleVersion,"~/Content/DataTables/css/datatable")
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatableButtons")
     @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/bootstrapdatepicker")
     @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/UserCSS/DailyServiceReport")
 }
@@ -94,12 +95,12 @@
                                         <th>Job No</th>
                                         <th>Customer Name</th>
                                         <th>Customer Location</th>
+                                        <th>Mobile Number</th> 
                                         <th>Service Type</th>
                                         <th>Call Type</th>
                                         <th>Model</th>
                                         <th>Serial No</th>
-                                        <th>Call Status</th>
-                                        <th>ICR No</th>
+                                        <th>Call Status</th> 
                                         <th>Technician Remark</th>
                                         <th>...</th>
                                         <th>...</th>
@@ -176,10 +177,14 @@
 
     @section Scripts {
         @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/datatable")
+         @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/jsZip")
+        @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/datatableButtons")
         @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/jqueryunobtrusiveajaxvalidate")
         @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/bootstrapdatepicker")
         @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/JobAction")
         @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/DailyServiceReport")
+       
+
 
     }
 

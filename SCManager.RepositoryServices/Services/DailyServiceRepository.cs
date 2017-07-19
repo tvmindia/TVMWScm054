@@ -157,7 +157,7 @@ namespace SCManager.RepositoryServices.Services
                                         _job.SerialNo = (sdr["SerialNo"].ToString() != "" ? (sdr["SerialNo"].ToString()) : _job.SerialNo);
                                      
                                         _job.CallStatusCode = (sdr["CallStatusCode"].ToString() != "" ? (sdr["CallStatusCode"].ToString()) : _job.CallStatusCode);
-                                        _job.ICRNo= (sdr["ICRNo"].ToString() != "" ? (sdr["ICRNo"].ToString()) : _job.ICRNo);
+                                        _job.MobileNumber= (sdr["ICRNo"].ToString() != "" ? (sdr["ICRNo"].ToString()) : _job.MobileNumber);
                                         _job.TechnicianRemark = (sdr["TechnicianRemarks"].ToString() != "" ? (sdr["TechnicianRemarks"].ToString()) : _job.TechnicianRemark);
                                         _job.RepeatEmpName= (sdr["Repeat_EmpName"].ToString() != "" ? (sdr["Repeat_EmpName"].ToString()) : _job.TechnicianRemark);
                                         _job.RepeatJobNo = (sdr["Repeat_JobNo"].ToString() != "" ? (sdr["Repeat_JobNo"].ToString()) : _job.RepeatJobNo);
@@ -230,7 +230,7 @@ namespace SCManager.RepositoryServices.Services
                                         _job.SerialNo = (sdr["SerialNo"].ToString() != "" ? (sdr["SerialNo"].ToString()) : _job.SerialNo);
 
                                         _job.CallStatusCode = (sdr["CallStatusCode"].ToString() != "" ? (sdr["CallStatusCode"].ToString()) : _job.CallStatusCode);
-                                        _job.ICRNo = (sdr["ICRNo"].ToString() != "" ? (sdr["ICRNo"].ToString()) : _job.ICRNo);
+                                        _job.MobileNumber = (sdr["ICRNo"].ToString() != "" ? (sdr["ICRNo"].ToString()) : _job.MobileNumber);
                                         _job.TechnicianRemark = (sdr["TechnicianRemarks"].ToString() != "" ? (sdr["TechnicianRemarks"].ToString()) : _job.TechnicianRemark);
                                         _job.RepeatEmpName = (sdr["Repeat_EmpName"].ToString() != "" ? (sdr["Repeat_EmpName"].ToString()) : _job.TechnicianRemark);
                                         _job.RepeatJobNo = (sdr["Repeat_JobNo"].ToString() != "" ? (sdr["Repeat_JobNo"].ToString()) : _job.RepeatJobNo);
@@ -283,7 +283,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@ModelNo", SqlDbType.NVarChar, 50).Value = technicianJob.ModelNo;
                         cmd.Parameters.Add("@SerialNo", SqlDbType.NVarChar, 50).Value = technicianJob.SerialNo;
                         cmd.Parameters.Add("@CallStatusCode", SqlDbType.NVarChar, 5).Value = technicianJob.CallStatusCode;
-                        cmd.Parameters.Add("@ICRNo", SqlDbType.NVarChar, 50).Value = technicianJob.ICRNo; 
+                        cmd.Parameters.Add("@ICRNo", SqlDbType.NVarChar, 50).Value = technicianJob.MobileNumber; 
                         cmd.Parameters.Add("@TechnicianRemarks", SqlDbType.NVarChar, -1).Value = technicianJob.TechnicianRemark;
                         if(technicianJob.Repeat_EmpID!=Guid.Empty)
                         {
@@ -370,7 +370,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@ModelNo", SqlDbType.NVarChar, 50).Value = technicianJob.ModelNo;
                         cmd.Parameters.Add("@SerialNo", SqlDbType.NVarChar, 50).Value = technicianJob.SerialNo;
                         cmd.Parameters.Add("@CallStatusCode", SqlDbType.NVarChar, 5).Value = technicianJob.CallStatusCode;
-                        cmd.Parameters.Add("@ICRNo", SqlDbType.NVarChar, 50).Value = technicianJob.ICRNo;
+                        cmd.Parameters.Add("@ICRNo", SqlDbType.NVarChar, 50).Value = technicianJob.MobileNumber;
                         cmd.Parameters.Add("@TechnicianRemarks", SqlDbType.NVarChar, -1).Value = technicianJob.TechnicianRemark;
                         if (technicianJob.Repeat_EmpID != Guid.Empty)
                         {

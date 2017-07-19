@@ -74,7 +74,10 @@ namespace SCManager.UserInterface.Models
        
         public string ICRNo { get; set; }
 
-      
+        [Display(Name = "Mobile No")]
+
+        public string MobileNumber { get; set; }
+
         [Display(Name = "Technician Remark")]
     
         public string TechnicianRemark { get; set; }

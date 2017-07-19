@@ -3,8 +3,10 @@ function BindForm(ID)
 {
     try
     {
+
         var result = GetServiceReportEntryByID(ID);
         if (result) {
+            debugger;
             $("#ModelJobNo").val(result.JobNo);
           //  $("#ModelJobNo").attr({ 'disabled': 'disabled' });
             $("#ModelCustomerName").val(result.CustomerName);
@@ -14,7 +16,8 @@ function BindForm(ID)
             $("#SCCommAmount").val(result.SCCommAmount);
             $("#ModelModelNo").val(result.ModelNo);
             $("#ModelSerialNo").val(result.SerialNo);
-            $("#ModelICRNo").val(result.ICRNo);
+            
+            $("#ModelICRNo").val(result.MobileNumber);
             $("#ModelTechnicianRemark").val(result.TechnicianRemark);
             //Hiddenfields
             $("#ModelTechEmpID").val(result.Employee.ID);
