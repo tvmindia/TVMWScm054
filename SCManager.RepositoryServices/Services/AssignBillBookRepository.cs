@@ -257,6 +257,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = assignBillBook.ID;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = assignBillBook.SCCode;
+                        cmd.Parameters.Add("@BookNo", SqlDbType.NVarChar, 50).Value = assignBillBook.BillNo;
                         cmd.Parameters.Add("@SeriesStart", SqlDbType.NVarChar, 50).Value = assignBillBook.SeriesStart;
                         cmd.Parameters.Add("@SeriesEnd", SqlDbType.NVarChar, 50).Value = assignBillBook.SeriesEnd;
                         cmd.Parameters.Add("@LastUsed", SqlDbType.NVarChar, 50).Value = assignBillBook.LastUsed;
