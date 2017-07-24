@@ -504,7 +504,7 @@ function AMCDateValidation(id)
     else
     {
         if ($("#AMCValidFromDate").val() != "" && $("#AMCValidtoDate").val() != "") {
-            if (($("#AMCValidtoDate").val()) < ($("#AMCValidFromDate").val())) {
+            if (Date.parse($("#AMCValidtoDate").val()) < Date.parse($("#AMCValidFromDate").val())) {
                 notyAlert('error', Messages.AMCDAte);
                 $("#AMCValidtoDate").css('border-color', 'red');
                 return false;

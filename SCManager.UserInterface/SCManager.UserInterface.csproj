@@ -412,7 +412,6 @@
     <Content Include="Content\images\scmanagerback1.JPG" />
     <Content Include="Content\images\stock.png" />
     <Content Include="Content\images\wrench.png" />
-    <Content Include="Content\Site.css" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="Content\UserCSS\DailyServiceReport.css" />
     <Content Include="Content\UserCSS\Form8.css" />
@@ -521,6 +520,10 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <None Include="Properties\PublishProfiles\AlbertSCpublish.pubxml" />
+    <None Include="Properties\PublishProfiles\PraveenaScm.pubxml" />
+    <None Include="Properties\PublishProfiles\PraveenaSCManagerNewPublish.pubxml" />
+    <None Include="Properties\PublishProfiles\PraveenaSCMPub.pubxml" />
+    <None Include="Properties\PublishProfiles\PraveenaSCMPublish.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />

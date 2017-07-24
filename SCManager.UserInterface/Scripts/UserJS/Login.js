@@ -154,13 +154,13 @@ function ForgotPassword() {
     var LoginDIv = $("#ForgorPassDiv");
    // $('#loginRowFluid').removeClass("content");
     var html = ('<div class="content" id="EmailBox">'
-        + '<h2>Enter your Email</h2>'
+        + '<h4>Enter your Email</h4>'
         + '<div class="" title="Email">'
-        + '<input class="form-control form-control-solid placeholder-no-fix" name="Email" id="txtEmail" type="Email" onkeyup="return EmailValidation();"  autocomplete="off" placeholder="Email"/>'
+        + '<input class="form-control text-box single-line" name="Email" id="txtEmail" type="Email" onkeyup="return EmailValidation();"  autocomplete="off" placeholder="Email"/>'
         + '</div>'
-        + '<div><img src="../Content/images/ring.gif" style="border:0;margin-left:100px;;max-width:24%;height:auto;vertical-align:middle;display:none;" id="Sendinggif"></div>'
+        + '<div><img src="../Content/images/ring.gif" style="border:0;margin-left:100px;;max-width:18%;height:auto;vertical-align:middle;display:none;" id="Sendinggif"></div>'
         + '<div class="button-login">'
-        + '<a href="#" onclick="SendVerificationCode();" class="btn btn-primary loginbtn">Continue</a>'
+        + '<a href="#" onclick="SendVerificationCode();"class="btn btn-lg btn-success btn-block btn-signin">Continue</a>'
         + '</div>'
         + '<div class="clearfix"></div>'
         + '<h3></h3><p id="lblerror"></p></div');
@@ -209,7 +209,7 @@ function MatchVetification(EmailAddr) {
     HdnMail.setAttribute("id", "HdnEmail");
     var LoginDIv = $('#ForgorPassDiv');
     var html = ('<div class="content" id="VerifyBox">'
-        + '<h2>Enter Verification Code</h2>'
+        + '<h4>Enter Verification Code</h4>'
         + '<div class="" title="Verification">'
         + '<input class="form-control form-control-solid placeholder-no-fix" name="VerificationCode" id="txtVerifyCode" type="password" autocomplete="off" placeholder="Verification Code"/>'
         + '</div><div style="font-family:monaco;padding-left:10px;font-size:14px;color:rosybrown"> ✉ CHECK Email For Verification Code</div>'
@@ -267,10 +267,11 @@ function EnterPassword(UsrID) {
     HdnUserID.setAttribute("id", "HdnUserID");
     var LoginDIv = $('#ForgorPassDiv');
     var html = ('<div class="content" id="NewPassword">'
-        + '<h2>Enter New Password</h2>'
+        + '<h4>Enter New Password</h4>'
         + '<div class="" title="NewPassword">'
         + '<input class="form-control form-control-solid placeholder-no-fix" name="NPAss" id="txtPassword" type="password" autocomplete="off" placeholder="New Password"/>'
         + '</div>'
+        + '<div class="col-md-12" style="height: 16px;"></div>'
         + '<div class="" title="NewPassword">'
         + '<input class="form-control form-control-solid placeholder-no-fix" name="CPass" id="txtConfirmPassword" type="password" autocomplete="off" placeholder="Confirm Password"/>'
         + '</div>'
