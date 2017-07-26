@@ -709,8 +709,6 @@ function getMaterials() {
         notyAlert('error', e.message);
     }
 
-
-
 }
 function reset()
 {
@@ -817,10 +815,13 @@ function TechnicianSelectOnChange(curobj) {
         var v = $(curobj).val();
         $("#ModelTechEmpID").val(v);
         BillBookNumberValidation();
+        getMaterialsByTechnician(v);
+
     }
-    catch (e) {
+    catch (e)
+    {
         notyAlert('error', e.Message);
-    }
+    }  
 }
 function RefreshDailyServiceTable(jobNo) {
     //need to write code to refresh combo
@@ -865,4 +866,29 @@ function JobSelect(obj) {
     FillJobRelatedFields();
     //var v = $(obj).val();
     //RefreshDailyServiceTable(v);
+}
+
+function getMaterialsByTechnician(empID) {
+
+    try {
+
+        var data = { "empID": empID };
+        var ds = {};
+        ds = GetDataFromServer("Item/ItemsForDropdownByTechnician/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            _Materials = [];
+            _Materials = ds.Records;
+            EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
+
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
 }
