@@ -383,7 +383,7 @@ function BillBookNumberValidation()
                         if (ds.Records.Name == '') {
                             msg = Messages.BLB02  +"(Bill Book not defined)"
                         } else {
-                            msg = Messages.BLB02 + " - (This bill no belongs to " + ds.Records.Name + ')';
+                            msg = Messages.BLB02 + " - (Bill No belongs to " + ds.Records.Name + ')';
                         }
                         
                     }
