@@ -374,7 +374,7 @@ namespace SCManager.RepositoryServices.Services
         #region BillBookNumberValidation
         public object BillBookNumberValidation(UA UA, string BillNo,string billBookType, string empID)
         {
-            SqlParameter outParameter1, outParameter2,outParameter3 = null;
+            SqlParameter outParameter1, outParameter2,outParameter3,outParameter4 = null;
             try
             {
                
@@ -390,7 +390,8 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
                         cmd.Parameters.Add("@number", SqlDbType.NVarChar,50).Value = BillNo;
                         cmd.Parameters.Add("@BillBookType", SqlDbType.NVarChar, 15).Value = billBookType;
-                        if(! string.IsNullOrEmpty(empID))
+                      
+                        if (! string.IsNullOrEmpty(empID))
                         {
                             cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = Guid.Parse(empID);
                         }
@@ -404,6 +405,8 @@ namespace SCManager.RepositoryServices.Services
                         outParameter2.Direction = ParameterDirection.Output;
                         outParameter3 = cmd.Parameters.Add("@Status", SqlDbType.NVarChar, 20);
                         outParameter3.Direction = ParameterDirection.Output;
+                        outParameter4 = cmd.Parameters.Add("@Name", SqlDbType.NVarChar, 250);
+                        outParameter4.Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -415,7 +418,8 @@ namespace SCManager.RepositoryServices.Services
             return new
             {
                 Status = outParameter3.Value.ToString(),
-                BookNo = outParameter2.Value.ToString()
+                BookNo = outParameter2.Value.ToString(),
+                Name = outParameter4.Value.ToString()
             };
            
         }

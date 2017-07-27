@@ -350,8 +350,9 @@ function FillUOM(row) {
 }
 function BillBookNumberValidation()
 {
-   
+    debugger;
     try {
+      
         var empID = $("#EmpID").val();
         if (empID == "")
         {
@@ -377,8 +378,14 @@ function BillBookNumberValidation()
                 }
                 else {
                     var msg = '';
+                    debugger;
                     if (ds.Records.Status == "BLB02") {
-                        msg = Messages.BLB02;
+                        if (ds.Records.Name == '') {
+                            msg = Messages.BLB02  +"(Bill Book not defined)"
+                        } else {
+                            msg = Messages.BLB02 + " - (This bill no belongs to " + ds.Records.Name + ')';
+                        }
+                        
                     }
                     if (ds.Records.Status == "BLB03") {
                         msg = Messages.BLB03;
