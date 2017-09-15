@@ -29,6 +29,7 @@ namespace SCManager.DataAccessObject.DTO
         public LogDetails logDetails { get; set; }
 
         public decimal GrandTotal { get; set; }
+        public decimal TotalTaxAmount { get; set; }
 
 
         public String ChallanDateFormatted { get; set; }
@@ -53,6 +54,11 @@ namespace SCManager.DataAccessObject.DTO
         public decimal? Rate { get; set; }
         public decimal? BasicAmount { get; set; }
         public decimal? TradeDiscount { get; set; }
+        public decimal? CGSTPercentage { get; set; }
+        public decimal? CGSTAmount { get; set; }
+        public decimal? SGSTPercentage { get; set; }
+        public decimal? SGSTAmount { get; set; }
+        ///public decimal? TotalTaxAmount { get; set; }
         public decimal? NetAmount { get; set; }
     }
 }

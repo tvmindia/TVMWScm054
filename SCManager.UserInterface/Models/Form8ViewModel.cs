@@ -60,6 +60,10 @@ namespace SCManager.UserInterface.Models
         [Range(0, 9999999999999999.99)]
         public decimal? Subtotal { get; set; }
 
+        [Display(Name = "Total Tax Amount (₹)")]
+        [Range(0, 9999999999999999.99)]
+        public decimal? TotalTaxAmount { get; set; }
+
         [Required(ErrorMessage = "Grand total should have value")]
         [Display(Name = "Grand Total (₹)")]
         [Range(0, 9999999999999999.99)]
@@ -94,6 +98,12 @@ namespace SCManager.UserInterface.Models
         public decimal? Rate { get; set; }
         public decimal? BasicAmount { get; set; }
         public decimal? TradeDiscount { get; set; }
+        public decimal? CGSTPercentage { get; set; }
+        public decimal? CGSTAmount { get; set; }
+        public decimal? SGSTPercentage { get; set; }
+        public decimal? SGSTAmount { get; set; }
+        public decimal? TotalTaxAmount { get; set; }
+        public decimal GrandTotal { get; set; }
         public decimal? NetAmount { get; set; }
 
     }

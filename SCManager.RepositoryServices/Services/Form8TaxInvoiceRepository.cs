@@ -65,6 +65,9 @@ namespace SCManager.RepositoryServices.Services
                                         _Form8Obj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : _Form8Obj.VATAmount);
                                         _Form8Obj.Subtotal = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : _Form8Obj.Subtotal);
                                         _Form8Obj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : _Form8Obj.Discount);
+                                        _Form8Obj.TotalTaxAmount = (sdr["TotalTaxAmount"].ToString() != "" ? decimal.Parse(sdr["TotalTaxAmount"].ToString()) : _Form8Obj.TotalTaxAmount);
+                                        _Form8Obj.GrandTotal = (sdr["GrandTotal"].ToString() != "" ? decimal.Parse(sdr["GrandTotal"].ToString()) : _Form8Obj.GrandTotal);
+
                                     }
 
                                     Form8list.Add(_Form8Obj);
@@ -251,9 +254,10 @@ namespace SCManager.RepositoryServices.Services
                                         _Form8Obj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : _Form8Obj.VATAmount);
                                         _Form8Obj.Subtotal = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : _Form8Obj.Subtotal);
                                         _Form8Obj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : _Form8Obj.Discount);
+                                       
                                     }
 
-                                    Form8=_Form8Obj;
+                                    Form8 =_Form8Obj;
                                 }
                             }
                         }
@@ -266,7 +270,7 @@ namespace SCManager.RepositoryServices.Services
             }
             return Form8;
         }
-
+//-----------------------------//
         public List<Form8Detail> GetForm8Detail(Guid ID, UA UA)
         {
             List<Form8Detail> Form8DetailList = null;
@@ -300,6 +304,8 @@ namespace SCManager.RepositoryServices.Services
                                         _Form8DetailObj.Quantity = (sdr["Qty"].ToString() != "" ? int.Parse(sdr["Qty"].ToString()) : 0);
                                         _Form8DetailObj.Rate = (sdr["Rate"].ToString() != "" ? decimal.Parse(sdr["Rate"].ToString()) : 0);
                                         _Form8DetailObj.TradeDiscount = (sdr["TradeDiscount"].ToString() != "" ? decimal.Parse(sdr["TradeDiscount"].ToString()) :0);
+                                        _Form8DetailObj.CGSTPercentage = (sdr["CGSTPercentage"].ToString() != "" ? decimal.Parse(sdr["CGSTPercentage"].ToString()) : 0);                                        
+                                        _Form8DetailObj.SGSTPercentage = (sdr["SGSTPercentage"].ToString() != "" ? decimal.Parse(sdr["SGSTPercentage"].ToString()) : 0);                                       
                                         _Form8DetailObj.Material = (sdr["Material"].ToString() != "" ? (sdr["Material"].ToString()) : _Form8DetailObj.Material);
                                         _Form8DetailObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _Form8DetailObj.UOM);
                                         _Form8DetailObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _Form8DetailObj.Description);
