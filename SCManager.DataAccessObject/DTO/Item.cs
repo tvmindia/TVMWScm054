@@ -28,5 +28,6 @@ namespace SCManager.DataAccessObject.DTO
         public string DefDamgStockQty { get; set; }
         public string SCQty { get; set; }
         public string TechnicianQty { get; set; }
+        public string HsnNo { get; set;  }
     }
 }

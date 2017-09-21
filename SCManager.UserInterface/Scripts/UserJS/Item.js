@@ -16,6 +16,7 @@ $(document).ready(function () {
                { "data": "ID", "defaultContent": "<i>-</i>" },
                { "data": "ItemCode", "defaultContent": "<i>-</i>" },
                { "data": "Description", "defaultContent": "<i>-</i>" },
+               { "data": "HsnNo", "defaultContent": "<i>-</i>" },
                { "data": "Category", "defaultContent": "<i>-</i>" },
                { "data": "Subcategory", "defaultContent": "<i>-</i>" },
                { "data": "Stock", "defaultContent": "<i>-</i>" },
@@ -30,7 +31,7 @@ $(document).ready(function () {
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
                   { className: "text-right", "targets": [5, 6, 8,9,10] },
                     { className: "text-center", "targets": [1,3, 4,7, 11] },
-                    { className: "text-left", "targets": [2,9] },
+                    { className: "text-left", "targets": [2,9,12] },
              ]
          });
 
@@ -154,6 +155,7 @@ function fillItems(ID) {
     $("#ID").val(thisItem[0].ID);
     $("#ItemCode").val(thisItem[0].ItemCode);
     $("#Description").val(thisItem[0].Description)
+    $("#HsnNo").val(thisItem[0].HsnNo)
     $("#Stock").val(thisItem[0].Stock)
     $("#DefDamgStockQty").val(thisItem[0].DefDamgStockQty);
     $("#SCQty").val(thisItem[0].SCQty);
@@ -179,6 +181,7 @@ function clearfields() {
     $("#ID").val(EmptyGuid);
     $("#ItemCode").val("")
     $("#Description").val("")
+    $("#HsnNo").val("")
     $("#Stock").val("")
     $("#DefDamgStockQty").val("")
     $("#SCQty").val("")

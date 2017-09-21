@@ -54,6 +54,7 @@ namespace SCManager.DataAccessObject.DTO
             ConstMessage.Add(new ConstMessage("Book No already exists!", "BKN01", "ERROR"));
             ConstMessage.Add(new ConstMessage("Deletion Not Successfull!-Already In Use", "DNS01", "ERROR"));
             ConstMessage.Add(new ConstMessage("Items from this Bill already used, Cannot be deleted", "ITBD01", "ERROR"));
+            ConstMessage.Add(new ConstMessage("Item already exists with this HSN No", "ITHS01", "ERROR"));
             //
         }
 

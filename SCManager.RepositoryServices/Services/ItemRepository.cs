@@ -56,6 +56,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ItemObj.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _ItemObj.SCCode);
                                         _ItemObj.ItemCode = (sdr["ItemCode"].ToString() != "" ? (sdr["ItemCode"].ToString()) : _ItemObj.ItemCode);
                                         _ItemObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _ItemObj.Description);
+                                        _ItemObj.HsnNo = (sdr["HsnNo"].ToString() != "" ? (sdr["HsnNo"].ToString()) : _ItemObj.HsnNo);
                                         _ItemObj.CategoryID = (sdr["CategoryID"].ToString() != "" ? Guid.Parse(sdr["CategoryID"].ToString()) : _ItemObj.CategoryID);
                                         _ItemObj.Category = (sdr["Category"].ToString() != "" ? (sdr["Category"].ToString()) : _ItemObj.Category);
                                         _ItemObj.SubcategoryID = (sdr["SubcategoryID"].ToString() != "" ? Guid.Parse(sdr["SubcategoryID"].ToString()) : _ItemObj.SubcategoryID);
@@ -230,6 +231,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ItemObj.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _ItemObj.SCCode);
                                         _ItemObj.ItemCode = (sdr["ItemCode"].ToString() != "" ? (sdr["ItemCode"].ToString()) : _ItemObj.ItemCode);
                                         _ItemObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _ItemObj.Description);
+                                        _ItemObj.HsnNo = (sdr["HsnNo"].ToString() != "" ? (sdr["HsnNo"].ToString()) : _ItemObj.HsnNo);
                                         _ItemObj.CategoryID = (sdr["CategoryID"].ToString() != "" ? Guid.Parse(sdr["CategoryID"].ToString()) : _ItemObj.CategoryID);
                                         _ItemObj.Category = (sdr["Category"].ToString() != "" ? (sdr["Category"].ToString()) : _ItemObj.Category);
                                         _ItemObj.SubcategoryID = (sdr["SubcategoryID"].ToString() != "" ? Guid.Parse(sdr["SubcategoryID"].ToString()) : _ItemObj.SubcategoryID);
@@ -295,6 +297,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = itemObj.logDetails.CreatedBy;
                         cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = itemObj.logDetails.CreatedDate;
                         cmd.Parameters.Add("@ItemCode", SqlDbType.NVarChar, 50).Value = itemObj.ItemCode;
+                        cmd.Parameters.Add("@HsnNo", SqlDbType.NVarChar, 50).Value = itemObj.HsnNo;
 
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
@@ -352,6 +355,8 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = itemObj.logDetails.UpdatedBy;
                         cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = itemObj.logDetails.UpdatedDate;
                         cmd.Parameters.Add("@ItemCode", SqlDbType.NVarChar, 50).Value = itemObj.ItemCode;
+                        cmd.Parameters.Add("@HsnNo", SqlDbType.NVarChar, 50).Value = itemObj.HsnNo;
+
 
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;

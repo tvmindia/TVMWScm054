@@ -45,6 +45,7 @@
                             <th style="display:none;">ID</th>
                             <th>Item Code</th>
                             <th style="width:200px !important;">Description</th>
+                            <th>HSN No</th>
                             <th>Category</th>
                             <th>Sub Category</th>
                             <th>Stock Qty </th>
@@ -98,6 +99,19 @@
                                 </div>
                                 <div class="col-md-1 mandatory"></div>
                             </div>
+
+                            <div class="form-group">
+                                <div class="col-md-5">
+                                    @Html.LabelFor(model => model.HsnNo, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.HsnNo, new { htmlAttributes = new { @class = "form-control BlockEnter" } })
+                                    @Html.ValidationMessageFor(model => model.HsnNo, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-1 mandatory"></div>
+                            </div>
+
+
 
                             <div class="form-group">
                                 <div class="col-md-5">

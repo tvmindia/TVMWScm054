@@ -56,6 +56,12 @@ namespace SCManager.UserInterface.Models
         public List<SelectListItem> UOMList { get; set; }
         public List<SelectListItem> SubCategoryList { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
+
+        [Required(ErrorMessage = "Please enter HSN No")]
+        [Display(Name = "HSN No")]
+        [StringLength(50)]
+        public string HsnNo { get; set; }
+
     }
 
     public class ItemDropdownViewModel
