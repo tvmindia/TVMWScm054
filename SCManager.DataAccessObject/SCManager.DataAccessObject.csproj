@@ -136,6 +136,7 @@
     <Compile Include="DTO\ReceiveFromTechnician.cs" />
     <Compile Include="DTO\ReorderAlert.cs" />
     <Compile Include="DTO\Reports.cs" />
+    <Compile Include="DTO\ReturnBill.cs" />
     <Compile Include="DTO\SalesReturn.cs" />
     <Compile Include="DTO\ServiceCenter.cs" />
     <Compile Include="DTO\Job.cs" />

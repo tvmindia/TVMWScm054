@@ -64,6 +64,7 @@ namespace SCManager.RepositoryServices.Services
                                         _Form8Obj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _Form8Obj.Remarks);
                                         _Form8Obj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : _Form8Obj.VATAmount);
                                         _Form8Obj.Subtotal = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : _Form8Obj.Subtotal);
+                                        _Form8Obj.Total = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : _Form8Obj.Total);
                                         _Form8Obj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : _Form8Obj.Discount);
                                         _Form8Obj.TotalTaxAmount = (sdr["TotalTaxAmount"].ToString() != "" ? decimal.Parse(sdr["TotalTaxAmount"].ToString()) : _Form8Obj.TotalTaxAmount);
                                         _Form8Obj.GrandTotal = (sdr["GrandTotal"].ToString() != "" ? decimal.Parse(sdr["GrandTotal"].ToString()) : _Form8Obj.GrandTotal);
@@ -253,6 +254,7 @@ namespace SCManager.RepositoryServices.Services
                                         _Form8Obj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _Form8Obj.Remarks);
                                         _Form8Obj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : _Form8Obj.VATAmount);
                                         _Form8Obj.Subtotal = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : _Form8Obj.Subtotal);
+                                        _Form8Obj.Total = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : _Form8Obj.Total);
                                         _Form8Obj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : _Form8Obj.Discount);
                                        
                                     }

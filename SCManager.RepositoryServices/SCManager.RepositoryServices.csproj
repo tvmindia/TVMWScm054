@@ -137,6 +137,7 @@
     <Compile Include="Contracts\IReceiveFromOtherSCRepository.cs" />
     <Compile Include="Contracts\IReceiveFromTechnicianRepository.cs" />
     <Compile Include="Contracts\IReportRepository.cs" />
+    <Compile Include="Contracts\IReturnBillRepository.cs" />
     <Compile Include="Contracts\ISalesRepository.cs" />
     <Compile Include="Contracts\ISalesReturnRepository.cs" />
     <Compile Include="Contracts\ISubCategoryRepository.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Services\ReceiveFromOtherSCRepository.cs" />
     <Compile Include="Services\ReceiveFromTechnicianRepository.cs" />
     <Compile Include="Services\ReportRepository.cs" />
+    <Compile Include="Services\ReturnBillRepository.cs" />
     <Compile Include="Services\SalesRepository.cs" />
     <Compile Include="Services\SalesReturnRepository.cs" />
     <Compile Include="Services\SubCategoryRepository.cs" />

@@ -146,8 +146,8 @@ namespace SCManager.BusinessService.Services
             {
 
                 throw;
-            }
-         
+            }    
+
 
         }
     }

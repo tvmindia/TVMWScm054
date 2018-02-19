@@ -209,6 +209,7 @@ function EG_Rebind() {
 }
 
 function EG_Rebind_WithData(data, extra) {
+    debugger;
     var i = 0;
     if (data != null) {
         for (i = 0; i < data.length; i++) {

@@ -33,7 +33,7 @@
         </li>
         <li>
             <a id="AddTab" onclick="Add(1)" href="#DefectiveorDamagedEntry" data-toggle="tab" style="width:235px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Defective/Damaged Entry</a>
-        </li>
+        </li>       
 
     </ul>
     <div class="tab-content clearfix">
@@ -67,7 +67,7 @@
             <div class="col-md-12">&nbsp;</div>
             
             <div class="col-md-12">
-                <span id="MsgReturn" style="position: absolute;right: 0px;top:-15px;font-size: 12px;color: #b50808;display:none;">Item Not Returned! Use 'Return' option to physically return the item</span>
+                <span id="MsgReturn" style="position: absolute;right: 0px;top:-15px;font-size: 12px;color: #b50808;display:none;">Item Not Returned! Use 'Return Bill' option to physically return the item</span>
                 @using (Ajax.BeginForm("InsertUpdateDefectDamaged", "DefectiveorDamaged", new AjaxOptions { HttpMethod = "POST", Confirm = "", OnSuccess = "DefectiveDamagedSaveSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "formIns_Up" }))
             {
                     @Html.AntiForgeryToken()
