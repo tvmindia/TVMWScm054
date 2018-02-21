@@ -7,7 +7,15 @@ $(document).ready(function () {
     try {
         DataTables.tblInvoicesList = $('#tblInvoicesList').DataTable(
        {
-           dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+           //dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+           dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
+           buttons: [{
+               extend: 'excel',
+               exportOptions:
+                            {
+                                columns: [1, 2, 3, 4, 5, 6]
+                            }
+           }],
            order: [],
            searching: true,
            paging: true,
@@ -20,11 +28,12 @@ $(document).ready(function () {
                { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
             
              { "data": "Remarks", "defaultContent": "<i>-</i>" },
+               { "data": "ItemDescription", "defaultContent": "<i>-</i>" },
              { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
            ],
-           columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, 
+           columnDefs: [{ "targets": [0,6], "visible": false, "searchable": false }, 
                 { className: "text-right", "targets": [5] },
-           { className: "text-center", "targets": [1, 2, 3, 4, 5, 6] }
+           { className: "text-center", "targets": [1, 2, 3, 4, 5, 7] }
 
            ]
        });
@@ -50,6 +59,7 @@ $(document).ready(function () {
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.tblReceiveFromOtherSCDetails;
         List();
+        $(".buttons-excel").hide();
     } catch (x) {
 
         notyAlert('error', x.message);
@@ -572,4 +582,14 @@ function OtherScReceiptDetailDelete(id, rw) {
         return 0;
     }
 
+}
+
+function PrintReport() {
+    debugger;
+    try {
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        console.log(e.message);
+    }
 }

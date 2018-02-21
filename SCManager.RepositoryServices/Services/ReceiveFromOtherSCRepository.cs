@@ -53,7 +53,8 @@ namespace SCManager.RepositoryServices.Services
                                         _ReceiveFromOtherSClistObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _ReceiveFromOtherSClistObj.ID);
                                         _ReceiveFromOtherSClistObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).ToString("dd-MMM-yyyy") : _ReceiveFromOtherSClistObj.InvoiceDate);
                                         _ReceiveFromOtherSClistObj.InvoiceNo = (sdr["InvoiceNo"].ToString() != "" ? (sdr["InvoiceNo"].ToString()) : _ReceiveFromOtherSClistObj.InvoiceNo);
-                                       
+                                        _ReceiveFromOtherSClistObj.ItemDescription = (sdr["ItemDescription"].ToString() != "" ? (sdr["ItemDescription"].ToString()) : _ReceiveFromOtherSClistObj.ItemDescription);
+
                                         _ReceiveFromOtherSClistObj.FromSCName = (sdr["FromSCName"].ToString() != "" ? (sdr["FromSCName"].ToString()) : _ReceiveFromOtherSClistObj.FromSCName);
                                        
                                         _ReceiveFromOtherSClistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _ReceiveFromOtherSClistObj.Remarks);

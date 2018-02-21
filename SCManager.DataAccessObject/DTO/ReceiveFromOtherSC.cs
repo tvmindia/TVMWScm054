@@ -22,6 +22,7 @@ namespace SCManager.DataAccessObject.DTO
         public decimal? GrandTotal { get; set; }
         public List<ReceiveFromOtherScDetail> ReceiveFromOtherScDetail { get; set; }
         public string DetailXML { get; set; }
+        public string ItemDescription { get; set; }
 
     }
     public class ReceiveFromOtherScDetail
