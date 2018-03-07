@@ -127,6 +127,7 @@
     </Compile>
     <Compile Include="Contracts\IICRBillEntryRepository.cs" />
     <Compile Include="Contracts\IICRExpensesRepository.cs" />
+    <Compile Include="Contracts\IImportRepository.cs" />
     <Compile Include="Contracts\IIssueToOtherSCRepository.cs" />
     <Compile Include="Contracts\IIssueToTechnicianRepository.cs" />
     <Compile Include="Contracts\IItemRepository.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Services\Form8TaxInvoiceRepository.cs" />
     <Compile Include="Services\ICRBillEntryRepository.cs" />
     <Compile Include="Services\ICRExpensesRepository.cs" />
+    <Compile Include="Services\ImportRepository.cs" />
     <Compile Include="Services\IssueToOtherSCRepository.cs" />
     <Compile Include="Services\IssueToTechnicianRepository.cs" />
     <Compile Include="Services\ItemRepository.cs" />

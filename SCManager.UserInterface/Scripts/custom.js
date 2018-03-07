@@ -338,3 +338,14 @@ function IsVaildDateFormat(date) {
     var regExp = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:2[0-9][0-9][0-9])$|^(?:29(\/|-|\.)(?:0?2|(?:Feb)))\3(?:2[0-9][13579][26]|2[0-9][02468][048])$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:2[0-9][0-9][0-9])$/;
     return regExp.test(date);
 }
+
+function Attachment_Remove(link) {
+    debugger;
+    return;
+    var row = Attachment_FindRow(link);
+    if (!confirm("Are you sure you want to delete '" + row.getAttribute("filename") + "'?"))
+        return;
+    var guid = row.getAttribute("fileguid");
+    var table = document.getElementById("FileUpload1");
+    table.deleteRow(row.rowIndex);
+}

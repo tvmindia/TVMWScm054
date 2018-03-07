@@ -75,7 +75,8 @@ namespace SCManager.UserInterface.App_Start
             bundles.Add(new ScriptBundle("~/bundles/AMCBaseSummary").Include("~/Scripts/UserJS/AMCBaseSummary.js"));
             bundles.Add(new ScriptBundle("~/bundles/ProfitAndLossReport").Include("~/Scripts/UserJS/ProfitAndLossReport.js"));
             bundles.Add(new ScriptBundle("~/bundles/ReturnBill").Include("~/Scripts/UserJS/ReturnBill.js"));
-            
+            bundles.Add(new ScriptBundle("~/bundles/ImportForm8").Include("~/Scripts/UserJS/ImportForm8.js"));
+
 
         }
     }

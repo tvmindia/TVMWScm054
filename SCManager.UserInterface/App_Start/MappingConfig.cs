@@ -83,7 +83,9 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<ProfitAndLossReportViewModel, ProfitAndLossReport>().ReverseMap();
                 config.CreateMap<ReturnBillViewModel, ReturnBill>().ReverseMap();
                 config.CreateMap<ReturnBillDetailViewModel, ReturnBillDetail>().ReverseMap();
-                
+                config.CreateMap<ImportForm8ViewModel, ImportForm8>().ReverseMap();
+                config.CreateMap<UploadedFilesViewModel, UploadedFiles>().ReverseMap();
+
 
             });
         }

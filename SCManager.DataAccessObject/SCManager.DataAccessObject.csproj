@@ -122,6 +122,7 @@
     <Compile Include="DTO\Form8B.cs" />
     <Compile Include="DTO\ICRBillEntry.cs" />
     <Compile Include="DTO\ICRExpenses.cs" />
+    <Compile Include="DTO\ImportForm8.cs" />
     <Compile Include="DTO\IssueToOtherSC.cs" />
     <Compile Include="DTO\IssueToTechnician.cs" />
     <Compile Include="DTO\Item.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="DTO\Technician.cs" />
     <Compile Include="DTO\TechnicianJob.cs" />
     <Compile Include="DTO\UA.cs" />
+    <Compile Include="DTO\UploadedFiles.cs" />
     <Compile Include="DTO\UserAndRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
