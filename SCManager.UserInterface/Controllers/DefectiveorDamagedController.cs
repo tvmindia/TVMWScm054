@@ -291,6 +291,12 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.addbtn.Title = "Add New";
                     ToolboxViewModelObj.addbtn.Event = "Add();";
 
+                    ToolboxViewModelObj.returnBtn.Visible = true;
+                    ToolboxViewModelObj.returnBtn.Text = "Bill";
+                    ToolboxViewModelObj.returnBtn.Title = "Generate Bill";
+                    ToolboxViewModelObj.returnBtn.Event = "ReturnBill(this);";
+
+
                     break;
                
                 case "Add":
@@ -319,11 +325,10 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.deletebtn.Event = "Delete();";
 
                     ToolboxViewModelObj.returnBtn.Visible = true;
-                    ToolboxViewModelObj.returnBtn.Disable = true;
-                    ToolboxViewModelObj.returnBtn.Text = "Return";
-                    ToolboxViewModelObj.returnBtn.Title = "Return To Company";
-                    ToolboxViewModelObj.returnBtn.DisableReason = "Not applicable for new Defective/Damaged";
-                    ToolboxViewModelObj.returnBtn.Event = "ReturnToCompany();";
+                    ToolboxViewModelObj.returnBtn.Disable = false;
+                    ToolboxViewModelObj.returnBtn.Text = "Bill";
+                    ToolboxViewModelObj.returnBtn.Title = "Generate Bill";                   
+                    ToolboxViewModelObj.returnBtn.Event = "ReturnBill(this);";
 
                     break;
                 case "Edit":
@@ -347,7 +352,7 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.deletebtn.Title = "Delete Defective/Damaged";
                     ToolboxViewModelObj.deletebtn.Event = "Delete()";
 
-                    ToolboxViewModelObj.returnBtn.Visible = true;
+                    ToolboxViewModelObj.returnBtn.Visible = false;
                     ToolboxViewModelObj.returnBtn.Text = "Return";
                     ToolboxViewModelObj.returnBtn.Title = "Return To Company";
                     ToolboxViewModelObj.returnBtn.Event = "ReturnToCompany();";

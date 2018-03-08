@@ -588,3 +588,8 @@ function GetAllItemCode() {
 
 
 }
+
+
+function ReturnBill(this_obj) {
+    $(this_obj).attr("href", "ReturnBill/Index");
+}

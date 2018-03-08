@@ -48,6 +48,14 @@
       <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.12\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.12\lib\itextsharp.xmlworker.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -176,12 +184,15 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\LocalPurchaseController.cs" />
     <Compile Include="Controllers\OfficeBillEntryController.cs" />
+    <Compile Include="Controllers\PDFGeneratorController.cs" />
     <Compile Include="Controllers\ReceiveFromOtherSCController.cs" />
     <Compile Include="Controllers\ReceiveFromTechnicianController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\OpeningSettingController.cs" />
     <Compile Include="Controllers\OtherIncomeController.cs" />
+    <Compile Include="Controllers\ReturnBillController.cs" />
     <Compile Include="Controllers\SalesReturnController.cs" />
+    <Compile Include="Controllers\TaxBillEntryController.cs" />
     <Compile Include="Controllers\TCRBillEntryController.cs" />
     <Compile Include="Controllers\TechnicianController.cs" />
     <Compile Include="Controllers\TechnicianSalaryCalculationController.cs" />
@@ -216,15 +227,18 @@
     <Compile Include="Models\OfficeBillEntryViewModel.cs" />
     <Compile Include="Models\OpeningSettingViewModel.cs" />
     <Compile Include="Models\OtherIncomeViewModel.cs" />
+    <Compile Include="Models\PDFGeneratorViewModel.cs" />
     <Compile Include="Models\ReceiveFromOtherSCViewModel.cs" />
     <Compile Include="Models\ReceiveFromTechnicianViewModel.cs" />
     <Compile Include="Models\ReorderAlertViewModel.cs" />
     <Compile Include="Models\ReportViewModel.cs" />
+    <Compile Include="Models\ReturnBillViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SalesReturnViewModel.cs" />
     <Compile Include="Models\ServiceCenterViewModel.cs" />
     <Compile Include="Models\ServiceTypeViewModel.cs" />
     <Compile Include="Models\StockValueSummaryViewModel.cs" />
+    <Compile Include="Models\TaxBillEntryViewModel.cs" />
     <Compile Include="Models\TCRBillEntryViewModel.cs" />
     <Compile Include="Models\TechnicianViewModel.cs" />
     <Compile Include="Models\ToolboxViewModel.cs" />
@@ -412,6 +426,7 @@
     <Content Include="Content\images\scmanagerback1.JPG" />
     <Content Include="Content\images\stock.png" />
     <Content Include="Content\images\wrench.png" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="Content\UserCSS\DailyServiceReport.css" />
     <Content Include="Content\UserCSS\Form8.css" />
@@ -541,6 +556,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jszip.min.js" />
     <Content Include="Scripts\lightbox.min.js" />
+    <Content Include="Scripts\PDF.js" />
     <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\UserJS\AMCBaseSummary.js" />
     <Content Include="Scripts\UserJS\AmcReports.js" />
@@ -573,9 +589,11 @@
     <Content Include="Scripts\UserJS\ProfitAndLossReport.js" />
     <Content Include="Scripts\UserJS\ReceiveFromOtherSC.js" />
     <Content Include="Scripts\UserJS\ReceiveFromTechnician.js" />
+    <Content Include="Scripts\UserJS\ReturnBill.js" />
     <Content Include="Scripts\UserJS\StockLedger.js" />
     <Content Include="Scripts\UserJS\StockSummary.js" />
     <Content Include="Scripts\UserJS\SalesReturn.js" />
+    <Content Include="Scripts\UserJS\TaxBillEntry.js" />
     <Content Include="Scripts\UserJS\TCRBillEntry.js" />
     <Content Include="Scripts\UserJS\TechnicianPerformance.js" />
     <Content Include="Scripts\UserJS\TechnicianSalaryCalculation.js" />
@@ -645,10 +663,17 @@
     <Content Include="Views\UserProfile\BuildMember.cshtml" />
     <Content Include="Views\Report\AMCBaseSummary.cshtml" />
     <Content Include="Views\Report\ProfitAndLoss.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\ReturnBill\Index.cshtml" />
+    <Content Include="Views\TaxBillEntry\Index.cshtml" />
+    <Content Include="Views\TaxBillEntry\_TaxBillView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />
+    <Folder Include="Content\Uploads\" />
     <Folder Include="Views\OfficeStockReport\" />
+    <Folder Include="Views\PDFGenerator\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

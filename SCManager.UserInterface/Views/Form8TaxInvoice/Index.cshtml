@@ -63,7 +63,7 @@
                             <th style="display:none">Items Total (₹)</th>
                             <th style="display:none">VAT Amount (₹)</th>
                             <th style="display:none">Discount (₹)</th>
-                            <th style="display:none">Total (₹)</th>
+                            <th>Total (₹)</th>
                             <th>Total Tax Amount (₹)</th> 
                             <th>Grand Total (₹)</th>
                             <th>Remarks</th>
@@ -282,6 +282,15 @@
 
                        <div class="form-group">
                            <div class="col-md-6">
+                               @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label" })
+                           </div>
+                           <div class="col-md-6">
+                               @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control Amount", @readonly = "readonly",@id = "total" } })
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <div class="col-md-6">
                                @Html.LabelFor(model => model.TotalTaxAmount, htmlAttributes: new { @class = "control-label" })
                            </div>
                            <div class="col-md-6">
@@ -314,6 +323,7 @@
 </div>
 <datalist id="Materials" onfocus='this.size=10;' onblur='this.size=1;' 
         onchange='this.size=1; this.blur();'>  </datalist>
+
 @section Scripts {
     @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/datatable")
    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/jqueryunobtrusiveajaxvalidate")

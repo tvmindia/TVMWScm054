@@ -21,28 +21,27 @@ $(document).ready(function () {
                { "data": "InvoiceDateFormatted" },
                { "data": "SaleOrderNo", "defaultContent": "<i>-</i>" },
                { "data": "PONo", "defaultContent": "<i>-</i>" },
-
                { "data": "Subtotal", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "VATAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "Discount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-             
+               { "data": "Total", render: function (data, type, row) { debugger; return roundoff(data, 1); },"defaultContent":"<i>-</i>" },     
 
-               { "data": "TotalTaxAmount", render: function (data, type, row) { debugger; return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-               { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "TotalTaxAmount", render: function (data, type, row) { debugger; return roundoff(data); }, "defaultContent": "<i>-</i>" },
+               { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data,1); }, "defaultContent": "<i>-</i>" },
                                         
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [1], "visible": false, "searchable": false },{"targets": [6,7,8], "visible": false},
-                { className: "text-left", "targets": [2,11] },
-                { className: "text-right", "targets": [9,10] },
+                { className: "text-left", "targets": [2] },
+                { className: "text-right", "targets": [9,10,11] },
                 { className: "text-center", "targets": [3, 4, 5] },
                   { "width": "15%", "targets": 4 },
                   { "width": "15%", "targets": 9 },
                   { "width": "15%", "targets": 10 },
                   { "width": "15%", "targets": 11 },
 
-                { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] }
+                { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12] }
              ]
          });
 
@@ -128,10 +127,10 @@ function EG_Columns() {
                 { "data": "BasicAmount", render: function (data, type, row) { return roundoff(data,1); }, "defaultContent": "<i></i>" },
                 { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'TradeDiscount', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "CGSTPercentage", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'CGSTPercentage', 'CalculateCGST')); }, "defaultContent": "<i></i>" },
-                { "data": "CGSTAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i></i>" },
+                { "data": "CGSTAmount", render: function (data, type, row) { debugger; return roundoff(data,1); }, "defaultContent": "<i></i>" },
                 { "data": "SGSTPercentage", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'SGSTPercentage', 'CalculateSGST')); }, "defaultContent": "<i></i>" },
-                { "data": "SGSTAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i></i>" },
-                { "data": "NetAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i></i>" },
+                { "data": "SGSTAmount", render: function (data, type, row) { return roundoff(data,1); }, "defaultContent": "<i></i>" },
+                { "data": "NetAmount", render: function (data, type, row) { return roundoff(data,1); }, "defaultContent": "<i></i>" },
                 { "data": null, "orderable": false, "defaultContent": '<a href="#" class="DeleteLink"  onclick="DeleteItem(this)" ><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>' }
 
     ]
@@ -221,7 +220,7 @@ function BindForm8(id) {
 }
 
 function BindForm8Fields(Records) {
-    try { 
+    try {
         $('#HeaderID').val(Records.ID);
         $('#InvNo').val(Records.InvoiceNo);        
         $('#Remarks').val(Records.Remarks);
@@ -231,6 +230,7 @@ function BindForm8Fields(Records) {
         $('#subtotal').val(roundoff(Records.Subtotal));
         $('#vatamount').val(roundoff(Records.VATAmount));
         $('#discount').val(roundoff(Records.Discount));
+        $('#total').val(roundoff(Records.Total));
         $('#totaltaxamount').val(roundoff(Records.TotalTaxAmount));
         $('#grandtotal').val(roundoff(Records.GrandTotal));       
         $('#Total').val(roundoff(Records.GrandTotal - Records.VATAmount));
@@ -407,7 +407,7 @@ function reset() {
     EG_ClearTable();
     EG_AddBlankRows(5);
     $('#discount').val('');
-    $('#Total').val('');
+    $('#total').val('');
     $('#totaltaxamount').val('');
     $('#grandtotal').val('');
     $('#subtotal').val('');
@@ -533,12 +533,12 @@ function CalculateCGST(row,avoidSummary) {
     EGrate = EG_GridData[row - 1]["Rate"];
     EGdic = EG_GridData[row - 1]["TradeDiscount"];
     EGcgst = EG_GridData[row - 1]["CGSTPercentage"];
-    
-
+   
     qty = parseFloat(EGqty) || 0;
     rate = parseFloat(EGrate) || 0;
     dic = parseFloat(EGdic) || 0;
     cgst = parseFloat(EGcgst) || 0;
+   
    
 
     if (dic > (qty * rate)) {
@@ -552,11 +552,13 @@ function CalculateCGST(row,avoidSummary) {
     EG_GridData[row - 1]['BasicAmount'] = roundoff(qty * rate);
     EG_GridData[row - 1]['TradeDiscount'] = roundoff(dic);
     EG_GridData[row - 1]["CGSTPercentage"] = roundoff(cgst);
-    EG_GridData[row - 1]['CGSTAmount'] = roundoff(((qty * rate) - (dic)) * (cgst / 100));
+    EG_GridData[row - 1]['CGSTAmount'] = roundoff(((qty * rate) - (dic)) * (cgst / 100));    
+    EG_GridData[row - 1]['SGSTPercentage'] = roundoff(cgst);
+    EG_GridData[row - 1]['SGSTAmount'] = roundoff(((qty * rate) - (dic)) * (cgst / 100));
 
     if (avoidSummary == undefined || avoidSummary == false) {
         EG_Rebind();
-        AmountSummary();
+        AmountSummary();        
     }
 }
 
@@ -614,7 +616,8 @@ function CalculateSGST(row, avoidSummary) {
 
 //----------------------Finding TotalTaxAmount and  GrandTotal------------------//
 function AmountSummary() {
-    debugger; 
+    debugger;
+    var t1 = 0.00;
     var total = 0.00;
     var cgstamount = 0.00;   
     var sgstamount = 0.00;  
@@ -633,9 +636,11 @@ function AmountSummary() {
         discount = (parseFloat(EG_GridData[i]['TradeDiscount']) || 0);
         cgstamount = (parseFloat(EG_GridData[i]['CGSTAmount']) || 0);
         sgstamount = (parseFloat(EG_GridData[i]['SGSTAmount']) || 0);
+        t1 = t1 + ((quant * rate) - (discount));
         total = total + ((quant * rate) - (discount) + (cgstamount + sgstamount)); // GrandTotal calculation
         taxtotal = taxtotal + ( cgstamount + sgstamount );  // TotalTaxAmount calculation
     }
+    $('#total').val(roundoff(t1));
     $('#grandtotal').val(roundoff(total));
     $('#totaltaxamount').val(roundoff(taxtotal));
 
@@ -711,8 +716,6 @@ function FillUOM(row) {
     }
 
 }
-
-
 
 //function validateForm() {
 

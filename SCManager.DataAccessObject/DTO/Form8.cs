@@ -28,6 +28,7 @@ namespace SCManager.DataAccessObject.DTO
         public decimal Discount { get; set; }
         public LogDetails logDetails { get; set; }
 
+        public decimal Total { get; set; }
         public decimal GrandTotal { get; set; }
         public decimal TotalTaxAmount { get; set; }
 

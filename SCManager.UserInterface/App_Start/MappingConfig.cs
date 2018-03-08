@@ -81,8 +81,10 @@ namespace SCManager.UserInterface.App_Start
                 config.CreateMap<AmcReportViewModel, AmcReport>().ReverseMap();
                 config.CreateMap<AmcBaseValueSummaryViewModel, AmcBaseValueSummary>().ReverseMap();
                 config.CreateMap<ProfitAndLossReportViewModel, ProfitAndLossReport>().ReverseMap();
-                
-
+                config.CreateMap<ReturnBillViewModel, ReturnBill>().ReverseMap();
+                config.CreateMap<ReturnBillDetailViewModel, ReturnBillDetail>().ReverseMap();
+                config.CreateMap<TaxBillEntryViewModel, TaxBillEntry>().ReverseMap();
+                config.CreateMap<TaxBillEntryDetailViewModel, TaxBillEntryDetail>().ReverseMap();
             });
         }
     }

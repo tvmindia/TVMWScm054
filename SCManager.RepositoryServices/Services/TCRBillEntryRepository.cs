@@ -190,8 +190,8 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@PaymentRefNo", SqlDbType.NVarChar, 50).Value = tCRBillEntry.PaymentRefNo;
                         cmd.Parameters.Add("@DetailXML", SqlDbType.Xml).Value = tCRBillEntry.DetailXML;
 
-                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = UA.UserName;
-                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = UA.CurrentDatetime();
+                        cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = UA.UserName;
+                        cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = UA.CurrentDatetime();
 
                         outputStatus = cmd.Parameters.Add("@Status", SqlDbType.SmallInt);
                         outputStatus.Direction = ParameterDirection.Output;

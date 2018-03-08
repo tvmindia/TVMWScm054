@@ -1,0 +1,112 @@
+﻿@model SCManager.UserInterface.Models.TaxBillEntryViewModel
+
+
+    <div id="divTaxBillDetails">
+    <table border="0" style="width:100%;" >
+        <tr style="border-bottom:2px;border-bottom-color:#000000;border-bottom-style:solid;">
+            <td style= "width:50%;text-align:center; border-bottom: thin solid;">
+                <span style="font-size:15px;font-weight:bold;">TAX BILL</span> 
+              
+            </td>
+        </tr>
+       
+    </table>
+    
+   
+        
+        <div style="width:700px;height:15px;"></div>
+        <div style="padding-left:100px;">
+            <table border="0" style="width:100%;">
+                <tr>
+                    <td>
+                        <div style="">
+                            <table border="0">
+                                <tr>
+                                    <td></td>
+
+                                <tr>
+                                    <td style="font-size:12px;">Technician &nbsp;:&nbsp;<b><label id="lblTechnician"></label></b></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size:12px;">Bill No &nbsp;:&nbsp;<b><label id="lblBillNo"></label></b></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size:12px;">Bill Date &nbsp;:&nbsp;<b><label id="lblBillDate"></label></b></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size:12px;">Mode Of Payment&nbsp;:&nbsp;<b><label id="lblModeOfPayment"></label></b></td>
+
+                                </tr>
+
+                                <tr><td style="font-size:12px;">Payment Reference No&nbsp;:&nbsp;<b><label id="lblPaymentReferenceNo"></label></b></td></tr>
+                            </table>
+                        </div>
+                    </td>
+
+
+                    <td>
+                        <div style="padding-right:200px;">
+                            <table border="0">
+
+
+                                <tr>
+                                    <td style="font-size:12px;">Customer Name &nbsp;:&nbsp;<b><label id="lblCustomerName"></label></b></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size:12px;">Customer Contact &nbsp;:&nbsp;<b><label id="lblCustomerContact"></label></b></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size:12px;">Customer Location &nbsp;:&nbsp;<b><label id="lblCustomerLocation"></label></b></td>
+                                </tr>
+                                <tr><td style="font-size:12px;">Remarks &nbsp;:&nbsp;<b><label id="lblRemarks"></label></b></td></tr>
+
+
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+        <div id="customtbl" class="" style="padding-left:40px;"></div>
+        <div style="padding-left:500px;">
+            <br />
+            <br />
+            <table border="0" style="width:100%;">
+                <tr>
+                    <td style="font-size:12px">Sub ToTal &nbsp;:&nbsp;</td>
+                    <td style="font-size:12px;text-align:right;"><b><label id="lblSubTotal"></label></b></td>
+                </tr>
+                <tr>
+                    <td style="font-size:12px">Discount &nbsp;:&nbsp;</td>
+                    <td style="font-size:12px;text-align:right;"><b><label id="lblDiscount"></label></b></td>
+                </tr>
+
+                <tr>
+                    <td style="font-size:12px">Total &nbsp;:&nbsp;</td>
+                    <td style="font-size:12px;text-align:right;"><b><label id="lblTotal"></label></b></td>
+                </tr>
+                <tr>
+                    <td style="font-size:12px">Tax % &nbsp;:&nbsp;</td>
+                    <td style="font-size:12px;text-align:right;"><b><label id="lblTax"></label><label id="lblTaxPercentage"></label></b></td>                  
+                   
+                </tr>
+                <tr>
+                    <td style="font-size:12px">Service Charge &nbsp;:&nbsp;</td>
+                    <td style="font-size:12px;text-align:right;"><b><label id="lblServiceCharge"></label></b></td>
+                </tr>
+                <tr>
+                    <td style="font-size:12px">Grand Total &nbsp;:&nbsp;</td>
+                    <td style="font-size:12px;text-align:right;"><b><label id="lblGrandtotal"></label></b></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+  

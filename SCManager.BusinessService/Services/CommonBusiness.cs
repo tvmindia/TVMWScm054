@@ -390,5 +390,69 @@ namespace SCManager.BusinessService.Services
             return result;  
 
         }
+
+        public string GetXMLfromReturnBill(List<ReturnBillDetail> myObj, string mandatoryProperties, UA ua)
+        {
+            string result = "<Details>";
+            int totalRows = 0;
+            try
+            {
+                int mandIndx = getMAndatoryIndex(myObj[0], mandatoryProperties);
+
+                foreach (object some_object in myObj)
+                {
+                    XML(some_object, mandIndx, ref result, ref totalRows);
+                }
+                result = result + "</Details>";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            if (totalRows > 0)
+            {
+                return result;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+
+        public string GetXMLfromTaxObject(List<TaxBillEntryDetail> taxDetailObj, string mandatoryProperties, UA ua)
+        {
+            string result = "<Details>";
+            int totalRows = 0;
+            try
+            {
+                //-------------------------//
+                int mandIndx = getMAndatoryIndex(taxDetailObj[0], mandatoryProperties);              
+
+                foreach (object some_object in taxDetailObj)
+                {
+                    XML(some_object, mandIndx, ref result, ref totalRows);
+
+                }
+
+                result = result + "</Details>";
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            if (totalRows > 0)
+            {
+                return result;
+            }
+            else
+            {
+                return "";
+            }
+
+        }
     }
 }

@@ -135,9 +135,11 @@
     <Compile Include="Contracts\IReceiveFromOtherSCBusiness.cs" />
     <Compile Include="Contracts\IReceiveFromTechnicianBusiness.cs" />
     <Compile Include="Contracts\IReportBusiness.cs" />
+    <Compile Include="Contracts\IReturnBillBusiness.cs" />
     <Compile Include="Contracts\ISalesBusiness.cs" />
     <Compile Include="Contracts\ISalesReturnBusiness.cs" />
     <Compile Include="Contracts\ISubCategoriesBusiness.cs" />
+    <Compile Include="Contracts\ITaxBillEntryBusiness.cs" />
     <Compile Include="Contracts\ITCRBillEntryBusiness.cs" />
     <Compile Include="Contracts\ITechnicianBusiness.cs" />
     <Compile Include="Contracts\ITechnicianSalaryCalculationBusiness.cs" />
@@ -168,9 +170,11 @@
     <Compile Include="Services\ReceiveFromOtherSCBusiness.cs" />
     <Compile Include="Services\ReceiveFromTechnicianBusiness.cs" />
     <Compile Include="Services\ReportBusiness.cs" />
+    <Compile Include="Services\ReturnBillBusiness.cs" />
     <Compile Include="Services\SalesBusiness.cs" />
     <Compile Include="Services\SalesReturnBusiness.cs" />
     <Compile Include="Services\SubCategoriesBusiness.cs" />
+    <Compile Include="Services\TaxBillEntryBusiness.cs" />
     <Compile Include="Services\TCRBillEntryBusiness.cs" />
     <Compile Include="Services\TechnicianBusiness.cs" />
     <Compile Include="Services\TechnicianSalaryCalculationBusiness.cs" />

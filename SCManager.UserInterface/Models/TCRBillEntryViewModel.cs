@@ -38,7 +38,7 @@ namespace SCManager.UserInterface.Models
         public string PaymentMode { get; set; }
         [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }
-        [Display(Name = "VAT %")]
+        [Display(Name = "Tax %")]
         public decimal? VATAmount { get; set; }
         [Range(0, 9999999999999999.99)]
         public decimal? Discount { get; set; }
@@ -68,6 +68,7 @@ namespace SCManager.UserInterface.Models
         public List<SelectListItem> JobNoList { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
         public List<TCRBillEntryDetailViewModel> TCRBillEntryDetail { get; set; }
+        public Guid? TcrID { get; set; }
         
     }
 

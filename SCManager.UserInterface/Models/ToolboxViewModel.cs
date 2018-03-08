@@ -14,7 +14,7 @@ namespace SCManager.UserInterface.Models
         public ToolBoxStructure resetbtn;        
         public ToolBoxStructure returnBtn;
         public ToolBoxStructure calculateBtn;
-        public ToolBoxStructure PrintBtn;
+        public ToolBoxStructure PrintBtn;       
     }
 
     public struct ToolBoxStructure
