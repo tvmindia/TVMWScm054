@@ -195,9 +195,11 @@ function GetAllForm8() {
 
 function BindForm8(id) {
     try {
+        debugger;
         var data = { "ID": id };
         var ds = {};
         ds = GetDataFromServer("Form8TaxInvoice/GetForm8/", data);
+        debugger;
         if (ds != '') {
             ds = JSON.parse(ds);
         }
@@ -371,6 +373,7 @@ function RestForm8() {
 }
 
 function Edit(currentObj) {
+    debugger;
     showLoader();
     var rowData = DataTables.eventTable.row($(currentObj).parents('tr')).data();
     //Event Request Case
@@ -518,7 +521,8 @@ function CalculateAmount(row) {
 
 }
 //---------------------Finding CGST Amount---------------------//
-function CalculateCGST(row,avoidSummary) {
+function CalculateCGST(row, avoidSummary) {
+    debugger;
     var qty = 0.00;
     var rate = 0.00;
     var dic = 0.00;

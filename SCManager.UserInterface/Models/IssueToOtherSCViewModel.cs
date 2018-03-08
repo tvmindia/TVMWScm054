@@ -35,6 +35,7 @@ namespace SCManager.UserInterface.Models
         public String DetailJSON { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
         public List<IssueToOtherSCDetailViewModel> IssueToOtherSCDetail { get; set; }
+        public string ItemDescription { get; set; }
     }
     public class IssueToOtherSCDetailViewModel
     {

@@ -179,6 +179,7 @@
     <Compile Include="Controllers\Form8TaxInvoiceController.cs" />
     <Compile Include="Controllers\ICRBillEntryController.cs" />
     <Compile Include="Controllers\ICRExpensesController.cs" />
+    <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\IssueToOtherSCController.cs" />
     <Compile Include="Controllers\IssueToTechnicianController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Models\Form8ViewModel.cs" />
     <Compile Include="Models\ICRBillEntryViewModel.cs" />
     <Compile Include="Models\ICRExpensesViewModel.cs" />
+    <Compile Include="Models\ImportForm8ViewModel.cs" />
     <Compile Include="Models\IssueToOtherSCViewModel.cs" />
     <Compile Include="Models\IssueToTechnicianViewModel.cs" />
     <Compile Include="Models\ItemViewModel.cs" />
@@ -242,6 +244,7 @@
     <Compile Include="Models\TCRBillEntryViewModel.cs" />
     <Compile Include="Models\TechnicianViewModel.cs" />
     <Compile Include="Models\ToolboxViewModel.cs" />
+    <Compile Include="Models\UploadedFilesViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -410,6 +413,8 @@
     <Content Include="Content\images\back.png" />
     <Content Include="Content\images\calculate.png" />
     <Content Include="Content\images\calendar.png" />
+    <Content Include="Content\images\Download.png" />
+    <Content Include="Content\images\history.png" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\employees.png" />
     <Content Include="Content\images\favicon.ico" />
@@ -576,6 +581,7 @@
     <Content Include="Scripts\UserJS\Form8B.js" />
     <Content Include="Scripts\UserJS\ICRBillEntry.js" />
     <Content Include="Scripts\UserJS\ICRExpenses.js" />
+    <Content Include="Scripts\UserJS\ImportForm8.js" />
     <Content Include="Scripts\UserJS\IncomeExpenseReport.js" />
     <Content Include="Scripts\UserJS\IssueToOtherSC.js" />
     <Content Include="Scripts\UserJS\IssueToTechnician.js" />
@@ -668,6 +674,8 @@
     <Content Include="Views\ReturnBill\Index.cshtml" />
     <Content Include="Views\TaxBillEntry\Index.cshtml" />
     <Content Include="Views\TaxBillEntry\_TaxBillView.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Import\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />
@@ -676,7 +684,9 @@
     <Folder Include="Views\PDFGenerator\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SCManager.BusinessService\SCManager.BusinessService.csproj">
