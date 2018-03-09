@@ -216,26 +216,10 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Connection = con;
                        
                         cmd.CommandText = "[UpdateTaxBillEntryDetail]";
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add("@IsActive", SqlDbType.Int).Value = taxBillEntry.IsActive;
+                        cmd.CommandType = CommandType.StoredProcedure;                      
                         cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = taxBillEntry.ID;                        
-                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
-                        cmd.Parameters.Add("@BillNo", SqlDbType.NVarChar, 50).Value = taxBillEntry.BillNo;
-                        cmd.Parameters.Add("@BillDate", SqlDbType.SmallDateTime).Value = taxBillEntry.BillDate;
-                        cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = taxBillEntry.EmpID;
-                        cmd.Parameters.Add("@JobNo", SqlDbType.NVarChar, 50).Value = taxBillEntry.JobNo;
-                        cmd.Parameters.Add("@CustomerName", SqlDbType.NVarChar, 250).Value = taxBillEntry.CustomerName;
-                        cmd.Parameters.Add("@CustomerContactNo", SqlDbType.NVarChar, 50).Value = taxBillEntry.CustomerContactNo;
-                        cmd.Parameters.Add("@CustomerLocation", SqlDbType.NVarChar, 50).Value = taxBillEntry.CustomerLocation;
-                        cmd.Parameters.Add("@PaymentMode", SqlDbType.NVarChar, 20).Value = taxBillEntry.PaymentMode;
-                        cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = taxBillEntry.Remarks;
-                        cmd.Parameters.Add("@VATAmount", SqlDbType.Decimal).Value = taxBillEntry.VATAmount;
-                        cmd.Parameters.Add("@Discount", SqlDbType.Decimal).Value = taxBillEntry.Discount;
-                        cmd.Parameters.Add("@ServiceCharge", SqlDbType.Decimal).Value = taxBillEntry.ServiceCharge;
-                        cmd.Parameters.Add("@ServiceChargeComm", SqlDbType.Decimal).Value = taxBillEntry.SCCommAmount;                       
-                        cmd.Parameters.Add("@PaymentRefNo", SqlDbType.NVarChar, 50).Value = taxBillEntry.PaymentRefNo;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;                       
                         cmd.Parameters.Add("@DetailXML", SqlDbType.Xml).Value = taxBillEntry.DetailXML;
-
                         cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = UA.UserName;
                         cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = UA.CurrentDatetime();
                        

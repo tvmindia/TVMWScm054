@@ -141,9 +141,9 @@ function EG_Columns_Settings() {
           { "width": "10%", "targets": 9 },
           { "width": "5%", "targets": 10 },
         { className: "text-right", "targets": [8] },
-        { className: "text-center", "targets": [10] },
+        { className: "text-center", "targets": [] },
         { className: "text-right disabled", "targets": [7,9] },
-        { className: "text-center disabled", "targets": [2,5,6] },
+        { className: "text-center disabled", "targets": [2,5,6,10] },
          { className: "text-left disabled", "targets": [3,4] },
         { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8,9,10] }
 

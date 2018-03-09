@@ -332,6 +332,7 @@ function Add() {
         debugger;
         ResetForm();
         RestReturnBill();
+        EnableReturnBillFields();
         // ticketNo = $('#TicketNo').val();
         $('#TicketNo').show();
         $('#TicketNo').prop('disabled', false);
@@ -483,6 +484,28 @@ function ReturnFields()
     $("#CGstIn").prop('disabled', true);
     $("#Place").prop('disabled', true);
 }
+
+function EnableReturnBillFields()
+{
+    $("#InvNo").prop('disabled', false);
+    $("#InvDate").prop('disabled', false);
+    $("#Remarks").prop('disabled', false);
+    $("#CName").prop('disabled', false);
+    $("#CPhoneNo").prop('disabled', false);
+    $("#CAddress").prop('disabled', false);
+    $("#SName").prop('disabled', false);
+    $("#SPhoneNo").prop('disabled', false);
+    $("#SAddress").prop('disabled', false);
+    $("#CEmail").prop('disabled', false);
+    $("#SEmail").prop('disabled', false);
+    $("#CGstIn").prop('disabled', false);
+    $("#SGstIn").prop('disabled', false);
+    $("#CPanNo").prop('disabled', false);
+    $("#SPanNo").prop('disabled', false);
+    $("#CGstIn").prop('disabled', false);
+    $("#Place").prop('disabled', false);
+}
+
 
 function save() {
     debugger;

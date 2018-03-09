@@ -121,7 +121,7 @@ namespace SCManager.UserInterface.Controllers
                 string ReadableFormat = JsonConvert.SerializeObject(ResultFromJS);
                 TaxBillEntryViewModel.TaxBillEntryDetail = JsonConvert.DeserializeObject<List<TaxBillEntryDetailViewModel>>(ReadableFormat);
                 TaxBillEntryViewModel result = Mapper.Map<TaxBillEntry, TaxBillEntryViewModel>(_iTaxBillEntryBusiness.UpdateTaxBill(Mapper.Map<TaxBillEntryViewModel, TaxBillEntry>(TaxBillEntryViewModel), ua));
-                return JsonConvert.SerializeObject(new { Result = "OK", Records = result });
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = result,Message="Updation Successfull" });
               
 
             }
@@ -156,7 +156,7 @@ namespace SCManager.UserInterface.Controllers
 
 
 
-                #region ButtonStyling
+               #region ButtonStyling
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
