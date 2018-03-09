@@ -511,7 +511,7 @@ color: #e32;
         cursor: pointer;
     }
 
- li.active{
+ li.activenav{
      background-color: white!important;
      border-bottom:#555555 solid 3px;
      border-top-color: white;

@@ -305,9 +305,9 @@ function Validate() {
         $("#importRow").show();
         $("#uploadRow").hide();
         $("#finalRow").hide();
-        $("#li2").addClass("active");
-        $("#li1").removeClass("active");
-        $("#li3").removeClass("active");
+        $("#li2").addClass("activenav");
+        $("#li1").removeClass("activenav");
+        $("#li3").removeClass("activenav");
         var FileObject = new Object;
         FileObject.Controller = "/Import/ValidateUploadFile";
         UploadFile(FileObject);
@@ -358,9 +358,9 @@ function Cancel() {
     $("#finalRow").hide();
     $("#ErrorBar").hide();
     $("#ErrorData").hide();
-    $("#li1").addClass("active");
-    $("#li2").removeClass("active");
-    $("#li3").removeClass("active");
+    $("#li1").addClass("activenav");
+    $("#li2").removeClass("activenav");
+    $("#li3").removeClass("activenav");
     $("fileError").hide();
     $("noError").hide();
     $('#dataError').hide();
@@ -377,9 +377,9 @@ function SaveSuccess() {
         var FileObject = new Object;
         FileObject.Controller = "/Import/UploadFile";
         UploadFile(FileObject);
-        $("#li3").addClass("active");
-        $("#li1").removeClass("active");
-        $("#li2").removeClass("active");
+        $("#li3").addClass("activenav");
+        $("#li1").removeClass("activenav");
+        $("#li2").removeClass("activenav");
     }
     catch (e) {
         notyAlert('error', e.message);
