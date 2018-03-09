@@ -107,7 +107,17 @@ $(document).ready(function () {
               { "data": "FilePath", "defaultContent": "<i>-</i>" },
               { "data": "FileType", "defaultContent": "<i>-</i>" },
               { "data": "RecordCount", "defaultContent": "<i>-</i>" },
-              { "data": "FileStatus", "defaultContent": "<i>-</i>" }
+              {
+                  "data": "FileStatus", render(data, type, row) {
+                      if (data === "Successfully Imported") {
+                          return '<span style="color:green">'+data+'</span>'
+                      }
+                      else
+                      {
+                          return '<span style="color:red">' + data + '</span>'
+                      }
+                  }
+                  , "defaultContent": "<i>-</i>" }
             ],
             columnDefs: [
                { className: "text-center", "targets": [0] },

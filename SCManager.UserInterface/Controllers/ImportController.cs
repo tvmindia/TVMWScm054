@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using SCManager.BusinessService.Contracts;
 using SCManager.DataAccessObject.DTO;
+using SCManager.UserInterface.CustomAttributes;
 using SCManager.UserInterface.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Web.Mvc;
 
 namespace SCManager.UserInterface.Controllers
 {
+    [CustomAuthenticationFilter]
     public class ImportController : Controller
     {
         #region Constructor_injection
@@ -25,6 +27,7 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion Constructor_injection
 
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult Index()
         {
             return View();
@@ -34,6 +37,7 @@ namespace SCManager.UserInterface.Controllers
         #region GetAllUploadedFile
         [HttpGet]
 
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllUploadedFile()
         {
             try
@@ -51,6 +55,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region UploadFile
         [HttpPost]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult UploadFile()
         {
             UploadedFilesViewModel uploadedFilesVM = new UploadedFilesViewModel();
@@ -130,6 +135,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region ValidateUploadFile
         [HttpPost]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult ValidateUploadFile()
         {
             UploadedFilesViewModel uploadedFilesVM = new UploadedFilesViewModel();
@@ -246,7 +252,7 @@ namespace SCManager.UserInterface.Controllers
 
         #region DownloadTemplate
         [HttpGet]
-
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult DownloadTemplate()
         {
             string filename = "Form8_00.00.0000_F0.xlsx";
@@ -255,7 +261,8 @@ namespace SCManager.UserInterface.Controllers
             return File(filepath, contentType, filename);
         }
         #endregion DownloadTemplate
-        
+
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult ChangeButtonStyle(string ActionType)
         {
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();

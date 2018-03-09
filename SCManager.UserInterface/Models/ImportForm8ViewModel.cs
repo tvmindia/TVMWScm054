@@ -11,7 +11,7 @@ namespace SCManager.UserInterface.Models
         public Guid ID { get; set; }
         public string InvoiceNo { get; set; }
         public string InvoiceDate { get; set; }
-        public string SaleOrderNo { get; set; }
+        public string SalesOrderNo { get; set; }
         public string ChallanNo { get; set; }
         public string ChallanDate { get; set; }
         public string PONo { get; set; }
