@@ -187,7 +187,7 @@ namespace SCManager.BusinessService.Services
                     ImportForm8 form8 = new ImportForm8();
                     form8.InvoiceNo = row["InvoiceNo"].ToString().Trim();
                     form8.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString().Trim()).ToString(settings.dateformat);
-                    form8.SaleOrderNo = row["SalesOrderNo"].ToString().Trim();
+                    form8.SalesOrderNo = row["SalesOrderNo"].ToString().Trim();
                     form8.ChallanDate = DateTime.Parse(row["ChallanDate"].ToString().Trim()).ToString(settings.dateformat);
                     form8.ChallanNo = row["ChallanNo"].ToString().Trim();
                     form8.PONo = row["PONo"].ToString().Trim();
@@ -252,7 +252,7 @@ namespace SCManager.BusinessService.Services
                     InvoiceDate = importForm8.InvoiceDate,
                     ChallanNo = importForm8.ChallanNo,
                     ChallanDate = importForm8.ChallanDate,
-                    SaleOrderNo = importForm8.SaleOrderNo,
+                    SaleOrderNo = importForm8.SalesOrderNo,
                     PONo = importForm8.PONo,
                     PODate = importForm8.PODate,
                     Discount = importForm8.Discount,
