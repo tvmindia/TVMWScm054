@@ -33,30 +33,26 @@ $(document).ready(function () {
                   },
                   "defaultContent": "<i>-</i>"
               },
-              { "data": "InvoiceNo", "defaultContent": "<i>-</i>" },
+              { "data": "InvoiceNo", "defaultContent": "<i>-</i>" },//2
               { "data": "InvoiceDate", "defaultContent": "<i>-</i>" },
               { "data": "SalesOrderNo", "defaultContent": "<i>-</i>" },
               { "data": "ChallanNo", "defaultContent": "<i>-</i>" },
               { "data": "ChallanDate", "defaultContent": "<i>-</i>" },
               { "data": "PONo", "defaultContent": "<i>-</i>" },
               { "data": "PODate", "defaultContent": "<i>-</i>" },
-              { "data": "Material", "defaultContent": "<i>-</i>" },
-              { "data": "Description", "defaultContent": "<i>-</i>" },
-              { "data": "Quantity", "defaultContent": "<i>-</i>" },
-              { "data": "UOM", "defaultContent": "<i>-</i>" },
-              { "data": "Rate", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "BasicAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "TradeDiscount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "CGSTAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "CGSTPercentage", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "SGSTAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "SGSTPercentage", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "TradeDiscount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" }
+              { "data": "Discount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },//9
+              { "data": "Remarks", "defaultContent": "<i>-</i>" },//10
+              { "data": "Material", "defaultContent": "<i>-</i>" },//11
+              { "data": "Quantity", "defaultContent": "<i>-</i>" },//12
+              { "data": "Rate", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },//13
+              { "data": "CGSTPercentage", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },//14
+              { "data": "SGSTPercentage", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },//15
+              { "data": "TradeDiscount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" }//16
             ],
-            columnDefs: [{ className: "text-left", "targets": [0, 1, 2, 4, 5, 7, 9, 10, 12] },
+            columnDefs: [{ className: "text-left", "targets": [0, 1, 2, 4, 5, 7] },
                            { "width": "10%", "targets": [1] },
-                           { className: "text-right", "targets": [11, 13, 14, 15, 16, 17, 18, 19, 20] },
-                          { className: "text-center", "targets": [0, 3, 6, 8] }]
+                           { className: "text-right", "targets": [9, 12, 13, 14, 15, 16] },
+                          { className: "text-center", "targets": [0, 3, 6] }]
         });
 
         DataTables.form8ImportTable = $('#form8ImportTable').DataTable({
@@ -80,22 +76,18 @@ $(document).ready(function () {
               { "data": "ChallanNo", "defaultContent": "<i>-</i>" },
               { "data": "ChallanDate", "defaultContent": "<i>-</i>" },
               { "data": "PONo", "defaultContent": "<i>-</i>" },
-              { "data": "PODate", "defaultContent": "<i>-</i>" },
-              { "data": "Material", "defaultContent": "<i>-</i>" },
-              { "data": "Description", "defaultContent": "<i>-</i>" },
-              { "data": "Quantity", "defaultContent": "<i>-</i>" },
-              { "data": "UOM", "defaultContent": "<i>-</i>" },
-              { "data": "Rate", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "BasicAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "TradeDiscount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "CGSTAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "CGSTPercentage", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "SGSTAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "SGSTPercentage", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
-              { "data": "TradeDiscount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+              { "data": "PODate", "defaultContent": "<i>-</i>" },//6
+              { "data": "Discount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },//7
+              { "data": "Remarks", "defaultContent": "<i>-</i>" },//8
+              { "data": "Material", "defaultContent": "<i>-</i>" },//9
+              { "data": "Quantity", "defaultContent": "<i>-</i>" },//10
+              { "data": "Rate", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },//11
+              { "data": "CGSTPercentage", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },//12
+              { "data": "SGSTPercentage", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },//13
+              { "data": "TradeDiscount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },//14
             ],
-            columnDefs: [{ className: "text-left", "targets": [2, 3, 5, 7, 8, 9, 10, 0] },
-                           { className: "text-right", "targets": [11, 12, 13, 14, 15, 16, 17, 18] },
+            columnDefs: [{ className: "text-left", "targets": [2, 3, 5, 8, 9, 0] },
+                           { className: "text-right", "targets": [7, 10, 11, 12, 13, 14] },
                            { className: "text-center", "targets": [1, 4, 6] }]
         });
 
