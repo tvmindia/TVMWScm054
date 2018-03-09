@@ -144,6 +144,7 @@
     <Compile Include="DTO\ServiceType.cs" />
     <Compile Include="DTO\StockValueSummary.cs" />
     <Compile Include="DTO\SubCategories.cs" />
+    <Compile Include="DTO\TaxBillEntry.cs" />
     <Compile Include="DTO\TCRBillEntry.cs" />
     <Compile Include="DTO\Technician.cs" />
     <Compile Include="DTO\TechnicianJob.cs" />

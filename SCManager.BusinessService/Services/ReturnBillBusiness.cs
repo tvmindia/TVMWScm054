@@ -71,6 +71,30 @@ namespace SCManager.BusinessService.Services
             return ReturnBilllist;
         }
 
+        public List<ReturnBill> GetSupplierDetail(UA UA)
+        {
+            List<ReturnBill> ReturnBilllist = null;
+            try
+            {
+
+                ReturnBilllist = _returnBillRepository.GetSupplierDetail(UA);
+                if (ReturnBilllist != null)
+                {
+                    foreach (ReturnBill F in ReturnBilllist)
+                    {
+
+                        ReturnBillBL(F);
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return ReturnBilllist;
+        }
 
 
         public List<ReturnBillDetail> GetMaterialsFromDefectiveDamaged(string TicketNo, string SCCode)
@@ -193,7 +217,33 @@ namespace SCManager.BusinessService.Services
                 throw;
             }
         }
-                       
+
+
+
+        public ReturnBill GetReturnBillHeaderByID(Guid ID, UA ua)
+        {
+            try
+            {
+                ReturnBill Result = new ReturnBill();
+                Result = _returnBillRepository.GetReturnBillHeader(ID, ua);
+                Result.ReturnBillDetail = _returnBillRepository.GetReturnBillDetail(ID, ua);
+                ReturnBillBL(Result);
+                ReturnBillDetailBL(Result);
+                if (Result.ReturnBillDetail != null)
+                {
+                    ReturnBillBL(Result);
+                }
+                return Result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+
         public string ReturnDefectiveDamaged(string ID, UA ua,string TicketNo)
         {
             string status = null;

@@ -1,0 +1,393 @@
+﻿@model SCManager.UserInterface.Models.TaxBillEntryViewModel
+
+@using SCManager.UserInterface.App_Start
+@{
+    ViewBag.Title = "Tax Bill Entry";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+@section styles {
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatable")
+@Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatableButtons")
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/bootstrapdatepicker")
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/UserCSS/DailyServiceReport")
+}
+<style>
+    .fa-exclamation-triangle {
+        color: orange;
+        cursor: pointer;
+        margin-left: -11px;
+    }
+
+    .popover-content {
+        width: 218px;
+        color: #be1010;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+</style>
+
+<div class="col-md-12">
+    <div class="SCHeader col-md-6">
+        Tax Bill Entry
+
+    </div>
+    <div class="col-md-6">
+        <div class="" id="btnPatchTaxBillEntrySettab" style="min-height:25px">
+
+            @{
+                var data = new { ActionType = "List" };
+                @Html.Action("ChangeButtonStyle", "TaxBillEntry", data);
+            }
+        </div>
+    </div>
+</div>
+
+<div id="exTab3" class="container SCtabContainer">
+
+    <ul class="nav nav-pills">
+        <li class="active" onclick="List()">
+            <a id="ListTab" href="#1b" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>Tax Bills</a>
+        </li>
+        <li>@*onclick="Add()"*@
+            <a id="EditTab" href="#2b" data-toggle="tab" style="width:170px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Tax Bill Entry</a>
+        </li>
+
+    </ul>
+
+    <div class="tab-content clearfix">
+
+        <div class="tab-pane fade in active" id="1b">
+            <div class="col-md-12">&nbsp;</div>
+            <div class="col-md-12">
+                <table id="tblCustomerTaxBills" class="table table-striped table-bordered table-hover" cellspacing="0">
+                    <thead>
+                        <tr class="text-center">
+
+                            <th hidden="hidden">ID</th>
+                            <th>Technician</th>
+                            <th hidden="hidden">Job No</th>
+                            <th>Date</th>
+                            <th>Bill No</th>
+                            <th>Bill Amount (₹)</th>
+                            <th>Cust. Name</th>
+                            <th>Cust. Contact</th>
+                            <th>Location</th>
+                            <th>Remarks</th>
+                            <th>...</th>
+
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="2b">
+            <div class="col-md-12">&nbsp;</div>
+            <div class="col-md-12">
+
+                @using (Ajax.BeginForm("UpdateTaxBillEntry", "TaxBillEntry", new AjaxOptions { HttpMethod = "POST", Confirm = "", OnSuccess = "SaveSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", @id = "TaxBill" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.ID, htmlAttributes: new { @class = "", Value = "0", @id = "HeaderID", })
+                    @Html.HiddenFor(model => model.DetailJSON, htmlAttributes: new { @id = "DetailJSON", Value = "" })
+                    @Html.HiddenFor(model => model.IsActive, htmlAttributes: new { @id = "hdnIsActive", Value = "" })
+                    <div class="inputForm col-md-12">
+                        &nbsp;
+                    </div>
+                    <div class="inputForm col-md-5">
+                        <div class="form-group">
+                            <div class="col-md-4 ">
+                                @Html.LabelFor(model => model.EmpID, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "-- Select Technician --", new { @class = "form-control HeaderBox BlockEnter", value = -1, style = "padding:4px 12px;", @id = "EmpID" })
+
+                                @Html.ValidationMessageFor(model => model.EmpID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1 mandatory"></div>
+                        </div>
+                        <div class="form-group" hidden="hidden">
+                            <div class="col-md-4 ">
+                                @Html.LabelFor(model => model.JobNo, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="JobNo" name="JobNo" class="form-control" list="jobnumberList" onchange="JobSelect(this)" />
+                                <datalist id="jobnumberList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>                                 
+                            </div>
+                            <div class="col-md-1 ">
+                                <span class="mandatory"></span>
+                                <span class="">&nbsp;</span>
+                                <span style="top:5px;">
+                                    <a href="#" onclick="AddTechnicanJob()" title="Add Job">
+                                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                                    </a>
+                                </span>
+
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 ">
+                                @Html.LabelFor(model => model.BillNo, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.BillNo, new { htmlAttributes = new { @class = "form-control HeaderBox", @onblur = "BillBookNumberValidation();" } })
+                                @Html.ValidationMessageFor(model => model.BillNo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1  mandatory" id="MandatoryStar"></div>
+                           @*<div class="col-md-1 mandatory" id="BillNoMandatory">
+        <i class="fa fa-exclamation-triangle" id="ahlinkMandatory" data-toggle="popover" data-trigger="click" data-placement="right" data-content="This bill no doesn't belong to selected technician "></i>
+    </div>*@ 
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 ">
+                                @Html.LabelFor(model => model.BillDate, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.BillDate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker" } })
+                                @Html.ValidationMessageFor(model => model.BillDate, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1 mandatory"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 ">
+                                @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @{
+                                    List<SelectListItem> listOtherIncomePaymentMode = new List<SelectListItem>();
+                                    listOtherIncomePaymentMode.Add(new SelectListItem
+                                    {
+                                        Text = "Cash",
+                                        Value = "Cash"
+                                    });
+                                    listOtherIncomePaymentMode.Add(new SelectListItem
+                                    {
+                                        Text = "Cheque",
+                                        Value = "Cheque"
+                                    });
+                                    listOtherIncomePaymentMode.Add(new SelectListItem
+                                    {
+                                        Text = "Online",
+                                        Value = "Online"
+                                    });
+                                }
+                                @Html.DropDownListFor(model => model.PaymentMode, listOtherIncomePaymentMode, "-- Select Payment Mode --", new { @class = "form-control HeaderBox BlockEnter", value = -1, style = "padding:4px 12px;" })
+                                @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1 mandatory"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 ">
+                                @Html.LabelFor(model => model.PaymentRefNo, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.PaymentRefNo, new { htmlAttributes = new { @class = "form-control HeaderBox" } })
+                                @Html.ValidationMessageFor(model => model.PaymentRefNo, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="inputForm col-md-5">
+                        <div class="form-group">
+                            <div class="col-md-4 ">
+                                @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control HeaderBox" } })
+                                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1 mandatory"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 ">
+                                @Html.LabelFor(model => model.CustomerContactNo, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.CustomerContactNo, new { htmlAttributes = new { @class = "form-control HeaderBox", onkeypress = "return isNumber(event)" } })
+                                @Html.ValidationMessageFor(model => model.CustomerContactNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 ">
+                                @Html.LabelFor(model => model.CustomerLocation, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.CustomerLocation, new { htmlAttributes = new { @class = "form-control HeaderBox" } })
+                                @Html.ValidationMessageFor(model => model.CustomerLocation, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-4 ">
+                                @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control HeaderBox", rows = 2, @id = "Remarks" } })
+                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inputForm col-md-2">&nbsp;</div>
+                    <div class="inputForm col-md-12 Subhead">&nbsp;</div>
+                                    //<div class="inputForm col-md-11 Subhead">Items</div>
+                                    <div class="col-md-1" style="text-align:right;cursor:pointer;vertical-align:bottom">
+                                        @*<span><a onclick="AddMoreRows()">More Rows</a></span>*@
+                                    </div>
+                                    <div class="inputForm col-md-12">
+                                        <table id="tblTaxBillDetails" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr class="text-center">
+
+                                                    <th style="display:none">ID</th>
+                                                    <th style="display:none">MaterialID</th>
+                                                    <th>Sl No</th>
+                                                    <th>Item</th>
+                                                    <th>Description</th>
+                                                    <th>Quantity</th>
+                                                    <th>UOM</th>
+                                                    <th>Referral Rate(₹)</th>
+                                                    <th>Rate (₹)</th>
+                                                    <th>Total Amount (₹)</th>
+                                                    <th>...</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+
+                                    </div>
+
+
+                                    <div class="inputForm col-md-3">
+
+                                    </div>
+                                    <div class="inputForm col-md-5">
+
+                                        
+
+                                    </div>
+                                    <div class="inputForm col-md-4">
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                @Html.LabelFor(model => model.Subtotal, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.Subtotal, new { htmlAttributes = new { @class = "form-control Amount", @id = "subtotal", @readonly = "readonly", style = "text-align:right" } })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control", style = "text-align:right", @id = "discount", @onkeyup = "DiscountChange();", @onclick = "SelectAllValue(this);" } })
+                                                @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control Amount", @id = "total", @readonly = "readonly", style = "text-align:right" } })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-3">
+                                                @Html.LabelFor(model => model.VATAmount, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" id="vatpercentage" class="form-control vattxt" onkeyup="CalculateVAT()" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.VATAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "VATAmount", @onkeyup = "ClearDiscountPercentage()", style = "text-align:right", @onclick = "SelectAllValue(this);" } })
+                                                @Html.Hidden("VATPercentageAmount", 0)
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                @Html.LabelFor(model => model.ServiceCharge, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.ServiceCharge, new { htmlAttributes = new { @class = "form-control", @id = "SCAmount", style = "text-align:right", @onblur = "CalculateSCCommissionAmt(); ", @onkeyup = "ServiceAmountchange();", @onclick = "SelectAllValue(this);" } })
+                                                @Html.ValidationMessageFor(model => model.ServiceCharge, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                @Html.LabelFor(model => model.GrandTotal, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.GrandTotal, new { htmlAttributes = new { @class = "form-control Amount GrandTotal", @readonly = "readonly", @id = "grandtotal", style = "text-align:right" } })
+                                                @Html.ValidationMessageFor(model => model.GrandTotal, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-horizontal">
+
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="form-group" hidden="hidden">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input id="btnSave" type="submit" value="Create" class="btn btn-default" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" id="headercontainer"></div>
+                                        <div class="col-md-12" id="modelcontent"></div>
+                                            
+
+                                        </div>
+                                    }
+            </div>
+            <div>
+
+                <form action="/PDFGenerator/Download" class="form-horizontal" id="DownloadForm" method="post" role="form">
+                    @Html.HiddenFor(model => model.PDFToolsObj.Content, htmlAttributes: new { @class = "", Value = "", @id = "hdnContent" })
+                    @Html.HiddenFor(model => model.PDFToolsObj.Headcontent, htmlAttributes: new { @class = "", Value = "", @id = "hdnHeadContent" })
+                    @Html.HiddenFor(model => model.PDFToolsObj.ContentFileName, htmlAttributes: new { @class = "", Value = "TaxBill", @id = "hdnContentFileName" })
+                    @Html.HiddenFor(model => model.PDFToolsObj.CustomerName, htmlAttributes: new { @class = "", @id = "hdnCustomerName" })
+                    @Html.HiddenFor(model => model.PDFToolsObj.HeaderText, htmlAttributes: new { @class = "", Value = "TAX BILL" })
+                    <input type="submit" value="Download" id="btnDownloadBillToPDF" />
+                </form>
+            </div>
+            <div class="inputForm col-md-2">&nbsp;</div>
+            <div class="inputForm col-md-2">&nbsp;</div>
+        </div>
+        <div class="preloader" id="prelaoder">
+            <img src="~/Content/images/loading.gif" class="preloaderImg" />
+        </div>
+    </div>
+</div>
+<datalist id="Materials" onfocus='this.size=10;' onblur='this.size=1;'
+          onchange='this.size=1; this.blur();'></datalist>
+
+<div id="PDFBody" hidden="hidden">  
+        @Html.Partial("_TaxBillView",@Model);    
+</div>
+@{
+    var sourcedata = new { source = "TechnicianJob1" };
+    @Html.Action("TechnicianJobForm", "DailyServiceReport", sourcedata);
+}
+@section Scripts {
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/datatable")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/jsZip")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/datatableButtons")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/jqueryunobtrusiveajaxvalidate")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/bootstrapdatepicker")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/TaxBillEntry")
+    <script src="~/Scripts/PDF.js"></script>
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/editableGrid")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/JobAction")
+  
+   
+
+}

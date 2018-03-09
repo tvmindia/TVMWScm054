@@ -21,7 +21,7 @@ $(document).ready(function () {
                { "data": "ID", "defaultContent": "<i>-</i>" },
                { "data": "InvoiceNo" ,"defaultContent": "<i>-</i>" },
                { "data": "InvoiceDateFormatted","defaultContent": "<i>-</i>" },
-               { "data": "CustomerName" ,"defaultContent": "<i>-</i>" },
+               { "data": "ShippingCustomerName", "defaultContent": "<i>-</i>" },
                { "data": "TotalValue", render: function (data, type, row) { return roundoff(data,1); }, "defaultContent": "<i>-</i>" },
                { "data": "TotalTaxAmount", render: function (data, type, row) { return roundoff(data); }, "defaultContent": "<i>-</i>" },
                { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data,1); }, "defaultContent": "<i>-</i>" },                                       
@@ -210,12 +210,35 @@ function GetAllFranchiseeDetail() {
         notyAlert('error', e.message);
     }
 }
+
+function GetSupplierDetail() {
+    try {
+        debugger;
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("ReturnBill/GetSupplierDetail/", data);
+        if (ds != '') {
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+
 function BindReturnBill(id) {
     debugger;
     try {
         var data = { "ID": id };
         var ds = {};
-        ds = GetDataFromServer("ReturnBill/GetReturnBill/", data);
+        ds = GetDataFromServer("ReturnBill/GetReturnBillHeaderByID/", data);
         if (ds != '') {
             ds = JSON.parse(ds);
         }
@@ -306,20 +329,32 @@ function List() {
 
 function Add() {
     try {
+        debugger;
+        ResetForm();
+        RestReturnBill();
         // ticketNo = $('#TicketNo').val();
         $('#TicketNo').show();
         $('#TicketNo').prop('disabled', false);
         $('#txtTicketNo').hide();
-        ResetForm();  
+        var thisSupplierItem = GetSupplierDetail();
+        $("#CName").val(thisSupplierItem[0].CompanyDescription);
+        $("#CAddress").val(thisSupplierItem[0].CompanyAddress);
+        $("#CEmail").val(thisSupplierItem[0].CompanyEmail);
+        $("#CPhoneNo").val(thisSupplierItem[0].CompanyContactNo);
+        $("#CGstIn").val(thisSupplierItem[0].CompanyGstIn);
+        $("#CPanNo").val(thisSupplierItem[0].CompanyPanNo);
+        $("#Place").val(thisSupplierItem[0].CompanyPlace);
+        
+      
     }
     catch(X)
     {}
     showLoader();
-    ChangeButtonPatchView('ReturnBill', 'btnPatchAttributeSettab', 'Add');
+    ChangeButtonPatchView('ReturnBill', 'btnPatchAttributeSettab', 'Add');    
     EG_ClearTable();
-    RestReturnBill();
+    
     EG_AddBlankRows(5)
-    $('#TicketNo').focus();
+    $('#TicketNo').focus();  
     hideLoader();
 }
 
@@ -494,7 +529,8 @@ function reset() {
 }
 
 //-----------------------------------------Reset Validation Messages--------------------------------------//
-function ResetForm() { 
+function ResetForm() {
+    debugger;
     var validator = $("#ReturnBill").validate();
     $('ReturnBill').find('.field-validation-error span').each(function () {
         validator.settings.success($(this));
@@ -771,7 +807,7 @@ function BindReturnBillFieldsByTicketNo(Records) {
     try {
         $('#HeaderID').val(Records[0].ID);
         $('#TicketNo').val(Records[0].TicketNo)       
-        $('#CName').val(Records[0].CustomerName);        
+        $('#SName').val(Records[0].CustomerName);
         $('#Total').val(roundoff(Records[0].TotalValue));
         $('#totaltaxamount').val(roundoff(Records[0].TotalTaxAmount));
         $('#grandtotal').val(roundoff(Records[0].GrandTotal));
@@ -843,6 +879,7 @@ function PrintTableToPdf()
 
 function FillPrintForm()
 {
+    debugger;
     DrawTable({
         Action: "ReturnBill/GetReturnBill/",
         data: {"ID":$('#HeaderID').val()  },
@@ -886,11 +923,11 @@ function FillPrintForm()
     $("#invoiceNo").text(invoiceno);
     var invoicedate = $("#InvDate").val();
     $("#invoiceDate").text(invoicedate);
-    var customername = $("#CName").val();
-    $("#customerName").text(customername);
-    var customeraddress = $("#CAddress").val().split(/\n/);
-    $("#add1").text(customeraddress);
-   // var customeradd1 = $("#CAddress").val().split(/\n/);
+    //var customername = $("#CName").val();
+    //$("#customerName").text(customername);
+    //var customeraddress = $("#CAddress").val().split(/\n/);
+    //$("#add1").text(customeraddress);
+    //var customeradd1 = $("#CAddress").val().split(/\n/);
     //$("#add2").text(customeradd1);
     var customername1 = $("#SName").val();
     $("#customerName1").text(customername1);
@@ -898,30 +935,30 @@ function FillPrintForm()
     $("#address1").text(customeraddress1);
     //var customeraddress2 =$("#CAddress").val().split(/\n/);
     //$("#address2").text(customeraddress2);
-    var mobileno = $("#CPhoneNo").val();
-    $("#customerMobileNo1").text(mobileno);
+    //var mobileno = $("#CPhoneNo").val();
+    //$("#customerMobileNo1").text(mobileno);
     var mobileno1 = $("#SPhoneNo").val();
     $("#customerMobileNo2").text(mobileno1);
-    var Email1 = $("#CEmail").val();
-    $("#customerEmail1").text(Email1);
+    //var Email1 = $("#CEmail").val();
+    //$("#customerEmail1").text(Email1);
     var Email2 = $("#SEmail").val();
     $("#customerEmail2").text(Email2);
     //var GstIn1 = $("#CGstIn").val();
     //$("#gstin1").text(GstIn1);
-   // var GstIn2 = $("#SGstIn").val();
-   // $("#gstin2").text(GstIn2);
-    var GstInNew1 = $("#CGstIn").val();
-    $("#gstinnew1").text(GstInNew1);
+    var GstIn2 = $("#SGstIn").val();
+    $("#gstin2").text(GstIn2);
+    //var GstInNew1 = $("#CGstIn").val();
+    //$("#gstinnew1").text(GstInNew1);
     var GstInNew2 = $("#SGstIn").val();
     $("#gstinnew2").text(GstInNew2);
-    var PanNo1 = $("#CPanNo").val();
-    $("#PanNo1").text(PanNo1);
+    //var PanNo1 = $("#CPanNo").val();
+    //$("#PanNo1").text(PanNo1);
     var PanNo2 = $("#SPanNo").val();
     $("#PanNo2").text(PanNo2);
-    var supplyPlace1 = $("#Place").val();
-    $("#PlaceofSupply1").text(supplyPlace1);
-    //var supplyPlace2 = $("#Place").val();
-    //$("#PlaceofSupply2").text(supplyPlace2);
+    //var supplyPlace1 = $("#Place").val();
+    //$("#PlaceofSupply1").text(supplyPlace1);
+    var supplyPlace2 = $("#Place").val();
+    $("#PlaceofSupply2").text(supplyPlace2);
    
     var grandTotal =Math.round( $("#grandtotal").val());
     //var grandTotal =Math.round( $("#grandtotal").val());   
@@ -939,6 +976,17 @@ function FillPrintForm()
     $('#GSTIN').text(thisItem[0].ServiceCenterGstIn);
     $('#panNo').text(thisItem[0].ServiceCenterPanNo);
     $('#placeOfSupply').text(thisItem[0].ServiceCenterPlace);
+
+    debugger;
+    var thisSupplierItem = GetSupplierDetail();
+    $('#customerName').text(thisSupplierItem[0].CompanyDescription);
+    $('#add1').text(thisSupplierItem[0].CompanyAddress);
+    $('#customerEmail1').text(thisSupplierItem[0].CompanyEmail);
+    $('#customerMobileNo1').text(thisSupplierItem[0].CompanyContactNo);
+    $('#gstinnew1').text(thisSupplierItem[0].CompanyGstIn);
+    $('#PanNo1').text(thisSupplierItem[0].CompanyPanNo);
+    $('#PlaceofSupply1').text(thisSupplierItem[0].CompanyPlace);
+
 }
 
 

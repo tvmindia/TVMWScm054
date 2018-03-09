@@ -96,7 +96,26 @@ namespace SCManager.UserInterface.Controllers
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
         }
-        #endregion  GetAllReturnBill
+        #endregion  GetFranchiseeDetail
+
+
+        #region GetSupplierDetail
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetSupplierDetail()
+        {
+            try
+            {
+                UA ua = new UA();
+                List<ReturnBillViewModel> ReturnBillList = Mapper.Map<List<ReturnBill>, List<ReturnBillViewModel>>(_returnBillBusiness.GetSupplierDetail(ua));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = ReturnBillList });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        #endregion  GetSupplierDetail
 
         #region GetMaterialsFromDefectiveDamaged
         [HttpGet]
@@ -221,13 +240,32 @@ namespace SCManager.UserInterface.Controllers
                 //   System.Threading.Thread.Sleep(5000);
                 UA ua = new UA();
                 ReturnBillViewModel Rtb = Mapper.Map<ReturnBill, ReturnBillViewModel>(_returnBillBusiness.GetReturnBill(dataObj.ID.GetValueOrDefault(), ua));
-                return JsonConvert.SerializeObject(new { Result = "OK", Records = Rtb });
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = Rtb.ReturnBillDetail });
             }
             catch (Exception ex)
             {
                 return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
             }
         }
+
+
+        #region GetReturnBillHeaderByID
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetReturnBillHeaderByID(ReturnBillViewModel dataObj)
+        {
+            try
+            {
+                UA ua = new UA();
+                ReturnBillViewModel result = Mapper.Map<ReturnBill, ReturnBillViewModel>(_returnBillBusiness.GetReturnBillHeaderByID(dataObj.ID.GetValueOrDefault(), ua));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = result });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        #endregion GetReturnBillHeaderByID
 
 
         #region ReturnDefectiveDamaged

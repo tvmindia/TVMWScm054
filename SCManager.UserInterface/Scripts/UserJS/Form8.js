@@ -223,7 +223,6 @@ function BindForm8(id) {
 
 function BindForm8Fields(Records) {
     try {
-        debugger;
         $('#HeaderID').val(Records.ID);
         $('#InvNo').val(Records.InvoiceNo);        
         $('#Remarks').val(Records.Remarks);

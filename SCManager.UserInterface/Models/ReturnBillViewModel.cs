@@ -121,7 +121,33 @@ namespace SCManager.UserInterface.Models
         public string ServiceCenterPanNo { get; set; }
         public string ServiceCenterPlace { get; set; }
 
-    }
+        [Display(Name = "Customer Address")]
+        [DataType(DataType.MultilineText)]
+        public string CompanyDescription { get; set; }
+
+        [Display(Name = "Customer Address")]
+        [DataType(DataType.MultilineText)]
+        public string CompanyAddress { get; set; }
+
+        [Display(Name = "Email")]
+        [StringLength(50, MinimumLength = 5)]
+        public string CompanyEmail { get; set; }
+
+        [Display(Name = "Phone No")]
+        [StringLength(50, MinimumLength = 5)]
+        public string CompanyContactNo { get; set; }
+
+        [Display(Name = "GSTIN")]
+        [MaxLength(20)]
+        public string CompanyGstIn { get; set; }
+        [Display(Name = "PAN No")]
+        [MaxLength(20)]
+        public string CompanyPanNo { get; set; }
+        [Display(Name = "Place Of Supply")]
+        [MaxLength(20)]
+        public string CompanyPlace { get; set; }    
+
+}
 
     public class ReturnBillDetailViewModel
     {

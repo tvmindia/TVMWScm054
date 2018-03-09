@@ -11,11 +11,13 @@ namespace SCManager.BusinessService.Contracts
     {
         List<ReturnBill> GetAllReturnBill(UA UA);
         List<ReturnBill> GetAllFranchiseeDetail(UA UA);
+        List<ReturnBill> GetSupplierDetail(UA UA);
         List<ReturnBillDetail> GetMaterialsFromDefectiveDamaged(string TicketNo, string SCCode);
         ReturnBill InsertUpdate(ReturnBill rtb, UA UA);
         bool DeleteReturnBill(Guid ID, UA UA);
         bool DeleteReturnBillDetail(Guid ID, Guid HeaderID, UA UA);
         ReturnBill GetReturnBill(Guid ID, UA UA);
+        ReturnBill GetReturnBillHeaderByID(Guid ID, UA ua);
         List<ReturnBill> GetAllTicketNo(UA UA);
         string ReturnDefectiveDamaged(string HeaderID, UA ua,string TicketNo);        
     }

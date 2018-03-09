@@ -140,6 +140,7 @@
     <Compile Include="Contracts\ISalesBusiness.cs" />
     <Compile Include="Contracts\ISalesReturnBusiness.cs" />
     <Compile Include="Contracts\ISubCategoriesBusiness.cs" />
+    <Compile Include="Contracts\ITaxBillEntryBusiness.cs" />
     <Compile Include="Contracts\ITCRBillEntryBusiness.cs" />
     <Compile Include="Contracts\ITechnicianBusiness.cs" />
     <Compile Include="Contracts\ITechnicianSalaryCalculationBusiness.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Services\SalesBusiness.cs" />
     <Compile Include="Services\SalesReturnBusiness.cs" />
     <Compile Include="Services\SubCategoriesBusiness.cs" />
+    <Compile Include="Services\TaxBillEntryBusiness.cs" />
     <Compile Include="Services\TCRBillEntryBusiness.cs" />
     <Compile Include="Services\TechnicianBusiness.cs" />
     <Compile Include="Services\TechnicianSalaryCalculationBusiness.cs" />

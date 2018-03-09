@@ -56,7 +56,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ReturnBillObj.InvoiceNo = (sdr["InvoiceNo"].ToString() != "" ? (sdr["InvoiceNo"].ToString()) : _ReturnBillObj.InvoiceNo);
                                         _ReturnBillObj.InvoiceDate = (sdr["InvoiceDate"].ToString() != "" ? DateTime.Parse(sdr["InvoiceDate"].ToString()).ToString("dd-MMM-yyyy") : _ReturnBillObj.InvoiceDate);                                       
                                         _ReturnBillObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _ReturnBillObj.Remarks);
-                                        _ReturnBillObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : _ReturnBillObj.CustomerName);
+                                        _ReturnBillObj.ShippingCustomerName = (sdr["ShippingCustomerName"].ToString() != "" ? (sdr["ShippingCustomerName"].ToString()) : _ReturnBillObj.ShippingCustomerName);
                                         _ReturnBillObj.TotalValue = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : _ReturnBillObj.TotalValue);
                                         _ReturnBillObj.TotalTaxAmount = (sdr["TotalTaxAmount"].ToString() != "" ? decimal.Parse(sdr["TotalTaxAmount"].ToString()) : _ReturnBillObj.TotalTaxAmount);
                                         _ReturnBillObj.GrandTotal = (sdr["GrandTotal"].ToString() != "" ? decimal.Parse(sdr["GrandTotal"].ToString()) : _ReturnBillObj.GrandTotal);
@@ -128,6 +128,55 @@ namespace SCManager.RepositoryServices.Services
             return ReturnBilllist;
         }
 
+
+
+        public List<ReturnBill> GetSupplierDetail(UA UA)
+        {
+            List<ReturnBill> ReturnBilllist = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;                       
+                        cmd.CommandText = "[GetSupplierDetails]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                ReturnBilllist = new List<ReturnBill>();
+                                while (sdr.Read())
+                                {
+                                    ReturnBill returnBillObj = new ReturnBill();
+                                    {                                                                              
+                                        returnBillObj.CompanyDescription = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : returnBillObj.CompanyDescription);
+                                        returnBillObj.CompanyAddress = (sdr["Address"].ToString() != "" ? (sdr["Address"].ToString()) : returnBillObj.CompanyAddress);
+                                        returnBillObj.CompanyContactNo= (sdr["ContactNo"].ToString() != "" ? (sdr["ContactNo"].ToString()) : returnBillObj.CompanyContactNo);
+
+                                        returnBillObj.CompanyGstIn = (sdr["GstIn"].ToString());
+                                        returnBillObj.CompanyPanNo = (sdr["PanNo"].ToString());
+                                        returnBillObj.CompanyPlace = (sdr["PlaceOfSupply"].ToString());
+                                        returnBillObj.CompanyEmail = (sdr["Email"].ToString());
+                                    }
+                                    ReturnBilllist.Add(returnBillObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ReturnBilllist;
+        }
 
         public List<ReturnBillDetail> GetMaterialsFromDefectiveDamaged(string TicketNo, string SCCode)
         {
@@ -212,13 +261,13 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar).Value = rtb.Remarks;
                         cmd.Parameters.Add("@CustomerName", SqlDbType.NVarChar).Value = rtb.CustomerName;
                         cmd.Parameters.Add("@CustomerAddress", SqlDbType.NVarChar).Value = rtb.CustomerAddress;                        
-                        cmd.Parameters.Add("@CustomerPhoneNo", SqlDbType.NVarChar, 50).Value = rtb.CustomerPhoneNo;
+                        cmd.Parameters.Add("@CustomerPhoneNo", SqlDbType.NVarChar, 50).Value = rtb.CustomerPanNo;
                         cmd.Parameters.Add("@CustomerEmail", SqlDbType.NVarChar).Value = rtb.CustomerEmail;
                         cmd.Parameters.Add("@CustomerGstIn", SqlDbType.NVarChar).Value = rtb.CustomerGstIn;
                         cmd.Parameters.Add("@CustomerPanNo", SqlDbType.NVarChar).Value = rtb.CustomerPanNo;
                         cmd.Parameters.Add("@PlaceOfSupply", SqlDbType.NVarChar).Value = rtb.PlaceofSupply;
                         cmd.Parameters.Add("@ShippingCustomerName", SqlDbType.NVarChar).Value = rtb.ShippingCustomerName;
-                        cmd.Parameters.Add("@ShippingAddress", SqlDbType.NVarChar).Value = rtb.CustomerAddress;
+                        cmd.Parameters.Add("@ShippingAddress", SqlDbType.NVarChar).Value = rtb.ShippingAddress;
                         cmd.Parameters.Add("@ShippingPhoneNo", SqlDbType.NVarChar, 50).Value = rtb.ShippingCustomerPhoneNo;
                         cmd.Parameters.Add("@ShippingEmail", SqlDbType.NVarChar).Value = rtb.ShippingCustomerEmail;
                         cmd.Parameters.Add("@ShippingGstIn", SqlDbType.NVarChar).Value = rtb.ShippingGstIn;
@@ -292,7 +341,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@CustomerPanNo", SqlDbType.NVarChar).Value = rtb.CustomerPanNo;
                         cmd.Parameters.Add("@PlaceOfSupply", SqlDbType.NVarChar).Value = rtb.PlaceofSupply;
                         cmd.Parameters.Add("@ShippingCustomerName", SqlDbType.NVarChar).Value = rtb.ShippingCustomerName;
-                        cmd.Parameters.Add("@ShippingAddress", SqlDbType.NVarChar).Value = rtb.CustomerAddress;
+                        cmd.Parameters.Add("@ShippingAddress", SqlDbType.NVarChar).Value = rtb.ShippingAddress;
                         cmd.Parameters.Add("@ShippingPhoneNo", SqlDbType.NVarChar, 50).Value = rtb.ShippingCustomerPhoneNo;
                         cmd.Parameters.Add("@ShippingEmail", SqlDbType.NVarChar).Value = rtb.ShippingCustomerEmail;
                         cmd.Parameters.Add("@ShippingGstIn", SqlDbType.NVarChar).Value = rtb.ShippingGstIn;

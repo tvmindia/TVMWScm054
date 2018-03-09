@@ -4,6 +4,7 @@
 //This js will support the html binding and ajax call to iText sharp 
 //*****************************************************************************
 function DrawTable(options) {
+    debugger;
     var Records = GetItemsSummary(options);
     if (Records != null) {
         for (var i = 0; i < Records.length; i++) {
@@ -96,7 +97,7 @@ function GetItemsSummary(options) {
                 ds = JSON.parse(ds);                 
             }
             if (ds.Result == "OK") {
-                return ds.Records.ReturnBillDetail;
+                return ds.Records;
             }
             if (ds.Result == "ERROR") {
                 notyAlert('error', ds.Message);

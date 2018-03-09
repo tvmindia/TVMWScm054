@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UserInterface.Models;
 
 namespace SCManager.UserInterface.Models
 {
-    public class TCRBillEntryViewModel
+    public class TaxBillEntryViewModel
     {
         public string SCCode { get; set; }
         public Guid? ID { get; set; }
@@ -44,7 +45,7 @@ namespace SCManager.UserInterface.Models
         public decimal? Discount { get; set; }
         [Display(Name = "Service Charge")]
         public decimal? ServiceCharge { get; set; }
-       
+
         [Display(Name = "Service Charge Commission %")]
         public decimal? ServiceChargeComm { get; set; }
         [Display(Name = "Special Commission")]
@@ -67,12 +68,12 @@ namespace SCManager.UserInterface.Models
         public List<SelectListItem> TechniciansList { get; set; }
         public List<SelectListItem> JobNoList { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
-        public List<TCRBillEntryDetailViewModel> TCRBillEntryDetail { get; set; }
-        public Guid? TcrID { get; set; }
-        
+        public List<TaxBillEntryDetailViewModel> TaxBillEntryDetail { get; set; }
+        public int IsActive { get; set; }
+        public PDFTools PDFToolsObj { get; set; }
     }
 
-    public class TCRBillEntryDetailViewModel
+    public class TaxBillEntryDetailViewModel
     {
         public int? SlNo { get; set; }
         public string SCCode { get; set; }
@@ -80,10 +81,12 @@ namespace SCManager.UserInterface.Models
         public Guid? HeaderID { get; set; }
         public string Material { get; set; }
         public Guid? MaterialID { get; set; }
+        public string Description { get; set; }
         public int? Quantity { get; set; }
+        public string UOM { get; set; }
+        public decimal? ReferralRate { get; set; }
         public decimal? Rate { get; set; }
         public decimal? NetAmount { get; set; }
-        public string UOM { get; set; }
-        public string Description { get; set; }
+       
     }
 }

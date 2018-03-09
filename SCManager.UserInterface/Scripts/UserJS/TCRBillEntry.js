@@ -25,10 +25,10 @@ $(document).ready(function () {
               { "data": "JobNo", "defaultContent": "<i>-</i>" },
               { "data": "BillDateFormatted", "defaultContent": "<i>-</i>" },
               { "data": "BillNo", "defaultContent": "<i>-</i>" },
-                { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+              { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
               { "data": "CustomerName", "defaultContent": "<i>-</i>" },
               { "data": "CustomerContactNo", "defaultContent": "<i>-</i>" },
-               { "data": "CustomerLocation", "defaultContent": "<i>-</i>" },
+              { "data": "CustomerLocation", "defaultContent": "<i>-</i>" },
               { "data": "Remarks", "defaultContent": "<i>-</i>" },
               { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
             ],
@@ -189,7 +189,7 @@ function CalculateSCCommissionAmt()
 }
 //---------------------------------------Edit Item--------------------------------------------------//
 function Edit(currentObj) {
-     
+    debugger;
     var rowData = DataTables.customerBillsTable.row($(currentObj).parents('tr')).data();
     //Event Request Case
     if ((rowData != null) && (rowData.ID != null)) {
@@ -527,7 +527,7 @@ function GetAllTCRBill() {
 }
 function save()
 {
-
+    debugger;
     //$("#JobNo").val("123ERT32q");
     $("#ID").val(emptyGUID);
     var validation = EG_Validate(false);

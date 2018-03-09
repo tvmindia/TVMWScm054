@@ -11,6 +11,7 @@ namespace SCManager.RepositoryServices.Contracts
     {
         List<ReturnBill> GetAllReturnBill(UA UA);
         List<ReturnBill> GetAllFranchiseeDetail(UA UA);
+        List<ReturnBill> GetSupplierDetail(UA UA);
         List<ReturnBillDetail> GetMaterialsFromDefectiveDamaged(string TicketNo, string SCCode);
         ReturnBill InsertReturnBill(ReturnBill rtb, UA UA);
         ReturnBill UpdateReturnBill(ReturnBill rtb, UA UA);

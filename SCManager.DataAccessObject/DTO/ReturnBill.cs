@@ -46,6 +46,14 @@ namespace SCManager.DataAccessObject.DTO
         public string ServiceCenterPanNo { get; set; }
         public string ServiceCenterPlace { get; set; }
 
+        //public string ServiceCenterCode { get; set; }
+        public string CompanyDescription { get; set; }
+        public string CompanyAddress { get; set; }
+        public string CompanyEmail { get; set; }
+        public string CompanyContactNo { get; set; }
+        public string CompanyGstIn { get; set; }
+        public string CompanyPanNo { get; set; }
+        public string CompanyPlace { get; set; }
     }
 
     public  class ReturnBillDetail

@@ -25,5 +25,11 @@ namespace UserInterface.Models
         public string Content { get; set; }
         [AllowHtml]
         public string Headcontent { get; set; }
+        [AllowHtml]
+        public string HeaderText { get; set; }
+        [AllowHtml]
+        public string ContentFileName { get; set; }
+        [AllowHtml]
+        public string CustomerName { get; set; }
     }
 }
