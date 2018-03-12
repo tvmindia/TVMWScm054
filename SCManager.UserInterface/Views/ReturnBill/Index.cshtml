@@ -443,137 +443,138 @@
 
             <div class="modal-body">
                 
-                    <div id="divHeader">
-                        <b style="padding-left:400px;">GST INVOICE</b>
-                        <div style="padding-left:800px;">
-                            <table border="0">
-                                <tr>
-                                    <td style="font-size:10px;"><b>Invoice No.</b><label id="invoiceNo"></label></td>
+                   
+                <div id="divPrintPreview">
+                    <b style="padding-left:400px;">GST INVOICE</b>
+                    <div style="padding-left:800px;">
+                        <table border="0">
+                            <tr>
+                                <td style="font-size:10px;"><b>Invoice No.</b><label id="invoiceNo"></label></td>
 
+                            </tr>
+                            <tr>
+                                <td style="font-size:10px;"><b>Invoice Date:</b><label id="invoiceDate"></label></td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div id="">
+                        <div style="padding-left:45px;">
+                            <table border="0" style="width:100%;">
+                                <tr>
+                                    <td>
+                                        <label id="FName" style="font-size:10px;"><b>Name of Franchisee</b></label>
+                                        <p style="font-size:9px;">&#40;Authorised Service Agent - IFB Industries Ltd &#41;</p>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td style="font-size:10px;"><b>Invoice Date:</b><label id="invoiceDate"></label></td>
+                                    <td>
+                                        <label id="Address1" style="font-size:9px;">Address Line 1</label>
+                                    </td>
+                                </tr>
 
+                                <tr>
+                                    <td><label style="font-size:9px;">E-mail:</label><label style="font-size:9px;" id="email"></label></td>
+                                </tr>
+                                <tr>
+                                    <td><label style="font-size:9px;">Contact Nos:</label><label style="font-size:9px;" id="contactNo"></label></td>
+                                </tr>
+                                <tr>
+                                    <td><label style="font-size:9px;">GSTIN:</label><label style="font-size:9px;" id="GSTIN"></label></td>
+                                </tr>
+                                <tr>
+                                    <td><label style="font-size:9px;">PAN NO:</label><label style="font-size:9px;" id="panNo"></label></td>
+                                </tr>
+                                <tr>
+                                    <td><label style="font-size:9px;">Place of Supply&#40;State Name & Code&#41;:</label><label style="font-size:9px;" id="placeOfSupply"></label></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <br />
+                        <div style="width:700px;height:15px;"></div>
+                        <div style="padding-left:45px;">
+                            <table border="0" style="width:100%;">
+                                <tr>
+                                    <td>
+                                        <div style="">
+                                            <table border="0">
+                                                <tr>
+                                                    <td><label style="font-size:10px;"><b><span id="customerName"></span></b></label><b><span style="font-size:10px;">&#40;Billed to&#41;:</span></b></td>
+
+
+                                                <tr>
+                                                    <td style="font-size:9px;">
+                                                        <label id="add1" style="font-size:9px;">Address line 1</label>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="font-size:9px;">GSTIN :<label id="gstinnew1"></label></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size:9px;">PAN No :<label id="PanNo1"></label></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size:9px;">Place of Supply&#40;State Name & Code&#41; :<label id="PlaceofSupply1"></label></td>
+
+                                                </tr>
+                                                <tr></tr>
+                                                <tr></tr>
+                                                <tr>
+                                                    <td style="font-size:10px;"><b>Email id:<label id="customerEmail1"></label></b></td>
+
+                                                </tr>
+
+                                                <tr><td style="font-size:10px;"><b>Mobile no:<label id="customerMobileNo1"></label></b></td></tr>
+                                            </table>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <div style="padding-left:200px;">
+                                            <table border="0">
+                                                <tr> <td style="font-size:10px;"><label><span id="customerName1"></span></label><b><span>&#40;Shipped to&#41;:</span></b></td></tr>
+
+
+                                                <tr>
+                                                    <td style="font-size:9px;">
+                                                        <label id="address1">Address line 1</label>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="font-size:9px;">GSTIN :<label id="gstinnew2"></label></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size:9px;">PAN No :<label id="PanNo2"></label></td>
+
+                                                </tr>
+                                                <tr></tr>
+                                                <tr></tr>
+                                                <tr></tr>
+                                                <tr></tr>
+
+                                                <tr>
+                                                    <td style="font-size:10px; padding-top:12px;"><b>Customer email id:</b><label id="customerEmail2"></label></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size:10px;"><b>Customer Mobile no:</b><label id="customerMobileNo2"></label></td>
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
                     </div>
-                <div id="divPrintPreview">
-                    <div style="padding-left:45px;">
-                        <table border="0" style="width:100%;">
-                            <tr>
-                                <td>
-                                    <label id="FName" style="font-size:10px;"><b>Name of Franchisee</b></label>
-                                    <p style="font-size:9px;">&#40;Authorised Service Agent - IFB Industries Ltd &#41;</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label id="Address1" style="font-size:9px;">Address Line 1</label>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><label style="font-size:9px;">E-mail:</label><label style="font-size:9px;" id="email"></label></td>
-                            </tr>
-                            <tr>
-                                <td><label style="font-size:9px;">Contact Nos:</label><label style="font-size:9px;" id="contactNo"></label></td>
-                            </tr>
-                            <tr>
-                                <td><label style="font-size:9px;">GSTIN:</label><label style="font-size:9px;" id="GSTIN"></label></td>
-                            </tr>
-                            <tr>
-                                <td><label style="font-size:9px;">PAN NO:</label><label style="font-size:9px;" id="panNo"></label></td>
-                            </tr>
-                            <tr>
-                                <td><label style="font-size:9px;">Place of Supply&#40;State Name & Code&#41;:</label><label style="font-size:9px;" id="placeOfSupply"></label></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <br />
-                    <br/>
-                    <div style="width:700px;height:15px;"></div>
-                    <div style="padding-left:45px;">
-                        <table border="0" style="width:100%;">
-                            <tr>
-                                <td>
-                                    <div style="">
-                                        <table border="0">
-                                            <tr>
-                                                <td><label style="font-size:10px;"><b><span id="customerName"></span></b></label><b><span style="font-size:10px;">&#40;Billed to&#41;:</span></b></td>
-
-
-                                            <tr>
-                                                <td style="font-size:9px;">
-                                                    <label id="add1" style="font-size:9px;">Address line 1</label>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td style="font-size:9px;">GSTIN :<label id="gstinnew1"></label></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size:9px;">PAN No :<label id="PanNo1"></label></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size:9px;">Place of Supply&#40;State Name & Code&#41; :<label id="PlaceofSupply1"></label></td>
-
-                                            </tr>
-                                            <tr></tr>
-                                            <tr></tr>
-                                            <tr>
-                                                <td style="font-size:10px;"><b>Customer email id:<label id="customerEmail1"></label></b></td>
-
-                                            </tr>
-
-                                            <tr><td style="font-size:10px;"><b>Customer Mobile no:<label id="customerMobileNo1"></label></b></td></tr>
-                                        </table>
-                                    </div>
-                                </td>
-
-
-                                <td>
-                                    <div style="padding-left:200px;">
-                                        <table border="0">
-                                            <tr> <td style="font-size:10px;"><label><span id="customerName1"></span></label><b><span>&#40;Shipped to&#41;:</span></b></td></tr>
-
-
-                                            <tr>
-                                                <td style="font-size:9px;">
-                                                    <label id="address1">Address line 1</label>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td style="font-size:9px;">GSTIN :<label id="gstinnew2"></label></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size:9px;">PAN No :<label id="PanNo2"></label></td>
-
-                                            </tr>
-                                            <tr></tr>
-                                            <tr></tr>
-                                            <tr></tr>
-                                            <tr></tr>
-
-                                            <tr>
-                                                <td style="font-size:10px; padding-top:12px;"><b>Customer email id:</b><label id="customerEmail2"></label></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size:10px;"><b>Customer Mobile no:</b><label id="customerMobileNo2"></label></td>
-
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
 
                     <div id="customtbl" class="" style="padding-left:50px;"></div>
                     <div style="padding-left:50px;">
@@ -581,12 +582,11 @@
                         <br />
                         <table border="0" style="width:100%;">
                             <tr>
-                                <td ><label style="font-size:11px;"><b>GrandTotal</b></label></td>
-                                <td ><label style="font-size:11px;" id="grandTotal"></label></td>
+                                <td><label style="font-size:11px;"><b>GrandTotal</b></label></td>
+                                <td><label style="font-size:11px;" id="grandTotal"></label></td>
                             </tr>
                             <tr><td>&nbsp;</td></tr>
-                            <tr><td>&nbsp;</td></tr>
-                            <tr><td>&nbsp;</td></tr>
+                            <tr><td>&nbsp;</td></tr>                          
 
                             <tr>
                                 <td style="font-size:9px;padding-top:10px;"><label>Received Rupees&#40;In Words&#41;</label></td>
@@ -615,6 +615,8 @@
                     </div>
 
                 </div>
+
+
                 <div class="modal-footer" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;height: 50px;padding: 7px;">
                   
                     <form action="/PDFGenerator/PrintPDF" class="form-horizontal" data-ajax="true" data-ajax-failure="NetworkFailure" data-ajax-method="POST" data-ajax-success="SaveSuccessPrint" id="EmployeeForm" method="post" role="form">

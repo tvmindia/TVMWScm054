@@ -261,7 +261,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar).Value = rtb.Remarks;
                         cmd.Parameters.Add("@CustomerName", SqlDbType.NVarChar).Value = rtb.CustomerName;
                         cmd.Parameters.Add("@CustomerAddress", SqlDbType.NVarChar).Value = rtb.CustomerAddress;                        
-                        cmd.Parameters.Add("@CustomerPhoneNo", SqlDbType.NVarChar, 50).Value = rtb.CustomerPanNo;
+                        cmd.Parameters.Add("@CustomerPhoneNo", SqlDbType.NVarChar, 50).Value = rtb.CustomerPhoneNo;
                         cmd.Parameters.Add("@CustomerEmail", SqlDbType.NVarChar).Value = rtb.CustomerEmail;
                         cmd.Parameters.Add("@CustomerGstIn", SqlDbType.NVarChar).Value = rtb.CustomerGstIn;
                         cmd.Parameters.Add("@CustomerPanNo", SqlDbType.NVarChar).Value = rtb.CustomerPanNo;

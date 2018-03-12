@@ -37,7 +37,7 @@ namespace SCManager.UserInterface.Controllers
                     PdfWriter writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
                     Footer footobj = new Footer();
                     footobj.imageURL = Server.MapPath("~/Content/images/SCManager.png");
-                    footobj.Header = XMLWorkerHelper.ParseToElementList(pDFToolsObj.Headcontent, null);
+                    footobj.Header = XMLWorkerHelper.ParseToElementList(pDFToolsObj.Headcontent ==null?"": pDFToolsObj.Headcontent, null);
                     writer.PageEvent = footobj;
                     pdfDoc.Open();
                     XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
@@ -74,34 +74,11 @@ namespace SCManager.UserInterface.Controllers
                 cell.Border = 0;
                 cell.PaddingLeft = 10;
                 footerTbl.AddCell(cell);
-                footerTbl.WriteSelectedRows(0, -1, doc.PageSize.Width - 190, 30, writer.DirectContent);
-
+                footerTbl.WriteSelectedRows(0, -1, doc.PageSize.Width - 190, 30, writer.DirectContent);               
+                //footerTbl.WriteSelectedRows(0, -1, 250, 30, writer.DirectContent);
             }
             public override void OnStartPage(PdfWriter writer, Document document)
-            {
-                //    PdfPTable headerTbl = new PdfPTable(1);
-                //    headerTbl.TotalWidth = document.PageSize.Width;
-                //    //headerTbl.HeaderHeight = 60; 
-                //    Font documentFont = FontFactory.GetFont(FontFactory.TIMES_BOLD, 14, iTextSharp.text.Font.BOLD);
-                //    string documentName = "Tax Bill" + "\n";               
-                //    Paragraph header = new Paragraph();
-                //    Phrase phraseDocumentName = new Phrase(documentName, documentFont);
-                //    header.Add(phraseDocumentName);            
-
-
-
-                //    headerTbl.HorizontalAlignment = Element.ALIGN_LEFT;
-                //    float[] widths = new float[] { 100f, document.PageSize.Width - 100 };
-                //    ColumnText ct = new ColumnText(writer.DirectContent);
-                //    ct.SetSimpleColumn(new Rectangle(10, 495, 832, 590));
-                //    foreach (IElement e in Header)
-                //    {
-                //        ct.AddElement(e);
-                //    }
-                //    ct.Go();
-
-                //    headerTbl.WriteSelectedRows(0, -1, 0, 490, writer.DirectContent);
-                //}
+            {      
 
 
                 Font documentFont = FontFactory.GetFont(FontFactory.TIMES, 14, iTextSharp.text.Font.BOLD);
