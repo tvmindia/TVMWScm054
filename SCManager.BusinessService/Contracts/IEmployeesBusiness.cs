@@ -9,7 +9,7 @@ namespace SCManager.BusinessService.Contracts
 {
    public interface IEmployeesBusiness
     {
-        List<Employees> GetAllEmployees(UA UA);
+        List<Employees> GetAllEmployees(UA UA,string filter);
         List<Employees> GetEmployeeByID(UA UA, string ID);
         object InsertUpdateEmployee(Employees employeesObj);
         string DeleteEmployee(string ID, UA ua);

@@ -16,10 +16,10 @@ namespace SCManager.BusinessService.Services
             _iEmployeesRepository = iEmployeesRepository;
         }
 
-        public List<Employees> GetAllEmployees(UA UA)
+        public List<Employees> GetAllEmployees(UA UA,string filter)
         {
             List<Employees> employeesList = null;
-            employeesList = _iEmployeesRepository.GetAllEmployees(UA);
+            employeesList = _iEmployeesRepository.GetAllEmployees(UA,filter);
             return employeesList;
         }
         public List<Employees> GetEmployeeByID(UA UA, string ID)

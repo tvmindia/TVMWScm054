@@ -35,5 +35,9 @@ namespace SCManager.UserInterface.Models
         [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }
         public LogDetailsViewModel logDetails { get; set; }
+
+        [Display(Name = "Is Active(Y/N)")]
+        public bool IsActive { get; set; }
+        public string Filter { get; set; }
     }
 }

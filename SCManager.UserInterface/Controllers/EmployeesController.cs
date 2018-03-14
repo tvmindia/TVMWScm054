@@ -36,10 +36,10 @@ namespace SCManager.UserInterface.Controllers
         #region GetAllEmployees
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
-        public string GetAllEmployees()
+        public string GetAllEmployees(string filter)
         {
             UA ua = new UA();
-            List<EmployeesViewModel> employeeList = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_iEmployeesBusiness.GetAllEmployees(ua));
+            List<EmployeesViewModel> employeeList = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_iEmployeesBusiness.GetAllEmployees(ua,filter));
             return JsonConvert.SerializeObject(new { Result = "OK", Records = employeeList });
 
         }

@@ -27,7 +27,7 @@ namespace SCManager.RepositoryServices.Services
         #region Methods
 
         #region GetAllEmployees
-        public List<Employees> GetAllEmployees(UA UA)
+        public List<Employees> GetAllEmployees(UA UA,string filter)
         {
             List<Employees> Emloyeeslist = null;
             try
@@ -42,6 +42,7 @@ namespace SCManager.RepositoryServices.Services
                         }
                         cmd.Connection = con;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@Filter", SqlDbType.NVarChar, 10).Value = filter;
                         cmd.CommandText = "[GetAllEmployees]";
                         cmd.CommandType = CommandType.StoredProcedure;
                         using (SqlDataReader sdr = cmd.ExecuteReader())
@@ -51,17 +52,18 @@ namespace SCManager.RepositoryServices.Services
                                 Emloyeeslist = new List<Employees>();
                                 while (sdr.Read())
                                 {
-                                    Employees _EmloyeesObj = new Employees();
+                                    Employees EmloyeesObj = new Employees();
                                     {
-                                        _EmloyeesObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _EmloyeesObj.ID);
-                                        _EmloyeesObj.Name = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : _EmloyeesObj.Name);
-                                        _EmloyeesObj.Type = (sdr["Type"].ToString() != "" ? (sdr["Type"].ToString()) : _EmloyeesObj.Type);
-                                        _EmloyeesObj.MobileNo = (sdr["MobileNo"].ToString() != "" ? (sdr["MobileNo"].ToString()) : _EmloyeesObj.MobileNo);
-                                        _EmloyeesObj.Address = (sdr["Address"].ToString() != "" ? (sdr["Address"].ToString()) : _EmloyeesObj.Address);
-                                        _EmloyeesObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _EmloyeesObj.Remarks);                                   
+                                        EmloyeesObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : EmloyeesObj.ID);
+                                        EmloyeesObj.Name = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : EmloyeesObj.Name);
+                                        EmloyeesObj.Type = (sdr["Type"].ToString() != "" ? (sdr["Type"].ToString()) : EmloyeesObj.Type);
+                                        EmloyeesObj.MobileNo = (sdr["MobileNo"].ToString() != "" ? (sdr["MobileNo"].ToString()) : EmloyeesObj.MobileNo);
+                                        EmloyeesObj.Address = (sdr["Address"].ToString() != "" ? (sdr["Address"].ToString()) : EmloyeesObj.Address);
+                                        EmloyeesObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : EmloyeesObj.Remarks); 
+                                        EmloyeesObj.IsActive = (sdr["IsActive"].ToString() != "" ? bool.Parse(sdr["IsActive"].ToString()) : EmloyeesObj.IsActive);
                                     }
 
-                                    Emloyeeslist.Add(_EmloyeesObj);
+                                    Emloyeeslist.Add(EmloyeesObj);
                                 }
                             }
                         }
@@ -102,17 +104,18 @@ namespace SCManager.RepositoryServices.Services
                                 Emloyeeslist = new List<Employees>();
                                 while (sdr.Read())
                                 {
-                                    Employees _EmloyeesObj = new Employees();
+                                    Employees EmployeesObj = new Employees();
                                     {
-                                        _EmloyeesObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _EmloyeesObj.ID);
-                                        _EmloyeesObj.Name = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : _EmloyeesObj.Name);
-                                        _EmloyeesObj.Type = (sdr["Type"].ToString() != "" ? (sdr["Type"].ToString()) : _EmloyeesObj.Type);
-                                        _EmloyeesObj.MobileNo = (sdr["MobileNo"].ToString() != "" ? (sdr["MobileNo"].ToString()) : _EmloyeesObj.MobileNo);
-                                        _EmloyeesObj.Address = (sdr["Address"].ToString() != "" ? (sdr["Address"].ToString()) : _EmloyeesObj.Address);
-                                        _EmloyeesObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _EmloyeesObj.Remarks);
+                                        EmployeesObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : EmployeesObj.ID);
+                                        EmployeesObj.Name = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : EmployeesObj.Name);
+                                        EmployeesObj.Type = (sdr["Type"].ToString() != "" ? (sdr["Type"].ToString()) : EmployeesObj.Type);
+                                        EmployeesObj.MobileNo = (sdr["MobileNo"].ToString() != "" ? (sdr["MobileNo"].ToString()) : EmployeesObj.MobileNo);
+                                        EmployeesObj.Address = (sdr["Address"].ToString() != "" ? (sdr["Address"].ToString()) : EmployeesObj.Address);
+                                        EmployeesObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : EmployeesObj.Remarks);
+                                        EmployeesObj.IsActive = (sdr["IsActive"].ToString() != "" ? bool.Parse(sdr["IsActive"].ToString()) : EmployeesObj.IsActive);
                                     }
 
-                                    Emloyeeslist.Add(_EmloyeesObj);
+                                    Emloyeeslist.Add(EmployeesObj);
                                 }
                             }
                         }
@@ -153,7 +156,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = employeesObj.Remarks;
                         cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = employeesObj.logDetails.CreatedBy;
                         cmd.Parameters.Add("@CreatedDate", SqlDbType.SmallDateTime).Value = employeesObj.logDetails.CreatedDate;
-                                          
+                        cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = employeesObj.IsActive;
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
                         outParameter1 = cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
@@ -203,7 +206,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = employeesObj.Remarks;
                         cmd.Parameters.Add("@UpdatedBy", SqlDbType.NVarChar, 250).Value = employeesObj.logDetails.CreatedBy;
                         cmd.Parameters.Add("@UpdatedDate", SqlDbType.SmallDateTime).Value = employeesObj.logDetails.CreatedDate;
-
+                        cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = employeesObj.IsActive;
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();

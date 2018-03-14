@@ -117,7 +117,7 @@ function EG_Columns() {
                 { "data": "Quantity"},//, render: function (data, type, row) { return (EG_createTextBox(data, 'N', row, 'Quantity', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "UOM", "defaultContent": "<i></i>" },
                 {"data":"ReferralRate","defaultContent": "<i></i>" },
-                { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'Rate', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
+                { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'Rate', 'CalculateAmount',true)); }, "defaultContent": "<i></i>" },
 
                 { "data": "NetAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i></i>" },
                 { "data": null, "orderable": false, "defaultContent": '<a href="#" class="DeleteLink"  onclick="DeleteItem(this)" ><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>' }
@@ -371,9 +371,13 @@ function BindTaxBillEntryFields(Records) {
         $("#ServiceChargeComm").val(roundoff(Records.ServiceCharge / 100));
         $("#SCCommAmount").val(roundoff(Records.SCCommAmount));
         $("#SpecialComm").val(roundoff(Records.SpecialComm));
-        EG_Rebind_WithData(Records.TaxBillEntryDetail, 1);        
-      
-    } catch (e) {
+        debugger;
+        EG_Rebind_WithData(Records.TaxBillEntryDetail);
+        
+        //$('#tblTaxBillDetails input.gridTextbox').attr('onblur', 'CalculateAmount(this)');
+    }
+    catch (e)
+    {
         notyAlert('error', e.message);
     }
 }
@@ -441,6 +445,7 @@ function SaveSuccess(data, status) {
 
 function CalculateAmount(row)
 {
+    debugger;
         //EG_GridData[row-1][Quantity] = value
         var qty = 0.00;
         var rate = 0.00;

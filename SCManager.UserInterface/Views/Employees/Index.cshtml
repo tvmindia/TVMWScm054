@@ -48,6 +48,7 @@
                             <th>MobileNo</th>
                             <th>Address</th>
                             <th>Remarks</th>
+                            <th>IsActive</th>
                             <th>...</th>
 
                         </tr>
@@ -129,12 +130,24 @@
                                 @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-                        <div class="form-group" hidden="hidden">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input id="btnInsertUpdateEmployee" type="submit" value="Create" class="btn btn-default" />
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label" })
+                            </div>                           
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "", style = "zoom:1.8" } })
+                                    
+                                   @*<input type="checkbox" id="IsActive"  value="" style="zoom:1.5;" />*@
+                                </div>
+                                
                             </div>
-                        </div>
+                           
+
+                            <div class="form-group" hidden="hidden">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input id="btnInsertUpdateEmployee" type="submit" value="Create" class="btn btn-default" />
+                                </div>
+                            </div>
                         </div>
                     <div class="col-md-6 mastersep">
 

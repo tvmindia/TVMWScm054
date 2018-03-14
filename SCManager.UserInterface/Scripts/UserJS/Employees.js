@@ -18,11 +18,19 @@ $(document).ready(function () {
                { "data": "MobileNo", "defaultContent": "<i>-</i>" },
                { "data": "Address", "defaultContent": "<i>-</i>" },
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
+                 { "data": "IsActive", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
-                 { className: "text-center", "targets": [1, 2, 3, 4, 6] },
+                 { className: "text-center", "targets": [1, 2, 3, 4, 6,7] },
                  { className: "text-left", "targets": [5] },
+                {
+                    "render": function (data, type, row) {
+                        return (data == false ? "No " : "Yes");
+                    },
+                    "targets": [6]
+
+                },
              ]
          });
 
@@ -38,7 +46,7 @@ $(document).ready(function () {
 //---------------------------------------Edit Employee--------------------------------------------------//
 function Edit(currentObj) {
     //Tab Change on edit click
-   
+    debugger;
 
     $('#AddTab').trigger('click');
     ChangeButtonPatchView("Employees", "btnPatchEmployeesSettab", "Edit"); //ControllerName,id of the container div,Name of the action
@@ -50,7 +58,7 @@ function Edit(currentObj) {
 //------------------------------- Employee Save-----------------------------//
 function save() {
    
-
+    debugger;
     $("#btnInsertUpdateEmployee").trigger('click');
 }
 //---------------get grid fill result-------------------
@@ -124,7 +132,7 @@ function EmployeeSaveSuccess(data, status) {
 
 //---------------------------------------Fill Employee--------------------------------------------------//
 function fillEmployee(ID) {
-  
+    debugger;
     ChangeButtonPatchView("Employees", "btnPatchEmployeesSettab", "Edit");
     var thisItem = GetEmployeeDetailsByID(ID); //Binding Data
     //Hidden
@@ -135,6 +143,15 @@ function fillEmployee(ID) {
     $("#Address").val(thisItem[0].Address)
     $("#Remarks").val(thisItem[0].Remarks)
     $("#deleteId").val(thisItem[0].ID);
+    if (thisItem[0].IsActive == true) {
+        $("#IsActive").prop('checked', true);
+       // $('#IsActive').val(this.checked ? 1 : 0);
+
+    }
+    else {
+        $("#IsActive").prop('checked', false);
+
+    }
 }
 
 //---------------------------------------Get Employee Details By ID-------------------------------------//
@@ -175,6 +192,7 @@ function clearfields() {
     $("#Address").val("")
     $("#Remarks").val("");
     $("#deleteId").val("0")
+    $("#IsActive").prop('checked', false);
     ResetForm();
 }
 function reset() {

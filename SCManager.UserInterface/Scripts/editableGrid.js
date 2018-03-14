@@ -7,7 +7,7 @@
 
 var currBoxIndx;
 var EG_MODE='ADD'
-
+var _isEdit;
 //--1----------------data validations-------------------------
 function datalistValidator(value, source) {
     var obj = $("#" + source).find("option[value='" + value + "']");
@@ -124,6 +124,8 @@ function EG_changeData(value, row, column) {
                 EG_GridData[i][column] = value;
 
                 if (i == EG_GridData.length-1) {
+                    debugger;
+                    if (!_isEdit)
                     EG_AddBlankRowsWithoutRebind(1);
                 }
 
@@ -156,8 +158,9 @@ function EG_ComboSource(id, values, valueCol, textCol) {
 
 
 //--4------------------create controlls------------------------------
-function EG_createTextBox(data, type, row, columnname,relatedfn) {
+function EG_createTextBox(data, type, row, columnname, relatedfn, isEdit) {
 
+    _isEdit=isEdit //to avoid new line creation
     var a = row[columnname];
     var b = row.SlNo;
     var c = "'";
@@ -242,7 +245,7 @@ function EG_AddBlankRowsWithoutRebind(count) {
         EG_GridData.push(tempObj);
     }
 
-    EG_totalDetailRows = EG_totalDetailRows + count;
+    EG_totalDetailRows = EG_totalDetailRows + count;   
 }
 
 

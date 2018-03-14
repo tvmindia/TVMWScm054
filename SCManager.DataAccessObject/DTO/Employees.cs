@@ -15,5 +15,7 @@ namespace SCManager.DataAccessObject.DTO
         public string Address { get; set; }
         public string Remarks { get; set; }
         public LogDetails logDetails { get; set; }
+        public bool IsActive { get; set; }
+        public string Filter { get; set; }
     }
 }

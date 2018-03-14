@@ -9,7 +9,7 @@ namespace SCManager.RepositoryServices.Contracts
 {
    public interface IEmployeesRepository
     {
-        List<Employees> GetAllEmployees(UA UA);
+        List<Employees> GetAllEmployees(UA UA,string filter);
         List<Employees> GetEmployeeByID(UA UA, string ID);
         object InsertEmployee(Employees employeesObj);
         object UpdateEmployee(Employees employeesObj);

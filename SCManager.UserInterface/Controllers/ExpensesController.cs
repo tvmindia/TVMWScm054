@@ -41,7 +41,7 @@ namespace SCManager.UserInterface.Controllers
                 expenseViewModel = new ExpensesViewModel(); 
                 List<SelectListItem> selectListItem = new List<SelectListItem>();
                 //Technician Drop down bind
-                List<EmployeesViewModel> TechniciansList = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_iEmployeesBusiness.GetAllEmployees(ua));
+                List<EmployeesViewModel> TechniciansList = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_iEmployeesBusiness.GetAllEmployees(ua,"1"));
                 
                 TechniciansList = TechniciansList == null ? null : TechniciansList.OrderBy(attset => attset.Name).ToList();
                 foreach (EmployeesViewModel clvm in TechniciansList)
