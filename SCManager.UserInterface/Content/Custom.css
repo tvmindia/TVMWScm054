@@ -516,3 +516,23 @@ color: #e32;
      border-bottom:#555555 solid 3px;
      border-top-color: white;
  }
+ 
+
+  .required:after
+        {
+            content: " *";
+            color: red;
+            font-size:20px;
+            
+        }
+
+
+  .headerTable{
+      background-color:#dcdcdc87;
+      border:1px solid lightgray;
+      width:100%;
+  }
+  td.headerTable{
+      padding-left:5px;
+      padding-right:5px;
+  }

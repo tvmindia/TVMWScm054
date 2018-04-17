@@ -32,14 +32,22 @@
             <li id="li1" role="presentation" class="activenav"><a>Upload File</a></li>
             <li id="li2" role="presentation"><a>Valdation Result</a></li>
             <li id="li3" role="presentation"><a>Import Result</a></li>
-        </ul>
+        </ul>       
 
         <div class="row" id="uploadRow" style="position:relative;height:100%;">
             <div class="row" style="min-height:400px;">
+
+               <div style="padding:30px;padding-top:50px;padding-left:110px;font-size:14px;color:dodgerblue;">   
+                                  
+               <a href='@Url.Action("DownloadTemplate", "Import")'>Download Form Import Template(Form8_00.00.0000_F000.00.AM/PM.xlsx)<span></span></a>
+             
+                     </div>  
+
                 <div class="form-group" style="position:relative">
+                    
                     <div class="col-md-1">
                         <input type="file" id="FileUpload1" onchange="BindFileName()" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" name="FileData" style="display:none;">
-                    </div>
+                    </div>             
                     <div class="form-group col-md-10" onclick="$('#FileUpload1').click();" required>
                         <div class="input-group" style="text-align:center;margin-top:15%">
                             <div class="input-group-addon" style="height:100px;">
@@ -59,7 +67,7 @@
                     Continue <span class="glyphicon glyphicon-arrow-right"></span>
                 </button>
             </div>
-
+            
         </div>
 
         <div class="row" id="importRow">

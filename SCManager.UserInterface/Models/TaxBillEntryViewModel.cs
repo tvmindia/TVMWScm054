@@ -71,6 +71,14 @@ namespace SCManager.UserInterface.Models
         public List<TaxBillEntryDetailViewModel> TaxBillEntryDetail { get; set; }
         public int IsActive { get; set; }
         public PDFTools PDFToolsObj { get; set; }
+        [Display(Name = "CGST %")]
+        public decimal? CGSTAmount { get; set; }
+        [Display(Name = "SGST %")]
+        public decimal? SGSTAmount { get; set; }
+        [Display(Name = "Total Tax Amount")]
+        public decimal? TotalTaxAmount { get; set; }
+    
+
     }
 
     public class TaxBillEntryDetailViewModel

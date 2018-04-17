@@ -52,7 +52,8 @@ $(document).ready(function () {
             columnDefs: [{ className: "text-left", "targets": [0, 1, 2, 4, 5, 7] },
                            { "width": "10%", "targets": [1] },
                            { className: "text-right", "targets": [9, 12, 13, 14, 15, 16] },
-                          { className: "text-center", "targets": [0, 3, 6] }]
+                           { className: "text-center", "targets": [0, 3, 6] },
+                           { "targets": [7], "visible": false }, ]
         });
 
         DataTables.form8ImportTable = $('#form8ImportTable').DataTable({
@@ -88,7 +89,9 @@ $(document).ready(function () {
             ],
             columnDefs: [{ className: "text-left", "targets": [2, 3, 5, 8, 9, 0] },
                            { className: "text-right", "targets": [7, 10, 11, 12, 13, 14] },
-                           { className: "text-center", "targets": [1, 4, 6] }]
+                           { className: "text-center", "targets": [1, 4, 6] },
+                           { "targets": [7], "visible": false },
+            ]
         });
 
         DataTables.UploadedFilesHistoryTable = $('#tblHistoryList').DataTable({

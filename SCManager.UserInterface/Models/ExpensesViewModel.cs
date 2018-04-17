@@ -28,7 +28,7 @@ namespace SCManager.UserInterface.Models
         [Required(ErrorMessage = "Must be date")]
         public string RefDate { get; set; }
 
-        [Display(Name = "Technician")]
+        [Display(Name = "Technician / Other Staff")]
         public Guid EmpID { get; set; }
 
         [Display(Name = "Mode of Payment")]

@@ -33,6 +33,8 @@ namespace SCManager.DataAccessObject.DTO
         public LogDetails logDetails { get; set; }
         public string DetailXML { get; set; }
         public List<TCRBillEntryDetail> TCRBillEntryDetail { get; set; }
+        public decimal? CGSTAmount { get; set; }
+        public decimal? SGSTAmount { get; set; }
     }
     public class TCRBillEntryDetail
     {

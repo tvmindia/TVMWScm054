@@ -67,6 +67,9 @@
                             <th hidden="hidden">Job No</th>
                             <th>Date</th>
                             <th>Bill No</th>
+                            <th>Total (₹)</th>
+                            <th>Discount (₹)</th>                            
+                            <th>Total Tax Amount (₹)</th>                           
                             <th>Bill Amount (₹)</th>
                             <th>Cust. Name</th>
                             <th>Cust. Contact</th>
@@ -296,7 +299,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-group" hidden="hidden">
                                             <div class="col-md-3">
                                                 @Html.LabelFor(model => model.VATAmount, htmlAttributes: new { @class = "control-label" })
                                             </div>
@@ -306,6 +309,34 @@
                                             <div class="col-md-6">
                                                 @Html.EditorFor(model => model.VATAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "VATAmount", @onkeyup = "ClearDiscountPercentage()", style = "text-align:right", @onclick = "SelectAllValue(this);" } })
                                                 @Html.Hidden("VATPercentageAmount", 0)
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-3">
+                                                @Html.LabelFor(model => model.CGSTAmount, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" id="cgstpercentage" class="form-control vattxt" onkeyup="CalculateCGST()" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.CGSTAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "CGSTAmount", @onkeyup = "ClearGSTDiscountPercentage()", style = "text-align:right", @onclick = "SelectAllValue(this);" } })
+                                                @Html.Hidden("CGSTPercentageAmount", 0)
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-3">
+                                                @Html.LabelFor(model => model.SGSTAmount, htmlAttributes: new { @class = "control-label" })
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" id="sgstpercentage" class="form-control vattxt" onkeyup="CalculateSGST()" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.SGSTAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "SGSTAmount", @onkeyup = "ClearGSTDiscountPercentage()", style = "text-align:right", @onclick = "SelectAllValue(this);" } })
+                                                @Html.Hidden("SGSTPercentageAmount", 0)
                                             </div>
                                         </div>
 

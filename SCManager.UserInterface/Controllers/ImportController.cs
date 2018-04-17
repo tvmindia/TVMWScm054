@@ -223,7 +223,7 @@ namespace SCManager.UserInterface.Controllers
         #region ValidateFileName
         string ValidateFileName(string fname)
         {
-            var regEx = new Regex(@"^Form8_([0]?[0-9]|[12][0-9]|[3][01])[.]([0]?[1-9]|[1][0-2])[.]([0-9]{4}|[0-9]{2})_F[0-9]+?.xlsx$");
+            var regEx = new Regex("^Form8_([0]?[0-9]|[12][0-9]|[3][01])[.]([0]?[1-9]|[1][0-2])[.]([0-9]{4}|[0-9]{2})_F[0-9]+(0[1-9]|1[0-2]).[0-5][0-9].(am|pm|AM|PM)+?.xlsx");
             if (regEx.IsMatch(fname))
             {
                 return ("success");
@@ -255,8 +255,12 @@ namespace SCManager.UserInterface.Controllers
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult DownloadTemplate()
         {
-            string filename = "Form8_00.00.0000_F0.xlsx";
-            string filepath = Path.Combine(Server.MapPath("~/Content/Uploads/Form8_00.00.0000_F0.xlsx"));
+            UA ua = new UA();
+            //string filename = "Form8_00.00.0000_F0.xlsx";
+           
+            string filename = "Form8_"+ ua.GetCurrentDateTime().ToString("dd/MM/yyyy").Replace('-','.')+"_F0"+ua.GetCurrentDateTime().ToString("hh:mm:tt").Replace(':','.') + ".xlsx";
+            //string filename = "Form8_" + ua.GetCurrentDateTime().ToString("dd/MM/yyyy").Replace('-', '.') + "_F0" + ".xlsx";
+            string filepath = Path.Combine(Server.MapPath("~/Content/Uploads/Form8_00.00.0000_F0.xlsx"));            
             string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";//web content type of .xlsx files
             return File(filepath, contentType, filename);
         }
@@ -268,16 +272,17 @@ namespace SCManager.UserInterface.Controllers
             ToolboxViewModel ToolboxViewModelObj = new ToolboxViewModel();
             switch (ActionType)
             {
-                case "List":
-                    ToolboxViewModelObj.downloadBtn.Visible = true;
-                    ToolboxViewModelObj.downloadBtn.Text = "Template";
-                    ToolboxViewModelObj.downloadBtn.Title = "Download Template";
-                    ToolboxViewModelObj.downloadBtn.Event = "DownloadTemplate();";
+                case "List":                   
 
                     ToolboxViewModelObj.HistoryBtn.Visible = true;
                     ToolboxViewModelObj.HistoryBtn.Text = "History";
                     ToolboxViewModelObj.HistoryBtn.Title = "Uploaded Files History";
                     ToolboxViewModelObj.HistoryBtn.Event = "FetchHistory();";
+
+                    ToolboxViewModelObj.downloadBtn.Visible = false;
+                    ToolboxViewModelObj.downloadBtn.Text = "Template";
+                    ToolboxViewModelObj.downloadBtn.Title = "Download Template";
+                    ToolboxViewModelObj.downloadBtn.Event = "DownloadTemplate();";
 
                     break;
                 default:

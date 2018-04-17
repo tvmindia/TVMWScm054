@@ -81,8 +81,8 @@ namespace SCManager.UserInterface.Controllers
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public string GetAllTaxBillEntry()
         {
-            UA ua = new UA();
-            List<TaxBillEntryViewModel> ItemList = Mapper.Map<List<TaxBillEntry>, List<TaxBillEntryViewModel>>(_iTaxBillEntryBusiness.GetAllTaxBillEntry(ua));
+            UA ua = new UA();          
+            List<TaxBillEntryViewModel> ItemList = Mapper.Map<List<TaxBillEntry>, List<TaxBillEntryViewModel>>(_iTaxBillEntryBusiness.GetAllTaxBillEntry(ua));            
             return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
 
         }

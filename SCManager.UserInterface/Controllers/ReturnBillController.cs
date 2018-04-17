@@ -403,7 +403,7 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.resetbtn.Title = "Reset";
                     ToolboxViewModelObj.resetbtn.Event = "reset();";
 
-                    ToolboxViewModelObj.PrintBtn.Visible = true;
+                    ToolboxViewModelObj.PrintBtn.Visible = false;
                     ToolboxViewModelObj.PrintBtn.Text = "Print";
                     ToolboxViewModelObj.PrintBtn.Title = "Print";
                     ToolboxViewModelObj.PrintBtn.Event = "PrintTableToPdf();";

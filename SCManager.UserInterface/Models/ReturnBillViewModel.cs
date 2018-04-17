@@ -156,21 +156,21 @@ namespace SCManager.UserInterface.Models
         public Guid? HeaderID { get; set; }
         public Guid? MaterialID { get; set; }
         public int? SlNo { get; set; }
-        public string Material { get; set; }
-        public int? Quantity { get; set; }
+        public string Material { get; set; }       
         public string UOM { get; set; }
         public string Description { get; set; }
-
-        public decimal? Rate { get; set; }
-        public decimal? BasicAmount { get; set; }
+        public int? Quantity { get; set; }
+        public decimal? Rate { get; set; }       
         public decimal? TradeDiscount { get; set; }
         public decimal? CGSTPercentage { get; set; }
         public decimal? CGSTAmount { get; set; }
         public decimal? SGSTPercentage { get; set; }
         public decimal? SGSTAmount { get; set; }
-        public decimal? TotalTaxAmount { get; set; }
-        public decimal GrandTotal { get; set; }
+        public decimal? TotalAmount { get; set; }
         public decimal? NetAmount { get; set; }
+        public decimal? BasicAmount { get; set; }
+        public decimal? TotalTaxAmount { get; set; }
+        public decimal GrandTotal { get; set; }        
         public string TicketNo { get; set; }
         public string CustomerName { get; set; }
         public decimal TotalValue { get; set; }

@@ -153,7 +153,8 @@ namespace SCManager.BusinessService.Services
                     }
                 }
                 
-                T.GrandTotal = T.Subtotal + T.VATAmount - T.Discount+T.ServiceCharge;
+                //T.GrandTotal = T.Subtotal + T.VATAmount - T.Discount+T.ServiceCharge;
+                T.GrandTotal = T.Subtotal + (T.CGSTAmount+T.SGSTAmount) - T.Discount + T.ServiceCharge;
 
                 if (T.BillDate != null)
                     T.BillDateFormatted = T.BillDate;//.GetValueOrDefault().ToString(settings.dateformat);                

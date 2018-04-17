@@ -19,7 +19,7 @@ $(document).ready(function () {
                 extend: 'excel',
                 exportOptions:
                              {
-                                 columns: [1, 2, 3, 4, 5, 6, 7,8,9]
+                                 columns: [1, 2, 3, 4, 5, 6, 7,8,9,10,11,12,13]
                              }
             }],
             order: [],
@@ -32,17 +32,23 @@ $(document).ready(function () {
               { "data": "JobNo", "defaultContent": "<i>-</i>" },
               { "data": "BillDateFormatted", "defaultContent": "<i>-</i>" },
               { "data": "BillNo", "defaultContent": "<i>-</i>" },
+              { "data": "Subtotal", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+              { "data": "Discount", "defaultContent": "<i>-</i>" },
+              { "data": "TotalTaxAmount", "defaultContent": "<i>-</i>" },             
               { "data": "GrandTotal", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
               { "data": "CustomerName", "defaultContent": "<i>-</i>" },
               { "data": "CustomerContactNo", "defaultContent": "<i>-</i>" },
               { "data": "CustomerLocation", "defaultContent": "<i>-</i>" },
+              
               { "data": "Remarks", "defaultContent": "<i>-</i>" },
               { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
             ],
             columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
-                 { className: "text-right", "targets": [5] },
-            { className: "text-center", "targets": [1, 2, 3, 4, 9, 5, 6, 7, 8, 9, 10] }
-
+                 { className: "text-right", "targets": [5,6,7,8] },
+            { className: "text-center", "targets": [1, 2, 3, 4, 9, 5, 6, 7, 8, 9, 10,11,12,13] },
+            { "width": "10%", "targets": 4 },
+            { "width": "10%", "targets": 5 },
+            { "width": "10%", "targets": 7 },
             ]
         });       
         //BindJobNumberDropDown();
@@ -367,6 +373,12 @@ function BindTaxBillEntryFields(Records) {
         $("#VATAmount").val(roundoff(Records.VATAmount));
         $("#VATPercentageAmount").val(Records.VATAmount);
 
+
+        $("#CGSTAmount").val(roundoff(Records.CGSTAmount));
+        $("#CGSTPercentageAmount").val(Records.CGSTAmount);
+        $("#SGSTAmount").val(roundoff(Records.SGSTAmount));
+        $("#SGSTPercentageAmount").val(Records.SGSTAmount);
+
         $("#grandtotal").val(roundoff(Records.GrandTotal));
         $("#ServiceChargeComm").val(roundoff(Records.ServiceCharge / 100));
         $("#SCCommAmount").val(roundoff(Records.SCCommAmount));
@@ -401,8 +413,14 @@ function DisableFields()
     $("#total").prop('readonly', true);
     $("#SCAmount").prop('readonly', true);
     $("#VATAmount").prop('readonly', true);
+    $("#CGSTAmount").prop('readonly', true);
+    $("#SGSTAmount").prop('readonly', true);
     $("#vatpercentage").prop('readonly', true);
     $("#VATPercentageAmount").prop('readonly', true);
+    $("#cgstpercentage").prop('readonly', true);
+    $("#CGSTPercentageAmount").prop('readonly', true);
+    $("#sgstpercentage").prop('readonly', true);
+    $("#SGSTPercentageAmount").prop('readonly', true);
     $("#grandtotal").prop('readonly', true);
     $("#ServiceChargeComm").prop('readonly', true);
     $("#SCCommAmount").prop('readonly', true);
@@ -477,6 +495,31 @@ function CalculateAmount(row)
         AmountSummary();
     }
 
+    //function AmountSummary() {
+    //    //debugger;
+    //    var Total = 0.00;
+    //    for (i = 0; i < EG_GridData.length; i++) {
+    //        Total = Total + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
+    //    }
+    //    $('#subtotal').val(roundoff(Total));
+    //    var discount = parseFloat($('#discount').val()) || 0;
+
+    //    $('#total').val(roundoff(Total - discount));
+
+    //    var total = parseFloat($('#total').val()) || 0;
+
+    //    if ($("#vatpercentage").val() != "")
+    //        CalculateVAT();
+
+    //    var vatamount = parseFloat($('#VATAmount').val()) || 0;
+    //    var SCAmount = parseFloat($('#SCAmount').val()) || 0;
+    //    $('#grandtotal').val(roundoff(total + vatamount + SCAmount));
+    //}
+
+
+
+
+
     function AmountSummary() {
         //debugger;
         var Total = 0.00;
@@ -490,34 +533,83 @@ function CalculateAmount(row)
 
         var total = parseFloat($('#total').val()) || 0;
 
-        if ($("#vatpercentage").val() != "")
-            CalculateVAT();
+        if (($("#cgstpercentage").val() != "") && ($("#sgstpercentage").val() != ""))
+        {
+            CalculateCGST();
+            CalculateSGST();
+        }
+        
 
         var vatamount = parseFloat($('#VATAmount').val()) || 0;
+        var cgstamount = parseFloat($('#CGSTAmount').val()) || 0;
+        var sgstamount = parseFloat($('#SGSTAmount').val()) || 0;
         var SCAmount = parseFloat($('#SCAmount').val()) || 0;
-        $('#grandtotal').val(roundoff(total + vatamount + SCAmount));
+        $('#grandtotal').val(roundoff(total + (cgstamount+sgstamount) + SCAmount));
     }
 
-    function CalculateVAT() {
-       // debugger;
-        var vatpercent = $("#vatpercentage").val();
+    //function CalculateVAT() {
+    //   // debugger;
+    //    var vatpercent = $("#vatpercentage").val();
+    //    var Total = $("#total").val();
+    //    vatpercent = parseFloat(vatpercent);
+    //    if (vatpercent > 100) {
+    //        vatpercent = 100
+    //        $("#vatpercentage").val(vatpercent);
+    //    }
+    //    if (vatpercent < 0) {
+    //        vatpercent = 0
+    //        $("#vatpercentage").val(vatpercent);
+    //    }
+    //    Total = parseFloat(Total);
+    //    var vatamt = (Total * vatpercent / 100)
+    //    if (isNaN(vatamt))
+    //    { vatamt = 0.00 }
+    //    $("#VATAmount").val(roundoff(vatamt));
+    //    $('#VATPercentageAmount').val(roundoff(vatamt));
+    //    $('#grandtotal').val(roundoff(Total + vatamt));
+    //}
+    function CalculateCGST() {
+        // debugger;
+        var cgstpercent = $("#cgstpercentage").val();
         var Total = $("#total").val();
-        vatpercent = parseFloat(vatpercent);
-        if (vatpercent > 100) {
-            vatpercent = 100
-            $("#vatpercentage").val(vatpercent);
+        cgstpercent = parseFloat(cgstpercent);
+        if (cgstpercent > 100) {
+            cgstpercent = 100
+            $("#cgstpercentage").val(cgstpercent);
         }
-        if (vatpercent < 0) {
-            vatpercent = 0
-            $("#vatpercentage").val(vatpercent);
+        if (cgstpercent < 0) {
+            cgstpercent = 0
+            $("#cgstpercentage").val(cgstpercent);
         }
         Total = parseFloat(Total);
-        var vatamt = (Total * vatpercent / 100)
-        if (isNaN(vatamt))
-        { vatamt = 0.00 }
-        $("#VATAmount").val(roundoff(vatamt));
-        $('#VATPercentageAmount').val(roundoff(vatamt));
-        $('#grandtotal').val(roundoff(Total + vatamt));
+        var cgstamt = (Total * cgstpercent / 100)
+        if (isNaN(cgstamt))
+        { cgstamt = 0.00 }
+        $("#CGSTAmount").val(roundoff(cgstamt));
+        $('#CGSTPercentageAmount').val(roundoff(cgstamt));
+        $('#grandtotal').val(roundoff(Total + cgstamt));
+    }
+
+    function CalculateSGST() {
+        // debugger;
+        var sgstpercent = $("#sgstpercentage").val();
+        var Total = $("#total").val();
+        sgstpercent = parseFloat(sgstpercent);
+        if (sgstpercent > 100) {
+            sgstpercent = 100
+            $("#sgstpercentage").val(sgstpercent);
+        }
+        if (sgstpercent < 0) {
+            sgstpercent = 0
+            $("#sgstpercentage").val(sgstpercent);
+        }
+        Total = parseFloat(Total);
+        var sgstamt = (Total * sgstpercent / 100)
+        if (isNaN(sgstamt))
+        { sgstamt = 0.00 }
+        $("#SGSTAmount").val(roundoff(sgstamt));
+        $('#SGSTPercentageAmount').val(roundoff(sgstamt));
+        $('#grandtotal').val(roundoff(Total + sgstamt));       
     }
 
     function PrintTableToDoc() {
@@ -600,6 +692,19 @@ function CalculateAmount(row)
         $("#lblTax").text(vatPercentage);
         var vatAmount = $('#VATAmount').val();
         $("#lblTaxPercentage").text(vatAmount);
+
+        var cgstPercentage = $('#cgstpercentage').val();
+        $("#lblCGST").text(cgstPercentage);
+        var CGSTAmount = $('#CGSTAmount').val();
+        $("#lblCGSTPercentage").text(CGSTAmount);
+
+        var sgstPercentage = $('#sgstpercentage').val();
+        $("#lblSGST").text(sgstPercentage);
+        var SGSTAmount = $('#SGSTAmount').val();
+        $("#lblSGSTPercentage").text(SGSTAmount);
+
+
+
         var serviceChargeAmount = $('#SCAmount').val();
         $("#lblServiceCharge").text(serviceChargeAmount);
         var grandTotal = $('#grandtotal').val();

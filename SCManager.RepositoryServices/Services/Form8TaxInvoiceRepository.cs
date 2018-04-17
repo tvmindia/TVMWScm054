@@ -109,7 +109,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@ChallanDate", SqlDbType.SmallDateTime).Value = frm8.ChallanDate;
                         cmd.Parameters.Add("@PONo", SqlDbType.NVarChar, 20).Value = frm8.PONo;
                         cmd.Parameters.Add("@PODate", SqlDbType.SmallDateTime).Value = frm8.PODate;
-                        cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar).Value = frm8.Remarks;
+                        cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar,-1).Value = frm8.Remarks;
                         cmd.Parameters.Add("@VATAmount", SqlDbType.Decimal).Value = frm8.VATAmount;
                         cmd.Parameters.Add("@Discount", SqlDbType.Decimal).Value = frm8.Discount;
                         cmd.Parameters.Add("@DetailXML", SqlDbType.Xml).Value = frm8.DetailXML;

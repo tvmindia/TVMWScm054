@@ -69,7 +69,13 @@ namespace SCManager.UserInterface.Models
         public LogDetailsViewModel logDetails { get; set; }
         public List<TCRBillEntryDetailViewModel> TCRBillEntryDetail { get; set; }
         public Guid? TcrID { get; set; }
-        
+
+
+        [Display(Name = "CGST %")]
+        public decimal? CGSTAmount { get; set; }
+        [Display(Name = "SGST %")]
+        public decimal? SGSTAmount { get; set; }
+
     }
 
     public class TCRBillEntryDetailViewModel

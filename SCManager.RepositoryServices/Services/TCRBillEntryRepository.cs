@@ -48,25 +48,27 @@ namespace SCManager.RepositoryServices.Services
                                 TCRBillEntrylist = new List<TCRBillEntry>();
                                 while (sdr.Read())
                                 {
-                                    TCRBillEntry _TCRBillEntrylistObj = new TCRBillEntry();
+                                    TCRBillEntry TCRBillEntrylistObj = new TCRBillEntry();
                                     {
-                                        _TCRBillEntrylistObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _TCRBillEntrylistObj.ID);
-                                        _TCRBillEntrylistObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()).ToString("dd-MMM-yyyy") : _TCRBillEntrylistObj.BillDate);
-                                        _TCRBillEntrylistObj.BillNo = (sdr["BillNo"].ToString() != "" ? (sdr["BillNo"].ToString()) : _TCRBillEntrylistObj.BillNo);
-                                        _TCRBillEntrylistObj.JobNo = (sdr["JobNo"].ToString() != "" ? (sdr["JobNo"].ToString()) : _TCRBillEntrylistObj.JobNo);
-                                        _TCRBillEntrylistObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : _TCRBillEntrylistObj.CustomerName);
-                                        _TCRBillEntrylistObj.CustomerContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : _TCRBillEntrylistObj.CustomerContactNo);
-                                        _TCRBillEntrylistObj.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : _TCRBillEntrylistObj.CustomerLocation);
-                                        _TCRBillEntrylistObj.Technician = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : _TCRBillEntrylistObj.Technician);
-                                        _TCRBillEntrylistObj.PaymentRefNo = (sdr["PaymentRefNo"].ToString() != "" ? (sdr["PaymentRefNo"].ToString()) : _TCRBillEntrylistObj.PaymentRefNo);
-                                        _TCRBillEntrylistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _TCRBillEntrylistObj.Remarks);
-                                        _TCRBillEntrylistObj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : _TCRBillEntrylistObj.VATAmount);
-                                        _TCRBillEntrylistObj.ServiceCharge = (sdr["ServiceCharge"].ToString() != "" ? decimal.Parse(sdr["ServiceCharge"].ToString()) : _TCRBillEntrylistObj.ServiceCharge);
-                                        _TCRBillEntrylistObj.Subtotal = (sdr["SubTotal"].ToString() != "" ? decimal.Parse(sdr["SubTotal"].ToString()) : _TCRBillEntrylistObj.Subtotal);
-                                        _TCRBillEntrylistObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : _TCRBillEntrylistObj.Discount);
+                                        TCRBillEntrylistObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : TCRBillEntrylistObj.ID);
+                                        TCRBillEntrylistObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()).ToString("dd-MMM-yyyy") : TCRBillEntrylistObj.BillDate);
+                                        TCRBillEntrylistObj.BillNo = (sdr["BillNo"].ToString() != "" ? (sdr["BillNo"].ToString()) : TCRBillEntrylistObj.BillNo);
+                                        TCRBillEntrylistObj.JobNo = (sdr["JobNo"].ToString() != "" ? (sdr["JobNo"].ToString()) : TCRBillEntrylistObj.JobNo);
+                                        TCRBillEntrylistObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : TCRBillEntrylistObj.CustomerName);
+                                        TCRBillEntrylistObj.CustomerContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : TCRBillEntrylistObj.CustomerContactNo);
+                                        TCRBillEntrylistObj.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : TCRBillEntrylistObj.CustomerLocation);
+                                        TCRBillEntrylistObj.Technician = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : TCRBillEntrylistObj.Technician);
+                                        TCRBillEntrylistObj.PaymentRefNo = (sdr["PaymentRefNo"].ToString() != "" ? (sdr["PaymentRefNo"].ToString()) : TCRBillEntrylistObj.PaymentRefNo);
+                                        TCRBillEntrylistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : TCRBillEntrylistObj.Remarks);
+                                        TCRBillEntrylistObj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : TCRBillEntrylistObj.VATAmount);
+                                        TCRBillEntrylistObj.ServiceCharge = (sdr["ServiceCharge"].ToString() != "" ? decimal.Parse(sdr["ServiceCharge"].ToString()) : TCRBillEntrylistObj.ServiceCharge);
+                                        TCRBillEntrylistObj.Subtotal = (sdr["SubTotal"].ToString() != "" ? decimal.Parse(sdr["SubTotal"].ToString()) : TCRBillEntrylistObj.Subtotal);
+                                        TCRBillEntrylistObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : TCRBillEntrylistObj.Discount);
+                                        TCRBillEntrylistObj.CGSTAmount = (sdr["CGSTAmount"].ToString() != "" ? decimal.Parse(sdr["CGSTAmount"].ToString()) : TCRBillEntrylistObj.CGSTAmount);
+                                        TCRBillEntrylistObj.SGSTAmount = (sdr["SGSTAmount"].ToString() != "" ? decimal.Parse(sdr["SGSTAmount"].ToString()) : TCRBillEntrylistObj.SGSTAmount);
                                     }
 
-                                    TCRBillEntrylist.Add(_TCRBillEntrylistObj);
+                                    TCRBillEntrylist.Add(TCRBillEntrylistObj);
                                 }
                             }
                         }
@@ -110,6 +112,8 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@PaymentMode", SqlDbType.NVarChar,20).Value = tCRBillEntry.PaymentMode;
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar,-1).Value = tCRBillEntry.Remarks;
                         cmd.Parameters.Add("@VATAmount", SqlDbType.Decimal).Value = tCRBillEntry.VATAmount;
+                        cmd.Parameters.Add("@CGSTAmount", SqlDbType.Decimal).Value = tCRBillEntry.CGSTAmount;
+                        cmd.Parameters.Add("@SGSTAmount", SqlDbType.Decimal).Value = tCRBillEntry.SGSTAmount;
                         cmd.Parameters.Add("@Discount", SqlDbType.Decimal).Value = tCRBillEntry.Discount;
                         cmd.Parameters.Add("@ServiceCharge", SqlDbType.Decimal).Value = tCRBillEntry.ServiceCharge;
                         cmd.Parameters.Add("@ServiceChargeComm", SqlDbType.Decimal).Value = tCRBillEntry.SCCommAmount;
@@ -183,6 +187,8 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@PaymentMode", SqlDbType.NVarChar, 20).Value = tCRBillEntry.PaymentMode;
                         cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = tCRBillEntry.Remarks;
                         cmd.Parameters.Add("@VATAmount", SqlDbType.Decimal).Value = tCRBillEntry.VATAmount;
+                        cmd.Parameters.Add("@CGSTAmount", SqlDbType.Decimal).Value = tCRBillEntry.CGSTAmount;
+                        cmd.Parameters.Add("@SGSTAmount", SqlDbType.Decimal).Value = tCRBillEntry.SGSTAmount;
                         cmd.Parameters.Add("@Discount", SqlDbType.Decimal).Value = tCRBillEntry.Discount;
                         cmd.Parameters.Add("@ServiceCharge", SqlDbType.Decimal).Value = tCRBillEntry.ServiceCharge;
                         cmd.Parameters.Add("@ServiceChargeComm", SqlDbType.Decimal).Value = tCRBillEntry.SCCommAmount;
@@ -304,28 +310,29 @@ namespace SCManager.RepositoryServices.Services
                                // TCRBillEntryHeaderList = TCRBillEntry();
                                 while (sdr.Read())
                                 {
-                                    TCRBillEntry _TCRBillEntryHeaderObj = new TCRBillEntry();
+                                    TCRBillEntry TCRBillEntryHeaderObj = new TCRBillEntry();
                                     {
-                                        _TCRBillEntryHeaderObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _TCRBillEntryHeaderObj.ID);
-                                        _TCRBillEntryHeaderObj.EmpID = (sdr["EmpID"].ToString() != "" ? Guid.Parse(sdr["EmpID"].ToString()) : _TCRBillEntryHeaderObj.EmpID);
-                                        _TCRBillEntryHeaderObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()).ToString("dd-MMM-yyyy") : _TCRBillEntryHeaderObj.BillDate);
-                                        _TCRBillEntryHeaderObj.BillNo = (sdr["BillNo"].ToString() != "" ? (sdr["BillNo"].ToString()) : _TCRBillEntryHeaderObj.BillNo);
-                                        _TCRBillEntryHeaderObj.JobNo = (sdr["JobNo"].ToString() != "" ? (sdr["JobNo"].ToString()) : _TCRBillEntryHeaderObj.JobNo);
-                                        _TCRBillEntryHeaderObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : _TCRBillEntryHeaderObj.CustomerName);
-                                        _TCRBillEntryHeaderObj.CustomerContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : _TCRBillEntryHeaderObj.CustomerContactNo);
-                                        _TCRBillEntryHeaderObj.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : _TCRBillEntryHeaderObj.CustomerLocation);
-                                        _TCRBillEntryHeaderObj.PaymentMode = (sdr["PaymentMode"].ToString() != "" ? (sdr["PaymentMode"].ToString()) : _TCRBillEntryHeaderObj.PaymentMode);
-                                        _TCRBillEntryHeaderObj.PaymentRefNo = (sdr["PaymentRefNo"].ToString() != "" ? (sdr["PaymentRefNo"].ToString()) : _TCRBillEntryHeaderObj.PaymentRefNo);
-                                        _TCRBillEntryHeaderObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _TCRBillEntryHeaderObj.Remarks);
-                                        _TCRBillEntryHeaderObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : _TCRBillEntryHeaderObj.Discount);
-                                        _TCRBillEntryHeaderObj.ServiceCharge = (sdr["ServiceCharge"].ToString() != "" ? decimal.Parse(sdr["ServiceCharge"].ToString()) : _TCRBillEntryHeaderObj.ServiceCharge);
-                                        _TCRBillEntryHeaderObj.SCCommAmount = (sdr["ServiceChargeComm"].ToString() != "" ? decimal.Parse(sdr["ServiceChargeComm"].ToString()) : _TCRBillEntryHeaderObj.SCCommAmount);
-                                        _TCRBillEntryHeaderObj.SpecialComm = (sdr["SpecialComm"].ToString() != "" ? decimal.Parse(sdr["SpecialComm"].ToString()) : _TCRBillEntryHeaderObj.SpecialComm);
-                                        _TCRBillEntryHeaderObj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : _TCRBillEntryHeaderObj.VATAmount);
-                                        
+                                        TCRBillEntryHeaderObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : TCRBillEntryHeaderObj.ID);
+                                        TCRBillEntryHeaderObj.EmpID = (sdr["EmpID"].ToString() != "" ? Guid.Parse(sdr["EmpID"].ToString()) : TCRBillEntryHeaderObj.EmpID);
+                                        TCRBillEntryHeaderObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()).ToString("dd-MMM-yyyy") : TCRBillEntryHeaderObj.BillDate);
+                                        TCRBillEntryHeaderObj.BillNo = (sdr["BillNo"].ToString() != "" ? (sdr["BillNo"].ToString()) : TCRBillEntryHeaderObj.BillNo);
+                                        TCRBillEntryHeaderObj.JobNo = (sdr["JobNo"].ToString() != "" ? (sdr["JobNo"].ToString()) : TCRBillEntryHeaderObj.JobNo);
+                                        TCRBillEntryHeaderObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : TCRBillEntryHeaderObj.CustomerName);
+                                        TCRBillEntryHeaderObj.CustomerContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : TCRBillEntryHeaderObj.CustomerContactNo);
+                                        TCRBillEntryHeaderObj.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : TCRBillEntryHeaderObj.CustomerLocation);
+                                        TCRBillEntryHeaderObj.PaymentMode = (sdr["PaymentMode"].ToString() != "" ? (sdr["PaymentMode"].ToString()) : TCRBillEntryHeaderObj.PaymentMode);
+                                        TCRBillEntryHeaderObj.PaymentRefNo = (sdr["PaymentRefNo"].ToString() != "" ? (sdr["PaymentRefNo"].ToString()) : TCRBillEntryHeaderObj.PaymentRefNo);
+                                        TCRBillEntryHeaderObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : TCRBillEntryHeaderObj.Remarks);
+                                        TCRBillEntryHeaderObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : TCRBillEntryHeaderObj.Discount);
+                                        TCRBillEntryHeaderObj.ServiceCharge = (sdr["ServiceCharge"].ToString() != "" ? decimal.Parse(sdr["ServiceCharge"].ToString()) : TCRBillEntryHeaderObj.ServiceCharge);
+                                        TCRBillEntryHeaderObj.SCCommAmount = (sdr["ServiceChargeComm"].ToString() != "" ? decimal.Parse(sdr["ServiceChargeComm"].ToString()) : TCRBillEntryHeaderObj.SCCommAmount);
+                                        TCRBillEntryHeaderObj.SpecialComm = (sdr["SpecialComm"].ToString() != "" ? decimal.Parse(sdr["SpecialComm"].ToString()) : TCRBillEntryHeaderObj.SpecialComm);
+                                        TCRBillEntryHeaderObj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : TCRBillEntryHeaderObj.VATAmount);
+                                        TCRBillEntryHeaderObj.CGSTAmount = (sdr["CGSTAmount"].ToString() != "" ? decimal.Parse(sdr["CGSTAmount"].ToString()) : TCRBillEntryHeaderObj.CGSTAmount);
+                                        TCRBillEntryHeaderObj.SGSTAmount = (sdr["SGSTAmount"].ToString() != "" ? decimal.Parse(sdr["SGSTAmount"].ToString()) : TCRBillEntryHeaderObj.SGSTAmount);
                                     }
 
-                                    TCRBillEntryHeaderList=_TCRBillEntryHeaderObj;
+                                    TCRBillEntryHeaderList=TCRBillEntryHeaderObj;
                                 }
                             }
                         }

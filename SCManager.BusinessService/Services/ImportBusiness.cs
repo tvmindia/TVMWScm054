@@ -90,6 +90,11 @@ namespace SCManager.BusinessService.Services
                     errorList.Add("No InvoiceDate");
                 if (row["PONo"].ToString() == "" || row["PONo"].ToString() == null)
                     errorList.Add("No PONo");
+                if (row["Item"].ToString() == "" || row["Item"].ToString() == null)
+                    errorList.Add("No Item");
+                if (row["Quantity"].ToString() == "" || row["Quantity"].ToString() == null)
+                    errorList.Add("No Quantity");
+
 
                 row["Error"] = (errorList.Count > 0 ? errorList[0] : "");
                 for(int i=1;i<errorList.Count;i++)
@@ -110,24 +115,45 @@ namespace SCManager.BusinessService.Services
                 string invoiceDate = row["InvoiceDate"].ToString();
                 string challanDate = row["ChallanDate"].ToString();
                 string poDate = row["PODate"].ToString();
-                Regex datePattern = new Regex(@"^([0]?[0-9]|[12][0-9]|[3][01])[/]([0]?[1-9]|[1][0-2])[/]([0-9]{4}|[0-9]{2}) (2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9]) [AM]|[PM]$");
+                Regex datePattern = new Regex(@"^([0-3]?[1-9]|[1][0-2]|2[0-2]|3[0-2])[./-][A-Za-z]{3}[./-]([0-9]{4}|[0-9]{2})");
+                if(!string.IsNullOrEmpty(invoiceDate))
+                {
+                    if (!datePattern.IsMatch(invoiceDate))
+                        errorList.Add("Invalid InvoiceDate Format");
+                }
+                
+                if(!string.IsNullOrEmpty(challanDate))
+                {
+                    if (!datePattern.IsMatch(challanDate))
+                        errorList.Add("Invalid ChallanDate Format");
+                }
+                
+                if(!string.IsNullOrEmpty(poDate))
+                {
+                    if (!datePattern.IsMatch(poDate))
+                        errorList.Add("Invalid PODate Format");
 
-                if (!datePattern.IsMatch(invoiceDate))
-                    errorList.Add("Invalid InvoiceDate Format");
-                if (!datePattern.IsMatch(challanDate))
-                    errorList.Add("Invalid ChallanDate Format");
-                if (!datePattern.IsMatch(poDate))
-                    errorList.Add("Invalid PODate Format");
+                }
 
                 string rate = row["Rate"].ToString();
                 Regex decimalPattern = new Regex(@"[\d]{1,4}([.,][\d]{1,2})?");
-                if (!decimalPattern.IsMatch(rate))
-                    errorList.Add("Rate is not in decimal format");
+
+                if(!string.IsNullOrEmpty(rate))
+                {
+                    if (!decimalPattern.IsMatch(rate))
+                        errorList.Add("Rate is not in decimal format");
+
+                }
 
                 string quantity = row["Quantity"].ToString();
                 Regex numberPattern = new Regex(@"^[0 - 9] *$");
-                if (!decimalPattern.IsMatch(quantity))
-                    errorList.Add("Quantity is not in Number Format");
+
+                if(!string.IsNullOrEmpty(quantity))
+                {
+                    if (!decimalPattern.IsMatch(quantity))
+                        errorList.Add("Quantity is not in Number Format");
+
+                }
 
                 row["Error"] += (errorList.Count > 0 ? errorList[0] : "");
                 for (int i = 1; i < errorList.Count; i++)
@@ -186,20 +212,49 @@ namespace SCManager.BusinessService.Services
                     DataRow row = excelData.Rows[i];
                     ImportForm8 form8 = new ImportForm8();
                     form8.InvoiceNo = row["InvoiceNo"].ToString().Trim();
-                    form8.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString().Trim()).ToString(settings.dateformat);
-                    form8.SalesOrderNo = row["SalesOrderNo"].ToString().Trim();
-                    form8.ChallanDate = DateTime.Parse(row["ChallanDate"].ToString().Trim()).ToString(settings.dateformat);
-                    form8.ChallanNo = row["ChallanNo"].ToString().Trim();
+                    if (!string.IsNullOrEmpty(row["InvoiceDate"].ToString().Trim()))
+                    {
+
+
+                        form8.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString().Trim()).ToString(settings.dateformat);
+
+                    }
+
+                   
+                    form8.SalesOrderNo = (row["SalesOrderNo"].ToString().Trim()) == null?"":row["SalesOrderNo"].ToString().Trim();
+                    if(!string.IsNullOrEmpty(row["ChallanDate"].ToString().Trim()))
+                    {
+                        form8.ChallanDate = (row["ChallanDate"].ToString().Trim()) == null ? "" : DateTime.Parse(row["ChallanDate"].ToString().Trim()).ToString(settings.dateformat);
+                    }
+                    
+                    form8.ChallanNo = (row["ChallanNo"].ToString().Trim())== null ? "" :row["ChallanNo"].ToString().Trim();
                     form8.PONo = row["PONo"].ToString().Trim();
-                    form8.PODate = DateTime.Parse(row["PODate"].ToString().Trim()).ToString(settings.dateformat);
+                    if (!string.IsNullOrEmpty(row["PODate"].ToString().Trim()))
+                    {
+                        form8.PODate = (row["PODate"].ToString().Trim()) == null ? "" : DateTime.Parse(row["PODate"].ToString().Trim()).ToString(settings.dateformat);
+                    }
                     form8.Material = row["Item"].ToString().Trim();
-                    form8.Quantity = int.Parse(row["Quantity"].ToString().Trim());
-                    form8.Remarks = row["Remarks"].ToString().Trim();
-                    form8.Discount = decimal.Parse(row["Discount"].ToString().Trim());
-                    form8.TradeDiscount = decimal.Parse(row["TradeDiscount"].ToString().Trim());
-                    form8.CGSTPercentage = decimal.Parse(row["CGSTPercentage"].ToString().Trim());
-                    form8.SGSTPercentage = decimal.Parse(row["SGSTPercentage"].ToString().Trim());
-                    form8.Rate = decimal.Parse(row["Rate"].ToString().Trim());
+                    if(!string.IsNullOrEmpty(row["Quantity"].ToString().Trim()))
+                    {
+                        form8.Quantity = int.Parse(row["Quantity"].ToString().Trim());
+                    }
+
+                   
+                    form8.Remarks = (row["Remarks"].ToString().Trim())== null ?"": row["Remarks"].ToString().Trim();
+
+                  //if(row["Discount"].ToString().Trim() != null && row["Discount"].ToString().Trim() != "")
+                  //      form8.Discount = decimal.Parse(row["Discount"].ToString().Trim());
+
+
+                    if (row["TradeDiscount"].ToString().Trim() != null && row["TradeDiscount"].ToString().Trim() != "")
+                        form8.TradeDiscount =  decimal.Parse(row["TradeDiscount"].ToString().Trim());
+                    if (row["CGSTPercentage"].ToString().Trim() != null && row["CGSTPercentage"].ToString().Trim() != "")
+                        form8.CGSTPercentage = decimal.Parse(row["CGSTPercentage"].ToString().Trim());
+
+                    if (row["SGSTPercentage"].ToString().Trim() != null && row["SGSTPercentage"].ToString().Trim() != "")
+                        form8.SGSTPercentage = decimal.Parse(row["SGSTPercentage"].ToString().Trim());
+                    if (row["Rate"].ToString().Trim() != null && row["Rate"].ToString().Trim() != "")
+                        form8.Rate = decimal.Parse(row["Rate"].ToString().Trim());
                     form8.ErrorRow = i;
                     form8.Error = row["Error"].ToString().Trim();
 
@@ -255,7 +310,8 @@ namespace SCManager.BusinessService.Services
                     SaleOrderNo = importForm8.SalesOrderNo,
                     PONo = importForm8.PONo,
                     PODate = importForm8.PODate,
-                    Discount = importForm8.Discount,
+                   // Discount = importForm8.Discount,
+                    Remarks = importForm8.Remarks,
                     Form8Detail = new List<Form8Detail>()
                 };
                 foreach (ImportForm8 importForm in importFormList)

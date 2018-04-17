@@ -174,6 +174,7 @@ namespace SCManager.BusinessService.Services
                     F.NetAmount = F.BasicAmount - F.TradeDiscount;
                     F.CGSTAmount = (((F.Quantity * F.Rate) - (F.TradeDiscount)) * (F.CGSTPercentage / 100));
                     F.SGSTAmount = (((F.Quantity * F.Rate) - (F.TradeDiscount)) * (F.SGSTPercentage / 100));
+                    F.TotalAmount = F.NetAmount + F.CGSTAmount + F.SGSTAmount;
                     t1 = (F.CGSTAmount ?? 0);
                     t2 = F.SGSTAmount ?? 0;
                     net = F.NetAmount ?? 0;

@@ -34,7 +34,10 @@ namespace SCManager.DataAccessObject.DTO
         public string DetailXML { get; set; }
         public List<TaxBillEntryDetail> TaxBillEntryDetail { get; set; }
         public Guid TcrID { get; set; }
-        public int IsActive { get; set; }
+        public int IsActive { get; set; }  
+        public decimal? CGSTAmount { get; set; }
+        public decimal? SGSTAmount { get; set; }  
+        public decimal? TotalTaxAmount { get; set; }    
     }
 
     public class TaxBillEntryDetail

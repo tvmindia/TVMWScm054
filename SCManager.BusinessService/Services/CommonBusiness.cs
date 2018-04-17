@@ -49,8 +49,8 @@ namespace SCManager.BusinessService.Services
                 foreach (var p in properties)
                 {
                     string name = p.Name;
-                    var value = p.GetValue(some_object, null);
-                    result = result + " " + name + @"=""" + value + @""" ";
+                    var value = p.GetValue(some_object, null);                  
+                        result = result + " " + name + @"=""" + value + @""" ";                   
 
                 }
                 result = result + "></item>";

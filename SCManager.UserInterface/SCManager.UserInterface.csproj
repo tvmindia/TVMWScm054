@@ -414,6 +414,7 @@
     <Content Include="Content\images\calculate.png" />
     <Content Include="Content\images\calendar.png" />
     <Content Include="Content\images\Download.png" />
+    <Content Include="Content\images\history-clock.png" />
     <Content Include="Content\images\history.png" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\employees.png" />
@@ -718,9 +719,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1659</DevelopmentServerPort>
+          <DevelopmentServerPort>1466</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1659/</IISUrl>
+          <IISUrl>http://localhost:1466/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

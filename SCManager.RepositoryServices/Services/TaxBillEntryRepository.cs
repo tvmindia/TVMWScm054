@@ -62,6 +62,8 @@ namespace SCManager.RepositoryServices.Services
                                         TaxBillEntrylistObj.PaymentRefNo = (sdr["PaymentRefNo"].ToString() != "" ? (sdr["PaymentRefNo"].ToString()) : TaxBillEntrylistObj.PaymentRefNo);
                                         TaxBillEntrylistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : TaxBillEntrylistObj.Remarks);
                                         TaxBillEntrylistObj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : TaxBillEntrylistObj.VATAmount);
+                                        TaxBillEntrylistObj.CGSTAmount = (sdr["CGSTAmount"].ToString() != "" ? decimal.Parse(sdr["CGSTAmount"].ToString()) : TaxBillEntrylistObj.CGSTAmount);
+                                        TaxBillEntrylistObj.SGSTAmount = (sdr["SGSTAmount"].ToString() != "" ? decimal.Parse(sdr["SGSTAmount"].ToString()) : TaxBillEntrylistObj.SGSTAmount);
                                         TaxBillEntrylistObj.ServiceCharge = (sdr["ServiceCharge"].ToString() != "" ? decimal.Parse(sdr["ServiceCharge"].ToString()) : TaxBillEntrylistObj.ServiceCharge);
                                         TaxBillEntrylistObj.Subtotal = (sdr["SubTotal"].ToString() != "" ? decimal.Parse(sdr["SubTotal"].ToString()) : TaxBillEntrylistObj.Subtotal);
                                         TaxBillEntrylistObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : TaxBillEntrylistObj.Discount);                                       
@@ -181,7 +183,8 @@ namespace SCManager.RepositoryServices.Services
                                         TaxBillEntryHeaderObj.SCCommAmount = (sdr["ServiceChargeComm"].ToString() != "" ? decimal.Parse(sdr["ServiceChargeComm"].ToString()) : TaxBillEntryHeaderObj.SCCommAmount);
                                         TaxBillEntryHeaderObj.SpecialComm = (sdr["SpecialComm"].ToString() != "" ? decimal.Parse(sdr["SpecialComm"].ToString()) : TaxBillEntryHeaderObj.SpecialComm);
                                         TaxBillEntryHeaderObj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : TaxBillEntryHeaderObj.VATAmount);
-
+                                        TaxBillEntryHeaderObj.CGSTAmount = (sdr["CGSTAmount"].ToString() != "" ? decimal.Parse(sdr["CGSTAmount"].ToString()) : TaxBillEntryHeaderObj.CGSTAmount);
+                                        TaxBillEntryHeaderObj.SGSTAmount = (sdr["SGSTAmount"].ToString() != "" ? decimal.Parse(sdr["SGSTAmount"].ToString()) : TaxBillEntryHeaderObj.SGSTAmount);
                                     }
 
                                     TaxBillEntryHeaderList = TaxBillEntryHeaderObj;
