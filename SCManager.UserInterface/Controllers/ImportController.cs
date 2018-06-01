@@ -173,7 +173,17 @@ namespace SCManager.UserInterface.Controllers
                     }
                     else
                     {
-                        return Json(new { Result = "ERROR", Message = "File uploaded recently" });
+                        try
+                        {
+                            System.IO.File.Delete(Path.Combine(Server.MapPath("~/Content/Uploads/"), fname));
+                        }
+                        catch (Exception)
+                        {
+
+                            return Json(new { Result = "ERROR", Message = "File uploaded recently" });
+                        }
+                       
+                        //return Json(new { Result = "ERROR", Message = "File uploaded recently" });
                     }
                     uploadedFilesVM.logDetails = new LogDetailsViewModel();
                     uploadedFilesVM.logDetails.CreatedBy = ua.UserName;
