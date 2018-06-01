@@ -47,7 +47,7 @@ namespace SCManager.UserInterface.Controllers
                 }
                 string fname = Path.Combine(Server.MapPath("~/Content/Uploads/"), "Report.pdf");
                 System.IO.File.WriteAllBytes(fname, bytes);
-                return JsonConvert.SerializeObject(new { Result = "OK", URL = "./Content/Uploads/Report.pdf" });
+                return JsonConvert.SerializeObject(new { Result = "OK", URL = "../Content/Uploads/Report.pdf" });
             }
             catch (Exception ex)
             {
