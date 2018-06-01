@@ -116,22 +116,23 @@ namespace SCManager.BusinessService.Services
                 string challanDate = row["ChallanDate"].ToString();
                 string poDate = row["PODate"].ToString();
                 Regex datePattern = new Regex(@"^([0-3]?[1-9]|[1][0-2]|2[0-2]|3[0-2])[./-][A-Za-z]{3}[./-]([0-9]{4}|[0-9]{2})");
-                if(!string.IsNullOrEmpty(invoiceDate))
+               // Regex datePattern = new Regex(@"^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$");
+                if (!string.IsNullOrEmpty(invoiceDate))
                 {
                     if (!datePattern.IsMatch(invoiceDate))
-                        errorList.Add("Invalid InvoiceDate Format");
+                        errorList.Add("InvoiceDate Should be in (DD/MMM/YYYY)");
                 }
                 
                 if(!string.IsNullOrEmpty(challanDate))
                 {
                     if (!datePattern.IsMatch(challanDate))
-                        errorList.Add("Invalid ChallanDate Format");
+                        errorList.Add("ChallanDate Should be in (DD/MMM/YYYY)");
                 }
                 
                 if(!string.IsNullOrEmpty(poDate))
                 {
                     if (!datePattern.IsMatch(poDate))
-                        errorList.Add("Invalid PODate Format");
+                        errorList.Add("PODate Should be in (DD/MMM/YYYY)");
 
                 }
 
@@ -170,16 +171,24 @@ namespace SCManager.BusinessService.Services
             try
             {
                 List<Item> itemList = _itemBusiness.GetAllItems(ua);
-                string[] itemNameList = (from i in itemList select i.Description.Replace(" [HSN:" + i.HsnNo + "]","")).ToArray();
+                string[] itemNameList = (from i in itemList select i.Description.Replace(" [HSN:" + i.HsnNo + "]","").Trim()).ToArray();
+                string[] itemCodeList = (from i in itemList select i.ItemCode.ToString().Trim()).ToArray();
                 foreach (ImportForm8 importForm8 in importForm8List)
                 {
-                    if (!itemNameList.Contains(importForm8.Material))
+                    if (!itemNameList.Contains(importForm8.Material.Trim()) && !itemCodeList.Contains(importForm8.Material.Trim()))
                     {
                         importForm8.Error += (importForm8.Error == "" ? "Item Unavailable" : ", Item Unavailable");
                     }
                     else
                     {
-                        importForm8.MaterialID = (from i in itemList where i.Description.Replace(" [HSN:" + i.HsnNo + "]", "") == importForm8.Material select i.ID).ToArray()[0];
+                        if (itemCodeList.Contains(importForm8.Material)) {
+                            importForm8.MaterialID = (from i in itemList where i.ItemCode.Trim() == importForm8.Material.Trim() select i.ID).ToArray()[0];
+
+                        }
+                        else {
+                            importForm8.MaterialID = (from i in itemList where i.Description.Replace(" [HSN:" + i.HsnNo + "]", "").Trim() == importForm8.Material.Trim() select i.ID).ToArray()[0];
+
+                        }
                     }
                 }
                 return importForm8List;
