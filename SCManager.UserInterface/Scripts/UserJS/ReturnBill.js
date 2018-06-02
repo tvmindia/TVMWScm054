@@ -117,16 +117,16 @@ function EG_Columns() {
                 { "data": "ID", "defaultContent": "<i>0</i>" },
                 { "data": "MaterialID", "defaultContent": "<i></i>" },
                 { "data": "SlNo", "defaultContent": "<i></i>" },
-                { "data": "Material", render: function (data, type, row) { return (EG_createCombo(data, 'S', row, 'Material', 'Materials', 'FillUOM')); } },
+                { "data": "Material" },
                 { "data": "Description", "defaultContent": "<i></i>" },
-                { "data": "Quantity", render: function (data, type, row) { return (EG_createTextBox(data, 'N', row, 'Quantity', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
+                { "data": "Quantity", "defaultContent": "<i></i>" },
                 { "data": "UOM", "defaultContent": "<i></i>" },
-                { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'Rate', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
+                { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'Rate', 'CalculateAmount',1)); }, "defaultContent": "<i></i>" },
                 { "data": "BasicAmount", render: function (data, type, row) { return roundoff(data,1); }, "defaultContent": "<i></i>" },
-                { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'TradeDiscount', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
-                { "data": "CGSTPercentage", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'CGSTPercentage', 'CalculateCGST')); }, "defaultContent": "<i></i>" },
+                { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'TradeDiscount', 'CalculateAmount',1)); }, "defaultContent": "<i></i>" },
+                { "data": "CGSTPercentage", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'CGSTPercentage', 'CalculateCGST',1)); }, "defaultContent": "<i></i>" },
                 { "data": "CGSTAmount", render: function (data, type, row) { return roundoff(data,1); }, "defaultContent": "<i></i>" },
-                { "data": "SGSTPercentage", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'SGSTPercentage', 'CalculateSGST')); }, "defaultContent": "<i></i>" },
+                { "data": "SGSTPercentage", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'SGSTPercentage', 'CalculateSGST',1)); }, "defaultContent": "<i></i>" },
                 { "data": "SGSTAmount", render: function (data, type, row) { return roundoff(data,1); }, "defaultContent": "<i></i>" },
                 { "data": "NetAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i></i>" },
                 { "data": "TotalAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i></i>" },
@@ -157,9 +157,9 @@ function EG_Columns_Settings() {
         { "width": "8%", "targets": 13 },
         { "width": "8%", "targets": 14 },
         //{ className: "text-right", "targets": [] },
-        { className: "text-center", "targets": [3, 4,6,8,10,11,13] },
+        { className: "text-center", "targets": [3,8,10,11,13] },
        // { className: "text-right disabled", "targets": [] },
-        { className: "text-center disabled", "targets": [9,12,7,14] },
+        { className: "text-center disabled", "targets": [4,6,9,12,7,14] },
         { className: "text-left disabled", "targets": [5] },
         { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12,13,14] }
 
@@ -668,7 +668,7 @@ function CalculateAmount(row) {
     debugger;
     CalculateCGST(row,true);
     CalculateSGST(row, true);
-    EG_GridData[row - 1]['TotalAmount'] = roundoff((qty * rate - dic) + ((  ( ((qty * rate) - (dic)) * (cgst / 100)) +(( ((qty * rate) - (dic)) * (sgst / 100))))));
+    EG_GridData[row - 1]['TotalAmount'] = roundoff((qty * rate - dic) + (((((qty * rate) - (dic)) * (cgstamt / 100)) + ((((qty * rate) - (dic)) * (sgstamt / 100))))));
 
     EG_Rebind();
 
