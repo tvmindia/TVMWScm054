@@ -77,7 +77,18 @@ namespace SCManager.UserInterface.Models
         public decimal? SGSTAmount { get; set; }
         [Display(Name = "Total Tax Amount")]
         public decimal? TotalTaxAmount { get; set; }
-    
+        public decimal? CgstPercentage { get; set; }
+        public decimal? SgstPercentage { get; set; }
+
+
+        public string ServiceCenterCode { get; set; }
+        public string ServiceCenterDescription { get; set; }
+        public string ServiceCenterAddress { get; set; }
+        public string ServiceCenterEmail { get; set; }
+        public string ServiceCenterContactNo { get; set; }
+        public string ServiceCenterGstIn { get; set; }
+        public string ServiceCenterPanNo { get; set; }
+        public string ServiceCenterPlace { get; set; }
 
     }
 

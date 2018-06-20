@@ -154,9 +154,27 @@ namespace SCManager.UserInterface.Controllers
             }
         #endregion GetTaxBill
 
+        #region GetFranchiseeDetails
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetAllFranchiseeDetail()
+        {
+            try
+            {
+                UA ua = new UA();
+                List<TaxBillEntryViewModel> taxEntryBillList = Mapper.Map<List<TaxBillEntry>, List<TaxBillEntryViewModel>>(_iTaxBillEntryBusiness.GetAllFranchiseeDetail(ua));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = taxEntryBillList });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        #endregion GetFranchiseeDetails
 
 
-               #region ButtonStyling
+
+        #region ButtonStyling
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
         public ActionResult ChangeButtonStyle(string ActionType)

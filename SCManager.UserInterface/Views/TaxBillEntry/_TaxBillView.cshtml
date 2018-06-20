@@ -15,33 +15,58 @@
    
         
         <div style="width:700px;height:15px;"></div>
+
+        <div style="padding-left:600px;">
+            <table border="0" style="width:100%;">
+                <tr>
+                    <td style="font-size:10px;">Bill No &nbsp;:&nbsp;<b><label id="lblBillNo"></label></b></td>
+
+                </tr>
+                <tr>
+                    <td style="font-size:10px;">Bill Date &nbsp;:&nbsp;<b><label id="lblBillDate"></label></b></td>
+
+                </tr>
+            </table>
+           </div>
+
+        <div style="width:700px;height:10px;"></div>
         <div style="padding-left:100px;">
             <table border="0" style="width:100%;">
                 <tr>
                     <td>
                         <div style="">
-                            <table border="0">
+                            <table border="0">  
                                 <tr>
-                                    <td></td>
-
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr><td><b><label id="lblFrom" style="font-size:10px;">From</label></b></td></tr>                            
                                 <tr>
-                                    <td style="font-size:12px;">Technician &nbsp;:&nbsp;<b><label id="lblTechnician"></label></b></td>
-
+                                    <td>
+                                        <b><label id="FName" style="font-size:10px;">Name of Franchisee</label></b></td></tr>
+                                       <tr><td style="font-size:9px;">&#40;Authorised Service Agent - IFB Industries Ltd &#41;
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td style="font-size:12px;">Bill No &nbsp;:&nbsp;<b><label id="lblBillNo"></label></b></td>
+                                    <td>
+                                       <b><label id="Address1" style="font-size:10px;">Address Line 1</label></b> 
+                                    </td>
+                                </tr>
 
+                                <tr>
+                                    <td><label style="font-size:10px;">E-mail:</label><b><label style="font-size:10px;" id="email"></label></b></td>
                                 </tr>
                                 <tr>
-                                    <td style="font-size:12px;">Bill Date &nbsp;:&nbsp;<b><label id="lblBillDate"></label></b></td>
-
+                                    <td><label style="font-size:10px;">Contact Nos:</label><b><label style="font-size:10px;" id="contactNo"></label></b></td>
                                 </tr>
                                 <tr>
-                                    <td style="font-size:12px;">Mode Of Payment&nbsp;:&nbsp;<b><label id="lblModeOfPayment"></label></b></td>
-
+                                    <td><label style="font-size:10px;">GSTIN:</label><b><label style="font-size:10px;" id="GSTIN"></label></b></td>
                                 </tr>
-
-                                <tr><td style="font-size:12px;">Payment Reference No&nbsp;:&nbsp;<b><label id="lblPaymentReferenceNo"></label></b></td></tr>
+                                <tr>
+                                    <td><label style="font-size:10px;">PAN NO:</label><b><label style="font-size:10px;" id="panNo"></label></b></td>
+                                </tr>
+                                <tr>
+                                    <td><label style="font-size:10px;">Place of Supply&#40;State Name & Code&#41;:</label><b><label style="font-size:10px;" id="placeOfSupply"></label></b></td>
+                                </tr>
                             </table>
                         </div>
                     </td>
@@ -50,20 +75,38 @@
                     <td>
                         <div style="padding-right:200px;">
                             <table border="0">
-
+                                @*<tr>
+                                    <td></td>
+                                </tr>
 
                                 <tr>
-                                    <td style="font-size:12px;">Customer Name &nbsp;:&nbsp;<b><label id="lblCustomerName"></label></b></td>
+                                    <td style="font-size:12px;">Technician &nbsp;:&nbsp;<b><label id="lblTechnician"></label></b></td>
+
+                                </tr>*@
+                               
+                               <tr><td><b><label id="lblTo" style="font-size:10px;">To</label></b></td></tr>
+                               
+                                 <tr>
+                                    <td style="font-size:10px;">Customer Name &nbsp;:&nbsp;<b><label id="lblCustomerName"></label></b></td>
 
                                 </tr>
                                 <tr>
-                                    <td style="font-size:12px;">Customer Contact &nbsp;:&nbsp;<b><label id="lblCustomerContact"></label></b></td>
+                                    <td style="font-size:10px;">Customer Contact &nbsp;:&nbsp;<b><label id="lblCustomerContact"></label></b></td>
 
                                 </tr>
                                 <tr>
-                                    <td style="font-size:12px;">Customer Location &nbsp;:&nbsp;<b><label id="lblCustomerLocation"></label></b></td>
+                                    <td style="font-size:10px;">Customer Location &nbsp;:&nbsp;<b><label id="lblCustomerLocation"></label></b></td>
                                 </tr>
-                                <tr><td style="font-size:12px;">Remarks &nbsp;:&nbsp;<b><label id="lblRemarks"></label></b></td></tr>
+                                <tr>
+                                    <td style="font-size:10px;">Mode Of Payment&nbsp;:&nbsp;<b><label id="lblModeOfPayment"></label></b></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td style="font-size:10px;">Payment Reference No&nbsp;:&nbsp;<b><label id="lblPaymentReferenceNo"></label></b></td>
+                                </tr>
+
+                                <tr><td style="font-size:10px;">Remarks &nbsp;:&nbsp;<b><label id="lblRemarks"></label></b></td></tr>
 
 
                             </table>
@@ -92,21 +135,22 @@
                     <td style="font-size:12px">Total &nbsp;:&nbsp;</td>
                     <td style="font-size:12px;text-align:right;"><b><label id="lblTotal"></label></b></td>
                 </tr>
-                <tr>
+                @*<tr>
                     <td style="font-size:12px">Tax % &nbsp;:&nbsp;</td>
                     <td style="font-size:12px;text-align:right;"><b><label id="lblTax"></label><label id="lblTaxPercentage"></label></b></td>                  
                    
-                </tr>
+                </tr>*@
                 <tr>
-                    <td style="font-size:12px">CGST % &nbsp;:&nbsp;</td>
-                    <td style="font-size:12px;text-align:right;"><b><label id="lblCGST"></label><label id="lblCGSTPercentage"></label></b></td>
+                    <td style="font-size:12px">CGST &nbsp;:&nbsp;</td>
+                    <td style="font-size:12px;text-align:right;"><b><label id="lblCGST"></label>&nbsp;&nbsp;&nbsp;&nbsp;<label id="lblCGSTPercentage"></label></b></td>
 
                 </tr>
                 <tr>
-                    <td style="font-size:12px">SGST % &nbsp;:&nbsp;</td>
-                    <td style="font-size:12px;text-align:right;"><b><label id="lblSGST"></label><label id="lblSGSTPercentage"></label></b></td>
+                    <td style="font-size:12px">SGST  &nbsp;:&nbsp;</td>
+                    <td style="font-size:12px;text-align:right;"><b><label id="lblSGST"></label>&nbsp;&nbsp;&nbsp;&nbsp;<label id="lblSGSTPercentage"></label></b></td>
 
                 </tr>
+                
                 <tr>
                     <td style="font-size:12px">Service Charge &nbsp;:&nbsp;</td>
                     <td style="font-size:12px;text-align:right;"><b><label id="lblServiceCharge"></label></b></td>

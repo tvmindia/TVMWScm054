@@ -13,5 +13,6 @@ namespace SCManager.BusinessService.Contracts
         TaxBillEntry GetTaxBillHeaderByID(Guid ID, UA ua);
         TaxBillEntry UpdateTaxBill(TaxBillEntry taxBillEntry, UA UA);
         TaxBillEntry GetTaxBill(Guid ID, UA UA);
+        List<TaxBillEntry> GetAllFranchiseeDetail(UA UA);
     }
 }

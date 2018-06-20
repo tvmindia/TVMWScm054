@@ -141,7 +141,7 @@ namespace SCManager.BusinessService.Services
             {
                 TaxBillEntry Result = new TaxBillEntry();
                 Result = _iTaxBillEntryRepository.GetTaxBillHeaderByID(ID, ua);
-                Result.TaxBillEntryDetail = _iTaxBillEntryRepository.GetTaxBillDetail(ID, ua);
+                Result.TaxBillEntryDetail = _iTaxBillEntryRepository.GetTaxBillDetail(ID, ua);               
                 TaxBillBL(Result.TaxBillEntryDetail);
                 TaxBillEntryBusinessL(Result);
                 return Result;
@@ -153,6 +153,21 @@ namespace SCManager.BusinessService.Services
             }
         }
 
+        public List<TaxBillEntry> GetAllFranchiseeDetail(UA UA)
+        {
+            List<TaxBillEntry> TaxBillEntrylist = null;
+            try
+            {
+                TaxBillEntrylist = _iTaxBillEntryRepository.GetAllFranchiseeDetail(UA);               
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return TaxBillEntrylist;
+        }
 
     }
 }

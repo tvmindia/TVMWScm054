@@ -318,7 +318,7 @@
                                                 @Html.LabelFor(model => model.CGSTAmount, htmlAttributes: new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-3">
-                                                <input type="text" id="cgstpercentage" class="form-control vattxt" onkeyup="CalculateCGST()" />
+                                                <input type="text" id="cgstpercentage" class="form-control vattxt" onkeyup="CalculateGST()" />
                                             </div>
                                             <div class="col-md-6">
                                                 @Html.EditorFor(model => model.CGSTAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "CGSTAmount", @onkeyup = "ClearGSTDiscountPercentage()", style = "text-align:right", @onclick = "SelectAllValue(this);" } })
@@ -332,7 +332,7 @@
                                                 @Html.LabelFor(model => model.SGSTAmount, htmlAttributes: new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-3">
-                                                <input type="text" id="sgstpercentage" class="form-control vattxt" onkeyup="CalculateSGST()" />
+                                                <input type="text" id="sgstpercentage" class="form-control vattxt" onkeyup="CalculateGST()" />
                                             </div>
                                             <div class="col-md-6">
                                                 @Html.EditorFor(model => model.SGSTAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "SGSTAmount", @onkeyup = "ClearGSTDiscountPercentage()", style = "text-align:right", @onclick = "SelectAllValue(this);" } })

@@ -37,7 +37,21 @@ namespace SCManager.DataAccessObject.DTO
         public int IsActive { get; set; }  
         public decimal? CGSTAmount { get; set; }
         public decimal? SGSTAmount { get; set; }  
-        public decimal? TotalTaxAmount { get; set; }    
+        public decimal? TotalTaxAmount { get; set; }
+        public decimal? CgstPercentage { get; set; }
+        public decimal? SgstPercentage { get; set; }
+
+
+
+        public string ServiceCenterCode { get; set; }
+        public string ServiceCenterDescription { get; set; }
+        public string ServiceCenterAddress { get; set; }
+        public string ServiceCenterEmail { get; set; }
+        public string ServiceCenterContactNo { get; set; }
+        public string ServiceCenterGstIn { get; set; }
+        public string ServiceCenterPanNo { get; set; }
+        public string ServiceCenterPlace { get; set; }
+
     }
 
     public class TaxBillEntryDetail

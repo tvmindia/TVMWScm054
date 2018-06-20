@@ -383,6 +383,9 @@ function BindTaxBillEntryFields(Records) {
         $("#ServiceChargeComm").val(roundoff(Records.ServiceCharge / 100));
         $("#SCCommAmount").val(roundoff(Records.SCCommAmount));
         $("#SpecialComm").val(roundoff(Records.SpecialComm));
+        $("#cgstpercentage").val(roundoff(Records.CgstPercentage));
+        $("#sgstpercentage").val(roundoff(Records.SgstPercentage));
+
         debugger;
         EG_Rebind_WithData(Records.TaxBillEntryDetail);
         
@@ -409,7 +412,7 @@ function DisableFields()
     $("#PaymentMode").prop('disabled', true);
     $("#Remarks").prop('readonly', true);
     $("#subtotal").prop('readonly', true);
-    $("#discount").prop('readonly', true);
+    $("#discount").prop('readonly', false);
     $("#total").prop('readonly', true);
     $("#SCAmount").prop('readonly', true);
     $("#VATAmount").prop('readonly', true);
@@ -417,9 +420,9 @@ function DisableFields()
     $("#SGSTAmount").prop('readonly', true);
     $("#vatpercentage").prop('readonly', true);
     $("#VATPercentageAmount").prop('readonly', true);
-    $("#cgstpercentage").prop('readonly', true);
+    $("#cgstpercentage").prop('readonly', false);
     $("#CGSTPercentageAmount").prop('readonly', true);
-    $("#sgstpercentage").prop('readonly', true);
+    $("#sgstpercentage").prop('readonly', false);
     $("#SGSTPercentageAmount").prop('readonly', true);
     $("#grandtotal").prop('readonly', true);
     $("#ServiceChargeComm").prop('readonly', true);
@@ -535,10 +538,17 @@ function CalculateAmount(row)
 
         if (($("#cgstpercentage").val() != "") && ($("#sgstpercentage").val() != ""))
         {
-            CalculateCGST();
-            CalculateSGST();
+            //CalculateCGST();
+            //CalculateSGST();
+            CalculateGST();
         }
-        
+        //if (($("#cgstpercentage").val() != ""))
+        //{ 
+        //    CalculateCGST();
+        //}
+        //if(($("#sgstpercentage").val() != "")){
+        //    CalculateSGST();
+        //}
 
         var vatamount = parseFloat($('#VATAmount').val()) || 0;
         var cgstamount = parseFloat($('#CGSTAmount').val()) || 0;
@@ -567,10 +577,35 @@ function CalculateAmount(row)
     //    $("#VATAmount").val(roundoff(vatamt));
     //    $('#VATPercentageAmount').val(roundoff(vatamt));
     //    $('#grandtotal').val(roundoff(Total + vatamt));
+//}
+
+
+    //function CalculateCGST() {
+    //    // debugger;
+    //    var cgstpercent = $("#cgstpercentage").val();
+    //    var Total = $("#total").val();
+    //    cgstpercent = parseFloat(cgstpercent);
+    //    if (cgstpercent > 100) {
+    //        cgstpercent = 100
+    //        $("#cgstpercentage").val(cgstpercent);
+    //    }
+    //    if (cgstpercent < 0) {
+    //        cgstpercent = 0
+    //        $("#cgstpercentage").val(cgstpercent);
+    //    }
+    //    Total = parseFloat(Total);
+    //    var cgstamt = (Total * cgstpercent / 100)
+    //    if (isNaN(cgstamt))
+    //    { cgstamt = 0.00 }
+    //    $("#CGSTAmount").val(roundoff(cgstamt));
+    //    $('#CGSTPercentageAmount').val(roundoff(cgstamt));
+    //    $('#grandtotal').val(roundoff(Total + cgstamt));
     //}
-    function CalculateCGST() {
+
+    function CalculateGST() {
         // debugger;
         var cgstpercent = $("#cgstpercentage").val();
+        var sgstpercent = $("#sgstpercentage").val();
         var Total = $("#total").val();
         cgstpercent = parseFloat(cgstpercent);
         if (cgstpercent > 100) {
@@ -581,14 +616,30 @@ function CalculateAmount(row)
             cgstpercent = 0
             $("#cgstpercentage").val(cgstpercent);
         }
+
+        sgstpercent = parseFloat(sgstpercent);
+        if (sgstpercent > 100) {
+            sgstpercent = 100
+            $("#sgstpercentage").val(sgstpercent);
+        }
+        if (sgstpercent < 0) {
+            sgstpercent = 0
+            $("#sgstpercentage").val(sgstpercent);
+        }
         Total = parseFloat(Total);
         var cgstamt = (Total * cgstpercent / 100)
         if (isNaN(cgstamt))
         { cgstamt = 0.00 }
         $("#CGSTAmount").val(roundoff(cgstamt));
-        $('#CGSTPercentageAmount').val(roundoff(cgstamt));
-        $('#grandtotal').val(roundoff(Total + cgstamt));
+        $('#CGSTPercentageAmount').val(roundoff(cgstamt));      
+        var sgstamt = (Total * sgstpercent / 100)
+        if (isNaN(sgstamt))
+        { sgstamt = 0.00 }
+        $("#SGSTAmount").val(roundoff(sgstamt));
+        $('#SGSTPercentageAmount').val(roundoff(sgstamt));
+        $('#grandtotal').val(roundoff(Total + sgstamt+cgstamt));
     }
+
 
     function CalculateSGST() {
         // debugger;
@@ -610,6 +661,16 @@ function CalculateAmount(row)
         $("#SGSTAmount").val(roundoff(sgstamt));
         $('#SGSTPercentageAmount').val(roundoff(sgstamt));
         $('#grandtotal').val(roundoff(Total + sgstamt));       
+    }
+
+
+
+    function DiscountChange() {
+        debugger;
+        //var subtotal = parseFloat($('#subtotal').val()) || 0;
+        //var discount = parseFloat($('#discount').val()) || 0;
+        //$('#total').val(roundoff(subtotal - discount));
+        AmountSummary()
     }
 
     function PrintTableToDoc() {
@@ -694,12 +755,12 @@ function CalculateAmount(row)
         $("#lblTaxPercentage").text(vatAmount);
 
         var cgstPercentage = $('#cgstpercentage').val();
-        $("#lblCGST").text(cgstPercentage);
+        $("#lblCGST").text(cgstPercentage).append("<b>%</b>");
         var CGSTAmount = $('#CGSTAmount').val();
         $("#lblCGSTPercentage").text(CGSTAmount);
 
         var sgstPercentage = $('#sgstpercentage').val();
-        $("#lblSGST").text(sgstPercentage);
+        $("#lblSGST").text(sgstPercentage).append("<b>%</b>");
         var SGSTAmount = $('#SGSTAmount').val();
         $("#lblSGSTPercentage").text(SGSTAmount);
 
@@ -709,6 +770,18 @@ function CalculateAmount(row)
         $("#lblServiceCharge").text(serviceChargeAmount);
         var grandTotal = $('#grandtotal').val();
         $("#lblGrandtotal").text(grandTotal);
+
+        var thisItem = GetAllFranchiseeDetail();
+    
+        $('#FName').text(thisItem[0].ServiceCenterDescription);
+        $('#Address1').text(thisItem[0].ServiceCenterAddress);
+        $('#email').text(thisItem[0].ServiceCenterEmail);
+        $('#contactNo').text(thisItem[0].ServiceCenterContactNo);
+        $('#GSTIN').text(thisItem[0].ServiceCenterGstIn);
+        $('#panNo').text(thisItem[0].ServiceCenterPanNo);
+        $('#placeOfSupply').text(thisItem[0].ServiceCenterPlace);
+
+
     }
 
 //to download Form
@@ -724,6 +797,26 @@ function CalculateAmount(row)
         $('#btnDownloadBillToPDF').trigger('click');
     }
 
+    function GetAllFranchiseeDetail() {
+        try {
+            debugger;
+            var data = {};
+            var ds = {};
+            ds = GetDataFromServer("TaxBillEntry/GetAllFranchiseeDetail/", data);
+            if (ds != '') {
+                ds = JSON.parse(ds);
+            }
+            if (ds.Result == "OK") {
+                return ds.Records;
+            }
+            if (ds.Result == "ERROR") {
+                alert(ds.Message);
+            }
+        }
+        catch (e) {
+            notyAlert('error', e.message);
+        }
+    }
 
 
 
