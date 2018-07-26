@@ -183,7 +183,16 @@ namespace SCManager.UserInterface.Controllers
                             msg = c.SeriesStartAndEndDuplication;
                             break;
                         case "3":
-                            msg = "3";
+                            msg = c.SeriesStartConflict;
+                            break;
+                        case "4":
+                            msg = c.SeriesEndConflict;
+                            break;
+                        case "5":
+                            msg = c.SeriesStartAndEndConflict;
+                            break;
+                        case "6":
+                            msg = "6";
                             break;
                     }
                     return JsonConvert.SerializeObject(new { Result = "OK", Records = status, Message = msg });

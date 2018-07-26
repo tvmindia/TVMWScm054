@@ -157,11 +157,11 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
                         if(! string.IsNullOrEmpty(seriesStart))
                         {
-                            cmd.Parameters.Add("@start", SqlDbType.Int).Value = int.Parse(seriesStart);
+                            cmd.Parameters.Add("@start", SqlDbType.NVarChar, 50).Value = seriesStart;
                         }
                        if(! string.IsNullOrEmpty(seriesEnd))
                         {
-                            cmd.Parameters.Add("@end", SqlDbType.Int).Value = int.Parse(seriesEnd);
+                            cmd.Parameters.Add("@end", SqlDbType.NVarChar, 50).Value = seriesEnd;
                         }
                         
                         cmd.Parameters.Add("@BillBookType", SqlDbType.NVarChar, 15).Value = BillBookType;
@@ -343,13 +343,13 @@ namespace SCManager.RepositoryServices.Services
                         }
                         cmd.Connection = con;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
-                        if(! string.IsNullOrEmpty(seriesStart))
+                        if (!string.IsNullOrEmpty(seriesStart))
                         {
-                            cmd.Parameters.Add("@start", SqlDbType.Int).Value = int.Parse(seriesStart);
+                            cmd.Parameters.Add("@start", SqlDbType.NVarChar, 50).Value = seriesStart;
                         }
                         if(! string.IsNullOrEmpty(seriesEnd))
                         {
-                            cmd.Parameters.Add("@end", SqlDbType.Int).Value = int.Parse(seriesEnd);
+                            cmd.Parameters.Add("@end", SqlDbType.NVarChar, 50).Value = seriesEnd;
                         }
                                              
                         cmd.Parameters.Add("@BookNo", SqlDbType.NVarChar, 50).Value = BillNo;

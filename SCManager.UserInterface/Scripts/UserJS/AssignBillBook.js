@@ -118,7 +118,7 @@ function SerialStartandEndRangeValidation(seriesStart,seriesEnd)
                 ds = JSON.parse(ds);
             }
             if (ds.Result == "OK") {
-                if (ds.Message == "3") {
+                if (ds.Message == "6") {
                     return true;
                 }
                 else {
@@ -183,7 +183,7 @@ function save() {
         if (seriesStart != "" && seriesEnd != "")
         {
             if (SerialStartandEndValidation() == true) {
-                if (SerialStartandEndRangeValidation(seriesStart, LastUsed) == true)
+                if (SerialStartandEndRangeValidation(seriesStart, seriesEnd) == true)
                 {
                     $("#btnSave").trigger('click');
                 }
