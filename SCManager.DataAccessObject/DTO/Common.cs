@@ -118,6 +118,18 @@ namespace SCManager.DataAccessObject.DTO
         {
             get { return "Series start and End Already Exists"; }
         }
+        public string SeriesStartConflict
+        {
+            get { return "Existing Series Start Conflicts"; }
+        }
+        public string SeriesEndConflict
+        {
+            get { return "Existing Series End Conflicts"; }
+        }
+        public string SeriesStartAndEndConflict
+        {
+            get { return "Given series includes an existing series"; }
+        }
         public string PasswordError
         {
             get { return "Password is wrong"; }

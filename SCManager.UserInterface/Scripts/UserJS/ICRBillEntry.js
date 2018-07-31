@@ -431,40 +431,35 @@ function BillBookNumberValidation() {
                 }
                 else {
                     var msg = '';
-                    if (ds.Records.Status == "BLB02") {
-                        // msg = Messages.BLB02;
-                        if (ds.Records.Name == '') {
-                            msg = Messages.BLB02 + "(Bill Book not defined)"
-                        } else {
-                            msg = Messages.BLB02 + " - (Bill No belongs to " + ds.Records.Name + ')';
-                        }
-                    }
-                    if (ds.Records.Status == "BLB03") {
-                        msg = Messages.BLB03;
-                    }
-                    if (ds.Records.Status == "BLB04") {
-                        msg = Messages.BLB04;
+                    debugger;
+                    switch (ds.Records.Status) {
+                        case "BLB02":
+                            if (ds.Records.Name == '') {
+                                msg = Messages.BLB02 + "(Bill Book not defined)"
+                            } else {
+                                msg = Messages.BLB02 + " - (Bill No belongs to " + ds.Records.Name + ')';
+                            }
+                            break;
+                        case "BLB03":
+                            msg = Messages.BLB03;
+                            break;
+                        case "BLB04":
+                            msg = Messages.BLB04;
+                            break;
                     }
                     if (ds.Records.Status != "BLB01" && ds.Records.Status != "BLB02") {
-                        //if ($(".fa-exclamation-triangle").length == 0) {
                         $("#MandatoryStar").hide();
-                        $("#BillNoMandatory").show()//('<i class="fa fa-exclamation-triangle" title="' + msg + "( " + ds.Records.BookNo + " )" + '"></i>');
+                        $("#BillNoMandatory").show()//.append('<i class="fa fa-exclamation-triangle" data-toggle="popover" data-placement="left" data-content="Content" title="' + msg + "( " + ds.Records.BookNo + " )" + '"></i>');
+                        $('#ahlinkMandatory').attr('data-content', msg + "( " + ds.Records.BookNo + " )");
                         $("#ahlinkMandatory").click();
-                        $(".popover-content").text("");
-                        $(".popover-content").text(msg + "( " + ds.Records.BookNo + " )");
-                        //}
                     }
-                    if (ds.Records.Status == "BLB02") {
-                        //if ($(".fa-exclamation-triangle").length == 0) {
+                    else if (ds.Records.Status == "BLB02") {
                         $("#MandatoryStar").hide();
                         $("#BillNoMandatory").show();//.append('<i class="fa fa-exclamation-triangle" data-toggle="popover" data-placement="left" data-content="Content" title="' + msg + '"></i>');
-                        //$("#ahlinkMandatory").attr('data-content', ds.Records.BookNo);                       
+                        $('#ahlinkMandatory').attr('data-content', msg);
                         $("#ahlinkMandatory").click();
-                        $(".popover-content").text("");
-                        $(".popover-content").text(msg);
-                        //}
                     }
-                    if (ds.Records.Status == "BLB01") {
+                    else if (ds.Records.Status == "BLB01") {
                         $("#MandatoryStar").show();
                         $("#BillNoMandatory").hide();
                     }

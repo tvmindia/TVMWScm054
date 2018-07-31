@@ -16,9 +16,11 @@ namespace SCManager.UserInterface.Models
         public string BillNo { get; set; }
         [Required(ErrorMessage ="Please Enter Series Start")]
         [Display(Name ="Series Start")]
+        [RegularExpression(@"^[A-Za-z]*\d+$", ErrorMessage = "Entered Bill No format is not valid. (eg: 507, T2011, PW998)")]
         public string SeriesStart { get; set; }
         [Required(ErrorMessage ="Please Enter Series End")]
         [Display(Name ="Series End")]
+        [RegularExpression(@"^[A-Za-z]*\d+$", ErrorMessage = "Entered Bill No format is not valid. (eg: 507, T2011, PW998)")]
         public string SeriesEnd { get; set; }
         [Display(Name ="Last Used")]
         public string LastUsed { get; set; }
