@@ -75,21 +75,33 @@ namespace SCManager.UserInterface.Models
         public decimal? CGSTAmount { get; set; }
         [Display(Name = "SGST %")]
         public decimal? SGSTAmount { get; set; }
-
+        public decimal? CgstPercentage { get; set; }
+        public decimal? SgstPercentage { get; set; }
+        public decimal? TotalTaxAmount { get; set; }
     }
 
     public class TCRBillEntryDetailViewModel
     {
-        public int? SlNo { get; set; }
         public string SCCode { get; set; }
         public Guid? ID { get; set; }
         public Guid? HeaderID { get; set; }
-        public string Material { get; set; }
+        public int? ItemNo { get; set; }
         public Guid? MaterialID { get; set; }
+        public int? SlNo { get; set; }
+        public string Material { get; set; }
         public int? Quantity { get; set; }
         public decimal? Rate { get; set; }
-        public decimal? NetAmount { get; set; }
         public string UOM { get; set; }
+        public decimal? NetAmount { get; set; }
         public string Description { get; set; }
+
+        public decimal? TradeDiscount { get; set; }
+        public decimal? CgstPercentage { get; set; }
+        public decimal? CGSTAmount { get; set; }
+        public decimal? SgstPercentage { get; set; }
+        public decimal? SGSTAmount { get; set; }
+
+        public decimal? GrandTotal { get; set; }
+        public decimal? TotalTaxAmount { get; set; }
     }
 }

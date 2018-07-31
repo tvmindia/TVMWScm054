@@ -159,7 +159,7 @@ function EG_ComboSource(id, values, valueCol, textCol) {
 
 //--4------------------create controlls------------------------------
 function EG_createTextBox(data, type, row, columnname, relatedfn, isEdit) {
-
+ 
     _isEdit=isEdit //to avoid new line creation
     var a = row[columnname];
     var b = row.SlNo;
@@ -203,6 +203,7 @@ function EG_createCombo(data, type, row, columnname, Source, relatedfn) {
 //---------------------------------------------------------------------------------
 
 function EG_Rebind() {
+  
     if (EG_GridDataTable == null) {
         alert("EG_GridDataTable not defined in document ready");
         return;
@@ -212,7 +213,7 @@ function EG_Rebind() {
 }
 
 function EG_Rebind_WithData(data, extra) {
-    debugger;
+    
     var i = 0;
     if (data != null) {
         for (i = 0; i < data.length; i++) {
@@ -301,7 +302,7 @@ function RoundTxtBox(obj) {
 }
 
 function EG_KeyDown() {
-
+    debugger;
     $('.gridTextbox').keydown(function (e) {
         try {
              

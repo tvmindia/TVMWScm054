@@ -35,6 +35,10 @@ namespace SCManager.DataAccessObject.DTO
         public List<TCRBillEntryDetail> TCRBillEntryDetail { get; set; }
         public decimal? CGSTAmount { get; set; }
         public decimal? SGSTAmount { get; set; }
+        public decimal? CgstPercentage { get; set; }
+        public decimal? SgstPercentage { get; set; }
+        public decimal? TotalTaxAmount { get; set; }
+
     }
     public class TCRBillEntryDetail
     {
@@ -50,5 +54,15 @@ namespace SCManager.DataAccessObject.DTO
         public string UOM { get; set; }
         public decimal? NetAmount { get; set; }
         public string Description { get; set; }
+       
+        public decimal? TradeDiscount { get; set; }
+        public decimal? CgstPercentage { get; set; }
+        public decimal? CGSTAmount { get; set; }
+        public decimal? SgstPercentage { get; set; }
+        public decimal? SGSTAmount { get; set; }
+      
+        public decimal? GrandTotal { get; set; }
+        public decimal? TotalTaxAmount { get; set; }
     }
+
 }

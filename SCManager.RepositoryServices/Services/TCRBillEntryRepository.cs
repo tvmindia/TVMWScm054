@@ -267,6 +267,11 @@ namespace SCManager.RepositoryServices.Services
                                         _TCRBillEntryDetailObj.Material = (sdr["Material"].ToString() != "" ? (sdr["Material"].ToString()) : _TCRBillEntryDetailObj.Material);
                                         _TCRBillEntryDetailObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _TCRBillEntryDetailObj.Description);
                                         _TCRBillEntryDetailObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _TCRBillEntryDetailObj.UOM);
+                                        _TCRBillEntryDetailObj.TradeDiscount = (sdr["TradeDiscount"].ToString() != "" ? decimal.Parse(sdr["TradeDiscount"].ToString()) : 0);
+                                        _TCRBillEntryDetailObj.CgstPercentage = (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : 0);
+                                        _TCRBillEntryDetailObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : 0);
+                                       
+
                                     }
 
                                     TCRBillEntryDetailList.Add(_TCRBillEntryDetailObj);
@@ -330,9 +335,11 @@ namespace SCManager.RepositoryServices.Services
                                         TCRBillEntryHeaderObj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : TCRBillEntryHeaderObj.VATAmount);
                                         TCRBillEntryHeaderObj.CGSTAmount = (sdr["CGSTAmount"].ToString() != "" ? decimal.Parse(sdr["CGSTAmount"].ToString()) : TCRBillEntryHeaderObj.CGSTAmount);
                                         TCRBillEntryHeaderObj.SGSTAmount = (sdr["SGSTAmount"].ToString() != "" ? decimal.Parse(sdr["SGSTAmount"].ToString()) : TCRBillEntryHeaderObj.SGSTAmount);
+                                        TCRBillEntryHeaderObj.CgstPercentage = (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : TCRBillEntryHeaderObj.CgstPercentage);
+                                        TCRBillEntryHeaderObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : TCRBillEntryHeaderObj.SgstPercentage);
                                     }
 
-                                    TCRBillEntryHeaderList=TCRBillEntryHeaderObj;
+                                    TCRBillEntryHeaderList =TCRBillEntryHeaderObj;
                                 }
                             }
                         }

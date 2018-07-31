@@ -25,13 +25,16 @@ $(document).ready(function () {
                { "data": "ReorderQty","defaultContent": "<i>-</i>" },
                { "data": "ProductCommission", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "SellingRate", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
+               { "data": "CgstPercentage", "defaultContent": "<i>-</i>" },
+               { "data": "SgstPercentage", "defaultContent": "<i>-</i>" },
+
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
              columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
-                  { className: "text-right", "targets": [5, 6, 8,9,10] },
-                    { className: "text-center", "targets": [1,3, 4,7, 11] },
-                    { className: "text-left", "targets": [2,9,12] },
+                  { className: "text-right", "targets": [5, 6, 8,10] },
+                    { className: "text-center", "targets": [1,3, 4,7,9, 11,12,13,15] },
+                    { className: "text-left", "targets": [2,14] },
              ]
          });
 
@@ -169,11 +172,13 @@ function fillItems(ID) {
     $("#Remarks").val(thisItem[0].Remarks)
     $("#deleteId").val(thisItem[0].ID);
     $("#CategoryID").val(thisItem[0].CategoryID);
+    $("#CgstPercentage").val(thisItem[0].CgstPercentage);
+    $("#SgstPercentage").val(thisItem[0].SgstPercentage);
     if (thisItem[0].SubCategoryID != null)
     {
         $("#Subcategory").val(thisItem[0].SubCategoryID);
     }
-   
+  
 }
 
 //---------------------------------------Clear Fields-----------------------------------------------------//
@@ -195,6 +200,9 @@ function clearfields() {
     $("#deleteId").val("0")
     $("#CategoryID").val("");
     $("#Subcategory").val("-1");
+    $("#CgstPercentage").val("");
+    $("#SgstPercentage").val("");
+
     ClearSubCategories();
     ResetForm();
 }

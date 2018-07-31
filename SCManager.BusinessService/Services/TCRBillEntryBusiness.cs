@@ -71,13 +71,32 @@ namespace SCManager.BusinessService.Services
             {
                 SCManagerSettings settings = new SCManagerSettings();
                 int slno = 1;
+                decimal t1;
+                decimal t2;
+                decimal t3;
+                decimal net;
                 foreach (TCRBillEntryDetail F in List)
                 {
                     F.SlNo = slno;
                     F.NetAmount = F.Quantity * F.Rate;
                      
                     //F.NetAmount = F.BasicAmount - F.TradeDiscount;
+                  
+
+                    F.CGSTAmount = (((F.Quantity * F.Rate) - (F.TradeDiscount)) * (F.CgstPercentage / 100));
+                    F.SGSTAmount = (((F.Quantity * F.Rate) - (F.TradeDiscount)) * (F.SgstPercentage / 100));
+                    t1 = (F.CGSTAmount ?? 0);
+                    t2 = F.SGSTAmount ?? 0;
+                    t3 = F.TotalTaxAmount ?? 0;
+                    net = F.NetAmount ?? 0;
+                    //F.TotalTaxAmount = F.TotalTaxAmount + t1 + t2;//.Total Tax Amount calculation
+                    F.TotalTaxAmount = t1 + t2 + t3;//.Total Tax Amount calculation
+
+                    F.GrandTotal = net + t1 + t2;//. Grand Total calculation
+
                     slno = slno + 1;
+
+
                 }
 
             }
@@ -155,6 +174,7 @@ namespace SCManager.BusinessService.Services
                 
                 //T.GrandTotal = T.Subtotal + T.VATAmount - T.Discount+T.ServiceCharge;
                 T.GrandTotal = T.Subtotal + (T.CGSTAmount+T.SGSTAmount) - T.Discount + T.ServiceCharge;
+                T.TotalTaxAmount = (T.CGSTAmount + T.SGSTAmount);
 
                 if (T.BillDate != null)
                     T.BillDateFormatted = T.BillDate;//.GetValueOrDefault().ToString(settings.dateformat);                

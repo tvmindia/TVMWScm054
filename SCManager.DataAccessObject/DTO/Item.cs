@@ -29,5 +29,8 @@ namespace SCManager.DataAccessObject.DTO
         public string SCQty { get; set; }
         public string TechnicianQty { get; set; }
         public string HsnNo { get; set;  }
+        public decimal? CgstPercentage { get; set; }
+        public decimal? SgstPercentage { get; set; }
+
     }
 }

@@ -68,6 +68,9 @@ namespace SCManager.RepositoryServices.Services
                                         _ItemObj.ProductCommission = (sdr["ProductCommission"].ToString() != "" ? float.Parse(sdr["ProductCommission"].ToString()) : _ItemObj.ProductCommission);
                                         _ItemObj.SellingRate = (sdr["SellingRate"].ToString() != "" ? float.Parse(sdr["SellingRate"].ToString()) : _ItemObj.SellingRate);
                                         _ItemObj.Remarks = (sdr["Remarks"].ToString() != "" ?(sdr["Remarks"].ToString()) : _ItemObj.Remarks);
+                                        _ItemObj.CgstPercentage= (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : _ItemObj.CgstPercentage);
+                                        _ItemObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : _ItemObj.SgstPercentage);
+
                                     }
 
                                     Itemlist.Add(_ItemObj);
@@ -246,8 +249,11 @@ namespace SCManager.RepositoryServices.Services
                                         _ItemObj.ProductCommission = (sdr["ProductCommission"].ToString() != "" ? float.Parse(sdr["ProductCommission"].ToString()) : _ItemObj.ProductCommission);
                                         _ItemObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _ItemObj.Remarks);
                                         _ItemObj.SalesReturnPendingQty= (sdr["SalesReturnPendingQty"].ToString() != "" ? (sdr["SalesReturnPendingQty"].ToString()) : _ItemObj.SalesReturnPendingQty);
-                                    }
+                                        _ItemObj.CgstPercentage = (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : _ItemObj.CgstPercentage);
+                                        _ItemObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : _ItemObj.SgstPercentage);
 
+                                    }
+                                    
                                     Itemlist.Add(_ItemObj);
                                 }
                             }
@@ -298,7 +304,8 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = itemObj.logDetails.CreatedDate;
                         cmd.Parameters.Add("@ItemCode", SqlDbType.NVarChar, 50).Value = itemObj.ItemCode;
                         cmd.Parameters.Add("@HsnNo", SqlDbType.NVarChar, 50).Value = itemObj.HsnNo;
-
+                        cmd.Parameters.Add("@CgstPercentage", SqlDbType.Decimal).Value = itemObj.CgstPercentage;
+                        cmd.Parameters.Add("@SgstPercentage", SqlDbType.Decimal).Value = itemObj.SgstPercentage;
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
                         outParameter1 = cmd.Parameters.Add("@ID",SqlDbType.UniqueIdentifier);
@@ -356,7 +363,8 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = itemObj.logDetails.UpdatedDate;
                         cmd.Parameters.Add("@ItemCode", SqlDbType.NVarChar, 50).Value = itemObj.ItemCode;
                         cmd.Parameters.Add("@HsnNo", SqlDbType.NVarChar, 50).Value = itemObj.HsnNo;
-
+                        cmd.Parameters.Add("@CgstPercentage", SqlDbType.Decimal).Value = itemObj.CgstPercentage;
+                        cmd.Parameters.Add("@SgstPercentage", SqlDbType.Decimal).Value = itemObj.SgstPercentage;
 
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;

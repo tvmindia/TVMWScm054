@@ -61,7 +61,10 @@ namespace SCManager.UserInterface.Models
         [Display(Name = "HSN No")]
         [StringLength(50)]
         public string HsnNo { get; set; }
-
+        [Display(Name = "CGST (%)")]
+        public decimal? CgstPercentage { get; set; }
+        [Display(Name = "SGST (%)")]
+        public decimal? SgstPercentage { get; set; }
     }
 
     public class ItemDropdownViewModel

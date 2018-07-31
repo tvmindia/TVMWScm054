@@ -122,6 +122,9 @@ namespace SCManager.RepositoryServices.Services
                                         TaxBillEntryDetailObj.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : TaxBillEntryDetailObj.Description);
                                         TaxBillEntryDetailObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : TaxBillEntryDetailObj.UOM);
                                         TaxBillEntryDetailObj.ReferralRate=(sdr["ReferralRate"].ToString() != "" ? decimal.Parse(sdr["ReferralRate"].ToString()) : 0);
+                                        TaxBillEntryDetailObj.CgstPercentage= (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : 0);
+                                        TaxBillEntryDetailObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : 0);
+                                        TaxBillEntryDetailObj.TradeDiscount = (sdr["TradeDiscount"].ToString() != "" ? decimal.Parse(sdr["TradeDiscount"].ToString()) : 0);
                                     }
 
                                     TaxBillEntryDetailList.Add(TaxBillEntryDetailObj);
@@ -183,10 +186,12 @@ namespace SCManager.RepositoryServices.Services
                                         TaxBillEntryHeaderObj.SCCommAmount = (sdr["ServiceChargeComm"].ToString() != "" ? decimal.Parse(sdr["ServiceChargeComm"].ToString()) : TaxBillEntryHeaderObj.SCCommAmount);
                                         TaxBillEntryHeaderObj.SpecialComm = (sdr["SpecialComm"].ToString() != "" ? decimal.Parse(sdr["SpecialComm"].ToString()) : TaxBillEntryHeaderObj.SpecialComm);
                                         TaxBillEntryHeaderObj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : TaxBillEntryHeaderObj.VATAmount);
+                                        TaxBillEntryHeaderObj.Subtotal = (sdr["TotalValue"].ToString() != "" ? decimal.Parse(sdr["TotalValue"].ToString()) : TaxBillEntryHeaderObj.Subtotal);
+
                                         TaxBillEntryHeaderObj.CGSTAmount = (sdr["CGSTAmount"].ToString() != "" ? decimal.Parse(sdr["CGSTAmount"].ToString()) : TaxBillEntryHeaderObj.CGSTAmount);
                                         TaxBillEntryHeaderObj.SGSTAmount = (sdr["SGSTAmount"].ToString() != "" ? decimal.Parse(sdr["SGSTAmount"].ToString()) : TaxBillEntryHeaderObj.SGSTAmount);
-                                        TaxBillEntryHeaderObj.CgstPercentage = (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : TaxBillEntryHeaderObj.CgstPercentage);
-                                        TaxBillEntryHeaderObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : TaxBillEntryHeaderObj.SgstPercentage);
+                                        // TaxBillEntryHeaderObj.CgstPercentage = (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : TaxBillEntryHeaderObj.CgstPercentage);
+                                        //TaxBillEntryHeaderObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : TaxBillEntryHeaderObj.SgstPercentage);
 
                                     }
 

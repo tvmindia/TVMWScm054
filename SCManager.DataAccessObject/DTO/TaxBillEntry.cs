@@ -67,8 +67,17 @@ namespace SCManager.DataAccessObject.DTO
         public decimal? ReferralRate { get; set; }
         public decimal? Rate { get; set; }
         public string UOM { get; set; }
-        public decimal? NetAmount { get; set; }
+       
         public string Description { get; set; }
+        public decimal? TradeDiscount { get; set; }
+        public decimal? CgstPercentage { get; set; }
+        public decimal? CGSTAmount { get; set; }
+        public decimal? SgstPercentage { get; set; }        
+        public decimal? SGSTAmount { get; set; }
+        public decimal? NetAmount { get; set; }
+        public decimal? GrandTotal { get; set; }
+        public decimal? TotalTaxAmount { get; set; }
+       
     }
 
 }

@@ -249,10 +249,15 @@
                                                     <th>Sl No</th>
                                                     <th>Item</th>
                                                     <th>Description</th>
-                                                    <th>Quantity</th>
+                                                    <th>Qty</th>
                                                     <th>UOM</th>
                                                     <th>Referral Rate(₹)</th>
                                                     <th>Rate (₹)</th>
+                                                    <th>Discount</th>
+                                                    <th>CGST (%)</th>
+                                                    <th>CGST Amount (₹)</th>
+                                                    <th>SGST (%)</th>
+                                                    <th>SGST Amount (₹)</th>
                                                     <th>Total Amount (₹)</th>
                                                     <th>...</th>
                                                 </tr>
@@ -318,7 +323,8 @@
                                                 @Html.LabelFor(model => model.CGSTAmount, htmlAttributes: new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-3">
-                                                <input type="text" id="cgstpercentage" class="form-control vattxt" onkeyup="CalculateGST()" />
+                                                <input type="text" id="cgstpercentage" class="form-control vattxt" /> <!-- onkeyup="CalculateGSTOld()"  -->
+                                                       
                                             </div>
                                             <div class="col-md-6">
                                                 @Html.EditorFor(model => model.CGSTAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "CGSTAmount", @onkeyup = "ClearGSTDiscountPercentage()", style = "text-align:right", @onclick = "SelectAllValue(this);" } })
@@ -332,7 +338,8 @@
                                                 @Html.LabelFor(model => model.SGSTAmount, htmlAttributes: new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-3">
-                                                <input type="text" id="sgstpercentage" class="form-control vattxt" onkeyup="CalculateGST()" />
+                                                <input type="text" id="sgstpercentage" class="form-control vattxt"   /> <!-- onkeyup="CalculateGSTOld()" -->
+                                                    
                                             </div>
                                             <div class="col-md-6">
                                                 @Html.EditorFor(model => model.SGSTAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "SGSTAmount", @onkeyup = "ClearGSTDiscountPercentage()", style = "text-align:right", @onclick = "SelectAllValue(this);" } })
