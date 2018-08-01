@@ -113,7 +113,7 @@ function EG_TableDefn() {
     tempObj.TradeDiscount = "";
     tempObj.CgstPercentage = "";
     tempObj.CGSTAmount = "";
-    tempObj.SgstTPercentage = "";
+    tempObj.SgstPercentage = "";
     tempObj.SGSTAmount = "";
     tempObj.NetAmount = "";
 
@@ -133,15 +133,15 @@ function EG_Columns() {
                 { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'Rate', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'TradeDiscount', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 {
-                    "data": "CgstPercentage", render: function (data, type, row) {
-                        debugger;
+                    "data": "CgstPercentage", render: function (data, type, row) {                      
+                      
                         return (EG_createTextBox(data, 'F', row, 'CgstPercentage', 'CalculateCGST'));
                     }, "defaultContent": "<i></i>"
                 },
                 { "data": "CGSTAmount", render: function (data, type, row) {return roundoff(data, 1); }, "defaultContent": "<i></i>" },
                 {
                     "data": "SgstPercentage", render: function (data, type, row) {
-                        debugger;
+                      
                         if(data!=null)
                         return  (EG_createTextBox(data, 'F', row, 'SgstPercentage', 'CalculateSGST'
                             )) ;
@@ -386,15 +386,17 @@ function BindTCRBillEntryFields(Records) {
 }
 
 function FillUOM(row) {
-     
+ 
     for (i = 0; i < _Materials.length; i++) {
         if (_Materials[i].ItemCode == EG_GridData[row - 1]['Material']) {
             EG_GridData[row - 1]['UOM'] = _Materials[i].UOM;
             EG_GridData[row - 1]['MaterialID'] = _Materials[i].ID;
             EG_GridData[row - 1]['Description'] = _Materials[i].Description;
             EG_GridData[row - 1]['Rate'] = _Materials[i].SellingRate;
+            EG_GridData[row - 1]['CgstPercentage'] = _Materials[i].CgstPercentage;
+            EG_GridData[row - 1]['SgstPercentage'] = _Materials[i].SgstPercentage;
             //----for calculating amount on changing item(if already quantity exists)
-           // CalculateAmount(row)
+            //CalculateAmount(row);
             EG_Rebind();
             //----------------------------------------------------------------
             break;

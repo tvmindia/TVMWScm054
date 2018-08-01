@@ -124,8 +124,12 @@ namespace SCManager.RepositoryServices.Services
                                         _ItemObj.SubcategoryID = (sdr["SubcategoryID"].ToString() != "" ? Guid.Parse(sdr["SubcategoryID"].ToString()) : _ItemObj.SubcategoryID);
                                         _ItemObj.Subcategory = (sdr["Subcategory"].ToString() != "" ? (sdr["Subcategory"].ToString()) : _ItemObj.Subcategory);
                                         _ItemObj.Stock = (sdr["StockQty"].ToString() != "" ? (sdr["StockQty"].ToString()) : _ItemObj.Stock);                                       
-                                        _ItemObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _ItemObj.UOM);                                 
-                                      
+                                        _ItemObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _ItemObj.UOM);                                     
+                                        _ItemObj.CgstPercentage = (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : _ItemObj.CgstPercentage);
+                                        _ItemObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : _ItemObj.SgstPercentage);
+                                       _ItemObj.SellingRate = (sdr["Rate"].ToString() != "" ? float.Parse(sdr["Rate"].ToString()) : _ItemObj.SellingRate);
+
+                                        _ItemObj.UOM = (sdr["UOM"].ToString() != "" ? (sdr["UOM"].ToString()) : _ItemObj.UOM);
                                         _ItemObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _ItemObj.Remarks);
                                     }
 

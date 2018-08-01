@@ -75,6 +75,7 @@ namespace SCManager.UserInterface.Models
         public string Description { get; set; }        
         public string UOM { get; set; }
         public float? SellingRate { get; set; }
-
+        public decimal? CgstPercentage { get; set; }     
+        public decimal? SgstPercentage { get; set; }
     }
 }
