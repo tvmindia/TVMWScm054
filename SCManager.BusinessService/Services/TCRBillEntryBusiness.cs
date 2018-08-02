@@ -78,15 +78,15 @@ namespace SCManager.BusinessService.Services
                 foreach (TCRBillEntryDetail F in List)
                 {
                     F.SlNo = slno;
-                    F.NetAmount = F.Quantity * F.Rate;
+                    F.NetAmount = F.Quantity * F.Rate-F.TradeDiscount;
                      
                     //F.NetAmount = F.BasicAmount - F.TradeDiscount;
                   
 
-                    F.CGSTAmount = (((F.Quantity * F.Rate) - (F.TradeDiscount)) * (F.CgstPercentage / 100));
-                    F.SGSTAmount = (((F.Quantity * F.Rate) - (F.TradeDiscount)) * (F.SgstPercentage / 100));
-                    t1 = (F.CGSTAmount ?? 0);
-                    t2 = F.SGSTAmount ?? 0;
+                    F.CgstAmount = (((F.Quantity * F.Rate) - (F.TradeDiscount)) * (F.CgstPercentage / 100));
+                    F.SgstAmount = (((F.Quantity * F.Rate) - (F.TradeDiscount)) * (F.SgstPercentage / 100));
+                    t1 = (F.CgstAmount ?? 0);
+                    t2 = F.SgstAmount ?? 0;
                     t3 = F.TotalTaxAmount ?? 0;
                     net = F.NetAmount ?? 0;
                     //F.TotalTaxAmount = F.TotalTaxAmount + t1 + t2;//.Total Tax Amount calculation
@@ -162,20 +162,25 @@ namespace SCManager.BusinessService.Services
                 if(T.TCRBillEntryDetail!=null)
                 {
                     T.Subtotal = 0;
+                    T.TotalAmount = 0;
                     foreach (TCRBillEntryDetail F in T.TCRBillEntryDetail)
                     {
+                        F.SubTotalAmount = F.Quantity * F.Rate;
+                        F.NetAmount = F.Quantity * F.Rate-F.TradeDiscount;
 
-                        F.NetAmount = F.Quantity * F.Rate;
-
-                        T.Subtotal = T.Subtotal + F.NetAmount;
-
+                        T.Subtotal = T.Subtotal + F.SubTotalAmount;
+                        T.TotalAmount = T.TotalAmount+ F.NetAmount;
+                        
                     }
                 }
-                
-                //T.GrandTotal = T.Subtotal + T.VATAmount - T.Discount+T.ServiceCharge;
-                T.GrandTotal = T.Subtotal + (T.CGSTAmount+T.SGSTAmount) - T.Discount + T.ServiceCharge;
-                T.TotalTaxAmount = (T.CGSTAmount + T.SGSTAmount);
 
+
+                //T.GrandTotal = T.Subtotal + T.VATAmount - T.Discount+T.ServiceCharge;
+                //T.GrandTotal = T.Subtotal + (T.CGSTAmount + T.SGSTAmount) - T.Discount + T.ServiceCharge;
+
+                T.GrandTotal = T.TotalAmount + (T.CGSTAmount+T.SGSTAmount) - T.Discount + T.ServiceCharge;
+                T.TotalTaxAmount = (T.CGSTAmount + T.SGSTAmount);
+                
                 if (T.BillDate != null)
                     T.BillDateFormatted = T.BillDate;//.GetValueOrDefault().ToString(settings.dateformat);                
             }

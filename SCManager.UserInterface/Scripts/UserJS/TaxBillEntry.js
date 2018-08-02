@@ -429,23 +429,25 @@ function BindTaxBillEntryFields(Records) {
         $("#Remarks").val(Records.Remarks);
         $("#subtotal").val(roundoff(Records.Subtotal));
         $("#discount").val(roundoff(Records.Discount));
-        $("#total").val(roundoff(Records.Subtotal - Records.Discount));
+        // $("#total").val(roundoff(Records.Subtotal - Records.Discount));
+        $("#total").val(roundoff(Records.TotalAmount));
+        
         $("#SCAmount").val(roundoff(Records.ServiceCharge));
         $("#VATAmount").val(roundoff(Records.VATAmount));
         $("#VATPercentageAmount").val(Records.VATAmount);
 
 
-       // $("#CGSTAmount").val(roundoff(Records.CGSTAmount));
+        $("#CGSTAmount").val(roundoff(Records.CGSTAmount));
       //  $("#CGSTPercentageAmount").val(Records.CGSTAmount);
-       // $("#SGSTAmount").val(roundoff(Records.SGSTAmount));
-      //  $("#SGSTPercentageAmount").val(Records.SGSTAmount);
+        $("#SGSTAmount").val(roundoff(Records.SGSTAmount));
+      /// $("#SGSTPercentageAmount").val(Records.SGSTAmount);
 
         $("#grandtotal").val(roundoff(Records.GrandTotal));
         $("#ServiceChargeComm").val(roundoff(Records.ServiceCharge / 100));
         $("#SCCommAmount").val(roundoff(Records.SCCommAmount));
         $("#SpecialComm").val(roundoff(Records.SpecialComm));
-        //$("#cgstpercentage").val(roundoff(Records.CgstPercentage));
-        //$("#sgstpercentage").val(roundoff(Records.SgstPercentage));
+      //  $("#cgstpercentage").val(roundoff(Records.CgstPercentage));
+       // $("#sgstpercentage").val(roundoff(Records.SgstPercentage));
         $("#SGSTAmount").val(roundoff(Records.SGSTAmount));
         $("#CGSTAmount").val(roundoff(Records.CGSTAmount));
         debugger;
@@ -693,11 +695,11 @@ function AmountSummary() {
     var taxtotal = 0.00;
     var netamount = 0.00;
     var subTot = 0.00;
-    var discAmount = 0.00
+    //var discAmount = 0.00
     var disPercent = 0.00;
     var serviceamount = 0.00;
     var total1 = 0.00;
-   var disc = 0.00;
+  // var disc = 0.00;
     serviceamount = parseFloat($("#SCAmount").val());
 
     for (i = 0; i < EG_GridData.length; i++) {
@@ -708,7 +710,7 @@ function AmountSummary() {
         quant = (parseFloat(EG_GridData[i]['Quantity']) || 0);
         rate = (parseFloat(EG_GridData[i]['Rate']) || 0);
         discount =(parseFloat(EG_GridData[i]['TradeDiscount']) || 0);
-        disc =disc+(parseFloat(EG_GridData[i]['TradeDiscount']) || 0);
+      //  disc =disc+(parseFloat(EG_GridData[i]['TradeDiscount']) || 0);
         cgstamount = cgstamount+(parseFloat(EG_GridData[i]['CGSTAmount']) || 0);
         sgstamount = sgstamount + (parseFloat(EG_GridData[i]['SGSTAmount']) || 0);
         netamount = netamount + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
@@ -723,7 +725,7 @@ function AmountSummary() {
         total =tot+ (cgstamount + sgstamount); // GrandTotal calculation
         taxtotal = taxtotal + (cgstamount + sgstamount);  // TotalTaxAmount calculation      
            
-        discAmount = disc;       
+        //discAmount = disc;       
     }
     
     total1 = total + serviceamount;
@@ -732,7 +734,7 @@ function AmountSummary() {
     $('#grandtotal').val(roundoff(total1));
     $('#totaltaxamount').val(roundoff(taxtotal));
     $('#subtotal').val(roundoff(t1));
-    $('#discount').val(roundoff(discAmount));
+    //$('#discount').val(roundoff(discAmount));
     $('#CGSTAmount').val(roundoff(cgstamount));
     $('#SGSTAmount').val(roundoff(sgstamount));
 

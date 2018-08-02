@@ -66,6 +66,7 @@ namespace SCManager.RepositoryServices.Services
                                         TCRBillEntrylistObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : TCRBillEntrylistObj.Discount);
                                         TCRBillEntrylistObj.CGSTAmount = (sdr["CGSTAmount"].ToString() != "" ? decimal.Parse(sdr["CGSTAmount"].ToString()) : TCRBillEntrylistObj.CGSTAmount);
                                         TCRBillEntrylistObj.SGSTAmount = (sdr["SGSTAmount"].ToString() != "" ? decimal.Parse(sdr["SGSTAmount"].ToString()) : TCRBillEntrylistObj.SGSTAmount);
+                                        TCRBillEntrylistObj.TotalAmount= (sdr["TotalAmount"].ToString() != "" ? decimal.Parse(sdr["TotalAmount"].ToString()) : TCRBillEntrylistObj.TotalAmount);
                                     }
 
                                     TCRBillEntrylist.Add(TCRBillEntrylistObj);
@@ -270,7 +271,7 @@ namespace SCManager.RepositoryServices.Services
                                         _TCRBillEntryDetailObj.TradeDiscount = (sdr["TradeDiscount"].ToString() != "" ? decimal.Parse(sdr["TradeDiscount"].ToString()) : 0);
                                         _TCRBillEntryDetailObj.CgstPercentage = (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : 0);
                                         _TCRBillEntryDetailObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : 0);
-                                       
+                                      
 
                                     }
 

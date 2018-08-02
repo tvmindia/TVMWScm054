@@ -66,7 +66,8 @@ namespace SCManager.RepositoryServices.Services
                                         TaxBillEntrylistObj.SGSTAmount = (sdr["SGSTAmount"].ToString() != "" ? decimal.Parse(sdr["SGSTAmount"].ToString()) : TaxBillEntrylistObj.SGSTAmount);
                                         TaxBillEntrylistObj.ServiceCharge = (sdr["ServiceCharge"].ToString() != "" ? decimal.Parse(sdr["ServiceCharge"].ToString()) : TaxBillEntrylistObj.ServiceCharge);
                                         TaxBillEntrylistObj.Subtotal = (sdr["SubTotal"].ToString() != "" ? decimal.Parse(sdr["SubTotal"].ToString()) : TaxBillEntrylistObj.Subtotal);
-                                        TaxBillEntrylistObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : TaxBillEntrylistObj.Discount);                                       
+                                        TaxBillEntrylistObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : TaxBillEntrylistObj.Discount);
+                                        TaxBillEntrylistObj.TotalAmount = (sdr["TotalAmount"].ToString() != "" ? decimal.Parse(sdr["TotalAmount"].ToString()) : TaxBillEntrylistObj.TotalAmount);
                                     }
 
                                     TaxBillEntrylist.Add(TaxBillEntrylistObj);
@@ -190,8 +191,8 @@ namespace SCManager.RepositoryServices.Services
 
                                         TaxBillEntryHeaderObj.CGSTAmount = (sdr["CGSTAmount"].ToString() != "" ? decimal.Parse(sdr["CGSTAmount"].ToString()) : TaxBillEntryHeaderObj.CGSTAmount);
                                         TaxBillEntryHeaderObj.SGSTAmount = (sdr["SGSTAmount"].ToString() != "" ? decimal.Parse(sdr["SGSTAmount"].ToString()) : TaxBillEntryHeaderObj.SGSTAmount);
-                                        // TaxBillEntryHeaderObj.CgstPercentage = (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : TaxBillEntryHeaderObj.CgstPercentage);
-                                        //TaxBillEntryHeaderObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : TaxBillEntryHeaderObj.SgstPercentage);
+                                        TaxBillEntryHeaderObj.CgstPercentage = (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : TaxBillEntryHeaderObj.CgstPercentage);
+                                        TaxBillEntryHeaderObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : TaxBillEntryHeaderObj.SgstPercentage);
 
                                     }
 

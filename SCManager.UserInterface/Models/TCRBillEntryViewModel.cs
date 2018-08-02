@@ -78,6 +78,7 @@ namespace SCManager.UserInterface.Models
         public decimal? CgstPercentage { get; set; }
         public decimal? SgstPercentage { get; set; }
         public decimal? TotalTaxAmount { get; set; }
+        public decimal? TotalAmount { get; set; }
     }
 
     public class TCRBillEntryDetailViewModel
@@ -97,11 +98,12 @@ namespace SCManager.UserInterface.Models
 
         public decimal? TradeDiscount { get; set; }
         public decimal? CgstPercentage { get; set; }
-        public decimal? CGSTAmount { get; set; }
+        public decimal? CgstAmount { get; set; }
         public decimal? SgstPercentage { get; set; }
-        public decimal? SGSTAmount { get; set; }
+        public decimal? SgstAmount { get; set; }
 
         public decimal? GrandTotal { get; set; }
         public decimal? TotalTaxAmount { get; set; }
+        public decimal? SubTotalAmount { get; set; }
     }
 }

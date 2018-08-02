@@ -112,9 +112,9 @@ function EG_TableDefn() {
     tempObj.Rate = "";  
     tempObj.TradeDiscount = "";
     tempObj.CgstPercentage = "";
-    tempObj.CGSTAmount = "";
+    tempObj.CgstAmount = "";
     tempObj.SgstPercentage = "";
-    tempObj.SGSTAmount = "";
+    tempObj.SgstAmount = "";
     tempObj.NetAmount = "";
 
     return tempObj
@@ -133,21 +133,21 @@ function EG_Columns() {
                 { "data": "Rate", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'Rate', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 { "data": "TradeDiscount", render: function (data, type, row) { return (EG_createTextBox(data, 'F', row, 'TradeDiscount', 'CalculateAmount')); }, "defaultContent": "<i></i>" },
                 {
-                    "data": "CgstPercentage", render: function (data, type, row) {                      
+                    "data": "CgstPercentage", render: function (data, type, row) {
                       
                         return (EG_createTextBox(data, 'F', row, 'CgstPercentage', 'CalculateCGST'));
                     }, "defaultContent": "<i></i>"
                 },
-                { "data": "CGSTAmount", render: function (data, type, row) {return roundoff(data, 1); }, "defaultContent": "<i></i>" },
+                { "data": "CgstAmount", render: function (data, type, row) {return roundoff(data, 1); }, "defaultContent": "<i></i>" },
                 {
                     "data": "SgstPercentage", render: function (data, type, row) {
                       
-                        if(data!=null)
-                        return  (EG_createTextBox(data, 'F', row, 'SgstPercentage', 'CalculateSGST'
+                       // if(data!=null)
+                        return (EG_createTextBox(data, 'F', row, 'SgstPercentage', 'CalculateSGST'
                             )) ;
                     }, "defaultContent": "<i></i>"
                 },
-                { "data": "SGSTAmount", render: function (data, type, row) {    
+                { "data": "SgstAmount", render: function (data, type, row) {    
                  return roundoff(data, 1);}, "defaultContent": "<i></i>"},
                { "data": "NetAmount", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i></i>" },
                 { "data": null, "orderable": false, "defaultContent": '<a href="#" class="DeleteLink"  onclick="DeleteItem(this)" ><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>' }
@@ -246,7 +246,7 @@ function Edit(currentObj) {
         if (BindTCRBillEntry(rowData.ID)) {
             ChangeButtonPatchView('TCRBillEntry', 'btnPatchTCRBillEntrySettab', 'Edit');
             debugger;
-            AmountSummary();
+          // AmountSummary();
         }
         else {
             $('#ListTab').trigger('click');
@@ -357,13 +357,16 @@ function BindTCRBillEntryFields(Records) {
         $("#Remarks").val(Records.Remarks);
         $("#subtotal").val(roundoff(Records.Subtotal));
         $("#discount").val(roundoff(Records.Discount));
-        $("#total").val(roundoff(Records.Subtotal - Records.Discount));
+       // $("#total").val(roundoff(Records.Subtotal - Records.Discount));
+        $("#total").val(roundoff(Records.TotalAmount));
+
+      
         $("#SCAmount").val(roundoff(Records.ServiceCharge));
         $("#VATAmount").val(roundoff(Records.VATAmount));       
         $("#VATPercentageAmount").val(Records.VATAmount);
 
         $("#CGSTAmount").val(roundoff(Records.CGSTAmount));
-       //$("#CGSTPercentageAmount").val(Records.CGSTAmount);
+        //$("#CGSTPercentageAmount").val(Records.CGSTAmount);
         $("#SGSTAmount").val(roundoff(Records.SGSTAmount));
        // $("#SGSTPercentageAmount").val(Records.SGSTAmount);
         $("#cgstpercentage").val(roundoff(Records.CgstPercentage));
@@ -681,7 +684,7 @@ function CalculateAmount(row) {
     EG_GridData[row - 1]['Rate'] = roundoff(rate);
     EG_GridData[row - 1]['BasicAmount'] = roundoff(qty * rate);
     EG_GridData[row - 1]['TradeDiscount'] = roundoff(dic);
-    EG_GridData[row - 1]['NetAmount'] = roundoff(qty * rate - dic);
+    EG_GridData[row - 1]['NetAmount'] = roundoff((qty * rate) - dic);
     CalculateCGST(row, true);
     CalculateSGST(row, true);
     EG_Rebind();
@@ -733,10 +736,10 @@ function CalculateCGST(row, avoidSummary) {
     //EG_GridData[row - 1]['BasicAmount'] = roundoff(qty * rate);
     EG_GridData[row - 1]['TradeDiscount'] = roundoff(dic);
     EG_GridData[row - 1]["CgstPercentage"] = roundoff(cgst);
-    EG_GridData[row - 1]['CGSTAmount'] = roundoff(((qty * rate) - (dic)) * (cgst / 100));
+    EG_GridData[row - 1]['CgstAmount'] = roundoff(((qty * rate) - (dic)) * (cgst / 100));
     EG_GridData[row - 1]['SgstPercentage'] = roundoff(cgst);
-    EG_GridData[row - 1]['SGSTAmount'] = roundoff(((qty * rate) - (dic)) * (cgst / 100));
-
+    EG_GridData[row - 1]['SgstAmount'] = roundoff(((qty * rate) - (dic)) * (cgst / 100));
+   EG_GridData[row - 1]['NetAmount'] = roundoff((qty * rate) - dic);
     if (avoidSummary == undefined || avoidSummary == false) {
         EG_Rebind();
         AmountSummary();
@@ -782,11 +785,11 @@ function CalculateSGST(row, avoidSummary) {
     }
 
     EG_GridData[row - 1]['Rate'] = roundoff(rate);
-    EG_GridData[row - 1]['BasicAmount'] = roundoff(qty * rate);
+    
     EG_GridData[row - 1]['TradeDiscount'] = roundoff(dic);
     EG_GridData[row - 1]['SgstPercentage'] = roundoff(sgst);
-    EG_GridData[row - 1]['SGSTAmount'] = roundoff(((qty * rate) - (dic)) * (sgst / 100));
-
+    EG_GridData[row - 1]['SgstAmount'] = roundoff(((qty * rate) - (dic)) * (sgst / 100));
+    EG_GridData[row - 1]['NetAmount'] = roundoff((qty * rate)-dic);
 
     if (avoidSummary == undefined || avoidSummary == false) {
         EG_Rebind();
@@ -807,18 +810,13 @@ function AmountSummary() {
     var quant = 0.00;
     var rate = 0.00;
     var taxtotal = 0.00;
-    var disc  = 0.00;
+    //var disc  = 0.00;
     var serviceamount = 0.00;
     var total1 = 0.00;
     var cgstamt = 0.00;
     var sgstamt = 0.00;
-
-    //if (isNaN(serviceamount))
-    //    debugger;
-    //{
-    //    serviceamount = 0;
-    //}
-
+    var net = 0.00;
+   
     serviceamount = parseFloat($("#SCAmount").val() == "" ? 0 : $("#SCAmount").val());
 
        for (i = 0; i < EG_GridData.length; i++) {
@@ -828,18 +826,21 @@ function AmountSummary() {
         quant = (parseFloat(EG_GridData[i]['Quantity']) || 0);
         rate = (parseFloat(EG_GridData[i]['Rate']) || 0);
         discount = (parseFloat(EG_GridData[i]['TradeDiscount']) || 0);
-        disc = disc+(parseFloat(EG_GridData[i]['TradeDiscount']) || 0);
-        cgstamount = (parseFloat(EG_GridData[i]['CGSTAmount']) || 0);
-        sgstamount = (parseFloat(EG_GridData[i]['SGSTAmount']) || 0);
-        cgstamt = cgstamt + (parseFloat(EG_GridData[i]['CGSTAmount']) || 0);
-        sgstamt = sgstamt + (parseFloat(EG_GridData[i]['SGSTAmount']) || 0);
-        t1 = t1 + ((quant * rate) - (discount));
+      //  disc = disc+(parseFloat(EG_GridData[i]['TradeDiscount']) || 0);
+        cgstamount = (parseFloat(EG_GridData[i]['CgstAmount']) || 0);
+        sgstamount = (parseFloat(EG_GridData[i]['SgstAmount']) || 0);
+        cgstamt = cgstamt + (parseFloat(EG_GridData[i]['CgstAmount']) || 0);
+        sgstamt = sgstamt + (parseFloat(EG_GridData[i]['SgstAmount']) || 0);
+        net = net + (parseFloat(EG_GridData[i]['NetAmount']) || 0);
+        t1 = t1 + ((quant * rate));
         total = total + ((quant * rate) - (discount) + (cgstamount + sgstamount)); // GrandTotal calculation
         taxtotal = taxtotal + (cgstamount + sgstamount);  // TotalTaxAmount calculation
     }
     total1 = total + serviceamount;
-    $('#discount').val(roundoff(disc));
-    $('#total').val(roundoff(t1));
+    //$('#discount').val(roundoff(disc));
+    //$('#total').val(roundoff(t1));
+    $('#subtotal').val(roundoff(t1));
+    $('#total').val(roundoff(net));
     $('#grandtotal').val(roundoff(total1));
     $('#totaltaxamount').val(roundoff(taxtotal));
     $('#CGSTAmount').val(roundoff(cgstamt));

@@ -44,15 +44,20 @@ namespace SCManager.BusinessService.Services
                 if (T.TaxBillEntryDetail != null)
                 {
                     T.Subtotal = 0;
+                    T.TotalAmount = 0;
                     foreach (TaxBillEntryDetail F in T.TaxBillEntryDetail)
                     {
-                        F.NetAmount = F.Quantity * F.Rate;
-                        T.Subtotal = T.Subtotal + F.NetAmount;
+                        F.SubTotalAmount = F.Quantity * F.Rate;
+                        F.NetAmount = F.Quantity * F.Rate-F.TradeDiscount;
+                        T.Subtotal = T.Subtotal + F.SubTotalAmount;
+                        T.TotalAmount = T.TotalAmount + F.NetAmount;
                     }
                 }
                 //T.GrandTotal = T.Subtotal + T.VATAmount - T.Discount + T.ServiceCharge;
-                
-                T.GrandTotal = T.Subtotal + (T.CGSTAmount + T.SGSTAmount) - T.Discount + T.ServiceCharge;
+
+                // T.GrandTotal = T.Subtotal + (T.CGSTAmount + T.SGSTAmount) - T.Discount + T.ServiceCharge;
+                T.GrandTotal = T.TotalAmount + (T.CGSTAmount + T.SGSTAmount) - T.Discount + T.ServiceCharge;
+
                 T.TotalTaxAmount = (T.CGSTAmount + T.SGSTAmount);
 
                 if (T.BillDate != null)

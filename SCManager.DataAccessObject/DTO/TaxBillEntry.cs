@@ -40,7 +40,7 @@ namespace SCManager.DataAccessObject.DTO
         public decimal? TotalTaxAmount { get; set; }
         public decimal? CgstPercentage { get; set; }
         public decimal? SgstPercentage { get; set; }
-
+        public decimal? TotalAmount { get; set; }
 
 
         public string ServiceCenterCode { get; set; }
@@ -77,7 +77,7 @@ namespace SCManager.DataAccessObject.DTO
         public decimal? NetAmount { get; set; }
         public decimal? GrandTotal { get; set; }
         public decimal? TotalTaxAmount { get; set; }
-       
+        public decimal? SubTotalAmount { get; set; }
     }
 
 }
