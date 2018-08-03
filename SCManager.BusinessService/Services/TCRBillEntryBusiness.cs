@@ -178,7 +178,7 @@ namespace SCManager.BusinessService.Services
                 //T.GrandTotal = T.Subtotal + T.VATAmount - T.Discount+T.ServiceCharge;
                 //T.GrandTotal = T.Subtotal + (T.CGSTAmount + T.SGSTAmount) - T.Discount + T.ServiceCharge;
 
-                T.GrandTotal = T.TotalAmount + (T.CGSTAmount+T.SGSTAmount) - T.Discount + T.ServiceCharge;
+                T.GrandTotal = T.TotalAmount + (T.CGSTAmount+T.SGSTAmount)  + T.ServiceCharge;
                 T.TotalTaxAmount = (T.CGSTAmount + T.SGSTAmount);
                 
                 if (T.BillDate != null)

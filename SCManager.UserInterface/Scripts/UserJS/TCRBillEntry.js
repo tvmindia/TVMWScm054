@@ -810,7 +810,7 @@ function AmountSummary() {
     var quant = 0.00;
     var rate = 0.00;
     var taxtotal = 0.00;
-    //var disc  = 0.00;
+    var disc  = 0.00;
     var serviceamount = 0.00;
     var total1 = 0.00;
     var cgstamt = 0.00;
@@ -826,7 +826,7 @@ function AmountSummary() {
         quant = (parseFloat(EG_GridData[i]['Quantity']) || 0);
         rate = (parseFloat(EG_GridData[i]['Rate']) || 0);
         discount = (parseFloat(EG_GridData[i]['TradeDiscount']) || 0);
-      //  disc = disc+(parseFloat(EG_GridData[i]['TradeDiscount']) || 0);
+        disc = disc+(parseFloat(EG_GridData[i]['TradeDiscount']) || 0);
         cgstamount = (parseFloat(EG_GridData[i]['CgstAmount']) || 0);
         sgstamount = (parseFloat(EG_GridData[i]['SgstAmount']) || 0);
         cgstamt = cgstamt + (parseFloat(EG_GridData[i]['CgstAmount']) || 0);
@@ -837,7 +837,7 @@ function AmountSummary() {
         taxtotal = taxtotal + (cgstamount + sgstamount);  // TotalTaxAmount calculation
     }
     total1 = total + serviceamount;
-    //$('#discount').val(roundoff(disc));
+    $('#discount').val(roundoff(disc));
     //$('#total').val(roundoff(t1));
     $('#subtotal').val(roundoff(t1));
     $('#total').val(roundoff(net));
