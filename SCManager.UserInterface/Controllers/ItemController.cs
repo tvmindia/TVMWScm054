@@ -84,10 +84,10 @@ namespace SCManager.UserInterface.Controllers
         Const c = new Const();
         [HttpGet]
         [AuthorizeRoles(RoleContants.ManagerRole, RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
-        public string ItemsForDropdown(ItemDropdownViewModel obj)
+        public string ItemsForDropdown(ItemDropdownViewModel obj, string filter)
         {
             UA ua = new UA();
-            List<ItemDropdownViewModel> ItemList = Mapper.Map<List<Item>, List<ItemDropdownViewModel>>(_itemBusiness.GetAllItems(ua));
+            List<ItemDropdownViewModel> ItemList = Mapper.Map<List<Item>, List<ItemDropdownViewModel>>(_itemBusiness.GetAllItems(ua,filter));
             return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });        
 
         }
@@ -111,10 +111,10 @@ namespace SCManager.UserInterface.Controllers
         }
         [HttpGet]
         [AuthorizeRoles(RoleContants.ManagerRole,RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
-        public string GetAllItems()
+        public string GetAllItems(string filter)
         {
             UA ua = new UA();
-            List<ItemViewModel> ItemList = Mapper.Map<List<Item>, List<ItemViewModel>>(_itemBusiness.GetAllItems(ua));
+            List<ItemViewModel> ItemList = Mapper.Map<List<Item>, List<ItemViewModel>>(_itemBusiness.GetAllItems(ua,filter));
             return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
 
         }

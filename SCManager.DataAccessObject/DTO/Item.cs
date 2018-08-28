@@ -31,6 +31,8 @@ namespace SCManager.DataAccessObject.DTO
         public string HsnNo { get; set;  }
         public decimal? CgstPercentage { get; set; }
         public decimal? SgstPercentage { get; set; }
+        public bool IsActive { get; set; }
+        public string Filter { get; set; }
 
     }
 }

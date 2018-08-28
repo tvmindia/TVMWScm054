@@ -31,5 +31,7 @@ namespace UserInterface.Models
         public string ContentFileName { get; set; }
         [AllowHtml]
         public string CustomerName { get; set; }
+        [AllowHtml]
+        public string BillNo { get; set; }
     }
 }

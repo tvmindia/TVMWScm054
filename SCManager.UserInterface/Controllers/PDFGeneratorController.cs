@@ -30,7 +30,8 @@ namespace SCManager.UserInterface.Controllers
             {
                 string sw = pDFToolsObj.Content.Replace("<br>", "<br/>").ToString();
                 StringReader sr = new StringReader(sw.ToString());
-                Document pdfDoc = new Document(PageSize.A4.Rotate(), 10f, 10f, 55f, 30f);
+                //Document pdfDoc = new Document(PageSize.A4.Rotate(), 10f, 10f, 55f, 30f);             
+                Document pdfDoc = new Document(PageSize.A4, 30f, 30f, 85f, 30f);
                 byte[] bytes = null;
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
@@ -104,7 +105,7 @@ namespace SCManager.UserInterface.Controllers
                 PdfPCell cell1 = new PdfPCell(header);
                 cell1.Border = 0;
                 cell1.PaddingLeft = 50;
-                cell1.PaddingTop = 40;
+                cell1.PaddingTop = 40;               
                 //cell1.Width = document.PageSize.Width - 90;
                 headerTbl.AddCell(cell1);
                 ColumnText ct = new ColumnText(writer.DirectContent);
@@ -129,7 +130,7 @@ namespace SCManager.UserInterface.Controllers
                 //Chunk chunkRupee = new Chunk(" \u20B9");
                 //string htmlBody = pDFToolsObj.Content.Replace("<br>", "<br/>").ToString().Replace("CurrencySymbol", chunkRupee.ToString()).ToString();
                 string htmlBody = pDFToolsObj.Content.Replace("<br>", "<br/>").ToString();
-                StringReader reader = new StringReader(htmlBody.ToString());
+                StringReader reader = new StringReader(htmlBody.ToString());        
                 Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 85f, 30f);
                 byte[] bytes = null;
                 using (MemoryStream memoryStream = new MemoryStream())
@@ -184,7 +185,7 @@ namespace SCManager.UserInterface.Controllers
                     bytes = memoryStream.ToArray();
                     memoryStream.Close();
                 }
-                string contentFileName = pDFToolsObj.ContentFileName.ToString() == null ? "Report.pdf" : (pDFToolsObj.ContentFileName.ToString() + " - " + pDFToolsObj.CustomerName.ToString() + ".pdf");
+                string contentFileName = pDFToolsObj.ContentFileName.ToString() == null ? "Report.pdf" : (pDFToolsObj.ContentFileName.ToString() + " - " + pDFToolsObj.BillNo.ToString() + ".pdf");
                 string fname = Path.Combine(Server.MapPath("~/Content/Uploads/"), contentFileName);
                 System.IO.File.WriteAllBytes(fname, bytes);
                 string contentType = "application/pdf";

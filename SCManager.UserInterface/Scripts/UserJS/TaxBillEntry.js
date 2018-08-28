@@ -80,7 +80,7 @@ $(document).ready(function () {
         getMaterials();
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.TaxBillDetail;
-        List();
+        List();      
         var $datepicker = $('#BillDate');
         $datepicker.datepicker('setDate', null);
         $(".buttons-excel").hide();
@@ -218,10 +218,11 @@ function EG_Columns_Settings() {
 //--------------------button actions ----------------------
 function List() {
     try {
-
+        
         ChangeButtonPatchView('TaxBillEntry', 'btnPatchTaxBillEntrySettab', 'List');
         $("#HeaderID").val("");
         reset();
+      
 
      BindAllCustomerBill();
     } catch (x) {
@@ -235,7 +236,16 @@ function goBack() {
     reset();
 }
 
-
+function Add()
+{   
+    debugger;
+    ChangeButtonPatchView('TaxBillEntry', 'btnPatchTaxBillEntrySettab', 'Add');
+    EG_ClearTable();
+    EG_AddBlankRows(0);
+    $("#HeaderID").val("");    
+       reset();
+   
+}
 
 //function Add() {
 //    debugger;
@@ -246,6 +256,53 @@ function goBack() {
 //    //reset();
 //}
 
+function reset()
+{
+    if (($("#HeaderID").val() == "") || ($("#HeaderID").val() == 'undefined') || ($("#HeaderID").val() == "0")) {
+        // $("#HeaderID").val(emptyGUID);
+        $("#EmpID").val("");
+        $("#ModelTechEmpID").val("");
+        $("#JobNo").val("");
+      
+        $("#BillDate").val("");
+        $("#BillNo").val("");
+        $("#CustomerName").val("");
+        $("#PaymentRefNo").val("");
+        $("#CustomerContactNo").val("");
+        $("#CustomerLocation").val("");
+        $("#PaymentMode").val("");
+        $("#Remarks").val("");
+        $("#subtotal").val("");
+        $("#discount").val("");       
+        $("#total").val("");
+        
+        $("#SCAmount").val("");
+        $("#VATAmount").val("");
+        $("#VATPercentageAmount").val("");
+        $("#CGSTAmount").val("");       
+        $("#SGSTAmount").val("");        
+        $("#grandtotal").val("");
+        $("#ServiceChargeComm").val("");
+        $("#SCCommAmount").val("");
+        $("#SpecialComm").val("");       
+        $("#SGSTAmount").val("");
+        $("#CGSTAmount").val("");
+        ResetTaxForm();
+    }
+    else {
+        BindTaxBillEntry($("#HeaderID").val());
+    }
+
+}
+
+function ResetTaxForm() {
+
+    var validator = $("#TaxBill").validate();
+    $('#TaxBill').find('.field-validation-error span').each(function () {
+        validator.settings.success($(this));
+    });
+    validator.resetForm();
+}
 
 function FillUOM(row) {
 
@@ -320,7 +377,8 @@ function getMaterials()
 {
     try
     {
-        var data = {};
+        var filter = 1;
+        var data = { "filter": filter };
         var ds = {};
         ds = GetDataFromServer("Item/ItemsForDropdown/", data);
         if (ds != '') {
@@ -979,7 +1037,7 @@ function AmountSummary() {
         DrawTable({
             Action: "TaxBillEntry/GetTaxBill/",
             data: { "ID": $('#HeaderID').val() },
-            Exclude_column: ["SCCode", "ID", "HeaderID", "MaterialID","ReferralRate","TotalTaxAmount","GrandTotal","ItemNo"
+            Exclude_column: ["SCCode", "ID", "HeaderID", "MaterialID", "ReferralRate", "TotalTaxAmount", "GrandTotal", "ItemNo", "SubTotalAmount"
                ],
             Header_column_style: {
                 "SlNo": { "style": "font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "No" },
@@ -989,11 +1047,11 @@ function AmountSummary() {
                 "UOM": { "style": "text-align:center;font-size:11px;border-bottom:1px solid grey;font-weight: 500;" },
                 "Rate": { "style": "text-align: right;font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "Rate" },
                 "TradeDiscount": { "style": "text-align: right;font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "Discount" },
-                "CgstPercentage":{ "style": "text-align: right;font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "CGSTPerc" },
-                "CGSTAmount": { "style": "text-align: right;font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "CGSTAmt" },
-                "SgstPercentage": { "style": "text-align: right;font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "SGSTPerc" },
-                "SGSTAmount": { "style": "text-align: right;font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "SGSTAmt" },
-                "NetAmount": { "style": "text-align: right;font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "Total Amount" },
+                "CgstPercentage":{ "style": "text-align: right;font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "CGST %" },
+                "CGSTAmount": { "style": "text-align: right;font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "CGST Amt" },
+                "SgstPercentage": { "style": "text-align: right;font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "SGST %" },
+                "SGSTAmount": { "style": "text-align: right;font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "SGST Amt" },
+                "NetAmount": { "style": "text-align: right;font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "Total Amt" },
                 
             },
             Row_color: { "Odd": "White", "Even": "white" },
@@ -1081,8 +1139,10 @@ function AmountSummary() {
         var HeaderContent = $('#divTaxBillHeader').html();
         $('#hdnContent').val(BodyContent);
         $('#hdnHeadContent').val(HeaderContent);
-        var customerName = $("#CustomerName").val();
-        $('#hdnCustomerName').val(customerName);
+        //var customerName = $("#CustomerName").val();
+        //$('#hdnCustomerName').val(customerName);
+        var billNo = $("#BillNo").val();
+        $('#hdnBillNo').val(billNo);
         $('#btnDownloadBillToPDF').trigger('click');
     }
 

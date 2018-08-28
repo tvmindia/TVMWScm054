@@ -26,7 +26,7 @@ namespace SCManager.RepositoryServices.Services
 
         #region Methods
 
-        public List<Item> GetAllItems(UA UA)
+        public List<Item> GetAllItems(UA UA,string filter)
         {
             List<Item> Itemlist = null;
             try
@@ -41,6 +41,7 @@ namespace SCManager.RepositoryServices.Services
                         }
                         cmd.Connection = con;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@Filter", SqlDbType.NVarChar, 10).Value = filter;
                         cmd.CommandText = "[GetAllItems]";
                         cmd.CommandType = CommandType.StoredProcedure;
                         using (SqlDataReader sdr = cmd.ExecuteReader())
@@ -70,6 +71,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ItemObj.Remarks = (sdr["Remarks"].ToString() != "" ?(sdr["Remarks"].ToString()) : _ItemObj.Remarks);
                                         _ItemObj.CgstPercentage= (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : _ItemObj.CgstPercentage);
                                         _ItemObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : _ItemObj.SgstPercentage);
+                                        _ItemObj.IsActive = (sdr["IsActive"].ToString() != "" ? bool.Parse(sdr["IsActive"].ToString()) : _ItemObj.IsActive);
 
                                     }
 
@@ -255,7 +257,7 @@ namespace SCManager.RepositoryServices.Services
                                         _ItemObj.SalesReturnPendingQty= (sdr["SalesReturnPendingQty"].ToString() != "" ? (sdr["SalesReturnPendingQty"].ToString()) : _ItemObj.SalesReturnPendingQty);
                                         _ItemObj.CgstPercentage = (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : _ItemObj.CgstPercentage);
                                         _ItemObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : _ItemObj.SgstPercentage);
-
+                                        _ItemObj.IsActive = (sdr["IsActive"].ToString() != "" ? bool.Parse(sdr["IsActive"].ToString()) : _ItemObj.IsActive);
                                     }
                                     
                                     Itemlist.Add(_ItemObj);
@@ -310,6 +312,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@HsnNo", SqlDbType.NVarChar, 50).Value = itemObj.HsnNo;
                         cmd.Parameters.Add("@CgstPercentage", SqlDbType.Decimal).Value = itemObj.CgstPercentage;
                         cmd.Parameters.Add("@SgstPercentage", SqlDbType.Decimal).Value = itemObj.SgstPercentage;
+                        cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = itemObj.IsActive;
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
                         outParameter1 = cmd.Parameters.Add("@ID",SqlDbType.UniqueIdentifier);
@@ -369,7 +372,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@HsnNo", SqlDbType.NVarChar, 50).Value = itemObj.HsnNo;
                         cmd.Parameters.Add("@CgstPercentage", SqlDbType.Decimal).Value = itemObj.CgstPercentage;
                         cmd.Parameters.Add("@SgstPercentage", SqlDbType.Decimal).Value = itemObj.SgstPercentage;
-
+                        cmd.Parameters.Add("@IsActive", SqlDbType.Bit).Value = itemObj.IsActive;
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
@@ -433,7 +436,8 @@ namespace SCManager.RepositoryServices.Services
                             con.Open();
                         }
                         cmd.Connection = con;
-                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;                      
+
                         cmd.CommandText = "[GetAllItemCode]";
                         cmd.CommandType = CommandType.StoredProcedure;
                         using (SqlDataReader sdr = cmd.ExecuteReader())

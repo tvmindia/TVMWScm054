@@ -17,10 +17,10 @@ namespace SCManager.BusinessService.Services
             _itemRepository = itemRepository;
         }
 
-        public List<Item> GetAllItems(UA UA)
+        public List<Item> GetAllItems(UA UA, string filter)
         {
             List<Item> Itemlist = null;
-            Itemlist = _itemRepository.GetAllItems(UA);
+            Itemlist = _itemRepository.GetAllItems(UA,filter);
             return Itemlist;
 
         }

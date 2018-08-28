@@ -562,12 +562,13 @@ function DefectiveDamagedValidation() {
 
 function GetAllItemCode() {
 
-
-    try {
-
-        var data = {};
+    debugger;
+    try {       
+        var data = {  };
         var ds = {};
-        ds = GetDataFromServer("Item/ItemsForDropdown/", data);
+        //ds = GetDataFromServer("Item/ItemsForDropdown/", data);
+        ds = GetDataFromServer("DefectiveorDamaged/GetAllItemCode/", data);
+
         if (ds != '') {
             ds = JSON.parse(ds);
         }

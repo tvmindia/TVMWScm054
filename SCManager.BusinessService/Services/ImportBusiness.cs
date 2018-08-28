@@ -170,7 +170,7 @@ namespace SCManager.BusinessService.Services
         {
             try
             {
-                List<Item> itemList = _itemBusiness.GetAllItems(ua);
+                List<Item> itemList = _itemBusiness.GetAllItems(ua,"1");
                 string[] itemNameList = (from i in itemList select i.Description.Replace(" [HSN:" + i.HsnNo + "]","").Trim()).ToArray();
                 string[] itemCodeList = (from i in itemList select i.ItemCode.ToString().Trim()).ToArray();
                 foreach (ImportForm8 importForm8 in importForm8List)

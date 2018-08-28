@@ -47,7 +47,7 @@
         <li class="active" onclick="List()">
             <a id="ListTab" href="#1b" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>Tax Bills</a>
         </li>
-        <li>@*onclick="Add()"*@
+        <li onclick="Add()">@*">onclick="Add()"*@
             <a id="EditTab" href="#2b" data-toggle="tab" style="width:170px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Tax Bill Entry</a>
         </li>
 
@@ -392,7 +392,8 @@
                     @Html.HiddenFor(model => model.PDFToolsObj.Content, htmlAttributes: new { @class = "", Value = "", @id = "hdnContent" })
                     @Html.HiddenFor(model => model.PDFToolsObj.Headcontent, htmlAttributes: new { @class = "", Value = "", @id = "hdnHeadContent" })
                     @Html.HiddenFor(model => model.PDFToolsObj.ContentFileName, htmlAttributes: new { @class = "", Value = "TaxBill", @id = "hdnContentFileName" })
-                    @Html.HiddenFor(model => model.PDFToolsObj.CustomerName, htmlAttributes: new { @class = "", @id = "hdnCustomerName" })
+                    @*@Html.HiddenFor(model => model.PDFToolsObj.CustomerName, htmlAttributes: new { @class = "", @id = "hdnCustomerName" })*@
+                    @Html.HiddenFor(model => model.PDFToolsObj.BillNo, htmlAttributes: new { @class = "", @id = "hdnBillNo" })                    
                     @Html.HiddenFor(model => model.PDFToolsObj.HeaderText, htmlAttributes: new { @class = "", Value = "" })
                     <input type="submit" value="Download" id="btnDownloadBillToPDF" />
                 </form>

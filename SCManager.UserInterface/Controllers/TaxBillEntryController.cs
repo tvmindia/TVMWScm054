@@ -206,35 +206,39 @@ namespace SCManager.UserInterface.Controllers
 
                     break;
                 case "Add":
-                    ToolboxViewModelObj.backbtn.Visible = true;
-                    ToolboxViewModelObj.backbtn.Text = "Back";
-                    ToolboxViewModelObj.backbtn.Title = "Back to list";
-                    ToolboxViewModelObj.backbtn.Event = "$('#ListTab').trigger('click');";
+                    ToolboxViewModelObj.PrintBtn.Visible = false;
+                    ToolboxViewModelObj.PrintBtn.Text = "Export";
+                    ToolboxViewModelObj.PrintBtn.Title = "Export";
+                    ToolboxViewModelObj.PrintBtn.Event = "PrintTableToDoc();";
+                    //ToolboxViewModelObj.backbtn.Visible = true;
+                    //ToolboxViewModelObj.backbtn.Text = "Back";
+                    //ToolboxViewModelObj.backbtn.Title = "Back to list";
+                    //ToolboxViewModelObj.backbtn.Event = "$('#ListTab').trigger('click');";
 
 
-                    ToolboxViewModelObj.addbtn.Visible = true;
-                    ToolboxViewModelObj.addbtn.Disable = true;
-                    ToolboxViewModelObj.addbtn.DisableReason = "N/A for new Tax Entry";
-                    ToolboxViewModelObj.addbtn.Text = "New";
-                    ToolboxViewModelObj.addbtn.Title = "Add New";
-                    ToolboxViewModelObj.addbtn.Event = "";
+                    //ToolboxViewModelObj.addbtn.Visible = true;
+                    //ToolboxViewModelObj.addbtn.Disable = true;
+                    //ToolboxViewModelObj.addbtn.DisableReason = "N/A for new Tax Entry";
+                    //ToolboxViewModelObj.addbtn.Text = "New";
+                    //ToolboxViewModelObj.addbtn.Title = "Add New";
+                    //ToolboxViewModelObj.addbtn.Event = "";
 
-                    ToolboxViewModelObj.savebtn.Visible = true;
-                    ToolboxViewModelObj.savebtn.Text = "Save";
-                    ToolboxViewModelObj.savebtn.Title = "Save Tax Bill";
-                    ToolboxViewModelObj.savebtn.Event = "save();";
+                    //ToolboxViewModelObj.savebtn.Visible = true;
+                    //ToolboxViewModelObj.savebtn.Text = "Save";
+                    //ToolboxViewModelObj.savebtn.Title = "Save Tax Bill";
+                    //ToolboxViewModelObj.savebtn.Event = "save();";
 
-                    ToolboxViewModelObj.deletebtn.Visible = true;
-                    ToolboxViewModelObj.deletebtn.Disable = true;
-                    ToolboxViewModelObj.deletebtn.Text = "Delete";
-                    ToolboxViewModelObj.deletebtn.Title = "Delete Tax";
-                    ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new Tax Entry";
-                    ToolboxViewModelObj.deletebtn.Event = "";
+                    //ToolboxViewModelObj.deletebtn.Visible = true;
+                    //ToolboxViewModelObj.deletebtn.Disable = true;
+                    //ToolboxViewModelObj.deletebtn.Text = "Delete";
+                    //ToolboxViewModelObj.deletebtn.Title = "Delete Tax";
+                    //ToolboxViewModelObj.deletebtn.DisableReason = "N/A for new Tax Entry";
+                    //ToolboxViewModelObj.deletebtn.Event = "";
 
-                    ToolboxViewModelObj.resetbtn.Visible = true;
-                    ToolboxViewModelObj.resetbtn.Text = "Reset";
-                    ToolboxViewModelObj.resetbtn.Title = "Reset";
-                    ToolboxViewModelObj.resetbtn.Event = "reset();";
+                    //ToolboxViewModelObj.resetbtn.Visible = true;
+                    //ToolboxViewModelObj.resetbtn.Text = "Reset";
+                    //ToolboxViewModelObj.resetbtn.Title = "Reset";
+                    //ToolboxViewModelObj.resetbtn.Event = "reset();";
 
                     break;
                 case "AddSub":

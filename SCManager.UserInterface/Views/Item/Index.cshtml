@@ -44,19 +44,20 @@
                         <tr class="text-center">
                             <th style="display:none;">ID</th>
                             <th>Item Code</th>
-                            <th style="width:200px !important;">Description</th>
+                            <th>Description</th>
                             <th>HSN No</th>
                             <th>Category</th>
-                            <th>Sub Category</th>
+                            <th style="display:none;" >Sub Category</th>
                             <th>Stock Qty </th>
                             <th>Def/Damg Qty</th>
-                            <th>UOM</th>
+                            <th style="display:none;">UOM</th>
                             <th>Reorder Qty</th>
-                            <th style="width:105px !important;">Product Commission (₹)</th>
-                            <th style="width:75px !important;">Base  Rate (₹)</th>
+                            <th >Product Commission (₹)</th>
+                            <th>Base  Rate (₹)</th>
                             <th>CGST (%)</th>
                             <th>SGST (%)</th>
-                            <th style="width:150px !important;">Remarks</th>
+                            <th>Is Active</th>
+                            <th >Remarks</th>                           
                             <th>...</th>
 
                         </tr>
@@ -264,6 +265,19 @@
                                     @*@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-md-5">
+                                    @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "", style = "zoom:1.8" ,@id="IsActive"} })                                   
+                                   
+                                </div>
+
+                            </div>
+
+
+
                         </div>
 
                        

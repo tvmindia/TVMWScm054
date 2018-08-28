@@ -1062,7 +1062,8 @@ function getMaterials() {
 
     try {
 
-        var data = {};
+        var filter = 1;
+        var data = { "filter": filter };
         var ds = {};
         ds = GetDataFromServer("Item/ItemsForDropdown/", data);
         if (ds != '') {

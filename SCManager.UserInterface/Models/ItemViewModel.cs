@@ -65,6 +65,9 @@ namespace SCManager.UserInterface.Models
         public decimal? CgstPercentage { get; set; }
         [Display(Name = "SGST (%)")]
         public decimal? SgstPercentage { get; set; }
+        [Display(Name = "Is Active (Y/N)")]
+        public bool IsActive { get; set; }
+        public string Filter { get; set; }
     }
 
     public class ItemDropdownViewModel
@@ -77,5 +80,6 @@ namespace SCManager.UserInterface.Models
         public float? SellingRate { get; set; }
         public decimal? CgstPercentage { get; set; }     
         public decimal? SgstPercentage { get; set; }
+        public string Filter { get; set; }
     }
 }

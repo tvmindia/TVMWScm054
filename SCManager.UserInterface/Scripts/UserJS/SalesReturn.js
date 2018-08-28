@@ -360,7 +360,7 @@ function SalesReturnValidation() {
 }
 
 function ItemCodeOnChange(i) {
-  
+ 
     var val = $(i).val();
     var a = $("#Materials").find('option[value="' + val + '"]');
     var itemID = a.attr('id');
@@ -372,12 +372,13 @@ function ItemCodeOnChange(i) {
 
 function GetAllItemCode() {
 
-
+  
     try {
-
-        var data = {};
+        var filter = 1;
+        var data = {"filter":filter};
         var ds = {};
-        ds = GetDataFromServer("Item/ItemsForDropdown/", data);
+       // ds = GetDataFromServer("Item/ItemsForDropdown/", data);
+        ds = GetDataFromServer("SalesReturn/GetAllItemCode/", data);
         if (ds != '') {
             ds = JSON.parse(ds);
         }

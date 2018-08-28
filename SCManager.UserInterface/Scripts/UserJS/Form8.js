@@ -459,8 +459,11 @@ function SaveSuccess(data, status, xhr) {
 
 function getMaterials() {
     try {
-        var data = {};
+        debugger;
+        var filter = 1;
+        var data = {"filter":filter};
         var ds = {};
+       
         ds = GetDataFromServer("Item/ItemsForDropdown/", data);
         if (ds != '') {
             ds = JSON.parse(ds);

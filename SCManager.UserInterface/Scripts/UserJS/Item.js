@@ -27,14 +27,22 @@ $(document).ready(function () {
                { "data": "SellingRate", render: function (data, type, row) { return roundoff(data, 1); }, "defaultContent": "<i>-</i>" },
                { "data": "CgstPercentage", "defaultContent": "<i>-</i>" },
                { "data": "SgstPercentage", "defaultContent": "<i>-</i>" },
-
+                { "data": "IsActive", "defaultContent": "<i>-</i>" },
                { "data": "Remarks", "defaultContent": "<i>-</i>" },
+               
                { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink" onclick="Edit(this)"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
              ],
-             columnDefs: [{ "targets": [0], "visible": false, "searchable": false },
-                  { className: "text-right", "targets": [5, 6, 8,10] },
-                    { className: "text-center", "targets": [1,3, 4,7,9, 11,12,13,15] },
-                    { className: "text-left", "targets": [2,14] },
+             columnDefs: [{ "targets": [0,5,8], "visible": false, "searchable": false },
+                  { className: "text-right", "targets": [ 6, 8,10] },
+                    { className: "text-center", "targets": [1,3, 4,5,7,9, 11,12,13,14,16] },
+                    { className: "text-left", "targets": [2, 15] },
+                       {
+                           "render": function (data, type, row) {
+                               return (data == false ? "No " : "Yes");
+                           },
+                           "targets": [14]
+
+                       },
              ]
          });
 
@@ -178,6 +186,17 @@ function fillItems(ID) {
     {
         $("#Subcategory").val(thisItem[0].SubCategoryID);
     }
+
+
+    if (thisItem[0].IsActive == true) {
+        $("#IsActive").prop('checked', true);
+        // $('#IsActive').val(this.checked ? 1 : 0);
+
+    }
+    else {
+        $("#IsActive").prop('checked', false);
+
+    }
   
 }
 
@@ -202,7 +221,7 @@ function clearfields() {
     $("#Subcategory").val("-1");
     $("#CgstPercentage").val("");
     $("#SgstPercentage").val("");
-
+    $("#IsActive").prop('checked', false);
     ClearSubCategories();
     ResetForm();
 }

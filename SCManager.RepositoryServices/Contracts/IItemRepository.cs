@@ -9,7 +9,7 @@ namespace SCManager.RepositoryServices.Contracts
 {
     public interface IItemRepository
     {
-        List<Item> GetAllItems(UA UA);
+        List<Item> GetAllItems(UA UA,string filter);
         List<Item> GetItemByID(UA UA,string ID);
         object InsertItem(Item itemObj);
         string UpdateItem(Item itemObj);
