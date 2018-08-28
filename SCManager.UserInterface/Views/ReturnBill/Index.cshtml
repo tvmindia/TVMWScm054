@@ -598,19 +598,25 @@
                            
                              <div style="padding-left:500px;">
                                  <table border="0" style="width:200px;">
-                                     <tr>
+                                     @*<tr>
                                          <td></td>
                                          <td></td>                                        
                                          <td style="text-align:right;"><label style="font-size:14px;"><b>GrandTotal</b></label></td>
-                                         <td style="text-align:right;font-size:11px;"><label>Rs.</label></td>
-                                         <td><label style="font-size:11px;" id="grandTotal"></label></td>
-                                     </tr>
-                                   
-
+                                         <td style="font-size:12px;"><label>Rs.</label><label style="font-size:12px;" id="grandTotal"></td>
+                                         @*<td><label style="font-size:12px;" id="grandTotal"></label></td>
+                                     </tr>*@                                   
+                                      <tr>
+                                         <td></td>   
+                                         <td></td>                                                                                  
+                                         <td style="padding-left:0px;"><label style="font-size:14px;"><b>GrandTotal</b></label></td>
+                                         <td style="font-size:12px;"><label>Rs.</label><label style="font-size:12px;" id="grandTotal"></label></td>
+                                         @*<td><label style="font-size:12px;" id="grandTotal"></label></td>*@
+                                     </tr>   
                                      </table>
 </div>
                           
                             <table border="0" style="width:100%;">  
+                                <tr><td></td></tr>
                                 <tr>
                                     <td style="font-size:9px;padding-top:10px;width:20%;"><label>Received Rupees&#40;In Words&#41;</label></td>
                                     <td style="border-bottom:1px dotted black;width:60%;"><label id="receivedRupees" onkeydown="convertNumberToWords(this.value)"></label><label>&nbsp;Only</label></td>

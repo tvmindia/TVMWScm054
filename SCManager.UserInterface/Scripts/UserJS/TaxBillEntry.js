@@ -1040,7 +1040,7 @@ function AmountSummary() {
             Exclude_column: ["SCCode", "ID", "HeaderID", "MaterialID", "ReferralRate", "TotalTaxAmount", "GrandTotal", "ItemNo", "SubTotalAmount"
                ],
             Header_column_style: {
-                "SlNo": { "style": "font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "No" },
+                "SlNo": { "style": "font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "Sl No" },
                 "Material": { "style": "font-size:11px;border-bottom:1px solid grey;font-weight: 500;", "custom_name": "Item" },
                 "Description": { "style": "width:70px;font-size:11px;border-bottom:1px solid grey;font-weight: 500;" },
                 "Quantity": { "style": "text-align: center;font-size:11px;border-bottom:1px solid grey;font-weight: 500;" },
