@@ -1,0 +1,148 @@
+﻿@model SCManager.UserInterface.Models.TaxBillEntryViewModel
+
+@using (Ajax.BeginForm("MergeTaxBill", "TaxBillEntry", new AjaxOptions { HttpMethod = "POST", OnSuccess = "TaxSaveSuccess", OnFailure = "TaxSaveFailure", OnBegin = "ValidateTaxForm", AllowCache = false, LoadingElementId = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", id = "taxform", autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.BillNo)
+        </div>
+
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.BillNo, new { htmlAttributes = new { @class = "form-control BlockEnter", @id = "ModelBillNo" } })
+            @Html.HiddenFor(model => model.ID, htmlAttributes: new { Value = "", @id = "ModelBillID" })
+            @Html.HiddenFor(model => model.TaxBillIDs, htmlAttributes: new { Value = "", @id = "ModelTaxBillIDs" })
+            @Html.ValidationMessageFor(model => model.BillDate, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-1 mandatory"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.BillDate)
+        </div>
+
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.BillDate, new { htmlAttributes = new { @class = "form-control datepicker", @id = "ModelBillDate", autofocus = "autofocus" } })
+            @Html.ValidationMessageFor(model => model.BillDate, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-1 mandatory"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.EmpID)
+        </div>
+        <div class="col-md-6">
+            @if (Model.TechniciansList.Count == 0)
+            {
+                @Html.EditorFor(model => model.EmpID, new { htmlAttributes = new { @class = "form-control", @id = "ModelEmpID", autofocus = "autofocus" } })
+            }
+            else
+            {
+                @Html.DropDownListFor(model => model.EmpID, Model.TechniciansList, "--Select Technician--", new { @class = "form-control HeaderBox BlockEnter", value = -1, style = "padding:4px 12px;", @id = "ModelEmpID" })
+            }
+            @Html.ValidationMessageFor(model => model.EmpID, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-1 mandatory"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.CustomerName)
+        </div>
+        <div class="col-md-6">
+            @if (Model.CustomerList.Count == 0)
+            {
+                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", @id = "ModelCustomerName", autofocus = "autofocus" } })
+            }
+            else
+            {
+                @Html.DropDownListFor(model => model.CustomerName, Model.CustomerList, "--Select Customer--", new { @class = "form-control HeaderBox BlockEnter", value = -1, style = "padding:4px 12px;", @id = "ModelCustomerName" })
+            }
+            @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-1 mandatory"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.CustomerLocation)
+        </div>
+
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.CustomerLocation, new { htmlAttributes = new { @class = "form-control ", @id = "ModelCustomerLocation"@*, @disabled = "disabled"*@ } })
+            @Html.ValidationMessageFor(model => model.CustomerLocation, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-1 mandatory"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.CustomerContactNo)
+        </div>
+
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.CustomerContactNo, new { htmlAttributes = new { @class = "form-control", @id = "ModelCustomerContactNo"@*, @disabled = "disabled"*@ } })
+
+        </div>
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.PaymentMode)
+        </div>
+
+        <div class="col-md-6">
+            @{
+                List<SelectListItem> PaymentModeList = new List<SelectListItem>();
+                PaymentModeList.Add(new SelectListItem
+                {
+                    Text = "Cash",
+                    Value = "Cash"
+                });
+                PaymentModeList.Add(new SelectListItem
+                {
+                    Text = "Cheque",
+                    Value = "Cheque"
+                });
+                PaymentModeList.Add(new SelectListItem
+                {
+                    Text = "Online",
+                    Value = "Online"
+                });
+            }
+            @Html.DropDownListFor(model => model.PaymentMode, PaymentModeList, "--Select Payment Mode--", new { @class = "form-control", @onchange = "PaymentModeOnChange(this)", @style = "padding:4px 12px;", @id = "ModelPaymentMode" })
+            @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-1 mandatory"></div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.PaymentRefNo)
+        </div>
+
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.PaymentRefNo, new { htmlAttributes = new { @class = "form-control", @id = "ModelModelNo" } })
+
+        </div>
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Remarks)
+        </div>
+
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control", @id = "ModelSerialNo" } })
+        </div>
+
+    </div>
+
+    <div class="form-group" style="display:none;">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="btnTaxSave" type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+
+
+
+                }
+    

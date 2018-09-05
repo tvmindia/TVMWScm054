@@ -192,5 +192,19 @@ namespace SCManager.BusinessService.Services
             return TaxBillEntrylist;
         }
 
+        public List<TaxBillEntry> GetCustomerInfoFromTaxBill(string taxBillIDs)
+        {
+            return _iTaxBillEntryRepository.GetCustomerInfoFromTaxBill(taxBillIDs);
+        }
+
+        public TaxBillEntry MergeTaxBill(TaxBillEntry taxBillEntry, UA UA)
+        {
+            return _iTaxBillEntryRepository.MergeTaxBill(taxBillEntry, UA);
+        }
+
+        public List<Employees> GetTechnicianListForMergeTaxBill(string taxBillIDs)
+        {
+            return _iTaxBillEntryRepository.GetTechnicianListForMergeTaxBill(taxBillIDs);
+        }
     }
 }

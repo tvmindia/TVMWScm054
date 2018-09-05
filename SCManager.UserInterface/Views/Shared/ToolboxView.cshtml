@@ -214,5 +214,27 @@
         }
 
 
+        @if (Model.mergeBtn.Visible)
+        {
+            if (Model.mergeBtn.Disable)
+            {
+
+                <a class="thr_disbtn" title="@Model.mergeBtn.Title-@Model.mergeBtn.DisableReason">
+                    <img class="btnImg" src="@Url.Content("~/Content/images/merge.PNG")">
+                    <span class="btnText">@Model.mergeBtn.Text</span>
+                </a>
+            }
+            else
+            {
+
+                <a title="@Model.mergeBtn.Title" class="thr_btn" onclick=@Model.mergeBtn.Event>
+                    <img class="btnImg" src="@Url.Content("~/Content/images/merge.PNG")">
+                    <span class="btnText">@Model.mergeBtn.Text</span>
+                </a>
+            }
+
+        }
+
+
     </div>
 

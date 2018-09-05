@@ -19,7 +19,7 @@ $(document).ready(function () {
                 extend: 'excel',
                 exportOptions:
                              {
-                                 columns: [1, 3, 4, 5, 6, 7,8,9,10,11,12]
+                                 columns: [2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
                              }
             }],
             order: [],
@@ -28,6 +28,7 @@ $(document).ready(function () {
             data: GetAllTaxBill(),
             columns: [
               { "data": "ID", "defaultContent": "<i>-</i>" },
+              { "data": "Checkbox", "defaultContent": "" ,"width": "2%"},
               { "data": "Technician", "defaultContent": "<i>-</i>" },
               { "data": "JobNo", "defaultContent": "<i>-</i>" },
               { "data": "BillDateFormatted", "defaultContent": "<i>-</i>" },
@@ -43,19 +44,22 @@ $(document).ready(function () {
               { "data": "Remarks", "defaultContent": "<i>-</i>" },
               { "data": null, "orderable": false, "defaultContent": '<a href="#" class="actionLink"  onclick="Edit(this)" ><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i></a>' }
             ],
-            columnDefs: [{ "targets": [0], "visible": false, "searchable": false }, { "targets": [2], "visible": false, "searchable": false },
-                 { className: "text-right", "targets": [5,6,7,8] },
-            { className: "text-center", "targets": [2, 3, 4, 5, 6, 7, 8, 10, 13] },
-            { className: "text-left", "targets": [1,9,11,12] },
-            { "width": "8%", "targets": 4 },
-            { "width": "8%", "targets": 5 },
-              { "width": "8%", "targets": 6 },
-            { "width": "10%", "targets": 7 },
-             { "width": "8%", "targets": 3 },
-              { "width": "9%", "targets": 8 },
-              { "width": "9%", "targets": 9 },
-            ]
-        });       
+            columnDefs: [ { "targets": [0, 3], "visible": false, "searchable": false },
+                { orderable: false, className: 'select-checkbox', "targets": 1 },
+                { className: "text-right", "targets": [6, 7, 8, 9] },
+                { className: "text-center", "targets": [1, 3, 4, 5, 6, 7, 8, 9, 11, 14] },
+                { className: "text-left", "targets": [2, 10, 12, 13] },
+                { "width": "8%", "targets": 4 },
+                { "width": "8%", "targets": 5 },
+                { "width": "8%", "targets": 6 },
+                { "width": "10%", "targets": 7 },
+                { "width": "8%", "targets": 3 },
+                { "width": "9%", "targets": 8 },
+                { "width": "9%", "targets": 9 },
+            ],
+            select: { style: 'multi', selector: 'td:first-child' },
+            destroy: true
+        });
         //BindJobNumberDropDown();
       
         DataTables.TaxBillDetail = $('#tblTaxBillDetails').DataTable(
@@ -430,7 +434,6 @@ function getMaterialsByTechnician(empID)
 
 function BindAllCustomerBill() {
     try {
-
         DataTables.customerTaxBillsTable.clear().rows.add(GetAllTaxBill()).draw(false);
     }
     catch (e) {
@@ -1167,5 +1170,111 @@ function AmountSummary() {
         }
     }
 
+    function Merge() {
+        try{
+            debugger;
+            var taxBillList = DataTables.customerTaxBillsTable.rows(".selected").data();
+            if (taxBillList.length !== 0) {
+                var IDs = [];
+                for (var i = 0; i < taxBillList.length; i++) {
+                    IDs.push(taxBillList[i].ID);
+                }
+                $('#divMergeTaxModel').load("TaxBillEntry/MergeTaxBillForm?taxBillIDs=" + String(IDs), function () {
+                    $('#divMergeTaxModel #ModelCustomerName').change(function () {
+                        var customerInfo = $('#divMergeTaxModel #ModelCustomerName option:selected').text();
+                        $('#divMergeTaxModel #ModelCustomerLocation').val(customerInfo.split(" | ")[1]);
+                        $('#divMergeTaxModel #ModelCustomerContactNo').val(customerInfo.split(" | ")[2]);
+                    });
 
+                    $('#divMergeTaxModel #ModelBillDate').datepicker('setDate', null);
+                });
+                $("#MergeTaxModel").modal('show');
+            }
+            else {
+                notyAlert('error', 'No Tax Bill Selected');
+            }
+                
+        }
+        catch (e) {
+            notyAlert('error', e.message);
+        }
+    }
     
+    function CancelMerge() {
+        try{
+            debugger;
+            $('#MergeTaxModel .close').click();
+            BindAllCustomerBill();
+        }
+        catch (e) {
+            notyAlert('error', e.message);
+        }
+    }
+
+    function MergeTaxBill() {
+        try {
+            debugger;
+            var taxBillList = DataTables.customerTaxBillsTable.rows(".selected").data();
+            var IDs = [];
+            for (var i = 0; i < taxBillList.length; i++) {
+                IDs.push(taxBillList[i].ID);
+            }
+            $('#ModelTaxBillIDs').val(String(IDs));
+            $('#btnTaxSave').click();
+        }
+        catch (e) {
+            notyAlert('error', e.message);
+        }
+    }
+    
+    function ValidateTaxForm() {
+        try {
+            debugger;
+            var fl = true;
+            if (($("#divMergeTaxModel #ModelBillNo").val() !== "") && ($("#divMergeTaxModel #ModelBillDate").val() !== "") && ($("#divMergeTaxModel #ModelCustomerName").val() !== "") && ($("#divMergeTaxModel #ModelEmpID").val() !== "") && ($("#divMergeTaxModel #ModelPaymentMode").val() !== "")) {
+                fl = true;
+            }
+            else {
+                fl = false;
+                notyAlert('error', 'Mandatory fields are empty!');
+            }
+            return fl;
+        }
+        catch (e) {
+            notyAlert('error', e.message);
+        }
+    };
+
+    function TaxSaveSuccess(data, status) {
+        try {
+            debugger;
+            var JsonResult = JSON.parse(data)
+            switch (JsonResult.Result) {
+                case "OK":
+                    $('#MergeTaxModel .close').click();
+                    BindAllCustomerBill();
+                    notyAlert('success', "Merge Success");
+                    break;
+                case "ERROR":
+                    notyAlert("error", JsonResult.Message)
+                    break;
+                default:
+                    notyAlert("error", JsonResult.Message)
+                    break;
+            }
+        }
+        catch (e) {
+            notyAlert('error', e.message);
+        }
+    }
+
+    function TaxSaveFailure(data, status) {
+        try {
+            debugger;
+            var JsonResult = JSON.parse(data)
+            notyAlert('error', JsonResult.Message);
+        }
+        catch (e) {
+            notyAlert('error', e.message);
+        }
+    }

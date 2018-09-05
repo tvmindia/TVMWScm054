@@ -90,6 +90,8 @@ namespace SCManager.UserInterface.Models
         public string ServiceCenterPanNo { get; set; }
         public string ServiceCenterPlace { get; set; }
 
+        public List<SelectListItem> CustomerList { get; set; }
+        public string TaxBillIDs { get; set; }
     }
 
     public class TaxBillEntryDetailViewModel

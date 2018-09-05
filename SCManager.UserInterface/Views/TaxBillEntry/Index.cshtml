@@ -7,7 +7,9 @@
 }
 @section styles {
     @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatable")
-@Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatableButtons")
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatableButtons")
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatableSelect")
+    @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/DataTables/css/datatablecheckbox")
     @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/bootstrapdatepicker")
     @Styles.RenderFormat(SiteKeys.StyleVersion, "~/Content/UserCSS/DailyServiceReport")
 }
@@ -47,7 +49,8 @@
         <li class="active" onclick="List()">
             <a id="ListTab" href="#1b" data-toggle="tab"> <span class="fa fa-list">&nbsp;&nbsp;</span>Tax Bills</a>
         </li>
-        <li onclick="Add()">@*">onclick="Add()"*@
+        <li onclick="Add()">
+            @*">onclick="Add()"*@
             <a id="EditTab" href="#2b" data-toggle="tab" style="width:170px"><span class="fa fa-file-o">&nbsp;&nbsp;</span>Tax Bill Entry</a>
         </li>
 
@@ -63,13 +66,14 @@
                         <tr class="text-center">
 
                             <th hidden="hidden">ID</th>
+                            <th></th>
                             <th>Technician</th>
                             <th hidden="hidden">Job No</th>
                             <th>Date</th>
                             <th>Bill No</th>
                             <th>Total (₹)</th>
-                            <th>Discount (₹)</th>                            
-                            <th>Total Tax Amount (₹)</th>                           
+                            <th>Discount (₹)</th>
+                            <th>Total Tax Amount (₹)</th>
                             <th>Bill Amount (₹)</th>
                             <th>Cust. Name</th>
                             <th>Cust. Contact</th>
@@ -88,7 +92,7 @@
             <div class="col-md-12">
 
                 @using (Ajax.BeginForm("UpdateTaxBillEntry", "TaxBillEntry", new AjaxOptions { HttpMethod = "POST", Confirm = "", OnSuccess = "SaveSuccess", OnFailure = "NetworkFailure", AllowCache = false, LoadingElementId = "", OnBegin = "", OnComplete = "" }, new { @class = "form-horizontal", role = "form", @id = "TaxBill" }))
-                {
+            {
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(model => model.ID, htmlAttributes: new { @class = "", Value = "0", @id = "HeaderID", })
                     @Html.HiddenFor(model => model.DetailJSON, htmlAttributes: new { @id = "DetailJSON", Value = "" })
@@ -114,7 +118,7 @@
                             </div>
                             <div class="col-md-6">
                                 <input type="text" id="JobNo" name="JobNo" class="form-control" list="jobnumberList" onchange="JobSelect(this)" />
-                                <datalist id="jobnumberList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>                                 
+                                <datalist id="jobnumberList" onfocus='this.size=10;' onblur='this.size=1;' onchange='this.size=1; this.blur();'></datalist>
                             </div>
                             <div class="col-md-1 ">
                                 <span class="mandatory"></span>
@@ -137,9 +141,9 @@
                                 @Html.ValidationMessageFor(model => model.BillNo, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-1  mandatory" id="MandatoryStar"></div>
-                           @*<div class="col-md-1 mandatory" id="BillNoMandatory">
-        <i class="fa fa-exclamation-triangle" id="ahlinkMandatory" data-toggle="popover" data-trigger="click" data-placement="right" data-content="This bill no doesn't belong to selected technician "></i>
-    </div>*@ 
+                            @*<div class="col-md-1 mandatory" id="BillNoMandatory">
+                                    <i class="fa fa-exclamation-triangle" id="ahlinkMandatory" data-toggle="popover" data-trigger="click" data-placement="right" data-content="This bill no doesn't belong to selected technician "></i>
+                                </div>*@
 
                         </div>
                         <div class="form-group">
@@ -272,7 +276,7 @@
                                     </div>
                                     <div class="inputForm col-md-5">
 
-                                        
+
 
                                     </div>
                                     <div class="inputForm col-md-4">
@@ -324,7 +328,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <input type="text" id="cgstpercentage" class="form-control vattxt" /> <!-- onkeyup="CalculateGSTOld()"  -->
-                                                       
+
                                             </div>
                                             <div class="col-md-6">
                                                 @Html.EditorFor(model => model.CGSTAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "CGSTAmount", @onkeyup = "ClearGSTDiscountPercentage()", style = "text-align:right", @onclick = "SelectAllValue(this);" } })
@@ -338,8 +342,8 @@
                                                 @Html.LabelFor(model => model.SGSTAmount, htmlAttributes: new { @class = "control-label" })
                                             </div>
                                             <div class="col-md-3">
-                                                <input type="text" id="sgstpercentage" class="form-control vattxt"   /> <!-- onkeyup="CalculateGSTOld()" -->
-                                                    
+                                                <input type="text" id="sgstpercentage" class="form-control vattxt" /> <!-- onkeyup="CalculateGSTOld()" -->
+
                                             </div>
                                             <div class="col-md-6">
                                                 @Html.EditorFor(model => model.SGSTAmount, new { htmlAttributes = new { @class = "form-control Amount", @id = "SGSTAmount", @onkeyup = "ClearGSTDiscountPercentage()", style = "text-align:right", @onclick = "SelectAllValue(this);" } })
@@ -381,9 +385,9 @@
                                         </div>
                                         <div class="col-md-12" id="headercontainer"></div>
                                         <div class="col-md-12" id="modelcontent"></div>
-                                            
 
-                                        </div>
+
+                                    </div>
                                     }
             </div>
             <div>
@@ -393,7 +397,7 @@
                     @Html.HiddenFor(model => model.PDFToolsObj.Headcontent, htmlAttributes: new { @class = "", Value = "", @id = "hdnHeadContent" })
                     @Html.HiddenFor(model => model.PDFToolsObj.ContentFileName, htmlAttributes: new { @class = "", Value = "TaxBill", @id = "hdnContentFileName" })
                     @*@Html.HiddenFor(model => model.PDFToolsObj.CustomerName, htmlAttributes: new { @class = "", @id = "hdnCustomerName" })*@
-                    @Html.HiddenFor(model => model.PDFToolsObj.BillNo, htmlAttributes: new { @class = "", @id = "hdnBillNo" })                    
+                    @Html.HiddenFor(model => model.PDFToolsObj.BillNo, htmlAttributes: new { @class = "", @id = "hdnBillNo" })
                     @Html.HiddenFor(model => model.PDFToolsObj.HeaderText, htmlAttributes: new { @class = "", Value = "" })
                     <input type="submit" value="Download" id="btnDownloadBillToPDF" />
                 </form>
@@ -409,24 +413,63 @@
 <datalist id="Materials" onfocus='this.size=10;' onblur='this.size=1;'
           onchange='this.size=1; this.blur();'></datalist>
 
-<div id="PDFBody" hidden="hidden">  
-        @Html.Partial("_TaxBillView",@Model);    
+<div id="PDFBody" hidden="hidden">
+    @Html.Partial("_TaxBillView", @Model);
 </div>
 @{
     var sourcedata = new { source = "TechnicianJob1" };
     @Html.Action("TechnicianJobForm", "DailyServiceReport", sourcedata);
 }
+
+<div class="modal fade" id="MergeTaxModel" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;height: 36px;padding: 3px;">
+                <div class="container-fluid" style="padding-right: 0px;">
+                    <div class="col-md-8">
+                        <h3 class="modal-title SCHeader" id="modelContextLabel">Merge Tax Bills</h3>
+                    </div>
+                    <div class="col-md-4" style="padding-right: 4px;">
+                        <a class="close" data-dismiss="modal" aria-label="Close"><i style="font-size: 33px;" class="fa fa-times-circle" aria-hidden="true"></i></a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <br />
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="col-md-10" id="divMergeTaxModel">
+
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="background-image: url('content/images/73a6f1c8.png');background-repeat: repeat;height: 50px;padding: 7px;">
+                <a class="btn btn-primary" onclick="MergeTaxBill()"><i class="glyphicon glyphicon-floppy-disk"></i> Merge</a>
+                <a class="btn btn-default" onclick="CancelMerge();"><i class="glyphicon glyphicon-refresh"></i> Cancel</a>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/datatable")
     @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/jsZip")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/datatableSelect")
     @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/datatableButtons")
+    @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/datatablecheckbox")
     @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/jqueryunobtrusiveajaxvalidate")
     @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/bootstrapdatepicker")
     @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/TaxBillEntry")
     <script src="~/Scripts/PDF.js"></script>
     @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/editableGrid")
     @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/JobAction")
-  
-   
 
 }

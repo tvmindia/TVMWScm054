@@ -17,6 +17,7 @@ namespace SCManager.UserInterface.Models
         public ToolBoxStructure PrintBtn;
         public ToolBoxStructure downloadBtn;
         public ToolBoxStructure HistoryBtn;
+        public ToolBoxStructure mergeBtn;
     }
 
     public struct ToolBoxStructure

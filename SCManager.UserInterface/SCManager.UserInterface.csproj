@@ -677,6 +677,7 @@
     <Content Include="Views\TaxBillEntry\_TaxBillView.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Import\Index.cshtml" />
+    <Content Include="Views\TaxBillEntry\_MergeTaxBill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

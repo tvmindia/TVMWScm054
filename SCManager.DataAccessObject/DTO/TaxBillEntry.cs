@@ -52,6 +52,8 @@ namespace SCManager.DataAccessObject.DTO
         public string ServiceCenterPanNo { get; set; }
         public string ServiceCenterPlace { get; set; }
 
+        public string TaxBillIDs { get; set; }
+
     }
 
     public class TaxBillEntryDetail

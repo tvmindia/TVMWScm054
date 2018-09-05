@@ -88,7 +88,6 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion GetAllTaxBillEntry
 
-
         #region GetTaxBillHeaderByID
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
@@ -106,8 +105,6 @@ namespace SCManager.UserInterface.Controllers
             }
         }
         #endregion GetTaxBillHeaderByID
-
-
 
         #region UpdateTaxBillEntry
         [HttpPost]
@@ -134,7 +131,6 @@ namespace SCManager.UserInterface.Controllers
            
         }
         #endregion UpdateTaxBillEntry
-
 
         #region GetTaxBill
         [HttpGet]
@@ -172,7 +168,63 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion GetFranchiseeDetails
 
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public ActionResult MergeTaxBillForm(string taxBillIDs)
+        {
+            TaxBillEntryViewModel taxBillEntryVM = new TaxBillEntryViewModel();
+            try
+            {
+                List<SelectListItem> selectList = new List<SelectListItem>();
+                List<TaxBillEntryViewModel> taxBillVMList = Mapper.Map<List<TaxBillEntry>, List<TaxBillEntryViewModel>>(_iTaxBillEntryBusiness.GetCustomerInfoFromTaxBill(taxBillIDs));
+                foreach (TaxBillEntryViewModel taxBill in taxBillVMList)
+                {
+                    selectList.Add(new SelectListItem
+                    {
+                        Text = taxBill.CustomerName +
+                        (taxBill.CustomerLocation != null ? " | " + taxBill.CustomerLocation : null) +
+                        (taxBill.CustomerContactNo != null ? " | " + taxBill.CustomerContactNo : null),
+                        Value = taxBill.CustomerName,
+                        Selected = false
+                    });
+                }
+                taxBillEntryVM.CustomerList = selectList;
 
+                selectList = new List<SelectListItem>();
+                List<EmployeesViewModel> employeeList = Mapper.Map<List<Employees>, List<EmployeesViewModel>>(_iTaxBillEntryBusiness.GetTechnicianListForMergeTaxBill(taxBillIDs));
+                foreach (EmployeesViewModel emp in employeeList)
+                {
+                    selectList.Add(new SelectListItem
+                    {
+                        Text = emp.Name,
+                        Value = emp.ID.ToString(),
+                        Selected = false
+                    });
+                }
+                taxBillEntryVM.TechniciansList = selectList;
+            }
+            catch (Exception ex)
+            {
+                throw(ex);
+            }
+            return PartialView("_MergeTaxBill", taxBillEntryVM);
+        }
+
+        #region MergeTaxBill
+        public string MergeTaxBill(TaxBillEntryViewModel taxBillEntryVM)
+        {
+            try
+            {
+                UA ua = new UA();
+                TaxBillEntryViewModel result = Mapper.Map<TaxBillEntry, TaxBillEntryViewModel>(_iTaxBillEntryBusiness.MergeTaxBill(Mapper.Map<TaxBillEntryViewModel, TaxBillEntry>(taxBillEntryVM), ua));
+                return JsonConvert.SerializeObject(new { Result = "OK", Records = result, Message = "Updation Successfull" });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+        #endregion MergeTaxBill
 
         #region ButtonStyling
         [HttpGet]
@@ -186,7 +238,12 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.PrintBtn.Visible = true;
                     ToolboxViewModelObj.PrintBtn.Text = "Export";
                     ToolboxViewModelObj.PrintBtn.Title = "Export";
-                    ToolboxViewModelObj.PrintBtn.Event = "PrintTableToDoc();";              
+                    ToolboxViewModelObj.PrintBtn.Event = "PrintTableToDoc();";
+
+                    ToolboxViewModelObj.mergeBtn.Visible = true;
+                    ToolboxViewModelObj.mergeBtn.Text = "Merge";
+                    ToolboxViewModelObj.mergeBtn.Title = "Merge";
+                    ToolboxViewModelObj.mergeBtn.Event = "Merge();";
                     break;
                 case "Edit":
                     ToolboxViewModelObj.backbtn.Visible = true;

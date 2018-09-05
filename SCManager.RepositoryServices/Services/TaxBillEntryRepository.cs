@@ -226,7 +226,6 @@ namespace SCManager.RepositoryServices.Services
                             con.Open();
                         }
                         cmd.Connection = con;
-                       
                         cmd.CommandText = "[UpdateTaxBillEntryDetail]";
                         cmd.CommandType = CommandType.StoredProcedure;                      
                         cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier).Value = taxBillEntry.ID;                        
@@ -240,9 +239,6 @@ namespace SCManager.RepositoryServices.Services
                         outputStatus = cmd.Parameters.Add("@Status", SqlDbType.SmallInt);
                         outputStatus.Direction = ParameterDirection.Output;                        
                         cmd.ExecuteNonQuery();
-
-
-
                     }
                 }
                 switch (outputStatus.Value.ToString())
@@ -257,7 +253,6 @@ namespace SCManager.RepositoryServices.Services
                     default:
                         break;
                 }
-
             }
             catch (Exception ex)
             {
@@ -324,6 +319,155 @@ namespace SCManager.RepositoryServices.Services
         }
         #endregion GetAllFranchiseeDetail
 
+        #region GetCustomerInfoFromTaxBill
+        public List<TaxBillEntry> GetCustomerInfoFromTaxBill(string taxBillIDs)
+        {
+            List<TaxBillEntry> taxBillList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@TaxBillIDs", SqlDbType.NVarChar).Value = taxBillIDs;
+                        cmd.CommandText = "[GetCustomerInfoFromTax_Header]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                taxBillList = new List<TaxBillEntry>();
+                                while (sdr.Read())
+                                {
+                                    TaxBillEntry taxBill = new TaxBillEntry();
+                                    {
+                                        taxBill.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : taxBill.CustomerName);
+                                        taxBill.CustomerContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : taxBill.CustomerContactNo);
+                                        taxBill.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : taxBill.CustomerLocation);
+                                    }
+                                    taxBillList.Add(taxBill);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return taxBillList;
+        }
+        #endregion GetCustomerInfoFromTaxBill
+
+        #region MergeTaxBill
+        public TaxBillEntry MergeTaxBill(TaxBillEntry taxBillEntry, UA UA)
+        {
+            try
+            {
+                SqlParameter outputStatus, outputID = null;
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+
+                        cmd.CommandText = "[MergeTaxBill]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.Parameters.Add("@BillNo", SqlDbType.NVarChar, 50).Value = taxBillEntry.BillNo;
+                        cmd.Parameters.Add("@BillDate", SqlDbType.SmallDateTime).Value = taxBillEntry.BillDate;
+                        cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = taxBillEntry.EmpID;
+                        cmd.Parameters.Add("@CustomerName", SqlDbType.NVarChar, 250).Value = taxBillEntry.CustomerName;
+                        cmd.Parameters.Add("@CustomerContactNo", SqlDbType.NVarChar, 50).Value = taxBillEntry.CustomerContactNo;
+                        cmd.Parameters.Add("@CustomerLocation", SqlDbType.NVarChar, 50).Value = taxBillEntry.CustomerLocation;
+                        cmd.Parameters.Add("@PaymentMode", SqlDbType.NVarChar, 20).Value = taxBillEntry.PaymentMode;
+                        cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, -1).Value = taxBillEntry.Remarks;
+                        cmd.Parameters.Add("@PaymentRefNo", SqlDbType.NVarChar, 50).Value = taxBillEntry.PaymentRefNo;
+                        cmd.Parameters.Add("@TaxBillIDs", SqlDbType.NVarChar).Value = taxBillEntry.TaxBillIDs;
+                        cmd.Parameters.Add("@CreatedBy", SqlDbType.NVarChar, 250).Value = UA.UserName;
+                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = UA.CurrentDatetime();
+                        outputStatus = cmd.Parameters.Add("@Status", SqlDbType.SmallInt);
+                        outputStatus.Direction = ParameterDirection.Output;
+                        outputID = cmd.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
+                        outputID.Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                switch (outputStatus.Value.ToString())
+                {
+                    case "0":
+                        Const Cobj = new Const();
+                        throw new Exception(Cobj.InsertFailure);
+                    case "1":
+                        taxBillEntry.ID = new Guid(outputID.Value.ToString());
+                        taxBillEntry.TaxBillEntryDetail = GetTaxBillDetail(taxBillEntry.ID, UA);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return taxBillEntry;
+        }
+        #endregion MergeTaxBill
+
+        #region GetTechnicianListForMergeTaxBill
+        public List<Employees> GetTechnicianListForMergeTaxBill(string taxBillIDs)
+        {
+            List<Employees> employeeList = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@TaxBillIDs", SqlDbType.NVarChar).Value = taxBillIDs;
+                        cmd.CommandText = "[GetTechnicianListForMergeTaxBill]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                employeeList = new List<Employees>();
+                                while (sdr.Read())
+                                {
+                                    Employees employee = new Employees();
+                                    {
+                                        employee.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : employee.ID);
+                                        employee.Name = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : employee.Name);
+                                    }
+                                    employeeList.Add(employee);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return employeeList;
+        }
+        #endregion GetTechnicianListForMergeTaxBill
 
     }
 }
