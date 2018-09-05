@@ -114,7 +114,7 @@ function goBack()
 {
     window.location = appAddress + "Report/Index/";
 }
-function PrintTableToDoc() {
+function PrintTableToDoc() {  
     try {
 
         $(".buttons-excel").trigger('click');

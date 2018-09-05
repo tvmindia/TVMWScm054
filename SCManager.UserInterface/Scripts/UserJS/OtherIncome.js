@@ -9,7 +9,15 @@ $(document).ready(function () {
     {
         DataTables.OtherIncomeTable = $('#tblOtherIncomeList').DataTable(
      {
-         dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+         dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+         buttons: [{
+             extend: 'excel',
+             exportOptions:
+                          {
+                              columns: [1,2, 3, 4, 5]
+                          }
+         }],
+        
          order: [],
          searching: true,
          paging: true,
@@ -48,6 +56,9 @@ $(document).ready(function () {
             FromDateOnChange();
         });
       
+        $(".buttons-excel").hide();
+        
+
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -311,4 +322,18 @@ function Add(id) {
     }
     clearfields();
     ChangeButtonPatchView('OtherIncome', 'btnPatchOtherIncomeSettab', 'Add');
+}
+
+
+
+
+
+function ExportData() {
+    try {
+
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
 }

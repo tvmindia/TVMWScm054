@@ -7,10 +7,12 @@ $(document).ready(function () {
         DataTables.customerBillsTable = $('#tblCustomerBills').DataTable(
  {
      dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+    
      order: [],
      searching: true,
      paging: true,
-     data: GetAllOfficeBill(),
+    // data: GetAllOfficeBill(),
+     data: null,
      columns: [
        { "data": "ID", "defaultContent": "<i>-</i>" },       
        { "data": "BillDateFormatted", "defaultContent": "<i>-</i>" },
@@ -28,10 +30,58 @@ $(document).ready(function () {
 
      ]
  });
+
+  //*********************//
+        DataTables.officeBillEntryTable = $('#tblOfficeBills').DataTable(
+{
+    dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+    buttons: [{
+        extend: 'excel',
+        exportOptions:
+                     {
+                         columns: [0,1, 2, 3, 5, 6,7,8,9,10,11,12]
+                     }
+    }],
+    order: [],
+    searching: true,
+    paging: true,
+   // data: GetAllOfficeBillForExport(),
+    data: null,
+    columns:[
+      { "data": "BillNo", "defaultContent": "<i>-</i>" },
+      { "data": "BillDate", "defaultContent": "<i>-</i>" },
+      { "data": "CustomerName", "defaultContent": "<i>-</i>" },
+      { "data": "CustomerContactNo", "defaultContent": "<i>-</i>" },
+      { "data": "CustomerLocation", "defaultContent": "<i>-</i>" },
+      { "data": "OfficeBillEntryDetailObj.Material", "defaultContent": "<i>-</i>" },
+      { "data": "OfficeBillEntryDetailObj.Description", "defaultContent": "<i>-</i>" },
+      { "data": "OfficeBillEntryDetailObj.Quantity", "defaultContent": "<i>-</i>" },
+      { "data": "OfficeBillEntryDetailObj.Rate", "defaultContent": "<i>-</i>" },
+      { "data": "Total", "defaultContent": "<i>-</i>" },
+       { "data": "Discount", "defaultContent": "<i>-</i>" },
+      { "data": "VATAmount", "defaultContent": "<i>-</i>" },     
+      { "data": "GrandTotal", "defaultContent": "<i>-</i>" },     
+    ],
+    columnDefs: [{ "targets": [], "visible": false, "searchable": false },
+         { className: "text-right", "targets": [] },
+    { className: "text-center", "targets": [0,1, 2, 3, 4, 5, 6,7,8,9,10,11,12] },
+    { "orderable": false, "targets": [0, 1, 2, 3, 4, 5, 6, 7,8,9,10,11,12] }
+    ]
+});
+
+//***********************//
+
         DataTables.OfficeBillDetail = $('#tblOfficeDetails').DataTable(
      {
 
          dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+         //buttons: [{
+         //    extend: 'excel',
+         //    exportOptions:
+         //                 {
+         //                     columns: [1, 2, 3, 4, 5, 6]
+         //                 }
+         //}],
          order: [],
          searching: false,
          paging: false,
@@ -48,6 +98,21 @@ $(document).ready(function () {
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.OfficeBillDetail;
         List();
+        $('#hdnTable').hide();
+        $(".buttons-excel").hide();
+
+
+        DataTables.customerBillsTable.on('search.dt', function () {
+
+            var searchTerm = $('.dataTables_filter input').val();
+            //console.log(input.value)
+        })
+
+
+        $('#tblCustomerBills_filter').keyup(function () {
+            DataTables.officeBillEntryTable.search($('.dataTables_filter input').val()).draw();
+        });
+
     } catch (x) {
 
         notyAlert('error', x.message);
@@ -153,6 +218,7 @@ function BindAllCustomerBill() {
     try {
 
         DataTables.customerBillsTable.clear().rows.add(GetAllOfficeBill()).draw(false);
+        DataTables.officeBillEntryTable.clear().rows.add(GetAllOfficeBillForExport()).draw(false);
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -382,6 +448,35 @@ function GetAllOfficeBill() {
         notyAlert('error', e.message);
     }
 }
+
+function GetAllOfficeBillForExport() {
+    debugger;
+    try {
+
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("OfficeBillEntry/GetAllOfficeBillEntryForExport/", data);
+
+        if (ds != '') {
+
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+
+            return ds.Records;
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+
+
+
 function CalculateAmount(row) {
 
 
@@ -555,4 +650,14 @@ function getMaterials() {
 
 
 
+}
+function ExportData() {
+    try {
+        GetAllOfficeBillForExport();
+        $(".buttons-excel").trigger('click');
+      
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
 }

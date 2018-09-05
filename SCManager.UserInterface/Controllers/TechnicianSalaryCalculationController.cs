@@ -155,6 +155,11 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.calculateBtn.Title = "Calculate";
                     ToolboxViewModelObj.calculateBtn.Event = "SalaryCalculate();";
 
+                    ToolboxViewModelObj.PrintBtn.Visible = true;
+                    ToolboxViewModelObj.PrintBtn.Text = "Export";
+                    ToolboxViewModelObj.PrintBtn.Title = "Export";
+                    ToolboxViewModelObj.PrintBtn.Event = "ExportData();";
+
 
                     break;
 

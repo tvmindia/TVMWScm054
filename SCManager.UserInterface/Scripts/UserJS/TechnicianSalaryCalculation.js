@@ -6,6 +6,14 @@ $(document).ready(function () {
         DataTables.SalaryTable = $('#tblSalaryCalculation').DataTable(
         {
             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
+            buttons: [{
+                extend: 'excel',
+                exportOptions:
+                             {
+                                 columns: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+                             }
+            }],
+
             order: [],          
             paging: false,
             data: GetAllTechniciansSalaryWithoutDate(),
@@ -62,7 +70,7 @@ $(document).ready(function () {
 
         });
 
-       
+        $(".buttons-excel").hide();
     }
     catch(e)
     {
@@ -74,7 +82,7 @@ $(document).ready(function () {
 
         DataTables.JobCommissionDetails = $('#tblJobCommissionDetails').DataTable(
          {
-             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"f>rt<"bottom"ip><"clear">',
              order: [],
              searching: true,
              paging: true,
@@ -120,7 +128,7 @@ $(document).ready(function () {
 
         DataTables.TCRBillCommissionDetails = $('#tblTCRBillDetails').DataTable(
          {
-             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"f>rt<"bottom"ip><"clear">',
              order: [],
              searching: true,
              paging: true,
@@ -158,7 +166,7 @@ $(document).ready(function () {
 
         DataTables.AMCCommissionDetails = $('#tblAMCDetails').DataTable(
          {
-             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"f>rt<"bottom"ip><"clear">',
              order: [],
              searching: true,
              paging: true,
@@ -190,7 +198,7 @@ $(document).ready(function () {
 
         DataTables.AdvanceDetails = $('#tblAdvanceDetails').DataTable(
          {
-             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"f>rt<"bottom"ip><"clear">',
              order: [],
              searching: true,
              paging: true,
@@ -435,6 +443,17 @@ function BindAllCommissionTables(SCCode, EmpID, Month, Year) {
             notyAlert('error', ds.Message);
            
         }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+
+function ExportData() {
+    try {
+
+        $(".buttons-excel").trigger('click');
     }
     catch (e) {
         notyAlert('error', e.message);

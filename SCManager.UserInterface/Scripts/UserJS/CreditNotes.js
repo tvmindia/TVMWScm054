@@ -10,7 +10,15 @@ $(document).ready(function () {
     {
         DataTables.CreditNotesTable = $('#tblCreditNotesList').DataTable(
        {
-           dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+           dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+           buttons: [{
+               extend: 'excel',
+               exportOptions:
+                            {
+                                columns: [1,2, 3,4]
+                            }
+           }],
+                     
            order: [],
            searching: true,
            paging: true,
@@ -46,6 +54,7 @@ $(document).ready(function () {
          
             FromDateOnChange();
         });
+        $(".buttons-excel").hide();
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -320,5 +329,16 @@ function CreditNotesSaveSuccess(data, status) {
         default:
             notyAlert('error', JsonResult.Message);
             break;
+    }
+}
+
+
+function ExportData() {
+    try {
+
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        notyAlert('error', e.message);
     }
 }

@@ -227,6 +227,13 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.addbtn.Text = "Add";
                     ToolboxViewModelObj.addbtn.Title = "Add";
                     ToolboxViewModelObj.addbtn.Event = "AddDepositandwithdrawal();";
+
+                    ToolboxViewModelObj.PrintBtn.Visible = true;
+                    ToolboxViewModelObj.PrintBtn.Text = "Export";
+                    ToolboxViewModelObj.PrintBtn.Title = "Export";
+                    ToolboxViewModelObj.PrintBtn.Event = "ExportData();";
+
+
                     break;
                 case "EditSave":
                     ToolboxViewModelObj.addbtn.Visible = true;

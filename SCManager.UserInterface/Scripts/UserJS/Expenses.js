@@ -8,7 +8,15 @@ $(document).ready(function () {
         ChangeButtonPatchView('Expenses', 'btnPatchExpensesSettab', 'Add');
         DataTables.ExpensesTable = $('#tblExpensesList').DataTable(
        {
-           dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+           dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+           buttons: [{
+               extend: 'excel',
+               exportOptions:
+                            {
+                                columns: [1,2, 3, 4, 5,6,7,8]
+                            }
+           }],                  
+
            order: [],
            searching: true,
            paging: true,
@@ -46,6 +54,7 @@ $(document).ready(function () {
             $("#showAllYNCheckbox").prop('checked', false);
         }); 
         clearfields();
+        $(".buttons-excel").hide();
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -386,6 +395,16 @@ function GetTechnicanSalary(TechID,dat)
             notyAlert('error', ds.Message);
           
         }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+function ExportData() {
+    try {
+
+        $(".buttons-excel").trigger('click');
     }
     catch (e) {
         notyAlert('error', e.message);

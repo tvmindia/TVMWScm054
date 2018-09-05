@@ -9,7 +9,7 @@ $(document).ready(function () {
        {
            //dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
            dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
-           buttons: [{
+           buttons:[{
                extend: 'excel',
                exportOptions:
                             {

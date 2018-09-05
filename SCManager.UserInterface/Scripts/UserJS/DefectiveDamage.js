@@ -6,7 +6,14 @@ $(document).ready(function () {
     try {
         DataTables.DefectiveDamagedTable = $('#tblDefectiveorDamagedList').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+             buttons: [{
+                 extend: 'excel',
+                 exportOptions:
+                              {
+                                  columns: [1,2, 3, 4, 5, 6, 7, 8,9]
+                              }
+             }],
              order: [],
              searching: true,
              paging: true,
@@ -54,7 +61,9 @@ $(document).ready(function () {
 
         GetAllItemCode();
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'ID', 'Description')
+        $(".buttons-excel").hide();
     }
+
     catch (e) {
         notyAlert('error', e.message);
     }
@@ -593,4 +602,16 @@ function GetAllItemCode() {
 
 function ReturnBill(this_obj) {
     $(this_obj).attr("href", "ReturnBill/Index");
+}
+
+
+
+function PrintReport() {
+    debugger;
+    try {
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        console.log(e.message);
+    }
 }

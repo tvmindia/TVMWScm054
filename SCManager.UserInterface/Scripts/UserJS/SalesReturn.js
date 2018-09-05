@@ -7,7 +7,15 @@ $(document).ready(function () {
     {
         DataTables.SalesReturnTable = $('#tblSalesReturnList').DataTable(
         {
-            dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+            dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+            buttons: [{
+                extend: 'excel',
+                exportOptions:
+                             {
+                                 columns: [1,2, 3, 4, 5, 6,7]
+                             }
+            }],
+
             order: [],
             searching: true,
             paging: true,
@@ -45,6 +53,7 @@ $(document).ready(function () {
         });
         GetAllItemCode();
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'ID', 'Description')
+        $(".buttons-excel").hide();
     }
     catch(e)
     {
@@ -448,4 +457,14 @@ function Add(id) {
 function goBack() {
     $('#SalesReturnTab').trigger('click');
     clearfields();
+}
+
+function ExportData() {
+    try {
+
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
 }

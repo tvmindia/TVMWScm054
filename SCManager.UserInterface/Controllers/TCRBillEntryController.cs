@@ -210,6 +210,18 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion GetTCRBillHeaderByID
 
+        #region GetAllTCRBillEntryForExport
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetAllTCRBillEntryForExport()
+        {
+            UA ua = new UA();
+            List<TCRBillEntryViewModel> ItemList = Mapper.Map<List<TCRBillEntry>, List<TCRBillEntryViewModel>>(_iTCRBillEntryBusiness.GetAllTCRBillEntryForExport(ua));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
+
+        }
+        #endregion GetAllTCRBillEntryForExport
+
         #region ButtonStyling
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
@@ -224,6 +236,11 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.addbtn.Title = "Add New";
                     ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
 
+
+                    ToolboxViewModelObj.PrintBtn.Visible = true;
+                    ToolboxViewModelObj.PrintBtn.Text = "Export";
+                    ToolboxViewModelObj.PrintBtn.Title = "Export";
+                    ToolboxViewModelObj.PrintBtn.Event = "PrintReport();";
 
 
                     break;
@@ -259,7 +276,6 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.backbtn.Text = "Back";
                     ToolboxViewModelObj.backbtn.Title = "Back to list";
                     ToolboxViewModelObj.backbtn.Event = "$('#ListTab').trigger('click');";
-
 
                     ToolboxViewModelObj.addbtn.Visible = true;
                     ToolboxViewModelObj.addbtn.Disable = true;

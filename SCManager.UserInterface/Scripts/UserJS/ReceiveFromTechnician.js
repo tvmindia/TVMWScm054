@@ -10,7 +10,15 @@ $(document).ready(function () {
 
         DataTables.ReceiveItems = $('#tblReceiptItemsList').DataTable(
        {
-           dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+           dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+           buttons: [{
+               extend: 'excel',
+               exportOptions:
+                            {
+                                columns: [4,3,5,6,7,8]
+                            }
+           }],
+
            order: [],
            searching: true,
            paging: true,
@@ -69,6 +77,7 @@ $(document).ready(function () {
             GetReceiveSheetsByTechnician();
         });
         fillTechnicians();
+        $(".buttons-excel").hide();
     } catch (x) {
 
         notyAlert('error', x.message);
@@ -464,3 +473,14 @@ function Add() {
     }
 }
 
+
+
+function ExportData() {
+    try {
+
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}

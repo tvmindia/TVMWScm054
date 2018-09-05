@@ -9,11 +9,18 @@ $(document).ready(function () {
         var EventRequestsViewModel = new Object();
         DataTables.eventTable = $('#tblInvoices').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+             buttons: [{
+                 extend: 'excel',
+                 exportOptions:
+                              {
+                                  columns: [2,3,4,5,6,7,8,9]
+                              }
+             }],
              order: [],
              searching: true,
              paging: true,
-             data: null,
+             data: GetAllForm8B(),
              columns: [
                { "data": "SCCode" },
                { "data": "ID" },
@@ -57,7 +64,7 @@ $(document).ready(function () {
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.DetailTable;
         List();
-
+        $(".buttons-excel").hide();
 
 
     } catch (x) {
@@ -592,4 +599,13 @@ function FillUOM(row) {
 //-----------------------------------------------------------------------------EG_MandatoryFields
 
 
+function PrintReport() {
+    debugger;
+    try {
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        console.log(e.message);
+    }
+}
 

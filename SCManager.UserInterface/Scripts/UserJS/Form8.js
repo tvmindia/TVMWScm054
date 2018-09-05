@@ -9,11 +9,18 @@ $(document).ready(function () {
         var EventRequestsViewModel = new Object();
         DataTables.eventTable = $('#tblInvoices').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+             buttons: [{
+                 extend: 'excel',
+                 exportOptions:
+                              {
+                                  columns: [2,3,4,5,6,8,10,11]
+                              }
+             }],
              order: [],
              searching: true,
              paging: true,
-             data: null,
+             data: GetAllForm8(),
              columns: [
                { "data": "SCCode" },
                { "data": "ID" },
@@ -68,7 +75,7 @@ $(document).ready(function () {
         List();
       
         
-
+          $(".buttons-excel").hide();
     } catch (x) {
 
         notyAlert('error', e.message);
@@ -740,4 +747,12 @@ function FillUOM(row) {
 //-----------------------------------------------------------------------------EG_MandatoryFields
 
 
-
+function PrintReport() {
+    debugger;
+    try {
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        console.log(e.message);
+    }
+}

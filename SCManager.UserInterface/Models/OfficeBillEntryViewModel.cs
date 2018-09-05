@@ -47,6 +47,8 @@ namespace SCManager.UserInterface.Models
         public LogDetailsViewModel logDetails { get; set; }
         public List<SelectListItem> PaymentModeList { get; set; }
         public List<OfficeBillEntryDetailViewModel> OfficeBillEntryDetail { get; set; }
+        public OfficeBillEntryDetailViewModel OfficeBillEntryDetailObj { get; set; }
+       
     }
     public class OfficeBillEntryDetailViewModel
     {

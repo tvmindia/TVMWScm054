@@ -240,6 +240,19 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion DeleteICRBillEntry
 
+        #region GetAllICRBillEntryForExport
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.ManagerRole, RoleContants.SuperAdminRole, RoleContants.AdministratorRole)]
+        public string GetAllICRBillEntryForExport()
+        {
+            UA ua = new UA();
+            List<ICRBillEntryViewModel> ItemList = Mapper.Map<List<ICRBillEntry>, List<ICRBillEntryViewModel>>(_iICRBillEntryBusiness.GetAllICRBillEntryForExport(ua));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
+
+        }
+        #endregion GetAllICRBillEntryForExport
+
+
         #region ButtonStyling
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
@@ -254,6 +267,10 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.addbtn.Title = "Add New";
                     ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
 
+                    ToolboxViewModelObj.PrintBtn.Visible = true;
+                    ToolboxViewModelObj.PrintBtn.Text = "Export";
+                    ToolboxViewModelObj.PrintBtn.Title = "Export";
+                    ToolboxViewModelObj.PrintBtn.Event = "ExportData();";
 
 
                     break;

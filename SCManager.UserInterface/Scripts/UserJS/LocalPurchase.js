@@ -9,7 +9,14 @@ $(document).ready(function () {
         var EventRequestsViewModel = new Object();
         DataTables.eventTable = $('#tblInvoices').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+             buttons: [{
+                 extend: 'excel',
+                 exportOptions:
+                              {
+                                  columns: [2,3,4,5,6,7]
+                              }
+             }],
              order: [],
              searching: true,
              paging: true,
@@ -56,6 +63,7 @@ $(document).ready(function () {
         List();
 
 
+        $(".buttons-excel").hide();
 
     } catch (x) {
 
@@ -547,6 +555,17 @@ function FillUOM(row) {
         }
     }
 
+}
+
+
+function PrintReport() {
+    debugger;
+    try {
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        console.log(e.message);
+    }
 }
 
  

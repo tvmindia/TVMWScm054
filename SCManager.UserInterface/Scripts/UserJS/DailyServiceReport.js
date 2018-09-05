@@ -7,12 +7,12 @@ $(document).ready(function () {
          {
              dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
              buttons: [{
-                 extend: 'excel',
-                 exportOptions:
-                              {
-                                  columns: [2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
-                              }
-             }],
+                         extend: 'excel',
+                         exportOptions:
+                                      {
+                                          columns: [1, 2, 3, 4, 5, 6, 7, 8, 10,11, 12]
+                                      }
+                     }],
              order: [],
              searching: true,
              paging: true,
@@ -45,9 +45,10 @@ $(document).ready(function () {
                 
              ],   
          });
+
        // hide button of jquery datatable
-         $(".buttons-print").hide();
-         $(".buttons-excel").hide();
+        // $(".buttons-print").hide();
+        // $(".buttons-excel").hide();
     
     
          $('#tblDailyServiceReport tbody').on('dblclick', 'td', function () {
@@ -64,7 +65,14 @@ $(document).ready(function () {
 
         DataTables.DailyServiceReportSummary = $('#tblServiceReportSummary').DataTable(
          {
-             dom: '<"pull-right"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-right"Bf>rt<"bottom"ip><"clear">',
+             buttons: [{
+                 extend: 'excel',
+                 exportOptions:
+                              {
+                                  columns: [1, 2, 3, 4, 5, 6, 7, 8]
+                              }
+             }],
              order: [],
              searching: true,
              paging: true,
@@ -97,7 +105,7 @@ $(document).ready(function () {
             ServiceRecordSummaryclick(this)
         });
     
-
+        $(".buttons-excel").hide();
     }
     catch (e) {
 
@@ -225,10 +233,12 @@ function FilterServiceRecord() {
         if (checkedValue == 30)
         { 
             DataTables.DailyService.clear().rows.add(GetServicefilterbyDays(true)).draw(false);
+           
         }
         else if (checkedValue == 60)
         { 
             DataTables.DailyService.clear().rows.add(GetServicefilterbyDays(false)).draw(false);
+          
         }
     }
 }
@@ -253,6 +263,9 @@ function GetServicefilterbyDays(Isdefault) {
         notyAlert('error', e.message);
     }
 }
+
+
+
 //TAB2
 function FilterRecordSummary() { 
     $("#txtServiceDate2").val("");
@@ -397,12 +410,25 @@ function PrintTableToDoc()
 
     try {
 
-        $(".buttons-excel").trigger('click');
+        $('#DailyServiceReport .buttons-excel').trigger('click');
+       
     }
     catch (e) {
         notyAlert('error', e.message);
     }
 }
 
+function ExportData()
+{
+    debugger;
 
+    try {
+
+        $('#ServiceReportList .buttons-excel').trigger('click');
+       
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
 

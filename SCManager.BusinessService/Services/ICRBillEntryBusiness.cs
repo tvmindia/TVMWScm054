@@ -154,5 +154,14 @@ namespace SCManager.BusinessService.Services
             }
 
         }
+
+        public List<ICRBillEntry> GetAllICRBillEntryForExport(UA UA)
+        {
+            List<ICRBillEntry> ICRBillEntryList = null;
+            ICRBillEntryList = _iICRBillEntryRepository.GetAllICRBillEntryForExport(UA);            
+            return ICRBillEntryList;
+        }
+
+
     }
 }

@@ -377,8 +377,8 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.addbtn.Event = "AddTechnicanJob();";
 
                     ToolboxViewModelObj.PrintBtn.Visible = true;
-                    ToolboxViewModelObj.PrintBtn.Text = "Print";
-                    ToolboxViewModelObj.PrintBtn.Title = "Print";
+                    ToolboxViewModelObj.PrintBtn.Text = "Export";
+                    ToolboxViewModelObj.PrintBtn.Title = "Export";
                     ToolboxViewModelObj.PrintBtn.Event = "PrintTableToDoc();";
                     break;
                 case "Back":
@@ -386,6 +386,11 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.backbtn.Text = "Back";
                     ToolboxViewModelObj.backbtn.Title = "Back";
                     ToolboxViewModelObj.backbtn.Event = "goBack();";
+
+                    ToolboxViewModelObj.PrintBtn.Visible = true;
+                    ToolboxViewModelObj.PrintBtn.Text = "Export";
+                    ToolboxViewModelObj.PrintBtn.Title = "Export";
+                    ToolboxViewModelObj.PrintBtn.Event = "ExportData();";
                     break;
                 default:
                     return Content("Nochange");

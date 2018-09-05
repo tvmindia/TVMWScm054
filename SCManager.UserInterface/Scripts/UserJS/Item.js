@@ -7,7 +7,15 @@ $(document).ready(function () {
        
         DataTables.itemTable = $('#tblItemList').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+             buttons: [{
+                 extend: 'excel',
+                 exportOptions:
+                              {
+                                  columns: [1,2,4,5,6,7,8,9,10,11,15 ]
+                              }
+             }],
+
              order: [],
              searching: true,
              paging: true,
@@ -52,6 +60,7 @@ $(document).ready(function () {
         });
        
         //EG_GridDataTable = DataTables.DetailTable;
+        $(".buttons-excel").hide();
     }
     catch(e)
     {
@@ -352,3 +361,14 @@ function CategoryOnChange(curObj)
 
     }    
 }
+
+
+function ExportData() {
+    try {
+
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}s

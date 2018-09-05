@@ -79,6 +79,9 @@ namespace SCManager.UserInterface.Models
         public decimal? SgstPercentage { get; set; }
         public decimal? TotalTaxAmount { get; set; }
         public decimal? TotalAmount { get; set; }
+
+        public TCRBillEntryDetailViewModel TCRBillDetail { get; set; }
+
     }
 
     public class TCRBillEntryDetailViewModel

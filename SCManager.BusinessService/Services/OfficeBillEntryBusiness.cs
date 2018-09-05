@@ -84,7 +84,7 @@ namespace SCManager.BusinessService.Services
                 }
                 OfficeBillEntryBusinessL(Result);
                 //Form8DetailBL(Result.Form8Detail);
-                
+
                 return Result;
             }
             catch (Exception)
@@ -137,6 +137,13 @@ namespace SCManager.BusinessService.Services
 
             return result;
         }
-
+        #region GetAllOfficeBillEntryForExport
+        public List<OfficeBillEntry> GetAllOfficeBillEntryForExport(UA UA)
+        {
+            List<OfficeBillEntry> OfficeBillEntryList = null;
+            OfficeBillEntryList = _iOfficeBillEntryRepository.GetAllOfficeBillEntryForExport(UA);            
+            return OfficeBillEntryList;
+        }
+        #endregion GetAllOfficeBillEntryForExport
     }
 }

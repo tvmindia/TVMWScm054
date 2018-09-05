@@ -460,5 +460,73 @@ namespace SCManager.RepositoryServices.Services
             return result;
         }
         #endregion DeleteICRBillEntry
+
+        #region GetAllICRBillEntryForExport
+        public List<ICRBillEntry> GetAllICRBillEntryForExport(UA UA)
+        {
+            List<ICRBillEntry> ICRBillEntrylist = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.CommandText = "[GetAllICRBillEntryForExport]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                ICRBillEntrylist = new List<ICRBillEntry>();
+                                while (sdr.Read())
+                                {
+                                    ICRBillEntry _ICRBillEntrylistObj = new ICRBillEntry();
+                                    {
+                                        _ICRBillEntrylistObj.ID = (sdr["ID"].ToString() != "" ? Guid.Parse(sdr["ID"].ToString()) : _ICRBillEntrylistObj.ID);
+                                        _ICRBillEntrylistObj.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _ICRBillEntrylistObj.SCCode);
+                                        _ICRBillEntrylistObj.ICRNo = (sdr["ICRNo"].ToString() != "" ? (sdr["ICRNo"].ToString()) : _ICRBillEntrylistObj.ICRNo);
+                                        _ICRBillEntrylistObj.ICRDate = (sdr["ICRDate"].ToString() != "" ? DateTime.Parse(sdr["ICRDate"].ToString()).ToString("dd-MMM-yyyy") : _ICRBillEntrylistObj.ICRDate);
+                                        _ICRBillEntrylistObj.ModelNo = (sdr["ModelNo"].ToString() != "" ? (sdr["ModelNo"].ToString()) : _ICRBillEntrylistObj.ModelNo);
+                                        _ICRBillEntrylistObj.SerialNo = (sdr["SerialNo"].ToString() != "" ? (sdr["SerialNo"].ToString()) : _ICRBillEntrylistObj.SerialNo);
+                                        _ICRBillEntrylistObj.STAmount = (sdr["STAmount"].ToString() != "" ? decimal.Parse(sdr["STAmount"].ToString()) : _ICRBillEntrylistObj.STAmount);
+                                        _ICRBillEntrylistObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : _ICRBillEntrylistObj.Discount);
+                                        _ICRBillEntrylistObj.TotalServiceTaxAmt = (sdr["TotalServiceTaxAmount"].ToString() != "" ? decimal.Parse(sdr["TotalServiceTaxAmount"].ToString()) : _ICRBillEntrylistObj.TotalServiceTaxAmt);
+                                        _ICRBillEntrylistObj.JobNo = (sdr["JobNo"].ToString() != "" ? (sdr["JobNo"].ToString()) : _ICRBillEntrylistObj.JobNo);
+                                        _ICRBillEntrylistObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : _ICRBillEntrylistObj.CustomerName);
+                                        _ICRBillEntrylistObj.CustomerContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : _ICRBillEntrylistObj.CustomerContactNo);
+                                        _ICRBillEntrylistObj.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : _ICRBillEntrylistObj.CustomerLocation);
+                                        _ICRBillEntrylistObj.Technician = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : _ICRBillEntrylistObj.Technician);
+                                        _ICRBillEntrylistObj.AMCValidFromDate = (sdr["AMCValidFromDate"].ToString() != "" ? DateTime.Parse(sdr["AMCValidFromDate"].ToString()).ToString("dd-MMM-yyyy") : _ICRBillEntrylistObj.AMCValidFromDate);
+                                        _ICRBillEntrylistObj.AMCValidToDate = (sdr["AMCValidToDate"].ToString() != "" ? DateTime.Parse(sdr["AMCValidToDate"].ToString()).ToString("dd-MMM-yyyy") : _ICRBillEntrylistObj.AMCValidToDate);
+                                        _ICRBillEntrylistObj.Remarks = (sdr["Remarks"].ToString() != "" ? (sdr["Remarks"].ToString()) : _ICRBillEntrylistObj.Remarks);
+                                        _ICRBillEntrylistObj.AMCNO = (sdr["AMCNO"].ToString() != "" ? (sdr["AMCNO"].ToString()) : _ICRBillEntrylistObj.AMCNO);
+                                        _ICRBillEntrylistObj.ChequeType = (sdr["ChequeType"].ToString() != "" ? (sdr["ChequeType"].ToString()) : _ICRBillEntrylistObj.ChequeType);
+                                        _ICRBillEntrylistObj.GrandTotal = (sdr["GrandTotal"].ToString() != "" ? decimal.Parse(sdr["GrandTotal"].ToString()) : _ICRBillEntrylistObj.GrandTotal);
+                                        _ICRBillEntrylistObj.Total = (sdr["Total"].ToString() != "" ? decimal.Parse(sdr["Total"].ToString()) : _ICRBillEntrylistObj.Total);
+
+                                    }
+
+                                    ICRBillEntrylist.Add(_ICRBillEntrylistObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ICRBillEntrylist;
+        }
+        #endregion  GetAllICRBillEntryForExport
+
+
     }
 }

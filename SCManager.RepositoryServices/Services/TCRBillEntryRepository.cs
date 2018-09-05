@@ -507,5 +507,76 @@ namespace SCManager.RepositoryServices.Services
             return result;
         }
         #endregion DeleteTCRBillEntry
+
+
+        #region GetAllTCRBillEntryForExport
+        public List<TCRBillEntry> GetAllTCRBillEntryForExport(UA UA)
+        {
+            List<TCRBillEntry> TCRBillEntrylist = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.CommandText = "[GetAllTCRBillEntryForExport]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                TCRBillEntrylist = new List<TCRBillEntry>();
+                                while (sdr.Read())
+                                {
+                                    TCRBillEntry TCRBillEntrylistObj = new TCRBillEntry();
+                                    {
+                                     
+                                        TCRBillEntrylistObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()).ToString("dd-MMM-yyyy") : TCRBillEntrylistObj.BillDate);
+                                        TCRBillEntrylistObj.BillNo = (sdr["BillNo"].ToString() != "" ? (sdr["BillNo"].ToString()) : TCRBillEntrylistObj.BillNo);
+                                        TCRBillEntrylistObj.JobNo = (sdr["JobNo"].ToString() != "" ? (sdr["JobNo"].ToString()) : TCRBillEntrylistObj.JobNo);
+                                        TCRBillEntrylistObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : TCRBillEntrylistObj.CustomerName);
+                                        TCRBillEntrylistObj.CustomerContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : TCRBillEntrylistObj.CustomerContactNo);
+                                        TCRBillEntrylistObj.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : TCRBillEntrylistObj.CustomerLocation);
+                                        TCRBillEntrylistObj.Technician = (sdr["Name"].ToString() != "" ? (sdr["Name"].ToString()) : TCRBillEntrylistObj.Technician);
+                                       // TCRBillEntrylistObj.Subtotal = (sdr["SubTotal"].ToString() != "" ? decimal.Parse(sdr["SubTotal"].ToString()) : TCRBillEntrylistObj.Subtotal);
+                                        TCRBillEntrylistObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : TCRBillEntrylistObj.Discount);
+                                   
+                                        TCRBillEntrylistObj.TotalAmount = (sdr["TotalAmount"].ToString() != "" ? decimal.Parse(sdr["TotalAmount"].ToString()) : TCRBillEntrylistObj.TotalAmount);
+                                        TCRBillEntrylistObj.TCRBillDetail = new TCRBillEntryDetail();
+                                        TCRBillEntrylistObj.TCRBillDetail.Quantity = (sdr["Qty"].ToString() != "" ? int.Parse(sdr["Qty"].ToString()) : TCRBillEntrylistObj.TCRBillDetail.Quantity);
+                                        TCRBillEntrylistObj.TCRBillDetail.Rate = (sdr["Rate"].ToString() != "" ? decimal.Parse(sdr["Rate"].ToString()) : TCRBillEntrylistObj.TCRBillDetail.Rate);
+                                        TCRBillEntrylistObj.TCRBillDetail.Material = (sdr["ItemCode"].ToString() != "" ? (sdr["ItemCode"].ToString()) : TCRBillEntrylistObj.TCRBillDetail.Material);
+                                        TCRBillEntrylistObj.TCRBillDetail.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : TCRBillEntrylistObj.TCRBillDetail.Description);
+                                         TCRBillEntrylistObj.TotalTaxAmount = (sdr["TotalTaxAmount"].ToString() != "" ? decimal.Parse(sdr["TotalTaxAmount"].ToString()) : TCRBillEntrylistObj.TotalTaxAmount);
+                                         TCRBillEntrylistObj.GrandTotal = (sdr["GrandTotal"].ToString() != "" ? decimal.Parse(sdr["GrandTotal"].ToString()) : TCRBillEntrylistObj.GrandTotal);
+                                       // TCRBillEntrylistObj.CGSTAmount = (sdr["CGSTAmount"].ToString() != "" ? decimal.Parse(sdr["CGSTAmount"].ToString()) : TCRBillEntrylistObj.CGSTAmount);
+                                        //TCRBillEntrylistObj.SGSTAmount = (sdr["SGSTAmount"].ToString() != "" ? decimal.Parse(sdr["SGSTAmount"].ToString()) : TCRBillEntrylistObj.SGSTAmount);
+                                        TCRBillEntrylistObj.ServiceCharge = (sdr["ServiceCharge"].ToString() != "" ? decimal.Parse(sdr["ServiceCharge"].ToString()) : TCRBillEntrylistObj.ServiceCharge);
+                                        TCRBillEntrylistObj.TotalAmount = (sdr["TotalAmount"].ToString() != "" ? decimal.Parse(sdr["TotalAmount"].ToString()) : TCRBillEntrylistObj.TotalAmount);
+                                       // TCRBillEntrylistObj.TCRBillDetail.CgstPercentage= (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : TCRBillEntrylistObj.TCRBillDetail.CgstPercentage);
+                                        //TCRBillEntrylistObj.TCRBillDetail.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : TCRBillEntrylistObj.TCRBillDetail.SgstPercentage);
+                                      //  TCRBillEntrylistObj.TCRBillDetail.TradeDiscount = (sdr["TradeDiscount"].ToString() != "" ? decimal.Parse(sdr["TradeDiscount"].ToString()) : TCRBillEntrylistObj.TCRBillDetail.TradeDiscount);
+                                    }
+
+                                    TCRBillEntrylist.Add(TCRBillEntrylistObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return TCRBillEntrylist;
+        }
+        #endregion GetAllTCRBillEntryForExport
     }
 }

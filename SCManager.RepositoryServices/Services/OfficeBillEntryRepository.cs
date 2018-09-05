@@ -429,5 +429,67 @@ namespace SCManager.RepositoryServices.Services
             return result;
         }
         #endregion DeleteOfficeBillDetail
+
+
+
+        #region GetAllOfficeBillEntryForExport
+        public List<OfficeBillEntry> GetAllOfficeBillEntryForExport(UA UA)
+        {
+            List<OfficeBillEntry> OfficeBillEntrylist = null;
+            try
+            {
+                using (SqlConnection con = _databaseFactory.GetDBConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+                        cmd.Connection = con;
+                        cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = UA.SCCode;
+                        cmd.CommandText = "[GetAllOfficeBillEntryForExport]";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            if ((sdr != null) && (sdr.HasRows))
+                            {
+                                OfficeBillEntrylist = new List<OfficeBillEntry>();
+                                while (sdr.Read())
+                                {
+                                    OfficeBillEntry _OfficeBillEntrylistObj = new OfficeBillEntry();
+                                    {                                      
+                                        _OfficeBillEntrylistObj.BillNo = (sdr["BillNo"].ToString() != "" ? (sdr["BillNo"].ToString()) : _OfficeBillEntrylistObj.BillNo);
+                                        _OfficeBillEntrylistObj.BillDate = (sdr["BillDate"].ToString() != "" ? DateTime.Parse(sdr["BillDate"].ToString()).ToString("dd-MMM-yyyy") : _OfficeBillEntrylistObj.BillDate);
+                                        _OfficeBillEntrylistObj.Discount = (sdr["Discount"].ToString() != "" ? decimal.Parse(sdr["Discount"].ToString()) : _OfficeBillEntrylistObj.Discount);
+                                        _OfficeBillEntrylistObj.VATAmount = (sdr["VATAmount"].ToString() != "" ? decimal.Parse(sdr["VATAmount"].ToString()) : _OfficeBillEntrylistObj.VATAmount);
+                                        _OfficeBillEntrylistObj.CustomerName = (sdr["CustomerName"].ToString() != "" ? (sdr["CustomerName"].ToString()) : _OfficeBillEntrylistObj.CustomerName);
+                                        _OfficeBillEntrylistObj.CustomerContactNo = (sdr["CustomerContactNo"].ToString() != "" ? (sdr["CustomerContactNo"].ToString()) : _OfficeBillEntrylistObj.CustomerContactNo);
+                                        _OfficeBillEntrylistObj.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : _OfficeBillEntrylistObj.CustomerLocation);
+                                       // _OfficeBillEntrylistObj.Subtotal = (sdr["SubTotal"].ToString() != "" ? decimal.Parse(sdr["SubTotal"].ToString()) : _OfficeBillEntrylistObj.Subtotal);
+                                        _OfficeBillEntrylistObj.OfficeBillEntryDetailObj = new OfficeBillEntryDetail();
+                                        _OfficeBillEntrylistObj.OfficeBillEntryDetailObj.Quantity= (sdr["Qty"].ToString() != "" ? int.Parse(sdr["Qty"].ToString()) : _OfficeBillEntrylistObj.OfficeBillEntryDetailObj.Quantity);
+                                        _OfficeBillEntrylistObj.OfficeBillEntryDetailObj.Rate = (sdr["Rate"].ToString() != "" ? decimal.Parse(sdr["Rate"].ToString()) : _OfficeBillEntrylistObj.OfficeBillEntryDetailObj.Rate);
+                                        _OfficeBillEntrylistObj.OfficeBillEntryDetailObj.Description = (sdr["Description"].ToString() != "" ?(sdr["Description"].ToString()) : _OfficeBillEntrylistObj.OfficeBillEntryDetailObj.Description);
+                                        _OfficeBillEntrylistObj.OfficeBillEntryDetailObj.Material = (sdr["ItemCode"].ToString() != "" ? (sdr["ItemCode"].ToString()) : _OfficeBillEntrylistObj.OfficeBillEntryDetailObj.Material);
+                                        _OfficeBillEntrylistObj.GrandTotal = (sdr["GrandTotal"].ToString() != "" ? decimal.Parse(sdr["GrandTotal"].ToString()) : _OfficeBillEntrylistObj.GrandTotal);
+                                        _OfficeBillEntrylistObj.Total = (sdr["Total"].ToString() != "" ? decimal.Parse(sdr["Total"].ToString()) : _OfficeBillEntrylistObj.Total);
+
+                                    }
+
+                                    OfficeBillEntrylist.Add(_OfficeBillEntrylistObj);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return OfficeBillEntrylist;
+        }
+        #endregion GetAllOfficeBillEntryForExport
     }
 }

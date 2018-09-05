@@ -173,6 +173,20 @@ namespace SCManager.UserInterface.Controllers
         }
         #endregion DeleteOfficeBillDetail
 
+        #region GetAllOfficeBillEntryForExport
+        [HttpGet]
+        [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
+        public string GetAllOfficeBillEntryForExport()
+        {
+            UA ua = new UA();
+            List<OfficeBillEntryViewModel> ItemList = Mapper.Map<List<OfficeBillEntry>, List<OfficeBillEntryViewModel>>(_iOfficeBillEntryBusiness.GetAllOfficeBillEntryForExport(ua));
+            return JsonConvert.SerializeObject(new { Result = "OK", Records = ItemList });
+
+        }
+        #endregion GetAllOfficeBillEntryForExport
+
+
+
         #region ButtonStyling
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
@@ -187,7 +201,10 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.addbtn.Title = "Add New";
                     ToolboxViewModelObj.addbtn.Event = "$('#AddTab').trigger('click');";
 
-
+                    ToolboxViewModelObj.PrintBtn.Visible = true;
+                    ToolboxViewModelObj.PrintBtn.Text = "Export";
+                    ToolboxViewModelObj.PrintBtn.Title = "Export";
+                    ToolboxViewModelObj.PrintBtn.Event = "ExportData();";
 
                     break;
                 case "Edit":

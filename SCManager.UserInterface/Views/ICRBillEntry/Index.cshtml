@@ -78,6 +78,34 @@
                     </thead>
                 </table>
             </div>
+            <div class="col-md-12" >&nbsp;</div>
+            <div id="hdnDiv">
+                <div class="col-md-12">
+                    <table id="tblIcrBillsEntry" class="table table-striped table-bordered table-hover" cellspacing="0">
+                        <thead>
+                            <tr class="text-center">
+                                
+                                <th>Technician</th>                               
+                                <th>Date</th>
+                                <th>ICR No</th>
+                                <th>AMC No.</th>
+                                <th>AMC From</th>
+                                <th>AMC To</th>
+                                <th>Customer</th>
+                                <th>Contact No.</th>
+                                <th>Model</th>
+                                <th>Serial</th>
+                                <th>Base Amount(₹)</th>
+                                <th>Discount (₹)</th>  
+                                <th>Tax (₹)</th>                              
+                                <th>Grand Total(₹)</th>                                                               
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+
         </div>
         <div class="tab-pane fade" id="2b">
             <div class="col-md-12">&nbsp;</div>
@@ -448,6 +476,8 @@
   @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/bootstrapdatepicker")
   @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/ICRBillEntry")
   @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/editableGrid")
+  @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/jsZip")
+  @Scripts.RenderFormat(SiteKeys.ScriptVersion, "~/bundles/datatableButtons")
   @Scripts.RenderFormat(SiteKeys.ScriptVersion,"~/bundles/JobAction")
 
 }

@@ -6,7 +6,15 @@ $(document).ready(function () {
 
         DataTables.DepositWithdrawalTable = $('#tblDepositwithdrawalList').DataTable(
          {
-             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+             dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+             buttons: [{
+                 extend: 'excel',
+                 exportOptions:
+                              {
+                                  columns: [1,2, 3, 4, 5]
+                              }
+             }],
+         
              order: [],
              searching: true,
              paging: true,
@@ -35,7 +43,9 @@ $(document).ready(function () {
             EditDepositWithdrawal(this);
         });
 
-    }
+
+        $(".buttons-excel").hide();
+            }
     catch (e) {
 
     }
@@ -430,4 +440,17 @@ function AddDepositandwithdrawal()
     $('#tabDepositwithdrawalEntry').trigger('click');
     ClearForm();
     ChangeButtonPatchView('DepositAndWithdrawal', 'btnPatchDepositandwithdrawal', 'Save');
+}
+
+
+
+
+function ExportData() {
+    try {
+
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
 }

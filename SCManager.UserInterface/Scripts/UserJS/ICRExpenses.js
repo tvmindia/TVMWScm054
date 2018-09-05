@@ -8,7 +8,14 @@ $(document).ready(function () {
         ChangeButtonPatchView('ICRExpenses', 'btnPatchICRExpensesSettab', 'Add');
         DataTables.ICRExpensesTable = $('#tblICRExpensesList').DataTable(
        {
-           dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+           dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+           buttons: [{
+               extend: 'excel',
+               exportOptions:
+                            {
+                                columns: [1,2,3,4,5,6,7]
+                            }
+           }],
            order: [],
            searching: true,
            paging: true,
@@ -46,6 +53,7 @@ $(document).ready(function () {
         }); 
         BindOutStandingPayment();
         clearfields();
+        $(".buttons-excel").hide();
 
     }
     catch (e) {
@@ -319,5 +327,15 @@ function DeleteSuccess(data, status) {
             break;
         default:
             break;
+    }
+}
+
+function ExportData() {
+    try {
+
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        notyAlert('error', e.message);
     }
 }

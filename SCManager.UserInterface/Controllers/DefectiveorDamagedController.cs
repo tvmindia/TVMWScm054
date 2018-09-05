@@ -296,7 +296,10 @@ namespace SCManager.UserInterface.Controllers
                     ToolboxViewModelObj.returnBtn.Title = "Generate Bill";
                     ToolboxViewModelObj.returnBtn.Event = "ReturnBill(this);";
 
-
+                    ToolboxViewModelObj.PrintBtn.Visible = true;
+                    ToolboxViewModelObj.PrintBtn.Text = "Export";
+                    ToolboxViewModelObj.PrintBtn.Title = "Export";
+                    ToolboxViewModelObj.PrintBtn.Event = "PrintReport();";
                     break;
                
                 case "Add":

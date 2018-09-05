@@ -9,7 +9,15 @@ $(document).ready(function () {
     {
         DataTables.BillListTable = $('#tblBillList').DataTable(
      {
-         dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+         dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+         buttons: [{
+             extend: 'excel',
+             exportOptions:
+                          {
+                              columns: [1,2,3,4,5,6,7,8]
+                          }
+         }],
+
          order: [],
          searching: true,
          paging: true,
@@ -42,6 +50,7 @@ $(document).ready(function () {
 
             Edit(this);
         });
+        $(".buttons-excel").hide();
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -457,6 +466,18 @@ function GetAllBillBookList()
         if (ds.Result == "ERROR") {
             alert(ds.Message);
         }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+
+
+function ExportData() {
+    try {
+
+        $(".buttons-excel").trigger('click');
     }
     catch (e) {
         notyAlert('error', e.message);

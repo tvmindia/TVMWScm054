@@ -15,10 +15,12 @@ $(document).ready(function () {
         DataTables.customerBillsTable = $('#tblCustomerBills').DataTable(
         {
             dom: '<"pull-left"f>rt<"bottom"ip><"clear">',
+           
             order: [],
             searching: true,
             paging: true,
-            data: GetAllTCRBill(),
+            //data: GetAllTCRBill(),
+            data: null,
             columns: [             
               { "data": "ID", "defaultContent": "<i>-</i>" },          
               { "data": "Technician", "defaultContent": "<i>-</i>" },
@@ -56,7 +58,62 @@ $(document).ready(function () {
 
             ]
         });
+     
         BindJobNumberDropDown();
+
+
+        //**********************//
+
+
+        DataTables.tcrBillsTable = $('#tblTcrBills').DataTable(
+      {
+          dom: '<"pull-left"Bf>rt<"bottom"ip><"clear">',
+          buttons: [{
+              extend: 'excel',
+              exportOptions:
+                           {
+                               columns: [0,1,2,3,4,6,7,8,9,10,11,12,13,14,15]
+                           }
+          }],
+          order: [],
+          searching: true,
+          paging: true,
+          data: null,
+          columns: [            
+                            
+            { "data": "BillNo", "defaultContent": "<i>-</i>" },
+            { "data": "BillDate", "defaultContent": "<i>-</i>" },           
+            { "data": "JobNo", "defaultContent": "<i>-</i>" },
+            { "data": "CustomerName", "defaultContent": "<i>-</i>" },
+            { "data": "CustomerContactNo", "defaultContent": "<i>-</i>" },
+            { "data": "CustomerLocation", "defaultContent": "<i>-</i>" },
+            { "data": "Technician", "defaultContent": "<i>-</i>" },
+            { "data": "TCRBillDetail.Material", "defaultContent": "<i>-</i>" },
+            { "data": "TCRBillDetail.Description", "defaultContent": "<i>-</i>" },
+            { "data": "TCRBillDetail.Quantity", "defaultContent": "<i>-</i>" },
+            { "data": "TCRBillDetail.Rate", "defaultContent": "<i>-</i>" },           
+            { "data": "TotalAmount", "defaultContent": "<i>-</i>" },
+            { "data": "Discount", "defaultContent": "<i>-</i>" },
+            { "data": "TotalTaxAmount", "defaultContent": "<i>-</i>" },
+            
+           { "data": "ServiceCharge", "defaultContent": "<i>-</i>" },
+
+            { "data": "GrandTotal", "defaultContent": "<i>-</i>" },
+          ],
+          columnDefs: [
+          //     { className: "text-right", "targets": [5,6,7,8] },
+          //{ className: "text-center", "targets": [2, 3,   10,  13] },
+           { className: "text-left", "targets": [1,9,11,12,4] }
+
+          ]
+      });
+
+
+        //*********************//
+
+
+
+
         DataTables.TCRBillDetail = $('#tblTCRBillDetails').DataTable(
        {
           
@@ -79,15 +136,31 @@ $(document).ready(function () {
         EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
         EG_GridDataTable = DataTables.TCRBillDetail;
         List();
+        $(".buttons-excel").hide();
+        $("#hdnDiv").hide();
         var $datepicker = $('#BillDate');
         $datepicker.datepicker('setDate', null);
 
-    } catch (x) {
+        DataTables.customerBillsTable.on('search.dt', function () {
+           
+            var searchTerm = $('.dataTables_filter input').val();
+            //console.log(input.value)
+        })
+       
+       
+        $('#tblCustomerBills_filter').keyup(function () {
+            DataTables.tcrBillsTable.search($('.dataTables_filter input').val()).draw();
+        });
+
+    }
+
+    catch (x) {
 
         notyAlert('error', x.message);
 
     }
-
+ 
+   
 });
 
 //-----------------------EDIT GRID DEFN-------------------------------------
@@ -558,6 +631,7 @@ function BindAllCustomerBill()
     try {
          
         DataTables.customerBillsTable.clear().rows.add(GetAllTCRBill()).draw(false);
+        DataTables.tcrBillsTable.clear().rows.add(GetAllTCRBillForExport()).draw(false);
     }
     catch (e) {
         notyAlert('error', e.message);
@@ -1262,6 +1336,44 @@ function getMaterialsByTechnician(empID) {
             _Materials = ds.Records;
             EG_ComboSource('Materials', _Materials, 'ItemCode', 'Description')
 
+        }
+        if (ds.Result == "ERROR") {
+            alert(ds.Message);
+        }
+    }
+    catch (e) {
+        notyAlert('error', e.message);
+    }
+}
+
+
+
+function PrintReport() {
+    debugger;
+    try {
+        GetAllTCRBillForExport();
+        $(".buttons-excel").trigger('click');
+    }
+    catch (e) {
+        console.log(e.message);
+    }
+}
+
+function GetAllTCRBillForExport()
+{
+    try {
+
+        var data = {};
+        var ds = {};
+        ds = GetDataFromServer("TCRBillEntry/GetAllTCRBillEntryForExport/", data);
+
+        if (ds != '') {
+
+            ds = JSON.parse(ds);
+        }
+        if (ds.Result == "OK") {
+
+            return ds.Records;
         }
         if (ds.Result == "ERROR") {
             alert(ds.Message);

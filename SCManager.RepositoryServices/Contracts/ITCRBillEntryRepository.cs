@@ -17,5 +17,7 @@ namespace SCManager.RepositoryServices.Contracts
         TCRBillEntry GetTCRBillHeaderByID(Guid ID, UA ua);
         bool DeleteTCRBillDetail(Guid ID, Guid HeaderID, UA UA);
         bool DeleteTCRBillEntry(Guid ID, UA UA);
+        List<TCRBillEntry> GetAllTCRBillEntryForExport(UA UA);
+        
     }
 }

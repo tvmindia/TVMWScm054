@@ -100,8 +100,8 @@ namespace SCManager.BusinessService.Services
                 throw ex;
             }
             return JobList;
-        }
-
+        }   
+                  
         public List<Job> GetAllJobNumbers(string SCCode)
         {
             List<Job> JobList = null;

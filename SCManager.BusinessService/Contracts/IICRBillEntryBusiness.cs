@@ -14,5 +14,7 @@ namespace SCManager.BusinessService.Contracts
         ICRBillEntry InsertUpdate(ICRBillEntry iCRBillEntry, UA UA);
         bool DeleteICRBillDetail(Guid ID, Guid HeaderID, UA UA);
         bool DeleteICRBillEntry(Guid ID, UA UA);
+        List<ICRBillEntry> GetAllICRBillEntryForExport(UA UA);
+
     }
 }

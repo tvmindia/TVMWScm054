@@ -120,6 +120,16 @@ namespace SCManager.BusinessService.Services
             return TCRBillEntryList;
         }
 
+        
+
+        public List<TCRBillEntry> GetAllTCRBillEntryForExport(UA UA)
+        {
+            List<TCRBillEntry> TCRBillEntryList = null;
+            TCRBillEntryList = _iTCRBillEntryRepository.GetAllTCRBillEntryForExport(UA);           
+            return TCRBillEntryList;
+        }
+
+
         public TCRBillEntry GetTCRBillHeaderByID(Guid ID, UA ua)
         {
             try

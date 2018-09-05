@@ -25,6 +25,8 @@ namespace SCManager.DataAccessObject.DTO
         public LogDetails logDetails { get; set; }
         public string DetailXML { get; set; }
         public List<OfficeBillEntryDetail> OfficeBillEntryDetail { get; set; }
+        public OfficeBillEntryDetail OfficeBillEntryDetailObj { get; set; }
+        public decimal? Total { get; set; }
     }
     public class OfficeBillEntryDetail
     {
