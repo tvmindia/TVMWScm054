@@ -10,10 +10,9 @@
         </div>
 
         <div class="col-md-6">
-            @Html.EditorFor(model => model.BillNo, new { htmlAttributes = new { @class = "form-control BlockEnter", @id = "ModelBillNo" } })
+            @Html.EditorFor(model => model.BillNo, new { htmlAttributes = new { @class = "form-control HeaderBox BlockEnter", @id = "ModelBillNo" } })
             @Html.HiddenFor(model => model.ID, htmlAttributes: new { Value = "", @id = "ModelBillID" })
             @Html.HiddenFor(model => model.TaxBillIDs, htmlAttributes: new { Value = "", @id = "ModelTaxBillIDs" })
-            @Html.ValidationMessageFor(model => model.BillDate, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-1 mandatory"></div>
     </div>
@@ -23,7 +22,7 @@
         </div>
 
         <div class="col-md-6">
-            @Html.EditorFor(model => model.BillDate, new { htmlAttributes = new { @class = "form-control datepicker", @id = "ModelBillDate", autofocus = "autofocus" } })
+            @Html.EditorFor(model => model.BillDate, new { htmlAttributes = new { @class = "form-control HeaderBox datepicker", @id = "ModelBillDate"} })
             @Html.ValidationMessageFor(model => model.BillDate, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-1 mandatory"></div>
@@ -35,7 +34,7 @@
         <div class="col-md-6">
             @if (Model.TechniciansList.Count == 0)
             {
-                @Html.EditorFor(model => model.EmpID, new { htmlAttributes = new { @class = "form-control", @id = "ModelEmpID", autofocus = "autofocus" } })
+                @Html.EditorFor(model => model.EmpID, new { htmlAttributes = new { @class = "form-control HeaderBox ", @id = "ModelEmpID", autofocus = "autofocus" } })
             }
             else
             {
@@ -52,7 +51,7 @@
         <div class="col-md-6">
             @if (Model.CustomerList.Count == 0)
             {
-                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", @id = "ModelCustomerName", autofocus = "autofocus" } })
+                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control HeaderBox ", @id = "ModelCustomerName", autofocus = "autofocus" } })
             }
             else
             {
@@ -68,7 +67,7 @@
         </div>
 
         <div class="col-md-6">
-            @Html.EditorFor(model => model.CustomerLocation, new { htmlAttributes = new { @class = "form-control ", @id = "ModelCustomerLocation"@*, @disabled = "disabled"*@ } })
+            @Html.EditorFor(model => model.CustomerLocation, new { htmlAttributes = new { @class = "form-control HeaderBox ", @id = "ModelCustomerLocation"@*, @disabled = "disabled"*@ } })
             @Html.ValidationMessageFor(model => model.CustomerLocation, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-1 mandatory"></div>
@@ -79,7 +78,7 @@
         </div>
 
         <div class="col-md-6">
-            @Html.EditorFor(model => model.CustomerContactNo, new { htmlAttributes = new { @class = "form-control", @id = "ModelCustomerContactNo"@*, @disabled = "disabled"*@ } })
+            @Html.EditorFor(model => model.CustomerContactNo, new { htmlAttributes = new { @class = "form-control HeaderBox ", @id = "ModelCustomerContactNo"@*, @disabled = "disabled"*@ } })
 
         </div>
 
@@ -120,7 +119,7 @@
         </div>
 
         <div class="col-md-6">
-            @Html.EditorFor(model => model.PaymentRefNo, new { htmlAttributes = new { @class = "form-control", @id = "ModelModelNo" } })
+            @Html.EditorFor(model => model.PaymentRefNo, new { htmlAttributes = new { @class = "form-control HeaderBox ", @id = "ModelModelNo" } })
 
         </div>
 
@@ -131,7 +130,7 @@
         </div>
 
         <div class="col-md-6">
-            @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control", @id = "ModelSerialNo" } })
+            @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control HeaderBox ", @id = "ModelSerialNo" } })
         </div>
 
     </div>

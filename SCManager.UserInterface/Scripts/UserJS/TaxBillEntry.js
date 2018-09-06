@@ -86,7 +86,14 @@ $(document).ready(function () {
         EG_GridDataTable = DataTables.TaxBillDetail;
         List();      
         var $datepicker = $('#BillDate');
-        $datepicker.datepicker('setDate', null);
+        $datepicker.datepicker({
+            format: "dd-M-yyyy",
+            maxViewMode: 0,
+            todayBtn: "linked",
+            clearBtn: true,
+            autoclose: true,
+            todayHighlight: true
+        });
         $(".buttons-excel").hide();
         $("#btnDownloadBillToPDF").hide();
     } catch (x) {
@@ -1186,7 +1193,19 @@ function AmountSummary() {
                         $('#divMergeTaxModel #ModelCustomerContactNo').val(customerInfo.split(" | ")[2]);
                     });
 
-                    $('#divMergeTaxModel #ModelBillDate').datepicker('setDate', null);
+                    $('input.datepicker').datepicker(
+                        {
+                            format: "dd-M-yyyy",
+                            maxViewMode: 0,
+                            todayBtn: "linked",
+                            clearBtn: true,
+                            autoclose: true,
+                            todayHighlight: true,
+                            autoOpen: false
+                        });
+                    $('#divMergeTaxModel #ModelBillDate').blur();
+
+                    $('#divMergeTaxModel #ModelBillNo').trigger('click');
                 });
                 $("#MergeTaxModel").modal('show');
             }
