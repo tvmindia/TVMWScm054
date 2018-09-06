@@ -338,6 +338,7 @@ namespace SCManager.RepositoryServices.Services
                                         TCRBillEntryHeaderObj.SGSTAmount = (sdr["SGSTAmount"].ToString() != "" ? decimal.Parse(sdr["SGSTAmount"].ToString()) : TCRBillEntryHeaderObj.SGSTAmount);
                                         TCRBillEntryHeaderObj.CgstPercentage = (sdr["CgstPercentage"].ToString() != "" ? decimal.Parse(sdr["CgstPercentage"].ToString()) : TCRBillEntryHeaderObj.CgstPercentage);
                                         TCRBillEntryHeaderObj.SgstPercentage = (sdr["SgstPercentage"].ToString() != "" ? decimal.Parse(sdr["SgstPercentage"].ToString()) : TCRBillEntryHeaderObj.SgstPercentage);
+                                        TCRBillEntryHeaderObj.IsDisabled = (sdr["IsDisabled"].ToString() != "" ? bool.Parse(sdr["IsDisabled"].ToString()) : TCRBillEntryHeaderObj.IsDisabled);
                                     }
 
                                     TCRBillEntryHeaderList =TCRBillEntryHeaderObj;

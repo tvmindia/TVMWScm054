@@ -69,7 +69,7 @@ namespace SCManager.UserInterface.Models
         public LogDetailsViewModel logDetails { get; set; }
         public List<TCRBillEntryDetailViewModel> TCRBillEntryDetail { get; set; }
         public Guid? TcrID { get; set; }
-
+        public bool IsDisabled { get; set; }
 
         [Display(Name = "CGST %")]
         public decimal? CGSTAmount { get; set; }

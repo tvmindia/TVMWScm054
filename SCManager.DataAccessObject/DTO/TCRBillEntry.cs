@@ -40,6 +40,7 @@ namespace SCManager.DataAccessObject.DTO
         public decimal? TotalTaxAmount { get; set; }
         public decimal? TotalAmount { get; set; }
         public TCRBillEntryDetail TCRBillDetail { get; set; }
+        public bool IsDisabled { get; set; }
     }
     public class TCRBillEntryDetail
     {

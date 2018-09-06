@@ -448,7 +448,6 @@ function BindTCRBillEntryFields(Records) {
         $("#ServiceChargeComm").val(roundoff(Records.ServiceCharge/100));
         $("#SCCommAmount").val(roundoff(Records.SCCommAmount));
         $("#SpecialComm").val(roundoff(Records.SpecialComm));
-        EG_Rebind_WithData(Records.TCRBillEntryDetail, 1);
        // $('#BillNo').attr('readonly', 'readonly');
        // $('#EmpID').attr('disabled', 'true');
        // $("#EmpID").val(Records.EmpID);
@@ -456,6 +455,18 @@ function BindTCRBillEntryFields(Records) {
         //var $datepicker = $('#BillDate');
         //$datepicker.datepicker('setDate', new Date(Records.BillDate));
 
+        if (Records.IsDisabled) {
+            DisableFields();
+            EG_Rebind_WithData(Records.TCRBillEntryDetail, 0);
+            $("#tblTCRBillDetails th:last-child").hide();
+            $("#tblTCRBillDetails td:last-child").remove();
+            $('#tblTCRBillDetails .DeleteLink').attr('onclick', '');
+            $('#tblTCRBillDetails .DeleteLink i').css({ "color": "grey", "cursor": "default" });
+            $('#tblTCRBillDetails .DeleteLink i').addClass('disabled');
+        } else {
+            EnableFields();
+            EG_Rebind_WithData(Records.TCRBillEntryDetail, 1);
+        }
     } catch (e) {
         notyAlert('error', e.message);
     }
@@ -1196,7 +1207,8 @@ function reset()
         $datepicker.datepicker('setDate', null);
         EG_ClearTable();
         EG_AddBlankRows(5);
-       
+
+        EnableFields();
         ResetTCRForm();
     }
     else
@@ -1382,4 +1394,73 @@ function GetAllTCRBillForExport()
     catch (e) {
         notyAlert('error', e.message);
     }
+}
+
+function DisableFields() {
+    $('#HeaderID').prop('readonly', true);
+    $("#EmpID").prop('disabled', true);
+    //$("#ModelTechEmpID").prop('readonly', true);
+    $("#JobNo").prop('readonly', true);
+    $("#BillDate").prop('readonly', true);
+    $("#BillNo").prop('readonly', true);
+    $("#CustomerName").prop('readonly', true);
+    $("#PaymentRefNo").prop('readonly', true);
+    $("#CustomerContactNo").prop('readonly', true);
+    $("#CustomerLocation").prop('readonly', true);
+    $("#PaymentMode").prop('disabled', true);
+    $("#Remarks").prop('readonly', true);
+    $("#subtotal").prop('readonly', true);
+    $("#discount").prop('readonly', false);
+    $("#total").prop('readonly', true);
+    $("#SCAmount").prop('readonly', true);
+    $("#VATAmount").prop('readonly', true);
+    $("#CGSTAmount").prop('readonly', true);
+    $("#SGSTAmount").prop('readonly', true);
+    $("#vatpercentage").prop('readonly', true);
+    $("#VATPercentageAmount").prop('readonly', true);
+    $("#cgstpercentage").prop('readonly', true);
+    $("#CGSTPercentageAmount").prop('readonly', true);
+    $("#sgstpercentage").prop('readonly', true);
+    $("#SGSTPercentageAmount").prop('readonly', true);
+    $("#grandtotal").prop('readonly', true);
+    $("#ServiceChargeComm").prop('readonly', true);
+    $("#SCCommAmount").prop('readonly', true);
+    $("#SpecialComm").prop('readonly', true);
+    $("#discount").prop('readonly', true);
+}
+
+function EnableFields() {
+    $('#HeaderID').prop('readonly', false);
+    $("#EmpID").prop('disabled', false);
+    //$("#ModelTechEmpID").prop('readonly', false);
+    $("#JobNo").prop('readonly', false);
+    $("#BillDate").prop('readonly', false);
+    $("#BillNo").prop('readonly', false);
+    $("#CustomerName").prop('readonly', false);
+    $("#PaymentRefNo").prop('readonly', false);
+    $("#CustomerContactNo").prop('readonly', false);
+    $("#CustomerLocation").prop('readonly', false);
+    $("#PaymentMode").prop('disabled', false);
+    $("#Remarks").prop('readonly', false);
+    $("#subtotal").prop('readonly', false);
+    $("#discount").prop('readonly', true);
+    $("#total").prop('readonly', false);
+    $("#SCAmount").prop('readonly', false);
+    $("#VATAmount").prop('readonly', false);
+    $("#CGSTAmount").prop('readonly', false);
+    $("#SGSTAmount").prop('readonly', false);
+    $("#vatpercentage").prop('readonly', false);
+    $("#VATPercentageAmount").prop('readonly', false);
+    $("#cgstpercentage").prop('readonly', false);
+    $("#CGSTPercentageAmount").prop('readonly', false);
+    $("#sgstpercentage").prop('readonly', false);
+    $("#SGSTPercentageAmount").prop('readonly', false);
+    $("#grandtotal").prop('readonly', false);
+    $("#ServiceChargeComm").prop('readonly', false);
+    $("#SCCommAmount").prop('readonly', false);
+    $("#SpecialComm").prop('readonly', false);
+    $("#discount").prop('readonly', false);
+
+
+    $("#tblTCRBillDetails th:last-child").show();
 }
