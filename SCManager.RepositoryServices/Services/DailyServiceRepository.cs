@@ -47,7 +47,7 @@ namespace SCManager.RepositoryServices.Services
                                         _serviceType.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _serviceType.SCCode);
                                         _serviceType.Code = (sdr["Code"].ToString() != "" ? (sdr["Code"].ToString()) : _serviceType.Code);
                                         _serviceType.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _serviceType.Description);
-                                        _serviceType.Commission = (sdr["Commission"].ToString() != "" ?decimal.Parse(sdr["Commission"].ToString()) : _serviceType.Commission);
+                                        _serviceType.Commission = (sdr["Commission"].ToString() != "" ? decimal.Parse(sdr["Commission"].ToString()) : _serviceType.Commission);
                                         _serviceType.SubType = (sdr["SubType"].ToString() != "" ? (sdr["SubType"].ToString()) : _serviceType.SubType);
                                     }
                                     serviceTypeList.Add(_serviceType);
@@ -95,7 +95,7 @@ namespace SCManager.RepositoryServices.Services
                                         _jobCallTypes.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _jobCallTypes.SCCode);
                                         _jobCallTypes.Code = (sdr["Code"].ToString() != "" ? (sdr["Code"].ToString()) : _jobCallTypes.Code);
                                         _jobCallTypes.Description = (sdr["Description"].ToString() != "" ? (sdr["Description"].ToString()) : _jobCallTypes.Description);
-                                      
+
                                     }
                                     JobCallTypesList.Add(_jobCallTypes);
                                 }
@@ -140,32 +140,32 @@ namespace SCManager.RepositoryServices.Services
                                     Job _job = new Job();
                                     {
                                         _job.SCCode = (sdr["SCCode"].ToString() != "" ? (sdr["SCCode"].ToString()) : _job.SCCode);
-                                        _job.ID= (sdr["ID"].ToString() != "" ? (Guid.Parse(sdr["ID"].ToString())) : Guid.Empty);
+                                        _job.ID = (sdr["ID"].ToString() != "" ? (Guid.Parse(sdr["ID"].ToString())) : Guid.Empty);
                                         _job.Employee = new Employees()
                                         {
-                                            ID= (sdr["EmpID"].ToString() != "" ? (Guid.Parse(sdr["EmpID"].ToString())) : Guid.Empty),
-                                            Name= (sdr["EmployeeName"].ToString() != "" ? (sdr["EmployeeName"].ToString()) : _job.Employee.Name),
-                                            Type= (sdr["EmployeeType"].ToString() != "" ? (sdr["EmployeeType"].ToString()) : _job.Employee.Type),
+                                            ID = (sdr["EmpID"].ToString() != "" ? (Guid.Parse(sdr["EmpID"].ToString())) : Guid.Empty),
+                                            Name = (sdr["EmployeeName"].ToString() != "" ? (sdr["EmployeeName"].ToString()) : _job.Employee.Name),
+                                            Type = (sdr["EmployeeType"].ToString() != "" ? (sdr["EmployeeType"].ToString()) : _job.Employee.Type),
                                         };
                                         _job.ServiceDate = (sdr["ServiceDate"].ToString() != "" ? (sdr["ServiceDate"].ToString()) : _job.ServiceDate);
                                         _job.JobNo = (sdr["JobNo"].ToString() != "" ? (sdr["JobNo"].ToString()) : _job.JobNo);
                                         _job.CustomerName = (sdr["CustomerName"].ToString() != "" ? sdr["CustomerName"].ToString() : _job.CustomerName);
                                         _job.CustomerLocation = (sdr["CustomerLocation"].ToString() != "" ? (sdr["CustomerLocation"].ToString()) : _job.CustomerLocation);
-                                        _job.ServiceType= (sdr["ServiceTypeCode"].ToString() != "" ? (sdr["ServiceTypeCode"].ToString()) : _job.ServiceType);
+                                        _job.ServiceType = (sdr["ServiceTypeCode"].ToString() != "" ? (sdr["ServiceTypeCode"].ToString()) : _job.ServiceType);
                                         _job.CallType = (sdr["CallTypeCode"].ToString() != "" ? (sdr["CallTypeCode"].ToString()) : _job.CallType);
                                         _job.ModelNo = (sdr["ModelNo"].ToString() != "" ? (sdr["ModelNo"].ToString()) : _job.ModelNo);
                                         _job.SerialNo = (sdr["SerialNo"].ToString() != "" ? (sdr["SerialNo"].ToString()) : _job.SerialNo);
-                                     
+
                                         _job.CallStatusCode = (sdr["CallStatusCode"].ToString() != "" ? (sdr["CallStatusCode"].ToString()) : _job.CallStatusCode);
-                                        _job.MobileNumber= (sdr["ICRNo"].ToString() != "" ? (sdr["ICRNo"].ToString()) : _job.MobileNumber);
+                                        _job.MobileNumber = (sdr["ICRNo"].ToString() != "" ? (sdr["ICRNo"].ToString()) : _job.MobileNumber);
                                         _job.TechnicianRemark = (sdr["TechnicianRemarks"].ToString() != "" ? (sdr["TechnicianRemarks"].ToString()) : _job.TechnicianRemark);
-                                        _job.RepeatEmpName= (sdr["Repeat_EmpName"].ToString() != "" ? (sdr["Repeat_EmpName"].ToString()) : _job.TechnicianRemark);
+                                        _job.RepeatEmpName = (sdr["Repeat_EmpName"].ToString() != "" ? (sdr["Repeat_EmpName"].ToString()) : _job.TechnicianRemark);
                                         _job.RepeatJobNo = (sdr["Repeat_JobNo"].ToString() != "" ? (sdr["Repeat_JobNo"].ToString()) : _job.RepeatJobNo);
                                         _job.Repeat_EmpID = (sdr["Repeat_EmpID"].ToString() != "" ? (sdr["Repeat_EmpID"].ToString()) : _job.Repeat_EmpID);
                                         _job.CallStatusDescription = (sdr["CallStatusDescription"].ToString() != "" ? (sdr["CallStatusDescription"].ToString()) : _job.CallStatusDescription);
-                                        _job.JobCallTypeDescription= (sdr["JobCallTypeDescription"].ToString() != "" ? (sdr["JobCallTypeDescription"].ToString()) : _job.JobCallTypeDescription);
+                                        _job.JobCallTypeDescription = (sdr["JobCallTypeDescription"].ToString() != "" ? (sdr["JobCallTypeDescription"].ToString()) : _job.JobCallTypeDescription);
                                         _job.ServiceTypeDescription = (sdr["ServiceTypeDescription"].ToString() != "" ? (sdr["ServiceTypeDescription"].ToString()) : _job.ServiceTypeDescription);
-                                        _job.SCCommAmount= (sdr["SpecialCommission"].ToString() != "" ? decimal.Parse(sdr["SpecialCommission"].ToString()) : _job.SCCommAmount);
+                                        _job.SCCommAmount = (sdr["SpecialCommission"].ToString() != "" ? decimal.Parse(sdr["SpecialCommission"].ToString()) : _job.SCCommAmount);
                                     }
                                     jobList.Add(_job);
                                 }
@@ -184,7 +184,7 @@ namespace SCManager.RepositoryServices.Services
 
 
         #region GetServicefilterbyDays
-        public List<Job> GetServicefilterbyDays(string SCCode,string Createddate,string Isdefault)
+        public List<Job> GetServicefilterbyDays(string SCCode, string FromDate, string ToDate)
         {
             List<Job> jobList = null;
             try
@@ -201,8 +201,11 @@ namespace SCManager.RepositoryServices.Services
                         cmd.CommandText = "[GetServicefilterbyDays]";
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = SCCode;
-                        cmd.Parameters.Add("@IsDefault", SqlDbType.Bit).Value =bool.Parse(Isdefault);
-                        cmd.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DateTime.Parse(Createddate);
+                        //cmd.Parameters.Add("@IsDefault", SqlDbType.Bit).Value =bool.Parse(Isdefault);
+                        if (!string.IsNullOrEmpty(FromDate))
+                            cmd.Parameters.Add("@FromDate", SqlDbType.DateTime).Value = DateTime.Parse(FromDate);
+                        if (!string.IsNullOrEmpty(ToDate))
+                            cmd.Parameters.Add("@ToDate", SqlDbType.DateTime).Value = DateTime.Parse(ToDate);
                         using (SqlDataReader sdr = cmd.ExecuteReader())
                         {
                             if ((sdr != null) && (sdr.HasRows))
@@ -275,7 +278,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@SCCode", SqlDbType.NVarChar, 5).Value = technicianJob.SCCode;
                         cmd.Parameters.Add("@EmpID", SqlDbType.UniqueIdentifier).Value = technicianJob.TechEmpID;
                         cmd.Parameters.Add("@ServiceDate", SqlDbType.DateTime).Value = DateTime.Parse(technicianJob.ServiceDate);
-                       // cmd.Parameters.Add("@JobNo", SqlDbType.NVarChar, 50).Value = technicianJob.JobNo;
+                        // cmd.Parameters.Add("@JobNo", SqlDbType.NVarChar, 50).Value = technicianJob.JobNo;
                         cmd.Parameters.Add("@CustomerName", SqlDbType.NVarChar, 250).Value = technicianJob.CustomerName;
                         cmd.Parameters.Add("@CustomerLocation", SqlDbType.NVarChar, 250).Value = technicianJob.CustomerLocation;
                         cmd.Parameters.Add("@ServiceTypeCode", SqlDbType.NVarChar, 5).Value = technicianJob.ServiceType;
@@ -283,13 +286,13 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@ModelNo", SqlDbType.NVarChar, 50).Value = technicianJob.ModelNo;
                         cmd.Parameters.Add("@SerialNo", SqlDbType.NVarChar, 50).Value = technicianJob.SerialNo;
                         cmd.Parameters.Add("@CallStatusCode", SqlDbType.NVarChar, 5).Value = technicianJob.CallStatusCode;
-                        cmd.Parameters.Add("@ICRNo", SqlDbType.NVarChar, 50).Value = technicianJob.MobileNumber; 
+                        cmd.Parameters.Add("@ICRNo", SqlDbType.NVarChar, 50).Value = technicianJob.MobileNumber;
                         cmd.Parameters.Add("@TechnicianRemarks", SqlDbType.NVarChar, -1).Value = technicianJob.TechnicianRemark;
-                        if(technicianJob.Repeat_EmpID!=Guid.Empty)
+                        if (technicianJob.Repeat_EmpID != Guid.Empty)
                         {
                             cmd.Parameters.Add("@Repeat_EmpID", SqlDbType.UniqueIdentifier).Value = technicianJob.Repeat_EmpID;
                         }
-                       if(!string.IsNullOrEmpty(technicianJob.Repeat_JobNo))
+                        if (!string.IsNullOrEmpty(technicianJob.Repeat_JobNo))
                         {
                             cmd.Parameters.Add("@Repeat_JobNo", SqlDbType.NVarChar, 50).Value = technicianJob.Repeat_JobNo;
                         }
@@ -309,9 +312,9 @@ namespace SCManager.RepositoryServices.Services
             {
                 throw ex;
             }
-            switch(outParameter.Value.ToString())
+            switch (outParameter.Value.ToString())
             {
-               
+
                 case "1":
                     return new
                     {
@@ -319,31 +322,31 @@ namespace SCManager.RepositoryServices.Services
                         Status = outParameter.Value.ToString(),
                         Message = constObj.InsertSuccess
                     };
-               
+
                 case "2":
                     return new
                     {
                         Status = outParameter.Value.ToString(),
                         Message = constObj.JobDuplicate
                     };
-                   
+
                 default:
                     return new
                     {
                         Status = outParameter.Value.ToString(),
                         Message = constObj.InsertFailure
                     };
-                   
+
             }
-          
-            
+
+
         }
         #endregion InsertJob
 
         #region UpdateJob
         public object UpdateJob(TechnicianJob technicianJob)
         {
-            SqlParameter outParameter=null;
+            SqlParameter outParameter = null;
             try
             {
 
@@ -385,7 +388,7 @@ namespace SCManager.RepositoryServices.Services
                         cmd.Parameters.Add("@UpdatedDate", SqlDbType.SmallDateTime).Value = technicianJob.logDetails.UpdatedDate;
                         outParameter = cmd.Parameters.Add("@Status", SqlDbType.Int);
                         outParameter.Direction = ParameterDirection.Output;
-                     
+
                         cmd.ExecuteNonQuery();
 
                     }
@@ -399,7 +402,7 @@ namespace SCManager.RepositoryServices.Services
             {
                 return new
                 {
-                 Message = constObj.UpdateSuccess
+                    Message = constObj.UpdateSuccess
                 };
             }
             else
@@ -443,13 +446,13 @@ namespace SCManager.RepositoryServices.Services
             {
                 throw ex;
             }
-          
-            if (outParameter.Value.ToString()=="1")
+
+            if (outParameter.Value.ToString() == "1")
             {
                 return new
                 {
 
-                 
+
                     Message = constObj.DeleteSuccess
                 };
             }
@@ -458,12 +461,12 @@ namespace SCManager.RepositoryServices.Services
                 return new
                 {
 
-                    
+
                     Message = constObj.DeleteFailure
                 };
             }
-          
-          
+
+
         }
         #endregion DeleteJob
 

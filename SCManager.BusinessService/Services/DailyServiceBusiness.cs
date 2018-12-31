@@ -76,12 +76,12 @@ namespace SCManager.BusinessService.Services
             return JobList;
         }
 
-        public List<Job> GetServicefilterbyDays(string SCCode,string CreatedDate ,string Isdefault)
+        public List<Job> GetServicefilterbyDays(string SCCode, string FromDate, string ToDate)
         {
             List<Job> JobList = null;
             try
             {
-                JobList = _dailyServiceRepository.GetServicefilterbyDays(SCCode,CreatedDate,Isdefault);
+                JobList = _dailyServiceRepository.GetServicefilterbyDays(SCCode, FromDate, ToDate);
                 if (JobList != null)
                 {
                     foreach (Job EX in JobList)

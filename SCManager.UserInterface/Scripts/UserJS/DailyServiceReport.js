@@ -110,6 +110,10 @@ $(document).ready(function () {
     catch (e) {
 
     }
+
+    $("#txtFromDate,#txtToDate").change(function () {
+        FilterServiceRecord();
+    })
 });
 
 
@@ -178,7 +182,8 @@ function RefreshDailyServiceTable(jobno) {
     try {
         var empid = $("#EmpSelector").val();
         var serdate = $("#txtServiceDate").val();
-        if ((empid) && (serdate) && (DataTables.DailyService!=undefined))
+
+        if ((empid) && (DataTables.DailyService!=undefined))
         {
             DataTables.DailyService.clear().rows.add(GetAllServiceReportEntries(empid, serdate)).draw(false);
             $('[data-toggle="tp"]').tooltip({ container: 'body' });
@@ -226,25 +231,29 @@ function goBack() {
 function FilterServiceRecord() { 
     $("#EmpSelector").val("");
     $("#txtServiceDate").val("");
+    debugger;
 
-    var checkedValue = $("input[name='filter']:checked").val()
-    if (checkedValue != "") {
+    //var checkedValue = $("input[name='filter']:checked").val()
+    //if (checkedValue != "") {
        
-        if (checkedValue == 30)
-        { 
-            DataTables.DailyService.clear().rows.add(GetServicefilterbyDays(true)).draw(false);
+    //    if (checkedValue == 30)
+    //    { 
+    //        DataTables.DailyService.clear().rows.add(GetServicefilterbyDays(true)).draw(false);
            
-        }
-        else if (checkedValue == 60)
-        { 
+    //    }
+    //    else if (checkedValue == 60)
+    //    { 
             DataTables.DailyService.clear().rows.add(GetServicefilterbyDays(false)).draw(false);
           
-        }
-    }
+    //    }
+    //}
 }
 function GetServicefilterbyDays(Isdefault) {
-    try { 
-        var data = { "Isdefault": Isdefault };
+    try {
+        debugger;
+        var fromdate = $("#txtFromDate").val();
+        var todate = $("#txtToDate").val();
+        var data = { "Isdefault": Isdefault, "FromDate": fromdate, "ToDate": todate };
         var ds = {};
         ds = GetDataFromServer("DailyServiceReport/GetServicefilterbyDays/", data);
         if (ds != '') {
@@ -341,10 +350,10 @@ function TechnicianSelectOnChange(curobj)
 }
 
 
-function GetAllServiceReportEntries(id,date) {
+function GetAllServiceReportEntries(id, date) {
     try {
-
-        var data = {"ID":id,"ServieDate":date};
+        debugger;
+        var data = { "ID": id, "ServieDate": date/*, "FromDate": fromdate, "ToDate": todate*/ };
         var ds = {};
         ds = GetDataFromServer("DailyServiceReport/GetAllServiceReports/", data);
         if (ds != '') {

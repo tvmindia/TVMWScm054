@@ -16,7 +16,6 @@ namespace SCManager.UserInterface.Controllers
     public class DailyServiceReportController : Controller
     {
         IDailyServiceBusiness _dailyServiceBusiness;
-      
         public DailyServiceReportController(IDailyServiceBusiness dailyServiceBusiness)
         {
             _dailyServiceBusiness = dailyServiceBusiness;
@@ -318,19 +317,24 @@ namespace SCManager.UserInterface.Controllers
 
         [HttpGet]
         [AuthorizeRoles(RoleContants.SuperAdminRole, RoleContants.AdministratorRole, RoleContants.ManagerRole)]
-        public string GetServicefilterbyDays(string Isdefault)
+        public string GetServicefilterbyDays(string FromDate, string ToDate, string Isdefault)
         {
             try
             {
-                if (!string.IsNullOrEmpty(Isdefault))
+                if(string.IsNullOrEmpty(FromDate) && string.IsNullOrEmpty(ToDate) && bool.Parse(Isdefault))
+                {
+                    ToDate = DateTime.Today.ToString();
+                    FromDate = (DateTime.Today).AddDays(-30).ToString();
+                }
+                if (!string.IsNullOrEmpty(FromDate) || !string.IsNullOrEmpty(ToDate))
                 {
                     UA ua = new UA();
-                    List<JobViewModel> jobList = Mapper.Map<List<Job>, List<JobViewModel>>(_dailyServiceBusiness.GetServicefilterbyDays(ua.SCCode,ua.GetCurrentDateTime().ToString(),Isdefault));
+                    List<JobViewModel> jobList = Mapper.Map<List<Job>, List<JobViewModel>>(_dailyServiceBusiness.GetServicefilterbyDays(ua.SCCode, FromDate, ToDate));
                     return JsonConvert.SerializeObject(new { Result = "OK", Records = jobList });
                 }
                 else
                 {
-                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "ID or Date is Empty!" });
+                    return JsonConvert.SerializeObject(new { Result = "ERROR", Message = "Both Date is Empty!" });
                 }
             }
             catch (Exception ex)

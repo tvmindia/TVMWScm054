@@ -20,7 +20,7 @@ namespace SCManager.BusinessService.Contracts
         Job GetDailyJobByID(string SCCode, string JobID);
         Job GetDailyJobByJobNo(string SCCode, string JobNo);
         List<Job> GetJobs(string SCCode,Guid id,string servicedate);
-        List<Job> GetServicefilterbyDays(string SCCode,string CreatedDate, string Isdefault);
+        List<Job> GetServicefilterbyDays(string SCCode, string FromDate, string ToDate);
         object UpdateJob(TechnicianJob technicianJob);
         List<ServiceRegistrySummary> GetServiceRegistrySummary(string SCCode, string serviceDate);
         List<ServiceRegistrySummary> GetServiceRegisterSummaryFilter(string SCCode, string CreatedDate, string Isdefault);
